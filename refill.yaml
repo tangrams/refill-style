@@ -736,9 +736,9 @@ layers:
                     draw:
                         lines:
                             color: [[12, [0.6,0.6,0.6]], [13, [0.4,0.4,0.4]], [14, [0.35,0.35,0.35]], [15, [0.35,0.35,0.35]], [16, [0.35,0.35,0.35]], [17, [0.0,0.0,0.0]]]
-                        width: [[11, 0.5px], [12, 0.5px], [13, 0.65px], [14, 1px], [15, 1.25px], [16, 2px], [17, 2px], [19, 16m]]
-                        outline:
-                            width: [[11, 0px], [12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 1px]]
+                            width: [[11, 0.5px], [12, 0.5px], [13, 0.65px], [14, 1px], [15, 1.25px], [16, 2px], [17, 2px], [19, 16m]]
+                            outline:
+                                width: [[11, 0px], [12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 1px]]
                     tunnel:
                         filter: {is_tunnel: yes, $zoom: {min: 13} }
                         draw:
@@ -802,9 +802,9 @@ layers:
                     draw:
                         lines:
                             color: [[11, [0.885,0.885,0.885]], [13, [0.8,0.8,0.8]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [17, [0.0,0.0,0.0]]]
-                        width: [[11, 0.5px], [12, .75px], [13, 1px], [14, 1px], [15, 1px], [16, 2px], [17, 2px], [18, 2px]]
-                        outline:
-                            width: [[12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [18, 0px]]
+                            width: [[11, 0.5px], [12, .75px], [13, 1px], [14, 1px], [15, 1px], [16, 2px], [17, 2px], [18, 2px]]
+                            outline:
+                                width: [[12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [18, 0px]]
                     tunnel:
                         filter: {is_tunnel: yes, $zoom: {min: 13} }
                         draw:
@@ -1104,7 +1104,7 @@ layers:
             filter:
                 kind: forest
             draw:
-                ppark-dots2:
+                park-dots2:
                     order: 1
         conservation:
             filter:
