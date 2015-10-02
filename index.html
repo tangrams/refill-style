@@ -1,0 +1,101 @@
+<!doctype html>
+<!--
+    Tangram: real-time WebGL rendering for OpenStreetMap
+
+    http://github.com/tangrams/tangram
+    http://mapzen.com
+-->
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Eraser Maps cartography</title>
+
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            background: rgba(0, 0, 0, 0);
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+
+    .label {
+        /*width: 200px;*/
+        /*margin-left: -100px;*/
+        position: absolute;
+        z-index: 10;
+        text-align: left;
+        margin: 0px;
+        background: #333;
+        opacity: 0.9;
+        padding: 2px;
+        /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+        /*word-wrap: break-word;*/
+    }
+
+    .labelInner {
+        padding: 3px 0px;
+        font-family: Helvetica, sans-serif;
+        font-size: 16px;
+        color: white;
+        opacity: 2.0;
+        margin: 0px;
+    }
+
+    .labelLine {
+        /*border: 2px solid gold;*/
+    }
+
+    .labelLine:hover {
+        border: 2px solid gold;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <!-- Leaflet -->
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="lib/leaflet-hash.js"></script>
+
+    <!-- Keymaster handles keyboard input -->
+    <script src="lib/keymaster.js"></script>
+
+    <!-- Main tangram library -->
+    <script src="https://mapzen.com/tangram/0.3/tangram.min.js"></script>
+
+    <!-- Demo module -->
+    <script src="main.js"></script>
+
+    <!-- Adding a script block to post message to the parent container (think iframed demos) -->
+    <script type="text/javascript">
+      window.addEventListener("hashchange",function(){
+      	parent.postMessage(window.location.hash, "*")
+      });
+    </script>
+
+    <!-- Mapzen map UI -->
+    <script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/mapzen-ui.min.js'></script>
+    <script>
+      MPZN.bug({
+      name: 'Tangram',
+      link: 'https://mapzen.com/projects/tangram',
+      tweet: 'Toner-inspired Tangram style from @mapzen',
+      repo: 'https://github.com/tangrams/refill/'
+    });
+    </script>
+
+  </body>
+</html>
