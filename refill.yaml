@@ -75,7 +75,7 @@ settings:
         - &path_bridge_casing1        [0.40, 0.40, 0.40]
         - &path_bridge_casing2        [0.40, 0.40, 0.40]  # zoomed out
         - &path_steps1                red
-        - &path_steps1_b              '#dad7d4'
+        - &path_steps1_b              '#ccc'
 
     boundaries:
         - &country_boundary           '#ccc'
@@ -456,7 +456,7 @@ styles:
                     float xMargin(vec2 st,float margin){
                         return 1.0-clamp(step(margin*.5,st.x)*step(margin*.5,1.0-st.x),0.,1.);
                     }
-                    
+
                     //  Function from Iñigo Quiles
                     //  https://www.shadertoy.com/view/MsS3Wc
                     vec3 hsb2rgb( in vec3 c ){
@@ -669,10 +669,37 @@ styles:
                     COLOR1: vec3(1.00,1.00,1.00)
                     COLOR2: vec3(0.800,0.800,0.800)
 
-    buildings_grid:
+    # HSV/RGB functions
+    hsv:
+        shaders:
+            blocks:
+                global: |
+                    vec3 rgb2hsv(vec3 c)
+                    {
+                        vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+                        vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+                        vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+                        float d = q.x - min(q.w, q.y);
+                        float e = 1.0e-10;
+                        return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+                    }
+                    vec3 hsv2rgb(vec3 c)
+                    {
+                        vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+                        vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+                        return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+                    }
+
+    building-grid:
         base: polygons
+        mix: [hsv, scale-buildings]
         texcoords: true
         shaders:
+            defines:
+                # ROOF_COLOR: vec3(.870, .870, .870)
+                # WALL_COLOR: vec3(0.658, 0.617, 0.576)
+                WALL_FACTOR: vec3(1., 3., .8) # modifies roof color HSV
+                GRID_COLOR: vec3(0.29)
             blocks:
                 color: |
                     vec2 st = v_texcoord.xy;
@@ -687,6 +714,23 @@ styles:
                         // If it's a roof
                         color.rgb = vec3(0.988);
                     }
+
+    scale-buildings:
+        shaders:
+            blocks:
+                position: |
+                    // scale buildings based on zoom
+                    float zoom = u_map_position.z;
+                    float min = .1;         // minimum building scale
+                    float midpoint = 16.; // middle of zoom range
+                    float speed = 2.;  // number of zoom levels to transition over
+                    float e = (zoom - midpoint)/(speed * .2);
+                    position.z *= ((1.-min) / (1.+(exp(e)))) + min;
+
+    building-lines:
+        base: lines
+        mix: scale-buildings
+        texcoords: true
 
     icons:
         base: points
@@ -1205,7 +1249,7 @@ layers:
                         color: [[10, [0.75,0.75,0.75]], [11, [0.8,0.8,0.8]], [12, [0.6,0.6,0.6]], [13, [0.4,0.4,0.4]], [14, [0.35,0.35,0.35]], [15, [0.35,0.35,0.35]], [17, [0.0,0.0,0.0]]]
                         width: [[10, 0.5px], [12, 0.5px], [13, 0.65px], [14, 1px], [15, 1.25px], [16, 2px], [17, 2px], [18, 2px]]
                         outline:
-                            width: [[11, 0px], [12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 0px]]
+                            width: 0px
                 routes:
                     filter: { ref: true, $zoom: { min: 12} }
                     draw:
@@ -1213,7 +1257,7 @@ layers:
                             color: [[12, [0.6,0.6,0.6]], [13, [0.4,0.4,0.4]], [14, [0.35,0.35,0.35]], [15, [0.35,0.35,0.35]], [16, [0.35,0.35,0.35]], [17, [0.0,0.0,0.0]]]
                             width: [[11, 0.5px], [12, 0.5px], [13, 0.65px], [14, 1px], [15, 1.25px], [16, 2px], [17, 2px], [19, 16m]]
                             outline:
-                                width: [[11, 0px], [12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 1px]]
+                                width: [[17, 0px], [18, 1px]]
                     tunnel:
                         filter: {is_tunnel: yes, $zoom: {min: 13} }
                         draw:
@@ -1238,34 +1282,34 @@ layers:
                     draw:
                         lines:
                             #width: [[11, 0.0px], [12, .5px], [14, 1.5px], [16, 2.0px], [19, 7m]]
-                            color: [[11,*green1_r],[12,*minor_road3],[14,*minor_road3]]
+                            color: [[10, [0.75,0.75,0.75]], [11, [0.8,0.8,0.8]], [12, [0.6,0.6,0.6]], [13, [0.4,0.4,0.4]], [14, [0.35,0.35,0.35]], [15, [0.35,0.35,0.35]], [17, [0.0,0.0,0.0]]]
                             outline:
-                                color: [[14,*green1_r],[15,*major_casing1]]
+                                color: [1.0,1.0,1.0]
                                 width: [[12, 0px], [13, 0.5px], [14, 1.0px], [15, 1.0px], [16, 1.5px], [18, 3.0px]]
                     golf_course:
                         filter: { landuse_kind: golf_course }
                         draw:
                             lines:
                                 outline:
-                                    color: *green1_r
+                                    color: [1.0,1.0,1.0]
                     nature_reserve:
                         filter: { landuse_kind: nature_reserve }
                         draw:
                             lines:
                                 outline:
-                                    color: [0.635,0.819,0.742]
+                                    color: [1.0,1.0,1.0]
                     conservation:
                         filter: { landuse_kind: conservation }
                         draw:
                             lines:
                                 outline:
-                                    color: orange
+                                    color: [1.0,1.0,1.0]
                     zoo:
                         filter: { landuse_kind: zoo }
                         draw:
                             lines:
                                 outline:
-                                    color: pink
+                                    color: [1.0,1.0,1.0]
                 labels-secondary:
                     filter: { $zoom: { min: 13, max: 15 } }
                     draw:
@@ -1311,7 +1355,7 @@ layers:
                         width: [[11, 0.5px], [12, .75px], [13, 0.65px], [14, 1px], [15, 1px], [16, 2px], [17, 2px], [18, 2px]]
                         outline:
                             color: [[15, [0.7,0.7,0.7]], [16, [0.0,0.0,0.0]], [17, [0.0,0.0,0.0]]]
-                            width: [[12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px]]
+                            width: 0px
                 routes:
                     filter: { ref: true, $zoom: { min: 12} }
                     draw:
@@ -1319,7 +1363,7 @@ layers:
                             color: [[11, [0.885,0.885,0.885]], [13, [0.8,0.8,0.8]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [17, [0.0,0.0,0.0]]]
                             width: [[11, 0.5px], [12, .75px], [13, 1px], [14, 1px], [15, 1px], [16, 2px], [17, 2px], [18, 2px]]
                             outline:
-                                width: [[12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [18, 0px]]
+                                width: 0px
                     tunnel:
                         filter: {is_tunnel: yes, $zoom: {min: 13} }
                         draw:
@@ -1336,40 +1380,40 @@ layers:
                             width: [[11, 0.0px], [12, 0.15px], [14, 0.15px], [15, 0.75px], [16, 1.25px], [17, 1.25px], [18, 1.25px]]
                             outline:
                                 color: [[12,*major_casing2],[13,*major_casing1]]
-                                width: [[12, 0px], [14, 0px], [16, 0px], [17, 0px], [18, 0px]]
+                                width: 0px
                 in_park:
                     filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
                     draw:
                         lines:
                             #width: [[11, 0.0px], [12, .5px], [14, 1.5px], [16, 2.0px], [19, 7m]]
-                            color: [[11,*green1_r],[12,*minor_road3],[14,*minor_road3]]
+                            color: [[11, [0.885,0.885,0.885]], [13, [0.6,0.6,0.6]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                             outline:
-                                color: [[14,*green1_r],[15,*major_casing1]]
+                                color: [1.0,1.0,1.0]
                                 width: [[12, 0px], [13, 0.5px], [14, 1.0px], [15, 1.0px], [16, 1.5px], [18, 3.0px]]
                     golf_course:
                         filter: { landuse_kind: golf_course }
                         draw:
                             lines:
                                 outline:
-                                    color: *green1_r
+                                    color: [1.0,1.0,1.0]
                     nature_reserve:
                         filter: { landuse_kind: nature_reserve }
                         draw:
                             lines:
                                 outline:
-                                    color: [0.635,0.819,0.742]
+                                    color: [1.0,1.0,1.0]
                     conservation:
                         filter: { landuse_kind: conservation }
                         draw:
                             lines:
                                 outline:
-                                    color: orange
+                                    color: [1.0,1.0,1.0]
                     zoo:
                         filter: { landuse_kind: zoo }
                         draw:
                             lines:
                                 outline:
-                                    color: pink
+                                    color: [1.0,1.0,1.0]
                 labels-tertiary:
                     filter: { $zoom: { min: 14, max: 15 } }
                     draw:
@@ -1414,23 +1458,21 @@ layers:
                     color: [[11, [0.885,0.885,0.885]], [13, [0.8,0.8,0.8]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                     width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 2px], [18, 2px]]
                     outline:
-                        color: [[14, [0.7,0.7,0.7]], [16, [0.0,0.0,0.0]]]
-                        width: [[12, 0.0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [18, 0px]]
+                        width: 0px
             early:
                 filter: { $zoom: { max: 14 } }
                 draw:
                     lines:
                         order: 15
-            
+
             in_park:
                 filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
                 draw:
                     lines:
-                        width: [[11, 0.5px], [12, 1.0px], [13, 1.2px], [14, 1.75px], [15, 2.5px], [16, 8m]]
-                        color: [[11,*green1_r],[12,*green1_r],[14,*minor_road3]]
+                        color: [[11, [0.885,0.885,0.885]], [13, [0.8,0.8,0.8]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                         outline:
-                            color: [[14,*green1_r],[18,*minor_casing1]]
-                            width: [[12, 0px], [13, 0.5px], [14, 0.75px], [17, 2.0px], [18, 4.0px]]
+                            color: [1.0,1.0,1.0]
+                            width: [[11, 1px], [14, 2px], [15, 3px]]
                 golf_course:
                     filter: { landuse_kind: golf_course }
                     draw:
@@ -1459,18 +1501,18 @@ layers:
                 filter: { landuse_kind: university }
                 draw:
                     lines:
-                        color: [[11,*brown1_r],[13,*brown1_r],[14,*minor_road3]]
+                        color: [[11, [0.885,0.885,0.885]], [13, [0.8,0.8,0.8]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                         outline:
-                            color: *brown1_r
-                            width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
+                            color: [1.0,1.0,1.0]
+                            width: [[11, 1px], [14, 2px], [15, 3px]]
             in_hospital:
                 filter: { landuse_kind: hospital }
                 draw:
                     lines:
-                        color: [[11,*red1_r],[13,*red1_r],[14,*minor_road3]]
+                        color: [[11, [0.885,0.885,0.885]], [13, [0.8,0.8,0.8]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                         outline:
-                            color: *red1_r
-                            width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
+                            color: [1.0,1.0,1.0]
+                            width: [[11, 1px], [14, 2px], [15, 3px]]
 
             tunnel:
                 filter: {is_tunnel: yes, $zoom: {min: 13} }
@@ -1519,62 +1561,59 @@ layers:
                     color: [[14, [0.75,0.75,0.75]], [15, [0.6, 0.6, 0.6]], [16, [0.3,0.3,0.3]], [18, [0.3,0.3,0.3]]]
                     width: [[14, 0.15px], [15, 0.75px], [16, 1.25px], [17, 1.25px], [18, 1.25px]]
                     outline:
-                        color: [[15, [0.7,0.7,0.7]], [16, [0.7,0.7,0.7]], [17, [0.0,0.0,0.0]]]
-                        width: [[14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 0px]]
+                        width: 0px
             in_park:
                 filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
                 draw:
                     lines:
-                        color: [0.976,0.976,0.976]
+                        color: [[14, [0.75,0.75,0.75]], [15, [0.6, 0.6, 0.6]], [16, [0.3,0.3,0.3]], [18, [0.3,0.3,0.3]]]
                         outline:
-                            color: [[14, *green1_r], [15, *green1_r]]
+                            color: [1.0,1.0,1.0]
                             width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
                 golf_course:
                     filter: { landuse_kind: golf_course }
                     draw:
                         lines:
                             outline:
-                                color: *green1_r
+                                color: [1.0,1.0,1.0]
                 nature_reserve:
                     filter: { landuse_kind: nature_reserve }
                     draw:
                         lines:
                             outline:
-                                color: [0.635,0.819,0.742]
+                                color: [1.0,1.0,1.0]
                 conservation:
                     filter: { landuse_kind: conservation }
                     draw:
                         lines:
                             outline:
-                                color: orange
+                                color: [1.0,1.0,1.0]
                 zoo:
                     filter: { landuse_kind: zoo }
                     draw:
                         lines:
                             outline:
-                                color: pink
+                                color: [1.0,1.0,1.0]
             in_cemetery:
                 filter: { landuse_kind: cemetery }
                 draw:
                     lines:
                         outline:
-                            color: *green1_r
+                            color: [1.0,1.0,1.0]
                             width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
             in_university:
                 filter: { landuse_kind: university }
                 draw:
                     lines:
-                        color: [1.0,1.0,1.0]
                         outline:
-                            color: *brown1_r
+                            color: [1.0,1.0,1.0]
                             width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
             in_hospital:
                 filter: { landuse_kind: hospital }
                 draw:
                     lines:
-                        color: [1.0,1.0,1.0]
                         outline:
-                            color: *red1_r
+                            color: [1.0,1.0,1.0]
                             width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
             labels-service_road:
                 filter: { $zoom: { min: 17, min: 18 } }
@@ -1608,8 +1647,7 @@ layers:
                     color: [[15, [0.6,0.6,0.6]], [16, [0.6,0.6,0.6]], [18, [0.6,0.6,0.6]]]
                     width: [[15, 0.5px], [16, 0.5px], [17, 0.5px], [18, 0.5px]]
                     outline:
-                        color: [[15, *path_casing1], [14, [0.6,0.6,0.6]]] 
-                        width: [[14, 0px], [15, 0px], [16, 0px], [18, 0px]]
+                        width: 0px
 
             bridge:
                 filter: {is_bridge: yes }
@@ -1623,16 +1661,16 @@ layers:
                 filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
                 draw:
                     lines:
-                        color: [[15,*green1_r],[16,*minor_road3]]
+                        color: [[15, [0.6,0.6,0.6]], [16, [0.6,0.6,0.6]], [18, [0.6,0.6,0.6]]]
                         outline:
-                            color: *green1_r
-                            width: [[15, 0px], [16, 0.5px], [18, 2px]]
+                            color: [1.0,1.0,1.0]
+                            width: [[15, 2px], [16, 3px], [18, 5px]]
                 golf_course:
                     filter: { landuse_kind: golf_course }
                     draw:
                         lines:
                             outline:
-                                color: *green1_r
+                                color: [1.0,1.0,1.0]
                 nature_reserve:
                     filter: { landuse_kind: nature_reserve }
                     draw:
@@ -1644,36 +1682,36 @@ layers:
                     draw:
                         lines:
                             outline:
-                                color: orange
+                                color: [1.0,1.0,1.0]
             in_cemetery:
                 filter: { landuse_kind: cemetery }
                 draw:
                     lines:
                         outline:
-                            color: *green1_r
-                            width: [[15, 0px], [16, 0.5px], [18, 3px]]
+                            color: [1.0,1.0,1.0]
+                            width: [[15, 2px], [16, 3px], [18, 5px]]
             in_zoo:
                 filter: { landuse_kind: zoo }
                 draw:
                     lines:
                         outline:
-                            color: [0.708,0.881,0.831]
-                            width: [[15, 0px], [16, 0.5px], [18, 3px]]
+                            color: [1.0,1.0,1.0]
+                            width: [[15, 2px], [16, 3px], [18, 5px]]
             in_university:
                 filter: { landuse_kind: university }
                 draw:
                     lines:
-                        color: [[15,*brown1_r],[16,*minor_road3]]
+                        color: [[15, [0.6,0.6,0.6]], [16, [0.6,0.6,0.6]], [18, [0.6,0.6,0.6]]]
                         outline:
-                            color: *brown1_r
-                            width: [[15, 0px], [16, 0.5px], [18, 2px]]
+                            color: [1.0,1.0,1.0]
+                            width: [[15, 2px], [16, 3px], [18, 5px]]
             in_hospital:
                 filter: { landuse_kind: hospital }
                 draw:
                     lines:
-                        color: [[15,*red1_r],[16,*minor_road3]]
+                        color: [[15, [0.6,0.6,0.6]], [16, [0.6,0.6,0.6]], [18, [0.6,0.6,0.6]]]
                         outline:
-                            color: *red1_r
+                            color: [1.0,1.0,1.0]
                             width: [[15, 0px], [16, 0.5px], [18, 2px]]
             labels-path:
                 filter: { $zoom: { min: 17 } }
@@ -1695,28 +1733,28 @@ layers:
                     width: [[15, 0.5], [16, 0.75px], [17, 1px], [18, 2px]]
                     outline:
                         color: *path_steps1
-                        width: [[15, 0], [16, 0], [17, 0], [18, 0]]
+                        width: 0px
             in_park:
                 filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
                 draw:
                     dashedline:
-                        color: [[15,*green1_r],[16,*minor_road3]]
+                        color: *path_steps1_b
                         outline:
-                            color: *green1_r
+                            color: [1.0,1.0,1.0]
             in_university:
                 filter: { landuse_kind: university }
                 draw:
                     dashedline:
-                        color: [[15,*brown1_r],[16,*minor_road3]]
+                        color: *path_steps1_b
                         outline:
-                            color: *brown1_r
+                            color: [1.0,1.0,1.0]
             in_hospital:
                 filter: { landuse_kind: hospital }
                 draw:
                     dashedline:
-                        color: [[15,*red1_r],[16,*minor_road3]]
+                        color: *path_steps1_b
                         outline:
-                            color: *red1_r
+                            color: [1.0,1.0,1.0]
             labels-steps:
                 filter: { $zoom: { min: 17 } }
                 draw:
@@ -1790,147 +1828,107 @@ layers:
                             # except bridges and tunnels, their outlines should also self-sort
                             order: function() { return 6 + feature.sort_key;
 
-    buildings-early:
-        data: { source: osm, layer: buildings }
-        filter: 
-            any:
-                # limit show smaller landuse areas to higher zooms
-                - { $zoom: { min: 13 }, area: { min: 40000 }, name: true }
-                - { $zoom: { min: 13 }, area: { min: 40000 }, kind: true }
-                - { $zoom: { min: 13 }, height: { min: 250 } }
-                # show them all
-                - { $zoom: { min: 14 } }
-            all:
-                - { $zoom: { max: 18 } }
-                - { not: { location: underground } }
+    buildings:
+        data: { source: osm }
+
+        filter:
+            not: { location: underground }
+
+        # set default footprint and extrusion draw properties, but don't draw by default (rules below will turn visibility on)
         draw:
             polygons:
-                order: 4
+                visible: false
+                order: 50
                 color: [1.000, 1.000, 1.000]
-            outline:
+            lines:
+                visible: false
                 style: lines
                 order: 51
                 color: [[14, [0.8,0.8,0.8]], [15, [0.78,0.78,0.78]], [16, [0.486,0.486,0.486]]]
                 width: [[14,0.3px],[15,0.5px],[16,0.5px],[18,0.5px]]
-                extrude: false
-        in_park:
-            filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
-            draw:
-                polygons:
-                    color: *green1_b
-                outline:
-                    color: *green1_r
-            golf_course:
-                filter: { landuse_kind: golf_course }
-                draw:
-                    lines:
-                        outline:
-                            color: *green1_r
-            nature_reserve:
-                filter: { landuse_kind: nature_reserve }
-                draw:
-                    lines:
-                        outline:
-                            color: [0.600, 0.600, 0.600]
-            conservation:
-                filter: { landuse_kind: conservation }
-                draw:
-                    lines:
-                        outline:
-                            color: [0.600, 0.600, 0.600]
-            zoo:
-                filter: { landuse_kind: zoo }
-                draw:
-                    lines:
-                        outline:
-                            color: [0.600, 0.600, 0.600]
-        in_university:
-            filter: { landuse_kind: [university, school] }
-            draw:
-                polygons:
-                    color: *brown1_b
-        in_hospital:
-            filter: { landuse_kind: hospital }
-            draw:
-                polygons:
-                    color: *red1_b
-#        in_retail:
-#            filter: { landuse_kind: retail }
-#            draw:
-#                polygons:
-#                    color: orange
-        in_industrial:
-            filter: { landuse_kind: industrial }
-            draw:
-                polygons:
-                    color: *red1_b
 
-    buildings-late:
-        data: { source: osm, layer: buildings }
-        filter: { $zoom: { min: 18 } }
-        draw:
-            polygons:
-                order: 50
-                color: [1.000,1.000,1.000]
-            outline:
-                style: lines
-                order: 51
-                color: [0.486,0.486,0.486]
-                width: 0.85px
-                extrude: true
-        extruded:
-            filter: { $zoom: { min: 17 } }
+        # turn interactive feature selection on for buildings with names
+        interactive:
+            filter: { name: true }
+            draw: { polygons: { interactive: true } }
+
+        # building footprints, pre-extrusion
+        footprints:
+            filter:
+                $zoom: { max: 18 }
+                any:
+                    # show footprints for buildings at least one zoom level before they will be extruded
+                    - { $zoom: { min: 17 } }
+                    - { $zoom: { min: 14 } }
+                    - { $zoom: { min: 15 } }
+                    - { $zoom: { min: 15 } }
+                    - { $zoom: { min: 16 } }
             draw:
                 polygons:
-                    style: buildings_grid
-                    extrude: function () { return feature.height > 0 || $zoom >= 17; }
+                    visible: true
+                lines:
+                    visible: true
+
+        # 3d buildings
+        extrude:
+            filter:
+                any:
+                    - { $zoom: { min: 18 } }
+                    - { $zoom: { min: 17 }, area: { min: 500 } }
+            draw:
+                polygons:
+                    visible: true
+                    style: building-grid
+                    extrude: true
+                    color: [1.0, 1.0, 1.0]
+                lines:
+                    visible: true
+                    style: building-lines
+                    extrude: true
+
+        # landuse-specific rules
         in_park:
-            filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
+            filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
             draw:
                 polygons:
-                    color: *green1_b
-                outline:
-                    color: *green1_r
-            golf_course:
-                filter: { landuse_kind: golf_course }
-                draw:
-                    lines:
-                        outline:
-                            color: *green1_r
-            nature_reserve:
-                filter: { landuse_kind: nature_reserve }
-                draw:
-                    lines:
-                        outline:
-                            color: [0.600, 0.600, 0.600]
-            conservation:
-                filter: { landuse_kind: conservation }
-                draw:
-                    lines:
-                        outline:
-                            color: [0.600, 0.600, 0.600]
-            zoo:
-                filter: { landuse_kind: zoo }
-                draw:
-                    lines:
-                        outline:
-                            color: [0.600, 0.600, 0.600]
+                    color: [1.0,1.0,1.0]
+
+            # golf_course:
+            #     filter: { landuse_kind: golf_course }
+            #     draw:
+            #         polygons:
+            #             color: *building2
+            # nature_reserve:
+            #     filter: { landuse_kind: nature_reserve }
+            #     draw:
+            #         polygons:
+            #             color: *building2
+            # conservation:
+            #     filter: { landuse_kind: conservation }
+            #     draw:
+            #         polygons:
+            #             color: *building2
+            # zoo:
+            #     filter: { landuse_kind: zoo }
+            #     draw:
+            #         polygons:
+            #             color: *building2
         in_university:
-            filter: { landuse_kind: [university, school] }
+            filter: { landuse_kind: [university,school] }
             draw:
                 polygons:
-                    color: *brown1_b
+                    color: [1.0,1.0,1.0]
         in_hospital:
             filter: { landuse_kind: hospital }
             draw:
                 polygons:
-                    color: *red1_b
-#        in_retail:
-#            filter: { landuse_kind: retail }
-#            draw:
-#                polygons:
-#                    color: orange
-                
+                    color: [1.0,1.0,1.0]
+        in_retail:
+           filter: { landuse_kind: retail }
+           draw:
+                polygons:
+                    color: [1.0,1.0,1.0]
+
     building-labels:
         data: { source: osm, layer: buildings }
         filter: 
@@ -3212,7 +3210,7 @@ layers:
                 filter: function() { return feature.name && feature.name.includes("Wilderness") }
                 draw:
                     polygons:
-                        color: *green7
+                        color: [1.0,1.0,1.0]
                     outline:
                         style: lines
                         color: *green6
@@ -3228,7 +3226,7 @@ layers:
             filter: { kind: pitch }
             draw:
                 polygons:
-                    color: *orange2
+                    color: [1.0,1.0,1.0]
                 outline:
                     style: lines
                     color: *green6
@@ -3272,7 +3270,7 @@ layers:
             filter: { kind: [plant, generator, substation] }
             draw:
                 polygons:
-                    color: *grey3
+                    color: [1.0,1.0,1.0]
         # retail:
         #     filter:
         #         kind: retail
@@ -3280,13 +3278,13 @@ layers:
         #         polygons:
         #             order: 2
         #             color: *grey1
-#        commercial:
-#            filter:
-#                kind: commercial
-#            draw:
-#                polygons:
-#                    order: 2
-#                    color: [0.149, 0.475, 0.851]
+        # commercial:
+        #     filter:
+        #         kind: commercial
+        #     draw:
+        #         polygons:
+        #             order: 2
+        #             color: [0.149, 0.475, 0.851]
 
         parking:
             filter:
@@ -3298,25 +3296,25 @@ layers:
                     - { $zoom: { min: 15 }, area: { min: 5000 } }
             draw:
                 polygons:
-                    color: *grey1
+                    color: [1.0,1.0,1.0]
                     visible: *grey1_v
             early:
                 filter: { $zoom: { max: 15 } }
                 draw:
                     polygons:
-                        color: *grey1_e
+                        color: [1.0,1.0,1.0]
         railway:
             filter:
                 kind: railway
             draw:
                 polygons:
-                    color: *grey3
+                    color: [1.0,1.0,1.0]
         place_of_worship:
             filter:
                 kind: place_of_worship
             draw:
                 polygons:
-                    color: *grey1
+                    color: [1.0,1.0,1.0]
                     visible: *grey1_v
         urban:
             filter: { kind: [urban, rural, residential] }
@@ -3329,26 +3327,26 @@ layers:
                 kind: zoo
             draw:
                 polygons:
-                    color: *green2
+                    color: [1.0,1.0,1.0]
         industrial:
             filter:
                 kind: industrial
             draw:
                 polygons:
-                    color: *grey6
+                    color: [1.0,1.0,1.0]
         airport:
             filter:
                 kind: aerodrome
             draw:
                 polygons:
-                    color: *purple
+                    color: [1.0,1.0,1.0]
                     visible: *purple_v
         military:
             filter:
                 kind: military
             draw:
                 polygons:
-                    color: *purple
+                    color: [1.0,1.0,1.0]
                     
         man-made:
             filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
