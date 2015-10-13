@@ -1190,7 +1190,7 @@ layers:
                                 size: 8px
                                 stroke: { color: *text_stroke, width: 3 }
                 labels-trunk_primary-early2:
-                    filter: { $zoom: { min: 13, max: 15 } }
+                    filter: { $zoom: [13] }
                     draw:
                         text:
                             priority: 3
@@ -1198,7 +1198,18 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 10px
+                                size: 8px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-trunk_primary-early3:
+                    filter: { $zoom: [14] }
+                    draw:
+                        text:
+                            priority: 3
+                            visible: *text_visible_trunk_primary
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: [0.35,0.35,0.35]
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-trunk_primary-late:
                     filter: { $zoom: { min: 15, max: 18 } }
@@ -1208,8 +1219,8 @@ layers:
                             visible: *text_visible_trunk_primary
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
-                                fill: *text_fill
-                                size: 14px
+                                fill: [0.15,0.15,0.15]
+                                size: 11px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-trunk_primary-late2:
                     filter: { $zoom: { min: 18 } }
@@ -1311,7 +1322,7 @@ layers:
                                 outline:
                                     color: [1.0,1.0,1.0]
                 labels-secondary:
-                    filter: { $zoom: { min: 13, max: 15 } }
+                    filter: { $zoom: [13] }
                     draw:
                         text:
                             priority: 4
@@ -1319,7 +1330,18 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 13px
+                                size: 8px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-secondary1:
+                    filter: { $zoom: [14] }
+                    draw:
+                        text:
+                            priority: 4
+                            visible: *text_visible_secondary_e
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: [0.35,0.35,0.35]
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-secondary2:
                     filter: { $zoom: { min: 15, max: 18 } }
@@ -1329,8 +1351,8 @@ layers:
                             visible: *text_visible_secondary
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
-                                fill: *text_fill
-                                size: 14px
+                                fill: [0.15,0.15,0.15]
+                                size: 11px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-secondary3:
                     filter: { $zoom: { min: 18 } }
@@ -1414,7 +1436,7 @@ layers:
                                 outline:
                                     color: [1.0,1.0,1.0]
                 labels-tertiary:
-                    filter: { $zoom: { min: 14, max: 15 } }
+                    filter: { $zoom: [13] }
                     draw:
                         text:
                             priority: 5
@@ -1422,7 +1444,18 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: *text_fill
-                                size: 10px
+                                size: 8px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-tertiary1:
+                    filter: { $zoom: [14] }
+                    draw:
+                        text:
+                            priority: 5
+                            visible: *text_visible_tertiary_e
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: [0.35,0.35,0.35]
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-tertiary2:
                     filter: { $zoom: { min: 15, max: 18 } }
@@ -1432,8 +1465,8 @@ layers:
                             visible: *text_visible_tertiary
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
-                                fill: *text_fill
-                                size: 14px
+                                fill: [0.15,0.15,0.15]
+                                size: 11px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-tertiary3:
                     filter: { $zoom: { min: 18 } }
