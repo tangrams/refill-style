@@ -596,7 +596,6 @@ styles:
     waves:
         base: polygons
         mix: tools
-        lighting: false
         shaders:
             blocks:
                 filter: |
@@ -616,7 +615,6 @@ styles:
     coast:
         base: lines
         mix: tools
-        lighting: false
         blend: overlay
         shaders:
             blocks:
@@ -771,7 +769,7 @@ layers:
         draw:
             coast:
                 order: 10
-                width: 4px
+                width: [[2, 2px], [5, 4px]]
                 color: [0.761, 0.761, 0.761]
             polygons:
                 order: 0
