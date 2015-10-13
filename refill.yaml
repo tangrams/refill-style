@@ -34,13 +34,13 @@ settings:
         - &light_settings             { type: directional, direction: [1, 1, -.9], diffuse: 0.5, ambient: 0.85 }
 
     roads:
-        - &highway1                   [0.00, 0.00, 0.00]
+        - &highway1                   [1.00,1.00,1.00]
         - &highway_link1              [0.00, 0.00, 0.00]
         - &highway_casing1            [0.40, 0.40, 0.40]
         - &highway_tunnel1            [0.7, 0.7, 0.7]
         - &highway_tunnel_casing1     [1.00, 0.00, 0.00]
         - &highway_link_tunnel_casing1 [1.00, 0.00, 0.00]
-        - &ferry1                     [0.30, 0.30, 0.30]
+        - &ferry1                     [0.75,0.75,0.75]
         - &major_road1                [0.0, 0.0, 0.0]
         - &major_road1b               [0.935, 0.935, 0.935]
         - &major_road1c               white    #15%
@@ -130,7 +130,7 @@ settings:
         - &purple_v    false               # airport
         - &mystry1     '#aaaaaa'                # recreation ground (type of park, sometimes around reservoirs)
         - &building1   white                    # building
-        - &building2   black                    # building stroke
+        - &building2   white                    # building stroke
         - &building_o  25                       # building stroke order
         - &building_e  true                # building stroke order
 
@@ -409,7 +409,7 @@ textures:
 sources:
     osm:
         type: TopoJSONTiles
-        #url: '//vector.dev.mapzen.com/osm/all/{z}/{x}/{y}.topojson'
+        # url: '//vector.dev.mapzen.com/osm/all/{z}/{x}/{y}.topojson'
         #url:  //localhost:8080//osm/all/{z}/{x}/{y}.topojson
         url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
 
@@ -1012,9 +1012,9 @@ layers:
                     lines:
                         # order: 3
                         color: *ferry1
-                        width: [[12, 1.0px], [14, 1.5px], [15, 3px], [16, 5m]]
+                        width: [[12, 0.5px], [13, 0.75px], [15, 1.0px]]
                         outline:
-                            width: [[12, 0px], [14, .5px], [17, 1px]]
+                            width: 0px
         highway:
             filter: { kind: highway }
             draw:
@@ -1025,7 +1025,7 @@ layers:
                     width: [[8, 1px], [10, 1.15px], [11, 1px], [12, 1px], [14, 1.75px], [15, 3px], [16, 4px], [17, 4px]]
                     outline:
                         color: *highway_casing1
-                        width: [[9, 0px], [10, 0px], [11, 0px], [12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 0px]]
+                        width: 0px
             not_link:
                 filter: { not: { is_link: yes }, $zoom: {max: 15} }
                 draw:
@@ -1141,7 +1141,7 @@ layers:
                         color: [[8, [0.8,0.8,0.8]], [10, [0.8,0.8,0.8]], [12, [0.5,0.5,0.5]], [13, [0.4,0.4,0.4]], [14, [0.3,0.3,0.3]], [15, [0.1,0.1,0.1]], [16, [0.0,0.0,0.0]], [17, [0.0,0.0,0.0]]]
                         width: [[9, 0.5px], [11, 0.5px], [12, 0.75px], [13, 0.75px], [14, 1px], [15, 1.25px], [16, 3px], [17, 3px], [18, 3px]]
                         outline:
-                            width: [[9, 0.0px], [11, 0px], [12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 0px]]
+                            width: 0px
                 routes:
                     filter: { ref: true }
                     draw:
@@ -1150,7 +1150,7 @@ layers:
                             width: [[9, 0.5px], [10, 0.65px], [11, 0.65px], [12, 0.65px], [13, 0.65px], [14, 1.25px], [15, 1.25px], [16, 3px], [17, 3px], [18, 3px]]
                             outline:
                                 color: [[8,*major_casing1], [16,[0.0,0.0,0.0]]]
-                                width: [[9, 0.0px], [11, 0px], [12, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 0px]]
+                                width: 0px
                     national-routes:
                         filter: { network: [US:US, US:I] }
                         draw:
@@ -1160,7 +1160,7 @@ layers:
                                 width: [[8, 1px], [10, 1.15px], [11, 1px], [12, 1px], [14, 1.75px], [15, 3px], [16, 4px], [17, 4px]]
                                 outline:
                                     color: *highway_casing1
-                                    width: [[9, 0px], [10, 0px], [11, 0px], [12, 0px], [13, 0px], [14, 0px], [15, 0px], [16, 0px], [17, 0px], [18, 0px]]
+                                    width: 0px
                     tunnel:
                         filter: {is_tunnel: yes, $zoom: {min: 13} }
                         draw:
@@ -1379,7 +1379,6 @@ layers:
                             color: [[14, [0.75,0.75,0.75]], [15, [0.6, 0.6, 0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                             width: [[11, 0.0px], [12, 0.15px], [14, 0.15px], [15, 0.75px], [16, 1.25px], [17, 1.25px], [18, 1.25px]]
                             outline:
-                                color: [[12,*major_casing2],[13,*major_casing1]]
                                 width: 0px
                 in_park:
                     filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
@@ -1807,8 +1806,8 @@ layers:
             draw:
                 lines:
                     # order: 3
-                    color: *ferry1
-                    width: [[12, 1.0px], [14, 1.5px], [16, 5m]]
+                    color: [[12, *ferry1], [13, [0.80,0.80,0.80]]]
+                    width: [[12, 0.5px], [13, 0.75px], [15, 1.0px]]
         z-order:
             #filter: { $zoom: {min: 12} }
             draw:
