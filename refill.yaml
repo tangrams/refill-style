@@ -577,7 +577,23 @@ styles:
                 filter: |
                     color.rgb = mix(vec3(1.0), vec3(0.970), gl_FragCoord.x / u_resolution.x + gl_FragCoord.y / u_resolution.y); 
 
-    pixel-pattern:
+    pixel-pattern-light:
+        mix: tools
+        base: polygons
+        shaders:
+            blocks:
+                global: |
+                    float random(in vec3 _st){ 
+                        return fract(sin(dot(_st.xyz,
+                                             vec3(70.9898,78.233,32.4355)))* 
+                            43758.5453123);
+                    }
+                    
+                filter: |
+                    vec3 pos = vec3(TileCoords()*130.0,1.0);
+                    color.rgb = vec3(random(abs(floor(pos)))+0.785);
+
+    pixel-pattern-dark:
         mix: tools
         base: polygons
         shaders:
@@ -625,7 +641,7 @@ styles:
                     const float dot_wrap = 1000.;
                     st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
                     
-                    color = mix(vec4(color.rgb, 0.9), vec4(0.), stripes(st*130.))*.8; // transparent stripes
+                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
                     
                     color.rgb -= grain(gl_FragCoord.xy)*0.5;
                 filter: |
@@ -645,27 +661,41 @@ styles:
                     color *= vec4(b);
                 filter: |
                     color.rgb = mix(COLOR1, COLOR2, b);
+
+    dots2:
+        mix: tools
+        base: polygons
+        shaders:
+            blocks:
+                color: |
+                    vec2 st = TileCoords();
+                    st = tile(st,50.0);
+                    float dot_size = .2;
+                    float b = circle(st, dot_size);
+                    color *= vec4(b);
+                filter: |
+                    color.rgb = mix(COLOR1, COLOR2, b);
                     
     park-dots1:
         mix: dots
         shaders:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: vec3(0.500,0.500,0.500)
+                    COLOR2: vec3(0.810,0.810,0.810)
 
     park-dots2:
-        mix: dots
+        mix: dots2
         shaders:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: vec3(0.650,0.650,0.650)
+                    COLOR2: vec3(0.790,0.790,0.790)
 
     park-dots3:
         mix: dots
         shaders:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: vec3(0.800,0.800,0.800)
+                    COLOR2: vec3(0.760,0.760,0.760)
 
     # HSV/RGB functions
     hsv:
@@ -767,35 +797,23 @@ layers:
     earth:
         data: { source: osm, layer: earth }
         draw:
-            coast:
+            # coast:
+            #     order: 10
+            #     width: [[2, 2px], [5, 4px]]
+            #     color: [0.761, 0.761, 0.761]
+            lines:
                 order: 10
-                width: [[2, 2px], [5, 4px]]
-                color: [0.761, 0.761, 0.761]
+                width: 1px
+                color: white
             polygons:
                 order: 0
                 color: [1.0,1.0,1.0]
 
-    water-early:
+    water1:
         data: { source: osm, layer: water }
-        not-playa:
-            filter: { not: { kind: [playa] } }
-            draw:
-                water-gradient:
-                    order: 3
-        playa:
-            filter: { kind: [playa] }
-            draw:
-                polygons:
-                    color: [0.98, 0.98, 0.98]
+        filter: { $zoom: { max: 8 } }
 
-    water-fade:
-        data: { source: osm, layer: water }
-        filter: { $zoom: { min: 9, max: 13 } }
-#        draw:
-#            waves:
-#                order: 4
-#                color: *water1
-        lakes:
+        lakes-early:
             filter: 
                 all:
                     - kind: [ocean, lake, water, reservoir]
@@ -806,57 +824,37 @@ layers:
                     - { $zoom: { min: 6 },  area: { min: 500000000 } }
                     - { $zoom: { min: 7 },  area: { min: 160000000 } }
                     - { $zoom: { min: 8 },  area: { min: 40000000 } }
+
+            draw:
+                water-gradient:
+                    color: [0.870, 0.870, 0.870]
+
+        not-playa:
+            filter: { not: { kind: [playa] } }
+            draw:
+                water-gradient:
+                    order: 3
+                    color: [0.870, 0.870, 0.870]
+        playas:
+            filter: { kind: playa, $zoom: {min: 6} }
+            draw:
+                water-gradient:
+                    color: [0.870, 0.870, 0.870]
+
+    water2:
+        data: { source: osm, layer: water }
+        filter: { $zoom: { min: 8 } }
+
+        lakes-early:
+            filter: 
+                all:
+                    - kind: [ocean, lake, water, reservoir]
+                any:
+                    # limit show smaller landuse areas to higher zooms
                     - { $zoom: { min: 9 },  area: { min: 10000000 } }
                     - { $zoom: { min: 10 }, area: { min: 8000000 } }
                     - { $zoom: { min: 11 }, area: { min: 2000000 } }
                     - { $zoom: { min: 12 }, area: { min: 500000 } }
-                    - { $zoom: { min: 13 }, area: { min: 100000 } }
-        not-playa:
-            filter: { not: { kind: [playa] } }
-            draw:
-                waves:
-                    color: *water1
-        other_water-areas:
-            filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 10 }, area: { min: 100 } }
-            draw:
-                waves:
-                    color: *water1
-        playas-early:
-            filter: { kind: playa, $zoom: {max: 6} }
-            draw:
-                waves:
-                    visible: false
-        playas:
-            filter: { kind: playa, $zoom: {min: 6} }
-            draw:
-                waves:
-                    visible: false
-                polygons:
-                    visible: true
-                    order: 10
-                    color: red #*water3
-        water_boundaries-ocean:
-          filter: { boundary: yes, kind: ocean, $zoom: { min: 10 } }
-          draw:
-                lines:
-                    order: 5
-                    color: *water1_o
-                    width: [[10,1px],[12,2px]]
-                    join: round
-
-    water-late:
-        data: { source: osm, layer: water }
-        filter: { $zoom: { min: 13 } }
-        draw:
-            waves:
-                order: 3
-                color: *water2
-        lakes:
-            filter: 
-                all:
-                    - kind: [ocean, lake, water, reservoir, playa]
-                any:
-                    # limit show smaller landuse areas to higher zooms
                     - { $zoom: { min: 13 }, area: { min: 100000 } }
                     - { $zoom: { min: 14 }, area: { min: 50000 } }
                     - { $zoom: { min: 15 }, area: { min: 20000 } }
@@ -864,42 +862,57 @@ layers:
                     - { $zoom: { min: 16 } }
             draw:
                 waves:
-                    color: *water2
-        other_water-areas:
-            filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 13 }, area: { min: 100 } }
+                    color: [0.870, 0.870, 0.870]
+
+        not-playa:
+            filter: { not: { kind: [playa] } }
             draw:
                 waves:
-                    color: *water2
+                    order: 3
+                    color: [0.870, 0.870, 0.870]
         playas:
             filter: { kind: playa, $zoom: {min: 6} }
             draw:
                 waves:
-                    visible: true
-                    color: *water3
+                    color: [0.870, 0.870, 0.870]
+
+        other_water-areas:
+            filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 10 }, area: { min: 100 } }
+            draw:
+                waves:
+                    color: [0.870, 0.870, 0.870]
+
+
+    water-lines:
+        data: { source: osm, layer: water }
+
         water_boundaries-ocean:
-          filter: { boundary: yes, kind: ocean, $zoom: { min: 10 } }
-          draw:
-                lines:
+            filter: { boundary: yes, kind: ocean }
+            draw:
+                coast:
                     order: 5
-                    color: *water1_o
-                    width: [[10,1px],[12,2px]]
+                    color: [0.761, 0.761, 0.761]
+                    width: [[2, 1.0px], [6, 1.25px], [8, 1.5px], [10, 2px], [14, 4px]]
                     join: round
+
         water_boundaries-not-ocean:
-          filter: { boundary: yes, not: { kind: ocean }, $zoom: { min: 14 } }
-          draw:
-                lines:
+            filter: { boundary: yes, not: { kind: ocean }, $zoom: { min: 6 } }
+            draw:
+                coast:
                     order: 5
-                    color: *water2_o
-                    width: [[14,1.0px],[16,1.5px],[18,2m]]
+                    color: [[6, [0.900, 0.900, 0.900]], [10, [0.761, 0.761, 0.761]]]
+                    width: [[6,0.75px], [10,1.0px], [14,1.25px],[15,1.5px],[16,2.0px]]
                     join: round
+
         river:
             filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 13 } }
             draw:
-                lines:
+                coast:
                     order: 3
-                    color: *water2_o
-                    width: [[13,0.5px],[14,1.0px],[16,1.5px],[18,4m]]
+                    color: [0.761, 0.761, 0.761]
+                    width: [[13,0.5px],[14,2.0px],[16,3.0px],[18,4m]]
                     cap: round
+
 
     railway-early:
         data: { source: osm, layer: transit }
@@ -1508,25 +1521,25 @@ layers:
                     draw:
                         lines:
                             outline:
-                                color: *green1_r
+                                color: [1.0,1.0,1.0]
                 nature_reserve:
                     filter: { landuse_kind: nature_reserve }
                     draw:
                         lines:
                             outline:
-                                color: [0.635,0.819,0.742]
+                                color: [1.0,1.0,1.0]
                 conservation:
                     filter: { landuse_kind: conservation }
                     draw:
                         lines:
                             outline:
-                                color: orange
+                                color: [1.0,1.0,1.0]
                 zoo:
                     filter: { landuse_kind: zoo }
                     draw:
                         lines:
                             outline:
-                                color: pink
+                                color: [1.0,1.0,1.0]
             in_university:
                 filter: { landuse_kind: university }
                 draw:
@@ -1706,7 +1719,7 @@ layers:
                     draw:
                         lines:
                             outline:
-                                color: [0.635,0.819,0.742]
+                                color: [1.0,1.0,1.0]
                 conservation:
                     filter: { landuse_kind: conservation }
                     draw:
@@ -1801,11 +1814,11 @@ layers:
             draw:
                 lines:
                     order: 10
-                    color: *grey2
+                    color: [[11, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                     cap: butt
                     width: [[10, 1px], [11, 1.5px], [12, 2px], [13, 4px], [14, 8px], [15, 16px], [16, 32px], [17, 60m]]
                     outline:
-                        color: [0.7,0.7,0.7]
+                        color: [1.0,1.0,1.0]
             # Features come in at zoom 9, but include mostly minor airports without POIs until z13
             early:
                 filter: { $zoom: { max: 12 }, not: { landuse_kind: [aerodrome, runway, taxiway] } }
@@ -1822,11 +1835,11 @@ layers:
                 draw:
                     lines:
                         order: 9
-                        color: red
+                        color: [[14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
                         width: [[14, 1px], [17, 1.5px], [18, 4m]]
                         outline:
                             width: 0.5px
-                            color: blue
+                            color: [1.0,1.0,1.0]
                 early:
                     filter: { $zoom: { max: 14 } }
                     draw:
@@ -3121,23 +3134,10 @@ layers:
                     polygons:
                       color: *green1
             park_z1:
-                filter:
-                    $zoom: [1,2,3,4,5,6,7,8,9,10,11]
                 draw:
                     park-dots1:
                         order: 1
-            park_z12:
-                filter:
-                    $zoom: [12,13,14]
-                draw:
-                    park-dots2:
-                        order: 1
-            park_z15:
-                filter:
-                    $zoom: [15,16,17,18,19,20]
-                draw:
-                    park-dots3:
-                        order: 1
+
             early-not-national-park:
                 filter: { $zoom: { max: 6 }, not: { operator: [ "United States National Park Service", "US National Park Service" ] } }
                 draw: 
@@ -3160,23 +3160,10 @@ layers:
                         color: *green1
                         width: [[9,0px],[10,2px],[12,4px]]
             park_z1:
-                filter:
-                    $zoom: [1,2,3,4,5,6,7,8,9,10,11]
-                draw:
-                    park-dots1:
-                        order: 1
-            park_z12:
-                filter:
-                    $zoom: [12,13,14]
                 draw:
                     park-dots2:
                         order: 1
-            park_z15:
-                filter:
-                    $zoom: [15,16,17,18,19,20]
-                draw:
-                    park-dots3:
-                        order: 1
+
             early:
                 filter: { $zoom: { max: 6 } }
                 draw: 
@@ -3201,7 +3188,7 @@ layers:
                 kind: forest
                 operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ]
             draw:
-                park-dots2:
+                pixel-pattern-dark:
                     order: 1
             early:
                 filter: { $zoom: { max: 6 } }
@@ -3233,9 +3220,8 @@ layers:
             filter:
                 kind: nature_reserve
             draw:
-                pixel-pattern:
+                pixel-pattern-light:
                     order: 1
-                    color: *green6
             wilderness-areas:
                 filter: function() { return feature.name && feature.name.includes("Wilderness") }
                 draw:
@@ -3380,7 +3366,7 @@ layers:
                     
         man-made:
             filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
-            draw: { polygons: { order: 2, color: *grey3 } }
+            draw: { polygons: { order: 2, color: [1.0,1.0,1.0] } }
             pier:
                 filter: { kind: [pier,bridge,breakwater,groyne,dike,cutline] }
                 draw: { polygons: { color: *earth1 } }
