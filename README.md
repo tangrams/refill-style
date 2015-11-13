@@ -66,7 +66,7 @@ If that doesn't work, try:
 Then navigate to: [http://localhost:8000](http://localhost:8000), which loads the [index.html](index.html) file.
 
 
-**You should be all set, happy mapping!** But please let us know at [hello@mapzen.com](mailto:hello@mapzen.com) or via Twitter [@mapzen](http://twitter.com/mapzen) if you encounter any funk and we'll help you get up and running.
+**You should be all set, happy mapping!** But please let us know at [hello@mapzen.com](mailto:hello@mapzen.com&subject=Help%20with%20style%20demo%3F) or via Twitter [@mapzen](http://twitter.com/mapzen) if you encounter any funk and we'll help you get up and running.
 
 ### See also:
 
