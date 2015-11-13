@@ -4,7 +4,7 @@
 
 Refill is a continuation of the [Toner](http://content.stamen.com/dotspotting_toner_cartography_available_for_download) style Geraldine started at [Stamen](http://stamen.com). With the GL capabilities of Tangram, detailed lines, patterns and building extrusions are further explored and elaborated upon from the previous Toner base-style. Toner was a style created at Stamen as part of their great [CityTracking](http://citytracking.org) project. Please use and adapt the open source scene file in your own projects!
 
-**Looking for help?** There is a mini tutorial after the preview image below walking thru [Vector Tiles API key signup](https://github.com/tangrams/refill-style/blob/gh-pages/README.md#sign-up-for-a-vector-tiles-api-key) and [building a Leaflet map](https://github.com/tangrams/refill-style/blob/gh-pages/README.md#building-a-leaflet-map-using-tangram) using Tangram and this repo's scene file.
+**Looking for help?** There is a mini tutorial after the preview image below walking thru [Vector Tiles API key signup](https://github.com/tangrams/refill-style/blob/gh-pages/README.md#sign-up-for-a-mapzen-vector-tiles-api-key) and [building a Leaflet map](https://github.com/tangrams/refill-style/blob/gh-pages/README.md#building-a-leaflet-map-using-tangram) using Tangram and this repo's scene file.
 
 ### A family of styles with many flavours
 
