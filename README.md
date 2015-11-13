@@ -39,7 +39,7 @@ Mapzen offers the Refill style in three flavors:
 
 Using Tangram and Mapzen's Vector tiles inside the popular [Leaflet](http://leafletjs.com) mapping framework is easy. We'll make it even easier soon to do this via a Leaflet [provider](https://github.com/leaflet-extras/leaflet-providers), but in the meantime...
 
-1. Update your copy of the scene file on [line 450](https://github.com/tangrams/refill-style/blob/gh-pages/refill-style.yaml#L428) to reference the API key you created in Step 3 in the **Sign up** section above. 
+1. Update your copy of the scene file on [line 428](https://github.com/tangrams/refill-style/blob/gh-pages/refill-style.yaml#L428) to reference the API key you created in Step 3 in the **Sign up** section above. 
 `url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-{your-api-key-here}`
 2. Reference the [index-demo.html](index-demo.html) file in any of the style repos for how to configure Leaflet with Tangram and the scene file (e.g.: [Refill](http://github.com/tangrams/refill-style)). 
 3. Looking for a more sophisticated implementation that includes basic search? The main [index.html](index.html) file has a more real world example.
