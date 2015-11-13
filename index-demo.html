@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Tangram Refill Style Map</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+  <style>
+  #map {
+    height:   100%;
+    width:    100%;
+    position: absolute;
+  }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+    <!-- 3rd party libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
+    <!-- bog-standard leaflet URL hash -->
+    <script src="lib/leaflet-hash.js"></script>
+    <!-- Main tangram library -->
+    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+    <script>
+      var map = L.map('map');
+      var layer = Tangram.leafletLayer({
+        scene: 'https://raw.githubusercontent.com/tangrams/refill-style/gh-pages/refill-style.yaml',
+        attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+      });
+      layer.addTo(map);
+      map.setView([41.8758,-87.6189], 16)
+    </script>
+</body>
+</html>
