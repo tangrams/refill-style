@@ -4,12 +4,18 @@
 map = (function () {
     'use strict';
 
+    var locations = {
+        'Oakland': [37.8044, -122.2708, 15],
+        'New York': [40.70531887544228, -74.00976419448853, 15],
+        'Seattle': [47.5937, -122.3215, 15]
+    };
+
+    var map_start_location = locations['Oakland'];
 
     /*** URL parsing ***/
 
     // leaflet-style URL hash pattern:
     // #[zoom],[lat],[lng]
-    var map_start_location = [37.8044, -122.2708, 15]; // Oakland
     var url_hash = window.location.hash.slice(1, window.location.hash.length).split('/');
 
     if (url_hash.length == 3) {
@@ -21,9 +27,9 @@ map = (function () {
     /*** Map ***/
 
     var map = L.map('map',
-        { maxZoom: 20 }
+        {"keyboardZoomOffset" : .05, maxZoom: 20 }
     );
-
+        
     var layer = Tangram.leafletLayer({
         scene: 'refill-style.yaml',
         attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
@@ -37,12 +43,12 @@ map = (function () {
     map.setView(map_start_location.slice(0, 3), map_start_location[2]);
 
     var hash = new L.Hash(map);
-
+    
 	function long2tile(lon,zoom) { return (Math.floor((lon+180)/360*Math.pow(2,zoom))); }
-	function lat2tile(lat,zoom)  { return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom))); }
+	function lat2tile(lat,zoom)  { return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom))); }    
 
     /***** Render loop *****/
-
+	
 	function addGUI () {
 		// Link to edit in OSM - hold 'e' and click
 		function onMapClick(e) {
@@ -67,10 +73,10 @@ map = (function () {
 			}
 		}
 
-		map.on('click', onMapClick);
+		map.on('click', onMapClick);		
 	}
 
-
+	
      // Feature selection
     function initFeatureSelection () {
         // Selection info shown on hover
@@ -117,12 +123,12 @@ map = (function () {
                 }
             }
         });
-
+        
         // Show selected feature on hover
         scene.container.addEventListener('click', function (event) {
             var pixel = { x: event.clientX, y: event.clientY };
 
-			scene.getFeatureAt(pixel).then(function(selection) {
+			scene.getFeatureAt(pixel).then(function(selection) {    
 				if (!selection) {
 					return;
 				}
@@ -154,7 +160,7 @@ map = (function () {
 					selection_info.parentNode.removeChild(selection_info);
 				}
 			});
-
+			
             // Don't show labels while panning
             if (scene.panning == true) {
                 if (selection_info.parentNode != null) {
@@ -162,7 +168,7 @@ map = (function () {
                 }
             }
         });
-
+        
     }
 
     window.addEventListener('load', function () {
@@ -173,7 +179,7 @@ map = (function () {
         });
         layer.addTo(map);
     });
-
+    
     return map;
 
 }());
