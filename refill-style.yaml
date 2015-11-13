@@ -1,4 +1,14 @@
-﻿# Author: Geraldine Sarmiento, Nathaniel V. Kelso
+﻿# Refill provides a high contrast, black & white basemap useful for data visualization. 
+# Give OpenStreetMap data a professional basemap skin using the Tangram graphics library 
+# and Mapzen's versatile Vector Tiles. 
+#
+# Refill is a modern GL take on Geraldine's work on Toner for Stamen as part of their 
+# great CityTracking project. Please use and adapt the open source scene file in  
+# your own projects!
+#
+# Authors: Geraldine Sarmiento, Nathaniel V. Kelso
+# Read more: https://github.com/tangrams/refill-style
+# 
 
 labels-global:
     - &text_visible_continent         true
