@@ -2563,12 +2563,12 @@ layers:
                             style: italic
                             stroke: { color: *text_stroke_park, width: 4 }
                 wilderness-areas-early:
-                   filter: function() { return $zoom < 10 && feature.name && (feature.name.includes("Wilderness") || feature.name.includes("BLM")) }
+                   filter: function() { return $zoom < 10 && feature.name && (feature.name.indexOf("Wilderness") > -1 || feature.name.indexOf("BLM") > -1) }
                    draw:
                        text: { visible: false }
                        icons: { visible: false }                
                 park:
-                    filter: function() { return feature.name && feature.name.includes("Park") && !feature.name.includes("National Park")}
+                    filter: function() { return feature.name && feature.name.indexOf("Park") > -1 && !feature.name.indexOf("National Park") > -1}
                     draw:
                         icons: 
                             sprite: park
@@ -2578,7 +2578,7 @@ layers:
                             text: { visible: false }
                             icons: { visible: false }
                 national-park:
-                    filter: function() { return feature.name && feature.name.includes("National Park") }
+                    filter: function() { return feature.name && feature.name.indexOf("National Park") > -1 }
                     draw:
                         icons: 
                             sprite: park
@@ -2591,7 +2591,7 @@ layers:
                         text: { visible: false }
                         icons: { visible: false }
                 forest:
-                    filter: function() { return $zoom < 8 && ((feature.name && feature.name.includes("Forest")) || feature.protect_class >=6) }
+                    filter: function() { return $zoom < 8 && ((feature.name && feature.name.indexOf("Forest") > -1) || feature.protect_class >=6) }
                     draw:
                         text: { visible: false }
                         icons: { visible: false }
@@ -3313,7 +3313,7 @@ layers:
                 polygons:
                     color: *green8
             wilderness-areas:
-                filter: function() { return feature.name && feature.name.includes("Wilderness") }
+                filter: function() { return feature.name && feature.name.indexOf("Wilderness") > -1 }
                 draw:
                     polygons:
                         color: *green7
@@ -3385,7 +3385,7 @@ layers:
                 pixel-pattern-light:
                     order: 1
             wilderness-areas:
-                filter: function() { return feature.name && feature.name.includes("Wilderness") }
+                filter: function() { return feature.name && feature.name.indexOf("Wilderness") > -1 }
                 draw:
                     polygons:
                         color: [1.0,1.0,1.0]
