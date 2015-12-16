@@ -888,7 +888,7 @@ layers:
 
     water2:
         data: { source: osm, layer: water }
-        filter: { $zoom: { min: 7 } }
+        filter: { $zoom: { min: 6 } }
 
         lakes-early:
             filter: 
