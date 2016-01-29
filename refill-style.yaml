@@ -428,9 +428,8 @@ sources:
         url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-W2tPU-Y
 
 cameras:
-    perspective:
+    isometric:
         type: isometric
-        vanishing_point: [0, -500]
 
 styles:
     dashedline:
@@ -765,42 +764,50 @@ styles:
                         return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
                     }
 
-    building-grid:
-        base: polygons
-        mix: [hsv, scale-buildings]
-        texcoords: true
-        shaders:
-            defines:
-                # ROOF_COLOR: vec3(.870, .870, .870)
-                # WALL_COLOR: vec3(0.658, 0.617, 0.576)
-                WALL_FACTOR: vec3(1., 3., .8) # modifies roof color HSV
-                GRID_COLOR: vec3(0.29)
-            blocks:
-                color: |
-                    vec2 st = v_texcoord.xy;
-                    vec2 f_st = fract(st*8.);
-                    vec2 i_st = floor(st*8.);
-                    // color.rg = f_st;
-                    
-                    vec2 pct = step(vec2(0.09),f_st);;
-                    color.rgb -= mix(vec3(0.0), vec3(0.4),(1.0-(pct.x * pct.y)));
-                    
-                    if ( dot(vec3(0.,0.,1.),normal) == 1.0 ) {
-                        // If it's a roof
-                        color.rgb = vec3(0.988);
-                    }
-
     scale-buildings:
         shaders:
             blocks:
                 position: |
                     // scale buildings based on zoom
                     float zoom = u_map_position.z;
-                    float min = .1;         // minimum building scale
+                    float min = .1;       // minimum building scale
                     float midpoint = 16.; // middle of zoom range
-                    float speed = 2.;  // number of zoom levels to transition over
-                    float e = (zoom - midpoint)/(speed * .2);
-                    position.z *= ((1.-min) / (1.+(exp(e)))) + min;
+                    float inspeed = .1;   // number of zooms to scale buildings up
+                    float outspeed = 2.;  // number of zooms to scale buildings back down
+                    float e = 0.;
+
+                    if (zoom >= midpoint) {
+                        e = (zoom - midpoint) / (outspeed * .2);
+                    } else {
+                        e = abs(zoom - midpoint) / inspeed;
+                    }
+                    position.z *= ((1. - min) / (1. + (exp(e)))) + min;
+
+    building-grid:
+        base: polygons
+        mix: [hsv, scale-buildings]
+        texcoords: true
+        material:
+            diffuse:
+                texture: building-grid
+                mapping: uv
+        shaders:
+            defines:
+                WALL_TINT: vec3(1., 3., .800) # modifies roof color HSV
+            blocks:
+                filter: |
+                    vec2 st = v_texcoord.xy;
+                    vec2 f_st = fract(st*6.);
+                    vec2 i_st = floor(st*6.);
+                    // color.rg = f_st;
+                    
+                    vec2 pct = step(vec2(0.09),f_st);;
+                    color.rgb = mix(vec3(1.0), vec3(0.5),(0.5-(pct.x * pct.y)));
+                    
+                    if ( dot(vec3(0.,0.,1.),normal) == 1.0 ) {
+                        // If it's a roof
+                        color.rgb = vec3(0.988);
+                    }
 
     building-lines:
         base: lines
@@ -1924,7 +1931,7 @@ layers:
                             order: function() { return 6 + feature.sort_key;
 
     buildings:
-        data: { source: osm }
+        data: { source: osm, layer: buildings }
 
         filter:
             not: { location: underground }
@@ -1953,11 +1960,18 @@ layers:
                 $zoom: { max: 18 }
                 any:
                     # show footprints for buildings at least one zoom level before they will be extruded
+                    - { $zoom: [13], area: { min: 50000 } }
+                    - { $zoom: [13], height: { min: 250 } }
+                    - { $zoom: [13], volume: { min: 200000 } }
+                    - { $zoom: [14], area: { min: 5000 } }
+                    - { $zoom: [14], height: { min: 190 } }
+                    - { $zoom: [14], volume: { min: 150000 } }
+                    - { $zoom: [15], height: { min: 100 } }
+                    - { $zoom: [15], area: { min: 500 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
+                    - { $zoom: [16], area: { min: 100 } }
+                    - { $zoom: [16], volume: { min: 50000 } }
                     - { $zoom: { min: 17 } }
-                    - { $zoom: { min: 14 } }
-                    - { $zoom: { min: 15 } }
-                    - { $zoom: { min: 15 } }
-                    - { $zoom: { min: 16 } }
             draw:
                 polygons:
                     visible: true
@@ -1968,18 +1982,25 @@ layers:
         extrude:
             filter:
                 any:
+                    - { $zoom: [15], height: { min: 190 } }
+                    - { $zoom: [15], area: { min: 5000 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
+                    - { $zoom: [16], height: { min: 100 } }
+                    - { $zoom: [16], area: { min: 3500 } }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: [17], area: { min: 500 } }
+                    - { $zoom: [17], volume: { min: 15000 } }
                     - { $zoom: { min: 18 } }
-                    - { $zoom: { min: 17 }, area: { min: 500 } }
             draw:
                 polygons:
                     visible: true
                     style: building-grid
-                    extrude: true
+                    extrude: function() { return feature.height || 20; }
                     color: [1.0, 1.0, 1.0]
                 lines:
                     visible: true
                     style: building-lines
-                    extrude: true
+                    extrude: function() { return feature.height || 20; }
 
         # landuse-specific rules
         in_park:
@@ -3556,7 +3577,7 @@ layers:
             draw:
                 polygons:
                     order: 3
-                    color: [0.95,0.95,0.95]
+                    color: [1.000, 1.000, 1.000]
                     visible: *grey1_v
 
     # landuse_urban_area-early:
