@@ -1717,7 +1717,7 @@ layers:
                             color: [1.0,1.0,1.0]
                             width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
             labels-service_road:
-                filter: { $zoom: { min: 17, min: 18 } }
+                filter: { $zoom: { min: 17, max: 18 } }
                 draw:
                     text:
                         priority: 7
