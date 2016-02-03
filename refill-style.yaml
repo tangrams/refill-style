@@ -1021,7 +1021,7 @@ layers:
 
     roads:
         data: { source: osm, layer: roads }
-        filter: { not: { kind: rail } }
+        filter: { not: { kind: [rail, ferry] } }
         draw:
             lines:
                 interactive: true
