@@ -863,16 +863,20 @@ layers:
                 order: 0
                 color: [1.0,1.0,1.0]
 
-    water1:
+    water-z1:
         data: { source: osm, layer: water }
         filter: { $zoom: { max: 6 } }
 
         lakes-early:
             filter: 
                 all:
-                    - kind: [ocean, lake, water, reservoir]
+                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
                 any:
                     # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 1 },  area: { min: 40000000000 } }
+                    - { $zoom: { min: 2 },  area: { min: 20000000000 } }
+                    # some weird natural earth scale set transition
+                    - { $zoom: { min: 3 },  area: { min: 80000000000 } }
                     - { $zoom: { min: 4 },  area: { min: 15000000000 } }
                     - { $zoom: { min: 5 },  area: { min: 1000000000 } }
                     - { $zoom: { min: 6 },  area: { min: 500000000 } }
@@ -893,14 +897,14 @@ layers:
                 water-gradient:
                     color: [0.870, 0.870, 0.870]
 
-    water2:
+    water:
         data: { source: osm, layer: water }
         filter: { $zoom: { min: 6 } }
 
-        lakes-early:
+        lakes:
             filter: 
                 all:
-                    - kind: [ocean, lake, water, reservoir]
+                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
                 any:
                     # limit show smaller landuse areas to higher zooms
                     - { $zoom: { min: 7 },  area: { min: 160000000 } }
