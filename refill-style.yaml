@@ -656,11 +656,6 @@ styles:
                     
                     color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
                     
-                    color.rgb -= grain(gl_FragCoord.xy)*0.5;
-                filter: |
-                    color.rgb += vec3(.2)*TileGrid();
-                    color.rgb -= grain(gl_FragCoord.xy)*0.3;
-                    
     dots:
         mix: tools
         base: polygons
@@ -851,23 +846,22 @@ layers:
     earth:
         data: { source: osm, layer: earth }
         draw:
-            # coast:
+            # lines:
             #     order: 10
-            #     width: [[2, 2px], [5, 4px]]
-            #     color: [0.761, 0.761, 0.761]
-            lines:
-                order: 10
-                width: 1px
-                color: white
+            #     width: 1px
+            #     color: white
             polygons:
                 order: 0
                 color: [1.0,1.0,1.0]
 
-    water-z1:
+    water:
         data: { source: osm, layer: water }
-        filter: { $zoom: { max: 6 } }
+        draw:
+            waves:
+                order: 5
+                color: [0.970, 0.970, 0.970]
 
-        lakes-early:
+        lakes:
             filter: 
                 all:
                     - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
@@ -877,36 +871,9 @@ layers:
                     - { $zoom: { min: 2 },  area: { min: 20000000000 } }
                     # some weird natural earth scale set transition
                     - { $zoom: { min: 3 },  area: { min: 80000000000 } }
-                    - { $zoom: { min: 4 },  area: { min: 15000000000 } }
-                    - { $zoom: { min: 5 },  area: { min: 1000000000 } }
+                    - { $zoom: { min: 4 },  area: { min: 5000000000 } }
+                    - { $zoom: { min: 5 },  area: { min: 700000000 } }
                     - { $zoom: { min: 6 },  area: { min: 500000000 } }
-
-            draw:
-                water-gradient:
-                    color: [0.870, 0.870, 0.870]
-
-        not-playa:
-            filter: { not: { kind: [playa] } }
-            draw:
-                water-gradient:
-                    order: 3
-                    color: [0.870, 0.870, 0.870]
-        playas:
-            filter: { kind: playa, $zoom: {min: 6} }
-            draw:
-                water-gradient:
-                    color: [0.870, 0.870, 0.870]
-
-    water:
-        data: { source: osm, layer: water }
-        filter: { $zoom: { min: 6 } }
-
-        lakes:
-            filter: 
-                all:
-                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
-                any:
-                    # limit show smaller landuse areas to higher zooms
                     - { $zoom: { min: 7 },  area: { min: 160000000 } }
                     - { $zoom: { min: 8 },  area: { min: 40000000 } }
                     - { $zoom: { min: 9 },  area: { min: 10000000 } }
@@ -914,60 +881,64 @@ layers:
                     - { $zoom: { min: 11 }, area: { min: 2000000 } }
                     - { $zoom: { min: 12 }, area: { min: 500000 } }
                     - { $zoom: { min: 13 }, area: { min: 100000 } }
-                    - { $zoom: { min: 14 }, area: { min: 50000 } }
-                    - { $zoom: { min: 15 }, area: { min: 20000 } }
-                    - { $zoom: { min: 15 }, area: { min: 2000 } }
-                    - { $zoom: { min: 16 } }
+                    - { $zoom: { min: 14 }, area: { min: 2000 } }
+                    - { $zoom: { min: 15 } }
             draw:
                 waves:
                     color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]]]
 
-        not-playa:
-            filter: { not: { kind: [playa] } }
+        other-water-areas:
+            filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 waves:
-                    order: 3
                     color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]]]
         playas:
             filter: { kind: playa, $zoom: {min: 6} }
             draw:
                 waves:
                     color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]]]
-
-        other_water-areas:
-            filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 10 }, area: { min: 100 } }
+        water-boundary-ocean-early:
+            filter: { boundary: yes, kind: ocean, $zoom: {min: 1, max: 17} }
             draw:
-                waves:
-                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]]]
-
-
-    water-lines:
-        data: { source: osm, layer: water }
-
-        water_boundaries-ocean:
-            filter: { boundary: yes, kind: ocean }
+                coast:
+                    order: 5
+                    color: [[1,[0.70,0.70,0.70]],[5,[0.60,0.60,0.60]],[6,[0.50,0.50,0.50]]]
+                    width: [[2, 1.0px],[6, 1px], [7, 2px],[10, 2px], [14, 2px]]
+                    join: round
+        water-boundary-ocean-late:
+            filter: { boundary: yes, kind: ocean, $zoom: {min: 17} }
             draw:
                 coast:
                     order: 5
                     color: [0.761, 0.761, 0.761]
                     width: [[2, 1.0px], [6, 1.25px], [8, 1.5px], [10, 2px], [14, 4px]]
                     join: round
-
         water_boundaries-not-ocean:
-            filter: { boundary: yes, not: { kind: ocean }, $zoom: { min: 6 } }
+            filter: { boundary: yes, not: { kind: ocean }, $zoom: { min: 8 } }
             draw:
                 coast:
                     order: 5
                     color: [[6, [0.900, 0.900, 0.900]], [10, [0.761, 0.761, 0.761]]]
                     width: [[6,0.75px], [10,1.0px], [14,1.25px],[15,1.5px],[16,2.0px]]
                     join: round
-
+            early:
+                filter: { $zoom: { min: 14 } }
+                draw:
+                    lines: { order: 19 }
+            riverbank:
+                # river boundaries like the thames in london, la seine in paris
+                filter: { kind: riverbank }
+                draw:
+                    coast:
+                        # color: [0.397,0.743,0.809]
+                        color: [0.200, 0.200, 0.200]
+                        width: [[9,0.5px],[10,0.75px],[11,1px],[14,1px],[15,2px],[17,2px]]
         river:
-            filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 13 } }
+            #river center lines, not boundaries for polygons
+            filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 11 } }
             draw:
                 coast:
                     order: 3
-                    color: [0.761, 0.761, 0.761]
                     width: [[13,0.5px],[14,2.0px],[16,3.0px],[18,4m]]
                     cap: round
 
