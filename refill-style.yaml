@@ -139,6 +139,10 @@ settings:
         - &grey6       '#dddddd'                # industrial
         - &grey6_b     [.65, .65, .65]          # industrial buildings
         - &grey6_bo    [.8, .8, .8]             # industrial building outlines
+        - &grey7       '#ecebe9'                # pedestrian, match minor road / path color
+        - &grey7_v     true                     # pedestrian visibility
+        - &grey8       '#ecebe9'                # winter sports
+        - &grey8_v     true                     # winter sports visibility
         - &purple      '#f0e1e1'                # airport
         - &purple_v    false                    # airport
         - &mystry1     '#aaaaaa'                # recreation ground (type of park, sometimes around reservoirs)
@@ -3263,276 +3267,367 @@ layers:
                  
     landuse:
         data: { source: osm }
-        filter: 
-            any:
-                # limit show smaller landuse areas to higher zooms
-                - { $zoom: { min: 4 },  area: { min: 15000000000 } }
-                - { $zoom: { min: 5 },  area: { min: 1000000000 } }
-                - { $zoom: { min: 6 },  area: { min: 500000000 } }
-                - { $zoom: { min: 7 },  area: { min: 160000000 } }
-                - { $zoom: { min: 8 },  area: { min: 40000000 } }
-                - { $zoom: { min: 9 },  area: { min: 10000000 } }
-                - { $zoom: { min: 10 }, area: { min: 8000000 } }
-                - { $zoom: { min: 11 }, area: { min: 2000000 } }
-                - { $zoom: { min: 12 }, area: { min: 500000 } }
-                - { $zoom: { min: 13 }, area: { min: 100000 } }
-                - { $zoom: { min: 14 }, area: { min: 50000 } }
-                - { $zoom: { min: 15 }, area: { min: 20000 } }
-                - { $zoom: { min: 15 }, area: { min: 2000 } }
-                - { $zoom: { min: 16 } }
-        parks-and-national-forests:
-            filter: { kind: [park, national_park, "park or protected land"] }
-            # default for national forests and more?
-            draw:
-                polygons:
-                    color: *green7
-            us_national_parks:
-                filter: { operator: [ "United States National Park Service", "US National Park Service" ] }
-                draw:
-                    polygons:
-                      color: *green1
-            park_z1:
+        tier1:
+            filter:
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 3 },  area: { min: 300000000 } }
+                    - { $zoom: { min: 4 },  area: { min: 300000000 } }
+                    - { $zoom: { min: 5 },  area: { min: 150000000 } }
+                    - { $zoom: { min: 6 },  area: { min: 150000000 } }
+                    - { $zoom: { min: 7 },  area: { min: 100000000 } }
+                    - { $zoom: { min: 8 },  area: { min: 10000000 } }
+                    - { $zoom: { min: 9 },  area: { min: 5000000 } }
+                    - { $zoom: { min: 10 }, area: { min: 1000000 } }
+                    - { $zoom: { min: 11 }, area: { min: 500000 } }
+                    - { $zoom: { min: 12 }, area: { min: 500000 } }
+                    - { $zoom: { min: 13 }, area: { min: 100000 } }
+                    - { $zoom: { min: 14 }, area: { min: 50000 } }
+                    - { $zoom: { min: 15 }, area: { min: 20000 } }
+                    - { $zoom: { min: 15 }, area: { min: 2000 } }
+                    - { $zoom: { min: 16 } }
+            national_park:
+                filter: { kind: [national_park, "park or protected land"], not: { operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ] } }
                 draw:
                     park-dots1:
+                        color: [0.85,0.85,0.85]
+                        # todo: what is this?
                         order: 1
+                        visible: true
+                us_national_park:
+                    # yosemite national park, death valley national park, grand canyon national park
+                    filter: { operator: [ "United States National Park Service", "US National Park Service" ] }
+                    draw:
+                        pixel-pattern-light:
+                            visible: true
 
-            early-not-national-park:
-                filter: { $zoom: { max: 6 }, not: { operator: [ "United States National Park Service", "US National Park Service" ] } }
-                draw: 
-                    park-dots1: { visible: false }
-                    polygons: { visible: false }
-                    outline: { visible: false }
-        conservation:
+        tier2:
             filter:
-                kind: [conservation, protected_area, nature_reserve]
-            draw:
-                polygons:
-                    color: *green8
-            wilderness-areas:
-                filter: function() { return feature.name && feature.name.indexOf("Wilderness") > -1 }
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 4 },  area: { min: 1000000000 } }
+                    - { $zoom: { min: 5 },  area: { min: 1000000000 } }
+                    - { $zoom: { min: 6 },  area: { min: 150000000 } }
+                    - { $zoom: { min: 7 },  area: { min: 100000000 } }
+                    - { $zoom: { min: 8 },  area: { min: 10000000 } }
+                    - { $zoom: { min: 9 },  area: { min: 5000000 } }
+                    - { $zoom: { min: 10 }, area: { min: 1000000 } }
+                    - { $zoom: { min: 11 }, area: { min: 500000 } }
+                    - { $zoom: { min: 12 }, area: { min: 500000 } }
+                    - { $zoom: { min: 13 }, area: { min: 100000 } }
+                    - { $zoom: { min: 14 }, area: { min: 50000 } }
+                    - { $zoom: { min: 15 }, area: { min: 20000 } }
+                    - { $zoom: { min: 15 }, area: { min: 2000 } }
+                    - { $zoom: { min: 16 } }
+            conservation:
+                filter:
+                    kind: [conservation, protected_area, nature_reserve]
+                    $zoom: { min: 4 }
                 draw:
                     polygons:
-                        color: *green7
-                    outline:
-                        style: lines
-                        color: *green1
-                        width: [[9,0px],[10,2px],[12,4px]]
-            park_z1:
-                draw:
-                    park-dots2:
-                        order: 1
+                        color: [1.00,1.00,1.00]
+                        visible: true
+                wilderness-areas:
+                    filter: function() { return feature.name && feature.name.indexOf("Wilderness") > -1 }
+                    draw:
+                        pixel-pattern-light:
+                            order: 10
+                            visible: true
 
-            early:
-                filter: { $zoom: { max: 6 } }
-                draw: 
-                    park-dots1: { visible: false }
-                    polygons: { visible: false }
-                    outline: { visible: false }
-        cemetery:
+                national_forest_level_6:
+                    filter: { protect_class: ["6",6] }
+                    draw:
+                        park-dots1:
+                            color: [1.00,1.00,1.00] #*green7
+                            visible: true
+
+            # gotta be a protected area to draw green, not just a landcover type
+            farm:
+                filter:
+                    kind: [farm, farmland]
+                    $zoom: { min: 10}
+                draw:
+                    polygons:
+                        color: [1.00,1.00,1.00]
+                        visible: *green4_v
+            forest:
+                filter: { kind: [forest,wood], $zoom: { min: 6 } }
+                national-forest:
+                    filter:
+                        operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ]
+                    draw:
+                        pixel-pattern-dark:
+                            color: *green7
+                            visible: true
+
+                landuse-forest:
+                    filter:
+                        not: { operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ] }
+                        $zoom: { min: 10 }
+                    draw:
+                        park-dots2: 
+                            color: [0.486,0.839,0.722]
+                            visible: false
+
+            nature_reserve:
+                filter: { kind: nature_reserve, $zoom: { min: 7 } }
+                draw:
+                    pixel-pattern-light:
+                        order: 3
+                wilderness-areas:
+                    filter: function() { return feature.name && feature.name.indexOf("Wilderness") > -1 }
+                    draw:
+                        pixel-pattern-light:
+                            color: [1.0,1.0,1.0]
+                        outline:
+                            style: lines
+                            color: *green6
+                            width: [[9,0px],[10,2px],[12,4px]]
+
+            parks-and-national-forests-not-national-park:
+                filter: { $zoom: { min: 4 }, kind: [park, national_park, "park or protected land"], not: { operator: [ "United States National Park Service", "US National Park Service" ] } }
+                # default for national forests and more?
+                draw:
+                    park-dots1:
+                        color: [1.00,1.00,1.00]
+                        order: function() { return feature.sort_key + 1 || 1; }
+                        visible: true
+
+            urban:
+                filter: { kind: [urban, rural, residential] }
+                visible: *earth2_v
+                draw:
+                    polygons:
+                        color: [1.00,1.00,1.00]
+                        visible: *earth2_v
+        tier3:
             filter:
-                kind: cemetery
-            draw:
-                park-dots2:
-                    order: 2
-        garden:
-            filter:
-                kind: garden
-            draw:
-                park-dots2:
-                    order: 2
-        # gotta be a protected area to draw green, not just a landcover type
-        forest:
-            filter:
-                kind: forest
-                operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ]
-            draw:
-                pixel-pattern-dark:
-                    order: 1
-            early:
-                filter: { $zoom: { max: 6 } }
-                draw: 
-                    park-dots2: { visible: false }
-        # recreation_ground:
-        #     filter:
-        #         kind: recreation_ground
-        #     draw:
-        #         polygons:
-        #             order: 1
-        #             color: *mystry1
-        # farm:
-        #     filter:
-        #         kind: [farm, farmland]
-        #         $zoom: { min: 10}
-        #     draw:
-        #         polygons:
-        #             order: 1
-        #             color: [ [10,*green4], [11,*green5] ]
-        golf_course:
-            filter:
-                kind: golf_course
-            draw:
-                park-dots2:
-                    order: 2
-                    color: *green3
-        nature_reserve:
-            filter:
-                kind: nature_reserve
-            draw:
-                pixel-pattern-light:
-                    order: 1
-            wilderness-areas:
-                filter: function() { return feature.name && feature.name.indexOf("Wilderness") > -1 }
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 8 },  area: { min: 10000000 } }
+                    - { $zoom: { min: 9 },  area: { min: 5000000 } }
+                    - { $zoom: { min: 10 }, area: { min: 1000000 } }
+                    - { $zoom: { min: 11 }, area: { min: 500000 } }
+                    - { $zoom: { min: 12 }, area: { min: 500000 } }
+                    - { $zoom: { min: 13 }, area: { min: 100000 } }
+                    - { $zoom: { min: 14 }, area: { min: 50000 } }
+                    - { $zoom: { min: 15 }, area: { min: 20000 } }
+                    - { $zoom: { min: 15 }, area: { min: 2000 } }
+                    - { $zoom: { min: 16 } }
+            airport:
+                filter:
+                    kind: aerodrome
                 draw:
                     polygons:
                         color: [1.0,1.0,1.0]
+                        visible: *purple_v
+            military:
+                filter:
+                    kind: military
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            university:
+                filter:
+                    kind: university
+                draw:
+                    park-dots2:
+                        color: [1.00,1.00,1.00]
+                        order: function() { return (feature.sort_key - 2) || 1; }
+                        visible: true
+        tier4:
+            filter:
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 10 }, area: { min: 1000000 } }
+                    - { $zoom: { min: 11 }, area: { min: 500000 } }
+                    - { $zoom: { min: 12 }, area: { min: 500000 } }
+                    - { $zoom: { min: 13 }, area: { min: 100000 } }
+                    - { $zoom: { min: 14 }, area: { min: 50000 } }
+                    - { $zoom: { min: 15 }, area: { min: 20000 } }
+                    - { $zoom: { min: 15 }, area: { min: 2000 } }
+                    - { $zoom: { min: 16 } }
+            cemetery:
+                filter:
+                    kind: cemetery
+                draw:
+                    park-dots2:
+                        order: 11
+                        visible: true
+            # commercial:
+            #     filter:
+            #         kind: commercial
+            #     draw:
+            #         dots2:
+            #             color: [0.855,0.748,0.667]
+            #             visible: *grey1_v
+            golf_course:
+                filter:
+                    kind: golf_course
+                draw:
+                    park-dots2:
+                        color: [1.00,1.00,1.00]
+                        visible: true
+            hospital:
+                filter:
+                    kind: hospital
+                draw:
+                    park-dots2:
+                        color: [1.00,1.00,1.00]
+                        visible: true
+            industrial:
+                filter:
+                    kind: industrial
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            power:
+                filter: { kind: [plant, generator, substation] }
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            railway:
+                filter:
+                    kind: railway
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            sports_centre:
+                filter:
+                    kind: sports_centre
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        order: function() { return (feature.sort_key + 1) || 1; }
+            recreation_ground:
+                filter:
+                    kind: recreation_ground
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            retail:
+                filter:
+                    kind: retail
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: *grey1_v
+            stadium:
+                filter:
+                    kind: stadium
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            zoo:
+                filter:
+                    kind: zoo
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            winter_sports:
+                filter:
+                    kind: winter_sports
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: *grey8_v
+            man-made:
+                filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
+                draw: { horizontal-bars: { order: 2, color: [0.90,0.90,0.90], visible: true } }
+                pier:
+                    filter: { kind: [pier,bridge,breakwater,groyne,dike,cutline] }
+                    draw: { polygons: { order: 7, color: [1.00,1.00,1.00], visible: true } }
+        tier5:
+            filter:
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 12 }, area: { min: 500000 } }
+                    - { $zoom: { min: 13 }, area: { min: 100000 } }
+                    - { $zoom: { min: 14 }, area: { min: 50000 } }
+                    - { $zoom: { min: 15 }, area: { min: 20000 } }
+                    - { $zoom: { min: 15 }, area: { min: 2000 } }
+                    - { $zoom: { min: 16 } }
+            garden:
+                filter:
+                    kind: garden
+                draw:
+                    park-dots2:
+                        order: 4
+                        visible: true
+            parking:
+                filter:
+                    all:
+                        - kind: parking
+                        - $zoom: { min: 14 }
+                    any:
+                        - { $zoom: { min: 14 }, area: { min: 10000 } }
+                        - { $zoom: { min: 15 }, area: { min: 5000 } }
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: *grey1_v
+                early:
+                    filter: { $zoom: { max: 15 } }
+                    draw:
+                        polygons:
+                            color: [1.0,1.0,1.0]
+                            visible: true
+            pedestrian:
+                filter:
+                    kind: [pedestrian,common]
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: *grey1_v
+            pitch:
+                filter: { kind: pitch }
+                draw:
+                    polygons:
+                        order: 7
+                        color: [1.0,1.0,1.0]
+                        visible: true
                     outline:
                         style: lines
                         color: *green6
-                        width: [[9,0px],[10,2px],[12,4px]]
-        # stadium:
-        #     filter:
-        #         kind: stadium
-        #     draw:
-        #         polygons:
-        #             order: 1
-        #             color: *orange1
-        pitch:
-            filter: { kind: pitch }
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-                outline:
-                    style: lines
-                    color: *green6
-                    width: [[14,0px],[15,1px],[16,1m]]
-        university:
-            filter:
-                kind: university
-            draw:
-                park-dots2:
-                    order: 2
-                    color: *brown1
-        # school:
-        #     filter:
-        #         kind: school
-        #     draw:
-        #         polygons:
-        #             order: 2
-        #             color: *brown2
-        hospital:
-            filter:
-                kind: hospital
-            draw:
-                park-dots2:
-                    order: 2
-                    color: *red1
-        # playground:
-        #     filter:
-        #         kind: playground
-        #     draw:
-        #         polygons:
-        #             order: 2
-        #             color: *brown3
-        # pedestrian:
-        #     filter:
-        #         kind: pedestrian
-        #     draw:
-        #         polygons:
-        #             order: 2
-        #             color: *grey1
-        power:
-            filter: { kind: [plant, generator, substation] }
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-        # retail:
-        #     filter:
-        #         kind: retail
-        #     draw:
-        #         polygons:
-        #             order: 2
-        #             color: *grey1
-        # commercial:
-        #     filter:
-        #         kind: commercial
-        #     draw:
-        #         polygons:
-        #             order: 2
-        #             color: [0.149, 0.475, 0.851]
-
-        parking:
-            filter:
-                all:
-                    - kind: parking
-                    - $zoom: { min: 14 }
-                any:
-                    - { $zoom: { min: 14 }, area: { min: 10000 } }
-                    - { $zoom: { min: 15 }, area: { min: 5000 } }
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-                    visible: *grey1_v
-            early:
-                filter: { $zoom: { max: 15 } }
+                        width: [[14,0px],[15,1px],[16,1m]]
+            place_of_worship:
+                filter:
+                    kind: place_of_worship
                 draw:
                     polygons:
                         color: [1.0,1.0,1.0]
-        railway:
-            filter:
-                kind: railway
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-        place_of_worship:
-            filter:
-                kind: place_of_worship
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-                    visible: *grey1_v
-        urban:
-            filter: { kind: [urban, rural, residential] }
-            draw:
-                polygons:
-                    color: [[0,],[9,*earth2]]
-                    visible: *earth2_v
-        zoo:
-            filter:
-                kind: zoo
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-        industrial:
-            filter:
-                kind: industrial
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-        airport:
-            filter:
-                kind: aerodrome
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-                    visible: *purple_v
-        military:
-            filter:
-                kind: military
-            draw:
-                polygons:
-                    color: [1.0,1.0,1.0]
-                    
-        man-made:
-            filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
-            draw: { horizontal-bars: { order: 2, color: [0.90,0.90,0.90] } }
-            pier:
-                filter: { kind: [pier,bridge,breakwater,groyne,dike,cutline] }
-                draw: { polygons: { color: *earth1 } }
-                
+                        visible: *grey1_v
+            playground:
+                filter:
+                    kind: playground
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
+            school:
+                filter:
+                    kind: school
+                draw:
+                    polygons:
+                        color: [1.0,1.0,1.0]
+                        visible: true
         z-order:
-            draw: 
-                polygons: 
-                    order: function() { feature.sort_key; }
+            draw:
+                dots2:
+                    order: function() { return feature.sort_key || 1; }
+                    visible: false
+                dots-rev:
+                    order: function() { return feature.sort_key || 1; }
+                    visible: false
+                polygons:
+                    order: function() { return feature.sort_key || 1; }
 
     landuse-not-filtered:
         data: { source: osm, layer: landuse }
