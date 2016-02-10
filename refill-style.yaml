@@ -890,18 +890,18 @@ layers:
                     - { $zoom: { min: 15 } }
             draw:
                 waves:
-                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]]]
+                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]], [13, [0.780,0.780,0.780]]]
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 waves:
-                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]]]
+                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]], [13, [0.780,0.780,0.780]]]
         playas:
             filter: { kind: playa, $zoom: {min: 6} }
             draw:
                 waves:
-                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]]]
+                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]], [13, [0.780,0.780,0.780]]]
         water-boundary-ocean-early:
             filter: { boundary: yes, kind: ocean, $zoom: {min: 1, max: 17} }
             draw:
