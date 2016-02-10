@@ -638,13 +638,33 @@ styles:
                     float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
                     st += u_map_position.xy / meter_pixels / wave_scale;
                     
-                    const float wave_width = 30.;
+                    const float wave_width = 30.0;
                     const float wave_height = .01;
                     st.y += sin(st.x * wave_width) * wave_height;
                     
                     // gradient
                     color.rgb = mix(vec3(0.890), color.rgb, gl_FragCoord.x / u_resolution.x);
                     color = mix(color,vec4(0.970,0.970,0.970,1.0),stripes2(st*92.))*1.0;
+
+    waves2:
+        base: polygons
+        mix: tools
+        shaders:
+            blocks:
+                filter: |
+                    float wave_scale = 695. / 2. * (u_device_pixel_ratio * .5 + 1.);
+                    vec2 st = gl_FragCoord.xy / wave_scale;
+                    
+                    float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
+                    st += u_map_position.xy / meter_pixels / wave_scale;
+                    
+                    const float wave_width = 30.0;
+                    const float wave_height = .01;
+                    st.y += sin(st.x * wave_width) * wave_height;
+                    
+                    // gradient
+                    color.rgb = mix(vec3(0.890), color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color = mix(color,vec4(0.770,0.770,0.770,1.0),stripes2(st*92.))*1.0;
 
     coast:
         base: lines
@@ -863,6 +883,7 @@ layers:
         data: { source: osm, layer: water }
         draw:
             waves:
+                interactive: true
                 order: 5
                 color: [0.970, 0.970, 0.970]
 
@@ -891,6 +912,12 @@ layers:
             draw:
                 waves:
                     color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]], [13, [0.780,0.780,0.780]]]
+
+        later:
+            filter: { $zoom: { min: 14 } }
+            draw:
+                waves2:
+                    color: [0.970, 0.970, 0.970]
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
