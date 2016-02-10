@@ -643,7 +643,7 @@ styles:
                     st.y += sin(st.x * wave_width) * wave_height;
                     
                     // gradient
-                    //color.rgb = mix(vec3(0.890), color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color.rgb = mix(vec3(0.890), color.rgb, gl_FragCoord.x / u_resolution.x);
                     color = mix(color,vec4(0.970,0.970,0.970,1.0),stripes2(st*92.))*1.0;
 
     coast:
