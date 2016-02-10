@@ -586,6 +586,60 @@ styles:
                 position: |
                     // GridTile
                     v_pos = a_position.xyz * 32767.;
+
+    tools-tilecoords:
+        shaders:
+            blocks:
+                global: |
+                    // Varying to be added to both vertex and fragment shaders
+                    varying vec2 v_pos;
+                    #ifdef TANGRAM_FRAGMENT_SHADER
+                    vec2 TileCoords() {
+                        return fract(v_pos);
+                    }
+                    #endif
+                position: |
+                    v_pos = modelPosition().xy;
+
+    tools-aastep:
+        shaders:
+            extensions: OES_standard_derivatives
+            blocks:
+                global: |
+                    float aastep(float threshold, float value) {
+                        #ifdef TANGRAM_FRAGMENT_SHADER
+                            #ifdef TANGRAM_EXTENSION_OES_standard_derivatives
+                                float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
+                                return smoothstep(threshold - afwidth, threshold + afwidth, value);
+                            #else
+                                return step(threshold, value);
+                            #endif
+                        #else
+                            return step(threshold, value);
+                        #endif
+                    }
+
+    shapes-circle:
+        shaders:
+            blocks:
+                global: |
+                    // get distance field of a Circle
+                    // ================================
+                    float circleDF (vec2 st) {
+                        return dot(st,st);
+                    }
+    tiling-brick:
+        shaders:
+            blocks:
+                global: |
+                    // Repeats a coordinate space (st) in diferent brick-like tiles
+                    // ================================
+                    vec2 brick(vec2 st, float zoom){
+                        st *= zoom;
+                        // Here is where the offset is happening
+                        st.x += step(1., mod(st.y, 2.0)) * 0.5;
+                        return fract(st);
+                    }
                     
     water-gradient:
         base: polygons
@@ -643,8 +697,8 @@ styles:
                     st.y += sin(st.x * wave_width) * wave_height;
                     
                     // gradient
-                    color.rgb = mix(vec3(0.890), color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(0.970,0.970,0.970,1.0),stripes2(st*92.))*1.0;
+                    color.rgb = mix(vec3(0.880), color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color = mix(color,vec4(0.950,0.950,0.950,1.0),stripes2(st*92.))*1.0;
 
     waves2:
         base: polygons
@@ -663,8 +717,8 @@ styles:
                     st.y += sin(st.x * wave_width) * wave_height;
                     
                     // gradient
-                    color.rgb = mix(vec3(0.890), color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(0.770,0.770,0.770,1.0),stripes2(st*92.))*1.0;
+                    color.rgb = mix(vec3(0.840), color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color = mix(color,vec4(0.930,0.930,0.930,1.0),stripes2(st*92.));
 
     coast:
         base: lines
@@ -680,7 +734,34 @@ styles:
                     st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
                     
                     color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
-                    
+
+
+    pattern-dots:
+        mix: [tools-tilecoords, tiling-brick, shapes-circle, tools-aastep]
+        shaders:
+            blocks:
+                global: |
+                    #ifdef TANGRAM_FRAGMENT_SHADER
+                        float TileDots(float scale, float size) {
+                            vec2 tc = TileCoords() * scale * pow(2., floor(u_map_position.z) - abs(u_tile_origin.z));
+                            vec2 IN = brick(tc, 2.);
+                            float A = circleDF(vec2(0.5) - IN) * 1.8;
+                            float d = 0.0;
+                            if (u_map_position.z < 18.) {
+                                vec2 OUT = fract(tc * 2.);
+                                float B = circleDF(vec2(0.25) - OUT) * 7.;
+                                B = min(B, circleDF(vec2(0.75, 0.25) - OUT) * 7.);
+                                B = min(B, circleDF(vec2(0.50, 0.75) - OUT) * 7.);
+                                B = min(B, circleDF(vec2(0.00, 0.75) - OUT) * 7.);
+                                B = min(B, circleDF(vec2(1.00, 0.75) - OUT) * 7.);
+                                d = mix(A, B, pow(fract(u_map_position.z), 10.));
+                            } else {
+                                d = A;
+                            }
+                            return aastep(size, d);
+                        }
+                    #endif
+
     dots:
         mix: tools
         base: polygons
@@ -702,8 +783,8 @@ styles:
             blocks:
                 color: |
                     vec2 st = TileCoords();
-                    st = tile(st,50.0);
-                    float dot_size = .2;
+                    st = tile(st,60.0);
+                    float dot_size = .25;
                     float b = circle(st, dot_size);
                     color *= vec4(b);
                 filter: |
@@ -714,14 +795,14 @@ styles:
         shaders:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: vec3(0.810,0.810,0.810)
+                    COLOR2: color.rgb
 
     park-dots2:
         mix: dots2
         shaders:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: vec3(0.890,0.890,0.890)
+                    COLOR2: color.rgb
 
     park-dots3:
         mix: dots
@@ -729,6 +810,14 @@ styles:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
                     COLOR2: vec3(0.760,0.760,0.760)
+
+    dots-rev:
+        base: polygons
+        mix: pattern-dots
+        shaders:
+            blocks:
+                color: |
+                    color.rgb = mix(vec3(1.000), color.rgb, TileDots(35.0, 0.31));
 
     horizontal-bars:
         base: polygons
@@ -822,7 +911,7 @@ styles:
                     // color.rg = f_st;
                     
                     vec2 pct = step(vec2(0.09),f_st);;
-                    color.rgb = mix(vec3(1.0), vec3(0.5),(0.5-(pct.x * pct.y)));
+                    color.rgb = mix(vec3(1.0), vec3(0.25),(0.5-(pct.x * pct.y)));
                     
                     if ( dot(vec3(0.,0.,1.),normal) == 1.0 ) {
                         // If it's a roof
@@ -885,7 +974,13 @@ layers:
             waves:
                 interactive: true
                 order: 5
-                color: [0.970, 0.970, 0.970]
+                color: [0.820, 0.820, 0.820]
+        later:
+            filter: { $zoom: { min: 14 } }
+            draw:
+                waves2:
+                    color: [0.780, 0.780, 0.780]
+                    order: 6
 
         lakes:
             filter: 
@@ -911,24 +1006,18 @@ layers:
                     - { $zoom: { min: 15 } }
             draw:
                 waves:
-                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]], [13, [0.780,0.780,0.780]]]
-
-        later:
-            filter: { $zoom: { min: 14 } }
-            draw:
-                waves2:
-                    color: [0.970, 0.970, 0.970]
+                    color: [0.820, 0.820, 0.820]
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 waves:
-                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]], [13, [0.780,0.780,0.780]]]
+                    color: [0.820, 0.820, 0.820]
         playas:
             filter: { kind: playa, $zoom: {min: 6} }
             draw:
                 waves:
-                    color: [[7, [0.970, 0.970, 0.970]], [9, [0.870, 0.870, 0.870]], [13, [0.780,0.780,0.780]]]
+                    color: [0.820, 0.820, 0.820]
         water-boundary-ocean-early:
             filter: { boundary: yes, kind: ocean, $zoom: {min: 1, max: 17} }
             draw:
@@ -942,16 +1031,16 @@ layers:
             draw:
                 coast:
                     order: 5
-                    color: [0.761, 0.761, 0.761]
-                    width: [[2, 1.0px], [6, 1.25px], [8, 1.5px], [10, 2px], [14, 4px]]
+                    color: [0.661, 0.661, 0.661]
+                    width: [[14, 4px],[17, 4px],[20, 10px]]
                     join: round
         water_boundaries-not-ocean:
             filter: { boundary: yes, not: { kind: ocean }, $zoom: { min: 8 } }
             draw:
                 coast:
                     order: 5
-                    color: [[6, [0.900, 0.900, 0.900]], [10, [0.761, 0.761, 0.761]]]
-                    width: [[6,0.75px], [10,1.0px], [14,1.25px],[15,1.5px],[16,2.0px]]
+                    color: [[6, [0.900, 0.900, 0.900]], [10, [0.761, 0.761, 0.761]],[11,[0.50,0.50,0.50]]]
+                    width: [[6,0.75px], [10,1.0px], [14,2.0px], [15,2.0px], [16,3.0px]]
                     join: round
             early:
                 filter: { $zoom: { min: 14 } }
@@ -1953,7 +2042,7 @@ layers:
                 visible: false
                 style: lines
                 order: 51
-                color: [[14, [0.8,0.8,0.8]], [15, [0.78,0.78,0.78]], [16, [0.486,0.486,0.486]]]
+                color: [[14, [0.8,0.8,0.8]], [15, [0.78,0.78,0.78]], [16, [0.650,0.650,0.650]],[17, [0.35,0.35,0.35]]]
                 width: [[14,0.3px],[15,0.5px],[16,0.5px],[18,0.5px]]
 
         # turn interactive feature selection on for buildings with names
@@ -3318,7 +3407,8 @@ layers:
                 filter: { kind: [national_park, "park or protected land"], not: { operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ] } }
                 draw:
                     park-dots1:
-                        color: [0.85,0.85,0.85]
+                        interactive: true
+                        color: [0.790,0.790,0.790]
                         # todo: what is this?
                         order: 1
                         visible: true
@@ -3366,7 +3456,7 @@ layers:
                     filter: { protect_class: ["6",6] }
                     draw:
                         park-dots1:
-                            color: [1.00,1.00,1.00] #*green7
+                            color: [0.810,0.810,0.810] #*green7
                             visible: true
 
             # gotta be a protected area to draw green, not just a landcover type
@@ -3394,7 +3484,7 @@ layers:
                         $zoom: { min: 10 }
                     draw:
                         park-dots2: 
-                            color: [0.486,0.839,0.722]
+                            color: [0.890,0.890,0.890]
                             visible: false
 
             nature_reserve:
@@ -3417,7 +3507,7 @@ layers:
                 # default for national forests and more?
                 draw:
                     park-dots1:
-                        color: [1.00,1.00,1.00]
+                        color: [0.810,0.810,0.810]
                         order: function() { return feature.sort_key + 1 || 1; }
                         visible: true
 
@@ -3460,8 +3550,8 @@ layers:
                 filter:
                     kind: university
                 draw:
-                    park-dots2:
-                        color: [1.00,1.00,1.00]
+                    dots-rev:
+                        color: [0.945,0.945,0.945]
                         order: function() { return (feature.sort_key - 2) || 1; }
                         visible: true
         tier4:
@@ -3481,6 +3571,7 @@ layers:
                     kind: cemetery
                 draw:
                     park-dots2:
+                        color: [0.890,0.890,0.890]
                         order: 11
                         visible: true
             # commercial:
@@ -3495,14 +3586,14 @@ layers:
                     kind: golf_course
                 draw:
                     park-dots2:
-                        color: [1.00,1.00,1.00]
+                        color: [0.890,0.890,0.890]
                         visible: true
             hospital:
                 filter:
                     kind: hospital
                 draw:
                     park-dots2:
-                        color: [1.00,1.00,1.00]
+                        color: [0.890,0.890,0.890]
                         visible: true
             industrial:
                 filter:
@@ -3587,6 +3678,7 @@ layers:
                     kind: garden
                 draw:
                     park-dots2:
+                        color: [0.890,0.890,0.890]
                         order: 4
                         visible: true
             parking:
