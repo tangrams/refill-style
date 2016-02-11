@@ -796,7 +796,7 @@ styles:
                 filter: |
                     color.rgb = mix(COLOR1, COLOR2, b);
 
-    dots2:
+    dots-medium:
         mix: tools
         base: polygons
         shaders:
@@ -831,8 +831,8 @@ styles:
                     COLOR1: vec3(1.00,1.00,1.00)
                     COLOR2: color.rgb
 
-    park-dots2:
-        mix: dots2
+    medium-dots:
+        mix: dots-medium
         shaders:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
@@ -876,8 +876,8 @@ styles:
                                         vec2(1.0)-_st);
                         return uv.x*uv.y;
                     }
-                    float cross(in vec2 _st, float _size){
-                        return  box(_st, vec2(_size*0.90,_size*0.4));
+                    float bar(in vec2 _st, float _size){
+                        return  box(_st, vec2(_size*0.90,_size*0.2));
                     }
                     vec2 getConstantPos(vec2 fragCoord){
                         const float pixel_scale = 75.;
@@ -890,7 +890,7 @@ styles:
                 filter: |
                     //vec2 pos = v_world_position.xy*0.01;
                     vec2 pos = getConstantPos(gl_FragCoord.xy)*5.0;
-                    float pct = clamp(cross(fract(pos),0.5),0.0,1.0);
+                    float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
                     color.rgb = mix(vec3(1.0,1.0,1.0),color.rgb,pct);
 
     # HSV/RGB functions
@@ -3526,7 +3526,7 @@ layers:
                         not: { operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ] }
                         $zoom: { min: 10 }
                     draw:
-                        park-dots2: 
+                        medium-dots: 
                             color: [0.890,0.890,0.890]
                             visible: false
 
@@ -3550,7 +3550,7 @@ layers:
                 # default for national forests and more?
                 draw:
                     park-dots1:
-                        color: [0.810,0.810,0.810]
+                        color: [0.760,0.760,0.760]
                         order: function() { return feature.sort_key + 1 || 1; }
                         visible: true
 
@@ -3628,14 +3628,14 @@ layers:
                 filter:
                     kind: golf_course
                 draw:
-                    park-dots2:
+                    medium-dots:
                         color: [0.830,0.830,0.830]
                         visible: true
             hospital:
                 filter:
                     kind: hospital
                 draw:
-                    park-dots2:
+                    medium-dots:
                         color: [0.890,0.890,0.890]
                         visible: true
             industrial:
@@ -3752,9 +3752,9 @@ layers:
             pitch:
                 filter: { kind: pitch }
                 draw:
-                    polygons:
+                    tiny-dots:
                         order: 7
-                        color: [1.0,1.0,1.0]
+                        color: [0.90,0.90,0.90]
                         visible: true
                     outline:
                         style: lines
@@ -3783,7 +3783,7 @@ layers:
                         visible: true
         z-order:
             draw:
-                park-dots2:
+                medium-dots:
                     order: function() { return feature.sort_key || 1; }
                     visible: false
                 dots-rev:
