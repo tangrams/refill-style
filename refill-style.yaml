@@ -809,6 +809,20 @@ styles:
                     color *= vec4(b);
                 filter: |
                     color.rgb = mix(COLOR1, COLOR2, b);
+
+    dots3:
+        mix: tools
+        base: polygons
+        shaders:
+            blocks:
+                color: |
+                    vec2 st = TileCoords();
+                    st = tile(st,70.0);
+                    float dot_size = .125;
+                    float b = circle(st, dot_size);
+                    color *= vec4(b);
+                filter: |
+                    color.rgb = mix(COLOR1, COLOR2, b);
                     
     park-dots1:
         mix: dots
@@ -823,6 +837,13 @@ styles:
             defines:
                     COLOR1: vec3(1.00,1.00,1.00)
                     COLOR2: color.rgb
+
+    tiny-dots:
+        mix: dots3
+        shaders:
+            defines:
+                    COLOR1: vec3(1.00,1.00,1.00)
+                    COLOR2: color.rgb                
 
     park-dots3:
         mix: dots
@@ -3592,7 +3613,7 @@ layers:
                 filter:
                     kind: cemetery
                 draw:
-                    park-dots2:
+                    tiny-dots:
                         color: [0.890,0.890,0.890]
                         order: 11
                         visible: true
@@ -3608,8 +3629,9 @@ layers:
                     kind: golf_course
                 draw:
                     park-dots2:
-                        color: [0.890,0.890,0.890]
+                        color: [0.830,0.830,0.830]
                         visible: true
+                        order: 11
             hospital:
                 filter:
                     kind: hospital
@@ -3699,8 +3721,8 @@ layers:
                 filter:
                     kind: garden
                 draw:
-                    park-dots2:
-                        color: [0.890,0.890,0.890]
+                    tiny-dots:
+                        color: [0.760,0.760,0.760]
                         order: 4
                         visible: true
             parking:
