@@ -893,6 +893,39 @@ styles:
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
                     color.rgb = mix(vec3(1.0,1.0,1.0),color.rgb,pct);
 
+    horizontal-bars-rev:
+        base: polygons
+        texcoords: false
+        shaders:
+            blocks:
+                global: |
+                    float box(in vec2 _st, in vec2 _size){
+                        _size = vec2(0.5) - _size*0.75;
+                        vec2 uv = smoothstep(_size,
+                                            _size+vec2(0.001),
+                                            _st);
+                        uv *= smoothstep(_size,
+                                        _size+vec2(0.001),
+                                        vec2(1.0)-_st);
+                        return uv.x*uv.y;
+                    }
+                    float bar(in vec2 _st, float _size){
+                        return  box(_st, vec2(_size*1.05,_size*0.5));
+                    }
+                    vec2 getConstantPos(vec2 fragCoord){
+                        const float pixel_scale = 55.;
+                        float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
+                        vec2 st = fragCoord.xy/pixel_scale;
+                        const float dot_wrap = 400.;
+                        st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
+                        return st;
+                    }
+                filter: |
+                    //vec2 pos = v_world_position.xy*0.01;
+                    vec2 pos = getConstantPos(gl_FragCoord.xy)*5.0;
+                    float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
+                    color.rgb = mix(color.rgb,vec3(1.0,1.0,1.0),pct);
+
     # HSV/RGB functions
     hsv:
         shaders:
@@ -3733,21 +3766,21 @@ layers:
                         - { $zoom: { min: 14 }, area: { min: 10000 } }
                         - { $zoom: { min: 15 }, area: { min: 5000 } }
                 draw:
-                    polygons:
-                        color: [1.0,1.0,1.0]
+                    horizontal-bars-rev:
+                        color: [0.940,0.940,0.940]
                         visible: *grey1_v
                 early:
                     filter: { $zoom: { max: 15 } }
                     draw:
-                        polygons:
-                            color: [1.0,1.0,1.0]
+                        horizontal-bars-rev:
+                            color: [0.940,0.940,0.940]
                             visible: true
             pedestrian:
                 filter:
                     kind: [pedestrian,common]
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: [1.00,1.00,1.00]
                         visible: *grey1_v
             pitch:
                 filter: { kind: pitch }
@@ -3778,12 +3811,18 @@ layers:
                 filter:
                     kind: school
                 draw:
-                    polygons:
-                        color: [1.0,1.0,1.0]
+                    dots-rev:
+                        color: [0.945,0.945,0.945]
                         visible: true
         z-order:
             draw:
                 medium-dots:
+                    order: function() { return feature.sort_key || 1; }
+                    visible: false
+                horizontal-bars:
+                    order: function() { return feature.sort_key || 1; }
+                    visible: false
+                horizontal-bars-rev:
                     order: function() { return feature.sort_key || 1; }
                     visible: false
                 dots-rev:
