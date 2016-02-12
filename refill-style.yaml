@@ -4543,14 +4543,18 @@ layers:
     water-area-labels:
         data: { source: osm, layer: [water] }
         visible: *text_visible_water_labels
-        filter: 
+        filter:
             all:
                 - name: true
-                - label_placement: yes
+                - $geometry: point
                 - not: { kind: [riverbank, dock, playa] }
                 - area: true
             any:
                 # show labels for smaller landuse areas at higher zooms
+                - { $zoom: { min: 5 },  area: { min: 10000000000 } }
+                - { $zoom: { min: 6 },  area: { min: 5000000000 } }
+                - { $zoom: { min: 7 },  area: { min: 400000000 } }
+                - { $zoom: { min: 8 },  area: { min: 200000000 } }
                 - { $zoom: { min: 9 },  area: { min: 100000000 } }
                 - { $zoom: { min: 10 }, area: { min: 100000000 } }
                 - { $zoom: { min: 11 }, area: { min: 10000000 } }
@@ -4560,40 +4564,113 @@ layers:
                 - { $zoom: { min: 15 }, area: { min: 100000 } }
                 - { $zoom: { min: 15 }, area: { min: 50000 } }
                 - { $zoom: { min: 16 }, area: { min: 20000 } }
-                - { $zoom: { min: 18 } }
+                - { $zoom: { min: 17 } }
         default-label-text:
             draw:
-                text:
+                text-blend-order:
                     font:
                         fill: *text_fill_water
-                        family: Helvetica
+                        family: *text_font_family
                         style: italic
-                        weight: 500
+                        weight: 400
                         size: 12px
-                        #stroke: { color: *text_stroke_water, width: 3 }
+                        # stroke: { color: [0.878,0.929,0.980], width: 2 }
+        lakes-z5:
+            filter: { $zoom: [5] }
+            draw:
+                text-blend-order: { font: { size: 9px } }
+        lakes-z6:
+            filter: { $zoom: [6] }
+            draw:
+                text-blend-order: { font: { size: 11px } }
+        lakes-z8:
+            filter: { $zoom: [8] }
+            draw:
+                text-blend-order: { font: { size: 12px } }
+
     ocean-sea-labels:
         data: { source: osm, layer: places }
         visible: *text_visible_water_labels
         filter: { name: true, kind: [sea, ocean] }
         draw:
-            text:
+            text-blend-order:
                 font:
                     fill: *text_fill_water
-                    family: Helvetica
-                    style: italic
-                    weight: 500
+                    family: *text_font_family
+                    weight: 400
                     size: 12px
-                    stroke: { color: *text_stroke_water, width: 3 }
+                    transform: uppercase
         sea-early:
-            filter: { $zoom: { max: 4 }, kind: sea }
-            draw: { text: { visible: false } }
+            filter: { $zoom: [3], kind: sea }
+            draw: { text-blend-order: { visible: false } }
+        ocean-spacer:
+            filter: { kind: ocean }
+            ocean-spacer-z1-z4:
+                filter: { $zoom: { min: 1, max: 4 } }
+                draw:
+                    text-blend-order:
+                        text_source: function() { return feature.name.split('').join(' ') }
+                        text_wrap: false
+            ocean-spacer-z4-up:
+                filter: { $zoom: { min: 4 } }
+                draw:
+                    text-blend-order:
+                        text_source: function() { return feature.name.split('').join('  ') }
+                        text_wrap: false
+        ocean-labels-z1:
+            filter: { $zoom: [1] }
+            draw:
+                text-blend-order: { font: { size: 8px } }
+        ocean-labels-z2:
+            filter: { $zoom: [2] }
+            draw:
+                text-blend-order: { font: { size: 10px } }
+        ocean-labels-z3:
+            filter: { $zoom: [3] }
+            draw:
+                text-blend-order: { font: { size: 13px } }
+        ocean-labels-z4-up:
+            filter: { $zoom: { min: 4} }
+            draw:
+                text-blend-order: { font: { size: 16px } }
+
+        sea-spacer:
+            filter: { not: { kind: [ocean] }, $zoom: { min: 5 } }
+            draw:
+                text-blend-order:
+                    text_source: function() { return feature.name.split('').join(' ') }
+                    text_wrap: false
+
+        sea-labels:
+            filter: { not: { kind: [ocean] } }
+            sea-labels-z4:
+                    filter: { $zoom: [4] }
+                    draw:
+                        text-blend-order: { font: { size: 9px } }
+            sea-labels-z5:
+                    filter: { $zoom: [5] }
+                    draw:
+                        text-blend-order: { font: { size: 10px } }
+            sea-labels-z6:
+                    filter: { $zoom: [6] }
+                    draw:
+                        text-blend-order: { font: { size: 11px } }
+            sea-labels-z7:
+                    filter: { $zoom: [7] }
+                    draw:
+                        text-blend-order: { font: { size: 12px } }
+            sea-labels-z8:
+                    filter: { $zoom: { min: 8} }
+                    draw:
+                        text-blend-order: { font: { size: 14px } }
+
     playa-labels:
         data: { source: osm, layer: [water] }
         visible: *text_visible_water_labels
-        filter: 
+        filter:
             all:
                 - name: true
-                - label_placement: yes
+                - $geometry: point
                 - kind: playa
                 - area: true
             any:
@@ -4609,14 +4686,14 @@ layers:
                 - { $zoom: { min: 15 }, area: { min: 100000 } }
                 - { $zoom: { min: 15 }, area: { min: 50000 } }
                 - { $zoom: { min: 16 }, area: { min: 20000 } }
-                - { $zoom: { min: 18 } }
+                - { $zoom: { min: 17 } }
         draw:
-            text:
+            text-blend-order:
                 font:
-                    fill: grey
-                    family: Helvetica
+                    fill: [0.50,0.50,0.50]
+                    family: *text_font_family
                     style: italic
-                    weight: 500
+                    weight: 400
                     size: 12px
                     stroke: { color: *text_stroke_water, width: 3 }
         # debug only
@@ -4624,6 +4701,7 @@ layers:
 #            size: [[13, 12px], [15, 18px]]
 #            interactive: true
 #            sprite: *townspot_sprite
+
     water-line-labels:
         data: { source: osm, layer: [water] }
         filter:
@@ -4633,23 +4711,31 @@ layers:
                 - kind: [river,canal,stream,dam,ditch,drain]
                 - $zoom: { min: 14 }
         draw:
-            text:
+            text-blend-order:
                 font:
                     fill: *text_fill_water
-                    family: Helvetica
+                    family: *text_font_family
                     style: italic
-                    weight: 500
+                    weight: 400
                     size: 12px
                     stroke: { color: *text_stroke_water, width: 3 }
+        water-line-labels-z14:
+            filter: { $zoom: [14] }
+            draw:
+                text-blend-order: { font: { size: 10px } }
+        water-line-labels-z17:
+            filter: { $zoom: [17] }
+            draw:
+                text-blend-order: { font: { size: 14px } }
         not-river-not-stream:
             filter: { kind: [canal,dam,ditch,drain], $zoom: { max: 16 } }
             draw:
-                text:
+                text-blend-order:
                     visible: false
         stream:
             filter: { kind: [stream], $zoom: { max: 17 } }
             draw:
-                text:
+                text-blend-order:
                     visible: false
                  
     landuse:
