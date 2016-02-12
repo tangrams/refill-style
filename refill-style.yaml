@@ -436,175 +436,52 @@ cameras:
         type: isometric
 
 styles:
-    dashedline:
-        base: lines
-        lighting: false # ignore lights
-        texcoords: true
+##### LIBRARY OF FUNCTIONS 
+#    SPACE functions
+    space-tile:
         shaders:
             blocks:
                 global: |
-                    vec2 mirrorTile(vec2 _st, vec2 _zoom){
-                        _st *= _zoom;
-                        if (fract(_st.y * 0.5) > 0.5){
-                            _st.x = _st.x + 0.5;
-                            _st.y = 1.0 - _st.y;
-                        }
-                        return fract(_st);
-                    }
-                    float fillY(vec2 _st, float _pct,float _antia){
-                      return smoothstep( _pct - _antia, _pct, _st.y);
-                    }
-                    float chevron(vec2 st){
-                        st = mirrorTile(st, vec2(1., 6.));
-                        float x = st.x * 2.;
-                        float a = floor(1. + sin(x * 3.14159));
-                        float b = floor(1. - sin(x * 3.14159));
-                        float f = fract(x);
-                        return fillY(st, mix(a, b, f), 0.01);
-                    }
-                    float stripes(vec2 st){
-                        st = st * 10.;
-                        return step(.5, 1.0 - smoothstep(.3, 1., abs(sin(st.y * 3.14159))));
-                    }
-                    float xMargin(vec2 st, float margin){
-                        return 1.0 - clamp(step(margin * .5, st.x) * step(margin * .5, 1.0 - st.x), 0., 1.);
-                    }
-                color: |
-                    vec2 st = v_texcoord;
-                    vec4 foreground = vec4(0.850,0.850,0.850,1.0);
-                    color = mix(v_color, foreground, stripes(st));
-
-    tools:
-        base: polygons
-        shaders:
-            extensions: OES_standard_derivatives
-            blocks:
-                global: |
-                    vec2 tile(vec2 _st, float _zoom){
-                      _st *= _zoom;
-                      return fract(_st);
-                    }
-                    
-                    vec2 brickTile(vec2 _st, float _zoom){
-                        _st *= _zoom;
-                        if (fract(_st.y * 0.5) > 0.5){
-                            _st.x += 0.5;
-                        }
-                        return fract(_st);
-                    }
-                    
-                    float circle(vec2 _st, float _radius){
-                      vec2 pos = vec2(0.5)-_st;
-                      return smoothstep(1.0-_radius,1.0-_radius+_radius*0.2,1.-dot(pos,pos)*3.14);
-                    }
-                    
-                    // GridTile
-                    //=============================
+                    // Variant to be add to both vertex and fragments shaders
                     varying vec3 v_pos;
-                    vec2 TileCoords(){return fract(v_pos.xy*0.0002445);}
-                    bool grid(vec2 st, float res, float press){
-                        vec2 grid = fract(st*res);
-                        return grid.x < res*press || grid.y < res*press;
-                    }
-                    float TileGrid(float res){
-                        vec2 st = TileCoords()*100.*res;
-                        float pct = 0.0;
-                        float press = 0.4+(1.0-fract(u_map_position.z))*0.1;
-                        if (grid(st,0.01,press)) pct += 0.5;
-                        if (grid(st,0.1,press)) pct += 0.1;
-                        return pct;
-                    }
-                    float TileGrid(){ return mix(TileGrid(1.),TileGrid(2.),fract(u_map_position.z)); }
-                    // Grain
-                    //=============================
-                    float random(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
-                    float noise(vec2 x) {
-                        vec2 i = floor(x);
-                        vec2 f = fract(x);
-                        float a = random(i);
-                        float b = random(i + vec2(1.0, 0.0));
-                        float c = random(i + vec2(0.0, 1.0));
-                        float d = random(i + vec2(1.0, 1.0));
-                        vec2 u = f * f * (3.0 - 2.0 * f);
-                        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-                    }
-                    float fbm( in vec2 p ){
-                        float s = 0.0;
-                        float m = 0.0;
-                        float a = 0.5;
-                        for(int i=0; i<2; i++ ){
-                            s += a * noise(p);
-                            m += a;
-                            a *= 0.5;
-                            p *= 2.0;
-                        }
-                        return s/m;
-                    }
-                    float grain(vec2 pos){
-                        vec2 st = pos/u_resolution.xy-vec2(.5);
-                        return dot(st,st)+(fbm(pos*0.6)*0.1);
-                    }
-                    // Stripes
-                    //=============================
-                    mat2 rotate2d(float angle){
-                        return mat2(cos(angle),-sin(angle),
-                                    sin(angle),cos(angle));
-                    }
-                    float stripes(vec2 st){
-                        st = rotate2d(3.14159265358*-0.25 )*st;
-                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
-                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
+                    //
+                    // Get the coordinates in tile space
+                    // ================================
+                    vec2 getTileCoords() {
+                        return fract(v_pos.xy);
                     }
 
-                    // Stripes
-                    //=============================
-                    float stripes2(vec2 st){
-                        return step(.3,1.0-smoothstep(.5,1.,abs(sin(st.y*3.14159265358))));
-                    }
                 position: |
-                    // GridTile
-                    v_pos = a_position.xyz * 32767.;
-
-    tools-tilecoords:
+                    // Normalize the attribute position of a vertex
+                    v_pos = modelPosition().xyz;
+    space-constant:
         shaders:
             blocks:
                 global: |
-                    // Varying to be added to both vertex and fragment shaders
-                    varying vec2 v_pos;
-                    #ifdef TANGRAM_FRAGMENT_SHADER
-                    vec2 TileCoords() {
-                        return fract(v_pos);
-                    }
-                    #endif
-                position: |
-                    v_pos = modelPosition().xy;
-
-    tools-aastep:
-        shaders:
-            extensions: OES_standard_derivatives
-            blocks:
-                global: |
-                    float aastep(float threshold, float value) {
+                    // Get the constant coordinates (glitches on zooms)
+                    // ================================
+                    vec2 getConstantCoords () {
                         #ifdef TANGRAM_FRAGMENT_SHADER
-                            #ifdef TANGRAM_EXTENSION_OES_standard_derivatives
-                                float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
-                                return smoothstep(threshold - afwidth, threshold + afwidth, value);
-                            #else
-                                return step(threshold, value);
-                            #endif
+                        const float pixel_scale = 695.;
+                        float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
+                        vec2 st = gl_FragCoord.xy/pixel_scale;
+                        const float dot_wrap = 1000.;
+                        st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
+                        return st;
                         #else
-                            return step(threshold, value);
+                        return vec2(0.0,0.0);
                         #endif
                     }
-
-    shapes-circle:
+#    TILING functions
+    tiling-tile:
         shaders:
             blocks:
                 global: |
-                    // get distance field of a Circle
+                    // Repeats a coordinate space (st) in diferent tiles
                     // ================================
-                    float circleDF (vec2 st) {
-                        return dot(st,st);
+                    vec2 tile(vec2 st, float zoom){
+                        st *= zoom;
+                        return fract(st);
                     }
     tiling-brick:
         shaders:
@@ -618,7 +495,201 @@ styles:
                         st.x += step(1., mod(st.y, 2.0)) * 0.5;
                         return fract(st);
                     }
+    tiling-mirror:
+        shaders:
+            blocks:
+                global: |
+                    // Mirror the coordinate space 
+                    // ================================
+                    vec2 mirror(vec2 _st, vec2 _zoom){
+                        _st *= _zoom;
+                        if (fract(_st.y * 0.5) > 0.5){
+                            _st.x = _st.x + 0.5;
+                            _st.y = 1.0 - _st.y;
+                        }
+                        return fract(_st);
+                    }             
+#    Usefull functions
+    functions-aastep:
+        shaders:
+            extensions: OES_standard_derivatives
+            blocks:
+                global: |
+                    // AntiAliased Step function
+                    //=============================
+                    float aastep(float threshold, float value) {
+                        #ifdef TANGRAM_FRAGMENT_SHADER
+                            #ifdef TANGRAM_EXTENSION_OES_standard_derivatives
+                                float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
+                                return smoothstep(threshold-afwidth, threshold+afwidth, value);
+                            #else
+                                return step(threshold, value);
+                            #endif  
+                        #else
+                            return step(threshold, value);
+                        #endif
+                    }
+#    Generative functions
+    generative-random:
+        shaders:
+            blocks:
+                global: |
+                    // 1D Random for 1 and 2 dimentions
+                    // ================================
+                    float random(float x) { return fract(sin(x)*43758.5453);}
+                    float random(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+                    float random(vec3 p) { return fract(sin(dot(p.xyz, vec3(70.9898,78.233,32.4355)))* 43758.5453123); }
+                    //
+                    // 2D Random for 2 dimentions
+                    // ================================
+                    vec2 random2 (vec2 xy) { return fract(sin(vec2(dot(xy,vec2(127.1,311.7)),dot(xy,vec2(269.5,183.3))))*43758.5453); }
+                    //
+                    // 3D Random for 2 dimentions
+                    // ================================
+                    vec3 random3 (vec2 xy) { return fract(sin(vec3( dot(xy,vec2(127.1,311.7)), dot(xy,vec2(269.5,183.3)), dot(xy,vec2(419.2,371.9)) ))*43758.5453); }
+                    vec3 random3 (vec3 c) {
+                        float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
+                        vec3 r;
+                        r.z = fract(512.0*j);
+                        j *= .125;
+                        r.x = fract(512.0*j);
+                        j *= .125;
+                        r.y = fract(512.0*j);
+                        return r-0.5;
+                    }
+#    Drawing Shapes functions
+    shapes-circle:
+        mix: functions-aastep
+        shaders:
+            defines:
+                PI: 3.14159265358979323846
+            blocks:
+                global: |
+                    // get distance field of a Circle
+                    // ================================
+                    float circleDF (vec2 st) {
+                        return dot(st,st);
+                    }
+                    //
+                    // Draw a circle in the middle of the ST space
+                    // ================================
+                    float circle (vec2 st, float radius) {
+                        return 1.-aastep(radius, circleDF(st-vec2(0.5))*PI);
+                    }
+    shapes-rect:
+        shaders:
+            blocks:
+                global: |
+                    // get distance field of a rectangle in the center
+                    // ================================
+                    float rectDF(vec2 st, vec2 size) {
+                        //float aspect = u_resolution.x/u_resolution.y;
+                        st = st*2.-1.;
+                        //st.x *= aspect;
+                        return length(max(abs(st)-size,.0));
+                    }
+                    float rectDF(vec2 st, float size) {
+                        //float aspect = u_resolution.x/u_resolution.y;
+                        st = st*2.-1.;
+                        //st.x *= aspect;
+                        return length(max(abs(st)-size,.0));
+                    }
                     
+                    // Draw a round corners rectangle in the center
+                    // ================================
+                    float rect(vec2 st, vec2 size, float radio) {
+                        radio = max(.000001, radio);
+                        return 1.0-step(radio, rectDF(st, size-radio));
+                    }
+                    
+                    float rect(vec2 st, float size, float radio) {
+                        return rect(st,vec2(size),radio);
+                    }
+                    
+                    // Draw a rectangle in the center
+                    // ================================
+                    float rect(vec2 st, vec2 size){
+                        size = .25-size*.125;
+                        vec2 uv = step(size,st*(1.0-st));
+                        return (uv.x*uv.y);
+                    }
+                    
+                    float rect(vec2 st, float size){
+                        return rect(st,vec2(size));
+                    }
+#    Patterns compositions functions
+    patterns-stripes:
+        mix: functions-aastep
+        shaders:
+            defines:
+                PI: 3.14159265358979323846
+            blocks:
+                global: |
+                    // Return a distance function of stripes
+                    float stripesDF (vec2 st) {
+                        return abs(sin(st.y*PI));
+                    }
+                    
+                    // Adjustable width stripes
+                    float stripes (vec2 st, float width) {
+                        return aastep(width,stripesDF(st));
+                    }
+                    
+                    // Faster optimisation of diagonal stripes
+                    float diagonalStripes (vec2 st) {
+                        vec2 i_st = floor(st);
+                        vec2 f_st = fract(st);
+                        if (mod(i_st.y,2.) - mod(i_st.x,2.) == 0.) {
+                            return 1.0 - aastep(f_st.x,f_st.y);
+                        } else {
+                            return aastep(f_st.x,f_st.y);
+                        }
+                    }
+    patterns-dots:
+        mix: [space-tile, tiling-brick, shapes-circle]
+        shaders:
+            blocks: 
+                global: |
+                    // Interpolated dot patern between zooms attached to tile coords
+                    float TileDots(float scale, float size) {
+                        // Beginning of the transition
+                        vec2 IN = brick(getTileCoords()*scale,2.);
+                        float A = circleDF(vec2(0.5)-IN)*1.8;
+                        //
+                        // If over 18. add an end B to transition with
+                        float d = 0.0;
+                        if (u_map_position.z < 18.) {
+                            vec2 OUT = fract(getTileCoords()*scale*2.);
+                            float B = circleDF(vec2(0.25)-OUT)*5.;
+                            B = min(B, circleDF(vec2(0.75,0.25)-OUT)*5.);
+                            B = min(B, circleDF(vec2(0.5,0.75)-OUT)*5.);
+                            B = min(B, circleDF(vec2(0.,0.75)-OUT)*5.);
+                            B = min(B, circleDF(vec2(1.,0.75)-OUT)*5.);
+                            d = mix(A, B, pow(fract(u_map_position.z),10.));
+                        } else {
+                            d = A;
+                        }
+                        //
+                        // Use the antialias step to make a shape from the DF
+                        return aastep(size,d);;
+                    }
+##### ACTUAL STYLES
+    dashedline:
+        base: lines
+        mix: tiling-mirror
+        lighting: false # ignore lights
+        texcoords: true
+        shaders:
+            blocks:
+                global: |
+                    float stripes(vec2 st){
+                        st = st * 10.;
+                        return step(.5, 1.0 - smoothstep(.3, 1., abs(sin(st.y * 3.14159))));
+                    }
+                color: |
+                    vec2 st = v_texcoord;
+                    vec4 foreground = vec4(0.850,0.850,0.850,1.0);
+                    color = mix(v_color, foreground, stripes(st));    
     water-gradient:
         base: polygons
         shaders:
@@ -627,212 +698,137 @@ styles:
                     color.rgb = mix(vec3(1.0), vec3(0.970), gl_FragCoord.x / u_resolution.x + gl_FragCoord.y / u_resolution.y); 
 
     pixel-pattern-light:
-        mix: tools
+        mix: [space-tile, generative-random]
         base: polygons
         shaders:
             blocks:
-                global: |
-                    float random(in vec3 _st){ 
-                        return fract(sin(dot(_st.xyz,
-                                             vec3(70.9898,78.233,32.4355)))* 
-                            43758.5453123);
-                    }
-                    
                 filter: |
-                    vec3 pos = vec3(TileCoords()*130.0,1.0);
+                    vec3 pos = vec3(getTileCoords()*130.0,1.0);
                     color.rgb = vec3(random(abs(floor(pos)))+0.785);
 
     pixel-pattern-dark:
-        mix: tools
+        mix: [space-tile, generative-random]
         base: polygons
         shaders:
             blocks:
-                global: |
-                    float random(in vec3 _st){ 
-                        return fract(sin(dot(_st.xyz,
-                                             vec3(70.9898,78.233,32.4355)))* 
-                            43758.5453123);
-                    }
-                    
                 filter: |
-                    vec3 pos = vec3(TileCoords()*130.0,1.0);
+                    vec3 pos = vec3(getTileCoords()*130.0,1.0);
                     color.rgb = vec3(random(abs(floor(pos)))+0.635);
 
     waves:
         base: polygons
-        mix: tools
+        mix: [space-constant, patterns-stripes]
         shaders:
+            defines:
+                COLOR1: vec3(0.880)
+                COLOR2: vec3(0.950)
             blocks:
+                global: |
+                    float stripes2(vec2 st){
+                        return step(.3,1.0-smoothstep(.5,1.,abs(sin(st.y*3.14159265358))));
+                    }
                 filter: |
-                    float wave_scale = 695. / 2. * (u_device_pixel_ratio * .5 + 1.);
-                    vec2 st = gl_FragCoord.xy / wave_scale;
-                    
-                    float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
-                    st += u_map_position.xy / meter_pixels / wave_scale;
-                    
+                    vec2 st = getConstantCoords();
+
                     const float wave_width = 30.0;
                     const float wave_height = .01;
-                    st.y += sin(st.x * wave_width) * wave_height;
+                    st.y += sin(st.x*wave_width)*wave_height;
                     
                     // gradient
-                    color.rgb = mix(vec3(0.880), color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(0.950,0.950,0.950,1.0),stripes2(st*92.))*1.0;
+                    color.rgb = mix(COLOR1, color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color = mix(color,vec4(COLOR2,1.0),stripes(st*92.,.5))*1.0;
 
     waves2:
         base: polygons
-        mix: tools
+        mix: waves
         shaders:
-            blocks:
-                filter: |
-                    float wave_scale = 695. / 2. * (u_device_pixel_ratio * .5 + 1.);
-                    vec2 st = gl_FragCoord.xy / wave_scale;
-                    
-                    float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
-                    st += u_map_position.xy / meter_pixels / wave_scale;
-                    
-                    const float wave_width = 30.0;
-                    const float wave_height = .01;
-                    st.y += sin(st.x * wave_width) * wave_height;
-                    
-                    // gradient
-                    color.rgb = mix(vec3(0.840), color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(0.930,0.930,0.930,1.0),stripes2(st*92.));
+            defines:
+                COLOR1: vec3(0.840)
+                COLOR2: vec3(0.930)
+
 
     stream-waves:
         base: lines
-        mix: tools
+        mix: [space-constant, patterns-stripes]
         shaders:
-            blocks:
-                filter: |
-                    float wave_scale = 695. / 2. * (u_device_pixel_ratio * .5 + 1.);
-                    vec2 st = gl_FragCoord.xy / wave_scale;
-                    
-                    float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
-                    st += u_map_position.xy / meter_pixels / wave_scale;
-                    
-                    const float wave_width = 30.0;
-                    const float wave_height = .01;
-                    st.y += sin(st.x * wave_width) * wave_height;
-                    
-                    // gradient
-                    color.rgb = mix(vec3(0.890), color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(0.930,0.930,0.930,1.0),stripes2(st*92.));
+            defines:
+                COLOR1: vec3(0.890)
+                COLOR2: vec3(0.930)
 
     coast:
         base: lines
-        mix: tools
+        mix: [space-constant, patterns-stripes]
         blend: overlay
         shaders:
             blocks:
                 color: |
-                    const float pixel_scale = 695.;
-                    float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
-                    vec2 st = gl_FragCoord.xy/pixel_scale;
-                    const float dot_wrap = 1000.;
-                    st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
-                    
-                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
-
-
-    pattern-dots:
-        mix: [tools-tilecoords, tiling-brick, shapes-circle, tools-aastep]
-        shaders:
-            blocks:
-                global: |
-                    #ifdef TANGRAM_FRAGMENT_SHADER
-                        float TileDots(float scale, float size) {
-                            vec2 tc = TileCoords() * scale * pow(2., floor(u_map_position.z) - abs(u_tile_origin.z));
-                            vec2 IN = brick(tc, 2.);
-                            float A = circleDF(vec2(0.5) - IN) * 1.8;
-                            float d = 0.0;
-                            if (u_map_position.z < 18.) {
-                                vec2 OUT = fract(tc * 2.);
-                                float B = circleDF(vec2(0.25) - OUT) * 7.;
-                                B = min(B, circleDF(vec2(0.75, 0.25) - OUT) * 7.);
-                                B = min(B, circleDF(vec2(0.50, 0.75) - OUT) * 7.);
-                                B = min(B, circleDF(vec2(0.00, 0.75) - OUT) * 7.);
-                                B = min(B, circleDF(vec2(1.00, 0.75) - OUT) * 7.);
-                                d = mix(A, B, pow(fract(u_map_position.z), 10.));
-                            } else {
-                                d = A;
-                            }
-                            return aastep(size, d);
-                        }
-                    #endif
-
+                    vec2 st = getConstantCoords();
+                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), diagonalStripes(st*130.))*.8; // transparent stripes
     dots:
-        mix: tools
+        mix: [space-tile, tiling-tile, shapes-circle]
         base: polygons
         shaders:
+            defines:
+                PATTERN_SCALE: 50.0
+                DOT_SIZE: .1
+                COLOR1: vec3(1.00,1.00,1.00)
+                COLOR2: color.rgb  
             blocks:
                 color: |
-                    vec2 st = TileCoords();
-                    st = tile(st,50.0);
-                    float dot_size = .1;
+                    vec2 st = getTileCoords();
+                    st = tile(st,PATTERN_SCALE);
+                    float dot_size = DOT_SIZE;
                     float b = circle(st, dot_size);
                     color *= vec4(b);
                 filter: |
                     color.rgb = mix(COLOR1, COLOR2, b);
 
     dots-medium:
-        mix: tools
+        mix: dots
         base: polygons
         shaders:
-            blocks:
-                color: |
-                    vec2 st = TileCoords();
-                    st = tile(st,60.0);
-                    float dot_size = .25;
-                    float b = circle(st, dot_size);
-                    color *= vec4(b);
-                filter: |
-                    color.rgb = mix(COLOR1, COLOR2, b);
-
+            defines:
+                PATTERN_SCALE: 60.0
+                DOT_SIZE: .25
     dots3:
-        mix: tools
+        mix: dots
         base: polygons
         shaders:
-            blocks:
-                color: |
-                    vec2 st = TileCoords();
-                    st = tile(st,70.0);
-                    float dot_size = .125;
-                    float b = circle(st, dot_size);
-                    color *= vec4(b);
-                filter: |
-                    color.rgb = mix(COLOR1, COLOR2, b);
+            defines:
+                PATTERN_SCALE: 70.0
+                DOT_SIZE: .125
                     
     park-dots1:
         mix: dots
         shaders:
             defines:
-                    COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: color.rgb
+                COLOR1: vec3(1.00,1.00,1.00)
+                COLOR2: color.rgb
 
     medium-dots:
         mix: dots-medium
         shaders:
             defines:
-                    COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: color.rgb
+                COLOR1: vec3(1.00,1.00,1.00)
+                COLOR2: color.rgb
 
     tiny-dots:
         mix: dots3
         shaders:
             defines:
-                    COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: color.rgb                
+                COLOR1: vec3(1.00,1.00,1.00)
+                COLOR2: color.rgb                
 
     park-dots3:
         mix: dots
         shaders:
             defines:
-                    COLOR1: vec3(1.00,1.00,1.00)
-                    COLOR2: vec3(0.760,0.760,0.760)
+                COLOR1: vec3(1.00,1.00,1.00)
+                COLOR2: vec3(0.760,0.760,0.760)
 
     dots-rev:
         base: polygons
-        mix: pattern-dots
+        mix: patterns-dots
         shaders:
             blocks:
                 color: |
@@ -840,90 +836,33 @@ styles:
 
     horizontal-bars:
         base: polygons
+        mix: [space-constant, shapes-rect]
         texcoords: false
         shaders:
             blocks:
                 global: |
-                    float box(in vec2 _st, in vec2 _size){
-                        _size = vec2(0.5) - _size*0.75;
-                        vec2 uv = smoothstep(_size,
-                                            _size+vec2(0.001),
-                                            _st);
-                        uv *= smoothstep(_size,
-                                        _size+vec2(0.001),
-                                        vec2(1.0)-_st);
-                        return uv.x*uv.y;
-                    }
-                    float bar(in vec2 _st, float _size){
-                        return  box(_st, vec2(_size*0.90,_size*0.2));
-                    }
-                    vec2 getConstantPos(vec2 fragCoord){
-                        const float pixel_scale = 75.;
-                        float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
-                        vec2 st = fragCoord.xy/pixel_scale;
-                        const float dot_wrap = 400.;
-                        st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
-                        return st;
+                    float bar(in vec2 st, float size){
+                        return  rect(st, vec2(size*0.90,size*0.2));
                     }
                 filter: |
-                    //vec2 pos = v_world_position.xy*0.01;
-                    vec2 pos = getConstantPos(gl_FragCoord.xy)*5.0;
+                    vec2 pos = getConstantCoords()*50.0;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
                     color.rgb = mix(vec3(1.0,1.0,1.0),color.rgb,pct);
 
     horizontal-bars-rev:
         base: polygons
+        mix: [space-constant, shapes-rect]
         texcoords: false
         shaders:
             blocks:
                 global: |
-                    float box(in vec2 _st, in vec2 _size){
-                        _size = vec2(0.5) - _size*0.75;
-                        vec2 uv = smoothstep(_size,
-                                            _size+vec2(0.001),
-                                            _st);
-                        uv *= smoothstep(_size,
-                                        _size+vec2(0.001),
-                                        vec2(1.0)-_st);
-                        return uv.x*uv.y;
-                    }
-                    float bar(in vec2 _st, float _size){
-                        return  box(_st, vec2(_size*1.05,_size*0.5));
-                    }
-                    vec2 getConstantPos(vec2 fragCoord){
-                        const float pixel_scale = 55.;
-                        float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
-                        vec2 st = fragCoord.xy/pixel_scale;
-                        const float dot_wrap = 400.;
-                        st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
-                        return st;
+                    float bar(in vec2 st, float size){
+                        return rect(st, vec2(size*1.05,size*0.5));
                     }
                 filter: |
-                    //vec2 pos = v_world_position.xy*0.01;
-                    vec2 pos = getConstantPos(gl_FragCoord.xy)*5.0;
+                    vec2 pos = getConstantCoords()*50.0;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
                     color.rgb = mix(color.rgb,vec3(1.0,1.0,1.0),pct);
-
-    # HSV/RGB functions
-    hsv:
-        shaders:
-            blocks:
-                global: |
-                    vec3 rgb2hsv(vec3 c)
-                    {
-                        vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
-                        vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
-                        vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
-                        float d = q.x - min(q.w, q.y);
-                        float e = 1.0e-10;
-                        return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
-                    }
-                    vec3 hsv2rgb(vec3 c)
-                    {
-                        vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-                        vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-                        return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-                    }
 
     scale-buildings:
         shaders:
