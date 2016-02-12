@@ -760,13 +760,25 @@ styles:
 
     coast:
         base: lines
-        mix: [space-constant, patterns-stripes]
+        mix: [space-constant]
         blend: overlay
         shaders:
             blocks:
+                global: |
+                    mat2 rotate2d(float angle){
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+                    
+                    float stripes(vec2 st){
+                        st = rotate2d(3.14159265358*-0.25 )*st;
+                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
+                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
+                    }
                 color: |
                     vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), diagonalStripes(st*130.))*.8; // transparent stripes
+                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
+                    
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]
         base: polygons
