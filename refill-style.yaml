@@ -2371,7 +2371,7 @@ layers:
                     text_source: function() { return feature["name:en"] || feature["name"]; }
                     font:
                         fill: *text_fill
-                        weight: 200
+                        weight: 400
                         size: 11px
                         stroke: { color: *text_stroke, width: 4 }
     #            icons:
@@ -2393,7 +2393,7 @@ layers:
                     text_source: function() { return feature["name:en"] || feature["name"]; }
                     font:
                         size: 14px
-                        weight: 800
+                        weight: 600
                         fill: *text_fill
                         stroke: { color: *text_stroke, width: 4 }
             small-ones-z6:
@@ -2412,7 +2412,7 @@ layers:
                     text_source: function() { return feature["name:en"] || feature["name"]; }
                     font:
                         size: 16px
-                        weight: 800
+                        weight: 700
                         fill: *text_fill
                         stroke: { color: *text_stroke, width: 4 }
             small-ones-z7:
@@ -2499,7 +2499,7 @@ layers:
                     interactive: true
                     anchor: bottom
                     priority: 6
-                    offset: [0, 8px]
+                    offset: [0, 5px]
 
             populated-places-natural-earth-z2:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [2], scalerank: 0 }
