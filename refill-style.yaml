@@ -729,8 +729,8 @@ styles:
         mix: [space-constant, patterns-stripes]
         shaders:
             defines:
-                COLOR1: vec3(0.880)
-                COLOR2: vec3(0.950)
+                COLOR1: vec3(0.890)
+                COLOR2: vec3(0.935)
             blocks:
                 global: |
                     float stripes2(vec2 st){
@@ -742,7 +742,7 @@ styles:
                     const float wave_width = 30.0;
                     const float wave_height = .01;
                     st.y += sin(st.x*wave_width)*wave_height;
-                    
+
                     // gradient
                     color.rgb = mix(COLOR1, color.rgb, gl_FragCoord.x / u_resolution.x);
                     color = mix(color,vec4(COLOR2,1.0),stripes(st*92.,.5))*1.0;
@@ -753,7 +753,7 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.840)
-                COLOR2: vec3(0.930)
+                COLOR2: vec3(0.910)
 
 
     stream-waves:
@@ -990,7 +990,7 @@ layers:
             waves:
                 interactive: true
                 order: 5
-                color: [0.820, 0.820, 0.820]
+                color: [0.860, 0.860, 0.860]
         later:
             filter: { $zoom: { min: 14 } }
             draw:
@@ -1022,18 +1022,18 @@ layers:
                     - { $zoom: { min: 15 } }
             draw:
                 waves:
-                    color: [0.820, 0.820, 0.820]
+                    color: [0.860, 0.860, 0.860]
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 waves:
-                    color: [0.820, 0.820, 0.820]
+                    color: [0.860, 0.860, 0.860]
         playas:
             filter: { kind: playa, $zoom: {min: 6} }
             draw:
                 waves:
-                    color: [0.820, 0.820, 0.820]
+                    color: [0.860, 0.860, 0.860]
         water-boundary-ocean-early:
             filter: { boundary: yes, kind: ocean, $zoom: {min: 1, max: 17} }
             draw:
