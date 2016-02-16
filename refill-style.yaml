@@ -730,7 +730,7 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.890)
-                COLOR2: vec3(0.935)
+                COLOR2: vec3(0.955)
             blocks:
                 global: |
                     float stripes2(vec2 st){
@@ -818,7 +818,7 @@ styles:
             defines:
                 PATTERN_SCALE: 70.0
                 DOT_SIZE: .125
-                    
+
     park-dots1:
         mix: dots
         shaders:
