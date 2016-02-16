@@ -729,8 +729,8 @@ styles:
         mix: [space-constant, patterns-stripes]
         shaders:
             defines:
-                COLOR1: vec3(0.935)
-                COLOR2: vec3(0.965)
+                COLOR1: vec3(0.915)
+                COLOR2: vec3(0.950)
             blocks:
                 global: |
                     float stripes2(vec2 st){
@@ -990,7 +990,7 @@ layers:
             waves:
                 interactive: true
                 order: 5
-                color: [0.890, 0.890, 0.890]
+                color: [0.880, 0.880, 0.880]
         later:
             filter: { $zoom: { min: 14 } }
             draw:
@@ -1022,18 +1022,18 @@ layers:
                     - { $zoom: { min: 15 } }
             draw:
                 waves:
-                    color: [0.860, 0.860, 0.860]
+                    color: [0.880, 0.880, 0.880]
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 waves:
-                    color: [0.860, 0.860, 0.860]
+                    color: [0.880, 0.880, 0.880]
         playas:
             filter: { kind: playa, $zoom: {min: 6} }
             draw:
                 waves:
-                    color: [0.860, 0.860, 0.860]
+                    color: [0.880, 0.880, 0.880]
         water-boundary-ocean-early:
             filter: { boundary: yes, kind: ocean, $zoom: {min: 1, max: 17} }
             draw:
@@ -2296,11 +2296,20 @@ layers:
                 text-blend-order:
                     visible: *text_visible_continent
                     font:
-                        size: 13px
+                        size: 14px
                         style: italic
                         fill: *text_fill
-                        stroke: { color: *text_stroke, width: 4 }
+                        weight: 600
+                        # stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
+        continent-spacer:
+            filter: { kind: continent }
+            continent-spacer-z1-z5:
+                filter: { $zoom: { min: 1, max: 5 } }
+                draw:
+                    text-blend-order:
+                        text_source: function() { return feature.name.split('').join(' ') }
+                        text_wrap: false
 
         country-z2:
             filter:
@@ -2350,7 +2359,7 @@ layers:
                     font:
                         fill: *text_fill
                         weight: 200
-                        size: 11px
+                        size: 13px
                         stroke: { color: *text_stroke, width: 4 }
     #            icons:
     #                size: [[13, 12px], [15, 18px]]
@@ -2505,7 +2514,7 @@ layers:
                     interactive: true
                     anchor: bottom
                     priority: 6
-                    offset: [0, 5px]
+                    offset: [0, 4px]
 
             populated-places-natural-earth-z2:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [2], scalerank: 0 }
@@ -3994,7 +4003,7 @@ layers:
                         draw:
                             icons:
                                 visible: false
-                            text-blend-order: { font: { size: 10px, stroke: { width: 2px } } }
+                            text-blend-order: { font: { size: 9px, stroke: { width: 2px }, fill: [0.60,0.60,0.60] } }
                     natl-park-labels-z7:
                         filter: { $zoom: [7] }
                         draw:
@@ -4937,7 +4946,7 @@ layers:
                 text-blend-order: { font: { size: 16px } }
 
         sea-spacer:
-            filter: { not: { kind: [ocean] }, $zoom: { min: 5 } }
+            filter: { not: { kind: [ocean] }, $zoom: { min: 4 } }
             draw:
                 text-blend-order:
                     text_source: function() { return feature.name.split('').join(' ') }
@@ -4948,7 +4957,7 @@ layers:
             sea-labels-z4:
                     filter: { $zoom: [4] }
                     draw:
-                        text-blend-order: { font: { size: 9px } }
+                        text-blend-order: { font: { size: 8px, fill: [0.250,0.250,0.250] } }
             sea-labels-z5:
                     filter: { $zoom: [5] }
                     draw:
