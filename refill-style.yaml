@@ -729,8 +729,8 @@ styles:
         mix: [space-constant, patterns-stripes]
         shaders:
             defines:
-                COLOR1: vec3(0.890)
-                COLOR2: vec3(0.955)
+                COLOR1: vec3(0.935)
+                COLOR2: vec3(0.965)
             blocks:
                 global: |
                     float stripes2(vec2 st){
@@ -990,7 +990,7 @@ layers:
             waves:
                 interactive: true
                 order: 5
-                color: [0.860, 0.860, 0.860]
+                color: [0.890, 0.890, 0.890]
         later:
             filter: { $zoom: { min: 14 } }
             draw:
