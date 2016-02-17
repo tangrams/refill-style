@@ -2386,9 +2386,15 @@ layers:
                     text_source: function() { return feature["name:en"] || feature["name"]; }
                     font:
                         fill: *text_fill
-                        weight: 400
-                        size: 11px
+                        weight: 600
+                        size: 13px
                         stroke: { color: *text_stroke, width: 4 }
+            # country-spacer-z5:
+            #     filter: { kind: country, $zoom: [5] }
+            #     draw:
+            #         text-blend-order:
+            #             text_source: function() { return feature.name.split('').join(' ') }
+            #             text_wrap: false
     #            icons:
     #                size: [[13, 12px], [15, 18px]]
     #                interactive: true
@@ -2427,7 +2433,7 @@ layers:
                     text_source: function() { return feature["name:en"] || feature["name"]; }
                     font:
                         size: 16px
-                        weight: 700
+                        weight: 600
                         fill: *text_fill
                         stroke: { color: *text_stroke, width: 4 }
             small-ones-z7:
@@ -2444,7 +2450,7 @@ layers:
                     visible: *text_visible_admin
                     text_source: 'name:short'
                     font:
-                        size: 12px
+                        size: 10px
                         weight: 400
                         fill: *text_fill
                         stroke: { color: *text_stroke, width: 4 }
@@ -2601,7 +2607,7 @@ layers:
                             visible: *text_visible_populated_places
                             # offset: [0, 3px] # half icon size
                             font:
-                                size: 13px
+                                size: 14px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
@@ -2643,7 +2649,7 @@ layers:
                             visible: *text_visible_populated_places
                             # offset: [0, 2px] # half icon size
                             font:
-                                size: 10px
+                                size: 9px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
