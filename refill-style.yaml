@@ -2450,9 +2450,9 @@ layers:
                     visible: *text_visible_admin
                     text_source: 'name:short'
                     font:
-                        size: 10px
+                        size: 11px
                         weight: 400
-                        fill: *text_fill
+                        fill: [0.70,0.70,0.70]
                         stroke: { color: *text_stroke, width: 4 }
 
         region-z5:
@@ -2463,9 +2463,9 @@ layers:
                     visible: *text_visible_admin
                     text_source: 'name:short'
                     font:
-                        size: 12px
-                        weight: 400
-                        fill: *text_fill
+                        size: 18px
+                        weight: 200
+                        fill: [0.5,0.5,0.5,0.5]
                         stroke: { color: *text_stroke, width: 4 }
 
         region-z6:
@@ -2476,10 +2476,10 @@ layers:
                     visible: *text_visible_admin
                     text_source: 'name:short'
                     font:
-                        size: 14px
-                        weight: 800
-                        fill: *text_fill
-                        stroke: { color: *text_stroke, width: 4 }
+                        size: 21px
+                        weight: 200
+                        fill: [0.5,0.5,0.5,0.5]
+                        # stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
 
         region:
@@ -2490,10 +2490,10 @@ layers:
                     visible: *text_visible_admin
                     text_source: function() { if(feature["name:short"]) { return feature["name"]; } else { return ""; } }
                     font:
-                        size: 14px
-                        weight: 800
-                        fill: *text_fill
-                        stroke: { color: *text_stroke, width: 4 }
+                        size: 30px
+                        weight: 200
+                        fill: [0.5,0.5,0.5,0.5]
+                        # stroke: { color: *text_stroke, width: 4 }
                         transform: uppercase
     #            icons:
     #                size: [[13, 12px], [15, 18px]]
