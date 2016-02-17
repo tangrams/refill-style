@@ -160,16 +160,16 @@ settings:
         - &building_e  true                     # building stroke order
 
     labels:
-        - &text_fill   '#000'                   # WHITE
-        - &text_fill2  '#000'                   # WHITE
-        - &text_fill_water   '#000'             # blue
-        - &text_fill_park    '#000'             # green
-        - &text_fill_building '#000'            # tan
-        - &text_stroke '#fff'                   # land color
-        - &text_stroke_park '#fff'              # land color
+        - &text_fill   '#000'                       # WHITE
+        - &text_fill2  '#000'                       # WHITE
+        - &text_fill_water   '#000'                 # blue
+        - &text_fill_park    [0.175,0.175,0.175]    # green
+        - &text_fill_building '#000'                # tan
+        - &text_stroke '#fff'                       # land color
+        - &text_stroke_park '#fff'                  # land color
         - &text_stroke_water '#fff'
-        - &townspot_sprite   townspot-m-rev     # depends on land color and text settings
-        - &text_font_family  'Open Sans'        # branding in asperational Unicode, yo (or Helvetica)
+        - &townspot_sprite   townspot-m-rev         # depends on land color and text settings
+        - &text_font_family  'Open Sans'            # branding in asperational Unicode, yo (or Helvetica)
 
 
 textures:
@@ -4004,20 +4004,24 @@ layers:
                                 fill: *text_fill_park
                                 style: italic
                                 stroke: { color: *text_stroke_park, width: 4 }
-                    natl-park-labels-z4-z6:
-                        filter: { $zoom: [4,5,6] }
+                    natl-park-labels-z4-z5:
+                        filter: { $zoom: [4,5] }
                         draw:
                             icons:
                                 visible: false
                             text-blend-order: { font: { size: 9px, stroke: { width: 2px }, fill: [0.60,0.60,0.60] } }
+                    natl-park-labels-z6:
+                        filter: { $zoom: [6] }
+                        draw:
+                            text-blend-order: { font: { size: 9px, stroke: { width: 2px }, fill: [0.40,0.40,0.40] } }
                     natl-park-labels-z7:
                         filter: { $zoom: [7] }
                         draw:
-                            text-blend-order: { font: { size: 10px, stroke: { width: 2px } } }
+                            text-blend-order: { font: { size: 10px, stroke: { width: 2px }, fill: [0.30,0.30,0.30] } }
                     natl-park-labels-z8:
                         filter: { $zoom: [8,9] }
                         draw:
-                            text-blend-order: { font: { size: 11px, stroke: { width: 2px } } }
+                            text-blend-order: { font: { size: 11px, stroke: { width: 2px }, fill: [0.175,0.175,0.175] } }
                     natl-park-labels-z10:
                         filter: { $zoom: {min: 10, max: 14 } }
                         draw:
@@ -4064,16 +4068,16 @@ layers:
                         filter: { $zoom: [6] }
                         draw:
                             icons: { visible: false }
-                            text-blend-order: { font: { size: 10px, stroke: { width: 2px } } }
+                            text-blend-order: { font: { size: 9px, stroke: { width: 2px }, fill: [0.40,0.40,0.40] } }
                     green-areas-z7:
                         filter: { $zoom: [7] }
                         draw:
                             icons: { visible: false }
-                            text-blend-order: { font: { size: 10px } }
+                            text-blend-order: { font: { size: 10px, stroke: { width: 2px }, fill: [0.30,0.30,0.30] } }
                     green-areas-z8-z9:
                         filter: { $zoom: { min: 8, max: 14 } }
                         draw:
-                            text-blend-order: { font: { size: 11px } }
+                            text-blend-order: { font: { size: 11px }, stroke: { width: 2px }, fill: [0.175,0.175,0.175] }
                     wilderness-areas-early:
                        filter: function() { return $zoom < 10 && feature.name && (feature.name.indexOf("Wilderness") > -1 || feature.name.indexOf("BLM") > -1) }
                        draw:
