@@ -3075,7 +3075,7 @@ layers:
                             # offset: [0, 1px] # half icon size
                             priority: 8
                             font:
-                                size: 13px
+                                size: 14px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                                     
@@ -3089,7 +3089,7 @@ layers:
                             # offset: [0, 1px] # half icon size
                             priority: 12
                             font:
-                                size: 13px
+                                size: 14px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
@@ -3115,7 +3115,7 @@ layers:
                             # offset: [0, 1px] # half icon size
                             priority: 16
                             font:
-                                size: 11px
+                                size: 12px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
@@ -3144,7 +3144,7 @@ layers:
                             # offset: [0, 1px] # half icon size
                             priority: 20
                             font:
-                                size: 9px
+                                size: 10px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
@@ -3196,7 +3196,7 @@ layers:
                             # offset: [0, 2px] # half icon size
                             priority: 26
                             font:
-                                size: 16px
+                                size: 17px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 8px
@@ -3220,7 +3220,7 @@ layers:
                             # offset: [0, 1px] # half icon size
                             priority: 30
                             font:
-                                size: 13px
+                                size: 14px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 7px
@@ -3244,7 +3244,7 @@ layers:
                             # offset: [0, 1px] # half icon size
                             priority: 34
                             font:
-                                size: 11px
+                                size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 7px
