@@ -784,6 +784,27 @@ styles:
                 color: |
                     vec2 st = getConstantCoords();
                     color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
+
+    borders:
+        base: lines
+        mix: [space-constant]
+        blend: overlay
+        shaders:
+            blocks:
+                global: |
+                    mat2 rotate2d(float angle){
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+                    
+                    float stripes(vec2 st){
+                        st = rotate2d(3.14159265358*-0.25 )*st;
+                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
+                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
+                    }
+                color: |
+                    vec2 st = getConstantCoords();
+                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
                     
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]
@@ -2237,7 +2258,7 @@ layers:
                     interactive: true
                     order: 8
                     color: *country_boundary
-                    width: [[0, 0.5px], [9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
+                    width: [[0, 0.5px], [5, 1.5px],[9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
             water:
                 filter: { maritime: yes }
                 draw:
@@ -2257,7 +2278,7 @@ layers:
                     interactive: true
                     order: 7
                     color: *region_boundary
-                    width: [[0, 0.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+                    width: [[0, 0.5px], [5, 0.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
             water:
                 filter: { maritime_boundary: yes }
                 draw:
@@ -2611,7 +2632,7 @@ layers:
                             # offset: [0, 3px] # half icon size
                             priority: 8
                             font:
-                                size: 14px
+                                size: 15px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
@@ -2649,7 +2670,7 @@ layers:
                         filter: { capital: yes }
                         draw:
                             text-blend-order:
-                                offset: [0, 3px] # half icon size
+                                # offset: [0, 3px] # half icon size
                                 priority: 10
                             icons:
                                 priority: 9
@@ -2675,7 +2696,7 @@ layers:
                         filter: { capital: yes }
                         draw:
                             text-blend-order:
-                                offset: [0, 3px] # half icon size
+                                # offset: [0, 3px] # half icon size
                                 priority: 16
                             icons:
                                 size: 7px
@@ -2689,19 +2710,25 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 3px] # half icon size
+                            priority: 8
                             font:
-                                size: 15px
+                                size: 16px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
+                            priority: 7
                             size: 8px
                             visible: *icon_visible_populated_places
                             sprite: *townspot_sprite
                     capital:
                         filter: { capital: yes }
                         draw:
+                            text-blend-order:
+                                # offset: [0, 4px] # half icon size
+                                priority: 6
                             icons:
                                 sprite: *townspot_sprite
+                                priority: 5
 
                 z6places-2:
                     filter: { scalerank: [2,3,4] }
@@ -2709,37 +2736,49 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 2px] # half icon size
+                            priority: 12
                             font:
-                                size: 12px
+                                size: 13px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
+                            priority: 11
                             size: 6px
                             visible: *icon_visible_populated_places
                             sprite: *townspot_sprite
                     capital:
                         filter: { capital: yes }
                         draw:
+                            text-blend-order:
+                                # offset: [0, 3px] # half icon size
+                                priority: 10
+                        draw:
                             icons:
                                 size: 7px
                                 sprite: *townspot_sprite
+                                priority: 9
 
                 z6places-3:
                     filter: { scalerank: [5,6] }
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
-                            # offset: [0, 2px] # half icon size
+                            # offset: [0, 2px] # half icon 
+                            priority: 16
                             font:
-                                size: 10px
+                                size: 11px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 6px
                             visible: *icon_visible_populated_places
                             sprite: *townspot_sprite
+                            priority: 15
                     capital:
                         filter: { capital: yes }
+                        text-blend-order:
+                                # offset: [0, 3px] # half icon size
+                                priority: 14
                         draw:
                             icons:
                                 size: 7px
