@@ -784,27 +784,6 @@ styles:
                 color: |
                     vec2 st = getConstantCoords();
                     color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
-
-    borders:
-        base: lines
-        mix: [space-constant]
-        blend: overlay
-        shaders:
-            blocks:
-                global: |
-                    mat2 rotate2d(float angle){
-                        return mat2(cos(angle),-sin(angle),
-                                    sin(angle),cos(angle));
-                    }
-                    
-                    float stripes(vec2 st){
-                        st = rotate2d(3.14159265358*-0.25 )*st;
-                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
-                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
-                    }
-                color: |
-                    vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
                     
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]
@@ -1182,8 +1161,8 @@ layers:
                 lines:
                     # put highways on top of all other roads
                     order: 8
-                    color: black
-                    width: [[5, 1px], [7, 1.25px], [9, 1.5px], [14, 1.5px], [16, 4px], [17, 10m]]
+                    color: [[5, [0.5,0.5,0.5]],[6, black]]
+                    width: [[5, 0.5px], [6, 0.5px], [7, 0.75px], [9, 1.5px], [14, 1.5px], [16, 4px], [17, 10m]]
                     outline:
                         color: *highway_casing1
                         width: [[9, 0px], [10, 0px], [12, 1px], [16, 2px]]
@@ -1191,7 +1170,7 @@ layers:
                 filter: { type: ['Secondary Highway','Road'] }
                 draw:
                     lines:
-                        color: [[5, [0.5,0.5,0.5]], [8, [0.4,0.4,0.4]], [13, [0.4,0.4,0.4]], [17, *major_road1]]
+                        color: [[5, [0.75,0.75,0.75]], [8, [0.4,0.4,0.4]], [13, [0.4,0.4,0.4]], [17, *major_road1]]
                         #color: red
                         width: [[5, 0.25px], [7, 0.5px], [7, 0.75px], [9, 1px], [10, 9px], [11, 9px], [13, 1px], [16, 2.5px], [19, 8m]]
                         outline:
@@ -2244,21 +2223,26 @@ layers:
         draw:
             lines:
                 interactive: true
-                order: 6
+                order: 11
 #                color: red
 #                width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
         country:
             filter: 
                 any:
                     - type: country
-                    - kind: nation
+                    - kind: [nation,country]
                     - admin_level: 2
             draw:
+                country-outerline:
+                    style: lines
+                    order: 12
+                    color: [[0, [0.70,0.70,0.70]], [6, [0.815,0.815,0.815]]]
+                    width: [[0, 0.5px], [2, 0.75px], [5, 1.7px], [6, 3.5px], [7, 4px], [9, 5px], [14, 7px], [16, 8px], [17, 14m]]
                 lines:
                     interactive: true
-                    order: 8
-                    color: *country_boundary
-                    width: [[0, 0.5px], [5, 1.5px],[9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
+                    order: 13
+                    color: [1.0,1.0,1.0]
+                    width: [[0, 0px], [5, 0px], [6, 1px], [7, 1px], [9, 1px]]
             water:
                 filter: { maritime: yes }
                 draw:
@@ -2276,7 +2260,7 @@ layers:
             draw:
                 lines:
                     interactive: true
-                    order: 7
+                    order: 12
                     color: *region_boundary
                     width: [[0, 0.5px], [5, 0.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
             water:
