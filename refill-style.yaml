@@ -3278,6 +3278,7 @@ layers:
                             anchor: center
                             visible: *text_visible_populated_places
                             # offset: [0, 2px] # half icon size
+                            priority: 5
                             font:
                                 size: 17px
                                 fill: *text_fill
@@ -3291,9 +3292,10 @@ layers:
                         text-blend-order:
                             anchor: center
                             visible: *text_visible_populated_places
-                            # offset: [0, 1px] # half icon size
+                            # offset: [0, 1px] # half icon 
+                            priority: 6
                             font:
-                                size: 13px
+                                size: 14px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
 
@@ -3305,13 +3307,15 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 1px] # half icon size
+                            priority: 8
                             font:
-                                size: 13px
+                                size: 14px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 7px
                             sprite: *townspot_sprite
+                            priority: 7
 
                 z10places-3:
                     filter:
@@ -3321,14 +3325,16 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 1px] # half icon size
+                            priority: 12
                             font:
-                                size: 11px
+                                size: 12px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 7px
                             visible: *icon_visible_populated_places
                             sprite: *townspot_sprite
+                            priority: 11
 
                 z10places-4:
                     filter:
@@ -3338,14 +3344,16 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 1px] # half icon size
+                            priority: 14
                             font:
-                                size: 9px
+                                size: 10px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 6px
                             visible: *icon_visible_populated_places
                             sprite: *townspot_sprite
+                            priority: 13
 
             populated-places-osm-z10-no-population:
                 filter:
@@ -3360,10 +3368,16 @@ layers:
                     text-blend-order:
                         anchor: center
                         visible: *text_visible_populated_places
+                        priority: 16
                         font:
                             size: 10px
                             fill: *text_fill
                             stroke: { color: *text_stroke, width: 4 }
+                    # icons:
+                    #     size: 5px
+                    #     visible: *icon_visible_populated_places
+                    #     sprite: townspot-s-rev
+                    #     priority: 15
 
             populated-places-natural-earth-z10-backfill:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [10], population: { max: 20000 } }
@@ -3374,8 +3388,9 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 2px] # half icon size
+                            priority: 17
                             font:
-                                size: 16px
+                                size: 17px
                                 stroke: { color: *text_stroke, width: 4 }
 
                 z10places-2-ne:
@@ -3384,18 +3399,23 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 1px] # half icon size
+                            priority: 22
                             font:
-                                size: 13px
+                                size: 14px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 7px
                             visible: *icon_visible_populated_places
                             sprite: *townspot_sprite
+                            priority: 21
                     capital:
                         filter: { capital: yes }
                         draw:
+                            text-blend-order:
+                                priority: 21
                             icons:
                                 sprite: *townspot_sprite
+                                priority: 20
 
                 z10places-3-ne:
                     filter: { scalerank: [6,7,8,9,10] }
@@ -3403,19 +3423,25 @@ layers:
                         text-blend-order:
                             visible: *text_visible_populated_places
                             # offset: [0, 1px] # half icon size
+                            priority: 26
                             font:
-                                size: 11px
+                                size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 6px
                             visible: *icon_visible_populated_places
                             sprite: *townspot_sprite
+                            priority: 25
                     capital:
                         filter: { capital: yes }
                         draw:
+                            text-blend-order:
+                                priority: 21
+                                priority: 24
                             icons:
                                 size: 7px
                                 sprite: *townspot_sprite
+                                priority: 23
 
             populated-places-osm-z11:
                 filter:
