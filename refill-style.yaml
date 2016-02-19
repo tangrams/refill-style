@@ -2980,7 +2980,7 @@ layers:
                             # offset: [0, 2px] # half icon size
                             priority: 24
                             font:
-                                size: 16px
+                                size: 17px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 8px
@@ -3004,7 +3004,7 @@ layers:
                             visible: *text_visible_populated_places
                             # offset: [0, 1px] # half icon size
                             font:
-                                size: 13px
+                                size: 14px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 7px
@@ -3024,7 +3024,7 @@ layers:
                             # offset: [0, 1px] # half icon size
                             priority: 28
                             font:
-                                size: 11px
+                                size: 10px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 6px
@@ -3129,7 +3129,7 @@ layers:
                             text-blend-order:
                                 priority: 14
                                 font:
-                                    size: 15px
+                                    size: 14px
                             icons:
                                 sprite: *townspot_sprite
                                 priority: 13
@@ -3564,7 +3564,7 @@ layers:
                             text-blend-order:
                                 priority: 11
                                 font:
-                                    size: 16px
+                                    size: 14px
                                     stroke: { color: *text_stroke, width: 4 }
                             icons:
                                 sprite: *townspot_sprite
@@ -3596,7 +3596,7 @@ layers:
                             text-blend-order:
                                 priority: 14
                                 font:
-                                    size: 14px
+                                    size: 11px
                                     stroke: { color: *text_stroke, width: 4 }
                             icons:
                                 sprite: *townspot_sprite
@@ -3622,6 +3622,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 5
                             font:
                                 size: 18px
                                 fill: *text_fill
@@ -3634,6 +3635,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 6
                             font:
                                 size: 14px
                                 fill: *text_fill
@@ -3646,6 +3648,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 7
                             font:
                                 size: 11px
                                 fill: *text_fill
@@ -3658,8 +3661,9 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 8
                             font:
-                                size: 10px
+                                size: 11px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
 
@@ -3676,6 +3680,7 @@ layers:
                     text-blend-order:
                         anchor: center
                         visible: *text_visible_populated_places
+                        priority: 9
                         font:
                             size: 11px
                             fill: *text_fill
@@ -3686,6 +3691,7 @@ layers:
                 draw:
                     text-blend-order:
                         anchor: center
+                        priority: 10
                         font:
                             fill: *text_fill
 
@@ -3694,8 +3700,9 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 12
                             font:
-                                size: 16px
+                                size: 18px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 14px
@@ -3705,8 +3712,9 @@ layers:
                         filter: { capital: yes }
                         draw:
                             text-blend-order:
+                                priority: 11
                                 font:
-                                    size: 16px
+                                    size: 18px
                                     stroke: { color: *text_stroke, width: 4 }
                             icons:
                                 sprite: *townspot_sprite
@@ -3716,8 +3724,9 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 14
                             font:
-                                size: 13px
+                                size: 14px
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 11px
@@ -3727,8 +3736,9 @@ layers:
                         filter: { capital: yes }
                         draw:
                             text-blend-order:
+                                priority: 13
                                 font:
-                                    size: 16px
+                                    size: 14px
                                     stroke: { color: *text_stroke, width: 4 }
                             icons:
                                 sprite: *townspot_sprite
@@ -3738,6 +3748,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 16
                             font:
                                 size: 11px
                                 stroke: { color: *text_stroke, width: 4 }
@@ -3749,8 +3760,9 @@ layers:
                         filter: { capital: yes }
                         draw:
                             text-blend-order:
+                                priority: 15
                                 font:
-                                    size: 14px
+                                    size: 11px
                                     stroke: { color: *text_stroke, width: 4 }
                             icons:
                                 sprite: *townspot_sprite
