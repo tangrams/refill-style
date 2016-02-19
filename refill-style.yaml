@@ -3998,11 +3998,11 @@ layers:
                         text_wrap: 12
                         visible: *text_visible_neighbourhoods
                         font:
-                            size: 18px
-                            weight: 400
-                            fill: [0.000,0.000,0.000,0.300]
+                            size: 21px
+                            weight: 200
+                            fill: [0.000,0.000,0.000,0.500]
                             transform: uppercase
-                            # stroke: { color: *text_stroke, width: 3 }
+                            stroke: { color: [1.0,1.0,1.0,0.5], width: 3 }
                 z15-new:
                     filter: 
                         all:
