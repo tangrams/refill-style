@@ -3806,6 +3806,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 5
                             font:
                                 size: 14px
                                 stroke: { color: *text_stroke, width: 4 }
@@ -3817,6 +3818,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 6
                             font:
                                 size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
@@ -3834,6 +3836,7 @@ layers:
                     text-blend-order:
                         anchor: center
                         visible: *text_visible_populated_places
+                        priority: 7
                         font:
                             size: 11px
                             stroke: { color: *text_stroke, width: 4 }
@@ -3851,6 +3854,7 @@ layers:
                     filter: { scalerank: [0,1] }
                     draw:
                         text-blend-order:
+                            priority: 8
                             interactive: false
                             visible: false
 
@@ -3858,6 +3862,7 @@ layers:
                     filter: { scalerank: [2,3,4,5] }
                     draw:
                         text-blend-order:
+                            priority: 9
                             visible: *text_visible_populated_places
                             font:
                                 size: 13px
@@ -3868,6 +3873,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: *text_visible_populated_places
+                            priority: 10
                             font:
                                 size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
@@ -3888,7 +3894,7 @@ layers:
                             #- kind_tile_rank: { max: 6 }
                 draw:
                     text-blend-order:
-                        priority: 7
+                        priority: 18
                         text_wrap: 10
                         visible: *text_visible_neighbourhoods_e
                         font:
@@ -3913,15 +3919,15 @@ layers:
                             #- kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 7
+                        priority: 18
                         text_wrap: 10
                         visible: *text_visible_neighbourhoods_e
                         font:
                             size: 10px
                             weight: 400
-                            fill: [0.300,0.300,0.300]
+                            fill: [0.600,0.600,0.600]
                             transform: uppercase
-                            # stroke: { color: *text_stroke, width: 2 }
+                            stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
             neighborhood-z13:
                 filter:
                     all:
@@ -3938,15 +3944,15 @@ layers:
                             - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 7
+                        priority: 18
                         text_wrap: 10
                         visible: *text_visible_neighbourhoods_e
                         font:
-                            size: 11px
-                            weight: 400
-                            fill: [0.35,0.35,0.35]
+                            size: 12px
+                            weight: 300
+                            fill: [0.500,0.500,0.500]
                             transform: uppercase
-                            # stroke: { color: *text_stroke, width: 2 }
+                            stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
             neighborhood-z14:
                 filter:
                     all:
@@ -3963,15 +3969,15 @@ layers:
                             - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 7
+                        priority: 18
                         text_wrap: 12
                         visible: *text_visible_neighbourhoods
                         font:
-                            size: 13px
-                            weight: 400
-                            fill: [0.000,0.000,0.000,0.500]
+                            size: 16px
+                            weight: 200
+                            fill: [0.500,0.500,0.500]
                             transform: uppercase
-                            # stroke: { color: *text_stroke, width: 3 }
+                            stroke: { color: [1.0,1.0,1.0,0.5], width: 4 }
             neighborhood-z15:
                 filter:
                     all:
@@ -3988,13 +3994,13 @@ layers:
                             - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 7
+                        priority: 18
                         text_wrap: 12
                         visible: *text_visible_neighbourhoods
                         font:
-                            size: 16px
-                            weight: 300
-                            fill: [0.000,0.000,0.000,0.480]
+                            size: 18px
+                            weight: 400
+                            fill: [0.000,0.000,0.000,0.300]
                             transform: uppercase
                             # stroke: { color: *text_stroke, width: 3 }
                 z15-new:
@@ -4003,6 +4009,7 @@ layers:
                             - min_zoom: 15
                     draw:
                         text-blend-order:
+                            priority: 19
                             font:
                                 size: 13px
             neighborhood-z16:
@@ -4021,7 +4028,7 @@ layers:
                             - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 7
+                        priority: 18
                         visible: *text_visible_neighbourhoods
                         font:
                             size: 17px
