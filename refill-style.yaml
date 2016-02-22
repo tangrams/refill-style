@@ -436,9 +436,12 @@ textures:
 
 sources:
     osm:
-        type: TopoJSONTiles
-        #url:  //localhost:8080//osm/all/{z}/{x}/{y}.topojson
-        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-W2tPU-Y
+        type: TopoJSON
+        url:  https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-W2tPU-Y
+        # url:  //localhost:8080//osm/all/{z}/{x}/{y}.topojson
+        # url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-W2tPU-Y
+        # type: MVT
+        # url:  http://vector.mapzen.com/osm/all/{z}/{x}/{y}.mvt
 
 cameras:
     isometric:
@@ -906,7 +909,7 @@ styles:
 
     building-grid:
         base: polygons
-        mix: [hsv, scale-buildings]
+        mix: [scale-buildings]
         texcoords: true
         material:
             diffuse:
@@ -2042,7 +2045,7 @@ layers:
                         #cap: butt
                         outline:
                             # except bridges and tunnels, their outlines should also self-sort
-                            order: function() { return 6 + feature.sort_key;
+                            order: function() { return 6 + feature.sort_key; }
 
     buildings:
         data: { source: osm, layer: buildings }
@@ -2203,7 +2206,7 @@ layers:
         filter: 
             all:
                 - { $zoom: { min: 20 }, kind: address }
-                - { $zoom: { min: 20 }, [ kind: true, addr_housenumber: true, name: false ] }
+                - { $zoom: { min: 20 }, kind: true, addr_housenumber: true, name: false }
         draw:
             text:
                 interactive: true
