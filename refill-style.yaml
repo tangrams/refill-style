@@ -59,8 +59,8 @@ settings:
         - &highway_link1              [0.00, 0.00, 0.00]
         - &highway_casing1            [0.40, 0.40, 0.40]
         - &highway_tunnel1            [0.7, 0.7, 0.7]
-        - &highway_tunnel_casing1     [1.00, 0.00, 0.00]
-        - &highway_link_tunnel_casing1 [1.00, 0.00, 0.00]
+        - &highway_tunnel_casing1     [1.00, 1.00, 1.00]
+        - &highway_link_tunnel_casing1 [1.00, 1.00, 1.00]
         - &ferry1                     [0.75,0.75,0.75]
         - &major_road1                [0.0, 0.0, 0.0]
         - &major_road1b               [0.935, 0.935, 0.935]
@@ -73,7 +73,7 @@ settings:
         - &major_casing1              [0.40, 0.40, 0.40]        # same as highway_casing1
         - &major_casing2              [0.40, 0.40, 0.40]        # zoomed out
         - &major_tunnel1              [0.7, 0.7, 0.7]
-        - &major_tunnel_casing1       [1.00, 0.00, 0.00]
+        - &major_tunnel_casing1       [1.00, 1.00, 1.00]
         - &major_route1               [0.0, 0.0, 0.0]
         - &major_route2               [0.2, 0.2, 0.2]           # zoomed out
         - &minor_route                [0.97, 0.97, 0.97]        # same as major_route
@@ -85,7 +85,7 @@ settings:
         - &minor_casing1              white                     # same as highway_casing1
         - &minor_casing2              white                     # zoomed out
         - &minor_tunnel1              [0.7, 0.7, 0.7]
-        - &minor_tunnel_casing1       [1.00, 0.00, 0.00]
+        - &minor_tunnel_casing1       [1.00, 1.00, 1.00]
         - &service_road1              [0.935, 0.935, 0.935]
         - &service_road2              white
         - &service_road_casing1       [0.40, 0.40, 0.40]
