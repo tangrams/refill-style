@@ -166,6 +166,10 @@ settings:
     labels:
         - &text_fill   '#000'                       # WHITE
         - &text_fill2  '#000'                       # WHITE
+        - &text_fill_road_e   '#555'                # WHITE
+        - &text_fill_exits    [0.920,0.398,0.340]   # motorway junctions, highway_casing1
+        - &text_fill_building '#ccc'                # WHITE
+        - &text_fill_address  [0.60,0.60,0.60]      # HUH
         - &text_fill_water   '#000'                 # blue
         - &text_fill_park    [0.175,0.175,0.175]    # green
         - &text_fill_piste   [0.675,0.675,0.675]    # dark gray
@@ -174,6 +178,7 @@ settings:
         - &text_stroke '#fff'                       # land color
         - &text_stroke_park '#fff'                  # land color
         - &text_stroke_water '#fff'
+        - &text_stroke_address   [1.0,1.0,1.0]      # address stroke color
         - &townspot_sprite   townspot-m-rev         # depends on land color and text settings
         - &text_font_family  'Open Sans'            # branding in asperational Unicode, yo (or Helvetica)
 
@@ -1105,7 +1110,7 @@ layers:
                     lines:
                         color: [[5, [0.75,0.75,0.75]], [8, [0.4,0.4,0.4]], [13, [0.4,0.4,0.4]], [17, *major_road1]]
                         #color: red
-                        width: [[5, 0.25px], [7, 0.5px], [7, 0.75px], [9, 1px], [10, 9px], [11, 9px], [13, 1px], [16, 2.5px], [19, 8m]]
+                        width: [[5, 0.25px], [7, 0.5px], [7, 0.75px], [9, 1px], [10, 9px], [11, 9px], [13, 1px], [16, 2.5px], [19, 6m]]
                         outline:
                             width: [[8, 0.0px], [9, 0.0px], [11, .5px], [16, .75px]]
             minor_road:
@@ -1502,7 +1507,7 @@ layers:
                     draw:
                         lines:
                             color: [[12, [0.6,0.6,0.6]], [13, [0.4,0.4,0.4]], [14, [0.35,0.35,0.35]], [15, [0.35,0.35,0.35]], [16, [0.35,0.35,0.35]], [17, [0.0,0.0,0.0]]]
-                            width: [[11, 0.5px], [12, 0.5px], [13, 0.65px], [14, 1px], [15, 1.25px], [16, 2px], [17, 2px], [19, 16m]]
+                            width: [[11, 0.5px], [12, 0.5px], [13, 0.65px], [14, 1px], [15, 1.25px], [16, 2px], [17, 2px], [19, 6m]]
                             outline:
                                 width: 2px
                     tunnel:
@@ -2551,22 +2556,23 @@ layers:
                     text_source: function() { if( feature.addr_housenumber ) { return feature.name + '\n' + feature.addr_housenumber; } else { return feature.name; } }
     address-labels:
         data: { source: osm, layer: buildings }
-        filter: 
-            all:
-                - { $zoom: { min: 20 }, kind: address }
-                - { $zoom: { min: 20 }, kind: true, addr_housenumber: true, name: false }
+        filter:
+            $zoom: { min: 20 }
+            any:
+                - kind: address
+                - { label_position: yes, addr_housenumber: true, name: false }
         draw:
-            text:
+            text-blend-order:
                 interactive: true
                 order: 7
                 visible: *text_visible_address
                 text_source: addr_housenumber
                 font:
-                    fill: *text_fill_building
-                    family: Helvetica
+                    fill: *text_fill_address
+                    family: *text_font_family
                     style: italic
-                    size: 10px
-                    stroke: { color: *building1, width: 4 }
+                    size: 12px
+                    stroke: { color: *text_stroke_address, width: 4 }
 
     boundaries:
         data: { source: osm, layer: boundaries }
