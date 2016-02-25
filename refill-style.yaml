@@ -656,11 +656,11 @@ styles:
 
     stream-waves:
         base: lines
-        mix: [space-constant, patterns-stripes]
+        mix: waves
         shaders:
             defines:
-                COLOR1: vec3(0.890)
-                COLOR2: vec3(0.930)
+                COLOR1: vec3(0.910)
+                COLOR2: vec3(0.980)
 
     coast:
         base: lines
@@ -2341,6 +2341,34 @@ layers:
                         outline:
                             # except bridges and tunnels, their outlines should also self-sort
                             order: function() { return (6 + feature.sort_key) || 6; }
+
+    # city_walls:
+    #     data: { source: osm, layer: boundaries }
+    #     filter: { kind: city_wall }
+    #     draw:
+    #         lines:
+    #             interactive: true
+    #             order: 8
+    #             color: *city_wall
+    #             width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
+    retaining_wall:
+        data: { source: osm, layer: boundaries }
+        filter: { kind: retaining_wall }
+        draw:
+            lines:
+                interactive: true
+                order: 8
+                color: [0.90,0.90,0.90] # *retaining_wall
+                width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
+    # snow_fence:
+    #     data: { source: osm, layer: boundaries }
+    #     filter: { kind: snow_fence }
+    #     draw:
+    #         lines:
+    #             interactive: true
+    #             order: 8
+    #             color: [0.0,0.0,1.0] # *snow_fence
+    #             width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
 
     buildings:
         data: { source: osm, layer: buildings }
