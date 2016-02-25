@@ -1037,6 +1037,33 @@ layers:
                         outline:
                             # except bridges and tunnels, their outlines should also self-sort
                             order: function() { return (6 + feature.sort_key) || 6; }
+    # platforms:
+    #     data: { source: osm, layer: transit }
+    #     filter: { kind: platform }
+    #     draw:
+    #         lines_transparent:
+    #             color: [0.569,0.690,0.722,0.5]
+    #             width: 5m
+    #             visible: *grey9_v
+    #     polygon_geom:
+    #         filter: { $geometry: polygon }
+    #         draw:
+    #             polygons_transparent:
+    #                 color: [0.592,0.671,0.694,0.5]
+    #                 visible: *grey9_v
+    #             lines_transparent:
+    #                 visible: false
+    #             outline_transparent:
+    #                 color: *grey9_o
+    #                 width: [[15,0px],[16,0.5px],[17,1px],[19,2px]]
+    #     z-order:
+    #         draw:
+    #             lines_transparent:
+    #                 order: function() { if($zoom<17) { return 10; } else { return 100; } }
+    #             polygons_transparent:
+    #                 order: function() { if($zoom<17) { return 10; } else { return 100; } }
+    #             outline_transparent:
+    #                 order: function() { if($zoom<17) { return 11; } else { return 101; } }
 
     roads:
         data: { source: osm, layer: roads }
