@@ -167,7 +167,7 @@ settings:
         - &text_fill   '#000'                       # WHITE
         - &text_fill2  '#000'                       # WHITE
         - &text_fill_road_e   '#555'                # WHITE
-        - &text_fill_exits    [0.920,0.398,0.340]   # motorway junctions, highway_casing1
+        - &text_fill_exits    [0.40,0.40,0.40]      # motorway junctions, highway_casing1
         - &text_fill_building '#ccc'                # WHITE
         - &text_fill_address  [0.60,0.60,0.60]      # HUH
         - &text_fill_water   '#000'                 # blue
@@ -4366,6 +4366,48 @@ layers:
                             fill: [0.000,0.000,0.000,0.500]
                             transform: uppercase
                             stroke: { color: [1.0,1.0,1.0,0.25], width: 6 }
+
+    highway-exit:
+        data: { source: osm, layer: [pois] }
+        filter: { kind: motorway_junction, $zoom: { min: 14 } }
+        draw:
+            icons:
+                visible: false
+            text-blend-order:
+                visible: true
+                interactive: true
+                text_source: ref
+                priority: 52
+                font:
+                    fill: [1.0,1.0,1.0] # *text_fill_exits
+                    size: [[12,9px],[15,10px],[17,12px]]
+                    stroke: { color: [0.25,0.25,0.25], width: [[14,3px],[15,4px]] }
+        later:
+            filter: { $zoom: { min: 16 } }
+            draw:
+                text-blend-order:
+                    font:
+                        weight: 600
+    airport-gate:
+        data: { source: osm, layer: [pois] }
+        filter: { kind: gate, aeroway: gate }
+        draw:
+            icons:
+                visible: false
+            text-blend-order:
+                visible: true
+                interactive: true
+                text_source: ref
+                font:
+                    fill: [0.50,0.50,0.50]
+                    size: [[16,9px],[17,12px],[20,14px]]
+                    #stroke: { color: [1.0,1.0,1.0], width: 4px }
+        later:
+            filter: { $zoom: { min: 19 } }
+            draw:
+                text-blend-order:
+                    font:
+                        weight: 600
 
 
     pois_and_landuse_labels:
