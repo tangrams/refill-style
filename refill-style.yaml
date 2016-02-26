@@ -626,14 +626,23 @@ styles:
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
                     color.rgb = vec3(random(abs(floor(pos)))+0.785);
 
+    pixel-pattern-bright:
+        mix: [space-tile, generative-random]
+        base: polygons
+        shaders:
+            blocks:
+                filter: |
+                    vec3 pos = vec3(getTileCoords()*180.0,1.0);
+                    color.rgb = vec3(random(abs(floor(pos)))+0.855);
+
     pixel-pattern-dark:
         mix: [space-tile, generative-random]
         base: polygons
         shaders:
             blocks:
                 filter: |
-                    vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    color.rgb = vec3(random(abs(floor(pos)))+0.635);
+                    vec3 pos = vec3(getTileCoords()*280.0,1.0);
+                    color.rgb = vec3(random(abs(floor(pos)))+0.695);
 
     waves:
         base: polygons
@@ -5790,18 +5799,19 @@ layers:
                     filter:
                         operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ]
                     draw:
-                        pixel-pattern-dark:
+                        polygons:
+                        pixel-pattern-bright:
                             color: *green7
                             visible: true
 
                 landuse-forest:
                     filter:
                         not: { operator: [ "United States Forest Service", "US Forest Service", "U.S. Forest Service", "USDA Forest Service" ] }
-                        $zoom: { min: 10 }
+                        $zoom: { min: 6 }
                     draw:
-                        medium-dots: 
+                        pixel-pattern-bright: 
                             color: [0.890,0.890,0.890]
-                            visible: false
+                            visible: true
 
             nature_reserve:
                 filter: { kind: nature_reserve, $zoom: { min: 7 } }
@@ -6071,6 +6081,15 @@ layers:
                 dots-rev:
                     order: function() { return feature.sort_key || 1; }
                     visible: false
+                pixel-pattern-light:
+                    order: function() { return feature.sort_key || 1; }
+                    visible: false
+                pixel-pattern-bright:
+                    order: function() { return feature.sort_key || 1; }
+                    visible: false
+                pixel-pattern-dark:
+                    order: function() { return feature.sort_key || 1; }
+                    visible: false
                 polygons:
                     order: function() { return feature.sort_key || 1; }
 
@@ -6098,7 +6117,8 @@ layers:
             filter:
                 kind: beach
             draw:
-                polygons:
+                # polygons:
+                pixel-pattern-dark:
                 # sand:
                     color: [0.980,0.980,0.980]
                     order: 4
