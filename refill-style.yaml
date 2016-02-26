@@ -3197,10 +3197,10 @@ layers:
                             priority: 15
                     capital:
                         filter: { capital: yes }
-                        text-blend-order:
+                        draw:
+                            text-blend-order:
                                 offset: [0, 3px] # half icon size
                                 priority: 14
-                        draw:
                             icons:
                                 size: 6px
                                 sprite: capital-m
