@@ -62,6 +62,9 @@ settings:
         - &highway_tunnel_casing1     [1.00, 1.00, 1.00]
         - &highway_link_tunnel_casing1 [1.00, 1.00, 1.00]
         - &ferry1                     [0.75,0.75,0.75]
+        - &rail1                      '#999'
+        - &rail1_e                    '#bbb'
+        - &rail2                      '#777'             # less important rail (service, sidings)
         - &major_road1                [0.0, 0.0, 0.0]
         - &major_road1b               [0.935, 0.935, 0.935]
         - &major_road1c               white    #15%
@@ -70,6 +73,7 @@ settings:
         - &major_road2b               [0.935, 0.935, 0.935]
         - &major_road3                [0.935, 0.935, 0.935]
         - &major_road4                [0.00, 0.00, 0.00]
+        - &major_road5                white
         - &major_casing1              [0.40, 0.40, 0.40]        # same as highway_casing1
         - &major_casing2              [0.40, 0.40, 0.40]        # zoomed out
         - &major_tunnel1              [0.7, 0.7, 0.7]
@@ -106,6 +110,9 @@ settings:
         - &country_boundary           '#ccc'
         - &region_boundary            '#ccc'
         - &subregion_boundary         '#ccc'
+        - &city_wall                  [0.682,0.682,0.682]
+        - &retaining_wall             [0.827,0.808,0.780]
+        - &snow_fence                 [0.827,0.808,0.780]
 
     areas:
         - &scene1      white                    # map background
