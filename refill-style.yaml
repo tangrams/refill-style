@@ -333,6 +333,9 @@ textures:
             winery: [456, 168, 38, 38]
             zoo: [966, 84, 38, 38]
 
+    building-grid:
+        url: images/building-grid.gif
+        filtering: mipmap
 
 sources:
     osm:
@@ -833,20 +836,10 @@ styles:
                 texture: building-grid
                 mapping: uv
         shaders:
-            defines:
-                WALL_TINT: vec3(1., 3., .800) # modifies roof color HSV
-            blocks:
+            blocks: 
                 filter: |
-                    vec2 st = v_texcoord.xy;
-                    vec2 f_st = fract(st*6.);
-                    vec2 i_st = floor(st*6.);
-                    // color.rg = f_st;
-                    
-                    vec2 pct = step(vec2(0.09),f_st);;
-                    color.rgb = mix(vec3(1.0), vec3(0.25),(0.5-(pct.x * pct.y)));
-                    
-                    if ( dot(vec3(0.,0.,1.),normal) == 1.0 ) {
-                        // If it's a roof
+                    // If it's a roof
+                    if (dot(vec3(0.,0.,1.), normal) == 1.0) {
                         color.rgb = vec3(0.988);
                     }
 
