@@ -1014,6 +1014,12 @@ layers:
             draw:
                 waves:
                     color: [0.880, 0.880, 0.880]
+        swimming_pool:
+            filter: { kind: swimming_pool }
+            draw:
+                waves:
+                    color: [0.880, 0.880, 0.880]
+                    order: 8
         water-boundary-ocean-early:
             filter: { boundary: yes, kind: ocean, $zoom: {min: 1, max: 17} }
             draw:
