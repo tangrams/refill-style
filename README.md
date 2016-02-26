@@ -48,7 +48,7 @@ Using Tangram and Mapzen's Vector tiles inside the popular [Leaflet](http://leaf
 
 ### Tangram resources
 
-1. [Procedural Cartography with Tangram](https://github.com/mapzen/presentations/tree/master/08-2015-JSGEO) Patricio's presentation notes from [JS.Geo](http://www.jsgeo.com) metope last month.
+1. [Procedural Cartography with Tangram](https://github.com/mapzen/presentations/tree/master/08-2015-JSGEO) Patricio's presentation notes from [JS.Geo](http://www.jsgeo.com).
 2. [Walkthrough: Make a map with Tangram](https://mapzen.com/documentation/tangram/walkthrough/) by Rhonda on Mapzen's documentation team.
 
 ### To run locally
