@@ -18,7 +18,7 @@ labels-global:
     - &text_visible_neighbourhoods    true
     - &text_visible_neighbourhoods_e  true
     - &text_visible_building          true
-    - &text_visible_address           true
+    - &text_visible_address           false
     - &label_visible_landuse_green    true
     - &icon_visible_landuse_green     false
     - &text_visible_landuse_green     true
@@ -30,20 +30,20 @@ labels-global:
     - &text_visible_poi_landuse_e     true
     - &label_visible_station          true
     - &icon_visible_station           false
-    - &text_visible_station           false
-    - &text_visible_water_labels      false
-    - &text_visible_highway           false
-    - &text_visible_highway_e         false
-    - &text_visible_trunk_primary     false
+    - &text_visible_station           true
+    - &text_visible_water_labels      true
+    - &text_visible_highway           true
+    - &text_visible_highway_e         true
+    - &text_visible_trunk_primary     true
     - &text_visible_trunk_primary_e   false
-    - &text_visible_secondary         false
+    - &text_visible_secondary         true
     - &text_visible_secondary_e       false
-    - &text_visible_tertiary          false
+    - &text_visible_tertiary          true
     - &text_visible_tertiary_e        false
-    - &text_visible_minor_road        false
-    - &text_visible_minor_road_e      false
-    - &text_visible_service_road      false
-    - &text_visible_path              false
+    - &text_visible_minor_road        true
+    - &text_visible_minor_road_e      true
+    - &text_visible_service_road      true
+    - &text_visible_path              true
     - &text_visible_steps             false
 
 
@@ -1325,7 +1325,7 @@ layers:
                         font:
                             fill: *text_fill
                             weight: 600
-                            size: 13px
+                            size: 11px
                             stroke: { color: [1.0,1.0,1.0,0.85], width: 4 }
             labels-highway-z15:
                 filter:
@@ -1334,10 +1334,10 @@ layers:
                     text-blend-order:
                         visible: *text_visible_highway
                         font:
-                            fill: *text_fill
+                            fill: [1.0,1.0,1.0]
                             weight: 600
-                            size: 15px
-                            stroke: { color: *text_stroke, width: 4 }
+                            size: 12px
+                            stroke: { color: [0.0,0.0,0.0], width: 3 }
             labels-highway-z16:
                 filter: { $zoom: { min: 16, max: 18 } }
                 draw:
@@ -1345,19 +1345,20 @@ layers:
                         priority: 50
                         visible: *text_visible_highway
                         font:
-                            fill: *text_fill
-                            size: 16px
-                            stroke: { color: *text_stroke, width: 4 }
-            labels-highway-z18:
-                filter: { $zoom: { min: 18 } }
+                            fill: [1.0,1.0,1.0]
+                            weight: 600
+                            size: 13px
+                            stroke: { color: [0.0,0.0,0.0], width: 3 }
+            labels-highway-z17:
+                filter: { $zoom: { min: 17 } }
                 draw:
                     text-blend-order:
                         priority: 50
                         visible: *text_visible_highway
                         font:
-                            fill: *text_fill
-                            size: 18px
-                            stroke: { color: *highway1, width: 4 }
+                            fill: [1.0,1.0,1.0]
+                            size: 15px
+                            stroke: { color: [0.0,0.0,0.0], width: 4 }
 
         major_road:
             filter: { kind: major_road }
@@ -1422,8 +1423,8 @@ layers:
                                 visible: *text_visible_trunk_primary
                                 text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
                                 font:
-                                    fill: [0.35,0.35,0.35]
-                                    size: 13px
+                                    fill: [0.15,0.15,0.15]
+                                    size: 11px
                                     stroke: { color: *text_stroke, width: 3 }
                     labels-trunk_primary-route-z15:
                         filter: { $zoom: [15] }
@@ -1433,9 +1434,9 @@ layers:
                                 visible: *text_visible_trunk_primary
                                 text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
                                 font:
-                                    fill: [0.15,0.15,0.15]
+                                    fill: [0.0,0.0,0.0]
                                     weight: 600
-                                    size: 15px
+                                    size: 12px
                                     stroke: { color: *text_stroke, width: 3 }
                     labels-trunk_primary-route-z16:
                         filter: { $zoom: { min: 16 } }
@@ -1447,7 +1448,7 @@ layers:
                                 font:
                                     fill: [0.15,0.15,0.15]
                                     weight: 600
-                                    size: 16px
+                                    size: 13px
                                     stroke: { color: *text_stroke, width: 3 }
                 labels-trunk_primary-z11:
                     filter:
@@ -1459,7 +1460,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 10px
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 3 }
                 labels-trunk_primary-z12:
                     filter:
@@ -1471,7 +1472,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 11px
+                                size: 10px
                                 stroke: { color: *text_stroke, width: 3 }
                 labels-trunk_primary-z13:
                     filter:
@@ -1483,7 +1484,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 12px
+                                size: 11px
                                 stroke: { color: *text_stroke, width: 3 }
                 labels-trunk_primary-z14:
                     filter:
@@ -1495,7 +1496,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 13px
+                                size: 11px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-trunk_primary-z15:
                     filter: { $zoom: [15] }
@@ -1506,7 +1507,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 14px
+                                size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-trunk_primary-z16:
                     filter: { $zoom: [16] }
@@ -1517,8 +1518,9 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 15px
-                                stroke: { color: *text_stroke, width: 4 }
+                                weight: 600
+                                size: 13px
+                                stroke: { color: [1.0,1.0,1.0,0.85], width: 4 }
                 labels-trunk_primary-z17:
                     filter: { $zoom: [17] }
                     draw:
@@ -1528,8 +1530,9 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 16px
-                                stroke: { color: *text_stroke, width: 4 }
+                                weight: 600
+                                size: 13px
+                                stroke: { color: *text_stroke, width: 6 }
                 labels-trunk_primary-z18:
                     filter: { $zoom: { min: 18 } }
                     draw:
@@ -1539,8 +1542,9 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
                             font:
                                 fill: *text_fill
-                                size: 17px
-                                stroke: { color: *text_stroke, width: 4 }
+                                weight: 600
+                                size: [[18,13px],[19,16px]]
+                                stroke: { color: *text_stroke, width: 6 }
             link:
                 filter: { is_link: yes } # on- and off-ramps, etc
                 draw:
@@ -1595,7 +1599,7 @@ layers:
                                 text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                                 font:
                                     fill: *text_fill
-                                    size: 12px
+                                    size: 11px
                                     stroke: { color: *text_stroke, width: 4 }
                     labels-secondary-routes-z15:
                         filter: { $zoom: { min: 15 } }
@@ -1607,7 +1611,19 @@ layers:
                                 font:
                                     fill: *text_fill
                                     weight: 600
-                                    size: 14px
+                                    size: 11px
+                                    stroke: { color: *text_stroke, width: 4 }
+                    labels-secondary-routes-z16:
+                        filter: { $zoom: { min: 16 } }
+                        draw:
+                            text-blend-order:
+                                priority: 54
+                                visible: *text_visible_secondary_e
+                                text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                                font:
+                                    fill: *text_fill
+                                    weight: 600
+                                    size: 12px
                                     stroke: { color: *text_stroke, width: 4 }
                 in_park:
                     filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
@@ -1652,7 +1668,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 11px
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-secondary-z14:
                     filter:
@@ -1664,7 +1680,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 12px
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-secondary-z15:
                     filter:
@@ -1676,7 +1692,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 13px
+                                size: 10px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-secondary-z16:
                     filter: { $zoom: { min: 16, max: 18 } }
@@ -1687,10 +1703,10 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 14.5px
+                                size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
-                labels-secondary-z18:
-                    filter: { $zoom: { min: 18 } }
+                labels-secondary-z17:
+                    filter: { $zoom: { min: 17 } }
                     draw:
                         text-blend-order:
                             priority: 54
@@ -1700,7 +1716,7 @@ layers:
                             font:
                                 # need a fill color here?
                                 fill: *text_fill
-                                size: 16px
+                                size: 13px
                                 stroke: { color: *text_stroke, width: 4 }
             tertiary:
                 filter: { highway: [tertiary, tertiary_link] }
@@ -1779,7 +1795,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 10px
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-tertiary-z14:
                     filter: { $zoom: [14] }
@@ -1790,7 +1806,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 12px
+                                size: 9px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-tertiary-z15:
                     filter: { $zoom: [15] }
@@ -1801,7 +1817,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 12px
+                                size: 10px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-tertiary-z16:
                     filter: { $zoom: [16] }
@@ -1812,7 +1828,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 14px
+                                size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-tertiary-z17:
                     filter: { $zoom: { min: 17, max: 18 } }
@@ -1823,7 +1839,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: [0.15,0.15,0.15]
-                                size: 15px
+                                size: 13px
                                 stroke: { color: *text_stroke, width: 4 }
                 labels-tertiary-z18:
                     filter: { $zoom: { min: 18 } }
@@ -1834,7 +1850,7 @@ layers:
                             text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
                             font:
                                 fill: *text_fill
-                                size: 15px
+                                size: 13px
                                 stroke: { color: *text_stroke, width: 4 }
         minor_road:
             filter: { kind: minor_road, not: { highway: service, aeroway: [runway, taxiway] } }
@@ -1934,8 +1950,8 @@ layers:
                         visible: *text_visible_minor_road_e
                         text_source: name
                         font:
-                            fill: [0.15,0.15,0.15]
-                            size: 12px
+                            fill: [0.45,0.45,0.45]
+                            size: 10px
                             stroke: { color: *text_stroke, width: 4 }
             labels-minor_road-z16:
                 filter: { $zoom: 16 }
@@ -1946,7 +1962,7 @@ layers:
                         text_source: name
                         font:
                             fill: [0.15,0.15,0.15]
-                            size: 14px
+                            size: 12px
                             stroke: { color: *text_stroke, width: 4 }
             labels-minor_road-z17:
                 filter: { $zoom: { min: 17, max: 18 } }
@@ -1957,7 +1973,7 @@ layers:
                         text_source: name
                         font:
                             fill: [0.15,0.15,0.15]
-                            size: 14px
+                            size: 12px
                             stroke: { color: *text_stroke, width: 4 }
             labels-minor_road-z18:
                 filter: { $zoom: { min: 18 } }
@@ -1969,7 +1985,7 @@ layers:
                         font:
                             # needs a fill color?
                             fill: *text_fill
-                            size: 15px
+                            size: 13px
                             stroke: { color: *text_stroke, width: 4 }
         service_road:
             filter: { kind: minor_road, highway: service }
@@ -2048,7 +2064,7 @@ layers:
                         font:
                             # need fill color?
                             fill: [0.25,0.25,0.25]
-                            size: 13px
+                            size: 12px
                             stroke: { color: *text_stroke, width: 4 }
             labels-service_road-z18:
                 filter: { $zoom: { min: 18 } }
@@ -2060,7 +2076,7 @@ layers:
                         font:
                             # need fill color?
                             fill: [0.15,0.15,0.15]
-                            size: 14px
+                            size: 13px
                             stroke: { color: *text_stroke, width: 4 }
         path:
             filter: { kind: path, not: { highway: [steps,track], man_made: [pier] } }
@@ -2608,21 +2624,21 @@ layers:
                 order: 7
                 # visible: *text_visible_building
                 font:
-                    fill: [0.350,0.350,0.350]
+                    fill: [0.300,0.300,0.300]
                     family: *text_font_family
                     style: italic
                     size: 11px
                     stroke: { color: *building2, width: 4 }
         # Hack for no text wrap in Tangram
-        building_labels-z15-z16-z17:
-            filter: { $zoom: [15,16,17] }
-            draw: { text-blend-order: { font: { size: 10px, stroke: { width: 3 } } } }
-        building_labels-z18:
-            filter: { $zoom: [18,19] }
-            draw: { text-blend-order: { font: { size: 12px, stroke: { width: 3 } } } }
-        building_labels-z20-up:
-            filter: { $zoom: { min: 20 } }
-            draw: { text-blend-order: { font: { size: 14px, stroke: { width: 3 }  } } }
+        building_labels-z15-z16:
+            filter: { $zoom: [15,16] }
+            draw: { text-blend-order: { font: { size: 9px, stroke: { width: 3 } } } }
+        building_labels-z17-z18:
+            filter: { $zoom: [17,18] }
+            draw: { text-blend-order: { font: { size: 11px, stroke: { width: 3 } } } }
+        building_labels-z19-up:
+            filter: { $zoom: [19,20] }
+            draw: { text-blend-order: { font: { size: 12px, stroke: { width: 3 }  } } }
         building-labels-z16:
             filter: function() { if( $zoom == 16 && feature.name.length > 20 ) { return true; } else { return false; } }
             draw:
@@ -4387,9 +4403,9 @@ layers:
                         font:
                             size: 9px
                             weight: 400
-                            fill: *text_fill
+                            fill: [0.600,0.600,0.600]
                             transform: uppercase
-                            stroke: { color: *text_stroke, width: 4 }
+                            stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
             neighborhood-z12:
                 filter:
                     all:
@@ -4437,9 +4453,9 @@ layers:
                         font:
                             size: 12px
                             weight: 300
-                            fill: [0.500,0.500,0.500]
+                            fill: [0.620,0.620,0.620]
                             transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
+                            stroke: { color: [1.0,1.0,1.0,0.7], width: 6 }
             neighborhood-z14:
                 filter:
                     all:
@@ -4462,9 +4478,9 @@ layers:
                         font:
                             size: 16px
                             weight: 200
-                            fill: [0.500,0.500,0.500]
+                            fill: [0.600,0.600,0.600]
                             transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.5], width: 4 }
+                            stroke: { color: [1.0,1.0,1.0,0.7], width: 6 }
             neighborhood-z15:
                 filter:
                     all:
@@ -4487,9 +4503,9 @@ layers:
                         font:
                             size: 21px
                             weight: 200
-                            fill: [0.000,0.000,0.000,0.500]
+                            fill: [0.650,0.650,0.650]
                             transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.5], width: 3 }
+                            stroke: { color: [1.0,1.0,1.0,0.6], width: 8 }
                 z15-new:
                     filter: 
                         all:
@@ -4520,9 +4536,9 @@ layers:
                         font:
                             size: 24px
                             weight: 300
-                            fill: [0.000,0.000,0.000,0.500]
+                            fill: [0.00,0.00,0.00,0.50]
                             transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.25], width: 6 }
+                            stroke: { color: [1.0,1.0,1.0,0.85], width: 4 }
 
     highway-exit:
         data: { source: osm, layer: [pois] }
@@ -4715,7 +4731,7 @@ layers:
                             visible: *text_visible_landuse_green
                             priority: 42
                             font:
-                                fill: *text_fill_park
+                                fill: [0.350,0.350,0.350]
                                 style: italic
                                 stroke: { color: *text_stroke_park, width: 4 }
                     natl-park-labels-z4-z5:
@@ -4731,11 +4747,11 @@ layers:
                     natl-park-labels-z7:
                         filter: { $zoom: [7] }
                         draw:
-                            text-blend-order: { font: { size: 10px, stroke: { width: 2px }, fill: [0.30,0.30,0.30] } }
+                            text-blend-order: { font: { size: 10px, stroke: { width: 2px }, fill: [0.350,0.350,0.350] } }
                     natl-park-labels-z8:
                         filter: { $zoom: [8,9] }
                         draw:
-                            text-blend-order: { font: { size: 11px, stroke: { width: 2px }, fill: [0.175,0.175,0.175] } }
+                            text-blend-order: { font: { size: 11px, stroke: { width: 2px }, fill: [0.350,0.350,0.350] } }
                     natl-park-labels-z10:
                         filter: { $zoom: {min: 10, max: 14 } }
                         draw:
@@ -4772,26 +4788,29 @@ layers:
                             visible: *text_visible_landuse_green
                             priority: 42
                             font:
-                                fill: *text_fill_park
-#                                size: 12px
-#                                weight: 400
+                                fill: [0.350,0.350,0.350]
+                                size: 10px
                                 style: italic
-                                stroke: { color: *text_stroke_park, width: 4 }
+                                stroke: { color: *text_stroke_park, width: 3 }
                     green-areas-z6:
                         # mojave national preserve
                         filter: { $zoom: [6] }
                         draw:
                             icons: { visible: false }
-                            text-blend-order: { font: { size: 9px, stroke: { width: 2px }, fill: [0.40,0.40,0.40] } }
+                            text-blend-order: { font: { size: 10px, stroke: { width: 2px }, fill: [0.40,0.40,0.40] } }
                     green-areas-z7:
                         filter: { $zoom: [7] }
                         draw:
                             icons: { visible: false }
-                            text-blend-order: { font: { size: 10px, stroke: { width: 2px }, fill: [0.30,0.30,0.30] } }
-                    green-areas-z8-z9:
-                        filter: { $zoom: { min: 8, max: 14 } }
+                            text-blend-order: { font: { size: 10px, stroke: { width: 2px }, fill: [0.350,0.350,0.350] } }
+                    green-areas-z17-up:
+                        filter: { $zoom: { min: 17 } }
                         draw:
-                            text-blend-order: { font: { size: 11px }, stroke: { width: 2px }, fill: [0.175,0.175,0.175] }
+                            text-blend-order:
+                                font:
+                                    size: 11px
+                                    stroke: { color: [1.0,1.0,1.0], width: 4 }
+
                     wilderness-areas-early:
                        filter: function() { return $zoom < 10 && feature.name && (feature.name.indexOf("Wilderness") > -1 || feature.name.indexOf("BLM") > -1) }
                        draw:
@@ -4885,7 +4904,7 @@ layers:
                         text_source: function() { if(feature.iata) { return feature.name + ' (' + feature.iata + ')'; } else { return feature.name; } }
                         font:
                             fill: *text_fill
-                            #size: 11px
+                            size: 10px
                             stroke: { color: *text_stroke, width: 4 }
                 early:
                     filter: { $zoom: [9,10,11] }
@@ -4959,7 +4978,7 @@ layers:
                         visible: *text_visible_landuse_green
                         font:
                             fill: *text_fill
-                            size: 12px
+                            size: 10px
                             stroke: { color: *text_stroke, width: 4 }
                 early:
                     filter: { $zoom: { max: 14 } }
@@ -4987,7 +5006,7 @@ layers:
                         visible: *text_visible_landuse_green
                         font:
                             fill: *text_fill
-                            size: 12px
+                            size: 10px
                             stroke: { color: *text_stroke, width: 4 }
                     icons:
                         sprite: ski-area
@@ -5027,12 +5046,18 @@ layers:
                         visible: *text_visible_poi_landuse
                         priority: 44
                         font:
-                            fill: [0.350,0.350,0.350]
+                            fill: [0.50,0.50,0.50]
+                            weight: 600
                             size: 10px
-                            stroke: { color: *text_stroke, width: 4 }
-                early-sizing:
-                    filter: { $zoom: { max: 14 } }
-                    draw: { text-blend-order: { size: 11px } }
+                            stroke: { color: [1.0,1.0,1.0,0.85], width: 3 }
+                landuse-z17:
+                    filter: { $zoom: { min: 17 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                size: 11px
+                                fill: [0.50,0.50,0.50]
+                                stroke: { color: [1.0,1.0,1.0], width: 4 }
                 # building-like:
                 #     filter: { kind: [commercial,residential,warehouse,public,dormitory], osm_relation: false }
                 #     draw:
@@ -5167,27 +5192,32 @@ layers:
                         visible: *text_visible_station
                         offset: [[13, [0, 6px]], [14, [0, 7px]],[15, [0, 8px]], [17, [0, 10px]]]
                         priority: 42
+                        font:
+                            weight: 600
+                            fill: [0.20,0.20,0.20]
+                            size: 10px
+                            stroke: { color: *text_stroke, width: 4 }
                 low-priority-early:
-                    filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                    filter: { $zoom: { min: 0, max: 14 } }
                     draw:
                         icons:
                             visible: false
                             #size: [[12, 10px], [14, 10px], [15, 16px]]
                         text-blend-order: { visible: false }
-                low-priority-early-z13:
-                    filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
-                    draw:
-                        icons:
-                            visible: false
-                            #size: [[12, 10px], [14, 10px], [15, 16px]]
-                        text-blend-order: { visible: false } 
                 low-priority-early-z14:
-                    filter: { kind_tile_rank: { min: 7 }, $zoom: { min: 14, max: 15 } }
+                    filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                     draw:
                         icons:
                             size: [[12, 10px], [14, 11px], [15, 16px]]
                             #visible: false
                         text-blend-order: { visible: false }
+                stations-later:
+                    filter: { $zoom: { min: 17 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                size: 12px
+                                fill: [0.0,0.0,0.0]
             tram-stop-early:
                 filter: { kind: tram_stop, $zoom: { max: 15 } }
                 draw:
@@ -5777,7 +5807,7 @@ layers:
                     family: *text_font_family
                     style: italic
                     weight: 400
-                    size: 12px
+                    size: 9px
                     stroke: { color: *text_stroke_water, width: 3 }
         # debug only
 #        icons:
@@ -5801,7 +5831,7 @@ layers:
                     style: italic
                     weight: 400
                     size: 12px
-                    stroke: { color: *text_stroke_water, width: 3 }
+                    # stroke: { color: *text_stroke_water, width: 3 }
         water-line-labels-z14:
             filter: { $zoom: [14] }
             draw:
