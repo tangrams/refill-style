@@ -44,7 +44,7 @@ labels-global:
     - &text_visible_minor_road_e      true
     - &text_visible_service_road      true
     - &text_visible_path              true
-    - &text_visible_steps             false
+    - &text_visible_steps             true
 
 
 settings:
@@ -1357,8 +1357,31 @@ layers:
                         visible: *text_visible_highway
                         font:
                             fill: [1.0,1.0,1.0]
+                            weight: 600
                             size: 15px
                             stroke: { color: [0.0,0.0,0.0], width: 4 }
+            labels-highway-z18:
+                filter: { $zoom: { min: 18 } }
+                draw:
+                    text-blend-order:
+                        priority: 50
+                        visible: *text_visible_highway
+                        font:
+                            fill: [1.0,1.0,1.0]
+                            weight: 600
+                            size: 16px
+                            stroke: { color: [0.0,0.0,0.0], width: 4 }
+            labels-highway-z19:
+                filter: { $zoom: { min: 19 } }
+                draw:
+                    text-blend-order:
+                        priority: 50
+                        visible: *text_visible_highway
+                        font:
+                            fill: [0.0,0.0,0.0]
+                            weight: 600
+                            size: 16px
+                            stroke: { color: [1.0,1.0,1.0], width: 4 }
 
         major_road:
             filter: { kind: major_road }
@@ -1446,10 +1469,34 @@ layers:
                                 visible: *text_visible_trunk_primary
                                 text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
                                 font:
-                                    fill: [0.15,0.15,0.15]
+                                    fill: [0.0,0.0,0.0]
                                     weight: 600
                                     size: 13px
-                                    stroke: { color: *text_stroke, width: 3 }
+                                    stroke: { color: *text_stroke, width: 4 }
+                    labels-trunk_primary-route-z17-z18:
+                        filter: { $zoom: [17,18] }
+                        draw:
+                            text-blend-order:
+                                priority: 53
+                                visible: *text_visible_trunk_primary
+                                text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
+                                font:
+                                    fill: [0.0,0.0,0.0]
+                                    weight: 600
+                                    size: 13px
+                                    stroke: { color: *text_stroke, width: 6 }
+                    labels-trunk_primary-route-z19:
+                        filter: { $zoom: { min: 19 } }
+                        draw:
+                            text-blend-order:
+                                priority: 53
+                                visible: *text_visible_trunk_primary
+                                text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
+                                font:
+                                    fill: [0.0,0.0,0.0]
+                                    weight: 600
+                                    size: 16px
+                                    stroke: { color: *text_stroke, width: 6 }
                 labels-trunk_primary-z11:
                     filter:
                         $zoom: [11]
@@ -2258,8 +2305,8 @@ layers:
                         visible: *text_visible_steps
                         text_source: name
                         font:
-                            fill: *text_fill
-                            size: 12px
+                            fill: [0.45,0.45,0.45]
+                            size: 11px
                             stroke: { color: *text_stroke, width: 4 }
         winter_sport_pistes:
             filter: { kind: piste }
@@ -2409,7 +2456,7 @@ layers:
                         text_source: name
                         font:
                             fill: *text_fill
-                            size: 12px
+                            size: 10px
                             stroke: { color: *text_stroke_park, width: 4 }
                 minor:
                     filter: { not: { aerialway: [gondola,cable_car,chair_lift] }, $zoom: { max: 17 } }
