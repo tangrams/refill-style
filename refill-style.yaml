@@ -18,7 +18,7 @@ labels-global:
     - &text_visible_neighbourhoods    true
     - &text_visible_neighbourhoods_e  true
     - &text_visible_building          true
-    - &text_visible_address           false
+    - &text_visible_address           true
     - &label_visible_landuse_green    true
     - &icon_visible_landuse_green     false
     - &text_visible_landuse_green     true
@@ -947,7 +947,7 @@ layers:
                 order: 5
                 color: [0.880, 0.880, 0.880]
         later:
-            filter: { $zoom: { min: 14 } }
+            filter: { $zoom: { min: 12 } }
             draw:
                 waves2:
                     color: [0.780, 0.780, 0.780]
@@ -2718,7 +2718,7 @@ layers:
                     fill: *text_fill_address
                     family: *text_font_family
                     style: italic
-                    size: 12px
+                    size: 11px
                     stroke: { color: *text_stroke_address, width: 4 }
 
     boundaries:
