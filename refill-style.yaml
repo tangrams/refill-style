@@ -2435,18 +2435,18 @@ layers:
                     lines:
                         color: [0.5,0.5,0.5]
                         width: [[12, 0.5px], [13, 0.5px], [14, 0.6px], [15, 1px], [16, 2px]]
-                    lines_transparent:
-                        color: [0.5,0.5,0.5]
-                        width: [[12, 0px], [13, 5px], [14, 8px], [15, 10px], [16, 12px]]
+#                    lines_transparent:
+#                        color: [0.5,0.5,0.5]
+#                        width: [[12, 0px], [13, 5px], [14, 8px], [15, 10px], [16, 12px]]
             chair_lift:
                 filter: { aerialway: chair_lift }
                 draw:
                     lines:
                         color: [0.5,0.5,0.5]
                         width: [[12, 0.5px], [13, 0.5px], [14, 0.6px], [15, 1px], [16, 1px], [16, 2px], [18, 3m]]
-                    lines_transparent:
-                        color: [0.5,0.5,0.5]
-                        width: [[12, 0px], [13, 5px], [14, 8px], [15, 10px], [16, 12px], [18, 20px]]
+#                    lines_transparent:
+#                        color: [0.5,0.5,0.5]
+#                        width: [[12, 0px], [13, 5px], [14, 8px], [15, 10px], [16, 12px], [18, 20px]]
             aerialway-labels:
                 filter: { $zoom: { min: 14 } }
                 draw:
