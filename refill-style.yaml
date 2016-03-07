@@ -2748,11 +2748,12 @@ layers:
                     color: [1.0,1.0,1.0]
                     width: [[0, 0px], [5, 0px], [6, 1px], [7, 1px], [9, 1px]]
             water:
-                filter: { maritime: yes }
+                filter: { maritime_boundary: yes }
                 draw:
+                    country-outerline:
+                        visible: false
                     lines:
-                        order: 9
-                        color: blue
+                        visible: false
 
         region:
             filter: 
