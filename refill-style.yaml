@@ -4013,6 +4013,7 @@ layers:
                                 stroke: { color: *text_stroke, width: 4 }
                         icons:
                             size: 6px
+                            visible: *icon_visible_populated_places
                             sprite: townspot-m-rev
                             priority: 7
 
