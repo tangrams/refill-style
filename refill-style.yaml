@@ -196,14 +196,13 @@ settings:
         - &text_fill2  '#000'                       # WHITE
         - &text_fill_road_e   '#555'                # WHITE
         - &text_fill_exits    [0.40,0.40,0.40]      # motorway junctions, highway_casing1
-        - &text_fill_building '#ccc'                # WHITE
+        - &text_fill_building '#000'                # tan
         - &text_fill_address  [0.60,0.60,0.60]      # HUH
         - &text_fill_water   '#000'                 # blue
         - &text_fill_park    [0.175,0.175,0.175]    # green
         - &text_fill_beach    [0.35,0.35,0.35]      # black
         - &text_fill_piste   [0.675,0.675,0.675]    # dark gray
         - &text_fill_piste_e [0.675,0.675,0.675]    # dark gray early
-        - &text_fill_building '#000'                # tan
         - &text_stroke '#fff'                       # land color
         - &text_stroke_park '#fff'                  # land color
         - &text_stroke_water '#fff'
