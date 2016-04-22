@@ -51,6 +51,7 @@ labels-global:
     - &text_visible_shields           true
     - &text_visible_exits             true
     - &text_visible_exits_e           false
+    - &text_visible_airport_gate      true
 
 settings:
     cameras:             
@@ -376,6 +377,49 @@ sources:
         # url:  http://vector.mapzen.com/osm/all/{z}/{x}/{y}.mvt
         max_zoom: 16
 
+    # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
+    # These are all in San Francisco, California
+    # 
+    # Current location gem
+    mz_current_location:
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/9e9588228b0a604264a2/raw/b28be49bea0b7feb859eb65b588c28e9fee5ae2c/map.geojson
+    # Route line
+    mz_route_line:
+        type: GeoJSON
+        # sf to ny
+        url: https://gist.githubusercontent.com/anonymous/30c6c1a75c168d91d90c/raw/92bfe55e622766d250b1f2f5d17bdc7c26acb956/map.geojson
+        # local sf trip
+        # url: https://gist.githubusercontent.com/anonymous/9a610ebda6fe4be7bccc/raw/8d217e43f2412d48d01534ba115f1e42dac72e68/map.geojson
+    # Pin at start of route
+    mz_route_start:
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/5262969cb7549ea69221/raw/be03f233fa323d9b5cf50ef1d8e89a1faa3750f1/map.geojson
+    # Pin at end of route
+    mz_route_stop:
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/dbae9635dfe46796490e/raw/df55c318635a7d91b309ed40754d4738a292fd38/map.geojson
+    # Arrow for current route location
+    mz_route_location::
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/36613092be6e2aa004fd/raw/f753d13069425199e1dea1b449ef67d723f6510e/map.geojson
+    # Pins showing search result locations
+    mz_search_result:
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/57dc09eeb120919f76de/raw/43426217da3c2bae0522dc4257aaa61e4df3981e/map.geojson
+    # Default point styling (SDK)
+    mz_default_point:
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/16324c771edfce45be0721390389b878/raw/7dbaebf17da7da8562e6c6f8768bc8cff83efa88/map.geojson
+    # Default line styling (SDK)
+    mz_default_line:
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/26f4e8b6b34b2617b5d5533d89decb39/raw/df8e180ab4f7f19448014dccc4a755f7cfa20003/map.geojson
+    # Default polygon styling (SDK)
+    mz_default_polygon:
+        type: GeoJSON
+        url: https://gist.githubusercontent.com/anonymous/88235c795bb44b8c45150bdd5561f947/raw/71d4fab97b6513833bf1a589167119e6169ef86d/map.geojson
+    
 cameras:
     isometric:
         type: isometric
@@ -911,7 +955,15 @@ styles:
         base: lines
         mix: scale-buildings
         texcoords: true
-
+    lines_transparent:
+        base: lines
+        blend: overlay
+    outline_transparent:
+        base: lines
+        blend: overlay
+    polygons_transparent:
+        base: polygons
+        blend: overlay
     icons:
         base: points
         texture: pois
@@ -935,22 +987,36 @@ styles:
         interactive: true
         blend: overlay
         blend_order: 3
+    sdk-point-overlay:
+        base: points
+        texture: pois
+        interactive: true
+        blend: overlay
+        blend_order: 3
+    sdk-line-overlay:
+        base: lines
+        blend: overlay
+        blend_order: 0
+    sdk-polygon-overlay:
+        base: polygons
+        blend: overlay
+        blend_order: 0
 
 scene:
     background:
         color: *scene1
 
 layers:
-    # Map overlays for styling the server response (using special source layer names) for route line, find_me location gem, and search result pins
-    route:
-        data: { source: route }
+    # Map overlays for styling the server response (using special source layer names) for route line, current location, and search result pins
+    mz_route_line:
+        data: { source: mz_route_line }
         draw:
             ui-lines-overlay:
                 color: '#06a6d4'
                 order: 500
                 width: [[0,3.5px],[5,5px],[9,7px],[10,6px],[11,6px],[13,8px],[14,9px],[15,10px],[16,11px],[17,12px],[18,10px]]
-    current_location_gem:
-        data: { source: find_me }
+    mz_current_location_gem:
+        data: { source: mz_current_location }
         draw:
             ui-location-gem-overlay:
                 interactive: true
@@ -960,8 +1026,8 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
-    route_icon:
-        data: { source: route_icon }
+    mz_route_location:
+        data: { source: mz_route_location }
         draw:
             ui-location-gem-overlay:
                 interactive: true
@@ -971,8 +1037,8 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
-    route_start:
-        data: { source: route_start }
+    mz_route_start:
+        data: { source: mz_route_start }
         draw:
             ui-icons-overlay:
                 interactive: true
@@ -984,8 +1050,8 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
-    route_stop:
-        data: { source: route_stop }
+    mz_route_stop:
+        data: { source: mz_route_stop }
         draw:
             ui-icons-overlay:
                 interactive: true
@@ -997,8 +1063,8 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
-    search:
-        data: { source: search }
+    mz_search_result:
+        data: { source: mz_search_result }
         draw:
             ui-icons-overlay:
                 interactive: true
@@ -1014,8 +1080,8 @@ layers:
             draw:
                 ui-icons-overlay:
                     sprite: search-inactive
-    reverse_geocode:
-        data: { source: reverse_geocode }
+    mz_dropped_pin:
+        data: { source: mz_dropped_pin }
         draw:
             ui-icons-overlay:
                 interactive: true
@@ -1026,6 +1092,38 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
+                        
+    # Used by the SDK to place point, line, and polygon overlays on the map
+    mz_default_point:
+        data: { source: mz_default_point }
+        draw:
+            sdk-point-overlay:
+                interactive: true
+                sprite: search-active
+                size: [36px,54px]
+                collide: false
+                anchor: top
+                transition:
+                    [show, hide]:
+                        time: 0s
+    mz_default_line:
+        data: { source: mz_default_line }
+        draw:
+            sdk-line-overlay:
+                color: '#06a6d4'
+                order: 503
+                width: 3px
+    mz_default_polygon:
+        data: { source: mz_default_polygon }
+        draw:
+            sdk-polygon-overlay:
+                color: [0.02,0.65,0.82,0.5]  #'#06b1e2'
+                order: 501
+            sdk-line-overlay:
+                color: '#06a6d4'
+                order: 502
+                width: 0px
+
 
     # Basemap styling
     earth:
@@ -4718,7 +4816,7 @@ layers:
             icons:
                 visible: false
             text-blend-order:
-                visible: true
+                visible: *text_visible_exits
                 interactive: true
                 text_source: ref
                 priority: 52
@@ -4739,7 +4837,7 @@ layers:
             icons:
                 visible: false
             text-blend-order:
-                visible: true
+                visible: *text_visible_airport_gate
                 interactive: true
                 text_source: ref
                 font:
