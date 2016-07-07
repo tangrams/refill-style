@@ -396,7 +396,7 @@ sources:
     #     type: GeoJSON
     #     url: https://gist.githubusercontent.com/anonymous/5262969cb7549ea69221/raw/be03f233fa323d9b5cf50ef1d8e89a1faa3750f1/map.geojson
     # # Pin at end of route
-    # mz_route_stop:
+    # mz_route_destination:
     #     type: GeoJSON
     #     url: https://gist.githubusercontent.com/anonymous/dbae9635dfe46796490e/raw/df55c318635a7d91b309ed40754d4738a292fd38/map.geojson
     # # Arrow for current route location
@@ -1050,8 +1050,8 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
-    mz_route_stop:
-        data: { source: mz_route_stop }
+    mz_route_destination:
+        data: { source: mz_route_destination }
         draw:
             ui-icons-overlay:
                 interactive: true
