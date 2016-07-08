@@ -259,7 +259,6 @@ textures:
             college-university: [870, 168, 38, 38]
             convenience-store: [46, 84, 38, 38]
             courthouse: [364, 0, 38, 38]
-            current-location: [80, 342, 88, 88]
             department-store: [734, 126, 38, 38]
             drinking-water: [230, 210, 38, 38]
             dry-cleaning: [0, 84, 38, 38]
@@ -320,14 +319,9 @@ textures:
             recycling-facility: [92, 42, 38, 38]
             rental-car: [594, 0, 38, 38]
             restaurant: [92, 210, 38, 38]
-            route-arrow: [776, 210, 128, 128]
-            route-start: [0, 342, 72, 92]
-            route-stop: [912, 210, 72, 92]
             ruin: [502, 0, 38, 38]
             salon-barber: [46, 42, 38, 38]
             school: [552, 84, 38, 38]
-            search-active: [174, 342, 72, 108]
-            search-inactive: [254, 342, 72, 108]
             shoe-store: [552, 42, 38, 38]
             ski-area: [368, 126, 38, 38]
             soccer-field: [368, 84, 38, 38]
@@ -361,6 +355,17 @@ textures:
             wine-bar: [184, 210, 38, 38]
             winery: [456, 168, 38, 38]
             zoo: [966, 84, 38, 38]
+            #
+            # UX/UI icons for map interactivity & app chrome
+            #
+            ux-current-location: [80, 342, 88, 88]
+            ux-route-arrow: [776, 210, 128, 128]
+            ux-route-start: [0, 342, 72, 92]
+            ux-route-stop: [912, 210, 72, 92]
+            ux-search-active: [174, 342, 72, 108]
+            ux-search-inactive: [254, 342, 72, 108]
+            # ux-transit-stop is currently reusing capital-xl artwork, please customize
+            ux-transit-stop: [538, 210, 20, 20]
 
     building-grid:
         url: images/building-grid.gif
@@ -391,6 +396,10 @@ sources:
     #     url: https://gist.githubusercontent.com/anonymous/30c6c1a75c168d91d90c/raw/92bfe55e622766d250b1f2f5d17bdc7c26acb956/map.geojson
     #     # local sf trip
     #     # url: https://gist.githubusercontent.com/anonymous/9a610ebda6fe4be7bccc/raw/8d217e43f2412d48d01534ba115f1e42dac72e68/map.geojson
+    #  # Transit route line
+    #  mz_route_line_transit:
+    #     type: GeoJSON
+    #     url: https://gist.githubusercontent.com/anonymous/71ae88cbc6d62c4d141ecd6a61060050/raw/2254bbc18243f5dc609e663a580c9412a7447936/map.geojson
     # # Pin at start of route
     # mz_route_start:
     #     type: GeoJSON
@@ -403,6 +412,10 @@ sources:
     # mz_route_location::
     #     type: GeoJSON
     #     url: https://gist.githubusercontent.com/anonymous/36613092be6e2aa004fd/raw/f753d13069425199e1dea1b449ef67d723f6510e/map.geojson
+    # # Dots for transit stops in route preview
+    # mz_route_transit_stop:
+    #     type: GeoJSON
+    #     url: https://gist.githubusercontent.com/anonymous/b9f16bca4a804f50faf71277d52ee4ab/raw/db13e4e765fa1ac8844b8ba02f4a0f66fe772907/map.geojson
     # # Pins showing search result locations
     # mz_search_result:
     #     type: GeoJSON
@@ -971,17 +984,21 @@ styles:
     text-blend-order:
         base: text
         blend_order: 1
-    ui-lines-overlay:
+    ux-lines-overlay:
         base: lines
         blend: overlay
         blend_order: 0
-    ui-location-gem-overlay:
+    ux-transit-line-overlay:
+        base: lines
+        blend: overlay
+        blend_order: 0
+    ux-location-gem-overlay:
         base: points
         texture: pois
         interactive: true
         blend: overlay
         blend_order: 2
-    ui-icons-overlay:
+    ux-icons-overlay:
         base: points
         texture: pois
         interactive: true
@@ -1011,16 +1028,26 @@ layers:
     mz_route_line:
         data: { source: mz_route_line }
         draw:
-            ui-lines-overlay:
+            ux-lines-overlay:
                 color: '#06a6d4'
+                order: 500
+                width: [[0,3.5px],[5,5px],[9,7px],[10,6px],[11,6px],[13,8px],[14,9px],[15,10px],[16,11px],[17,12px],[18,10px]]
+    mz_route_line_transit:
+        data: { source: mz_route_line_transit }
+        draw:
+            ux-transit-line-overlay:
+                # each transit route segment could be a different "line" each with it's own color
+                # but some transit lines don't define a color, in those cases default to blue
+                # and since the color is coming from Transit.land they call it "color" instead of "colour"
+                color: function() { return feature.color || '#06a6d4'; }
                 order: 500
                 width: [[0,3.5px],[5,5px],[9,7px],[10,6px],[11,6px],[13,8px],[14,9px],[15,10px],[16,11px],[17,12px],[18,10px]]
     mz_current_location_gem:
         data: { source: mz_current_location }
         draw:
-            ui-location-gem-overlay:
+            ux-location-gem-overlay:
                 interactive: true
-                sprite: current-location
+                sprite: ux-current-location
                 size: 36px
                 collide: false
                 transition:
@@ -1029,9 +1056,9 @@ layers:
     mz_route_location:
         data: { source: mz_route_location }
         draw:
-            ui-location-gem-overlay:
+            ux-location-gem-overlay:
                 interactive: true
-                sprite: route-arrow
+                sprite: ux-route-arrow
                 size: [60px,60px]
                 collide: false
                 transition:
@@ -1040,10 +1067,10 @@ layers:
     mz_route_start:
         data: { source: mz_route_start }
         draw:
-            ui-icons-overlay:
+            ux-icons-overlay:
                 interactive: true
                 priority: 1
-                sprite: route-start
+                sprite: ux-route-start
                 size: [36px,46px]
                 collide: false
                 anchor: top
@@ -1053,22 +1080,33 @@ layers:
     mz_route_destination:
         data: { source: mz_route_destination }
         draw:
-            ui-icons-overlay:
+            ux-icons-overlay:
                 interactive: true
                 priority: 1
-                sprite: route-stop
+                sprite: ux-route-stop
                 size: [36px,46px]
                 collide: false
                 anchor: top
                 transition:
                     [show, hide]:
                         time: 0s
+    mz_route_transit_stop:
+        data: { source: mz_route_transit_stop }
+        draw:
+            ux-icons-overlay:
+                interactive: true
+                sprite: ux-transit-stop
+                size: [15px,15px]
+                collide: false
+                transition:
+                     [show, hide]:
+                         time: 0s
     mz_search_result:
         data: { source: mz_search_result }
         draw:
-            ui-icons-overlay:
+            ux-icons-overlay:
                 interactive: true
-                sprite: search-active
+                sprite: ux-search-active
                 size: [36px,54px]
                 collide: false
                 anchor: top
@@ -1078,14 +1116,14 @@ layers:
         inactive:
             filter: { state: inactive }
             draw:
-                ui-icons-overlay:
-                    sprite: search-inactive
+                ux-icons-overlay:
+                    sprite: ux-search-inactive
     mz_dropped_pin:
         data: { source: mz_dropped_pin }
         draw:
-            ui-icons-overlay:
+            ux-icons-overlay:
                 interactive: true
-                sprite: search-active
+                sprite: ux-search-active
                 size: [36px,54px]
                 collide: false
                 anchor: top
@@ -1099,7 +1137,7 @@ layers:
         draw:
             sdk-point-overlay:
                 interactive: true
-                sprite: search-active
+                sprite: ux-search-active
                 size: [36px,54px]
                 collide: false
                 anchor: top
