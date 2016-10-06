@@ -1,14 +1,14 @@
-﻿# Refill provides a high contrast, black & white basemap useful for data visualization. 
-# Give OpenStreetMap data a professional basemap skin using the Tangram graphics library 
-# and Mapzen's versatile Vector Tiles. 
+﻿# Refill provides a high contrast, black & white basemap useful for data visualization.
+# Give OpenStreetMap data a professional basemap skin using the Tangram graphics library
+# and Mapzen's versatile Vector Tiles.
 #
-# Refill is a modern GL take on Geraldine's work on Toner for Stamen as part of their 
-# great CityTracking project. Please use and adapt the open source scene file in  
+# Refill is a modern GL take on Geraldine's work on Toner for Stamen as part of their
+# great CityTracking project. Please use and adapt the open source scene file in
 # your own projects!
 #
 # Authors: Geraldine Sarmiento, Nathaniel V. Kelso
 # Read more: https://github.com/tangrams/refill-style
-# 
+#
 
 labels-global:
     - &text_visible_continent         true
@@ -54,7 +54,7 @@ labels-global:
     - &text_visible_airport_gate      true
 
 settings:
-    cameras:             
+    cameras:
         - &camera_settings            { type: isometric, axis: [0, .1], vanishing_point: [0, -500] }
 
     lights:
@@ -380,7 +380,7 @@ sources:
 
     # # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
     # # These are all in San Francisco, California
-    # # 
+    # #
     # # Current location gem
     # mz_current_location:
     #     type: GeoJSON
@@ -420,14 +420,14 @@ sources:
     # mz_default_polygon:
     #     type: GeoJSON
     #     url: https://gist.githubusercontent.com/anonymous/88235c795bb44b8c45150bdd5561f947/raw/71d4fab97b6513833bf1a589167119e6169ef86d/map.geojson
-    
+
 cameras:
     isometric:
         type: isometric
 
 styles:
 
-##### LIBRARY OF FUNCTIONS 
+##### LIBRARY OF FUNCTIONS
 #    SPACE functions
     space-tile:
         shaders:
@@ -490,7 +490,7 @@ styles:
         shaders:
             blocks:
                 global: |
-                    // Mirror the coordinate space 
+                    // Mirror the coordinate space
                     // ================================
                     vec2 mirror(vec2 _st, vec2 _zoom){
                         _st *= _zoom;
@@ -499,7 +499,7 @@ styles:
                             _st.y = 1.0 - _st.y;
                         }
                         return fract(_st);
-                    }             
+                    }
 #    Usefull functions
     functions-aastep:
         shaders:
@@ -515,7 +515,7 @@ styles:
                                 return smoothstep(threshold-afwidth, threshold+afwidth, value);
                             #else
                                 return step(threshold, value);
-                            #endif  
+                            #endif
                         #else
                             return step(threshold, value);
                         #endif
@@ -585,18 +585,18 @@ styles:
                         //st.x *= aspect;
                         return length(max(abs(st)-size,.0));
                     }
-                    
+
                     // Draw a round corners rectangle in the center
                     // ================================
                     float rect(vec2 st, vec2 size, float radio) {
                         radio = max(.000001, radio);
                         return 1.0-step(radio, rectDF(st, size-radio));
                     }
-                    
+
                     float rect(vec2 st, float size, float radio) {
                         return rect(st,vec2(size),radio);
                     }
-                    
+
                     // Draw a rectangle in the center
                     // ================================
                     float rect(vec2 st, vec2 size){
@@ -604,7 +604,7 @@ styles:
                         vec2 uv = step(size,st*(1.0-st));
                         return (uv.x*uv.y);
                     }
-                    
+
                     float rect(vec2 st, float size){
                         return rect(st,vec2(size));
                     }
@@ -620,12 +620,12 @@ styles:
                     float stripesDF (vec2 st) {
                         return abs(sin(st.y*PI));
                     }
-                    
+
                     // Adjustable width stripes
                     float stripes (vec2 st, float width) {
                         return aastep(width,stripesDF(st));
                     }
-                    
+
                     // Faster optimisation of diagonal stripes
                     float diagonalStripes (vec2 st) {
                         vec2 i_st = floor(st);
@@ -639,7 +639,7 @@ styles:
     patterns-dots:
         mix: [space-tile, tiling-brick, shapes-circle]
         shaders:
-            blocks: 
+            blocks:
                 global: |
                     // Interpolated dot patern between zooms attached to tile coords
                     float TileDots(float scale, float size) {
@@ -680,13 +680,13 @@ styles:
                 color: |
                     vec2 st = v_texcoord;
                     vec4 foreground = vec4(0.850,0.850,0.850,1.0);
-                    color = mix(v_color, foreground, stripes(st));    
+                    color = mix(v_color, foreground, stripes(st));
     water-gradient:
         base: polygons
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(vec3(1.0), vec3(0.970), gl_FragCoord.x / u_resolution.x + gl_FragCoord.y / u_resolution.y); 
+                    color.rgb = mix(vec3(1.0), vec3(0.970), gl_FragCoord.x / u_resolution.x + gl_FragCoord.y / u_resolution.y);
 
     pixel-pattern-light:
         mix: [space-tile, generative-random]
@@ -766,7 +766,7 @@ styles:
                         return mat2(cos(angle),-sin(angle),
                                     sin(angle),cos(angle));
                     }
-                    
+
                     float stripes(vec2 st){
                         st = rotate2d(3.14159265358*-0.25 )*st;
                         //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
@@ -774,8 +774,8 @@ styles:
                     }
                 color: |
                     vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
-                    
+                    color = mix(vec4(color.rgb, 0.4), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
+
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]
         base: polygons
@@ -784,7 +784,7 @@ styles:
                 PATTERN_SCALE: 50.0
                 DOT_SIZE: .1
                 COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb  
+                COLOR2: color.rgb
             blocks:
                 color: |
                     vec2 st = getTileCoords();
@@ -829,7 +829,7 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb                
+                COLOR2: color.rgb
 
     park-dots3:
         mix: dots
@@ -1085,7 +1085,7 @@ layers:
                 transition:
                     [show, hide]:
                         time: 0s
-                        
+
     # Used by the SDK to place point, line, and polygon overlays on the map
     mz_default_point:
         data: { source: mz_default_point }
@@ -1141,7 +1141,7 @@ layers:
                     order: function() { return feature.sort_rank + 1; }
 
         lakes:
-            filter: 
+            filter:
                 all:
                     - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
                 any:
@@ -1243,13 +1243,13 @@ layers:
         railway:
             filter: { kind: [railway,train] }
             draw:
-                lines: 
+                lines:
                     color: [0.70,0.70,0.70]
                     width: [[14,0.5px],[16,1px],[18,1px]]
         subway:
             filter: { kind: subway }
             draw:
-                lines: 
+                lines:
                     color: [0.70,0.70,0.70]
                     width: [[14,0.5px],[16,1px],[18,1px]]
         light_rail:
@@ -2344,10 +2344,10 @@ layers:
                             size: 13px
                             stroke: { color: *text_stroke, width: 4 }
         path:
-            filter: 
+            filter:
                 all:
                     - kind: path
-                not: 
+                not:
                     - kind_detail: [steps, track, pier]
             draw:
                 lines:
@@ -2496,7 +2496,7 @@ layers:
                             color: [0.790,0.790,0.790]
                             width: [[14, 0.0px], [15, 0.35px], [16, 0.45px], [17, 0.85px], [18, 1px]]
         steps:
-            filter: 
+            filter:
                 all:
                     - kind: path
                     - kind_detail: steps
@@ -2556,12 +2556,12 @@ layers:
                         fill: *text_fill_piste
                         size: 12px
                         # stroke: { color: *grey8, width: 4 }
-            early: 
+            early:
                 filter: { $zoom: { max: 15 } }
                 draw:
                     text-blend-order:
                         visible: false
-            early-z15: 
+            early-z15:
                 filter: { $zoom: [15] }
                 draw:
                     text-blend-order:
@@ -2580,14 +2580,14 @@ layers:
                         color: [0.975,0.975,0.975]
             advanced:
                 filter: { piste_difficulty: advanced }
-                draw: 
+                draw:
                     lines:
                         color: [0.975,0.975,0.975]
                     text-blend-order:
                         text_source: function() { if( feature.name ){ return '◆ ' + feature.name; } else { return '◆'; } }
             expert:
                 filter: { piste_difficulty: expert }
-                draw: 
+                draw:
                     lines:
                         color: [0.975,0.975,0.975]
                     text-blend-order:
@@ -3226,7 +3226,7 @@ layers:
                         font: { transform: uppercase }
 
         populated-places:
-            filter: 
+            filter:
                 kind: locality
                 name: true
             draw:
@@ -3654,7 +3654,7 @@ layers:
                                 size: 5px
                                 sprite: capital-s
                                 priority: 17
-                                    
+
             populated-places-natural-earth-z8-backfill:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [8], population: { max: 50000 } }
                 draw: { text-blend-order: { font: { fill: *text_fill } } }
@@ -3756,7 +3756,7 @@ layers:
                                 size: 14px
                                 fill: *text_fill
                                 stroke: { color: *text_stroke, width: 4 }
-                                    
+
                 z9places-2b:
                     filter:
                         any:
@@ -4518,7 +4518,7 @@ layers:
                                 size: 12px
                                 stroke: { color: *text_stroke, width: 4 }
         neighbourhoods:
-            filter: 
+            filter:
                 kind: [macrohood, neighbourhood]
             neighborhood-z11:
                 filter:
@@ -4616,7 +4616,7 @@ layers:
                             transform: uppercase
                             stroke: { color: [1.0,1.0,1.0,0.6], width: 8 }
                 z15-new:
-                    filter: 
+                    filter:
                         all:
                             - min_zoom: 15
                     draw:
@@ -4688,7 +4688,7 @@ layers:
     pois_and_landuse_labels:
         data: { source: osm, layer: [pois,landuse,buildings] }
         visible: *label_visible_poi_landuse
-        filter: 
+        filter:
             not: { kind: [building,farm,tree,gate,address,apron] }
             any:
                 - area: false
@@ -4728,7 +4728,7 @@ layers:
             filter: { $zoom: { min: 20 } }
             draw: { icons: { text: { font: { size: 14px, weight: 600, stroke: { width: 3 } } } } }
 
-# 
+#
 # HERE BEGINS "no label" version, commment it all out for no labels for POIS
 #
 
@@ -4784,14 +4784,14 @@ layers:
                 filter: { kind: [parking], $zoom: { min: 17 } }
                 draw:   { icons: { sprite: parking, visible: *icon_visible_poi_landuse_e } }
 
-# 
+#
 # HERE ENDS FIRST "no label" version, commment it all out for no labels for POIS
 #
 
         has-name:
             filter: { name: true }
 
-# 
+#
 # HERE BEGINS 2nd "no label" version, commment it all out for no labels for POIS
 #
 
@@ -4822,7 +4822,7 @@ layers:
                             visible: *text_visible_poi_landuse
                             priority: 48
 
-# 
+#
 # HERE ENDS 2nd "no label" version, commment it all out for no labels for POIS
 #
 
@@ -4868,12 +4868,12 @@ layers:
                     natl-park-labels-z6:
                         filter: { $zoom: [6] }
                         draw:
-                            icons: 
+                            icons:
                                 text: { font: { size: 9px, stroke: { width: 2px }, fill: [0.40,0.40,0.40] } }
                     natl-park-labels-z7:
                         filter: { $zoom: [7] }
                         draw:
-                            icons: 
+                            icons:
                                 text: { font: { size: 10px, stroke: { width: 2px }, fill: [0.350,0.350,0.350] } }
                     natl-park-labels-z8:
                         filter: { $zoom: [8,9] }
@@ -4924,7 +4924,7 @@ layers:
                         # mojave national preserve
                         filter: { $zoom: [6] }
                         draw:
-                            icons: 
+                            icons:
                                 visible: false
                                 text: { font: { size: 10px, stroke: { width: 2px }, fill: [0.40,0.40,0.40] } }
                     green-areas-z7:
@@ -5214,7 +5214,7 @@ layers:
                 landuse-z17:
                     filter: { $zoom: { min: 17 } }
                     draw:
-                        icons: 
+                        icons:
                             text:
                                 font:
                                     size: 11px
@@ -5228,7 +5228,7 @@ layers:
                 residential-relations-paris-wtf-early:
                     filter: { kind: [residential], osm_relation: true, $zoom: { max: 13 } }
                     draw:
-                        icons: 
+                        icons:
                             visible: false
                             text: { visible: false }
                 residential-relations-paris-wtf:
@@ -5236,7 +5236,7 @@ layers:
                     draw:
                         icons:
                             visible: false
-                            text: 
+                            text:
                                 visible: true
                                 text_source: short_name
                 hide-till-later:
@@ -5348,7 +5348,7 @@ layers:
             landuse-funky:
                 filter: { kind: [commercial, residential, wood], $zoom: { max: 17 } }
                 draw:
-                    icons: 
+                    icons:
                         text:
                             visible: false
             car-sharing:
@@ -5361,7 +5361,7 @@ layers:
                 text-labels-early:
                     filter: { $zoom: { max: 19 } }
                     draw:
-                        icons: 
+                        icons:
                             text:
                                 visible: false
             tower:
@@ -5401,7 +5401,7 @@ layers:
                         icons:
                             visible: false
                             #size: [[12, 10px], [14, 10px], [15, 16px]]
-                            text: { visible: false } 
+                            text: { visible: false }
                 low-priority-early-z14:
                     filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                     draw:
@@ -5448,10 +5448,10 @@ layers:
                                 size: 11px
                                 stroke: { color: *text_stroke, width: 4 }
 
-# 
+#
 # HERE BEGINS CONTINUES "no label" version, commment it all out for no labels for POIS
 #
- 
+
                 bus_stop:
                     filter:
                         kind: [bus_stop]
@@ -5477,7 +5477,7 @@ layers:
                 draw:
                     text-blend-order:  { visible: false }
                     icons: { visible: false }
- 
+
             icons:
                 adult-boutique:
                     filter: { kind: [erotic, adult_boutique] }
@@ -5880,11 +5880,11 @@ layers:
                     filter: { kind: [ski, ski_rental, ski_school, ski_jumping, skiing] }
                     draw:   { icons: { sprite: ski-area } }
 
-# 
+#
 # HERE ENDS CONTINUATION OF "no label" version, commment it all out for no labels for POIS
 #
 
- 
+
     # todo: ocean and sea features are hiding in the places layer
     water-area-labels:
         data: { source: osm, layer: [water] }
@@ -6174,7 +6174,7 @@ layers:
             #         - { $zoom: { min: 15 }, area: { min: 20000 } }
             #         - { $zoom: { min: 15 }, area: { min: 2000 } }
             #         - { $zoom: { min: 16 } }
-            
+
             # effectively wilderness
             conservation:
                 filter:
@@ -6238,12 +6238,12 @@ layers:
                     polygons:
                         color: [1.00,1.00,1.00]
                         visible: *green4_v
-            
+
             # TODO, make a ligher forest pattern color
             #forest:
             #    filter: { kind: [forest, wood, natural_wood, natural_forest, natural_park], $zoom: { min: 10 }, not: { operator: [ "United States Forest Service"] } }
             #    draw:
-            #        pixel-pattern-bright: 
+            #        pixel-pattern-bright:
             #            #color: [0.890,0.890,0.890]
             #            visible: true
 
@@ -6544,7 +6544,7 @@ layers:
                 - enclosure
                 - petting_zoo
                 - aviary
-        draw: 
+        draw:
             dots:
                 order: function() { return feature.sort_rank; }
                 visible: false
