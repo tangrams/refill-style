@@ -187,8 +187,8 @@ global:
     text_visible_highway:           true
     text_visible_highway_e:         true
     text_visible_trunk_primary:     true
-    text_visible_trunk_primary_e2:  false
-    text_visible_trunk_primary_e:   false
+    text_visible_trunk_primary_e2:  true    # the routes
+    text_visible_trunk_primary_e:   false   # the not-routes
     text_visible_secondary:         true
     text_visible_secondary_e:       false
     text_visible_tertiary:          true
@@ -1814,7 +1814,7 @@ layers:
                                     color: [[13, [1.00,1.00,1.00]], [15, [1.00,1.00,1.00]], [16, [0.85,0.85,0.85]]]
                                     width: [[8,2px], [16,1.5px], [17, 3px], [18, 3px]]
                     labels-trunk_primary-route-z14:
-                        filter: { $zoom: [14] }
+                        filter: { $zoom: [13,14] }
                         draw:
                             text-blend-order:
                                 priority: 53
