@@ -367,7 +367,7 @@ textures:
         filtering: mipmap
 
 sources:
-    osm:
+    mapzen:
         type: TopoJSON #GeoJSON, MVT, TopoJSON
         # url:  https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-W2tPU-Y
         url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-W2tPU-Y
@@ -1120,14 +1120,14 @@ layers:
 
     # Basemap styling
     earth:
-        data: { source: osm, layer: earth }
+        data: { source: mapzen, layer: earth }
         draw:
             polygons:
                 order: function() { return feature.sort_rank; }
                 color: [1.0,1.0,1.0]
 
     water:
-        data: { source: osm, layer: water }
+        data: { source: mapzen, layer: water }
         draw:
             waves:
                 interactive: true
@@ -1234,7 +1234,7 @@ layers:
                     cap: round
 
     subway-light-rail:
-        data: { source: osm, layer: transit }
+        data: { source: mapzen, layer: transit }
         filter: { not: { kind: [platform] }, $zoom: { min: 14 } }
         draw:
             lines:
@@ -1261,7 +1261,7 @@ layers:
                     width: [[14,0px],[15,0.6px],[16,1px],[17,1px]]
 
     railway-late:
-        data: { source: osm, layer: roads }
+        data: { source: mapzen, layer: roads }
         filter: { kind: rail, not: { railway: [subway,light_rail,tram] } }
         draw:
             lines:
@@ -1287,7 +1287,7 @@ layers:
                     color: [0.70,0.70,0.70]
                     width: [[14,0px],[15,0.5px],[16,0.75px],[17,1px],[18,1px]]
     # platforms:
-    #     data: { source: osm, layer: transit }
+    #     data: { source: mapzen, layer: transit }
     #     filter: { kind: platform }
     #     draw:
     #         lines_transparent:
@@ -1315,7 +1315,7 @@ layers:
     #                 order: function() { if($zoom<17) { return 11; } else { return 101; } }
 
     roads:
-        data: { source: osm, layer: roads }
+        data: { source: mapzen, layer: roads }
         filter: { not: { kind: rail } }
         draw:
             lines:
@@ -2705,7 +2705,7 @@ layers:
                                 weight: 600
 
     buildings:
-        data: { source: osm, layer: buildings }
+        data: { source: mapzen, layer: buildings }
         filter:
             not: { location: underground }
        # set default footprint and extrusion draw properties, but don't draw by default (rules below will turn visibility on)
@@ -2827,7 +2827,7 @@ layers:
                     color: [1.0,1.0,1.0]
 
     building-labels:
-        data: { source: osm, layer: buildings }
+        data: { source: mapzen, layer: buildings }
         filter:
             all:
                 - { $zoom: { min: 16 } }
@@ -2885,7 +2885,7 @@ layers:
                 text-blend-order:
                     text_source: function() { if( feature.addr_housenumber ) { return feature.name + '\n' + feature.addr_housenumber; } else { return feature.name; } }
     address-labels:
-        data: { source: osm, layer: buildings }
+        data: { source: mapzen, layer: buildings }
         filter:
             $zoom: { min: 20 }
             any:
@@ -2905,7 +2905,7 @@ layers:
                     stroke: { color: *text_stroke_address, width: 4 }
 
     boundaries:
-        data: { source: osm, layer: boundaries }
+        data: { source: mapzen, layer: boundaries }
         # country subdivisions (states, provinces)
         draw:
             lines:
@@ -2995,7 +2995,7 @@ layers:
                     width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 1m]]
 
     places:
-        data: { source: osm, layer: places }
+        data: { source: mapzen, layer: places }
         filter: { not: { kind: [ocean, sea] } }
         draw:
             text-blend-order:
@@ -3657,7 +3657,7 @@ layers:
 
             populated-places-natural-earth-z8-backfill:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [8], population: { max: 50000 } }
-                draw: { text-blend-order: { font: { fill: *text_fill } } }
+                draw: { icons: { text: { font: { fill: *text_fill } } } }
                 z8places-1-ne:
                     filter: { min_zoom: [2,3] }
                     draw:
@@ -3879,7 +3879,7 @@ layers:
 
             populated-places-natural-earth-z9-backfill:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [9], population: { max: 50000 } }
-                draw: { text-blend-order: { font: { fill: *text_fill } } }
+                draw: { icons: { text: { font: { fill: *text_fill } } } }
                 z9places-1-ne:
                     filter: { min_zoom: [2,3] }
                     draw:
@@ -4053,7 +4053,7 @@ layers:
 
             populated-places-natural-earth-z10-backfill:
                 filter: { name: true, source: naturalearthdata.com, $zoom: [10], population: { max: 20000 } }
-                draw: { text-blend-order: { font: { fill: *text_fill } } }
+                draw: { icons: { text: { font: { fill: *text_fill } } } }
                 z10places-1-ne:
                     filter: { min_zoom: [2,3] }
                     draw:
@@ -4643,53 +4643,11 @@ layers:
                             transform: uppercase
                             stroke: { color: [1.0,1.0,1.0,0.85], width: 4 }
 
-    highway-exit:
-        data: { source: osm, layer: [pois] }
-        filter: { kind: motorway_junction, $zoom: { min: 14 } }
-        draw:
-            icons:
-                visible: false
-            text-blend-order:
-                visible: *text_visible_exits
-                interactive: true
-                text_source: ref
-                priority: 52
-                font:
-                    fill: [1.0,1.0,1.0] # *text_fill_exits
-                    size: [[12,9px],[15,10px],[17,12px]]
-                    stroke: { color: [0.25,0.25,0.25], width: [[14,3px],[15,4px]] }
-        later:
-            filter: { $zoom: { min: 16 } }
-            draw:
-                text-blend-order:
-                    font:
-                        weight: 600
-    airport-gate:
-        data: { source: osm, layer: [pois] }
-        filter: { kind: aeroway_gate }
-        draw:
-            icons:
-                visible: false
-            text-blend-order:
-                visible: *text_visible_airport_gate
-                interactive: true
-                text_source: ref
-                font:
-                    fill: [0.50,0.50,0.50]
-                    size: [[16,9px],[17,12px],[20,14px]]
-                    #stroke: { color: [1.0,1.0,1.0], width: 4px }
-        later:
-            filter: { $zoom: { min: 19 } }
-            draw:
-                text-blend-order:
-                    font:
-                        weight: 600
-
     pois_and_landuse_labels:
-        data: { source: osm, layer: [pois,landuse,buildings] }
+        data: { source: mapzen, layer: [pois] }
         visible: *label_visible_poi_landuse
         filter:
-            not: { kind: [building,farm,tree,gate,address,apron] }
+            not: { kind: [farm,tree,gate,address,apron] }
             any:
                 - area: false
                   all:
@@ -4715,9 +4673,12 @@ layers:
                         fill: [0.350,0.350,0.350]
                         size: 8px
                         stroke: { color: *text_stroke, width: 3 }
+        poi_labels-z12-z13:
+            filter: { $zoom: [12,13] }
+            draw: { icons: { text: { font: { size: 10px } } } }
         poi_labels-z14:
             filter: { $zoom: [14] }
-            draw: { icons: { text: { font: { size: 11px } } } }
+            draw: { icons: { text: { font: { size: 10.5px } } } }
         poi_labels-z15:
             filter: { $zoom: [15,16,17] }
             draw: { icons: { text: { font: { size: 12px, stroke: { width: 2 } } } } }
@@ -4734,31 +4695,46 @@ layers:
 
         no-name:
             filter: { name: false }
-            sports-pitch:
-                filter: { kind: [grass, pitch], $geometry: point, area: true, $zoom: { min: 17 } }
+
+            highway-exit:
+                filter: { kind: motorway_junction, $zoom: { min: 14 } }
                 draw:
                     icons:
-                        sprite: function() { return feature.kind_detail }
-                        visible: *icon_visible_poi_landuse_e
-                        priority: 49
-                baseball:
-                    filter: { kind_detail: baseball }
-                    draw: { icons: { sprite: baseball-field } }
-                basketball:
-                    filter: { kind_detail: basketball }
-                    draw: { icons: { sprite: basketball-court } }
-                football:
-                    filter: { kind_detail: football }
-                    draw: { icons: { sprite: football-stadium } }
-                hockey:
-                    filter: { kind_detail: hockey-field }
-                    draw: { icons: { sprite: hockey-field } }
-                soccer:
-                    filter: { kind_detail: soccer }
-                    draw: { icons: { sprite: soccer-field } }
-                tennis:
-                    filter: { kind_detail: tennis }
-                    draw: { icons: { sprite: tennis } }
+                        visible: false
+                    text-blend-order:
+                        visible: *text_visible_exits
+                        interactive: true
+                        text_source: ref
+                        priority: 52
+                        font:
+                            fill: [1.0,1.0,1.0] # *text_fill_exits
+                            size: [[12,9px],[15,10px],[17,12px]]
+                            stroke: { color: [0.25,0.25,0.25], width: [[14,3px],[15,4px]] }
+                later:
+                    filter: { $zoom: { min: 16 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                weight: 600
+            airport-gate:
+                filter: { kind: aeroway_gate }
+                draw:
+                    icons:
+                        visible: false
+                    text-blend-order:
+                        visible: *text_visible_airport_gate
+                        interactive: true
+                        text_source: ref
+                        font:
+                            fill: [0.50,0.50,0.50]
+                            size: [[16,9px],[17,12px],[20,14px]]
+                            #stroke: { color: [1.0,1.0,1.0], width: 4px }
+                later:
+                    filter: { $zoom: { min: 19 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                weight: 600
             toilets:
                 filter: { kind: toilets, $zoom: { min: 18 }  }
                 draw: { icons: { sprite: toilets, visible: *icon_visible_poi_landuse_e } }
@@ -4783,6 +4759,38 @@ layers:
             car-parking:
                 filter: { kind: [parking], $zoom: { min: 17 } }
                 draw:   { icons: { sprite: parking, visible: *icon_visible_poi_landuse_e } }
+
+        sports-pitch:
+            filter: { kind: [grass, pitch] }
+            draw:
+                icons:
+                    sprite: function() { return feature.kind_detail }
+                    visible: *icon_visible_poi_landuse_e
+                    priority: 49
+            early:
+                filter: { $zoom: { max: 17 } }
+                draw:
+                    icons:
+                        visible: false
+            baseball:
+                filter: { kind_detail: baseball }
+                draw: { icons: { sprite: baseball-field } }
+            basketball:
+                filter: { kind_detail: basketball }
+                draw: { icons: { sprite: basketball-court } }
+            football:
+                filter: { kind_detail: football }
+                draw: { icons: { sprite: football-stadium } }
+            hockey:
+                filter: { kind_detail: hockey-field }
+                draw: { icons: { sprite: hockey-field } }
+            soccer:
+                filter: { kind_detail: soccer }
+                draw: { icons: { sprite: soccer-field } }
+            tennis:
+                filter: { kind_detail: tennis }
+                draw: { icons: { sprite: tennis } }
+
 
 #
 # HERE ENDS FIRST "no label" version, commment it all out for no labels for POIS
@@ -4891,7 +4899,7 @@ layers:
                     all:
                         - area: true
                         - $geometry: point
-                        - kind: [park, national_park, "park or protected land",conservation, protected_area, nature_reserve, forest, grass]
+                        - kind: [park, conservation, protected_area, nature_reserve, forest, grass]
                     any:
                         # show labels for smaller landuse areas at higher zooms
                         - { $zoom: [5],    area: { min: 10000000000 } }
@@ -4965,6 +4973,11 @@ layers:
                                 icons:
                                     visible: false
                                     text: { visible: false }
+                    forest-icon:
+                        filter: { kind: forest }
+                        draw:
+                            icons:
+                                sprite: forest
                     forest:
                         filter: function() { return $zoom < 8 && ((feature.name && feature.name.indexOf("Forest") > -1) || feature.protect_class >=6) }
                         draw:
@@ -5053,7 +5066,6 @@ layers:
                         - kind: [university, college]
                         - area: true
                         - $geometry: point
-                        - not: { $layer: buildings }
                     any:
                         # show labels for smaller landuse areas at higher zooms
                         - { $zoom: [9],   area: { min: 10000000 } }
@@ -5079,11 +5091,8 @@ layers:
                                 fill: [0.350,0.350,0.350]
                                 size: 10px
                                 stroke: { color: *text_stroke, width: 4 }
-                early:
-                    filter: { $zoom: { max: 12 } }
-                    draw: { icons: { text: { visible: false } } }
                 early2:
-                    filter: { $zoom: { min: 12, max: 14 } }
+                    filter: { $zoom: { max: 14 } }
                     draw: { icons: { text: { size: 11px } } }
             school:
                 filter:
@@ -5100,7 +5109,7 @@ layers:
                         - { $zoom: [15], area: { min: 10000 } }
                         - { $zoom: [16], area: { min: 5000 } }
                         - { $zoom: [17], area: { min: 2000 } }
-                        - { $zoom: { min: 18 } }
+                        - { $zoom: { min: 18 }, area: true }
                 draw:
                     icons:
                         sprite: school
@@ -5172,7 +5181,7 @@ layers:
                             visible: *text_visible_poi_landuse
                             font:
                                 fill: *text_fill
-                                size: 12px
+                                size: 10.5px
                                 stroke: { color: *text_stroke, width: 4 }
                 early-sizing:
                     filter: { $zoom: { max: 14 } }
@@ -5257,6 +5266,20 @@ layers:
                         icons:
                             visible: false
                             text: { visible: false }
+                garden-area-early:
+                   filter:
+                       all:
+                           - kind: [garden, allotments]
+                       any:
+                           # limit show smaller landuse areas to higher zooms
+                           - { $zoom: [12], area: { max: 500000 } }
+                           - { $zoom: [13], area: { max: 100000 } }
+                           - { $zoom: [14], area: { max: 10000 } }
+                           - { $zoom: [15], area: { max: 5000 } }
+                   draw:
+                       icons:
+                           visible: false
+
             university-poi:
                 filter: { kind: [university, college], area: false, $zoom: { max: 16 } }
                 draw:
@@ -5278,6 +5301,25 @@ layers:
                     icons:
                         visible: false
                         text: { visible: false }
+            garden-no-area-early2:
+                filter: { kind: [garden, allotments], $zoom: { max: 16 }, area: false }
+                draw:
+                    icons:
+                        visible: false
+            garden-no-area-early:
+                filter: { kind: [garden, allotments], $zoom: [16], area: false }
+                draw:
+                    icons:
+                        priority: 45
+                        size: 14px
+                        text:  { font: { size: 10px, style: italic } }
+            garden-no-area-later:
+                filter: { kind: [garden, allotments], $zoom: { min: 17 }, area: false }
+                draw:
+                    icons:
+                        priority: 45
+                        size: 16px
+                        text:  { font: { size: 11px, style: italic } }
             post-office-early:
                 filter: { kind: [post_office], $zoom: { max: 14 } }
                 draw:
@@ -5459,15 +5501,14 @@ layers:
                     draw:
                         icons:
                             size: [[13, 8px], [19, 18px]]
-                        text-blend-order:
-                            visible: false
+                            text:
+                                visible: false
             minor-z17-early:
                 filter:
                     kind: [accountant, administrative, advertising_agency, architect, association, atm, bakery, bed_and_breakfast, bicycle, bicycle_parking, bicycle_rental, books, bus_stop, bus_stop, butcher, car, car_repair, chalet, clothes, company, computer, consulting, convenience, doityourself, drinking_water, dry_cleaning, educational_institution, emergency_phone, employment_agency, estate_agent, fashion, financial, florist, foundation, gate, gift, government, greengrocer, guest_house, hairdresser, hostel, hotel, insurance, it, jewelry, lawyer, mast, memorial, mobile_phone, motel, newspaper, ngo, notary, optician, parking, pet, physician, playground, political_party, post_box, religion, research, slipway, subway_entrance, tax_advisor, telecommunication, telephone, theatre, therapist, toilets, traffic_signals, travel_agent, water_tower]
                     area: false
                     $zoom: { max: 17 }
                 draw:
-                    text-blend-order:  { visible: false }
                     icons: { visible: false }
             minor-z18-early:
                 filter:
@@ -5475,7 +5516,6 @@ layers:
                     area: false
                     $zoom: { max: 18 }
                 draw:
-                    text-blend-order:  { visible: false }
                     icons: { visible: false }
 
             icons:
@@ -5545,8 +5585,6 @@ layers:
                                 - { $zoom: [16], area: { max: 5000 } }
                                 - { $zoom: [17], area: { max: 1000 } }
                         draw:
-                            text-blend-order:
-                                visible: false
                             icons:
                                 visible: false
                 burger:
@@ -5887,7 +5925,7 @@ layers:
 
     # todo: ocean and sea features are hiding in the places layer
     water-area-labels:
-        data: { source: osm, layer: [water] }
+        data: { source: mapzen, layer: [water] }
         visible: *text_visible_water_labels
         filter:
             all:
@@ -5935,7 +5973,7 @@ layers:
                 text-blend-order: { font: { size: 12px } }
 
     ocean-sea-labels:
-        data: { source: osm, layer: water }
+        data: { source: mapzen, layer: water }
         visible: *text_visible_water_labels
         filter: { name: true, kind: [sea, ocean] }
         draw:
@@ -6011,7 +6049,7 @@ layers:
                         text-blend-order: { font: { size: 14px } }
 
     playa-labels:
-        data: { source: osm, layer: [water] }
+        data: { source: mapzen, layer: [water] }
         visible: *text_visible_water_labels
         filter:
             all:
@@ -6049,7 +6087,7 @@ layers:
 #            sprite: *townspot_sprite
 
     water-line-labels:
-        data: { source: osm, layer: [water] }
+        data: { source: mapzen, layer: [water] }
         filter:
             all:
                 - name: true
@@ -6085,7 +6123,7 @@ layers:
                     visible: false
 
     landuse:
-        data: { source: osm }
+        data: { source: mapzen }
         draw:
             park-dots1:
                 order: function() { return feature.sort_rank; }
@@ -6526,7 +6564,7 @@ layers:
                         visible: true
 
     landuse-not-filtered:
-        data: { source: osm, layer: landuse }
+        data: { source: mapzen, layer: landuse }
         # runways and taxiways are also in the roads layer as lines
         # these ones are probably duplicate features, but have AREA (a good thing)
         filter:
@@ -6595,7 +6633,7 @@ layers:
                     visible: true
 
     # landuse_urban_area-early:
-    #     data: { source: osm, layer: landuse }
+    #     data: { source: mapzen, layer: landuse }
     #     filter:
     #         # This is from Natural Earth and only shows up from zoom(0,9)
     #         kind: ['urban area']
@@ -6605,7 +6643,7 @@ layers:
     #             color: [[4, [1.000,0.510,0.894]], [6, [1.000,0.510,0.894]], [7, [0.882,0.639,0.827]], [8, [0.757,0.729,0.753]]]
 
     debug:
-        data: { source: osm }
+        data: { source: mapzen }
         draw:
             flat_lines:
                 width: 2px
