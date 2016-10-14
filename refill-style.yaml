@@ -187,12 +187,12 @@ global:
     text_visible_highway:           true
     text_visible_highway_e:         true
     text_visible_trunk_primary:     true
-    text_visible_trunk_primary_e2:  true    # the routes
-    text_visible_trunk_primary_e:   false   # the not-routes   #false on default
+    text_visible_trunk_primary_e2:  false   # the routes       #false on default, still false on more?
+    text_visible_trunk_primary_e:   false   # the not-routes   #false on default, still false on more?
     text_visible_secondary:         true
-    text_visible_secondary_e:       false                      #false on default
+    text_visible_secondary_e:       false                      #false on default, still false on more
     text_visible_tertiary:          true
-    text_visible_tertiary_e:        false                      #false on default
+    text_visible_tertiary_e:        false                      #false on default, still false on more
     text_visible_minor_road:        true
     text_visible_minor_road_e:      true
     text_visible_service_road:      true
@@ -202,7 +202,7 @@ global:
     text_visible_aerialway:         true
     text_visible_shields:           true
     text_visible_exits:             true
-    text_visible_exits_e:           false                      #false on default
+    text_visible_exits_e:           false                      #false on default, still false on more
     text_visible_airport_gate:      true
 
     # roads
