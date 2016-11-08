@@ -551,7 +551,7 @@ sources:
     #     type: GeoJSON
     #     url: https://gist.githubusercontent.com/anonymous/dbae9635dfe46796490e/raw/df55c318635a7d91b309ed40754d4738a292fd38/map.geojson
     # # Arrow for current route location
-    # mz_route_location::
+    # mz_route_location:
     #     type: GeoJSON
     #     url: https://gist.githubusercontent.com/anonymous/36613092be6e2aa004fd/raw/f753d13069425199e1dea1b449ef67d723f6510e/map.geojson
     # # Dots for transit stops in route preview
