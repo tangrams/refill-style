@@ -2786,7 +2786,7 @@ layers:
                     - all:
                         - shield_text: false    # some roads don't have shield text, deal with that later
                         - ref: true
-                        - kind: [motorway, trunk, primary, secondary, tertiary]
+                        - kind_detail: [motorway, trunk, primary, secondary, tertiary]
             # default
             draw:
                 icons:
@@ -3640,7 +3640,7 @@ layers:
                 filter: { $zoom: { min: 14 } }
                 draw:
                     text-blend-order:
-                        priority: 59
+                        priority: 63
                         visible: global.text_visible_aerialway
                         text_source: name
                         font:
@@ -5605,7 +5605,7 @@ layers:
                 size: [[13, 12px], [16, 16px], [18, 19px]]
                 interactive: true
                 visible: global.label_visible_poi_landuse
-                priority: 45
+                priority: 65
                 text:
                     visible: global.text_visible_poi_landuse    # labels are enabled by each layer below
                     text_source: global.ux_language_text_source
