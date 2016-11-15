@@ -495,7 +495,6 @@ textures:
             county_shield_4char: [728, 304, 152, 72]
             county_shield_5char: [540, 304, 180, 72]
             courthouse: [364, 0, 38, 38]
-            current-location: [702, 680, 88, 88]
             department-store: [734, 126, 38, 38]
             department_store: [734, 126, 38, 38]
             drinking-water: [230, 210, 38, 38]
@@ -652,9 +651,6 @@ textures:
             car_sharing: [594, 0, 38, 38]
             restaurant: [92, 210, 38, 38]
             deli: [92, 210, 38, 38]
-            route-arrow: [408, 680, 128, 128]
-            route-start: [622, 680, 72, 92]
-            route-stop: [544, 680, 72, 92]
             ruin: [502, 0, 38, 38]
             ruins: [502, 0, 38, 38]
             archaeological_site: [502, 0, 38, 38]
@@ -664,8 +660,6 @@ textures:
             beauty_salon: [46, 42, 38, 38]
             school: [552, 84, 38, 38]
             kindergarten: [552, 84, 38, 38]
-            search-active: [796, 680, 72, 108]
-            search-inactive: [876, 680, 72, 108]
             shoe-store: [552, 42, 38, 38]
             shoes: [552, 42, 38, 38]
             shoe_store: [552, 42, 38, 38]
@@ -722,6 +716,16 @@ textures:
             wine: [456, 168, 38, 38]
             zoo: [966, 84, 38, 38]
 
+            ux-current-location: [702, 680, 88, 88]
+            ux-route-arrow: [408, 680, 128, 128]
+            ux-route-start: [622, 680, 72, 92]
+            ux-route-stop: [544, 680, 72, 92]
+            ux-search-active: [796, 680, 72, 108]
+            ux-search-inactive: [876, 680, 72, 108]
+            #
+            # reuse capital-xl
+            ux-transit-stop: [170, 680, 20, 20]
+
     building-grid:
         url: images/building-grid.gif
         filtering: mipmap
@@ -734,56 +738,56 @@ sources:
         # url:  //localhost:8080/vector/all/{z}/{x}/{y}.topojson
         max_zoom: 16
 
-    # # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
-    # # These are all in San Francisco, California
-    # #
-    # # Current location gem
-    # mz_current_location:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/9e9588228b0a604264a2/raw/b28be49bea0b7feb859eb65b588c28e9fee5ae2c/map.geojson
-    # # Route line
-    # mz_route_line:
-    #     type: GeoJSON
-    #     # sf to ny
-    #     url: https://gist.githubusercontent.com/anonymous/30c6c1a75c168d91d90c/raw/92bfe55e622766d250b1f2f5d17bdc7c26acb956/map.geojson
-    #     # local sf trip
-    #     # url: https://gist.githubusercontent.com/anonymous/9a610ebda6fe4be7bccc/raw/8d217e43f2412d48d01534ba115f1e42dac72e68/map.geojson
-    # # Transit route line
-    # mz_route_line_transit:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/71ae88cbc6d62c4d141ecd6a61060050/raw/2254bbc18243f5dc609e663a580c9412a7447936/map.geojson
-    # # Pin at start of route
-    # mz_route_start:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/5262969cb7549ea69221/raw/be03f233fa323d9b5cf50ef1d8e89a1faa3750f1/map.geojson
-    # # Pin at end of route
-    # mz_route_destination:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/dbae9635dfe46796490e/raw/df55c318635a7d91b309ed40754d4738a292fd38/map.geojson
-    # # Arrow for current route location
-    # mz_route_location:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/36613092be6e2aa004fd/raw/f753d13069425199e1dea1b449ef67d723f6510e/map.geojson
-    # # Dots for transit stops in route preview
-    # mz_route_transit_stop:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/b9f16bca4a804f50faf71277d52ee4ab/raw/db13e4e765fa1ac8844b8ba02f4a0f66fe772907/map.geojson
-    # # Pins showing search result locations
-    # mz_search_result:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/57dc09eeb120919f76de/raw/43426217da3c2bae0522dc4257aaa61e4df3981e/map.geojson
-    # # Default point styling (SDK)
-    # mz_default_point:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/16324c771edfce45be0721390389b878/raw/7dbaebf17da7da8562e6c6f8768bc8cff83efa88/map.geojson
-    # # Default line styling (SDK)
-    # mz_default_line:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/26f4e8b6b34b2617b5d5533d89decb39/raw/df8e180ab4f7f19448014dccc4a755f7cfa20003/map.geojson
-    # # Default polygon styling (SDK)
-    # mz_default_polygon:
-    #     type: GeoJSON
-    #     url: https://gist.githubusercontent.com/anonymous/88235c795bb44b8c45150bdd5561f947/raw/71d4fab97b6513833bf1a589167119e6169ef86d/map.geojson
+#    # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
+#    # These are all in San Francisco, California
+#    #
+#    # Current location gem
+#    mz_current_location:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/9e9588228b0a604264a2/raw/b28be49bea0b7feb859eb65b588c28e9fee5ae2c/map.geojson
+#    # Route line
+#    mz_route_line:
+#        type: GeoJSON
+#        # sf to ny
+#        #url: https://gist.githubusercontent.com/anonymous/30c6c1a75c168d91d90c/raw/92bfe55e622766d250b1f2f5d17bdc7c26acb956/map.geojson
+#        # local sf trip
+#        url: https://gist.githubusercontent.com/anonymous/9a610ebda6fe4be7bccc/raw/8d217e43f2412d48d01534ba115f1e42dac72e68/map.geojson
+#    # Transit route line
+#    mz_route_line_transit:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/71ae88cbc6d62c4d141ecd6a61060050/raw/2254bbc18243f5dc609e663a580c9412a7447936/map.geojson
+#    # Pin at start of route
+#    mz_route_start:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/5262969cb7549ea69221/raw/be03f233fa323d9b5cf50ef1d8e89a1faa3750f1/map.geojson
+#    # Pin at end of route
+#    mz_route_destination:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/dbae9635dfe46796490e/raw/df55c318635a7d91b309ed40754d4738a292fd38/map.geojson
+#    # Arrow for current route location
+#    mz_route_location:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/36613092be6e2aa004fd/raw/f753d13069425199e1dea1b449ef67d723f6510e/map.geojson
+#    # Dots for transit stops in route preview
+#    mz_route_transit_stop:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/b9f16bca4a804f50faf71277d52ee4ab/raw/db13e4e765fa1ac8844b8ba02f4a0f66fe772907/map.geojson
+#    # Pins showing search result locations
+#    mz_search_result:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/57dc09eeb120919f76de/raw/43426217da3c2bae0522dc4257aaa61e4df3981e/map.geojson
+#    # Default point styling (SDK)
+#    mz_default_point:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/16324c771edfce45be0721390389b878/raw/7dbaebf17da7da8562e6c6f8768bc8cff83efa88/map.geojson
+#    # Default line styling (SDK)
+#    mz_default_line:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/26f4e8b6b34b2617b5d5533d89decb39/raw/df8e180ab4f7f19448014dccc4a755f7cfa20003/map.geojson
+#    # Default polygon styling (SDK)
+#    mz_default_polygon:
+#        type: GeoJSON
+#        url: https://gist.githubusercontent.com/anonymous/88235c795bb44b8c45150bdd5561f947/raw/71d4fab97b6513833bf1a589167119e6169ef86d/map.geojson
 
 cameras:
     isometric:
