@@ -197,8 +197,8 @@ global:
     text_visible_highway:           true
     text_visible_highway_e:         true
     text_visible_trunk_primary:     true
-    text_visible_trunk_primary_e2:  false   # the routes       #false on default, still false on more?
-    text_visible_trunk_primary_e:   false   # the not-routes   #false on default, still false on more?
+    text_visible_trunk_primary_e2:  false   # the routes       #false on default, still false on more
+    text_visible_trunk_primary_e:   false   # the not-routes   #false on default, still false on more
     text_visible_secondary:         true
     text_visible_secondary_e:       false                      #false on default, still false on more
     text_visible_tertiary:          true
@@ -2788,7 +2788,7 @@ layers:
                 #
                 # Europe doesn't have many network relations set, so we could look for either
                 # shield_text or ref (with no shield_text) but...
-                # that makes United States look a bit funky with `(xxx)` and generic shields 
+                # that makes United States look a bit funky with `(xxx)` and generic shields
                 # showing up in fields of custom state shields like US:CA and US:NY
                 #
                 any:
@@ -2802,8 +2802,8 @@ layers:
                 icons:
                     # you need to match any custom shield to the vector tile `network` values
                     sprite: |
-                        function() { 
-                            if( feature.shield_text ) { 
+                        function() {
+                            if( feature.shield_text ) {
                                 return ('generic_shield_' + feature.shield_text.length + 'char');
                             } else {
                                 return ('generic_shield_' + feature.ref.length + 'char');
@@ -2829,8 +2829,8 @@ layers:
                         repeat_distance: 200px
                         anchor: center
                         text_source: |
-                            function() { 
-                                if( feature.shield_text ) { 
+                            function() {
+                                if( feature.shield_text ) {
                                     return feature.shield_text;
                                 } else {
                                     return feature.ref;
@@ -2842,7 +2842,7 @@ layers:
                             size: [[7,7px],[12,8px],[16,11px]]
 
             default_priority_highway:
-                filter: 
+                filter:
                     all:
                         - kind_detail: motorway
                         - $zoom: { min: 9 }
@@ -2853,7 +2853,7 @@ layers:
                         visible: global.text_visible_shields
 
             default_priority_trunk:
-                filter: 
+                filter:
                     all:
                         - kind_detail: [trunk]
                         - $zoom: { min: 10 }
@@ -2863,7 +2863,7 @@ layers:
                         #color: red
                         visible: global.text_visible_shields
             default_priority_primary:
-                filter: 
+                filter:
                     all:
                         - kind_detail: [primary]
                         - $zoom: { min: 12 }
@@ -2901,8 +2901,8 @@ layers:
             #             visible: false
             width_1char:
                 filter: |
-                    function() { 
-                        if( feature.shield_text ) { 
+                    function() {
+                        if( feature.shield_text ) {
                             return (feature.shield_text.length === 1)
                         } else {
                             return (feature.ref.length === 1)
@@ -2913,8 +2913,8 @@ layers:
                         size: [[6,[14px,14px]],[13,[16px,16px]],[16,[18px,18px]]]
             width_2char:
                 filter: |
-                    function() { 
-                        if( feature.shield_text ) { 
+                    function() {
+                        if( feature.shield_text ) {
                             return (feature.shield_text.length === 2)
                         } else {
                             return (feature.ref.length === 2)
@@ -2925,8 +2925,8 @@ layers:
                         size: [[6,[18px,14px]],[13,[20px,15px]],[16,[24px,18px]]]
             width_3char:
                 filter: |
-                    function() { 
-                        if( feature.shield_text ) { 
+                    function() {
+                        if( feature.shield_text ) {
                             return (feature.shield_text.length === 3)
                         } else {
                             return (feature.ref.length === 3)
@@ -2937,8 +2937,8 @@ layers:
                         size: [[6,[25px,14px]],[13,[27px,15px]],[16,[33px,18px]]]
             width_4char:
                 filter: |
-                    function() { 
-                        if( feature.shield_text ) { 
+                    function() {
+                        if( feature.shield_text ) {
                             return (feature.shield_text.length === 4)
                         } else {
                             return (feature.ref.length === 4)
@@ -2955,8 +2955,8 @@ layers:
                             visible: false
             width_5char:
                 filter: |
-                    function() { 
-                        if( feature.shield_text ) { 
+                    function() {
+                        if( feature.shield_text ) {
                             return (feature.shield_text.length === 5)
                         } else {
                             return (feature.ref.length === 5)
@@ -2974,8 +2974,8 @@ layers:
             # this is kinda a hack
             width_longggggg:
                 filter: |
-                    function() { 
-                        if( feature.shield_text ) { 
+                    function() {
+                        if( feature.shield_text ) {
                             return (feature.shield_text.length > 5)
                         } else {
                             return (feature.ref.length > 5)
@@ -3253,16 +3253,16 @@ layers:
                     #     }
                     #
                     # this generic for any country with 3rd level networks (like county routes in USA)
-                    # BEWARE: 
+                    # BEWARE:
                     # US:US:Business  about 150
                     # US:US:Truck
                     # US:US:Alternate
-    # 
+    #
                     # STATE ROUTE
                     # ??:??:Loop  about 200
                     # ??:??:Spur  about 200
                     # ??:??:Business   about 100
-    # 
+    #
                     # STATE TEXAS SPECIAL ROUTE
                     # US:TX:FM -- probably just state? there are 3k of these
                     #
@@ -6172,7 +6172,7 @@ layers:
                             visible: global.text_visible_poi_landuse
                             font:
                                 fill: [0.50,0.50,0.50]
-                                weight: 600
+                                #weight: 600
                                 size: 10px
                                 stroke: { color: [1.0,1.0,1.0,0.85], width: 3 }
                 landuse-z17:
