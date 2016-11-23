@@ -5540,17 +5540,21 @@ layers:
                             stroke: { color: [1.0,1.0,1.0,0.85], width: 4 }
 
     pois_and_landuse_labels:
-        data: { source: mapzen, layer: [pois,landuse] }
+        data: { source: mapzen, layer: [pois] }
         filter:
-            not: { kind: [farm,tree,gate,address,apron] }
-            any:
-                - area: false
-                  all:
-                      - $zoom: { min: 12 }
-                - area: true
-                  all:
-                      - $geometry: point
-                      - kind: true
+            all:
+                - not: { kind: [building,address,farm,tree,apron,residential,commercial,industrial] }
+                - $geometry: point
+                # White list a few kinds to "always" show per the tile zoom inclusion, else test feature's min_zoom
+                #- function() { return feature.min_zoom <= $zoom }
+                - function() { if( feature.kind == 'restaurant' || feature.kind == 'landmark' || feature.kind == 'cafe' ) { return true } else { return feature.min_zoom <= $zoom } }
+                - any:
+                    - area: false
+                      all:
+                          - $zoom: { min: 12 }
+                    - area: true
+                      all:
+                          - kind: true
         draw:
             icons:
                 size: [[13, 16px], [16, 16px], [18, 18px]]
@@ -6084,20 +6088,20 @@ layers:
                         - area: true
                         - $geometry: point
                         - not: { kind: [park, national_park, protected_area, nature_reserve, airport, aerodrome, university, college, school, kindergarten, winter_sports, zoo, theme_park, resort, aquarium, winery, maze, stadium] }
-                    any:
-                        # show labels for smaller landuse areas at higher zooms
-                        - { $zoom: [5,6,7], area: { min: 5000000000 } }
-                        - { $zoom: [8],     area: { min: 1600000000 } }
-                        - { $zoom: [9],     area: { min: 400000000 } }
-                        - { $zoom: [10],    area: { min: 100000000 } }
-                        - { $zoom: [11],    area: { min: 25000000 } }
-                        - { $zoom: [12],    area: { min: 5000000 } }
-                        - { $zoom: [13],    area: { min: 1000000 } }
-                        - { $zoom: [14],    area: { min: 100000 } }
-                        # show labels for smaller landuse areas at higher zooms
-                        - { $zoom: [15],    area: { min: 5000 } }
-                        - { $zoom: [16],    area: { min: 2000 } }
-                        - { $zoom: { min: 17 } }
+                    # any:
+                    #     # show labels for smaller landuse areas at higher zooms
+                    #     - { $zoom: [5,6,7], area: { min: 5000000000 } }
+                    #     - { $zoom: [8],     area: { min: 1600000000 } }
+                    #     - { $zoom: [9],     area: { min: 400000000 } }
+                    #     - { $zoom: [10],    area: { min: 100000000 } }
+                    #     - { $zoom: [11],    area: { min: 25000000 } }
+                    #     - { $zoom: [12],    area: { min: 5000000 } }
+                    #     - { $zoom: [13],    area: { min: 1000000 } }
+                    #     - { $zoom: [14],    area: { min: 100000 } }
+                    #     # show labels for smaller landuse areas at higher zooms
+                    #     - { $zoom: [15],    area: { min: 5000 } }
+                    #     - { $zoom: [16],    area: { min: 2000 } }
+                    #     - { $zoom: { min: 17 } }
                 draw:
                     icons:
                         sprite: function() { return feature.kind; }
