@@ -641,7 +641,7 @@ textures:
             amusement_ride: [966, 84, 38, 38]
             toilets: [828, 84, 38, 38]
             townspot-l: [204, 792, 32, 32]
-            townspot-l-rev: [30, 792, 32, 32]
+            townspot-l-rev: [32, 792, 32, 32]
             townspot-m: [172, 792, 24, 24]
             townspot-m-rev: [0, 792, 24, 24]
             townspot-s: [144, 792, 20, 20]
