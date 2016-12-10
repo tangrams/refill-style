@@ -4267,6 +4267,85 @@ layers:
                         fill: global.text_fill
                         stroke: { color: global.text_stroke, width: 4 }
 
+            #
+            # NOTE: you'd think no-townspot would be the way to go, but icons with size 0px seems to have a bug to also hide the text :(
+            #
+            # no-townspot:
+            #     filter: { $zoom: { min: 11 } }
+            #     draw:
+            #         icons:
+            #             size: 0px
+            #             text:
+            #                 anchor: center
+            #
+            # NOTE: So instead we play a shell game with symbolizers per zoom
+            #
+            _icons_later: 
+                filter: { $zoom: { min: 11 } }
+                draw:
+                    icons: 
+                        visible: false
+                    text-blend-order:
+                        visible: global.text_visible_populated_places
+
+            _text_early: 
+                filter: { $zoom: { max: 11 } }
+                draw:
+                    text-blend-order: 
+                        visible: false
+            # END HACK
+
+            z8-50k-below:
+                filter: { $zoom: [8,9], population: { min: 10000, max: 50000 } }
+                draw:
+                    icons:
+                        buffer: 25px
+                        #color: red
+                        #visible: false
+            z9-10k-below:
+                filter: { $zoom: [8,9], population: { max: 10000 } }
+                draw:
+                    icons:
+                        buffer: 18px
+                        #color: blue
+                        #visible: false
+            z9-no-population:
+                filter: { $zoom: [8,9], population: false }
+                draw:
+                    icons:
+                        buffer: 10px
+                        #color: yellow
+                        #visible: false
+
+            # HACK
+            # NOTE: These should use icon: buffer instead of going visible: false, but there are problems using icon here :(
+            # This fixes Paris area, but causes problems for small places in the USA eg Table Bluff near Eureka, California.
+            funky-village:
+                filter: { kind_detail: [village], $zoom: [11], population: { max: 1000 } }
+                draw:
+                    text-blend-order:
+                        visible: false
+            funky-isolated_dwelling:
+                filter: { kind_detail: [isolated_dwelling], $zoom: [13] }
+                draw:
+                    text-blend-order:
+                        visible: false
+            hamlet:
+                filter: { kind_detail: hamlet, $zoom: [13] }
+                draw:
+                    text-blend-order:
+                        visible: false
+            # END HACK
+
+            # someone in London and Salt Lake City thought neighbourhoods should be tagged place: locality
+            # They were wrong
+            funky-fake-neighbourhoods:
+                filter: { kind_detail: [locality], $zoom: { min: 13 } }
+                draw:
+                    text-blend-order:
+                        visible: false
+
+
             population-10m-up:
                 filter:
                     population: { min: 10000000 }
