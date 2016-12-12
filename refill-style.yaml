@@ -1357,8 +1357,25 @@ scene:
         color: global.scene1
 
 fonts:
+    Open Sans:
+        - weight: 300 # Light
+          url: fonts/OpenSans-Light.woff
+        - weight: normal # Regular
+          url: fonts/OpenSans-Regular.woff
+        - weight: normal # Regular
+          style: italic
+          url: fonts/OpenSans-Italic.woff
+        - weight: 600 # Semi Bold
+          url: fonts/OpenSans-Semibold.woff
+        - weight: 600 # Semi Bold
+          style: italic
+          url: fonts/OpenSans-SemiboldItalic.woff
+        - weight: bold
+          url: fonts/OpenSans-Bold.woff
     Montserrat:
-        url: https://fonts.gstatic.com/s/montserrat/v7/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff
+        - weight: normal
+          #url: https://fonts.gstatic.com/s/montserrat/v7/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff
+          url: fonts/Montserrat-Regular.woff
 
 layers:
     # Map overlays for styling the server response (using special source layer names) for route line, current location, and search result pins
@@ -4079,6 +4096,7 @@ layers:
                     font:
                         family: global.text_font_family
                         fill: global.text_fill
+                        stroke: { color: global.text_stroke, width: 4 }
             # NOTE: This is a hack for localities because of an icon & text bug, see note below
             text:
                 text_source: global.ux_language_text_source
@@ -4086,6 +4104,7 @@ layers:
                 font:
                     family: global.text_font_family
                     fill: global.text_fill
+                    stroke: { color: global.text_stroke, width: 4 }
             # END NOTE
 
             text-blend-order:
@@ -4095,6 +4114,7 @@ layers:
                     family: global.text_font_family
                     # weight: 500
                     fill: global.text_fill
+                    stroke: { color: global.text_stroke, width: 4 }
 
         country:
             filter:
@@ -4257,15 +4277,13 @@ layers:
                         buffer: 3px
                         font:
                             size: [[5,9px],[8,10px],[12,11px]]
-                            fill: global.text_fill
-                            stroke: { color: global.text_stroke, width: 4 }
+                            # fill: global.text_fill
                 text-blend-order:
                     visible: global.text_visible_populated_places
                     interactive: true
                     text:
                         size: [[5,9px],[8,10px],[12,11px]]
-                        fill: global.text_fill
-                        stroke: { color: global.text_stroke, width: 4 }
+                        # fill: global.text_fill
 
             #
             # NOTE: you'd think no-townspot would be the way to go, but icons with size 0px seems to have a bug to also hide the text :(
@@ -4501,12 +4519,12 @@ layers:
                         priority: 17
                         text:
                             font:
-                                fill: [0.30,0.30,0.30]
+                                # fill: [0.30,0.30,0.30]
                                 size: [[6,10px],[8,12px],[10,12px],[12,14px],[14,14px],[15,0px]]
                     text-blend-order:
                         priority: 17
                         font:
-                            fill: [0.30,0.30,0.30]
+                            # fill: [0.30,0.30,0.30]
                             size: [[6,10px],[8,12px],[10,12px],[12,14px],[14,14px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
@@ -4527,12 +4545,12 @@ layers:
                         priority: 19
                         text:
                             font:
-                                fill: [0.30,0.30,0.30]
+                                # fill: [0.30,0.30,0.30]
                                 size: [[9,11px],[12,12px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 19
                         font:
-                            fill: [0.30,0.30,0.30]
+                            # fill: [0.30,0.30,0.30]
                             size: [[9,11px],[12,12px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
@@ -4554,12 +4572,12 @@ layers:
                         text:
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: [[9,11px],[12,12px],[14,12px],[15,0px]]
+                                size: [[9,11px],[12,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 21
                         font:
                             fill: [0.35,0.35,0.35]
-                            size: [[9,11px],[12,12px],[14,12px],[15,0px]]
+                            size: [[9,11px],[12,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4580,12 +4598,12 @@ layers:
                         text:
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: [[9,10px],[12,12px],[13,12px],[14,12px],[15,0px]]
+                                size: [[9,10px],[12,10px],[13,12px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 23
                         font:
                             fill: [0.35,0.35,0.35]
-                            size: [[9,10px],[12,12px],[13,12px],[14,12px],[15,0px]]
+                            size: [[9,10px],[12,10px],[13,12px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
