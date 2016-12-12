@@ -4849,7 +4849,7 @@ layers:
                     buffer: 7px
                     font:
                         family: global.text_font_family
-                        weight: 400
+                        weight: normal
                         fill: [0.350,0.350,0.350]
                         size: 8px
                         stroke: { color: global.text_stroke, width: 3 }
@@ -5738,7 +5738,7 @@ layers:
 
     # todo: ocean and sea features are hiding in the places layer
     water-area-labels:
-        data: { source: mapzen, layer: [water] }
+        data: { source: mapzen, layer: water }
         visible: global.text_visible_water_labels
         filter:
             all:
@@ -5762,17 +5762,17 @@ layers:
                 - { $zoom: { min: 15 }, area: { min: 50000 } }
                 - { $zoom: { min: 16 }, area: { min: 20000 } }
                 - { $zoom: { min: 17 } }
-        draw:
-            text-blend-order:
-                visible: global.text_visible_water_labels
-                text_source: global.ux_language_text_source
-                font:
-                    fill: global.text_fill_water
-                    family: global.text_font_family
-                    style: italic
-                    weight: 400
-                    size: 12px
-                    # stroke: { color: [0.878,0.929,0.980], width: 2 }
+        default-label-text:
+            draw:
+                text-blend-order:
+                    text_source: global.ux_language_text_source
+                    font:
+                        fill: global.text_fill_water
+                        family: global.text_font_family
+                        style: italic
+                        weight: normal
+                        size: 12px
+                        # stroke: { color: [0.878,0.929,0.980], width: 2 }
         lakes-z5:
             filter: { $zoom: [5] }
             draw:
@@ -5786,80 +5786,82 @@ layers:
             draw:
                 text-blend-order: { font: { size: 12px } }
 
-        ocean-sea-labels:
-            filter: { name: true, kind: [sea, ocean] }
-            draw:
-                text-blend-order:
-                    text_source: global.ux_language_text_source
-                    font:
-                        fill: global.text_fill_water
-                        family: global.text_font_family
-                        weight: 400
-                        size: 12px
-                        transform: uppercase
-            sea-early:
-                filter: { $zoom: [3], kind: sea }
-                draw: { text-blend-order: { visible: false } }
-            ocean-spacer:
-                filter: { kind: ocean }
-                ocean-spacer-z1-z4:
-                    filter: { $zoom: { min: 1, max: 4 } }
-                    draw:
-                        text-blend-order:
-                            text_source: global.ux_language_text_source_ocean
-                            text_wrap: false
-                ocean-spacer-z4-up:
-                    filter: { $zoom: { min: 4 } }
-                    draw:
-                        text-blend-order:
-                            text_source: global.ux_language_text_source_ocean
-                            text_wrap: false
-            ocean-labels-z1:
-                filter: { $zoom: [1] }
-                draw:
-                    text-blend-order: { font: { size: 8px } }
-            ocean-labels-z2:
-                filter: { $zoom: [2] }
-                draw:
-                    text-blend-order: { font: { size: 10px } }
-            ocean-labels-z3:
-                filter: { $zoom: [3] }
-                draw:
-                    text-blend-order: { font: { size: 13px } }
-            ocean-labels-z4-up:
-                filter: { $zoom: { min: 4} }
-                draw:
-                    text-blend-order: { font: { size: 16px } }
-
-            sea-spacer:
-                filter: { not: { kind: [ocean] }, $zoom: { min: 4 } }
+    ocean-sea-labels:
+        data: { source: mapzen, layer: water }
+        visible: global.text_visible_water_labels
+        filter: { name: true, kind: [sea, ocean] }
+        draw:
+            text-blend-order:
+                text_source: global.ux_language_text_source
+                font:
+                    fill: global.text_fill_water
+                    family: global.text_font_family
+                    weight: normal
+                    size: 12px
+                    transform: uppercase
+        sea-early:
+            filter: { $zoom: [3], kind: sea }
+            draw: { text-blend-order: { visible: false } }
+        ocean-spacer:
+            filter: { kind: ocean }
+            ocean-spacer-z1-z4:
+                filter: { $zoom: { min: 1, max: 4 } }
                 draw:
                     text-blend-order:
-                        text_source: global.ux_language_text_source_sea
+                        text_source: global.ux_language_text_source_ocean
                         text_wrap: false
+            ocean-spacer-z4-up:
+                filter: { $zoom: { min: 4 } }
+                draw:
+                    text-blend-order:
+                        text_source: global.ux_language_text_source_ocean
+                        text_wrap: false
+        ocean-labels-z1:
+            filter: { $zoom: [1] }
+            draw:
+                text-blend-order: { font: { size: 7px } }
+        ocean-labels-z2:
+            filter: { $zoom: [2] }
+            draw:
+                text-blend-order: { font: { size: 9px } }
+        ocean-labels-z3:
+            filter: { $zoom: [3] }
+            draw:
+                text-blend-order: { font: { size: 12px } }
+        ocean-labels-z4-up:
+            filter: { $zoom: { min: 4} }
+            draw:
+                text-blend-order: { font: { size: 15px } }
 
-            sea-labels:
-                filter: { not: { kind: [ocean] } }
-                sea-labels-z4:
-                        filter: { $zoom: [4] }
-                        draw:
-                            text-blend-order: { font: { size: 8px, fill: [0.250,0.250,0.250] } }
-                sea-labels-z5:
-                        filter: { $zoom: [5] }
-                        draw:
-                            text-blend-order: { font: { size: 10px } }
-                sea-labels-z6:
-                        filter: { $zoom: [6] }
-                        draw:
-                            text-blend-order: { font: { size: 11px } }
-                sea-labels-z7:
-                        filter: { $zoom: [7] }
-                        draw:
-                            text-blend-order: { font: { size: 12px } }
-                sea-labels-z8:
-                        filter: { $zoom: { min: 8} }
-                        draw:
-                            text-blend-order: { font: { size: 14px } }
+        sea-spacer:
+            filter: { not: { kind: [ocean] }, $zoom: { min: 4 } }
+            draw:
+                text-blend-order:
+                    text_source: global.ux_language_text_source_sea
+                    text_wrap: false
+
+        sea-labels:
+            filter: { not: { kind: [ocean] } }
+            sea-labels-z4:
+                    filter: { $zoom: [4] }
+                    draw:
+                        text-blend-order: { font: { size: 8px, fill: [0.250,0.250,0.250] } }
+            sea-labels-z5:
+                    filter: { $zoom: [5] }
+                    draw:
+                        text-blend-order: { font: { size: 10px } }
+            sea-labels-z6:
+                    filter: { $zoom: [6] }
+                    draw:
+                        text-blend-order: { font: { size: 11px } }
+            sea-labels-z7:
+                    filter: { $zoom: [7] }
+                    draw:
+                        text-blend-order: { font: { size: 12px } }
+            sea-labels-z8:
+                    filter: { $zoom: { min: 8} }
+                    draw:
+                        text-blend-order: { font: { size: 14px } }
 
         playa-labels:
             visible: global.text_visible_water_labels
@@ -5890,7 +5892,7 @@ layers:
                         fill: [0.50,0.50,0.50]
                         family: global.text_font_family
                         style: italic
-                        weight: 400
+                        weight: normal
                         size: 9px
                         stroke: { color: global.text_stroke_water, width: 3 }
             # debug only
