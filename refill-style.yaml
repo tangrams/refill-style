@@ -4263,14 +4263,14 @@ layers:
                         visible: global.text_visible_populated_places
                         buffer: 3px
                         font:
-                            size: [[5,9px],[8,10px],[12,12px]]
+                            size: [[5,9px],[8,10px],[12,11px]]
                             # fill: global.text_fill
                 text-blend-order:
                     visible: global.text_visible_populated_places
                     buffer: 10px
                     interactive: true
                     font:
-                        size: [[5,9px],[8,10px],[12,12px]]
+                        size: [[5,9px],[8,10px],[12,11px]]
                         # fill: global.text_fill
 
             #
@@ -4664,12 +4664,12 @@ layers:
                         text:
                             font:
                                 fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
-                                size: [[9,10px],[14,12px],[15,0px]]
+                                size: [[9,10px],[14,11px],[15,0px]]
                     text-blend-order:
                         priority: 28
                         font:
                             fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
-                            size: [[9,10px],[14,12px],[15,0px]]
+                            size: [[9,10px],[14,11px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
