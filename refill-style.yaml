@@ -4098,15 +4098,6 @@ layers:
                         fill: global.text_fill
                         stroke: { color: global.text_stroke, width: 4 }
             # NOTE: This is a hack for localities because of an icon & text bug, see note below
-            text:
-                text_source: global.ux_language_text_source
-                visible: false    # labels are enabled by each layer below
-                font:
-                    family: global.text_font_family
-                    fill: global.text_fill
-                    stroke: { color: global.text_stroke, width: 4 }
-            # END NOTE
-
             text-blend-order:
                 text_source: global.ux_language_text_source
                 visible: false    # labels are enabled by each layer below
@@ -4115,6 +4106,8 @@ layers:
                     # weight: 500
                     fill: global.text_fill
                     stroke: { color: global.text_stroke, width: 4 }
+
+            # END NOTE
 
         country:
             filter:
@@ -4128,7 +4121,6 @@ layers:
                     text_source: function() { return feature["name:en"] || feature["name"]; }
                     font:
                         fill: global.text_fill
-                        stroke: { color: global.text_stroke, width: 4 }
                         weight: 600
             country-z2-3:
                 filter: { $zoom: [2,3] }
@@ -4196,7 +4188,6 @@ layers:
                         text-blend-order:
                             visible: false
 
-
         region:
             filter:
                 kind: region
@@ -4218,8 +4209,6 @@ layers:
                             size: 11px
                             weight: 400
                             fill: [0.70,0.70,0.70]
-                            stroke: { color: global.text_stroke, width: 4 }
-
             region-z5:
                 filter: { $zoom: [5], not: { name: ["Western Cape","Eastern Cape","Northern Cape","North West","Limpopo","KwaZulu-Natal","Hamburg","Freie und Hansestadt Hamburg","Neuchâtel","Nordrhein-Westfalen","Haute-Normandie","Baden-Württemberg","Bayern","Sachsen-Anhalt","Berlin","Mecklenburg-Vorpommern","Schleswig-Holstein","Brandenburg","Niedersachsen","Saarland","Thüringen","Hessen","Sachsen"] } }
                 draw:
@@ -4228,8 +4217,6 @@ layers:
                         font:
                             size: 18px
                             weight: 200
-                            stroke: { color: global.text_stroke, width: 4 }
-
             region-z6:
                 filter: { $zoom: [6], not: { name: ["Western Cape","Eastern Cape","Northern Cape","North West","Limpopo","KwaZulu-Natal","Hamburg","Freie und Hansestadt Hamburg","Neuchâtel","Nordrhein-Westfalen","Haute-Normandie","Baden-Württemberg","Bayern","Sachsen-Anhalt","Berlin","Mecklenburg-Vorpommern","Schleswig-Holstein","Brandenburg","Niedersachsen","Saarland","Thüringen","Hessen","Sachsen"] } }
                 draw:
@@ -4276,13 +4263,14 @@ layers:
                         visible: global.text_visible_populated_places
                         buffer: 3px
                         font:
-                            size: [[5,9px],[8,10px],[12,11px]]
+                            size: [[5,9px],[8,10px],[12,12px]]
                             # fill: global.text_fill
                 text-blend-order:
                     visible: global.text_visible_populated_places
+                    buffer: 10px
                     interactive: true
-                    text:
-                        size: [[5,9px],[8,10px],[12,11px]]
+                    font:
+                        size: [[5,9px],[8,10px],[12,12px]]
                         # fill: global.text_fill
 
             #
@@ -4374,11 +4362,11 @@ layers:
                         priority: 6
                         text:
                             font:
-                                size: [[2,11px],[6,15px],[8,17px],[10,19px],[12,20px],[13,0px]]
+                                size: [[2,11px],[6,15px],[8,18px],[10,20px],[12,20px],[13,0px]]
                     text-blend-order:
                         priority: 6
                         font:
-                            size: [[2,11px],[6,15px],[8,16px],[10,19px],[12,20x],[13,0px]]
+                            size: [[2,11px],[6,15px],[8,18px],[10,20px],[12,20x],[13,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4398,11 +4386,11 @@ layers:
                         priority: 7
                         text:
                             font:
-                                size: [[4,10px],[6,13px],[8,17px],[10,19px],[12,20px],[13,0px]]
+                                size: [[4,10px],[6,14px],[8,18px],[10,20px],[12,20px],[13,0px]]
                     text-blend-order:
                         priority: 7
                         font:
-                            size: [[4,10px],[6,13px],[8,16px],[10,19px],[12,20px],[13,0px]]
+                            size: [[4,10px],[6,14px],[8,18px],[10,20px],[12,20px],[13,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4410,7 +4398,7 @@ layers:
                             size: [[10,8px],[11,0px]]
                             sprite: capital-l
                             priority: 6
-                        text:
+                        text-blend-order:
                             priority: 6
             population-1m-5m:
                 filter:
@@ -4422,11 +4410,11 @@ layers:
                         priority: 9
                         text:
                             font:
-                                size: [[4,10px],[6,13px],[8,17px],[10,19px],[12,20px],[13,0px]]
+                                size: [[4,10px],[6,14px],[8,15px],[12,18px],[13,0px]]
                     text-blend-order:
                         priority: 9
                         font:
-                            size: [[4,10px],[6,13px],[8,16px],[10,19px],[12,20px],[13,0px]]
+                            size: [[4,10px],[6,14px],[8,15px],[12,18px],[13,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4434,7 +4422,7 @@ layers:
                             size: [[10,8px],[11,0px]]
                             sprite: capital-l
                             priority: 8
-                        text:
+                        text-blend-order:
                             priority: 8
             population-500k-1m:
                 filter:
@@ -4446,11 +4434,11 @@ layers:
                         priority: 11
                         text:
                             font:
-                                size: [[5,10px],[8,14px],[10,15px],[12,16px],[13,0px]]
+                                size: [[5,10px],[8,12px],[10,14px],[12,16px],[13,0px]]
                     text-blend-order:
                         priority: 11
                         font:
-                            size: [[5,10px],[8,14px],[10,15px],[12,16px],[13,0px]]
+                            size: [[5,10px],[8,12px],[10,14px],[12,16px],[13,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4458,7 +4446,7 @@ layers:
                             size: [[10,6px],[11,0px]]
                             sprite: capital-m
                             priority: 10
-                        text:
+                        text-blend-order:
                             priority: 10
             population-200k-500k:
                 filter:
@@ -4483,7 +4471,7 @@ layers:
                             size: [[10,6px],[11,0px]]
                             sprite: capital-m
                             priority: 12
-                        text:
+                        text-blend-order:
                             priority: 12
             population-100k-200k:
                 filter:
@@ -4495,11 +4483,11 @@ layers:
                         priority: 15
                         text:
                             font:
-                                size: [[6,10px],[8,14px],[10,14px],[12,14px],[14,14px],[15,0px]]
+                                size: [[6,10px],[8,12px],[14,14px],[15,0px]]
                     text-blend-order:
                         priority: 15
                         font:
-                            size: [[6,10px],[8,14px],[10,14px],[12,14px],[14,14px],[15,0px]]
+                            size: [[6,10px],[8,12px],[14,14px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4507,7 +4495,7 @@ layers:
                             size: [[10,6px],[11,0px]]
                             sprite: capital-m
                             priority: 14
-                        text:
+                        text-blend-order:
                             priority: 14
             population-50k-100k:
                 filter:
@@ -4520,12 +4508,12 @@ layers:
                         text:
                             font:
                                 # fill: [0.30,0.30,0.30]
-                                size: [[6,10px],[8,12px],[10,12px],[12,14px],[14,14px],[15,0px]]
+                                size: [[6,10px],[8,12px],[14,14px],[15,0px]]
                     text-blend-order:
                         priority: 17
                         font:
                             # fill: [0.30,0.30,0.30]
-                            size: [[6,10px],[8,12px],[10,12px],[12,14px],[14,14px],[15,0px]]
+                            size: [[6,10px],[8,12px],[14,14px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4533,7 +4521,7 @@ layers:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-m
                             priority: 16
-                        text:
+                        text-blend-order:
                             priority: 16
             population-20k-50k:
                 filter:
@@ -4546,12 +4534,12 @@ layers:
                         text:
                             font:
                                 # fill: [0.30,0.30,0.30]
-                                size: [[9,11px],[12,12px],[14,12px],[15,0px]]
+                                size: [[9,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 19
                         font:
                             # fill: [0.30,0.30,0.30]
-                            size: [[9,11px],[12,12px],[14,12px],[15,0px]]
+                            size: [[9,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4559,7 +4547,7 @@ layers:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 18
-                        text:
+                        text-blend-order:
                             priority: 18
             population-10k-20k:
                 filter:
@@ -4571,13 +4559,13 @@ layers:
                         priority: 21
                         text:
                             font:
-                                fill: [0.35,0.35,0.35]
-                                size: [[9,11px],[12,10px],[14,12px],[15,0px]]
+                                fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                                size: [[9,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 21
                         font:
-                            fill: [0.35,0.35,0.35]
-                            size: [[9,11px],[12,10px],[14,12px],[15,0px]]
+                            fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                            size: [[9,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4585,7 +4573,7 @@ layers:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 20
-                        text:
+                        text-blend-order:
                             priority: 20
             population-5k-10k:
                 filter:
@@ -4597,13 +4585,13 @@ layers:
                         priority: 23
                         text:
                             font:
-                                fill: [0.35,0.35,0.35]
-                                size: [[9,10px],[12,10px],[13,12px],[14,12px],[15,0px]]
+                                fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                                size: [[9,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 23
                         font:
-                            fill: [0.35,0.35,0.35]
-                            size: [[9,10px],[12,10px],[13,12px],[14,12px],[15,0px]]
+                            fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                            size: [[9,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4611,7 +4599,7 @@ layers:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 22
-                        text:
+                        text-blend-order:
                             priority: 22
             population-2k-5k:
                 filter:
@@ -4623,13 +4611,13 @@ layers:
                         priority: 25
                         text:
                             font:
-                                fill: [0.35,0.35,0.35]
-                                size: [[9,10px],[12,10px],[13,12px],[14,12px],[15,0px]]
+                                fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                                size: [[9,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 25
                         font:
-                            fill: [0.35,0.35,0.35]
-                            size: [[9,10px],[12,10px],[13,12px],[14,12px],[15,0px]]
+                            fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                            size: [[9,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4637,7 +4625,7 @@ layers:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 24
-                        text:
+                        text-blend-order:
                             priority: 24
             population-1k-2k:
                 filter:
@@ -4649,13 +4637,13 @@ layers:
                         priority: 27
                         text:
                             font:
-                                fill: [0.35,0.35,0.35]
-                                size: [[9,10px],[12,10px],[14,11px],[15,0px]]
+                                fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                                size: [[9,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 27
                         font:
-                            fill: [0.35,0.35,0.35]
-                            size: [[9,10px],[12,10px],[14,11px],[15,0px]]
+                            fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                            size: [[9,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4663,7 +4651,7 @@ layers:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 26
-                        text:
+                        text-blend-order:
                             priority: 26
             population-200-1k:
                 filter:
@@ -4675,13 +4663,13 @@ layers:
                         priority: 28
                         text:
                             font:
-                                fill: [0.35,0.35,0.35]
-                                size: [[9,10px],[12,10px],[14,11px],[15,0px]]
+                                fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                                size: [[9,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 28
                         font:
-                            fill: [0.35,0.35,0.35]
-                            size: [[9,10px],[12,10px],[14,11px],[15,0px]]
+                            fill: [[9,[0.25,0.25,0.25]],[11,[0.00,0.00,0.00]]]
+                            size: [[9,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
@@ -4689,7 +4677,7 @@ layers:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 27
-                        text:
+                        text-blend-order:
                             priority: 27
 
 
