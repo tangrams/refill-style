@@ -4774,7 +4774,7 @@ layers:
                             weight: 200
                             fill: [0.650,0.650,0.650]
                             transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.6], width: 8 }
+                            stroke: { color: [1.0,1.0,1.0,0.50], width: 8 }
                 z15-new:
                     filter:
                         all:
