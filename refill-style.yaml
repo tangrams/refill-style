@@ -1134,13 +1134,7 @@ styles:
                 COLOR2: color.rgb
             blocks:
                 color: |
-                    vec2 st = getTileCoords();
-                    st = tile(st,PATTERN_SCALE);
-                    float dot_size = DOT_SIZE;
-                    float b = circle(st, dot_size);
-                    color *= vec4(b);
-                filter: |
-                    color.rgb = mix(COLOR1, COLOR2, b);
+                    color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
 
     dots-medium:
         mix: dots
