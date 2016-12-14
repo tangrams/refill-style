@@ -1127,46 +1127,30 @@ styles:
         mix: [space-tile, tiling-tile, shapes-circle]
         base: polygons
         shaders:
-            defines:
-                PATTERN_SCALE: 50.0
-                DOT_SIZE: .1
             uniforms:
-                u_COLOR: [1.00,1.00,1.00]
+                u_pattern_scale: 50.
+                u_dot_size: .1
+            defines:
+                PATTERN_SCALE: u_pattern_scale
+                DOT_SIZE: u_dot_size
+                BACKGROUND_COLOR: vec3(1.)
             blocks:
                 color: |
-                    color.rgb = mix(u_COLOR.rgb, color.rgb, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
-
-    dots-medium:
-        mix: dots
-        base: polygons
-        shaders:
-            defines:
-                PATTERN_SCALE: 60.0
-                DOT_SIZE: .25
-    dots3:
-        mix: dots
-        base: polygons
-        shaders:
-            defines:
-                PATTERN_SCALE: 70.0
-                DOT_SIZE: .125
-
-    park-dots1:
-        mix: dots
-        shaders:
-            uniforms:
-                u_COLOR: [1.00,1.00,1.00]
-
+                    color.rgb = mix(BACKGROUND_COLOR, color.rgb, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
     medium-dots:
-        mix: dots-medium
+        mix: dots
+        base: polygons
         shaders:
             uniforms:
-                u_COLOR: [1.00,1.00,1.00]
+                u_pattern_scale: 60.
+                u_dot_size: .25
     tiny-dots:
-        mix: dots3
+        mix: dots
+        base: polygons
         shaders:
-           uniforms:
-                u_COLOR: [1.00,1.00,1.00]
+            uniforms:
+                u_pattern_scale: 70.
+                u_dot_size: .125
                 
     dots-rev:
         base: polygons
@@ -6795,7 +6779,7 @@ layers:
     landuse:
         data: { source: mapzen }
         draw:
-            park-dots1:
+            dots:
                 order: global.feature_order
                 visible: false
             medium-dots:
@@ -6848,7 +6832,7 @@ layers:
                         - not: { operator: [ "United States Forest Service" ] }
                         - protect_class: ['2','3','5']
                 draw:
-                    park-dots1:
+                    dots:
                         interactive: true
                         color: [0.790,0.790,0.790]
                         # todo: what is this?
@@ -6924,7 +6908,7 @@ layers:
                         - not: { protect_class: ['2','3','5','6'] }
                 # default for national forests and more?
                 draw:
-                    park-dots1:
+                    dots:
                         color: [0.760,0.760,0.760]
                         visible: true
                 national_park:
@@ -7181,7 +7165,7 @@ layers:
                 filter:
                     kind: [pedestrian,common]
                 draw:
-                    park-dots1:
+                    dots:
                         color: [0.950,0.950,0.950]
                         visible: global.grey1_v
                 green-stuff:
