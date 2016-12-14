@@ -1,4 +1,4 @@
-﻿# Refill provides a high contrast, black & white basemap useful for data visualization.
+# Refill provides a high contrast, black & white basemap useful for data visualization.
 # Give OpenStreetMap data a professional basemap skin using the Tangram graphics library
 # and Mapzen's versatile Vector Tiles.
 #
@@ -1130,11 +1130,11 @@ styles:
             defines:
                 PATTERN_SCALE: 50.0
                 DOT_SIZE: .1
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+            uniforms:
+                u_COLOR: [1.00,1.00,1.00]
             blocks:
                 color: |
-                    color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
+                    color.rgb = mix(u_COLOR.rgb, color.rgb, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
 
     dots-medium:
         mix: dots
@@ -1154,31 +1154,20 @@ styles:
     park-dots1:
         mix: dots
         shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+            uniforms:
+                u_COLOR: [1.00,1.00,1.00]
 
     medium-dots:
         mix: dots-medium
         shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
-
+            uniforms:
+                u_COLOR: [1.00,1.00,1.00]
     tiny-dots:
         mix: dots3
         shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
-
-    park-dots3:
-        mix: dots
-        shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: vec3(0.760,0.760,0.760)
-
+           uniforms:
+                u_COLOR: [1.00,1.00,1.00]
+                
     dots-rev:
         base: polygons
         mix: patterns-dots
