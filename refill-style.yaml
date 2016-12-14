@@ -1134,13 +1134,7 @@ styles:
                 COLOR2: color.rgb
             blocks:
                 color: |
-                    vec2 st = getTileCoords();
-                    st = tile(st,PATTERN_SCALE);
-                    float dot_size = DOT_SIZE;
-                    float b = circle(st, dot_size);
-                    color *= vec4(b);
-                filter: |
-                    color.rgb = mix(COLOR1, COLOR2, b);
+                    color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
 
     dots-medium:
         mix: dots
@@ -4096,7 +4090,7 @@ layers:
                     font:
                         family: global.text_font_family
                         fill: global.text_fill
-                        stroke: { color: global.text_stroke, width: 4 }
+                        # stroke: { color: global.text_stroke, width: 4 }
             # NOTE: This is a hack for localities because of an icon & text bug, see note below
             text-blend-order:
                 text_source: global.ux_language_text_source
@@ -4105,7 +4099,7 @@ layers:
                     family: global.text_font_family
                     # weight: 500
                     fill: global.text_fill
-                    stroke: { color: global.text_stroke, width: 4 }
+                    # stroke: { color: global.text_stroke, width: 4 }
 
             # END NOTE
 
@@ -4264,6 +4258,7 @@ layers:
                         buffer: 3px
                         font:
                             size: [[5,9px],[8,10px],[12,11px]]
+                            stroke: { color: global.text_stroke, width: 4 }
                             # fill: global.text_fill
                 text-blend-order:
                     visible: global.text_visible_populated_places
@@ -4271,6 +4266,7 @@ layers:
                     interactive: true
                     font:
                         size: [[5,9px],[8,10px],[12,11px]]
+                        stroke: { color: global.text_stroke, width: 4 }
                         # fill: global.text_fill
 
             #
