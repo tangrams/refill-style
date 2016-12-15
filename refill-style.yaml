@@ -4152,7 +4152,6 @@ layers:
                 visible: false    # labels are enabled by each layer below
                 font:
                     family: global.text_font_family
-                    # weight: 500
                     fill: global.text_fill
                     # stroke: { color: global.text_stroke, width: 4 }
 
@@ -4176,7 +4175,7 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            weight: 200
+                            weight: 300
                             size: 11px
                 early-ones:
                     # US, Brazil, China, Russia, Canada, Greenland, Iceland, Australia, India, Japan, Guam, Indonesia, South Africa, Egypt, Nigeria, Kenya
@@ -4188,8 +4187,9 @@ layers:
                 filter: { population: true, $zoom: [4] }
                 draw:
                     text-blend-order:
+                        buffer: 13px
                         font:
-                            weight: 200
+                            weight: 300
                             size: 13px
                 early-ones-z4:
                     filter: { name: [Nederland,Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,Crna Gora,Македонија,The Gambia,Burundi,Swaziland,الإمارات العربية المتحدة,العراق,Singapore,El Salvador,Belize,Trinidad and Tobago, Saint Lucia, Montserrat,Anguilla,República Dominicana,Bahamas,British Virgin Islands,Antigua and Barbuda,Grenada,Sint Maarten,Saint Kitts and Nevis,Cayman Islands,België - Belgique - Belgien], $zoom: {min: 4, max: 5} }
@@ -4256,7 +4256,7 @@ layers:
                         visible: global.text_visible_admin
                         font:
                             size: 11px
-                            weight: 400
+                            weight: normal
                             fill: [0.70,0.70,0.70]
             region-z5:
                 filter: { $zoom: [5], not: { name: ["Western Cape","Eastern Cape","Northern Cape","North West","Limpopo","KwaZulu-Natal","Hamburg","Freie und Hansestadt Hamburg","Neuchâtel","Nordrhein-Westfalen","Haute-Normandie","Baden-Württemberg","Bayern","Sachsen-Anhalt","Berlin","Mecklenburg-Vorpommern","Schleswig-Holstein","Brandenburg","Niedersachsen","Saarland","Thüringen","Hessen","Sachsen"] } }
@@ -4265,7 +4265,7 @@ layers:
                         visible: global.text_visible_admin
                         font:
                             size: 18px
-                            weight: 200
+                            weight: 300
             region-z6:
                 filter: { $zoom: [6], not: { name: ["Western Cape","Eastern Cape","Northern Cape","North West","Limpopo","KwaZulu-Natal","Hamburg","Freie und Hansestadt Hamburg","Neuchâtel","Nordrhein-Westfalen","Haute-Normandie","Baden-Württemberg","Bayern","Sachsen-Anhalt","Berlin","Mecklenburg-Vorpommern","Schleswig-Holstein","Brandenburg","Niedersachsen","Saarland","Thüringen","Hessen","Sachsen"] } }
                 draw:
@@ -4273,7 +4273,7 @@ layers:
                         visible: global.text_visible_admin
                         font:
                             size: 21px
-                            weight: 200
+                            weight: 300
                             transform: uppercase
 
             region:
@@ -4284,7 +4284,7 @@ layers:
                         text_source: global.ux_language_text_source_short_proxy_name
                         font:
                             size: 30px
-                            weight: 200
+                            weight: 300
                             transform: uppercase
                 pesky:
                     filter: { name: ["Western Cape","Eastern Cape","Northern Cape","North West","Limpopo","KwaZulu-Natal","Hamburg","Freie und Hansestadt Hamburg","Neuchâtel","Nordrhein-Westfalen","Haute-Normandie","Baden-Württemberg","Bayern","Sachsen-Anhalt","Berlin","Mecklenburg-Vorpommern","Schleswig-Holstein","Brandenburg","Niedersachsen","Saarland","Thüringen","Hessen","Sachsen"], $zoom: {min: 7, max: 8} }
