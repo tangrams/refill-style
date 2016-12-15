@@ -4735,62 +4735,56 @@ layers:
         neighbourhoods:
             filter:
                 kind: [macrohood, neighbourhood]
+                is_landuse_aoi: false
+            draw:
+                text-blend-order:
+                    priority: 18
+                    font:
+                        fill: [0.600,0.600,0.600]
+                        transform: uppercase
+                        stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
             neighborhood-z11:
                 filter:
                     all:
                         - $zoom: [11]
                         - min_zoom: [11]
                         - max_zoom: { min: 12 }
-                        - is_landuse_aoi: false
                         #- kind_tile_rank: { max: 6 }
                 draw:
                     text-blend-order:
-                        priority: 18
                         text_wrap: 10
                         visible: global.text_visible_neighbourhoods_e
                         font:
                             size: 9px
-                            weight: 400
-                            fill: [0.600,0.600,0.600]
-                            transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
+                            weight: normal
             neighborhood-z12:
                 filter:
                     all:
                         - $zoom: [12]
                         - min_zoom: [11,12]
                         - max_zoom: { min: 13 }
-                        - is_landuse_aoi: false
                         #- kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 18
                         text_wrap: 10
                         visible: global.text_visible_neighbourhoods_e
                         font:
                             size: 10px
-                            weight: 400
-                            fill: [0.600,0.600,0.600]
-                            transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
+                            weight: normal
             neighborhood-z13:
                 filter:
                     all:
                         - $zoom: [13]
                         - min_zoom: [11,12,13]
                         - max_zoom: { min: 14 }
-                        - is_landuse_aoi: false
                         - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 18
                         text_wrap: 10
                         visible: global.text_visible_neighbourhoods_e
                         font:
                             size: 12px
                             weight: 300
-                            fill: [0.620,0.620,0.620]
-                            transform: uppercase
                             stroke: { color: [1.0,1.0,1.0,0.7], width: 6 }
             neighborhood-z14:
                 filter:
@@ -4798,18 +4792,14 @@ layers:
                         - $zoom: [14]
                         - min_zoom: [11,12,13,14]
                         - max_zoom: { min: 15 }
-                        - is_landuse_aoi: false
                         - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 18
                         text_wrap: 12
                         visible: global.text_visible_neighbourhoods
                         font:
                             size: 16px
-                            weight: 200
-                            fill: [0.600,0.600,0.600]
-                            transform: uppercase
+                            weight: 300
                             stroke: { color: [1.0,1.0,1.0,0.7], width: 6 }
             neighborhood-z15:
                 filter:
@@ -4817,18 +4807,15 @@ layers:
                         - $zoom: [15]
                         - min_zoom: [11,12,13,14,15]
                         - max_zoom: { min: 16 }
-                        - is_landuse_aoi: false
                         - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 18
                         text_wrap: 12
                         visible: global.text_visible_neighbourhoods
                         font:
                             size: 21px
-                            weight: 200
+                            weight: 300
                             fill: [0.650,0.650,0.650]
-                            transform: uppercase
                             stroke: { color: [1.0,1.0,1.0,0.50], width: 8 }
                 z15-new:
                     filter:
@@ -4845,18 +4832,15 @@ layers:
                         - $zoom: [16]
                         - min_zoom: [11,12,13,14,15,16]
                         - max_zoom: { min: 17 }
-                        - is_landuse_aoi: false
                         - kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        priority: 18
                         visible: global.text_visible_neighbourhoods
                         font:
                             size: 24px
                             weight: 300
                             fill: [0.00,0.00,0.00,0.50]
-                            transform: uppercase
-                            stroke: { color: [1.0,1.0,1.0,0.85], width: 4 }
+                            stroke: { color: [1.0,1.0,1.0,0.50], width: 8 }
 
     pois_and_landuse_labels:
         data: { source: mapzen, layer: [pois] }
