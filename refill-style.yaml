@@ -3705,12 +3705,12 @@ layers:
                     color: [0.0,0.0,0.0]
                     width: [[13,0.5px],[14,1px],[15, 1px], [16, 1.5px], [18, 3px], [19, 5px]]
         airport-lines:
-            filter: { kind: aeroway }
+            filter: { kind: aeroway, kind_detail: [runway,taxiway] }
             draw:
                 lines:
-                    color: [[11, [0.25,0.25,0.25]], [17, [0.0,0.0,0.0]]]
+                    color: [[11,[0.25,0.25,0.25]],[17,[0.0,0.0,0.0]]]
                     cap: butt
-                    width: [[10, 1px], [11, 1.5px], [12, 2px], [13, 4px], [14, 8px], [15, 16px], [16, 32px], [17, 60m]]
+                    width: [[10,1px],[13,3px],[15,16px],[17,60m]]
                     outline:
                         color: [1.0,1.0,1.0]
             # Features come in at zoom 9, but include mostly minor airports without POIs until z13
@@ -3728,8 +3728,8 @@ layers:
                 filter: { kind_detail: taxiway }
                 draw:
                     lines:
-                        color: [[14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [0.0,0.0,0.0]]]
-                        width: [[14, 1px], [17, 1.5px], [18, 4m]]
+                        color: [[14,[0.75,0.75,0.75]],[15,[0.6,0.6,0.6]],[16,[0.3,0.3,0.3]],[17,[0.0,0.0,0.0]]]
+                        width: [[14,1px],[17,1.5px],[18,4m]]
                         outline:
                             width: 0.5px
                             color: [1.0,1.0,1.0]
