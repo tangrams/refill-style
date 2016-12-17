@@ -4353,7 +4353,8 @@ layers:
                                     size: 16px
 
         populated-places:
-            filter: { kind: locality }
+            filter:
+                kind: locality
             draw:
                 icons:
                     visible: global.icon_visible_populated_places
@@ -4428,21 +4429,29 @@ layers:
                         #color: yellow
                         #visible: false
 
+            sorry-denver:
+                filter:
+                    $zoom: [3]
+                    name: [Denver]
+                draw:
+                    icons:
+                        visible: false
+
             # HACK
             # NOTE: These should use icon: buffer instead of going visible: false, but there are problems using icon here :(
             # This fixes Paris area, but causes problems for small places in the USA eg Table Bluff near Eureka, California.
             funky-village:
-                filter: { kind_detail: [village], $zoom: [11], population: { max: 1000 } }
+                filter: { $zoom: [11], population: { max: 1000 }, kind_detail: [village] }
                 draw:
                     text-blend-order:
                         visible: false
             funky-isolated_dwelling:
-                filter: { kind_detail: [isolated_dwelling], $zoom: [13] }
+                filter: { $zoom: [13], kind_detail: [isolated_dwelling] }
                 draw:
                     text-blend-order:
                         visible: false
             hamlet:
-                filter: { kind_detail: hamlet, $zoom: [13] }
+                filter: { $zoom: [13], kind_detail: hamlet }
                 draw:
                     text-blend-order:
                         visible: false
@@ -4451,7 +4460,7 @@ layers:
             # someone in London and Salt Lake City thought neighbourhoods should be tagged place: locality
             # They were wrong
             funky-fake-neighbourhoods:
-                filter: { kind_detail: [locality], $zoom: { min: 13 } }
+                filter: { $zoom: { min: 13 }, kind_detail: [locality] }
                 draw:
                     text-blend-order:
                         visible: false
@@ -4497,6 +4506,7 @@ layers:
                         font:
                             size: [[4,10px],[6,14px],[8,18px],[10,20px],[12,20px],[13,0px]]
                 capital:
+                    # we only want townspots to show as capital dots starting at zoom 5
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
                         icons:
@@ -4521,6 +4531,7 @@ layers:
                         font:
                             size: [[4,10px],[6,14px],[8,15px],[12,18px],[13,0px]]
                 capital:
+                    # we only want townspots to show as capital dots starting at zoom 5
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
                         icons:
@@ -4612,12 +4623,10 @@ layers:
                         priority: 17
                         text:
                             font:
-                                # fill: [0.30,0.30,0.30]
                                 size: [[6,10px],[8,12px],[14,14px],[15,0px]]
                     text-blend-order:
                         priority: 17
                         font:
-                            # fill: [0.30,0.30,0.30]
                             size: [[6,10px],[8,12px],[14,14px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
@@ -4638,12 +4647,10 @@ layers:
                         priority: 19
                         text:
                             font:
-                                # fill: [0.30,0.30,0.30]
                                 size: [[9,10px],[14,12px],[15,0px]]
                     text-blend-order:
                         priority: 19
                         font:
-                            # fill: [0.30,0.30,0.30]
                             size: [[9,10px],[14,12px],[15,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
