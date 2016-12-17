@@ -19,6 +19,20 @@ global:
             // if a ux_langauge has been defined use that, else if there is feature name in the fallback_ux_language then use that, else use the feature's default name in the local language
             return (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature.name;
         }
+    ux_language_text_source_boundary_lines: |
+        function() {
+            var right = (global.ux_language && feature['name:right:'+global.ux_language]) || (global.ux_language_fallback && feature['name:right:'+global.ux_language_fallback]) || feature['name:right'];
+            var left = (global.ux_language && feature['name:left:'+global.ux_language]) || (global.ux_language_fallback && feature['name:left:'+global.ux_language_fallback]) || feature['name:left'];
+            if( right && left ) {
+                if( right.includes(' ') || left.includes(' ') ) {
+                    return left + " - " + right;
+                } else {
+                    return right + '\n' + left;
+                }
+            } else {
+                return (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature.name;
+            }
+        }
     ux_language_text_source_short: |
         function() {
             return (global.ux_language && feature['name:short:'+global.ux_language]) || (global.ux_language_fallback && feature['name:short:'+global.ux_language_fallback]) || feature['name:short'];
@@ -316,7 +330,7 @@ global:
 
     # boundaries:
     country_boundary:           '#ccc'
-    region_boundary:            '#ccc'
+    region_boundary:            [0.900,0.900,0.900]
     subregion_boundary:         '#ccc'
     city_wall:                  [0.682,0.682,0.682]
     retaining_wall:             [0.827,0.808,0.780]
@@ -773,6 +787,9 @@ styles:
     dashed:
         base: lines
         dash: [1.25, 1.25]
+    dashed_big:
+        base: lines
+        dash: [2.0, 1.0]
 
 ##### LIBRARY OF FUNCTIONS
 #    SPACE functions
@@ -3989,21 +4006,21 @@ layers:
             lines:
                 interactive: true
                 order: global.feature_order
-#                color: red
-#                width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
         country:
             filter:
-                kind: country
+                any:
+                    - kind: country
+                    - admin_level: 2
             draw:
                 country-outerline:
                     style: lines
                     order: function() { return (feature.sort_rank -1); }
-                    color: [[0, [0.70,0.70,0.70]], [6, [0.815,0.815,0.815]]]
-                    width: [[0, 0.5px], [2, 0.75px], [5, 1.7px], [6, 3.5px], [7, 4px], [9, 5px], [14, 7px], [16, 8px], [17, 14m]]
+                    color: [[0,[0.70,0.70,0.70]],[6,[0.825,0.825,0.825]]]
+                    width: [[0,0px],[6,3px],[14,7px],[17,14m]]
                 lines:
                     interactive: true
                     color: [1.0,1.0,1.0]
-                    width: [[0, 0px], [5, 0px], [6, 1px], [7, 1px], [9, 1px]]
+                    width: [[0, 0px],[5,0px],[6,1px]]
             water:
                 filter: { maritime_boundary: true }
                 draw:
@@ -4017,26 +4034,12 @@ layers:
                     text-blend-order:
                         priority: 2
                         visible: global.text_visible_admin
-                        text_source: global.ux_language_text_source
-                        # NOTE: there is a bug on feature order for country boundary names
-                        # text_source: |
-                        #     function() {
-                        #         if( feature['name:right'] && feature['name:left'] ) {
-                        #             if( feature['name:right'].includes(' ') || feature['name:left'].includes(' ') ) {
-                        #                 return feature['name'];
-                        #             } else {
-                        #                 return feature['name:left'] + '\n' + feature['name:right'];
-                        #             }
-                        #         } else {
-                        #             return feature['name'];
-                        #         }
-                        #     }
-                        text_wrap: 100px
+                        text_source: global.ux_language_text_source_boundary_lines
+                        text_wrap: 100
                         font:
                             family: global.text_font_family
                             size: 10px
                             fill: [0.00,0.00,0.00]
-                            # stroke: { color: global.text_stroke, width: 4 }
                             transform: uppercase
 
         other_country_boundary_disputed_etc:
@@ -4045,16 +4048,27 @@ layers:
                 dashed:
                     order: global.feature_order
                     color: global.country_boundary
-                    width: [[1, 0.2px], [2, 0.5px], [4, 1.0px], [9, 1.5px], [14, 2.5px], [16, 3.5px], [17, 10m]]
+                    width: [[1,0.2px],[9,1.5px],[17,10m]]
+            disputed:
+                filter: { kind: [disputed, line_of_control] }
+                draw:
+                    dashed:
+                        visible: false
+                    dashed_big:
+                        order: global.feature_order
+                        color: global.country_boundary
+                        width: [[1,0.5px],[9,2.5px],[17,14m]]
 
         region:
             filter:
-                kind: region
+                any:
+                    - kind: [region,macroregion]
+                    - kind_detail: [3,4]
             draw:
                 lines:
                     interactive: true
                     color: global.region_boundary
-                    width: [[0, 0.5px], [5, 0.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+                    width: [[0,0.5px],[5,1.5px],[9,3px],[14,5.5px],[16,6.5px],[17,16m]]
             water:
                 filter: { maritime_boundary: true }
                 draw:
@@ -4071,27 +4085,14 @@ layers:
                     text-blend-order:
                         priority: 3
                         visible: global.text_visible_admin
-                        #text_source: global.ux_language_text_source
-                        text_source: |
-                            function() {
-                                if( feature['name:right'] && feature['name:left'] ) {
-                                    if( feature['name:right'].includes(' ') || feature['name:left'].includes(' ') ) {
-                                        return feature['name'];
-                                    } else {
-                                        return feature['name:right'] + '\n' + feature['name:left'];
-                                    }
-                                } else {
-                                    return feature['name'];
-                                }
-                            }
-                        text_wrap: 100px
+                        text_source: global.ux_language_text_source_boundary_lines
+                        text_wrap: 100
                         offset: 10px
                         anchor: top
                         font:
                             family: global.text_font_family
                             size: 9px
                             fill: [0.4,0.4,0.4]
-                            # stroke: { color: global.text_stroke, width: 4 }
                             transform: uppercase
 
 #        subregions:
@@ -4734,53 +4735,55 @@ layers:
 
         neighbourhoods:
             filter:
-                kind: [macrohood, neighbourhood]
+                kind:
+                    - macrohood
+                    - neighbourhood
+                    - borough
+                $zoom: { min: 10 }
                 is_landuse_aoi: false
             draw:
                 text-blend-order:
-                    priority: 18
+                    visible: false
+                    priority: 29
+                    buffer: 8px
+                    text_wrap: 10
+                    max_lines: 2
                     font:
                         fill: [0.600,0.600,0.600]
                         transform: uppercase
                         stroke: { color: [1.0,1.0,1.0,0.7], width: 4 }
             neighborhood-z11:
                 filter:
-                    all:
-                        - $zoom: [11]
-                        - min_zoom: [11]
-                        - max_zoom: { min: 12 }
-                        #- kind_tile_rank: { max: 6 }
+                    $zoom: [11]
+                    min_zoom: [11]
+                    max_zoom: { min: 12 }
+                    #- kind_tile_rank: { max: 6 }
                 draw:
                     text-blend-order:
-                        text_wrap: 10
                         visible: global.text_visible_neighbourhoods_e
                         font:
                             size: 9px
                             weight: normal
             neighborhood-z12:
                 filter:
-                    all:
-                        - $zoom: [12]
-                        - min_zoom: [11,12]
-                        - max_zoom: { min: 13 }
-                        #- kind_tile_rank: { max: 8 }
+                    $zoom: [12]
+                    min_zoom: [11,12]
+                    max_zoom: { min: 13 }
+                    #- kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        text_wrap: 10
                         visible: global.text_visible_neighbourhoods_e
                         font:
                             size: 10px
                             weight: normal
             neighborhood-z13:
                 filter:
-                    all:
-                        - $zoom: [13]
-                        - min_zoom: [11,12,13]
-                        - max_zoom: { min: 14 }
-                        - kind_tile_rank: { max: 8 }
+                    $zoom: [13]
+                    min_zoom: [11,12,13]
+                    max_zoom: { min: 14 }
+                    kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
-                        text_wrap: 10
                         visible: global.text_visible_neighbourhoods_e
                         font:
                             size: 12px
@@ -4788,11 +4791,10 @@ layers:
                             stroke: { color: [1.0,1.0,1.0,0.7], width: 6 }
             neighborhood-z14:
                 filter:
-                    all:
-                        - $zoom: [14]
-                        - min_zoom: [11,12,13,14]
-                        - max_zoom: { min: 15 }
-                        - kind_tile_rank: { max: 8 }
+                    $zoom: [14]
+                    min_zoom: [11,12,13,14]
+                    max_zoom: { min: 15 }
+                    kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
                         text_wrap: 12
@@ -4803,11 +4805,10 @@ layers:
                             stroke: { color: [1.0,1.0,1.0,0.7], width: 6 }
             neighborhood-z15:
                 filter:
-                    all:
-                        - $zoom: [15]
-                        - min_zoom: [11,12,13,14,15]
-                        - max_zoom: { min: 16 }
-                        - kind_tile_rank: { max: 8 }
+                    $zoom: [15]
+                    min_zoom: [11,12,13,14,15]
+                    max_zoom: { min: 16 }
+                    kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
                         text_wrap: 12
@@ -4828,11 +4829,10 @@ layers:
                                 size: 13px
             neighborhood-z16:
                 filter:
-                    all:
-                        - $zoom: [16]
-                        - min_zoom: [11,12,13,14,15,16]
-                        - max_zoom: { min: 17 }
-                        - kind_tile_rank: { max: 8 }
+                    $zoom: [16]
+                    min_zoom: [11,12,13,14,15,16]
+                    max_zoom: { min: 17 }
+                    kind_tile_rank: { max: 8 }
                 draw:
                     text-blend-order:
                         visible: global.text_visible_neighbourhoods
