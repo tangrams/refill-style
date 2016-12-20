@@ -4490,7 +4490,7 @@ layers:
                             size: [[10,8px],[11,0px]]
                             sprite: capital-l
                             priority: 5
-                        text:
+                        text-blend-order:
                             priority: 5
             population-5m-10m:
                 filter:
