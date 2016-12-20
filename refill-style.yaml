@@ -4190,7 +4190,7 @@ layers:
                     draw:
                         text-blend-order:
                             visible: false
-                early-ones-z2:
+                early-ones-z3:
                     filter:
                         $zoom: [3]
                         name: [Nederland,Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,Crna Gora,Македонија,The Gambia,Burundi,Swaziland,الإمارات العربية المتحدة,العراق,Singapore,El Salvador,Belize,Trinidad and Tobago, Saint Lucia, Montserrat,Anguilla,República Dominicana,Bahamas,British Virgin Islands,Antigua and Barbuda,Grenada,Sint Maarten,Saint Kitts and Nevis,Cayman Islands,België - Belgique - Belgien,Deutschland,España]
