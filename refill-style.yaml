@@ -75,9 +75,15 @@ global:
             name = name.split(' ').join('\n');
             return name.split('').join(' ');
         }
+    ux_language_text_source_continent_stacked_only: |
+        function() {
+            var name = (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature['name'] || '';
+            return name.split(' ').join('\n');
+        }
     ux_language_text_source_continent: |
         function() {
             var name = (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature['name'] || '';
+            name = name.split(' ').join('\n');
             return name.split('').join(' ');
         }
     ux_language_text_source_road_ref_and_name: |
@@ -5993,6 +5999,42 @@ layers:
             draw:
                 text-blend-order:
                     visible: false
+
+    earth-labels:
+        data: { source: mapzen, layer: earth }
+        filter: { name: true }
+        continent:
+            filter: { kind: [continent], $zoom: {max: 5} }
+            draw:
+                text-blend-order:
+                    visible: global.text_visible_continent
+                    text_source: global.ux_language_text_source_continent_stacked_only
+                    text_wrap: false
+                    font:
+                        family: global.text_font_family
+                        size: [[1,11px],[3,14px]]
+                        style: italic
+                        fill: global.text_fill
+                        weight: normal
+                        transform: uppercase
+            continent-spacer:
+                filter: { $zoom: { min: 2 } }
+                draw:
+                    text-blend-order:
+                        text_source: global.ux_language_text_source_continent
+        island:
+            filter: { kind: [archipelago, island, islet] }
+            draw:
+                text-blend-order:
+                    visible: global.text_visible_island
+                    text_wrap: 10
+                    font:
+                        family: global.text_font_family
+                        size: 12px
+                        style: italic
+                        fill: global.text_fill
+                        weight: normal
+                        stroke: { color: global.text_stroke, width: 4 }
 
     landuse:
         data: { source: mapzen }
