@@ -4850,8 +4850,8 @@ layers:
                             fill: [0.00,0.00,0.00,0.50]
                             stroke: { color: [1.0,1.0,1.0,0.50], width: 8 }
 
-    pois_and_landuse_labels:
-        data: { source: mapzen, layer: [pois] }
+    pois:
+        data: { source: mapzen, layer: pois }
         filter:
             all:
                 - not: { kind: [building,address,farm,tree,apron,residential,commercial,industrial] }
@@ -5994,6 +5994,26 @@ layers:
                 visible: false
             polygons:
                 order: global.feature_order
+
+        landuse-labels:
+            filter:
+                all:
+                    - label_placement: true
+                    - name: true
+            draw:
+                text-blend-order:
+                    text_source: global.ux_language_text_source
+                    interactive: global.interactive
+                    move_into_tile: true
+                    priority: 100
+                    visible: global.text_visible_landuse_generic
+                    font:
+                        fill: '#666'
+                        family: global.text_font_family
+                        style: italic
+                        size: 11px
+                        stroke: { color: global.text_stroke_address, width: 1 }
+
         tier1:
             # filter:
             #     any:
