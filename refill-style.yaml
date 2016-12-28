@@ -394,6 +394,9 @@ global:
 
 
 textures:
+    sdf-dot:
+        url: images/dot-sdf.png
+
     pois:
         url: images/refill@2x.png
         filtering: mipmap
@@ -878,23 +881,26 @@ styles:
                         return r-0.5;
                     }
 #    Drawing Shapes functions
-    shapes-circle:
+    sdf-shape:
         mix: functions-aastep
         shaders:
-            defines:
-                PI: 3.14159265358979323846
+            uniforms:
+                u_sdf: sdf-dot
+                u_shape_stroke: 0.15
             blocks:
                 global: |
-                    // get distance field of a Circle
+                    // get distance field of a shape or pattern
                     // ================================
-                    float circleDF (vec2 st) {
-                        return dot(st,st);
+                    float getSDF (vec2 st) {
+                        return texture2D(u_sdf, st).r;
                     }
-                    //
-                    // Draw a circle in the middle of the ST space
-                    // ================================
-                    float circle (vec2 st, float radius) {
-                        return 1.-aastep(radius, circleDF(st-vec2(0.5))*PI);
+
+                    float fill (in float size, in float sdf) {
+                        return 1.-aastep(size, sdf);
+                    }
+
+                    float stroke (in float size, in float sdf) {
+                        return aastep(size, sdf+u_shape_stroke) - aastep(size, sdf);
                     }
     shapes-rect:
         shaders:
@@ -966,10 +972,14 @@ styles:
                         }
                     }
     patterns-dots:
-        mix: [space-tile, tiling-brick, shapes-circle]
+        mix: [space-tile, tiling-brick, functions-aastep]
         shaders:
             blocks:
                 global: |
+                    float circleDF (vec2 st) {
+                        return dot(st,st)*3.03;
+                    }
+
                     // Interpolated dot patern between zooms attached to tile coords
                     float TileDots(float scale, float size) {
                         // Beginning of the transition
@@ -1106,60 +1116,33 @@ styles:
                     color = mix(vec4(color.rgb, 0.4), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
 
     dots:
-        mix: [space-tile, tiling-tile, shapes-circle]
+        mix: [space-tile, tiling-tile, sdf-shape]
         base: polygons
         shaders:
+            uniforms:
+                u_pattern_scale: 50.
+                u_dot_size: .05
             defines:
-                PATTERN_SCALE: 50.0
-                DOT_SIZE: .1
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+                PATTERN_SCALE: u_pattern_scale
+                DOT_SIZE: u_dot_size
+                BACKGROUND_COLOR: vec3(1.)
             blocks:
                 color: |
-                    color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
-
-    dots-medium:
-        mix: dots
-        base: polygons
-        shaders:
-            defines:
-                PATTERN_SCALE: 60.0
-                DOT_SIZE: .25
-    dots3:
-        mix: dots
-        base: polygons
-        shaders:
-            defines:
-                PATTERN_SCALE: 70.0
-                DOT_SIZE: .125
-
-    park-dots1:
-        mix: dots
-        shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
-
+                    color.rgb = mix(BACKGROUND_COLOR, color.rgb, fill(DOT_SIZE, getSDF(tile(getTileCoords(),PATTERN_SCALE))));
     medium-dots:
-        mix: dots-medium
-        shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
-
-    tiny-dots:
-        mix: dots3
-        shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
-
-    park-dots3:
         mix: dots
+        base: polygons
         shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: vec3(0.760,0.760,0.760)
+            uniforms:
+                u_pattern_scale: 60.
+                u_dot_size: .16
+    tiny-dots:
+        mix: dots
+        base: polygons
+        shaders:
+            uniforms:
+                u_pattern_scale: 70.
+                u_dot_size: .125
 
     dots-rev:
         base: polygons
@@ -5663,7 +5646,7 @@ layers:
     landuse:
         data: { source: mapzen }
         draw:
-            park-dots1:
+            dots:
                 order: global.feature_order
                 visible: false
             medium-dots:
@@ -5736,7 +5719,7 @@ layers:
                         - not: { operator: [ "United States Forest Service" ] }
                         - protect_class: ['2','3','5']
                 draw:
-                    park-dots1:
+                    dots:
                         interactive: true
                         color: [0.790,0.790,0.790]
                         # todo: what is this?
@@ -5812,7 +5795,7 @@ layers:
                         - not: { protect_class: ['2','3','5','6'] }
                 # default for national forests and more?
                 draw:
-                    park-dots1:
+                    dots:
                         color: [0.760,0.760,0.760]
                         visible: true
                 national_park:
@@ -5894,7 +5877,8 @@ layers:
                 filter:
                     kind: cemetery
                 draw:
-                    tiny-dots:
+                    medium-dots:
+                    #tiny-dots:
                         color: [0.890,0.890,0.890]
                         visible: true
             # commercial:
@@ -6044,7 +6028,8 @@ layers:
                 filter:
                     kind: garden
                 draw:
-                    tiny-dots:
+                    medium-dots:
+                    #tiny-dots:
                         color: [0.760,0.760,0.760]
                         visible: true
             parking:
@@ -6069,7 +6054,7 @@ layers:
                 filter:
                     kind: [pedestrian,common]
                 draw:
-                    park-dots1:
+                    dots:
                         color: [0.950,0.950,0.950]
                         visible: global.grey1_v
                 green-stuff:
@@ -6081,7 +6066,8 @@ layers:
             pitch:
                 filter: { kind: pitch }
                 draw:
-                    tiny-dots:
+                    medium-dots:
+                    #tiny-dots:
                         color: [0.90,0.90,0.90]
                         visible: true
                     outline:
