@@ -1,4 +1,4 @@
-# Refill provides a high contrast, black & white basemap useful for data visualization.
+﻿# Refill provides a high contrast, black & white basemap useful for data visualization.
 # Give OpenStreetMap data a professional basemap skin using the Tangram graphics library
 # and Mapzen's versatile Vector Tiles.
 #
@@ -1121,7 +1121,7 @@ styles:
         shaders:
             uniforms:
                 u_pattern_scale: 50.
-                u_dot_size: .1
+                u_dot_size: .05
             defines:
                 PATTERN_SCALE: u_pattern_scale
                 DOT_SIZE: u_dot_size
@@ -1135,7 +1135,7 @@ styles:
         shaders:
             uniforms:
                 u_pattern_scale: 60.
-                u_dot_size: .25
+                u_dot_size: .16
     tiny-dots:
         mix: dots
         base: polygons
@@ -1143,7 +1143,7 @@ styles:
             uniforms:
                 u_pattern_scale: 70.
                 u_dot_size: .125
-                
+
     dots-rev:
         base: polygons
         mix: patterns-dots
@@ -6179,7 +6179,8 @@ layers:
                 filter:
                     kind: cemetery
                 draw:
-                    tiny-dots:
+                    medium-dots:
+                    #tiny-dots:
                         color: [0.890,0.890,0.890]
                         visible: true
             # commercial:
@@ -6329,7 +6330,8 @@ layers:
                 filter:
                     kind: garden
                 draw:
-                    tiny-dots:
+                    medium-dots:
+                    #tiny-dots:
                         color: [0.760,0.760,0.760]
                         visible: true
             parking:
@@ -6366,7 +6368,8 @@ layers:
             pitch:
                 filter: { kind: pitch }
                 draw:
-                    tiny-dots:
+                    medium-dots:
+                    #tiny-dots:
                         color: [0.90,0.90,0.90]
                         visible: true
                     outline:
