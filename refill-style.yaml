@@ -24,11 +24,11 @@ global:
             var right = (global.ux_language && feature['name:right:'+global.ux_language]) || (global.ux_language_fallback && feature['name:right:'+global.ux_language_fallback]) || feature['name:right'];
             var left = (global.ux_language && feature['name:left:'+global.ux_language]) || (global.ux_language_fallback && feature['name:left:'+global.ux_language_fallback]) || feature['name:left'];
             if( right && left ) {
-                if( right.includes(' ') || left.includes(' ') ) {
+                //if( right.includes(' ') || left.includes(' ') ) {
                     return left + " - " + right;
-                } else {
-                    return right + '\n' + left;
-                }
+                //} else {
+                //    return right + '\n' + left;
+                //}
             } else {
                 return (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature.name;
             }
@@ -4400,18 +4400,18 @@ layers:
             #
             # NOTE: So instead we play a shell game with symbolizers per zoom
             #
-            _icons_later: 
+            _icons_later:
                 filter: { $zoom: { min: 11 } }
                 draw:
-                    icons: 
+                    icons:
                         visible: false
                     text-blend-order:
                         visible: global.text_visible_populated_places
 
-            _text_early: 
+            _text_early:
                 filter: { $zoom: { max: 11 } }
                 draw:
-                    text-blend-order: 
+                    text-blend-order:
                         visible: false
             # END HACK
 
@@ -5987,7 +5987,7 @@ layers:
         water-line-labels:
             draw:
                 text-blend-order:
-                    font: 
+                    font:
                         size: [[14,10px],[17,14px]]
         not-river-not-stream:
             filter: { kind: [canal,dam,ditch,drain], $zoom: { max: 16 } }
