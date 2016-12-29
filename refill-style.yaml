@@ -199,6 +199,9 @@ global:
     sdk_shield_color: black
     sdk_shield_text_color: white
     #
+    # enable interactivity for key features
+    sdk_interactive: true
+    #
     # default order for basemap features
     feature_order: function() { return feature.sort_rank; }
     #
@@ -1309,25 +1312,25 @@ styles:
     ux-location-gem-overlay:
         base: points
         texture: pois
-        interactive: true
+        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 2
     ux-icons-overlay:
         base: points
         texture: pois
-        interactive: true
+        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-point-overlay:
         base: points
         texture: pois
-        interactive: true
+        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-shield-overlay:
         base: points
         texture: pois
-        interactive: true
+        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-line-overlay:
@@ -1389,7 +1392,7 @@ layers:
         data: { source: mz_current_location }
         draw:
             ux-location-gem-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 sprite: ux-current-location
                 size: 36px
                 collide: false
@@ -1400,7 +1403,7 @@ layers:
         data: { source: mz_route_location }
         draw:
             ux-location-gem-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 sprite: ux-route-arrow
                 size: [60px,60px]
                 collide: false
@@ -1411,7 +1414,7 @@ layers:
         data: { source: mz_route_start }
         draw:
             ux-icons-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 priority: 1
                 sprite: ux-route-start
                 size: [36px,46px]
@@ -1424,7 +1427,7 @@ layers:
         data: { source: mz_route_destination }
         draw:
             ux-icons-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 priority: 1
                 sprite: ux-route-stop
                 size: [36px,46px]
@@ -1437,7 +1440,7 @@ layers:
         data: { source: mz_route_transit_stop }
         draw:
             ux-icons-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 sprite: ux-transit-stop
                 size: [15px,15px]
                 collide: false
@@ -1448,7 +1451,7 @@ layers:
         data: { source: mz_search_result }
         draw:
             ux-icons-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 sprite: ux-search-active
                 size: [36px,54px]
                 collide: false
@@ -1465,7 +1468,7 @@ layers:
         data: { source: mz_dropped_pin }
         draw:
             ux-icons-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 sprite: ux-search-active
                 size: [36px,54px]
                 collide: false
@@ -1479,7 +1482,7 @@ layers:
         data: { source: mz_default_point }
         draw:
             sdk-point-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 sprite: ux-search-active
                 size: [36px,54px]
                 collide: false
@@ -1491,7 +1494,7 @@ layers:
         data: { source: mz_default_shield }
         draw:
             sdk-shield-overlay:
-                interactive: true
+                interactive: global.sdk_interactive
                 sprite: |
                     function() {
                         if( feature.ref ) {
@@ -1662,7 +1665,6 @@ layers:
         data: { source: mapzen, layer: water }
         draw:
             waves:
-                #interactive: true
                 order: global.feature_order
                 color: [0.880, 0.880, 0.880]
         later:
@@ -1760,7 +1762,6 @@ layers:
             draw:
                 stream-waves:
                     order: global.feature_order
-                    interactive: true
                     color: [0.840,0.840,0.840]
                     width: [[14,0.5px],[15,2.0px],[17,6.0px],[18,8.0px]]
                     cap: round
@@ -1770,7 +1771,6 @@ layers:
         filter: { not: { kind: [platform] }, $zoom: { min: 14 } }
         draw:
             lines:
-                interactive: true
                 order: function() { return feature.sort_rank || 275; }
         railway:
             filter: { kind: [railway,train] }
@@ -1797,7 +1797,6 @@ layers:
         filter: { kind: rail, not: { railway: [subway,light_rail,tram] } }
         draw:
             lines:
-                interactive: true
                 color: [[14,'#bbb'],[16,'#999']]
                 width: [[12,0px],[13,0.25px],[14,0.4px],[15,0.75px],[16,0.75px],[18,1px]]
                 # let roads sort themselves past zoom 14
@@ -1851,7 +1850,6 @@ layers:
         filter: { not: { kind: rail } }
         draw:
             lines:
-                interactive: true
                 #color: black
                 width: 1px
                 order: global.feature_order
@@ -3677,7 +3675,6 @@ layers:
             filter: { kind: racetrack }
             draw:
                 lines:
-                    interactive: true
                     cap: round
                     join: round
                     color: [0.0,0.0,0.0]
@@ -3726,7 +3723,6 @@ layers:
             filter: { kind: aerialway }
             draw:
                 lines:
-                    interactive: true
                     color: [0.5,0.5,0.5]
                     width: [[14, 0.5px], [15, 1.0px], [16, 2m]]
             gondola_cable_car:
@@ -3792,11 +3788,6 @@ layers:
                 order: 330
                 color: [[14, [0.8,0.8,0.8]], [15, [0.78,0.78,0.78]], [16, [0.67,0.67,0.67]],[17, [0.56,0.56,0.56]],[18, [0.45,0.45,0.45]], [19, [0.37,0.37,0.37]]]
                 width: [[14,0.3px],[15,0.5px],[16,0.75px],[18,0.75px],[19,1px]]
-
-        # turn interactive feature selection on for buildings with names
-        interactive:
-            filter: { name: true }
-            draw: { polygons: { interactive: true } }
 
         # building footprints, pre-extrusion
         footprints:
@@ -3922,7 +3913,7 @@ layers:
                 - { $zoom: { min: 20 }, name: true }
         draw:
             text-blend-order:
-                interactive: true
+                interactive: global.sdk_interactive
                 text_source: global.ux_language_text_source_building_and_address
                 move_into_tile: true
                 priority: 51
@@ -3967,7 +3958,7 @@ layers:
                 - { label_position: true, addr_housenumber: true, name: false }
         draw:
             text-blend-order:
-                interactive: true
+                interactive: global.sdk_interactive
                 order: 7
                 visible: global.text_visible_address
                 text_source: addr_housenumber
@@ -3983,7 +3974,6 @@ layers:
         # country subdivisions (states, provinces)
         draw:
             lines:
-                interactive: true
                 order: global.feature_order
         country:
             filter:
@@ -3997,7 +3987,6 @@ layers:
                     color: [[0,[0.70,0.70,0.70]],[6,[0.825,0.825,0.825]]]
                     width: [[0,0px],[6,3px],[14,7px],[17,14m]]
                 lines:
-                    interactive: true
                     color: [1.0,1.0,1.0]
                     width: [[0, 0px],[5,0px],[6,1px]]
             water:
@@ -4045,7 +4034,6 @@ layers:
                     - kind_detail: [3,4]
             draw:
                 lines:
-                    interactive: true
                     color: global.region_boundary
                     width: [[0,0.5px],[5,1.5px],[9,3px],[14,5.5px],[16,6.5px],[17,16m]]
             water:
@@ -4074,20 +4062,10 @@ layers:
                             fill: [0.4,0.4,0.4]
                             transform: uppercase
 
-#        subregions:
-#            filter: { kind: county, $zoom: { min: 10 } }
-#            draw:
-#                lines:
-#                    interactive: true
-#                    order: 6
-#                    color: global.subregion_boundary
-#                    width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
-
         # city_walls:
         #     filter: { kind: city_wall }
         #     draw:
         #         lines:
-        #             interactive: true
         #             order: 8
         #             color: global.city_wall
         #             width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
@@ -4095,14 +4073,12 @@ layers:
             filter: { kind: retaining_wall }
             draw:
                 lines:
-                    interactive: true
                     color: [0.90,0.90,0.90] # global.retaining_wall
                     width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
         # snow_fence:
         #     filter: { kind: snow_fence }
         #     draw:
         #         lines:
-        #             interactive: true
         #             order: 8
         #             color: [1.0,0.0,0.0] # global.snow_fence
         #             width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
@@ -4111,7 +4087,6 @@ layers:
             filter: { kind: fence }
             draw:
                 lines:
-                    interactive: true
                     color: [1.0,1.0,1.0]
                     width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 1m]]
 
@@ -4337,7 +4312,6 @@ layers:
             draw:
                 icons:
                     visible: global.icon_visible_populated_places
-                    interactive: true
                     size: [[10,4px],[11,0px]]
                     sprite: townspot-xs-rev
                     buffer: 8px
@@ -4352,7 +4326,6 @@ layers:
                 text-blend-order:
                     visible: global.text_visible_populated_places
                     buffer: 10px
-                    interactive: true
                     font:
                         size: [[5,9px],[8,10px],[12,11px]]
                         stroke: { color: global.text_stroke, width: 4 }
@@ -4896,7 +4869,7 @@ layers:
                 size: global.icon_size
                 sprite: function() { return feature.kind; }
                 sprite_default: generic
-                interactive: global.interactive
+                interactive: global.sdk_interactive
                 priority: 65 #function() { return (feature.min_zoom && Math.floor(feature.min_zoom * 1000)) || 65; }
                 repeat_group: abc
                 buffer: 3px
@@ -5728,7 +5701,7 @@ layers:
             draw:
                 text-blend-order:
                     text_source: global.ux_language_text_source
-                    interactive: global.interactive
+                    interactive: global.sdk_interactive
                     move_into_tile: true
                     priority: 100
                     visible: global.text_visible_landuse_generic
@@ -5767,7 +5740,6 @@ layers:
                         - protect_class: ['2','3','5']
                 draw:
                     park-dots1:
-                        interactive: true
                         color: [0.790,0.790,0.790]
                         # todo: what is this?
                         order: 18
