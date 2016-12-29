@@ -11,6 +11,10 @@
 #
 
 global:
+    # Sign up for a Mapzen API key to enjoy higher rate limits
+    # https://mapzen.com/documentation/overview/#developer-accounts-and-api-keys
+    sdk_mapzen_api_key: mapzen-xxxxxx     # set this value to your Mapzen API key
+
     #ux/ui
     ux_language: false             # l10n language code, trusting OSM in v0.10 tiles, fixed in v1.0 tiles
     ux_language_fallback: false    # l10n language code, trusting OSM in v0.10 tiles, fixed in v1.0 tiles
@@ -698,7 +702,7 @@ sources:
         type: TopoJSON #GeoJSON, MVT, TopoJSON
         url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
         url_params:
-            api_key: vector-tiles-W2tPU-Y
+            api_key: global.sdk_mapzen_api_key
         #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
         # url:  //localhost:8080/vector/all/{z}/{x}/{y}.topojson
         max_zoom: 16
