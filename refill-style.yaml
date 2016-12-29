@@ -198,7 +198,6 @@ global:
     # SHIELDS
     sdk_shield_color: black
     sdk_shield_text_color: white
-    sdk_shield_visible: true
     #
     # default order for basemap features
     feature_order: function() { return feature.sort_rank; }
@@ -215,10 +214,10 @@ global:
     text_visible_address:           true
     text_visible_water_labels:      true
     text_visible_island:            true
-    label_visible_landuse_green:    true                       #this needs work
-    icon_visible_landuse_green:     true                       #this needs work
-    icon_size_green: 0px                                       # 0px for no, default, more  [[13, 14px], [16, 18px], [18, 19px]]
-    icon_size_green_l: 0px                                     # 0px for no, default, more  [[14,24px],[16,32px]]
+    label_visible_landuse_green:    true                        #this needs work
+    icon_visible_landuse_green:     true                        #this needs work
+    icon_size_green: [[0, '0px']]                               # 0px for no, default, more  [[13, 14px], [16, 18px], [18, 19px]]
+    icon_size_green_l: [[0, '0px']]                             # 0px for no, default, more  [[14,24px],[16,32px]]
     text_visible_landuse_green:     true
     label_visible_poi_landuse:      false                      #false on default
     icon_visible_poi_landuse:       false                      #false on default
@@ -245,7 +244,7 @@ global:
     text_visible_piste:             true
     text_visible_steps:             true
     text_visible_aerialway:         true
-    text_visible_shields:           true
+    sdk_road_shields:               true
     text_visible_exits:             true
     text_visible_exits_e:           false                      #false on default, still false on more
     text_visible_airport_gate:      true
@@ -1976,7 +1975,7 @@ layers:
             #     draw:
             #         text-blend-order:
             #             priority: 50
-            #             visible: global.text_visible_shields
+            #             visible: global.sdk_road_shields
             #             text_source: ref
             #             font:
             #                 fill: [0.35,0.35,0.35]
@@ -1988,7 +1987,7 @@ layers:
             #         $zoom: 10
             #     draw:
             #         text-blend-order:
-            #             visible: global.text_visible_shields
+            #             visible: global.sdk_road_shields
             #             text_source: ref
             #             font:
             #                 fill: [0.25,0.25,0.25]
@@ -2000,7 +1999,7 @@ layers:
             #         $zoom: 11
             #     draw:
             #         text-blend-order:
-            #             visible: global.text_visible_shields
+            #             visible: global.sdk_road_shields
             #             text_source: ref
             #             font:
             #                 fill: [0.25,0.25,0.25]
@@ -2012,7 +2011,7 @@ layers:
             #         $zoom: 12
             #     draw:
             #         text-blend-order:
-            #             visible: global.text_visible_shields
+            #             visible: global.sdk_road_shields
             #             text_source: ref
             #             font:
             #                 fill: global.text_fill
@@ -2892,7 +2891,7 @@ layers:
                     # that makes United States look a bit funky with `(xxx)` and generic shields
                     # showing up in fields of custom state shields like US:CA and US:NY
                     #
-                    - function() { return global.sdk_shield_visible; }
+                    - function() { return global.sdk_road_shields; }
                     - any:
                         - shield_text: true    # some roads don't have shield text, deal with that later
                         - all:
@@ -2952,7 +2951,7 @@ layers:
                     icons:
                         priority: 47
                         #color: yellow
-                        visible: global.text_visible_shields
+                        visible: global.sdk_road_shields
 
             default_priority_trunk:
                 filter:
@@ -2963,7 +2962,7 @@ layers:
                     icons:
                         priority: 48
                         #color: red
-                        visible: global.text_visible_shields
+                        visible: global.sdk_road_shields
             default_priority_primary:
                 filter:
                     all:
@@ -2973,7 +2972,7 @@ layers:
                     icons:
                         priority: 49
                         #color: aqua
-                        visible: global.text_visible_shields
+                        visible: global.sdk_road_shields
             default_priority_trunk_secondary:
                 filter:
                     all:
@@ -2983,7 +2982,7 @@ layers:
                     icons:
                         priority: 53
                         #color: blue
-                        visible: global.text_visible_shields
+                        visible: global.sdk_road_shields
             default_priority_trunk_tertiary:
                 filter:
                     all:
@@ -2993,7 +2992,7 @@ layers:
                     icons:
                         priority: 55
                         #color: green
-                        visible: global.text_visible_shields
+                        visible: global.sdk_road_shields
             # not-special:
             #     filter:
             #         not: { network: ['US:I','US:US'] }
@@ -3110,7 +3109,7 @@ layers:
                             # you need to match any custom shield to the vector tile `network` values
                             sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
                             priority: 46
-                            visible: global.text_visible_shields
+                            visible: global.sdk_road_shields
                             text:
                                 offset: [0px, 0.5px]
                                 font:
@@ -3153,7 +3152,7 @@ layers:
                                 function() { return ('US:US-' + feature.shield_text.length + 'char'); }
                             priority: 47
                             cull_from_tile: true
-                            visible: global.text_visible_shields
+                            visible: global.sdk_road_shields
                             text:
                                 offset: [0px, -0.7px]
                                 font:
@@ -3223,17 +3222,17 @@ layers:
                         filter: { kind_detail: [motorway], $zoom: [7,8] }
                         draw:
                             icons:
-                                visible: global.text_visible_shields
+                                visible: global.sdk_road_shields
                     trunk:
                         filter: { kind_detail: [trunk], $zoom: [8,9] }
                         draw:
                             icons:
-                                visible: global.text_visible_shields
+                                visible: global.sdk_road_shields
                     primary:
                         filter: { kind_detail: primary, $zoom: [10,11] }
                         draw:
                             icons:
-                                visible: global.text_visible_shields
+                                visible: global.sdk_road_shields
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
                         draw:
@@ -3380,7 +3379,7 @@ layers:
                             # you need to match any custom shield to the vector tile `network` values
                             sprite: function() { return ('county_shield-' + feature.shield_text.length + 'char'); }
                             # priority: 19
-                            visible: global.text_visible_shields
+                            visible: global.sdk_road_shields
                             text:
                                 font:
                                     fill: [0.00,0.00,0.00]
@@ -5017,219 +5016,220 @@ layers:
                     text: { font: { style: italic } }
 
         # the server should be setting better values here
-        hide-until-z12-any:
-            filter:
-                kind: [landmark, museum, prison]
-                $zoom: { max: 12 }
-            draw:
-                icons:
-                    visible: false
-        hide-until-z14-any:
-            filter:
-                kind: [natural_forest, natural_park, natural_wood, post_office]
-                $zoom: { max: 14 }
-            draw:
-                icons:
-                    visible: false
-        hide-until-z15-any:
-            filter:
-                $zoom: { max: 15 }
-                kind: [cafe, restaurant]
-            draw:
-                icons:
-                    visible: false
-        hide-until-z15-no-area:
-            filter:
-                area: false
-                $zoom: { max: 15 }
-                kind: [park]
-            draw:
-                icons:
-                    visible: false
-        hide-until-z15-with-area:
-            filter:
-                area: true
-                $zoom: { max: 15 }
-                kind: [nursing_home]
-            draw:
-                icons:
-                    visible: false
-        hide-until-z16-any:
-            filter:
-                kind: [fire_station, grass, peak, police, tram_stop]
-                $zoom: { max: 16 }
-            draw:
-                icons:
-                    visible: false
-        hide-until-z16-no-area:
-            filter:
-                area: false
-                kind: [allotments, college, garden, university]
-                $zoom: { max: 16 }
-            draw:
-                icons:
-                    visible: false
-        # no POIs for commercial, residential
-        hide-until-z17-any:
-            filter:
-                $zoom: { max: 17 }
-                kind: [bank, bus_stop, car_sharing, wood]
-            draw:
-                icons:
-                    visible: false
-        hide-until-z17-with-area:
-            filter:
-                area: true
-                $zoom: { max: 17 }
-                kind: [common, grass, houseboat, pedestrian, pitch, railway, ship, wetland]
-            draw:
-                icons:
-                    visible: false
-        hide-until-z17-no-area:
-            filter:
-                area: false
-                $zoom: { max: 17 }
-                # note: atm and drinking_water appear hear and in area versions
-                kind: [accountant, administrative, advertising_agency, animal, architect, association, atm, bakery, bed_and_breakfast, bicycle, bicycle_parking, bicycle_rental_station, books, butcher, car, car_repair, chalet, clothes, company, computer, consulting, convenience, doityourself, drinking_water, dry_cleaning, educational_institution, emergency_phone, employment_agency, estate_agent, fashion, financial, florist, foundation, gift, government, greengrocer, guest_house, hairdresser, hostel, hotel, insurance, it, jewelry, lawyer, mast, memorial, mobile_phone, motel, newspaper, ngo, notary, optician, parking, pet, physician, playground, political_party, post_box, religion, research, subway_entrance, tax_advisor, telecommunication, telephone, theatre, therapist, toilets, traffic_signals, travel_agent, water_tower]
-            draw:
-                icons:
-                    visible: false
-        hide-until-z18-any:
-            filter:
-                kind: [atm, bus_stop, drinking_water]
-                $zoom: { max: 18 }
-            draw:
-                icons:
-                    visible: false
-        hide-until-z18-no-area:
-            filter:
-                $zoom: { max: 18 }
-                area: false
-                kind: [bench, parking, waste_basket]
-            draw:
-                icons:
-                    visible: false
-        hide-until-z19-any:
-            filter:
-                $zoom: { max: 19 }
-                kind: [bicycle_parking, burial_vault, car_sharing]
-            draw:
-                icons:
-                    visible: false
-
-        # hide based on kind and area filters
-        military-early:
-            filter:
-                kind: [military]
-                any:
-                    # show labels for smaller landuse areas at higher zooms
-                    - { $zoom: [8], area: { max: 50000000 } }
-            draw:
-                icons:
-                    visible: false
-        university-early:
-            filter:
-                kind: [university, college]
-                any:
-                    # show labels for smaller landuse areas at higher zooms
-                    - { $zoom: [11], area: { max: 2000000 } }
-                    - { $zoom: [12], area: { max: 500000 } }
-            draw:
-                icons:
-                    visible: false
-        school-early:
-            filter:
-                kind: [school, kindergarten]
-                any:
-                    # show labels for smaller landuse areas at higher zooms
-                    - { $zoom: [13], area: { max: 100000 } }
-                    - { $zoom: [14], area: { max: 50000 } }
-                    - { $zoom: [15], area: { max: 10000 } }
-                    - { $zoom: [16], area: { max: 5000 } }
-                    - { $zoom: [17], area: { max: 2000 } }
-            draw:
-                icons:
-                    visible: false
-        garden-area-early:
-            filter:
-                kind: [garden, allotments]
-                any:
-                    # limit show smaller landuse areas to higher zooms
-                    - { $zoom: [12], area: { max: 500000 } }
-                    - { $zoom: [13], area: { max: 100000 } }
-                    - { $zoom: [14], area: { max: 10000 } }
-                    - { $zoom: [15], area: { max: 5000 } }
-            draw:
-                icons:
-                    visible: false
-        cemetery-early:
-            filter:
-                kind: [cemetery]
-                # limit show smaller landuse areas to higher zooms
-                any:
-                    - { $zoom: [12], area: { max: 3000000 } }
-            draw:
-                icons:
-                    visible: false
-        golf_course-early:
-            filter:
-                kind: golf_course
-                any:
-                    - { $zoom: [12], area: { max: 2500000 } }
-            draw:
-                icons:
-                    visible: false
-        office-early:
-            filter:
-                - { kind: [insurance, office, company], $zoom: [15], area: { max: 10000 } }
-                - { kind: [insurance, office, company], $zoom: [16], area: { max: 5000 } }
-            draw:
-                icons:
-                    visible: false
-        landuse-labels-green-areas-not-national-park:
-            filter:
-                kind: [park, conservation, protected_area, nature_reserve, forest, grass]
-                any:
-                # show labels for smaller landuse areas at higher zooms
-                - { $zoom: { max: 6 }, area: true }
-                - { $zoom: [6],    area: { max: 5000000000 } }
-                - { $zoom: [7],    area: { max: 5000000000 } }
-                - { $zoom: [8],    area: { max: 1000000000 } }
-                - { $zoom: [9],    area: { max: 100000000 } }
-                - { $zoom: [10],   area: { max: 50000000 } }
-                - { $zoom: [11],   area: { max: 25000000 } }
-                - { $zoom: [12],   area: { max: 5000000 } }
-                - { $zoom: [13],   area: { max: 200000 } }
-                - { $zoom: [14],   area: { max: 50000 } }
-                - { $zoom: [15],   area: { max: 10000 } }
-                - { $zoom: [16],   area: { max: 1000 } }
-            draw:
-                icons:
-                    visible: false
-            wilderness-areas-early:
-                filter: function() { return $zoom < 9 && feature.name && (feature.name.indexOf("Wilderness") > -1 || feature.name.indexOf("BLM") > -1 || feature.protect_class == '1' || feature.protect_class == '1a' || feature.protect_class == '1b' ); }
+        z-server-friend:
+            hide-until-z12-any:
+                filter:
+                    kind: [landmark, museum, prison]
+                    $zoom: { max: 12 }
                 draw:
                     icons:
                         visible: false
-            not-national-park:
-                filter: function() { return feature.name && !((feature.name.indexOf("National Park") > -1) || feature.name.indexOf("National Monument") > -1); }
-                early:
-                    filter: { $zoom: { max: 8 } }
+            hide-until-z14-any:
+                filter:
+                    kind: [natural_forest, natural_park, natural_wood, post_office]
+                    $zoom: { max: 14 }
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z15-any:
+                filter:
+                    $zoom: { max: 15 }
+                    kind: [cafe, restaurant]
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z15-no-area:
+                filter:
+                    area: false
+                    $zoom: { max: 15 }
+                    kind: [park]
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z15-with-area:
+                filter:
+                    area: true
+                    $zoom: { max: 15 }
+                    kind: [nursing_home]
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z16-any:
+                filter:
+                    kind: [fire_station, grass, peak, police, tram_stop]
+                    $zoom: { max: 16 }
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z16-no-area:
+                filter:
+                    area: false
+                    kind: [allotments, college, garden, university]
+                    $zoom: { max: 16 }
+                draw:
+                    icons:
+                        visible: false
+            # no POIs for commercial, residential
+            hide-until-z17-any:
+                filter:
+                    $zoom: { max: 17 }
+                    kind: [bank, bus_stop, car_sharing, wood]
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z17-with-area:
+                filter:
+                    area: true
+                    $zoom: { max: 17 }
+                    kind: [common, grass, houseboat, pedestrian, pitch, railway, ship, wetland]
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z17-no-area:
+                filter:
+                    area: false
+                    $zoom: { max: 17 }
+                    # note: atm and drinking_water appear hear and in area versions
+                    kind: [accountant, administrative, advertising_agency, animal, architect, association, atm, bakery, bed_and_breakfast, bicycle, bicycle_parking, bicycle_rental_station, books, butcher, car, car_repair, chalet, clothes, company, computer, consulting, convenience, doityourself, drinking_water, dry_cleaning, educational_institution, emergency_phone, employment_agency, estate_agent, fashion, financial, florist, foundation, gift, government, greengrocer, guest_house, hairdresser, hostel, hotel, insurance, it, jewelry, lawyer, mast, memorial, mobile_phone, motel, newspaper, ngo, notary, optician, parking, pet, physician, playground, political_party, post_box, religion, research, subway_entrance, tax_advisor, telecommunication, telephone, theatre, therapist, toilets, traffic_signals, travel_agent, water_tower]
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z18-any:
+                filter:
+                    kind: [atm, bus_stop, drinking_water]
+                    $zoom: { max: 18 }
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z18-no-area:
+                filter:
+                    $zoom: { max: 18 }
+                    area: false
+                    kind: [bench, parking, waste_basket]
+                draw:
+                    icons:
+                        visible: false
+            hide-until-z19-any:
+                filter:
+                    $zoom: { max: 19 }
+                    kind: [bicycle_parking, burial_vault, car_sharing]
+                draw:
+                    icons:
+                        visible: false
+
+            # hide based on kind and area filters
+            military-early:
+                filter:
+                    kind: [military]
+                    any:
+                        # show labels for smaller landuse areas at higher zooms
+                        - { $zoom: [8], area: { max: 50000000 } }
+                draw:
+                    icons:
+                        visible: false
+            university-early:
+                filter:
+                    kind: [university, college]
+                    any:
+                        # show labels for smaller landuse areas at higher zooms
+                        - { $zoom: [11], area: { max: 2000000 } }
+                        - { $zoom: [12], area: { max: 500000 } }
+                draw:
+                    icons:
+                        visible: false
+            school-early:
+                filter:
+                    kind: [school, kindergarten]
+                    any:
+                        # show labels for smaller landuse areas at higher zooms
+                        - { $zoom: [13], area: { max: 100000 } }
+                        - { $zoom: [14], area: { max: 50000 } }
+                        - { $zoom: [15], area: { max: 10000 } }
+                        - { $zoom: [16], area: { max: 5000 } }
+                        - { $zoom: [17], area: { max: 2000 } }
+                draw:
+                    icons:
+                        visible: false
+            garden-area-early:
+                filter:
+                    kind: [garden, allotments]
+                    any:
+                        # limit show smaller landuse areas to higher zooms
+                        - { $zoom: [12], area: { max: 500000 } }
+                        - { $zoom: [13], area: { max: 100000 } }
+                        - { $zoom: [14], area: { max: 10000 } }
+                        - { $zoom: [15], area: { max: 5000 } }
+                draw:
+                    icons:
+                        visible: false
+            cemetery-early:
+                filter:
+                    kind: [cemetery]
+                    # limit show smaller landuse areas to higher zooms
+                    any:
+                        - { $zoom: [12], area: { max: 3000000 } }
+                draw:
+                    icons:
+                        visible: false
+            golf_course-early:
+                filter:
+                    kind: golf_course
+                    any:
+                        - { $zoom: [12], area: { max: 2500000 } }
+                draw:
+                    icons:
+                        visible: false
+            office-early:
+                filter:
+                    - { kind: [insurance, office, company], $zoom: [15], area: { max: 10000 } }
+                    - { kind: [insurance, office, company], $zoom: [16], area: { max: 5000 } }
+                draw:
+                    icons:
+                        visible: false
+            landuse-labels-green-areas-not-national-park:
+                filter:
+                    kind: [park, conservation, protected_area, nature_reserve, forest, grass]
+                    any:
+                    # show labels for smaller landuse areas at higher zooms
+                    - { $zoom: { max: 6 }, area: true }
+                    - { $zoom: [6],    area: { max: 5000000000 } }
+                    - { $zoom: [7],    area: { max: 5000000000 } }
+                    - { $zoom: [8],    area: { max: 1000000000 } }
+                    - { $zoom: [9],    area: { max: 100000000 } }
+                    - { $zoom: [10],   area: { max: 50000000 } }
+                    - { $zoom: [11],   area: { max: 25000000 } }
+                    - { $zoom: [12],   area: { max: 5000000 } }
+                    - { $zoom: [13],   area: { max: 200000 } }
+                    - { $zoom: [14],   area: { max: 50000 } }
+                    - { $zoom: [15],   area: { max: 10000 } }
+                    - { $zoom: [16],   area: { max: 1000 } }
+                draw:
+                    icons:
+                        visible: false
+                wilderness-areas-early:
+                    filter: function() { return $zoom < 9 && feature.name && (feature.name.indexOf("Wilderness") > -1 || feature.name.indexOf("BLM") > -1 || feature.protect_class == '1' || feature.protect_class == '1a' || feature.protect_class == '1b' ); }
                     draw:
                         icons:
                             visible: false
-        landuse-labels-not-any-above:
-            filter:
-                $zoom: { max: 6 }
-                not: { kind: [aerodrome, airport, allotments, aquarium, attraction, battlefield, beach, cemetery, college, conservation, forest, garden, glacier, golf_course, grass, kindergarten, landmark, maze, national_park, nature_reserve, park, playground, protected_area, resort, school, stadium, station, theme_park, university, winery, winter_sports, zoo] }
-            draw:
-                icons:
-                    visible: false
-        glacier:
-            filter: { $zoom: { max: 14 }, kind: glacier, area: false }
-            draw:
-                icons:
-                    visible: false
+                not-national-park:
+                    filter: function() { return feature.name && !((feature.name.indexOf("National Park") > -1) || feature.name.indexOf("National Monument") > -1); }
+                    early:
+                        filter: { $zoom: { max: 8 } }
+                        draw:
+                            icons:
+                                visible: false
+            landuse-labels-not-any-above:
+                filter:
+                    $zoom: { max: 6 }
+                    not: { kind: [aerodrome, airport, allotments, aquarium, attraction, battlefield, beach, cemetery, college, conservation, forest, garden, glacier, golf_course, grass, kindergarten, landmark, maze, national_park, nature_reserve, park, playground, protected_area, resort, school, stadium, station, theme_park, university, winery, winter_sports, zoo] }
+                draw:
+                    icons:
+                        visible: false
+            glacier:
+                filter: { $zoom: { max: 14 }, kind: glacier, area: false }
+                draw:
+                    icons:
+                        visible: false
 
         # set special priority, sprite, and text styles per kind
         has-area:
@@ -5247,7 +5247,7 @@ layers:
                     size: global.icon_size_green
                     sprite: park
                     text:
-                        #visible: global.text_visible_landuse_green
+                        visible: global.text_visible_landuse_green
                         font:
                             fill: global.text_fill_park
                             style: italic
