@@ -11,7 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Tangram: Refill Style</title>
+    <title>Refill</title>
 
     <!-- 3rd party libraries -->
         <!-- Leaflet -->
@@ -19,9 +19,16 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.js"></script>
         <!-- bog-standard leaflet URL hash -->
         <script type="text/javascript" src="https://cdn.rawgit.com/mlevans/leaflet-hash/master/leaflet-hash.js"></script>
+
         <!-- Main tangram library -->
-        <script type="text/javascript" src="https://mapzen.com/tangram/0.11/tangram.min.js"></script>
-        <!-- <script src="http://localhost:8000/dist/tangram.debug.js"></script> -->
+        <!-- production -->
+        <script src="https://mapzen.com/tangram/0.11/tangram.min.js"></script>
+        <!-- production debug -->
+        <!-- <script src="https://mapzen.com/tangram/0.11/tangram.debug.js"></script> -->
+        <!-- dev -->
+        <!-- <script src="https://precog.mapzen.com/tangrams/tangram/master/dist/tangram.debug.js"></script> -->
+        <!-- dev branch -->
+        <!-- <script src="https://precog.mapzen.com/tangrams/tangram/placement-min-ratio/dist/tangram.debug.js"></script> -->
 
         <!-- A lightweight graphical user interface for changing variables in JavaScript.  -->
         <script type="text/javascript" src="lib/dat.gui.min.js"></script>
@@ -215,7 +222,10 @@
         map.setView(map_start_location.slice(0, 2), map_start_location[2]);
 
         var layer = Tangram.leafletLayer({
-            scene: 'refill-style.yaml',
+            // more: 'vector-tiles-TTucZYU'
+            // default (some): 'vector-tiles-W2tPU-Y'
+            // no: 'vector-tiles-haXTO7g'
+            scene: { import: 'refill-style.yaml', global: { sdk_mapzen_api_key: 'vector-tiles-W2tPU-Y' } },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
 
@@ -250,7 +260,7 @@
             // Scene initialized
             layer.scene.subscribe({
                 load: function (data) {
-                    data.config.global.animated = animated;
+                    data.config.global.sdk_animated = animated;
                 }
             });
             layer.addTo(map);
@@ -340,7 +350,7 @@
             var zoom = max_zoom < map.getZoom() ? max_zoom : Math.floor(map.getZoom());
             var tileCoords = { x : long2tile(latlng.lng,zoom), y: lat2tile(latlng.lat,zoom), z: zoom };
 
-            var url = 'http://tile.dev.mapzen.com/mapzen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson';
+            var url = 'http://tile.mapzen.com/mapzen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson';
             return url;
         }
 
@@ -356,16 +366,23 @@
             // Language selector
             var langs = {
                 '(default)': false,
+                'العربية (Arabic)': 'ar',
+                '中文 (Chinese)': 'zh',
                 'English': 'en',
-                'Russian': 'ru',
-                'Chinese': 'zh',
-                'Japanese': 'ja',
-                'Korean': 'ko',
-                'German': 'de',
-                'French': 'fr',
-                'Arabic': 'ar',
-                'Spanish': 'es',
-                'Greek': 'gr'
+                'français (French)': 'fr',
+                'Русский (Russian)': 'ru',
+                'español (Spanish)': 'es',
+                'বাংলা (Bengali)': 'bn',
+                'Deutsch (German)': 'de',
+                'ελληνικά (Greek)': 'gr',
+                'हिन्दी (Hindi)': 'hi',
+                'Bahasa Indonesia (Indonesian)': 'id',
+                'italiano (Italian)': 'it',
+                '日本語 (Japanese)': 'ja',
+                '한국어 (Korean)': 'ko',
+                'Português (Portuguese)': 'pt',
+                'Türkçe (Turkish)': 'tr',
+                'Tiếng Việt (Vietnamese)': 'vi'
             };
             // use query language, else default to English
             gui.language = query.language || false;
@@ -375,88 +392,164 @@
                 //window.location.search = 'language=' + value;
             });
             gui.fallback_lang = query.language || false;
-            gui.add(gui, 'fallback_lang', langs).onChange(function(value) {
+            gui.fallback_button = gui.add(gui, 'fallback_lang', langs).onChange(function(value) {
                 scene.config.global.ux_language_fallback = value;
                 scene.updateConfig();
                 //window.location.search = 'language=' + value;
             });
+            gui.fallback_button.name('lang fallback');
 
-            // Language selector
+            // Labels selector
             var labels = {
-                '(default)': 'default',
+                '(default)': 'more',
                 'More': 'more',
+                'Some': 'some',
+                'Some (no shields)': 'some_no_shields',
                 'None': 'none'
             };
-            // use query language, else default to English
-            gui.labels = query.labels || 'default';
+            gui.labels = query.labels || 'more';
             gui.add(gui, 'labels', labels).onChange(function(value) {
-                var _val = value;
+                var _default = true;
+                var _more = false;
+                var _road_shields = true;
 
-				// default
-                var _all = false;
-                var _some = true;
+                if(value === 'more') {
+                    _more = true;
+                    _default = true;
+                    _road_shields = true;
+                } else if(value === 'some') {
+                    _more = false;
+                    _default = true;
+                    _road_shields = true;
+                } else if(value === 'some_no_shields') {
+                    _more = false;
+                    _default = true;
+                    _road_shields = false;
+                } else {
+                    _more = false;
+                    _default = false;
+                    _road_shields = false;
+                }
 
-				if( _val === 'more' ) {
-					_all = true;
-				}
-				if( _val === 'none' ) {
-					_some = false;
-				}
+                scene.config.global.text_visible_continent = _default;
+                scene.config.global.text_visible_admin = _default;
+                scene.config.global.text_visible_populated_places = _default;
+                scene.config.global.icon_visible_populated_places = _default;
+                scene.config.global.text_visible_neighbourhoods = _default;
+                scene.config.global.text_visible_neighbourhoods_e = _default;
+                scene.config.global.text_visible_water = _default;
+                scene.config.global.text_visible_water_labels = _default;
+                scene.config.global.text_visible_island = _default;
 
-				scene.config.label_visible_landuse_green = _all;
-				scene.config.icon_visible_landuse_green  = _all;
-				scene.config.text_visible_landuse_green  = _all;
+                scene.config.global.sdk_road_shields = _road_shields;
 
-				scene.config.text_visible_poi_landuse = _all;
-				scene.config.text_visible_poi_landuse_e = _all;
+                scene.config.global.text_visible_roads = _default;
+                scene.config.global.text_visible_highway = _default;
+                scene.config.global.text_visible_highway_e = _default;
+                scene.config.global.text_visible_trunk_primary_route = _default;
+                scene.config.global.text_visible_trunk_primary = _default;
+                scene.config.global.text_visible_secondary = _default;
+                scene.config.global.text_visible_tertiary = _default;
+                scene.config.global.text_visible_minor_road = _default;
+                scene.config.global.text_visible_minor_road_e = _default;
+                scene.config.global.text_visible_service_road = _default;
+                scene.config.global.text_visible_path = _default;
+                scene.config.global.text_visible_piste = _default;
+                scene.config.global.text_visible_steps = _default;
 
-				scene.config.icon_visible_station = _all;
-				scene.config.global.text_visible_trunk_primary_e2 = _all;
-				scene.config.global.text_visible_secondary_e = _all;
-				scene.config.global.text_visible_tertiary_e = _all;
-				scene.config.global.text_visible_exits_e = _all;
+                scene.config.global.text_visible_highway_e = _default;
+                scene.config.global.text_visible_trunk_primary_e2 = _default;
+                scene.config.global.text_visible_trunk_primary_e = _default;
+                scene.config.global.text_visible_secondary_e = _default;
+                scene.config.global.text_visible_tertiary_e = _default;
+                scene.config.global.text_visible_minor_road_e = _default;
+                scene.config.global.text_visible_exits_e = _default;
 
-				scene.config.label_visible_poi_landuse = _some;
-				scene.config.label_visible_poi_landuse_e = _some;
-				scene.config.icon_visible_poi_landuse = _some;
-				scene.config.icon_visible_poi_landuse_e = _some;
+                scene.config.text_visible_aerialway = _default;
+                scene.config.global.text_visible_airport_gate = _default;
+                scene.config.global.text_visible_exits = _default;
 
-				scene.config.global.text_visible_pois_landuse = _some;
-				scene.config.global.icon_visible_pois_landuse = _some;
-				scene.config.text_visible_station = _some;
+                scene.config.global.text_visible_buildings = _default;
+                scene.config.global.text_visible_addresses = _default;
 
-			    scene.config.global.text_visible_continent = _some;
-				scene.config.global.text_visible_admin = _some;
-				scene.config.global.text_visible_populated_places = _some;
-				scene.config.global.icon_visible_populated_places = _some;
-				scene.config.global.text_visible_neighbourhoods = _some;
-				scene.config.global.text_visible_neighbourhoods_e = _some;
-				scene.config.global.text_visible_water = _some;
-				//scene.config.global.text_visible_roads = _some;
-				scene.config.global.text_visible_highway = _some;
-				scene.config.global.text_visible_highway_e = _some;
-				scene.config.global.text_visible_trunk_primary = _some;
-				scene.config.global.text_visible_trunk_primary_e = _some;
-				scene.config.global.text_visible_secondary = _some;
-				scene.config.global.text_visible_tertiary = _some;
-				scene.config.global.text_visible_minor_road = _some;
-				scene.config.global.text_visible_minor_road_e = _some;
-				scene.config.global.text_visible_service_road = _some;
-				scene.config.global.text_visible_path = _some;
-				scene.config.global.text_visible_piste = _some;
-				scene.config.global.text_visible_steps = _some;
-				scene.config.global.text_visible_aerialway = _some;
-				scene.config.global.text_visible_shields = _some;
-				scene.config.global.text_visible_exits = _some;
-				scene.config.global.text_visible_airport_gate = _some;
-				scene.config.global.text_visible_building = _some;
-				scene.config.global.text_visible_address = _some;
-				scene.config.global.text_visible_island = _some;
-				scene.config.global.text_visible_water_labels = _some;
+                scene.config.global.label_visible_poi_landuse = _more;
+                scene.config.global.label_visible_poi_landuse_e = _more;
+                scene.config.global.icon_visible_poi_landuse = _more;
+                scene.config.global.icon_visible_poi_landuse_e = _more;
+                scene.config.global.text_visible_poi_landuse_e = _more;
+                scene.config.global.icon_visible_station = _more;
 
+                scene.config.global.icon_visible_landuse_green = _default;
+                scene.config.global.text_visible_landuse_green = _default;
+                scene.config.global.text_visible_landuse_generic = _default;
+                if( _more ) {
+                    scene.config.global.icon_size_green = [[13, '14px'], [16, '18px'], [18, '19px']];
+                    scene.config.global.icon_size_green_nationl_park = [[10,'18px'],[12,'28px'],[13,'36px']];
+                    scene.config.global.icon_size_green_airport = [[13,'12px'],[14,'12px'],[17,'18px'],[19,'36px']];
+                    scene.config.global.icon_size_green_l = [[14,'24px'],[16,'32px']];
+                } else {
+                    scene.config.global.icon_size_green = [[0, '0px']];
+                    scene.config.global.icon_size_green_nationl_park = [[0, '0px']];
+                    scene.config.global.icon_size_green_airport = [[0, '0px']];
+                    scene.config.global.icon_size_green_l = [[0, '0px']];
+                }
                 scene.updateConfig();
                 //window.location.search = 'language=' + value;
             });
+
+            // Transit selector
+            var transit_overlay = {
+                '(default)': false,
+                'Show': true,
+                'Hide': false
+            };
+            // use transit ux, else default to false
+            gui.transit_overlay = query.transit_overlay || false;
+            gui.transit_button = gui.add(gui, 'transit_overlay', transit_overlay).onChange(function(value) {
+                scene.config.global.sdk_transit_overlay = (value === 'true' || value === true); // dat.gui passes a string
+                if (value === 'true' || value === true) {
+                    scene.config.global.sdk_road_shields = false;
+                } else {
+                    scene.config.global.sdk_road_shields = true;
+                }
+                scene.updateConfig();
+            });
+            gui.transit_button.name('transit');
+
+            // Building extrusion selector
+            var building_3d = {
+                '(default)': true,
+                'Yes': true,
+                'No': false
+            };
+            // use transit ux, else default to false
+            gui.building_3d = query.building_3d || true;
+            gui.building_button = gui.add(gui, 'building_3d', building_3d).onChange(function(value) {
+                scene.config.global.sdk_building_extrude = (value === 'true' || value === true); // dat.gui passes a string
+                scene.updateConfig();
+            });
+            gui.building_button.name( '3D buildings' );
+//
+//             // Animation selector
+//             var animated = {
+//                 '(default)': true,
+//                 'Yes': true,
+//                 'No': false
+//             };
+//             gui.animated = query.animated || true;
+//             gui.add(gui, 'animated', animated).onChange(function(value) {
+//                 scene.config.global.sdk_animated = (value === 'true' || value === true); // dat.gui passes a string
+//                 scene.updateConfig();
+//                 //window.location.search = 'animated=' + value;
+//             });
+
+            // Enable/disable interactivity for all features
+            var interactive_label = 'interactive';
+            gui[interactive_label] = false;
+            gui.add(gui, interactive_label).onChange(function(value) {
+                scene.setIntrospection(value);
+            });
+            scene.setIntrospection(gui[interactive_label]);
 
             // Take a screenshot and save to file
             gui.save_screenshot = function () {
@@ -470,7 +563,8 @@
                     saveAs(screenshot.blob, 'tangram-' + map_location + '-' + prettydate + '.png');
                 });
             };
-            gui.add(gui, 'save_screenshot');
+            gui.screenshot = gui.add(gui, 'save_screenshot');
+            gui.screenshot.name('save screenshot');
 
             // Take a video capture and save to file
             if (typeof window.MediaRecorder == 'function') {
@@ -598,10 +692,13 @@
                     map_start_location = [camera.position[1], camera.position[0], camera.position[2]]
                 }
                 map.setView([map_start_location[0], map_start_location[1]], map_start_location[2]);
+
+                if (!inIframe()) {
+                    addGUI();
+                }
             });
             if (!inIframe()) {
                 map.scrollWheelZoom.enable();
-                addGUI();
                 initFeatureSelection();
             }
 
@@ -612,16 +709,16 @@
 
         </script>
 
-		<!-- Mapzen map UI -->
-		<script src='https://mapzen.com/common/ui/mapzen-ui.min.js'></script>
-		<script>
-		  MPZN.bug({
-		  name: 'Tangram',
-		  link: 'https://mapzen.com/projects/tangram',
-		  tweet: 'Tangram Refill style from @mapzen',
-		  repo: 'https://github.com/tangrams/refill-style/'
-		});
-		</script>
+        <!-- Mapzen map UI -->
+        <script src='https://mapzen.com/common/ui/mapzen-ui.min.js'></script>
+        <script>
+          MPZN.bug({
+          name: 'Tangram',
+          link: 'https://mapzen.com/projects/tangram',
+          tweet: 'Tangram Refill style from @mapzen',
+          repo: 'https://github.com/tangrams/refill-style/'
+        });
+        </script>
 
   </body>
 </html>
