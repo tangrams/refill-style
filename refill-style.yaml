@@ -4969,7 +4969,7 @@ layers:
                 draw: { icons: { visible: global.icon_visible_poi_landuse_e } }
 
         # NOTE: all natural_* should only be in landuse layer
-        suppress icon-always:
+        suppress-icon-always:
             filter:
                 kind: [natural_forest, natural_park, natural_wood]
             draw:
