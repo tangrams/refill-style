@@ -1400,9 +1400,7 @@ layers:
                 sprite: ux-current-location
                 size: 36px
                 collide: false
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
     mz_route_location:
         data: { source: mz_route_location }
         draw:
@@ -1411,9 +1409,7 @@ layers:
                 sprite: ux-route-arrow
                 size: [60px,60px]
                 collide: false
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
     mz_route_start:
         data: { source: mz_route_start }
         draw:
@@ -1424,9 +1420,7 @@ layers:
                 size: [36px,46px]
                 collide: false
                 anchor: top
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
     mz_route_destination:
         data: { source: mz_route_destination }
         draw:
@@ -1437,9 +1431,7 @@ layers:
                 size: [36px,46px]
                 collide: false
                 anchor: top
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
     mz_route_transit_stop:
         data: { source: mz_route_transit_stop }
         draw:
@@ -1460,9 +1452,7 @@ layers:
                 size: [36px,54px]
                 collide: false
                 anchor: top
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
         inactive:
             filter: { state: inactive }
             draw:
@@ -1477,9 +1467,7 @@ layers:
                 size: [36px,54px]
                 collide: false
                 anchor: top
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
 
     # Used by the SDK to place point, line, and polygon overlays on the map
     mz_default_point:
@@ -1491,9 +1479,7 @@ layers:
                 size: [36px,54px]
                 collide: false
                 anchor: top
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
     mz_default_shield:
         data: { source: mz_default_shield }
         draw:
@@ -1510,9 +1496,7 @@ layers:
                 sprite_default: sdk_shield-1char
                 color: global.sdk_shield_color
                 collide: false
-                transition:
-                    [show, hide]:
-                        time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
                 text:
                     # offset: [0px, -1px]
                     text_source: |
