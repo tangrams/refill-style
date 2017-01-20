@@ -210,40 +210,41 @@ global:
     feature_order: function() { return feature.sort_rank; }
     #
     #label visibility
-    icon_size: [[13, 14px], [16, 18px], [18, 19px]]
+    icon_size:                      [[13, 14px], [16, 18px], [18, 19px]]
     text_visible_continent:         true
     text_visible_admin:             true
     text_visible_populated_places:  true
     icon_visible_populated_places:  true
     text_visible_neighbourhoods:    true
     text_visible_neighbourhoods_e:  true
-    text_visible_building:          true
-    text_visible_address:           true
+    text_visible_building:          false                       # false for default
+    text_visible_address:           false                       # false for default
     text_visible_water_labels:      true
     text_visible_island:            true
     label_visible_landuse_green:    true                        #this needs work
     icon_visible_landuse_green:     true                        #this needs work
     text_visible_landuse_green:     true
-    icon_size_green: [[0, '0px']]                               # 0px for no, default, more  [[13, 14px], [16, 18px], [18, 19px]]
-    icon_size_green_l: [[0, '0px']]                             # 0px for no, default, more  [[14,24px],[16,32px]]
-    label_visible_poi_landuse:      false                      #false on default
-    icon_visible_poi_landuse:       false                      #false on default
+    icon_size_green:                [[0, '0px']]                # 0px for no, default, more  [[13, 14px], [16, 18px], [18, 19px]]
+    icon_size_green_l:              [[0, '0px']]                # 0px for no, default, more  [[14,24px],[16,32px]]
+    label_visible_poi_landuse:      false                       #false on default
+    icon_visible_poi_landuse:       false                       #false on default
     text_visible_poi_landuse:       true
     label_visible_poi_landuse_e:    true
-    icon_visible_poi_landuse_e:     false                      #false on default
+    icon_visible_poi_landuse_e:     false                       #false on default
     text_visible_poi_landuse_e:     true
+    text_visible_landuse_generic:   false                       # false for default
     label_visible_station:          true
-    icon_visible_station:           false                      #false on default, this needs work
+    icon_visible_station:           false                       #false on default, this needs work
     text_visible_station:           true
     text_visible_highway:           true
     text_visible_highway_e:         true
     text_visible_trunk_primary:     true
-    text_visible_trunk_primary_e2:  false   # the routes       #false on default, still false on more
-    text_visible_trunk_primary_e:   false   # the not-routes   #false on default, still false on more
+    text_visible_trunk_primary_e2:  false   # the routes        #false on default, still false on more
+    text_visible_trunk_primary_e:   false   # the not-routes    #false on default, still false on more
     text_visible_secondary:         true
-    text_visible_secondary_e:       false                      #false on default, still false on more
+    text_visible_secondary_e:       false                       #false on default, still false on more
     text_visible_tertiary:          true
-    text_visible_tertiary_e:        false                      #false on default, still false on more
+    text_visible_tertiary_e:        false                       #false on default, still false on more
     text_visible_minor_road:        true
     text_visible_minor_road_e:      true
     text_visible_service_road:      true
@@ -253,7 +254,7 @@ global:
     text_visible_aerialway:         true
     sdk_road_shields:               true
     text_visible_exits:             true
-    text_visible_exits_e:           false                      #false on default, still false on more
+    text_visible_exits_e:           false                       #false on default, still false on more
     text_visible_airport_gate:      true
 
     # roads
@@ -1444,9 +1445,7 @@ layers:
                 sprite: ux-transit-stop
                 size: [15px,15px]
                 collide: false
-                transition:
-                    [show, hide]:
-                         time: 0s
+                transition: { show: { time: 0s }, hide: { time: 0s } }
     mz_search_result:
         data: { source: mz_search_result }
         draw:
