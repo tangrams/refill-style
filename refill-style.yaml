@@ -258,6 +258,11 @@ global:
     text_visible_airport_gate:      true
 
     # roads
+    refill_black:               [0.00,0.00,0.00]
+    refill_white:               [1.00,1.00,1.00]
+    refill_darkgray:             [0.250,0.250,0.250]
+    refill_midgray:             [0.500,0.500,0.500]
+    refill_lightgray:             [0.750,0.750,0.750]
     highway1:                   [1.00,1.00,1.00]
     highway_link1:              [0.00, 0.00, 0.00]
     highway_casing1:            [0.40, 0.40, 0.40]
@@ -2251,19 +2256,19 @@ layers:
             filter: { kind: highway, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[8, [0.0,0.0,0.0]], [15, [0.0,0.0,0.0]], [16, [1.0,1.0,1.0]]]
+                    color: [[8, global.refill_black], [15, global.refill_black], [16, global.refill_white]]
                     width: [[8, 1px], [12, 1px], [15, 3px], [16, 3px], [17, 5px], [18, 4m], [19, 5m]]
                     outline:
-                        color: [[8, [1.0,1.0,1.0]], [15, [1.0,1.0,1.0]], [16, [0.00,0.00,0.00]]]
+                        color: [[8, global.refill_white], [15, global.refill_white], [16, global.refill_black]]
                         width: [[8,0px], [15,0px], [16, 3px], [19, 6px]]
             link:
                 filter: { is_link: true } # on- and off-ramps, etc
                 draw:
                     lines:
-                        color: [[9, [0.0,0.0,0.0]], [15, [0.0,0.0,0.0]], [16, [1.0,1.0,1.0]]]
+                        color: [[9, global.refill_black], [15, global.refill_black], [16, global.refill_white]]
                         width: [[9, 0px], [11, 0.15px], [15, 1.25px], [17, 2px], [18, 4px], [19, 8px]]
                         outline:
-                            color: [[9, [1.0,1.0,1.0]], [15,[1.0,1.0,1.0]], [16,[0.00,0.00,0.00]]]
+                            color: [[9, global.refill_white], [15, global.refill_white], [16, global.refill_black]]
                             width: [[9, 0px], [15, 0px], [16, 1px], [17, 1px], [18, 2px]]
                 early_link:
                     filter: { $zoom: {min: 13, max: 15} }
@@ -2279,7 +2284,7 @@ layers:
                                 color: [[13, global.highway_tunnel_casing1], [16, [0.85,0.85,0.85]]]
                                 width: [[9, 0px], [15, 0px], [16, 1px], [17, 1px], [18, 2px]]
             tunnel:
-                filter: {is_tunnel: true, $zoom: { min: 13 } }
+                filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
                         color: [[13, global.highway_tunnel1], [16, [0.970,0.970,0.970]]]
@@ -2323,7 +2328,7 @@ layers:
             # default style
             draw:
                 lines:
-                    color: [[8, [0.00,0.00,0.00]], [13, major_road2], [17, [1.0,1.0,1.0]]]
+                    color: [[8, global.refill_black], [13, global.refill_black], [17, global.refill_white]]
                     width: [[13, 1px], [14, 1px], [16, 2.5px], [17,3px]]
                     outline:
                         width: [[12, 0px], [13, .5px], [15, 1px], [17, 2px]]
@@ -2331,10 +2336,10 @@ layers:
                 filter: { kind_detail: [trunk, primary] }
                 draw:
                     lines:
-                        color: [[8, [0.8,0.8,0.8]], [10, [0.8,0.8,0.8]], [12, [0.5,0.5,0.5]], [13, [0.4,0.4,0.4]], [14, [0.3,0.3,0.3]], [15, [0.1,0.1,0.1]], [16, [1.0,1.0,1.0]]]
+                        color: [[8, global.refill_lightgray], [10, global.refill_lightgray], [12, global.refill_midgray], [13, global.refill_black], [15, global.refill_black], [16, global.refill_white]]
                         width: [[8, 0.5px], [11, 0.5px], [14, 1px], [16, 2px], [17, 4px], [18, 4px], [19, 8px]]
                         outline:
-                            color: [[8,[1.0,1.0,1.0]], [15,[1.0,1.0,1.0]], [16,[0.00,0.00,0.00]]]
+                            color: [[8, global.refill_white], [15, global.refill_white], [16, global.refill_black]]
                             width: [[8, 1px], [17, 3px], [18, 4px]]
                 early:
                     filter: { $zoom: { max: 16 } }
@@ -2353,10 +2358,10 @@ layers:
                     filter: { ref: true }
                     draw:
                         lines:
-                            color: [[8, [0.5,0.5,0.5]], [14, [0.0,0.0,0.0]], [15, [0.0,0.0,0.0]], [16, [1.0,1.0,1.0]]]
+                            color: [[8, global.refill_midgray], [13, global.refill_black], [15, global.refill_black], [16, global.refill_white]]
                             width: [[9, 0.5px], [13, 0.65px], [14, 1.25px], [15, 1.25px], [16, 2px], [17, 4px], [19, 8px]]
                             outline:
-                                color: [[8,[1.0,1.0,1.0]], [15,[1.0,1.0,1.0]], [16,[0.00,0.00,0.00]]]
+                                color: [[8, global.refill_white], [15, global.refill_white], [16, global.refill_black]]
                                 width: [[8, 1.5px], [17, 3px], [18, 4px]]
                     early:
                         filter: { $zoom: { max: 16 } }
@@ -2369,9 +2374,9 @@ layers:
                         filter: {is_tunnel: true, $zoom: {min: 13} }
                         draw:
                             lines:
-                                color: [[13,[0.70,0.70,0.70]], [14,[0.70,0.70,0.70]], [15,[0.8,0.8,0.8]], [16,[0.950,0.950,0.950]]]
+                                color: [[13, global.refill_lightgray], [15, global.refill_lightgray], [16,[0.950,0.950,0.950]]]
                                 outline:
-                                    color: [[13, [1.00,1.00,1.00]], [15, [1.00,1.00,1.00]], [16, [0.85,0.85,0.85]]]
+                                    color: [[13, global.refill_white], [15, global.refill_white], [16, global.refill_lightgray]]
                                     width: [[8,2px], [16,1.5px], [17, 3px], [18, 3px]]
                     labels-trunk_primary-route-z13-z14:
                         filter: { $zoom: [13,14] }
@@ -2424,27 +2429,27 @@ layers:
                 filter: { is_link: true } # on- and off-ramps, etc
                 draw:
                     lines:
-                        color: [[10, [0.4,0.4,0.4]], [14, [0.75,0.75,0.75]], [15, [0.89, 0.89, 0.89]], [16, [1.0,1.0,1.0]]]
+                        color: [[10, global.refill_midgray], [14, global.refill_lightgray], [15, global.refill_lightgray], [16, global.refill_white]]
                         width: [[10, 0.5px], [15, 1px], [16, 1.75px], [18, 3px], [19, 8px]]
                         outline:
-                            color: [[10, [1.0,1.0,1.0]], [15, [0.50,0.50,0.50]], [16, [0.00,0.00,0.00]]]
+                            color: [[10, global.refill_white], [15, global.refill_midgray], [16, global.refill_black]]
                             width: [[10, 0px], [15, 0px], [16, 1px]]
             tunnel:
                 filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, [0.70,0.70,0.70]], [16, [0.950,0.950,0.950]]]
+                        color: [[13, global.refill_lightgray], [16, [0.950,0.950,0.950]]]
                         outline:
-                            color: [[13, [1.00,1.00,1.00]], [15, [1.00,1.00,1.00]], [16, [0.85,0.85,0.85]]]
+                            color: [[13, global.refill_white], [15, global.refill_white], [16, [0.85,0.85,0.85]]]
                             width: [[13, 0px], [16, 1.5px], [17, 3px]]
             secondary:
                 filter: { kind_detail: secondary }
                 draw:
                     lines:
-                        color: [[10, [0.75,0.75,0.75]], [12, [0.6,0.6,0.6]], [15, [0.35,0.35,0.35]], [16, [0.00,0.00,0.00]], [17, [1.0,1.0,1.0]]]
+                        color: [[10, global.refill_lightgray], [13, global.refill_midgray], [16, global.refill_black], [17, global.refill_white]]
                         width: [[10, 0.5px], [14, 1px], [16, 2px], [17, 3px], [18, 3px], [19, 8px]]
                         outline:
-                            color: [[10, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
+                            color: [[10, global.refill_white], [16, global.refill_white], [17, global.refill_black]]
                             width: [[10, 2px], [16, 0px], [17, 2px]]
                 early:
                     filter: { $zoom: { max: 16 } }
@@ -2457,10 +2462,10 @@ layers:
                     filter: { ref: true, $zoom: { min: 12 } }
                     draw:
                         lines:
-                            color: [[12, [0.6,0.6,0.6]], [15, [0.35,0.35,0.35]], [16, [0.00,0.00,0.00]], [17, [1.0,1.0,1.0]]]
-                            width: [[11, 0.5px], [16, 2px], [17, 3px], [18, 3px], [19, 8px]]
+                            color: [[12, global.refill_lightgray], [13, global.refill_midgray], [16, global.refill_black], [17, global.refill_white]]
+                            width: [[11, 0.5px], [16, 1px], [17, 3px], [18, 3px], [19, 8px]]
                             outline:
-                                color: [[10, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
+                                color: [[10, global.refill_white], [16, global.refill_white], [17, global.refill_black]]
                                 width: [[10,2px], [16,0px], [17, 2px]]
                     early:
                         filter: { $zoom: { max: 15 } }
@@ -2473,9 +2478,9 @@ layers:
                         filter: {is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, [0.70,0.70,0.70]], [16, [0.950,0.950,0.950]]]
+                                color: [[13, global.refill_lightgray], [16, [0.950,0.950,0.950]]]
                                 outline:
-                                    color: [[13, [1.00,1.00,1.00]], [16, [1.00,1.00,1.00]], [17, [0.85,0.85,0.85]]]
+                                    color: [[13, global.refill_white], [16, global.refill_white], [17, [0.85,0.85,0.85]]]
                                     width: 2px
                     labels-secondary-routes:
                         filter: { $zoom: [13] }
@@ -2527,10 +2532,10 @@ layers:
                 filter: { kind_detail: [tertiary, tertiary_link] }
                 draw:
                     lines:
-                        color: [[11, [0.885,0.885,0.885]], [13, [0.60,0.60,0.60]], [15, [0.60,0.60,0.60]], [16, [0.30,0.30,0.30]], [17, [1.0,1.0,1.0]]]
+                        color: [[11, global.refill_lightgray], [13, global.refill_midgray], [15, global.refill_midgray], [16, global.refill_darkgray], [17, global.refill_white]]
                         width: [[11, 0.5px], [12, 0.65px], [13, 0.65px], [14, 1px], [15, 1px], [16, 2px], [17, 3px], [18, 3px], [19, 8px]]
                         outline:
-                            color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
+                            color: [[11, global.refill_white], [16, global.refill_white], [17, global.refill_black]]
                             width: [[11, 2px], [16,0px], [17, 2px], [18, 2px]]
                 early:
                     filter: { $zoom: { max: 15 } }
@@ -2543,10 +2548,10 @@ layers:
                     filter: { ref: true, $zoom: { min: 12} }
                     draw:
                         lines:
-                            color: [[11, [0.885,0.885,0.885]], [13, [0.8,0.8,0.8]], [14, [0.75,0.75,0.75]], [15, [0.6,0.6,0.6]], [17, [1.0,1.0,1.0]]]
+                            color: [[11, global.refill_lightgray], [13, global.refill_lightgray], [14, global.refill_lightgray], [15, global.refill_midgray], [17, global.refill_white]]
                             width: [[11, 0.5px], [12, 0.75px], [13, 1px], [14, 1px], [15, 1px], [16, 2px], [17, 3px], [18, 3px], [19, 8px]]
                             outline:
-                                color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
+                                color: [[11, global.refill_white], [16, global.refill_white], [17, global.refill_black]]
                                 width: [[11, 2px], [16,0px], [17, 2px], [18, 2px]]
                     early:
                         filter: { $zoom: { max: 15 } }
@@ -2566,46 +2571,13 @@ layers:
                     filter: { is_link: true } # on- and off-ramps, etc
                     draw:
                         lines:
-                            color: [[14, [0.75,0.75,0.75]], [15, [0.60, 0.60, 0.60]], [16, [0.3,0.3,0.3]], [17, [1.00,1.00,1.00]]]
+                            color: [[14, global.refill_lightgray], [15, global.refill_midgray], [16, global.refill_darkgray], [17, global.refill_white]]
                             width: [[11, 0.0px], [12, 0.15px], [14, 0.15px], [15, 0.75px], [16, 1.25px], [17, 2px], [18, 2px], [19, 4px]]
                             outline:
-                                color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
+                                color: [[11, global.refill_white], [16, global.refill_white], [17, global.refill_black]]
                                 width: [[11, 0px], [16, 0px], [17, 1px], [18, 1px]]
-                in_park:
-                    filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden] }
-                    draw:
-                        lines:
-                            #width: [[11, 0.0px], [12, .5px], [14, 1.5px], [16, 2.0px], [19, 7m]]
-                            color: [[11, [0.885,0.885,0.885]], [13, [0.60,0.60,0.60]], [15, [0.60,0.60,0.60]], [16, [0.30,0.30,0.30]], [17, [1.0,1.0,1.0]]]
-                            outline:
-                                color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
-                                width: [[11, 2px], [16,0px], [17, 2px], [18, 2px]]
-                    golf_course:
-                        filter: { landuse_kind: golf_course }
-                        draw:
-                            lines:
-                                outline:
-                                    color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
-                    nature_reserve:
-                        filter: { landuse_kind: nature_reserve }
-                        draw:
-                            lines:
-                                outline:
-                                    color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
-                    conservation:
-                        filter: { landuse_kind: conservation }
-                        draw:
-                            lines:
-                                outline:
-                                    color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
-                    zoo:
-                        filter: { landuse_kind: zoo }
-                        draw:
-                            lines:
-                                outline:
-                                    color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
                 labels-tertiary-z13:
-                    filter: { $zoom: [13] }
+                    filter: { $zoom: [13,14] }
                     draw:
                         text-blend-order:
                             priority: 57
@@ -2613,71 +2585,27 @@ layers:
                             text_source: global.ux_language_text_source_road_ref_and_name_short
                             font:
                                 fill: [0.35,0.35,0.35]
-                                size: 9px
-                                stroke: { color: global.text_stroke, width: 4 }
-                labels-tertiary-z14:
-                    filter: { $zoom: [14] }
-                    draw:
-                        text-blend-order:
-                            priority: 57
-                            visible: global.text_visible_tertiary_e
-                            text_source: global.ux_language_text_source_road_ref_and_name_short
-                            font:
-                                fill: [0.35,0.35,0.35]
-                                size: 9px
+                                size: [[13, 9px], [14, 9px]]
                                 stroke: { color: global.text_stroke, width: 4 }
                 labels-tertiary-z15:
-                    filter: { $zoom: [15] }
+                    filter: { $zoom: { min: 15 } }
                     draw:
                         text-blend-order:
                             priority: 57
                             visible: global.text_visible_tertiary
                             text_source: global.ux_language_text_source_road_ref_and_name_short
                             font:
-                                fill: [0.15,0.15,0.15]
-                                size: 10px
-                                stroke: { color: global.text_stroke, width: 4 }
-                labels-tertiary-z16:
-                    filter: { $zoom: [16] }
-                    draw:
-                        text-blend-order:
-                            priority: 57
-                            visible: global.text_visible_tertiary
-                            text_source: global.ux_language_text_source_road_ref_and_name_short
-                            font:
-                                fill: [0.15,0.15,0.15]
-                                size: 12px
-                                stroke: { color: global.text_stroke, width: 4 }
-                labels-tertiary-z17:
-                    filter: { $zoom: { min: 17, max: 18 } }
-                    draw:
-                        text-blend-order:
-                            priority: 57
-                            visible: global.text_visible_tertiary
-                            text_source: global.ux_language_text_source_road_ref_and_name_short
-                            font:
-                                fill: [0.15,0.15,0.15]
-                                size: 13px
-                                stroke: { color: global.text_stroke, width: 4 }
-                labels-tertiary-z18:
-                    filter: { $zoom: { min: 18 } }
-                    draw:
-                        text-blend-order:
-                            priority: 57
-                            visible: global.text_visible_tertiary
-                            text_source: global.ux_language_text_source_road_ref_and_name_short
-                            font:
-                                fill: global.text_fill
-                                size: 13px
+                                fill: [[15, [0.15,0.15,0.15]], [17, [0.15,0.15,0.15]], [18, global.text_fill]]
+                                size: [[15, 10px], [16, 12px], [17,13px]]
                                 stroke: { color: global.text_stroke, width: 4 }
         minor_road:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[11, [0.885,0.885,0.885]], [13, [0.80,0.80,0.80]], [14, [0.75,0.75,0.75]], [15, [0.5,0.5,0.5]], [16, [0.3,0.3,0.3]], [17, [1.0,1.0,1.0]]]
+                    color: [[11, [0.885,0.885,0.885]], [13, [0.80,0.80,0.80]], [14, global.refill_lightgray], [15, global.refill_midgray], [16, [0.3,0.3,0.3]], [17, global.refill_white]]
                     width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 2px], [17, 3px], [18, 3px], [19, 8px]]
                     outline:
-                        color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.30,0.30,0.30]], [18, [0.00,0.00,0.00]]]
+                        color: [[11, global.refill_white], [16, global.refill_white], [17, global.refill_darkgray], [18, global.refill_black]]
                         width: [[11, 1px], [16, 0px], [17, 1.5px], [18, 1.5px]]
             early:
                 filter: { $zoom: { max: 16 } }
@@ -2686,7 +2614,6 @@ layers:
                         order: 350
                         outline:
                             order: 351
-
             # Is this junk code?
             round:
                 filter: { $zoom: { min: 17 } }
@@ -2694,55 +2621,6 @@ layers:
                     lines:
                         cap: round
                         join: round
-
-            in_park:
-                filter: { landuse_kind: [park,protected_area,nature_reserve,conservation,golf_course,garden,wood,farmland,farm] }
-                draw:
-                    lines:
-                        color: [[11, [0.885,0.885,0.885]], [13, [0.75,0.75,0.75]], [14, [0.70,0.70,0.70]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [1.0,1.0,1.0]]]
-                        outline:
-                            color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.30,0.30,0.30]], [18, [0.00,0.00,0.00]]]
-                            width: [[11, 1px], [16, 0px], [17, 1.5px]]
-                golf_course:
-                    filter: { landuse_kind: golf_course }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.30,0.30,0.30]], [18, [0.00,0.00,0.00]]]
-                nature_reserve:
-                    filter: { landuse_kind: nature_reserve }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.30,0.30,0.30]], [18, [0.00,0.00,0.00]]]
-                conservation:
-                    filter: { landuse_kind: conservation }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.30,0.30,0.30]], [18, [0.00,0.00,0.00]]]
-                zoo:
-                    filter: { landuse_kind: zoo }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.30,0.30,0.30]], [18, [0.00,0.00,0.00]]]
-            in_university:
-                filter: { landuse_kind: university }
-                draw:
-                    lines:
-                        color: [[11, [0.885,0.885,0.885]], [13, [0.75,0.75,0.75]], [14, [0.70,0.70,0.70]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [1.0,1.0,1.0]]]
-                        outline:
-                            color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
-                            width: [[11, 1px], [16, 0px], [17, 1.5px]]
-            in_hospital:
-                filter: { landuse_kind: hospital }
-                draw:
-                    lines:
-                        color: [[11, [0.885,0.885,0.885]], [13, [0.75,0.75,0.75]], [14, [0.70,0.70,0.70]], [15, [0.6,0.6,0.6]], [16, [0.3,0.3,0.3]], [17, [1.0,1.0,1.0]]]
-                        outline:
-                            color: [[11, [1.0,1.0,1.0]], [16, [1.0,1.0,1.0]], [17, [0.00,0.00,0.00]]]
-                            width: [[11, 1px], [16, 0px], [17, 1.5px]]
 
             tunnel:
                 filter: {is_tunnel: true, $zoom: {min: 13} }
@@ -2758,38 +2636,16 @@ layers:
                         cap: round
                         outline:
                             cap: butt
-            labels-minor_road-z15:
-                filter: { $zoom: 15 }
+            labels-minor_road-z15-z17:
+                filter: { $zoom: [15,16,17] }
                 draw:
                     text-blend-order:
                         priority: 59
                         visible: global.text_visible_minor_road_e
                         text_source: name
                         font:
-                            fill: [0.45,0.45,0.45]
-                            size: 10px
-                            stroke: { color: global.text_stroke, width: 4 }
-            labels-minor_road-z16:
-                filter: { $zoom: 16 }
-                draw:
-                    text-blend-order:
-                        priority: 59
-                        visible: global.text_visible_minor_road_e
-                        text_source: name
-                        font:
-                            fill: [0.15,0.15,0.15]
-                            size: 12px
-                            stroke: { color: global.text_stroke, width: 4 }
-            labels-minor_road-z17:
-                filter: { $zoom: { min: 17, max: 18 } }
-                draw:
-                    text-blend-order:
-                        priority: 59
-                        visible: global.text_visible_minor_road_e
-                        text_source: name
-                        font:
-                            fill: [0.15,0.15,0.15]
-                            size: 12px
+                            fill: [[15, [0.45,0.45,0.45]], [16, [0.15,0.15,0.15]]]
+                            size: [[15, 10px], [16, 12px]]
                             stroke: { color: global.text_stroke, width: 4 }
             labels-minor_road-z18:
                 filter: { $zoom: { min: 18 } }
@@ -2799,7 +2655,6 @@ layers:
                         visible: global.text_visible_minor_road
                         text_source: name
                         font:
-                            # needs a fill color?
                             fill: global.text_fill
                             size: 13px
                             stroke: { color: global.text_stroke, width: 4 }
@@ -2807,91 +2662,21 @@ layers:
             filter: { kind: minor_road, kind_detail: service, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[14, [0.75,0.75,0.75]], [15, [0.60,0.60,0.60]], [16, [0.30,0.30,0.30]], [17, [1.0,1.0,1.0]]]
+                    color: [[14, global.refill_lightgray], [15, global.refill_midgray], [16, global.refill_darkgray], [17, global.refill_white]]
                     width: [[14, 0.15px], [15, 0.75px], [16, 1.25px], [17, 3px], [18, 3px], [19, 6px]]
                     outline:
-                        color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
+                        color: [[14, global.refill_white], [16, global.refill_white], [17, global.refill_darkgray], [18, global.refill_black]]
                         width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px], [19, 1.5px]]
-            in_park:
-                filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
-                draw:
-                    lines:
-                        color: [[14, [0.75,0.75,0.75]], [15, [0.60,0.60,0.60]], [16, [0.30,0.30,0.30]], [17, [1.0,1.0,1.0]]]
-                        outline:
-                            color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                            width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
-                golf_course:
-                    filter: { landuse_kind: golf_course }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                                width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
-                nature_reserve:
-                    filter: { landuse_kind: nature_reserve }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                                width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
-                conservation:
-                    filter: { landuse_kind: conservation }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                                width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
-                zoo:
-                    filter: { landuse_kind: zoo }
-                    draw:
-                        lines:
-                            outline:
-                                color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                                width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
-            in_cemetery_garden:
-                filter: { landuse_kind: [cemetery,garden] }
-                draw:
-                    lines:
-                        outline:
-                            color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                            width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
-            in_university:
-                filter: { landuse_kind: university }
-                draw:
-                    lines:
-                        outline:
-                            color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                            width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
-            in_hospital:
-                filter: { landuse_kind: hospital }
-                draw:
-                    lines:
-                        outline:
-                            color: [[14,[1.0,1.0,1.0]], [16,[1.0,1.0,1.0]], [17,[0.30,0.30,0.30]], [18,[0.00,0.00,0.00]]]
-                            width: [[13, 0px], [14, 0.5px], [16, 0px], [17, 1.0px]]
             labels-service_road:
-                filter: { $zoom: 17 }
+                filter: { $zoom: { min: 17 } }
                 draw:
                     text-blend-order:
                         priority: 60
                         visible: global.text_visible_service_road
                         text_source: name
                         font:
-                            # need fill color?
-                            fill: [0.25,0.25,0.25]
-                            size: 12px
-                            stroke: { color: global.text_stroke, width: 4 }
-            labels-service_road-z18:
-                filter: { $zoom: { min: 18 } }
-                draw:
-                    text-blend-order:
-                        priority: 60
-                        visible: global.text_visible_service_road
-                        text_source: name
-                        font:
-                            # need fill color?
-                            fill: [0.15,0.15,0.15]
-                            size: 13px
+                            fill: [[17, [0.25,0.25,0.25]], [18, [0.15,0.15,0.15]]]
+                            size: [[17, 12px], [18, 13px]]
                             stroke: { color: global.text_stroke, width: 4 }
 
         shields:
