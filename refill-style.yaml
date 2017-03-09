@@ -263,6 +263,8 @@ global:
     darkgray_color:             [0.250,0.250,0.250]
     midgray_color:              [0.500,0.500,0.500]
     lightgray_color:            [0.750,0.750,0.750]
+    lightergray_color:          [0.850,0.850,0.850]
+    lightestgray_color:         [0.900,0.900,0.900]
     offwhite_color:             [0.970,0.970,0.970]
 
     #roads
@@ -2615,7 +2617,7 @@ layers:
             draw:
                 lines:
                     color: [[13, global.offwhite_color], [16, global.midgray_color], [17, global.white_color]]
-                    width: [[13, 0px], [16, 1px], [18, 2px], [19, 6px]]
+                    width: [[13, 0px], [16, 1.25px], [18, 2px], [19, 6px]]
                     outline:
                         color: [[13, global.white_color], [16, global.white_color], [17, global.darkgray_color], [18, global.black_color]]
                         width: [[13, 0px], [16, 0px], [17, 1px], [19, 1.5px]]
@@ -5430,31 +5432,13 @@ layers:
                     priority: 100
                     visible: global.text_visible_landuse_generic
                     font:
-                        fill: '#666'
+                        fill: global.midgray_color
                         family: global.text_font_family
                         style: italic
                         size: 11px
-                        stroke: { color: global.text_stroke_address, width: 1 }
+                        stroke: { color: global.white_color, width: 1 }
 
         tier1:
-            # filter:
-            #     any:
-            #         # limit show smaller landuse areas to higher zooms
-            #         - { $zoom: { min: 3 },  area: { min: 300000000 } }
-            #         - { $zoom: { min: 4 },  area: { min: 300000000 } }
-            #         - { $zoom: { min: 5 },  area: { min: 150000000 } }
-            #         - { $zoom: { min: 6 },  area: { min: 150000000 } }
-            #         - { $zoom: { min: 7 },  area: { min: 100000000 } }
-            #         - { $zoom: { min: 8 },  area: { min: 10000000 } }
-            #         - { $zoom: { min: 9 },  area: { min: 5000000 } }
-            #         - { $zoom: { min: 10 }, area: { min: 1000000 } }
-            #         - { $zoom: { min: 11 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 12 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 13 }, area: { min: 100000 } }
-            #         - { $zoom: { min: 14 }, area: { min: 50000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 20000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 2000 } }
-            #         - { $zoom: { min: 16 } }
             national_park:
                 filter:
                     all:
@@ -5464,8 +5448,7 @@ layers:
                         - protect_class: ['2','3','5']
                 draw:
                     park-dots1:
-                        color: [0.790,0.790,0.790]
-                        # todo: what is this?
+                        color: global.lightgray_color
                         order: 18
                         visible: true
                 us_national_park:
@@ -5479,23 +5462,6 @@ layers:
                             visible: true
 
         tier2:
-            # filter:
-            #     any:
-            #         # limit show smaller landuse areas to higher zooms
-            #         - { $zoom: { min: 4 },  area: { min: 1000000000 } }
-            #         - { $zoom: { min: 5 },  area: { min: 1000000000 } }
-            #         - { $zoom: { min: 6 },  area: { min: 150000000 } }
-            #         - { $zoom: { min: 7 },  area: { min: 100000000 } }
-            #         - { $zoom: { min: 8 },  area: { min: 10000000 } }
-            #         - { $zoom: { min: 9 },  area: { min: 5000000 } }
-            #         - { $zoom: { min: 10 }, area: { min: 1000000 } }
-            #         - { $zoom: { min: 11 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 12 }, area: { min: 250000 } }
-            #         - { $zoom: { min: 13 }, area: { min: 100000 } }
-            #         - { $zoom: { min: 14 }, area: { min: 50000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 20000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 2000 } }
-            #         - { $zoom: { min: 16 } }
 
             # effectively wilderness
             conservation:
@@ -5504,17 +5470,9 @@ layers:
                     kind: [protected_area, nature_reserve, national_park]
                     not: { protect_class: ['2','3','5']}
                 draw:
-                    # pixel-pattern-light:
-                    #     #order: 33 #25
-                    #     visible: true
-
                     pixel-pattern-light:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
-                    # outline:
-                    #     style: lines
-                    #     color: global.green6
-                    #     width: [[9,0px],[10,2px],[12,4px]]
 
             national_forest_level_6:
                 filter:
@@ -5525,7 +5483,7 @@ layers:
                         - operator: ['United States Forest Service']
                 draw:
                     pixel-pattern-bright:
-                        color: global.green7
+                        color: global.lightergray_color
                         visible: true
 
             parks-and-national-forests-not-national-park:
@@ -5539,7 +5497,7 @@ layers:
                 # default for national forests and more?
                 draw:
                     park-dots1:
-                        color: [0.760,0.760,0.760]
+                        color: global.lightgray_color
                         visible: true
                 national_park:
                     #filter: function() { return feature.name && (feature.name.indexOf('National Park') > -1); }
@@ -5558,70 +5516,38 @@ layers:
                     $zoom: { min: 10}
                 draw:
                     polygons:
-                        color: [1.00,1.00,1.00]
+                        color: global.white_color
                         visible: global.green4_v
 
-            # TODO, make a ligher forest pattern color
-            #forest:
-            #    filter: { kind: [forest, wood, natural_wood, natural_forest, natural_park], $zoom: { min: 10 }, not: { operator: [ "United States Forest Service"] } }
-            #    draw:
-            #        pixel-pattern-bright:
-            #            #color: [0.890,0.890,0.890]
-            #            visible: true
-
         tier3:
-            # filter:
-            #     any:
-            #         # limit show smaller landuse areas to higher zooms
-            #         - { $zoom: { min: 8 },  area: { min: 10000000 } }
-            #         - { $zoom: { min: 9 },  area: { min: 5000000 } }
-            #         - { $zoom: { min: 10 }, area: { min: 1000000 } }
-            #         - { $zoom: { min: 11 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 12 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 13 }, area: { min: 100000 } }
-            #         - { $zoom: { min: 14 }, area: { min: 50000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 20000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 2000 } }
-            #         - { $zoom: { min: 16 } }
             airport:
                 filter:
                     kind: aerodrome
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: global.purple_v
             military:
                 filter:
                     kind: military
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
             university:
                 filter:
                     kind: [university, college]
                 draw:
                     dots-rev:
-                        color: [0.945,0.945,0.945]
+                        color: global.lightestgray_color
                         visible: true
         tier4:
-            # filter:
-            #     any:
-            #         # limit show smaller landuse areas to higher zooms
-            #         - { $zoom: { min: 10 }, area: { min: 1000000 } }
-            #         - { $zoom: { min: 11 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 12 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 13 }, area: { min: 100000 } }
-            #         - { $zoom: { min: 14 }, area: { min: 50000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 20000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 2000 } }
-            #         - { $zoom: { min: 16 } }
             cemetery:
                 filter:
                     kind: cemetery
                 draw:
                     tiny-dots:
-                        color: [0.890,0.890,0.890]
+                        color: global.lightestgray_color
                         visible: true
             # commercial:
             #     filter:
@@ -5635,100 +5561,90 @@ layers:
                     kind: golf_course
                 draw:
                     medium-dots:
-                        color: [0.830,0.830,0.830]
+                        color: global.lightergray_color
                         visible: true
             hospital:
                 filter:
                     kind: hospital
                 draw:
                     medium-dots:
-                        color: [0.890,0.890,0.890]
+                        color: global.lightestgray_color
                         visible: true
             industrial:
                 filter:
                     kind: industrial
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
             power:
                 filter: { kind: [plant, generator, substation] }
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
             railway:
                 filter:
                     kind: railway
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
             sports_centre:
                 filter:
                     kind: sports_centre
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
             recreation_ground:
                 filter:
                     kind: recreation_ground
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
             retail:
                 filter:
                     kind: retail
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: global.grey1_v
             stadium:
                 filter:
                     kind: stadium
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
             zoo:
                 filter:
                     kind: [zoo, wildlife_park]
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: true
             winter_sports:
                 filter:
                     kind: winter_sports
                 draw:
                     polygons:
-                        color: [1.0,1.0,1.0]
+                        color: global.white_color
                         visible: global.grey8_v
             man-made:
                 filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
                 draw:
                     horizontal-bars:
-                        color: [0.90,0.90,0.90]
+                        color: global.lightestgray_color
                         visible: true
                 pier:
                     filter: { kind: [pier,bridge,breakwater,groyne,dike,cutline] }
                     draw:
                         polygons:
-                            color: [0.970,0.970,0.970]
+                            color: global.offwhite_color
                             visible: true
         tier5:
             filter:
-                # any:
-                #     # limit show smaller landuse areas to higher zooms
-                #     - { $zoom: { min: 10 }, area: { min: 1000000 } }
-                #     - { $zoom: { min: 11 }, area: { min: 400000 } }
-                #     - { $zoom: { min: 12 }, area: { min: 200000 } }
-                #     - { $zoom: { min: 13 }, area: { min: 50000 } }
-                #     - { $zoom: { min: 14 }, area: { min: 20000 } }
-                #     - { $zoom: { min: 15 }, area: { min: 10000 } }
-                #     - { $zoom: { min: 15 }, area: { min: 2000 } }
-                #     - { $zoom: { min: 16 } }
                 all:
                     - kind:
                         - theme_park
@@ -5747,31 +5663,22 @@ layers:
                         - maze
                 draw:
                     dots:
-                        color: global.grey10
+                        color: global.lightgray_color
                         visible: true
             beach:
                 filter:
                     kind: beach
                 draw:
                     dots:
-                        color: [0.780,0.740,0.538]
+                        color: global.lightestgray_color
                         visible: true
         tier6:
-            # filter:
-            #     any:
-            #         # limit show smaller landuse areas to higher zooms
-            #         - { $zoom: { min: 12 }, area: { min: 500000 } }
-            #         - { $zoom: { min: 13 }, area: { min: 100000 } }
-            #         - { $zoom: { min: 14 }, area: { min: 50000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 20000 } }
-            #         - { $zoom: { min: 15 }, area: { min: 2000 } }
-            #         - { $zoom: { min: 16 } }
             garden:
                 filter:
                     kind: garden
                 draw:
                     tiny-dots:
-                        color: [0.760,0.760,0.760]
+                        color: global.lightgray_color
                         visible: true
             parking:
                 filter:
@@ -5783,20 +5690,20 @@ layers:
                         - { $zoom: { min: 15 }, area: { min: 5000 } }
                 draw:
                     horizontal-bars-rev:
-                        color: [0.950,0.950,0.950]
+                        color: global.lightestgray_color
                         visible: global.grey1_v
                 early:
                     filter: { $zoom: { max: 15 } }
                     draw:
                         horizontal-bars-rev:
-                            color: [0.950,0.950,0.950]
+                            color: global.offwhite_color
                             visible: true
             pedestrian:
                 filter:
                     kind: [pedestrian,common]
                 draw:
                     park-dots1:
-                        color: [0.950,0.950,0.950]
+                        color: global.offwhite_color
                         visible: global.grey1_v
                 green-stuff:
                     filter:
