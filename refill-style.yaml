@@ -287,6 +287,17 @@ global:
     # offwhite_color:             [1.000,0.969,0.996]
     # white_color:                [1.00,1.00,1.00]
 
+        # Refill Global Colors - PINK
+    pink:
+        black_color:                [1.000,0.047,0.773]
+        darkgray_color:             [1.000,0.282,0.831]
+        midgray_color:              [1.000,0.518,0.890]
+        lightgray_color:            [1.000,0.761,0.945]
+        lightergray_color:          [1.000,0.859,0.969]
+        lightestgray_color:         [1.000,0.902,0.980]
+        offwhite_color:             [1.000,0.969,0.996]
+        white_color:                [1.00,1.00,1.00]
+
     #roads
     highway1:                   [1.00,1.00,1.00]
     highway_link1:              [0.00, 0.00, 0.00]
@@ -3495,7 +3506,7 @@ layers:
                 visible: false
                 style: lines
                 order: 330
-                color: [[14, global.lightgray_color], [19, global.darkgray_color]]
+                color: [[14, global.pink.lightgray_color], [19, global.pink.darkgray_color]]
                 width: [[14, 0.3px], [15, 0.5px], [16, 0.75px],[18, 0.75px], [19, 1px]]
 
         # building footprints, pre-extrusion
