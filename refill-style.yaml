@@ -1301,7 +1301,7 @@ styles:
         shaders:
             uniforms:
                 u_tex_grid: building-grid
-                u_grid_color: global.pink.black_color
+                u_grid_color: global.black_color
             defines:
                 WALL_TINT: vec3(1., 3., .993)
             blocks:
@@ -2304,14 +2304,14 @@ layers:
                     filter: {is_tunnel: true, $zoom: { min: 13 } }
                     draw:
                         lines:
-                            color: [[13, global.light_color], [15, global.offwhite_color]]
+                            color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
                             outline:
                                 color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
             tunnel:
                 filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [15, global.offwhite_color]]
+                        color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
                         outline:
                             color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
             highway_bridge:
@@ -2381,7 +2381,7 @@ layers:
                     filter: { ref: true }
                     draw:
                         lines:
-                            color: [[8, global.midlight_color], [11, global.midlight_color], [13, global.mid_color], [14, global.black_color], [15, global.white_color]]
+                            color: [[8, global.midlight_color], [11, global.mid_color], [13, global.mid_color], [14, global.black_color], [15, global.white_color]]
                             width: [[9, 0.5px], [14, 1.25px], [15, 1.25px], [16, 2px], [17, 4px], [18, 6px], [20, 3m]]
                             outline:
                                 color: [[8, global.white_color], [14, global.white_color], [15, global.black_color]]
@@ -2397,7 +2397,7 @@ layers:
                         filter: {is_tunnel: true, $zoom: {min: 13} }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [15, global.offwhite_color]]
+                                color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
                                 outline:
                                     color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
                     labels-trunk_primary-route-z13-z14:
@@ -2460,7 +2460,7 @@ layers:
                 filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [16, global.offwhite_color]]
+                        color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
                         outline:
                             color: [[13, global.white_color], [15, global.white_color], [16, global.light_color]]
             secondary:
@@ -2499,7 +2499,7 @@ layers:
                         filter: {is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [17, global.offwhite_color]]
+                                color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
                                 outline:
                                     color: [[13, global.white_color], [16, global.white_color], [17, global.light_color]]
                     labels-secondary-routes:
@@ -2572,7 +2572,7 @@ layers:
                         filter: {is_tunnel: true, $zoom: {min: 13} }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [17, global.offwhite_color]]
+                                color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
                                 outline:
                                     color: [[13, global.white_color], [16, global.white_color], [17, global.light_color]]
                 link:
@@ -2599,7 +2599,7 @@ layers:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[11, global.ultralight_color], [14, global.light_color], [16, global.dark_color], [17, global.white_color]]
+                    color: [[11, global.lightest_color], [14, global.light_color], [16, global.dark_color], [17, global.white_color]]
                     width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 2px], [17, 3px], [18, 3px], [19, 8px]]
                     outline:
                         color: [[11, global.white_color], [16, global.white_color], [17, global.dark_color], [18, global.black_color]]
@@ -2623,7 +2623,7 @@ layers:
                 filter: {is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [17, global.offwhite_color]]
+                        color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
                         outline:
                             color: [[13, global.white_color], [16, global.white_color], [17, global.light_color]]
             minor_road_bridge:
