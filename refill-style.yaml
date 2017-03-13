@@ -3743,7 +3743,7 @@ layers:
             draw:
                 dashed:
                     order: global.feature_order
-                    color: global.mid_color
+                    color: global.light_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
             disputed:
                 filter: { kind: [disputed, line_of_control] }
@@ -3752,7 +3752,7 @@ layers:
                         visible: false
                     dashed_big:
                         order: global.feature_order
-                        color: global.mid_color
+                        color: global.light_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
 
         region:
