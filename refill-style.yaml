@@ -1684,12 +1684,12 @@ layers:
         draw:
             waves:
                 order: global.feature_order
-                color: global.lighter_color
+                color: global.lightest_color
         later:
             filter: { $zoom: { min: 12 } }
             draw:
                 waves2:
-                    color: global.light_color
+                    color: global.lighter_color
                     order: function() { return feature.sort_rank + 1; }
 
         lakes:
@@ -2249,7 +2249,7 @@ layers:
             draw:
                 lines:
                     color: [[5, global.mid_color], [6, global.black_color]]
-                    width: [[5, 0.5px], [7, 0.75px]]
+                    width: [[5, 0.5px], [6, 0.5px], [7, 0.75px]]
                     outline:
                         color: global.mid_color
                         width: [[9, 0px], [10, 0px], [12, 1px], [16, 2px]]
@@ -2257,7 +2257,7 @@ layers:
                 filter: { kind: major_road }
                 draw:
                     lines:
-                        color: [[5, global.light_color], [8, global.mid_color]]
+                        color: [[5, global.light_color], [7, global.mid_color]]
                         width: [[5, 0.25px], [7, 0.5px]]
                         # outline:
                         #     width: [[8, 0.0px], [9, 0.0px], [11, .5px], [16, .75px]]
@@ -2315,7 +2315,7 @@ layers:
                         outline:
                             color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
             highway_bridge:
-                filter: {is_bridge: true}
+                filter: { is_bridge: true }
                 draw:
                     lines:
                         cap: round
@@ -2705,15 +2705,21 @@ layers:
                         outline:
                             color: [[14, global.light_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
                             width: [[13, 0px], [14, 0.25], [15, 0.5], [16, 0px], [17, 1px]]
+                bridge:
+                    filter: { is_bridge: true }
+                    draw:
+                        lines:
+                            cap: round
+                            outline:
+                                color: [[14, global.mid_color], [15, global.white_color], [16, global.white_color], [17, global.mid_color]]
+                                cap: butt
             bridge:
                 filter: { is_bridge: true }
                 draw:
                     lines:
-                        width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 2px], [20, 1m]]
                         cap: round
                         outline:
-                            color: [[14, global.midlight_color], [15, global.white_color], [16, global.white_color], [17, global.midlight_color]]
-                            width: [[14, 0.0px], [15, 0.35px], [16, 0.45px], [17, 0.85px], [18, 1px]]
+                            color: [[14, global.mid_color], [15, global.white_color], [16, global.white_color], [17, global.mid_color]]
                             cap: butt
             labels-path:
                 filter: { $zoom: { min: 17 } }
@@ -2743,7 +2749,7 @@ layers:
                         color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
                         width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 1.5px], [20, 1m]]
                         outline:
-                            color: [[14, global.light_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
+                            color: [[14, global.light_color], [15, global.white_color], [16, global.white_color], [17, global.dark_color]]
                             width: [[13, 0px], [14, 0.25], [15, 0.5], [16, 1px], [17, 1px]]
                             cap: butt
         steps:
@@ -3955,7 +3961,7 @@ layers:
                     font:
                         size: 11px
                         weight: normal
-                        fill: global.dark_color
+                        fill: [[4, global.light_color], [9, global.midlight_color]]
             region-z4:
                 filter:
                     $zoom: [4]
