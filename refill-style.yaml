@@ -13,7 +13,7 @@
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
     # https://mapzen.com/documentation/overview/#developer-accounts-and-api-keys
-    sdk_mapzen_api_key: mapzen-ZzW4tEy     # set this value to your Mapzen API key
+    sdk_mapzen_api_key: ''     # set this value to your Mapzen API key
 
     #ux/ui
     ux_language: false             # l10n language code, trusting OSM in v0.10 tiles, fixed in v1.0 tiles
