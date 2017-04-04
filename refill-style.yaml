@@ -258,36 +258,40 @@ global:
     text_visible_airport_gate:      true
 
     # Refill Global Colors -  BLACK
-    black_color:                [0.00,0.00,0.00]
-    dark_color:             [0.250,0.250,0.250]
-    mid_color:              [0.500,0.500,0.500]
-    midlight_color:          [0.625,0.625,0.625]
-    light_color:            [0.750,0.750,0.750]
-    lighter_color:          [0.850,0.850,0.850]
-    lightest_color:         [0.900,0.900,0.900]
-    ultralight_color:           [0.950,0.950,0.950]
-    offwhite_color:             [0.970,0.970,0.970]
-    white_color:                [1.00,1.00,1.00]
+    # black_color:                [0.00,0.00,0.00]
+    # dark_color:             [0.250,0.250,0.250]
+    # mid_color:              [0.500,0.500,0.500]
+    # midlight_color:          [0.625,0.625,0.625]
+    # light_color:            [0.750,0.750,0.750]
+    # lighter_color:          [0.850,0.850,0.850]
+    # lightest_color:         [0.900,0.900,0.900]
+    # ultralight_color:           [0.950,0.950,0.950]
+    # offwhite_color:             [0.970,0.970,0.970]
+    # white_color:                [1.00,1.00,1.00]
 
     # Refill Global Colors - BLUE
-    # black_color:                [0.000,0.337,0.878]
-    # dark_color:             [0.251,0.502,0.910]
-    # mid_color:              [0.498,0.667,0.937]
-    # light_color:            [0.749,0.835,0.969]
-    # lighter_color:          [0.851,0.902,0.980]
-    # lightest_color:         [0.898,0.933,0.988]
-    # offwhite_color:             [0.969,0.980,0.996]
-    # white_color:                [1.00,1.00,1.00]
+    black_color:                [0.000,0.337,0.878]
+    dark_color:             [0.141,0.424,0.880]
+    mid_color:              [0.282,0.523,0.910]
+    midlight_color:         [0.382,0.585,0.910]
+    light_color:            [0.489,0.662,0.940]
+    lighter_color:          [0.602,0.731,0.940]
+    lightest_color:         [0.718,0.819,0.970]
+    ultralight_color:           [0.794,0.868,0.980]
+    offwhite_color:             [0.881,0.923,0.990]
+    white_color:                [1.00,1.00,1.00]
 
     # Refill Global Colors - PINK
-    # black_color:                [1.000,0.047,0.773]
-    # dark_color:             [1.000,0.282,0.831]
-    # mid_color:              [1.000,0.518,0.890]
-    # light_color:            [1.000,0.761,0.945]
-    # lighter_color:          [1.000,0.859,0.969]
-    # lightest_color:         [1.000,0.902,0.980]
-    # offwhite_color:             [1.000,0.969,0.996]
-    # white_color:                [1.00,1.00,1.00]
+    # black_color:                [1.000,0.000,0.767]
+    # dark_color:             [1.000,0.270,0.830]
+    # mid_color:              [1.000,0.400,0.860]
+    # midlight_color:         [1.000,0.500,0.883]
+    # light_color:            [1.000,0.580,0.902]
+    # lighter_color:          [1.000,0.640,0.916]
+    # lightest_color:         [1.000,0.761,0.945]
+    # ultralight_color:       [1.000,0.859,0.969]
+    # offwhite_color:             [1.000,0.920,0.984]
+    # white_color:                [1.000,1.000,1.000]
 
     # Refill Global Colors - PINK
     pink:
@@ -1075,7 +1079,9 @@ styles:
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    color.rgb = vec3(random(abs(floor(pos)))+0.785);
+                    // color.rgb = vec3(random(abs(floor(pos)))+0.785); // GRAYSCALE
+                    // color.rgb = vec3(1.00, random(abs(floor(pos)))+0.785, random(abs(floor(pos)))+0.885); // PINK
+                    color.rgb = vec3(random(abs(floor(pos)))+0.685, random(abs(floor(pos)))+0.785, 1.00); // BLUE
 
     pixel-pattern-bright:
         mix: [space-tile, generative-random]
@@ -1100,8 +1106,11 @@ styles:
         mix: [space-constant, patterns-stripes]
         shaders:
             uniforms:
-                u_dark: global.pink.dark_color
-                u_light: global.lightest_color
+                u_dark: global.dark_color
+                u_light: global.lighter_color
+                u_lightest: global.lightest_color
+                u_ultralight: global.ultralight_color
+                u_white: global.white_color
             defines:
                 COLOR1: vec3(0.915)
                 COLOR2: vec3(0.950)
@@ -1118,8 +1127,8 @@ styles:
                     st.y += sin(st.x*wave_width)*wave_height;
 
                     // gradient
-                    color.rgb = mix(COLOR1, color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(COLOR2,1.0),stripes(st*92.,.5))*1.0;
+                    color.rgb = mix(u_lightest, color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color = mix(color,vec4(u_ultralight,1.0),stripes(st*92.,.5))*1.0;
 
     waves2:
         base: polygons
