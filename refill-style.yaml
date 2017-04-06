@@ -1114,16 +1114,8 @@ styles:
         mix: [space-constant, patterns-stripes]
         shaders:
             uniforms:
-                u_dark: global.dark_color
-                u_midlight: global.midlight_color
-                u_light: global.light_color
                 u_lighter: global.lighter_color
                 u_lightest: global.lightest_color
-                u_ultralight: global.ultralight_color
-                u_white: global.white_color
-            defines:
-                COLOR1: vec3(0.915)
-                COLOR2: vec3(0.950)
             blocks:
                 global: |
                     float stripes2(vec2 st){
@@ -1139,15 +1131,6 @@ styles:
                     // gradient
                     color.rgb = mix(u_lighter, color.rgb, gl_FragCoord.x / u_resolution.x);
                     color = mix(color,vec4(u_lightest,1.0),stripes(st*92.,.5))*1.0;
-
-
-    stream-waves:
-        base: lines
-        mix: waves
-        shaders:
-            defines:
-                COLOR1: vec3(0.910)
-                COLOR2: vec3(0.980)
 
     coast:
         base: lines
@@ -1206,9 +1189,12 @@ styles:
                 COLOR2: color.rgb
 
     medium-dots:
-        mix: dots-medium
+        mix: dots
+        base: polygons
         shaders:
             defines:
+                PATTERN_SCALE: 60.0
+                DOT_SIZE: .25
                 COLOR1: vec3(1.00,1.00,1.00)
                 COLOR2: color.rgb
 
@@ -1674,7 +1660,7 @@ layers:
         draw:
             waves:
                 order: global.feature_order
-                color: global.lightest_color
+                color: global.lightest_color # colors the wave lines
         later:
             filter: { $zoom: { min: 12 } }
             draw:
@@ -1717,28 +1703,20 @@ layers:
             filter: { kind: playa }
             draw:
                 polygons:
-                    order: function() { return feature.sort_rank + 1; }
+                    order: global.feature_order
                     color: global.offwhite_color
         swimming_pool:
             filter: { kind: swimming_pool }
             draw:
                 waves:
                     color: global.lighter_color
-        water-boundary-ocean-early:
-            filter: { boundary: true, kind: ocean, $zoom: {min: 1, max: 17} }
+        water-boundary-ocean:
+            filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
             draw:
                 coast:
                     order: global.feature_order
-                    color: [[1, global.light_color], [6, global.mid_color]]
-                    width: [[2, 1.0px],[6, 1px], [7, 2px],[10, 2px], [14, 2px]]
-                    join: round
-        water-boundary-ocean-late:
-            filter: { boundary: true, kind: ocean, $zoom: {min: 17} }
-            draw:
-                coast:
-                    order: global.feature_order
-                    color: global.mid_color
-                    width: [[14, 4px],[17, 4px],[20, 10px]]
+                    color: [[1, global.light_color], [6, global.dark_color]]
+                    width: [[1, 1px], [20, 10px]]
                     join: round
         water_boundaries-not-ocean:
             filter: { boundary: true, not: { kind: ocean }, $zoom: { min: 8 } }
@@ -1748,11 +1726,12 @@ layers:
                     color: [[6, global.lightest_color], [11, global.mid_color]]
                     width: [[6, 0.75px], [10, 1px], [14, 2px], [16, 3px]]
                     join: round
-            early:
-                filter: { $zoom: { min: 14 } }
-                draw:
-                    lines:
-                        order: 241
+            # do we still need this?
+            # early:
+            #     filter: { $zoom: { min: 14 } }
+            #     draw:
+            #         lines:
+            #             order: 241
             swimming-pools-early:
                 filter: { kind: swimming_pool, $zoom: { max: 19 } }
                 draw:
@@ -1769,7 +1748,7 @@ layers:
             #river center lines, not boundaries for polygons
             filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 14 }, not: { is_tunnel: true } }
             draw:
-                stream-waves:
+                waves:
                     order: global.feature_order
                     color: global.lighter_color
                     width: [[14, 0.5px], [15, 2px], [17, 6px],[ 18, 8px]]
