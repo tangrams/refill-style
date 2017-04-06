@@ -1091,9 +1091,9 @@ styles:
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    // color.rgb = vec3(random(abs(floor(pos)))+0.785); // GRAYSCALE
+                    color.rgb = vec3(random(abs(floor(pos)))+0.785); // GRAYSCALE
                     // color.rgb = vec3(1.00, random(abs(floor(pos)))+0.785, random(abs(floor(pos)))+0.885); // PINK
-                    color.rgb = vec3(random(abs(floor(pos)))+0.685, random(abs(floor(pos)))+0.785, 1.00); // BLUE
+                    // color.rgb = vec3(random(abs(floor(pos)))+0.685, random(abs(floor(pos)))+0.785, 1.00); // BLUE
 
     pixel-pattern-bright:
         mix: [space-tile, generative-random]
@@ -1103,15 +1103,6 @@ styles:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*180.0,1.0);
                     color.rgb = vec3(random(abs(floor(pos)))+0.855);
-
-    pixel-pattern-dark:
-        mix: [space-tile, generative-random]
-        base: polygons
-        shaders:
-            blocks:
-                filter: |
-                    vec3 pos = vec3(getTileCoords()*280.0,1.0);
-                    color.rgb = vec3(random(abs(floor(pos)))+0.695);
 
     waves:
         base: polygons
@@ -5383,9 +5374,6 @@ layers:
                 order: global.feature_order
                 visible: false
             pixel-pattern-bright:
-                order: global.feature_order
-                visible: false
-            pixel-pattern-dark:
                 order: global.feature_order
                 visible: false
             tiny-dots:
