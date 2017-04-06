@@ -1166,21 +1166,6 @@ styles:
                 color: |
                     color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
 
-    dots3:
-        mix: dots
-        base: polygons
-        shaders:
-            defines:
-                PATTERN_SCALE: 70.0
-                DOT_SIZE: .125
-
-    park-dots1:
-        mix: dots
-        shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
-
     medium-dots:
         mix: dots
         base: polygons
@@ -1192,9 +1177,11 @@ styles:
                 COLOR2: color.rgb
 
     tiny-dots:
-        mix: dots3
+        mix: dots
         shaders:
             defines:
+                PATTERN_SCALE: 70.0
+                DOT_SIZE: .125
                 COLOR1: vec3(1.00,1.00,1.00)
                 COLOR2: color.rgb
 
@@ -5374,6 +5361,9 @@ layers:
     landuse:
         data: { source: mapzen }
         draw:
+            dots:
+                order: global.feature_order
+                visible: false
             park-dots1:
                 order: global.feature_order
                 visible: false
@@ -5433,7 +5423,7 @@ layers:
                         - not: { operator: [ "United States Forest Service" ] }
                         - protect_class: ['2','3','5']
                 draw:
-                    park-dots1:
+                    dots:
                         color: global.lighter_color
                         order: 18
                         visible: true
@@ -5482,7 +5472,7 @@ layers:
                         - not: { protect_class: ['2','3','5','6'] }
                 # default for national forests and more?
                 draw:
-                    park-dots1:
+                    dots:
                         color: global.lighter_color
                         visible: true
                 national_park:
@@ -5688,7 +5678,7 @@ layers:
                 filter:
                     kind: [pedestrian,common]
                 draw:
-                    park-dots1:
+                    dots:
                         color: global.offwhite_color
                         visible: global.grey1_v
                 green-stuff:
