@@ -1633,9 +1633,8 @@ layers:
                         size: 12px
                         style: italic
                         fill: global.black_color
-                        weight: 400
+                        weight: normal
                         stroke: { color: global.white_color, width: 4 }
-                        #transform: uppercase
     water:
         data: { source: mapzen, layer: water }
         draw:
@@ -2102,7 +2101,7 @@ layers:
             draw:
                 polygons_transparent:
                     color: global.transparent
-                    visible: global.true
+                    visible: true
                 lines_transparent:
                     visible: false
                 outline_transparent:
@@ -2117,7 +2116,8 @@ layers:
         #             order: function() { if($zoom<17) { return 10; } else { return 100; } }
         #         outline_transparent:
         #             order: function() { if($zoom<17) { return 11; } else { return 101; } }
-#
+
+# is this still a problem?
 #    transit-platforms:
 #        data: { source: mapzen, layer: transit }
 #        filter: { kind: platform, $zoom: { min: 15 }, $geometry: [polygon,line] }
@@ -2158,7 +2158,7 @@ layers:
                 visible: false    # labels are enabled by each layer below
                 font:
                     family: global.text_font_family
-                    weight: 500
+                    weight: normal
                     fill: global.black_color
 
         early:
