@@ -1166,13 +1166,6 @@ styles:
                 color: |
                     color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
 
-    dots-medium:
-        mix: dots
-        base: polygons
-        shaders:
-            defines:
-                PATTERN_SCALE: 60.0
-                DOT_SIZE: .25
     dots3:
         mix: dots
         base: polygons
@@ -1204,13 +1197,6 @@ styles:
             defines:
                 COLOR1: vec3(1.00,1.00,1.00)
                 COLOR2: color.rgb
-
-    park-dots3:
-        mix: dots
-        shaders:
-            defines:
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: vec3(0.760,0.760,0.760)
 
     dots-rev:
         base: polygons
@@ -5547,7 +5533,7 @@ layers:
                     kind: cemetery
                 draw:
                     tiny-dots:
-                        color: global.lightest_color
+                        color: global.lighter_color
                         visible: true
             # commercial:
             #     filter:
