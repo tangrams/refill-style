@@ -283,18 +283,31 @@ global:
     # white_color:                [1.00,1.00,1.00]
     # transparent:                  [0.929,0.929,0.929,0.500]
 
-    # Refill Global Colors - BLUE
-    black_color:                [0.000,0.337,0.878]
-    dark_color:             [0.141,0.424,0.880]
-    mid_color:              [0.282,0.523,0.910]
-    midlight_color:         [0.382,0.585,0.910]
-    light_color:            [0.489,0.662,0.940]
-    lighter_color:          [0.686,0.783,0.940]
-    lightest_color:         [0.805,0.871,0.970]
-    ultralight_color:           [0.872,0.915,0.980]
-    offwhite_color:             [0.921,0.947,0.990]
+    # SEPIA
+    black_color:                [0.702,0.475,0.408]
+    dark_color:                 [0.808,0.663,0.620]
+    mid_color:                  [0.835,0.710,0.671]
+    midlight_color:             [0.867,0.765,0.737]
+    light_color:                [0.906,0.835,0.816]
+    lighter_color:              [0.937,0.886,0.871]
+    lightest_color:             [0.957,0.922,0.914]
+    ultralight_color:           [0.973,0.949,0.945]
+    offwhite_color:             [0.988,0.980,0.976]
     white_color:                [1.00,1.00,1.00]
-    transparent:                [0.805,0.871,0.970,0.500] # lighter color at 50%
+    transparent:                [0.957,0.925,0.918,0.500]
+
+    # Refill Global Colors - BLUE
+    # black_color:                [0.000,0.337,0.878]
+    # dark_color:             [0.141,0.424,0.880]
+    # mid_color:              [0.282,0.523,0.910]
+    # midlight_color:         [0.382,0.585,0.910]
+    # light_color:            [0.489,0.662,0.940]
+    # lighter_color:          [0.686,0.783,0.940]
+    # lightest_color:         [0.805,0.871,0.970]
+    # ultralight_color:           [0.872,0.915,0.980]
+    # offwhite_color:             [0.921,0.947,0.990]
+    # white_color:                [1.00,1.00,1.00]
+    # transparent:                [0.805,0.871,0.970,0.500] # lighter color at 50%
 
     # Refill Global Colors - PINK
     # black_color:                [1.000,0.130,0.797]
@@ -5551,19 +5564,19 @@ layers:
             #         polygons:
             #             color: global.white_color
             #             visible: true
-            # sports_centre:
-            #     filter:
-            #         kind: sports_centre
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            # recreation_ground:
-            #     filter:
-            #         kind: recreation_ground
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: true
+            sports_centre:
+                filter:
+                    kind: sports_centre
+                draw:
+                    dots-rev-grid:
+                        color: global.offwhite_color
+            recreation_ground:
+                filter:
+                    kind: recreation_ground
+                draw:
+                    dots-rev-grid:
+                        color: global.offwhite_color
+                        visible: true
             # retail:
             #     filter:
             #         kind: retail
@@ -5571,20 +5584,20 @@ layers:
             #         polygons:
             #             color: global.white_color
             #             visible: global.grey1_v
-            # stadium:
-            #     filter:
-            #         kind: stadium
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: true
-            # zoo:
-            #     filter:
-            #         kind: [zoo, wildlife_park]
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: true
+            stadium:
+                filter:
+                    kind: stadium
+                draw:
+                    dots-rev-grid:
+                        color: global.offwhite_color
+                        visible: true
+            zoo:
+                filter:
+                    kind: [zoo, wildlife_park]
+                draw:
+                    tiny-dots:
+                        color: global.offwhite_color
+                        visible: true
             # winter_sports:
             #     filter:
             #         kind: winter_sports
