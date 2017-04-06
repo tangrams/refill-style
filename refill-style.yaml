@@ -1716,7 +1716,8 @@ layers:
         playas:
             filter: { kind: playa }
             draw:
-                waves:
+                polygons:
+                    order: function() { return feature.sort_rank + 1; }
                     color: global.offwhite_color
         swimming_pool:
             filter: { kind: swimming_pool }
@@ -1860,14 +1861,6 @@ layers:
                         text-blend-order:
                             font:
                                 size: [[5, 9px], [10, 13px]]
-                # lakes-z6:
-                #     filter: { $zoom: [6] }
-                #     draw:
-                #         text-blend-order: { font: { size: 11px } }
-                # lakes-z8:
-                #     filter: { $zoom: [8] }
-                #     draw:
-                #         text-blend-order: { font: { size: 12px } }
             playa-labels:
                 filter:
                     all:
