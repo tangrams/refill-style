@@ -5352,9 +5352,6 @@ layers:
             dots:
                 order: global.feature_order
                 visible: false
-            park-dots1:
-                order: global.feature_order
-                visible: false
             medium-dots:
                 order: global.feature_order
                 visible: false
