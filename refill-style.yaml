@@ -269,28 +269,40 @@ global:
     # offwhite_color:             [0.970,0.970,0.970]
     # white_color:                [1.00,1.00,1.00]
 
-    # Refill Global Colors - BLUE
-    black_color:                [0.000,0.337,0.878]
-    dark_color:             [0.141,0.424,0.880]
-    mid_color:              [0.282,0.523,0.910]
-    midlight_color:         [0.382,0.585,0.910]
-    light_color:            [0.489,0.662,0.940]
-    lighter_color:          [0.602,0.731,0.940]
-    lightest_color:         [0.718,0.819,0.970]
-    ultralight_color:           [0.794,0.868,0.980]
-    offwhite_color:             [0.881,0.923,0.990]
+    # Refill Global Colors -  GRAY
+    black_color:                [0.650,0.650,0.650]
+    dark_color:                 [0.680,0.680,0.680]
+    mid_color:                  [0.722,0.722,0.722]
+    midlight_color:             [0.788,0.788,0.788]
+    light_color:                [0.824,0.824,0.824]
+    lighter_color:              [0.894,0.894,0.894]
+    lightest_color:             [0.929,0.929,0.929]
+    ultralight_color:           [0.965,0.965,0.965]
+    offwhite_color:             [0.976,0.976,0.976]
     white_color:                [1.00,1.00,1.00]
 
+    # Refill Global Colors - BLUE
+    # black_color:                [0.000,0.337,0.878]
+    # dark_color:             [0.141,0.424,0.880]
+    # mid_color:              [0.282,0.523,0.910]
+    # midlight_color:         [0.382,0.585,0.910]
+    # light_color:            [0.489,0.662,0.940]
+    # lighter_color:          [0.686,0.783,0.940]
+    # lightest_color:         [0.805,0.871,0.970]
+    # ultralight_color:           [0.872,0.915,0.980]
+    # offwhite_color:             [0.921,0.947,0.990]
+    # white_color:                [1.00,1.00,1.00]
+
     # Refill Global Colors - PINK
-    # black_color:                [1.000,0.000,0.767]
-    # dark_color:             [1.000,0.270,0.830]
-    # mid_color:              [1.000,0.400,0.860]
-    # midlight_color:         [1.000,0.500,0.883]
-    # light_color:            [1.000,0.580,0.902]
-    # lighter_color:          [1.000,0.640,0.916]
-    # lightest_color:         [1.000,0.761,0.945]
-    # ultralight_color:       [1.000,0.859,0.969]
-    # offwhite_color:             [1.000,0.920,0.984]
+    # black_color:                [1.000,0.130,0.797]
+    # dark_color:             [1.000,0.440,0.869]
+    # mid_color:              [1.000,0.520,0.888]
+    # midlight_color:         [1.000,0.620,0.911]
+    # light_color:            [1.000,0.730,0.937]
+    # lighter_color:          [1.000,0.810,0.956]
+    # lightest_color:         [1.000,0.880,0.972]
+    # ultralight_color:       [1.000,0.920,0.983]
+    # offwhite_color:             [1.000,0.970,0.994]
     # white_color:                [1.000,1.000,1.000]
 
     # Refill Global Colors - PINK
@@ -816,12 +828,6 @@ cameras:
         type: isometric
 
 styles:
-    dashed:
-        base: lines
-        dash: [1.25, 1.25]
-    dashed_big:
-        base: lines
-        dash: [2.0, 1.0]
 
 ##### LIBRARY OF FUNCTIONS
 #    SPACE functions
@@ -1061,16 +1067,18 @@ styles:
                         return aastep(size,d);;
                     }
 ##### ACTUAL STYLES
+    dashed:
+        base: lines
+        dash: [1.25, 1.25]
+
+    dashed_big:
+        base: lines
+        dash: [2.0, 1.0]
+
     dashed_steps:
         base: lines
         dash: [0.75, 0.25]
         dash_background_color: global.white_color
-    water-gradient:
-        base: polygons
-        shaders:
-            blocks:
-                filter: |
-                    color.rgb = mix(vec3(1.0), vec3(0.970), gl_FragCoord.x / u_resolution.x + gl_FragCoord.y / u_resolution.y);
 
     pixel-pattern-light:
         mix: [space-tile, generative-random]
@@ -1079,9 +1087,9 @@ styles:
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    // color.rgb = vec3(random(abs(floor(pos)))+0.785); // GRAYSCALE
+                    color.rgb = vec3(random(abs(floor(pos)))+0.785); // GRAYSCALE
                     // color.rgb = vec3(1.00, random(abs(floor(pos)))+0.785, random(abs(floor(pos)))+0.885); // PINK
-                    color.rgb = vec3(random(abs(floor(pos)))+0.685, random(abs(floor(pos)))+0.785, 1.00); // BLUE
+                    //color.rgb = vec3(random(abs(floor(pos)))+0.685, random(abs(floor(pos)))+0.785, 1.00); // BLUE
 
     pixel-pattern-bright:
         mix: [space-tile, generative-random]
@@ -1107,7 +1115,9 @@ styles:
         shaders:
             uniforms:
                 u_dark: global.dark_color
-                u_light: global.lighter_color
+                u_midlight: global.midlight_color
+                u_light: global.light_color
+                u_lighter: global.lighter_color
                 u_lightest: global.lightest_color
                 u_ultralight: global.ultralight_color
                 u_white: global.white_color
@@ -1127,8 +1137,8 @@ styles:
                     st.y += sin(st.x*wave_width)*wave_height;
 
                     // gradient
-                    color.rgb = mix(u_lightest, color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(u_ultralight,1.0),stripes(st*92.,.5))*1.0;
+                    color.rgb = mix(u_lighter, color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color = mix(color,vec4(u_lightest,1.0),stripes(st*92.,.5))*1.0;
 
     waves2:
         base: polygons
@@ -1768,7 +1778,7 @@ layers:
             draw:
                 stream-waves:
                     order: global.feature_order
-                    color: global.lighter_color
+                    color: global.light_color
                     width: [[14, 0.5px], [15, 2px], [17, 6px],[ 18, 8px]]
                     cap: round
 
@@ -2506,7 +2516,7 @@ layers:
                         draw:
                             text-blend-order:
                                 priority: 56
-                                visible: global.text_visible_secondary_e
+                                visible: global.text_visible_secondary
                                 text_source: global.ux_language_text_source_road_ref_and_name_short
                                 font:
                                     fill: global.black_color
@@ -5442,8 +5452,12 @@ layers:
             pixel-pattern-dark:
                 order: global.feature_order
                 visible: false
+            tiny-dots:
+                order: global.feature_order
+                visible: false
             polygons:
                 order: global.feature_order
+
 
         landuse-labels:
             filter:
@@ -5474,7 +5488,7 @@ layers:
                         - protect_class: ['2','3','5']
                 draw:
                     park-dots1:
-                        color: global.light_color
+                        color: global.lighter_color
                         order: 18
                         visible: true
                 us_national_park:
@@ -5523,7 +5537,7 @@ layers:
                 # default for national forests and more?
                 draw:
                     park-dots1:
-                        color: global.light_color
+                        color: global.lighter_color
                         visible: true
                 national_park:
                     #filter: function() { return feature.name && (feature.name.indexOf('National Park') > -1); }
@@ -5745,8 +5759,9 @@ layers:
                         visible: true
                     outline:
                         style: lines
-                        color: global.lighter_color
-                        width: [[14,0px],[15,1px],[16,1m]]
+                        color: global.ultralight_color
+                        order: global.feature_order
+                        width: [[14, 0px], [15, 1px], [18, 2px]]
             # place_of_worship:
             #     filter:
             #         kind: place_of_worship
@@ -5759,7 +5774,7 @@ layers:
                     kind: playground
                 draw:
                     dots-rev:
-                        color: global.white_color
+                        color: global.ultralight_color
                         visible: true
             school:
                 filter:
