@@ -268,6 +268,7 @@ global:
     # ultralight_color:           [0.950,0.950,0.950]
     # offwhite_color:             [0.970,0.970,0.970]
     # white_color:                [1.00,1.00,1.00]
+    # transparent:                  [0.900,0.900,0.900,0.500]
 
     # Refill Global Colors -  GRAY
     # black_color:                [0.650,0.650,0.650]
@@ -280,6 +281,7 @@ global:
     # ultralight_color:           [0.965,0.965,0.965]
     # offwhite_color:             [0.976,0.976,0.976]
     # white_color:                [1.00,1.00,1.00]
+    # transparent:                  [0.929,0.929,0.929,0.500]
 
     # Refill Global Colors - BLUE
     black_color:                [0.000,0.337,0.878]
@@ -292,6 +294,7 @@ global:
     ultralight_color:           [0.872,0.915,0.980]
     offwhite_color:             [0.921,0.947,0.990]
     white_color:                [1.00,1.00,1.00]
+    transparent:                [0.805,0.871,0.970,0.500] # lighter color at 50%
 
     # Refill Global Colors - PINK
     # black_color:                [1.000,0.130,0.797]
@@ -304,6 +307,7 @@ global:
     # ultralight_color:       [1.000,0.920,0.983]
     # offwhite_color:             [1.000,0.970,0.994]
     # white_color:                [1.000,1.000,1.000]
+    # transparent:                   [1.000,0.880,0.972,0.500]
 
     # Refill Global Colors - PINK
     pink:
@@ -2085,33 +2089,34 @@ layers:
                                 fill: global.black_color
                                 style: italic
                                 stroke: { color: global.white_color, width: 3px }
-    # platforms:
-    #     data: { source: mapzen, layer: transit }
-    #     filter: { kind: platform }
-    #     draw:
-    #         lines_transparent:
-    #             color: [0.569,0.690,0.722,0.5]
-    #             width: 5m
-    #             visible: global.grey9_v
-    #     polygon_geom:
-    #         filter: { $geometry: polygon }
-    #         draw:
-    #             polygons_transparent:
-    #                 color: [0.592,0.671,0.694,0.5]
-    #                 visible: global.grey9_v
-    #             lines_transparent:
-    #                 visible: false
-    #             outline_transparent:
-    #                 color: global.grey9_o
-    #                 width: [[15,0px],[16,0.5px],[17,1px],[19,2px]]
-    #     z-order:
-    #         draw:
-    #             lines_transparent:
-    #                 order: function() { if($zoom<17) { return 10; } else { return 100; } }
-    #             polygons_transparent:
-    #                 order: function() { if($zoom<17) { return 10; } else { return 100; } }
-    #             outline_transparent:
-    #                 order: function() { if($zoom<17) { return 11; } else { return 101; } }
+    platforms:
+        data: { source: mapzen, layer: transit }
+        filter: { kind: platform }
+        draw:
+            lines_transparent:
+                color: global.transparent
+                width: 5m
+                visible: true
+        polygon_geom:
+            filter: { $geometry: polygon }
+            draw:
+                polygons_transparent:
+                    color: global.transparent
+                    visible: global.true
+                lines_transparent:
+                    visible: false
+                outline_transparent:
+                    color: global.transparent
+                    width: [[15, 0px], [16, 0.5px], [17, 1px], [19, 2px]]
+        # do we still need this z-order?
+        # z-order:
+        #     draw:
+        #         lines_transparent:
+        #             order: function() { if($zoom<17) { return 10; } else { return 100; } }
+        #         polygons_transparent:
+        #             order: function() { if($zoom<17) { return 10; } else { return 100; } }
+        #         outline_transparent:
+        #             order: function() { if($zoom<17) { return 11; } else { return 101; } }
 #
 #    transit-platforms:
 #        data: { source: mapzen, layer: transit }
@@ -3370,20 +3375,14 @@ layers:
                 filter: { kind_detail: [gondola, cable_car] }
                 draw:
                     lines:
-                        color: global.mid_color
-                        width: [[12, 0.5px], [13, 0.5px], [14, 0.6px], [15, 1px], [16, 2px]]
-#                    lines_transparent:
-#                        color: [0.5,0.5,0.5]
-#                        width: [[12, 0px], [13, 5px], [14, 8px], [15, 10px], [16, 12px]]
+                        color: global.midlight_color
+                        width: [[12, 0.5px], [14, 0.6px], [16, 2px]]
             chair_lift:
                 filter: { kind_detail: chair_lift }
                 draw:
                     lines:
-                        color: global.mid_color
-                        width: [[12, 0.5px], [13, 0.5px], [14, 0.6px], [15, 1px], [16, 1px], [16, 2px], [18, 3m]]
-#                    lines_transparent:
-#                        color: [0.5,0.5,0.5]
-#                        width: [[12, 0px], [13, 5px], [14, 8px], [15, 10px], [16, 12px], [18, 20px]]
+                        color: global.midlight_color
+                        width: [[12, 0.5px], [14, 0.6px], [16, 2px], [18, 3m]]
             aerialway-labels:
                 filter: { $zoom: { min: 14 } }
                 draw:
@@ -3400,12 +3399,6 @@ layers:
                     draw:
                         text-blend-order:
                             visible: false
-                early_gondola:
-                    filter: { $zoom: [14], kind_detail: [gondola,cable_car] }
-                    draw:
-                        text-blend-order:
-                            font:
-                                weight: 600
                 later:
                     filter: { $zoom: { min: 15 } }
                     draw:
