@@ -257,20 +257,20 @@ global:
     text_visible_exits_e:           false                       #false on default, still false on more
     text_visible_airport_gate:      true
 
-    # Refill Global Colors -  BLACK
+    # BLACK
     # black_color:                [0.00,0.00,0.00]
-    # dark_color:             [0.250,0.250,0.250]
-    # mid_color:              [0.500,0.500,0.500]
-    # midlight_color:          [0.625,0.625,0.625]
-    # light_color:            [0.750,0.750,0.750]
-    # lighter_color:          [0.850,0.850,0.850]
-    # lightest_color:         [0.900,0.900,0.900]
+    # dark_color:                 [0.250,0.250,0.250]
+    # mid_color:                  [0.500,0.500,0.500]
+    # midlight_color:             [0.625,0.625,0.625]
+    # light_color:                [0.750,0.750,0.750]
+    # lighter_color:              [0.850,0.850,0.850]
+    # lightest_color:             [0.900,0.900,0.900]
     # ultralight_color:           [0.950,0.950,0.950]
     # offwhite_color:             [0.970,0.970,0.970]
     # white_color:                [1.00,1.00,1.00]
-    # transparent:                  [0.900,0.900,0.900,0.500]
+    # transparent:                [0.900,0.900,0.900,0.500]
 
-    # Refill Global Colors -  GRAY
+    # GRAY
     # black_color:                [0.650,0.650,0.650]
     # dark_color:                 [0.680,0.680,0.680]
     # mid_color:                  [0.722,0.722,0.722]
@@ -281,46 +281,46 @@ global:
     # ultralight_color:           [0.965,0.965,0.965]
     # offwhite_color:             [0.976,0.976,0.976]
     # white_color:                [1.00,1.00,1.00]
-    # transparent:                  [0.929,0.929,0.929,0.500]
+    # transparent:                [0.929,0.929,0.929,0.500]
 
     # SEPIA
-    black_color:                [0.702,0.475,0.408]
-    dark_color:                 [0.808,0.663,0.620]
-    mid_color:                  [0.835,0.710,0.671]
-    midlight_color:             [0.867,0.765,0.737]
-    light_color:                [0.906,0.835,0.816]
-    lighter_color:              [0.937,0.886,0.871]
-    lightest_color:             [0.957,0.922,0.914]
-    ultralight_color:           [0.973,0.949,0.945]
-    offwhite_color:             [0.988,0.980,0.976]
-    white_color:                [1.00,1.00,1.00]
-    transparent:                [0.957,0.925,0.918,0.500]
+    black_color:                  [0.624,0.373,0.306]
+    dark_color:                   [0.710,0.465,0.398]
+    mid_color:                    [0.780,0.572,0.515]
+    midlight_color:               [0.820,0.653,0.607]
+    light_color:                  [0.880,0.738,0.695]
+    lighter_color:                [0.910,0.819,0.792]
+    lightest_color:               [0.940,0.868,0.855]
+    ultralight_color:             [0.960,0.918,0.912]
+    offwhite_color:               [0.980,0.943,0.931]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.940,0.868,0.855,0.500]
 
-    # Refill Global Colors - BLUE
+    # BLUE
     # black_color:                [0.000,0.337,0.878]
-    # dark_color:             [0.141,0.424,0.880]
-    # mid_color:              [0.282,0.523,0.910]
-    # midlight_color:         [0.382,0.585,0.910]
-    # light_color:            [0.489,0.662,0.940]
-    # lighter_color:          [0.686,0.783,0.940]
-    # lightest_color:         [0.805,0.871,0.970]
+    # dark_color:                 [0.141,0.424,0.880]
+    # mid_color:                  [0.282,0.523,0.910]
+    # midlight_color:             [0.382,0.585,0.910]
+    # light_color:                [0.489,0.662,0.940]
+    # lighter_color:              [0.686,0.783,0.940]
+    # lightest_color:             [0.805,0.871,0.970]
     # ultralight_color:           [0.872,0.915,0.980]
     # offwhite_color:             [0.921,0.947,0.990]
     # white_color:                [1.00,1.00,1.00]
     # transparent:                [0.805,0.871,0.970,0.500] # lighter color at 50%
 
-    # Refill Global Colors - PINK
-    # black_color:                [1.000,0.130,0.797]
-    # dark_color:             [1.000,0.440,0.869]
-    # mid_color:              [1.000,0.520,0.888]
-    # midlight_color:         [1.000,0.620,0.911]
-    # light_color:            [1.000,0.730,0.937]
-    # lighter_color:          [1.000,0.810,0.956]
-    # lightest_color:         [1.000,0.880,0.972]
-    # ultralight_color:       [1.000,0.920,0.983]
-    # offwhite_color:             [1.000,0.970,0.994]
-    # white_color:                [1.000,1.000,1.000]
-    # transparent:                   [1.000,0.880,0.972,0.500]
+    # PINK
+    # black_color:               [1.000,0.130,0.797]
+    # dark_color:                [1.000,0.440,0.869]
+    # mid_color:                 [1.000,0.520,0.888]
+    # midlight_color:            [1.000,0.620,0.911]
+    # light_color:               [1.000,0.730,0.937]
+    # lighter_color:             [1.000,0.810,0.956]
+    # lightest_color:            [1.000,0.880,0.972]
+    # ultralight_color:          [1.000,0.920,0.983]
+    # offwhite_color:            [1.000,0.970,0.994]
+    # white_color:               [1.000,1.000,1.000]
+    # transparent:               [1.000,0.880,0.972,0.500]
 
     # Refill Global Colors - PINK
     pink:
