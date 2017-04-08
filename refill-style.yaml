@@ -3380,7 +3380,7 @@ layers:
             filter: { kind: aeroway, kind_detail: [runway,taxiway] }
             draw:
                 lines:
-                    color: [[11, global.dark_color], [17, global.black_color]]
+                    color: global.lighter_color
                     cap: butt
                     width: [[10, 1px], [13, 3px], [15, 16px], [17, 60m]]
                     outline:
@@ -3400,8 +3400,8 @@ layers:
                 filter: { kind_detail: taxiway }
                 draw:
                     lines:
-                        color: [[14, global.light_color], [17, global.black_color]]
-                        width: [[14, 1px], [17, 1.5px], [18, 4m]]
+                        color: global.lighter_color
+                        width: [[14, 1px], [16, 6px], [18, 4m]]
                         outline:
                             width: 0.5px
                             color: global.white_color
@@ -5802,7 +5802,7 @@ layers:
                 draw:
                     polygons:
                         visible: true
-                        color: global.black_color
+                        color: global.lighter_color
             # apron:
             #     filter:
             #         kind: apron
@@ -5836,14 +5836,6 @@ layers:
                         color: global.lighter_color
                         visible: true
 
-        # landuse_urban_area-early:
-        #     filter:
-        #         # This is from Natural Earth and only shows up from zoom(0,9)
-        #         kind: ['urban area']
-        #     draw:
-        #         dots:
-        #             order: 1
-        #             color: [[4, [1.000,0.510,0.894]], [6, [1.000,0.510,0.894]], [7, [0.882,0.639,0.827]], [8, [0.757,0.729,0.753]]]
 
 #    transit-bus-roads:
 #        data: { source: mapzen, layer: roads }
