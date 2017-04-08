@@ -284,17 +284,17 @@ global:
     # transparent:                [0.929,0.929,0.929,0.500]
 
     # SEPIA
-    black_color:                  [0.624,0.373,0.306]
-    dark_color:                   [0.710,0.465,0.398]
-    mid_color:                    [0.780,0.572,0.515]
-    midlight_color:               [0.820,0.653,0.607]
-    light_color:                  [0.880,0.738,0.695]
-    lighter_color:                [0.910,0.819,0.792]
-    lightest_color:               [0.940,0.868,0.855]
-    ultralight_color:             [0.960,0.918,0.912]
-    offwhite_color:               [0.980,0.943,0.931]
-    white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.940,0.868,0.855,0.500]
+    # black_color:                  [0.624,0.373,0.306]
+    # dark_color:                   [0.710,0.465,0.398]
+    # mid_color:                    [0.780,0.572,0.515]
+    # midlight_color:               [0.820,0.653,0.607]
+    # light_color:                  [0.880,0.738,0.695]
+    # lighter_color:                [0.910,0.819,0.792]
+    # lightest_color:               [0.940,0.868,0.855]
+    # ultralight_color:             [0.960,0.918,0.912]
+    # offwhite_color:               [0.980,0.943,0.931]
+    # white_color:                  [1.00,1.00,1.00]
+    # transparent:                  [0.940,0.868,0.855,0.500]
 
     # BLUE
     # black_color:                [0.000,0.337,0.878]
@@ -310,17 +310,17 @@ global:
     # transparent:                [0.805,0.871,0.970,0.500] # lighter color at 50%
 
     # PINK
-    # black_color:               [1.000,0.130,0.797]
-    # dark_color:                [1.000,0.440,0.869]
-    # mid_color:                 [1.000,0.520,0.888]
-    # midlight_color:            [1.000,0.620,0.911]
-    # light_color:               [1.000,0.730,0.937]
-    # lighter_color:             [1.000,0.810,0.956]
-    # lightest_color:            [1.000,0.880,0.972]
-    # ultralight_color:          [1.000,0.920,0.983]
-    # offwhite_color:            [1.000,0.970,0.994]
-    # white_color:               [1.000,1.000,1.000]
-    # transparent:               [1.000,0.880,0.972,0.500]
+    black_color:               [1.000,0.130,0.797]
+    dark_color:                [1.000,0.440,0.869]
+    mid_color:                 [1.000,0.520,0.888]
+    midlight_color:            [1.000,0.620,0.911]
+    light_color:               [1.000,0.730,0.937]
+    lighter_color:             [1.000,0.810,0.956]
+    lightest_color:            [1.000,0.880,0.972]
+    ultralight_color:          [1.000,0.920,0.983]
+    offwhite_color:            [1.000,0.970,0.994]
+    white_color:               [1.000,1.000,1.000]
+    transparent:               [1.000,0.880,0.972,0.500]
 
     # Refill Global Colors - PINK
     pink:
@@ -496,12 +496,12 @@ textures:
             # define sprites: [x origin, y origin, width, height]
             'US:CA-1char': [488, 642, 82, 92]
             'US:CA-2char': [388, 642, 94, 94]
-            'US:CA-3char': [268, 642, 114, 92]
+            'US:CA-3char': [268, 642, 112, 92]
             'US:CA-4char': [136, 642, 124, 92]
             'US:CA-5char': [0, 642, 128, 92]
-            'US:I-1char': [908, 746, 90, 100]
-            'US:I-2char': [798, 746, 102, 100]
-            'US:I-3char': [658, 746, 132, 100]
+            'US:I-1char': [908, 746, 88, 100]
+            'US:I-2char': [798, 746, 102, 102]
+            'US:I-3char': [658, 746, 134, 100]
             'US:I-4char': [512, 746, 140, 100]
             'US:I-5char': [352, 746, 152, 100]
             'US:NY-1char': [756, 386, 72, 88]
@@ -512,8 +512,8 @@ textures:
             'US:PA-1char': [216, 386, 72, 88]
             'US:PA-2char': [120, 386, 88, 88]
             'US:PA-3char': [0, 386, 112, 88]
-            'US:PA-4char': [844, 254, 120, 88]
-            'US:PA-5char': [708, 254, 128, 88]
+            'US:PA-4char': [892, 254, 120, 88]
+            'US:PA-5char': [756, 254, 128, 88]
             'US:US-1char': [256, 746, 88, 94]
             'US:US-2char': [144, 746, 106, 94]
             'US:US-3char': [0, 746, 138, 100]
@@ -522,6 +522,7 @@ textures:
             airport: [870, 0, 38, 38]
             aerodrome: [870, 0, 38, 38]
             aquarium: [732, 168, 38, 38]
+            arrow: [368, 210, 38, 38]
             atm: [918, 126, 38, 38]
             bakery: [548, 168, 38, 38]
             bank: [964, 126, 38, 38]
@@ -554,11 +555,11 @@ textures:
             cafe: [502, 168, 38, 38]
             camp_site: [782, 84, 38, 38]
             summer_camp: [782, 84, 38, 38]
-            capital-l: [544, 210, 32, 32]
-            capital-m: [512, 210, 24, 24]
-            capital-s: [482, 210, 20, 20]
-            capital-xl: [632, 210, 40, 40]
-            capital-xs: [460, 210, 16, 16]
+            capital-l: [590, 212, 32, 32]
+            capital-m: [558, 212, 24, 24]
+            capital-s: [528, 212, 20, 20]
+            capital-xl: [678, 212, 42, 36]
+            capital-xs: [506, 212, 16, 16]
             car: [780, 126, 38, 38]
             category-namespace-mobility: [780, 126, 38, 38]
             category-predicate-mobility: [780, 126, 38, 38]
@@ -612,9 +613,9 @@ textures:
             fuel: [960, 168, 38, 38]
             gallery: [640, 168, 38, 38]
             garden: [644, 84, 38, 38]
-            generic: [368, 210, 38, 38]
-            category-namespace-other: [368, 210, 38, 38]
-            category-predicate-addressing: [368, 210, 38, 38]
+            generic: [414, 210, 38, 38]
+            category-namespace-other: [414, 210, 38, 38]
+            category-predicate-addressing: [414, 210, 38, 38]
             generic_shield-1char: [104, 554, 72, 72]
             generic_shield-2char: [0, 554, 98, 72]
             generic_shield-3char: [832, 478, 132, 72]
@@ -640,7 +641,7 @@ textures:
             hostel: [732, 0, 38, 38]
             category-predicate-sleep: [732, 0, 38, 38]
             ice_cream: [322, 210, 38, 38]
-            information: [414, 210, 38, 38]
+            information: [460, 210, 38, 38]
             jewelry: [736, 42, 38, 38]
             jewish: [46, 0, 38, 38]
             landmark: [272, 0, 38, 38]
@@ -735,31 +736,31 @@ textures:
             theme_park: [966, 84, 38, 38]
             amusement_ride: [966, 84, 38, 38]
             toilets: [828, 84, 38, 38]
-            townspot-l: [932, 210, 32, 32]
-            townspot-l-rev: [760, 210, 32, 32]
-            townspot-m: [900, 210, 24, 24]
-            townspot-m-rev: [728, 210, 24, 24]
-            townspot-s: [872, 210, 20, 20]
-            townspot-s-rev: [700, 210, 20, 20]
-            townspot-xl: [972, 210, 40, 40]
-            townspot-xl-rev: [800, 210, 40, 40]
-            townspot-xs: [848, 210, 16, 16]
-            townspot-xs-rev: [680, 210, 12, 12]
+            townspot-l: [978, 210, 32, 32]
+            townspot-l-rev: [806, 212, 32, 32]
+            townspot-m: [946, 210, 24, 24]
+            townspot-m-rev: [774, 212, 24, 24]
+            townspot-s: [918, 210, 20, 20]
+            townspot-s-rev: [746, 212, 20, 20]
+            townspot-xl: [0, 254, 40, 40]
+            townspot-xl-rev: [846, 212, 38, 38]
+            townspot-xs: [894, 210, 16, 16]
+            townspot-xs-rev: [726, 212, 12, 12]
             toys: [916, 0, 38, 38]
             traffic_signals: [916, 168, 38, 38]
             train_station: [410, 0, 38, 38]
             station: [410, 0, 38, 38]
             train: [410, 0, 38, 38]
             category-predicate-transport: [410, 0, 38, 38]
-            ux-current-location: [294, 254, 88, 88]
-            ux-locate-off: [628, 254, 72, 72]
-            ux-locate-on: [548, 254, 72, 72]
-            ux-route-arrow: [0, 254, 128, 128]
-            ux-route-start: [214, 254, 72, 92]
-            ux-route-stop: [136, 254, 72, 92]
-            ux-search-active: [388, 254, 72, 108]
-            ux-search-inactive: [468, 254, 72, 108]
-            ux-transit-stop: [584, 212, 42, 36]
+            ux-current-location: [342, 254, 88, 88]
+            ux-locate-off: [676, 254, 72, 72]
+            ux-locate-on: [596, 254, 72, 72]
+            ux-route-arrow: [48, 254, 128, 128]
+            ux-route-start: [262, 254, 72, 92]
+            ux-route-stop: [184, 254, 72, 92]
+            ux-search-active: [436, 254, 72, 108]
+            ux-search-inactive: [516, 254, 72, 108]
+            ux-transit-stop: [630, 212, 42, 36]
             veterinary: [138, 0, 38, 38]
             viewpoint: [686, 168, 38, 38]
             category-namespace-do_and_see: [686, 168, 38, 38]
@@ -2165,6 +2166,20 @@ layers:
                     weight: normal
                     fill: global.black_color
 
+        arrows:
+            # oneway arrows and shields are distinct groups!
+            filter: { oneway: yes, shield_text: false, $zoom: { min: 17 } }
+            draw:
+                icons:
+                    flat: true
+                    visible: true
+                    sprite: arrow
+                    color: global.midlight_color
+                    size: [[17, 6px], [20, 14px]]
+                    placement: spaced
+                    placement_spacing: [[17, 70px], [20, 175px]]
+                    angle: auto
+
         early:
             filter: { $zoom: { max: 15 } }
             draw:
@@ -2225,20 +2240,20 @@ layers:
             filter: { kind: highway, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[8, global.black_color], [14, global.black_color], [15, global.white_color]]
-                    width: [[8, 1px], [12, 1px], [14, 2px], [15, 1.5px], [17, 6px], [18, 4m], [19, 5m]]
+                    color: [[8, global.black_color], [13, global.black_color], [14, global.white_color]]
+                    width: [[8, 1px], [13, 1.25px], [14, 0.1px], [15, 1.5px], [17, 6px], [18, 10m]]
                     outline:
-                        color: [[8, global.white_color], [14, global.white_color], [15, global.black_color]]
-                        width: [[8,0px], [14,0px], [15, 2px], [19, 6px]]
+                        color: [[8, global.white_color], [12, global.white_color], [13, global.black_color]]
+                        width: [[8, 0px], [13, 0px], [14, 1px], [15, 2px], [19, 6px]]
             link:
                 filter: { is_link: true } # on- and off-ramps, etc
                 draw:
                     lines:
-                        color: [[9, global.mid_color], [15, global.dark_color], [16, global.white_color]]
-                        width: [[9, 0px], [15, 1px], [17, 3px], [18, 4px], [19, 8px]]
+                        color: [[9, global.mid_color], [13, global.mid_color], [14, global.white_color]]
+                        width: [[9, 0px], [13, 0.75px], [14, 0.1px], [17, 3px], [18, 5m]]
                         outline:
-                            color: [[9, global.white_color], [15, global.white_color], [16, global.black_color]]
-                            width: [[9, 0px], [15, 0px], [16, 1px], [17, 1.5px], [18, 2px]]
+                            color: [[9, global.white_color], [12, global.white_color], [13, global.mid_color], [15, global.black_color]]
+                            width: [[9, 0px], [13, 0px], [14, 0.4px], [17, 1.5px], [18, 2px]]
                 early_link:
                     filter: { $zoom: {min: 13, max: 15} }
                     draw:
@@ -2248,16 +2263,16 @@ layers:
                     filter: {is_tunnel: true, $zoom: { min: 13 } }
                     draw:
                         lines:
-                            color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
+                            color: [[13, global.light_color], [14, global.offwhite_color]]
                             outline:
-                                color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
+                                color: [[12, global.white_color], [13, global.light_color]]
             tunnel:
                 filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
+                        color: [[13, global.light_color], [14, global.offwhite_color]]
                         outline:
-                            color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
+                            color: [[12, global.white_color], [13, global.light_color]]
             highway_bridge:
                 filter: { is_bridge: true }
                 draw:
@@ -2296,18 +2311,18 @@ layers:
             draw:
                 lines:
                     color: [[8, global.black_color], [13, global.black_color], [17, global.white_color]]
-                    width: [[13, 1px], [14, 1px], [16, 2.5px], [17,3px]]
+                    width: [[13, 1px], [14, 1px], [16, 2.5px], [17, 3px]]
                     outline:
                         width: [[12, 0px], [13, .5px], [15, 1px], [17, 2px]]
             trunk_primary:
                 filter: { kind_detail: [trunk, primary] }
                 draw:
                     lines:
-                        color: [[8, global.light_color], [12, global.mid_color], [13, global.black_color], [15, global.black_color], [16, global.white_color]]
-                        width: [[8, 0.5px], [11, 0.5px], [14, 1px], [16, 2px], [17, 4px], [18, 4px], [19, 8px]]
+                        color: [[8, global.midlight_color], [12, global.mid_color], [13, global.black_color], [14, global.white_color]]
+                        width: [[8, 0.5px], [11, 0.5px], [13, 1px], [14, 0.1px], [16, 2px], [17, 8.25px], [18, 10m]]
                         outline:
-                            color: [[8, global.white_color], [15, global.white_color], [16, global.black_color]]
-                            width: [[8, 1px], [16, 1.5px], [18, 4px]]
+                            color: [[8, global.white_color], [12, global.white_color], [13, global.black_color]]
+                            width: [[8, 0px], [13, 0px], [14, 0.75px], [16, 1.5px], [18, 4px]]
                 early:
                     filter: { $zoom: { max: 16 } }
                     draw:
@@ -2325,11 +2340,11 @@ layers:
                     filter: { ref: true }
                     draw:
                         lines:
-                            color: [[8, global.midlight_color], [11, global.mid_color], [13, global.mid_color], [14, global.black_color], [15, global.white_color]]
-                            width: [[9, 0.5px], [14, 1.25px], [15, 1.25px], [16, 2px], [17, 4px], [18, 6px], [20, 3m]]
+                            color: [[8, global.midlight_color], [12, global.mid_color], [13, global.black_color], [14, global.white_color]]
+                            width: [[9, 0.5px], [13, 1px], [14, 0.1px], [15, 1.25px], [16, 2px], [17, 9px], [18, 10m]]
                             outline:
-                                color: [[8, global.white_color], [14, global.white_color], [15, global.black_color]]
-                                width: [[8, 0.5px], [15, 1.5px], [17, 3px], [18, 4px]]
+                                color: [[8, global.white_color], [12, global.white_color], [13, global.black_color]]
+                                width: [[8, 0px], [13, 0px], [14, 0.75px], [15, 1.5px], [17, 3px], [18, 4px]]
                     early:
                         filter: { $zoom: { max: 16 } }
                         draw:
@@ -2338,7 +2353,7 @@ layers:
                                 outline:
                                     order: 353
                     tunnel:
-                        filter: {is_tunnel: true, $zoom: {min: 13} }
+                        filter: { is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
                                 color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
@@ -2395,27 +2410,27 @@ layers:
                 filter: { is_link: true } # on- and off-ramps, etc
                 draw:
                     lines:
-                        color: [[10, global.mid_color], [14, global.light_color], [15, global.light_color], [16, global.white_color]]
-                        width: [[10, 0.5px], [15, 1px], [16, 1.75px], [18, 3px], [19, 8px]]
+                        color: [[10, global.mid_color], [15, global.light_color], [16, global.white_color]]
+                        width: [[10, 0.5px], [12, 0.5px], [15, 1px], [16, 1.75px], [18, 5m]]
                         outline:
                             color: [[10, global.white_color], [15, global.mid_color], [16, global.black_color]]
-                            width: [[10, 0px], [15, 0px], [16, 1px]]
+                            width: [[10, 0px], [15, 0px], [16, 1px], [18, 2px]]
             tunnel:
                 filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
+                        color: [[13, global.light_color], [14, global.offwhite_color]]
                         outline:
-                            color: [[13, global.white_color], [15, global.white_color], [16, global.light_color]]
+                            color: [[12, global.white_color], [13, global.light_color]]
             secondary:
                 filter: { kind_detail: secondary }
                 draw:
                     lines:
-                        color: [[10, global.lighter_color], [13, global.mid_color], [16, global.black_color], [17, global.white_color]]
-                        width: [[10, 0.5px], [12, 0.5px], [14, 1px], [16, 2px], [17, 3px], [18, 4px], [19, 8px]]
+                        color: [[10, global.lighter_color], [13, global.mid_color], [15, global.black_color], [16, global.white_color]]
+                        width: [[10, 0.5px], [12, 0.5px], [14, 1px], [15, 1.5px], [16, 0.1px], [17, 7.5px], [18, 9m]]
                         outline:
-                            color: [[10, global.white_color], [16, global.white_color], [17, global.black_color]]
-                            width: [[10, 0px], [16, 0px], [17, 2px]]
+                            color: [[10, global.white_color], [14, global.white_color], [15, global.black_color]]
+                            width: [[10, 0px], [15, 0px], [16, 1.1px], [17, 2px]]
                 early:
                     filter: { $zoom: { max: 16 } }
                     draw:
@@ -2427,11 +2442,11 @@ layers:
                     filter: { ref: true, $zoom: { min: 12 } }
                     draw:
                         lines:
-                            color: [[10, global.lighter_color], [12, global.midlight_color], [13, global.mid_color], [16, global.black_color], [17, global.white_color]]
-                            width: [[10, 0.5px], [14, 1px], [16, 2px], [17, 3px], [18, 4px], [19, 8px]]
+                            color: [[10, global.lighter_color], [12, global.midlight_color], [13, global.mid_color], [15, global.black_color], [16, global.white_color]]
+                            width: [[10, 0.5px], [14, 1px], [15, 1px], [16, 0.1px], [17, 7.5px], [18, 9m]]
                             outline:
-                                color: [[10, global.white_color], [16, global.white_color], [17, global.black_color]]
-                                width: [[10, 2px], [16,0px], [17, 2px]]
+                                color: [[10, global.white_color], [14, global.white_color], [15, global.black_color]]
+                                width: [[10, 0px], [15, 0px], [16, 1.5px], [17, 2px]]
                     early:
                         filter: { $zoom: { max: 15 } }
                         draw:
@@ -2443,9 +2458,9 @@ layers:
                         filter: {is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
+                                color: [[13, global.light_color], [15, global.light_color], [16, global.offwhite_color]]
                                 outline:
-                                    color: [[13, global.white_color], [16, global.white_color], [17, global.light_color]]
+                                    color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
                     labels-secondary-routes:
                         filter: { $zoom: [13] }
                         draw:
@@ -2484,11 +2499,11 @@ layers:
                 filter: { kind_detail: [tertiary, tertiary_link] }
                 draw:
                     lines:
-                        color: [[11, global.lighter_color], [13, global.mid_color], [15, global.mid_color], [16, global.dark_color], [17, global.white_color]]
-                        width: [[11, 0.5px], [15, 1px], [16, 2px], [17, 3px], [18, 4px], [19, 8px]]
+                        color: [[11, global.lighter_color], [15, global.dark_color], [16, global.white_color]]
+                        width: [[11, 0.5px], [15, 1px], [16, 0.1px], [17, 6px], [18, 9m]]
                         outline:
-                            color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
-                            width: [[11, 2px], [16,0px], [17, 2px], [18, 2px]]
+                            color: [[11, global.white_color], [14, global.white_color], [15, global.black_color]]
+                            width: [[11, 0px], [15, 0px], [16, 0.9px], [17, 2px], [18, 2px]]
                 early:
                     filter: { $zoom: { max: 15 } }
                     draw:
@@ -2500,11 +2515,11 @@ layers:
                     filter: { ref: true, $zoom: { min: 12} }
                     draw:
                         lines:
-                            color: [[11, global.light_color], [13, global.light_color], [14, global.light_color], [15, global.mid_color], [17, global.white_color]]
-                            width: [[11, 0.5px], [15, 1px], [16, 2px], [17, 3px], [18, 4px], [19, 8px]]
+                            color: [[11, global.lighter_color], [15, global.dark_color], [16, global.white_color]]
+                            width: [[11, 0.5px], [15, 1px], [16, 0.1px], [17, 6px], [18, 9m]]
                             outline:
-                                color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
-                                width: [[11, 2px], [16,0px], [17, 2px], [18, 2px]]
+                                color: [[11, global.white_color], [14, global.white_color], [15, global.black_color]]
+                                width: [[11, 0px], [15, 0px], [16, 0.75px], [17, 2px], [18, 2px]]
                     early:
                         filter: { $zoom: { max: 15 } }
                         draw:
@@ -2513,21 +2528,21 @@ layers:
                                 outline:
                                     order: 353
                     tunnel:
-                        filter: {is_tunnel: true, $zoom: {min: 13} }
+                        filter: { is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
+                                color: [[13, global.light_color], [15, global.light_color], [16, global.offwhite_color]]
                                 outline:
-                                    color: [[13, global.white_color], [16, global.white_color], [17, global.light_color]]
+                                    color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
                 link:
                     filter: { is_link: true } # on- and off-ramps, etc
                     draw:
                         lines:
-                            color: [[14, global.light_color], [15, global.mid_color], [16, global.dark_color], [17, global.white_color]]
-                            width: [[11, 0.0px], [15, 0.5px], [16, 1.25px], [18, 2px], [19, 4px]]
+                            color: [[14, global.light_color], [15, global.dark_color], [16, global.white_color]]
+                            width: [[11, 0.0px], [15, 0.5px], [16, 0.1px], [18, 4.5m]]
                             outline:
-                                color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
-                                width: [[11, 0px], [16, 0px], [17, 1px]]
+                                color: [[11, global.white_color], [14, global.white_color], [15, global.black_color]]
+                                width: [[11, 0px], [14, 0px], [16, 0.25px], [18, 2px]]
                 labels-tertiary:
                     filter: { $zoom: { min: 13 } }
                     draw:
@@ -2543,11 +2558,11 @@ layers:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[11, global.lightest_color], [14, global.light_color], [16, global.dark_color], [17, global.white_color]]
-                    width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 2px], [17, 3px], [18, 3px], [19, 8px]]
+                    color: [[11, global.offwhite_color], [15, global.midlight_color], [16, global.white_color]]
+                    width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 0.1px], [17, 2px], [18, 9m]]
                     outline:
-                        color: [[11, global.white_color], [16, global.white_color], [17, global.dark_color], [18, global.black_color]]
-                        width: [[11, 1px], [16, 0px], [17, 1.5px], [18, 1.5px]]
+                        color: [[11, global.white_color], [14, global.white_color], [15, global.midlight_color], [17, global.black_color]]
+                        width: [[11, 0px], [15, 0px], [16, 0.75px], [17, 1.5px], [18, 1.5px]]
             early:
                 filter: { $zoom: { max: 16 } }
                 draw:
@@ -2567,9 +2582,9 @@ layers:
                 filter: {is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
+                        color: [[13, global.light_color], [15, global.light_color], [16, global.offwhite_color]]
                         outline:
-                            color: [[13, global.white_color], [16, global.white_color], [17, global.light_color]]
+                            color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
             minor_road_bridge:
                 filter: { is_bridge: true }
                 draw:
@@ -2592,11 +2607,11 @@ layers:
             filter: { kind: minor_road, kind_detail: service, $zoom: { min: 13 } }
             draw:
                 lines:
-                    color: [[13, global.offwhite_color], [16, global.mid_color], [17, global.white_color]]
-                    width: [[13, 0px], [16, 1.5px], [17, 2.5px], [19, 6px]]
+                    color: [[13, global.offwhite_color], [15, global.midlight_color], [16, global.white_color]]
+                    width: [[13, 0px], [15, 0.75px], [16, 0.1px], [17, 2.5px], [18, 5m]]
                     outline:
-                        color: [[13, global.white_color], [16, global.white_color], [17, global.dark_color], [18, global.black_color]]
-                        width: [[13, 0px], [16, 0px], [17, 1px], [19, 1.5px]]
+                        color: [[13, global.white_color], [14, global.white_color], [15, global.mid_color], [18, global.black_color]]
+                        width: [[13, 0px], [15, 0px], [16, 1px], [19, 1.5px]]
             labels-service_road:
                 filter: { $zoom: { min: 17 } }
                 draw:
