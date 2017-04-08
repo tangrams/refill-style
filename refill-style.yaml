@@ -9,6 +9,9 @@
 # Authors: Geraldine Sarmiento, Nathaniel V. Kelso
 # Read more: https://github.com/tangrams/refill-style
 #
+import:
+    - https://tangrams.github.io/blocks/patterns/dots.yaml
+    - https://tangrams.github.io/blocks/elevation/normal.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -284,17 +287,17 @@ global:
     # transparent:                [0.929,0.929,0.929,0.250]
 
     # SEPIA
-    # black_color:                  [0.624,0.373,0.306]
-    # dark_color:                   [0.710,0.465,0.398]
-    # mid_color:                    [0.780,0.572,0.515]
-    # midlight_color:               [0.820,0.653,0.607]
-    # light_color:                  [0.880,0.738,0.695]
-    # lighter_color:                [0.910,0.819,0.792]
-    # lightest_color:               [0.940,0.868,0.855]
-    # ultralight_color:             [0.960,0.918,0.912]
-    # offwhite_color:               [0.980,0.943,0.931]
-    # white_color:                  [1.00,1.00,1.00]
-    # transparent:                  [0.940,0.868,0.855,0.250]
+    black_color:                  [0.624,0.373,0.306]
+    dark_color:                   [0.710,0.465,0.398]
+    mid_color:                    [0.780,0.572,0.515]
+    midlight_color:               [0.820,0.653,0.607]
+    light_color:                  [0.880,0.738,0.695]
+    lighter_color:                [0.910,0.819,0.792]
+    lightest_color:               [0.940,0.868,0.855]
+    ultralight_color:             [0.960,0.918,0.912]
+    offwhite_color:               [0.980,0.943,0.931]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.940,0.868,0.855,0.250]
 
     # BLUE
     # black_color:                [0.000,0.337,0.878]
@@ -310,17 +313,17 @@ global:
     # transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
 
     # PINK
-    black_color:               [1.000,0.130,0.797]
-    dark_color:                [1.000,0.440,0.869]
-    mid_color:                 [1.000,0.520,0.888]
-    midlight_color:            [1.000,0.620,0.911]
-    light_color:               [1.000,0.730,0.937]
-    lighter_color:             [1.000,0.810,0.956]
-    lightest_color:            [1.000,0.880,0.972]
-    ultralight_color:          [1.000,0.920,0.983]
-    offwhite_color:            [1.000,0.970,0.994]
-    white_color:               [1.000,1.000,1.000]
-    transparent:               [1.000,0.880,0.972,0.250]
+    # black_color:               [1.000,0.130,0.797]
+    # dark_color:                [1.000,0.440,0.869]
+    # mid_color:                 [1.000,0.520,0.888]
+    # midlight_color:            [1.000,0.620,0.911]
+    # light_color:               [1.000,0.730,0.937]
+    # lighter_color:             [1.000,0.810,0.956]
+    # lightest_color:            [1.000,0.880,0.972]
+    # ultralight_color:          [1.000,0.920,0.983]
+    # offwhite_color:            [1.000,0.970,0.994]
+    # white_color:               [1.000,1.000,1.000]
+    # transparent:               [1.000,0.880,0.972,0.250]
 
     # Refill Global Colors - PINK
     pink:
@@ -784,7 +787,14 @@ sources:
             api_key: global.sdk_mapzen_api_key
         #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
         # url:  //localhost:8080/vector/all/{z}/{x}/{y}.topojson
+        rasters: [normals-elevation]
         max_zoom: 16
+    normals-elevation:
+        type: Raster
+        url: https://tile.mapzen.com/mapzen/terrain/v1/normal/{z}/{x}/{y}.png
+        url_params:
+            api_key: global.sdk_mapzen_api_key
+        max_zoom: 15
 
 #    # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
 #    # These are all in San Francisco, California
@@ -1286,6 +1296,23 @@ styles:
                     color.rgb = mix(mix(color.rgb, u_grid_color.rgb, texture2D(u_tex_grid, v_texcoord).a),
                                     color.rgb,
                                     step(.5,dot(vec3(0., 0., 1.), worldNormal())));
+
+    landuse-tier4-hospital:
+        mix: [polygons-dots]
+        raster: custom
+        shaders:
+            defines:
+                NORMAL_TEXTURE_INDEX: 0
+                DOTS_DIR: vec3(-0.600,-0.420,0.600)
+
+                DOTS_COLOR: vec3(0.345,0.224,0.392)
+                DOTS_SCALE: 30.
+                DOTS_SIZE: shade*2.
+            blocks:
+                normal: |
+                    float shade = dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2., DOTS_DIR);
+                    shade = shade*shade*shade;
+
 
     building-lines:
         base: lines
@@ -5457,7 +5484,9 @@ layers:
                     kind: [protected_area, nature_reserve, national_park]
                     not: { protect_class: ['2','3','5']}
                 draw:
+                    # polygons:
                     pixel-pattern-light:
+                        # style: landuse-tier4-hospital
                         color: global.white_color
                         visible: true
 
