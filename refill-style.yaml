@@ -268,7 +268,7 @@ global:
     # ultralight_color:           [0.950,0.950,0.950]
     # offwhite_color:             [0.970,0.970,0.970]
     # white_color:                [1.00,1.00,1.00]
-    # transparent:                [0.900,0.900,0.900,0.500]
+    # transparent:                [0.900,0.900,0.900,0.250]
 
     # GRAY
     # black_color:                [0.650,0.650,0.650]
@@ -281,7 +281,7 @@ global:
     # ultralight_color:           [0.965,0.965,0.965]
     # offwhite_color:             [0.976,0.976,0.976]
     # white_color:                [1.00,1.00,1.00]
-    # transparent:                [0.929,0.929,0.929,0.500]
+    # transparent:                [0.929,0.929,0.929,0.250]
 
     # SEPIA
     # black_color:                  [0.624,0.373,0.306]
@@ -294,7 +294,7 @@ global:
     # ultralight_color:             [0.960,0.918,0.912]
     # offwhite_color:               [0.980,0.943,0.931]
     # white_color:                  [1.00,1.00,1.00]
-    # transparent:                  [0.940,0.868,0.855,0.500]
+    # transparent:                  [0.940,0.868,0.855,0.250]
 
     # BLUE
     # black_color:                [0.000,0.337,0.878]
@@ -307,7 +307,7 @@ global:
     # ultralight_color:           [0.872,0.915,0.980]
     # offwhite_color:             [0.921,0.947,0.990]
     # white_color:                [1.00,1.00,1.00]
-    # transparent:                [0.805,0.871,0.970,0.500] # lighter color at 50%
+    # transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
 
     # PINK
     black_color:               [1.000,0.130,0.797]
@@ -320,7 +320,7 @@ global:
     ultralight_color:          [1.000,0.920,0.983]
     offwhite_color:            [1.000,0.970,0.994]
     white_color:               [1.000,1.000,1.000]
-    transparent:               [1.000,0.880,0.972,0.500]
+    transparent:               [1.000,0.880,0.972,0.250]
 
     # Refill Global Colors - PINK
     pink:
@@ -1097,6 +1097,11 @@ styles:
         base: lines
         dash: [0.75, 0.25]
         dash_background_color: global.white_color
+
+    railway_dash:
+        base: lines
+        dash: [0.2, 1.0]
+        dash_background_color: global.offwhite_color
 
     pixel-pattern-light:
         mix: [space-tile, generative-random]
@@ -2356,9 +2361,9 @@ layers:
                         filter: { is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [14, global.light_color], [15, global.offwhite_color]]
+                                color: [[13, global.light_color], [14, global.offwhite_color]]
                                 outline:
-                                    color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
+                                    color: [[12, global.white_color], [13, global.light_color]]
                     labels-trunk_primary-route-z13-z14:
                         filter: { $zoom: [13,14] }
                         draw:
@@ -2426,7 +2431,7 @@ layers:
                 filter: { kind_detail: secondary }
                 draw:
                     lines:
-                        color: [[10, global.lighter_color], [13, global.mid_color], [15, global.black_color], [16, global.white_color]]
+                        color: [[10, global.lighter_color], [13, global.midlight_color], [15, global.dark_color], [16, global.white_color]]
                         width: [[10, 0.5px], [12, 0.5px], [14, 1px], [15, 1.5px], [16, 0.1px], [17, 7.5px], [18, 9m]]
                         outline:
                             color: [[10, global.white_color], [14, global.white_color], [15, global.black_color]]
@@ -2442,8 +2447,8 @@ layers:
                     filter: { ref: true, $zoom: { min: 12 } }
                     draw:
                         lines:
-                            color: [[10, global.lighter_color], [12, global.midlight_color], [13, global.mid_color], [15, global.black_color], [16, global.white_color]]
-                            width: [[10, 0.5px], [14, 1px], [15, 1px], [16, 0.1px], [17, 7.5px], [18, 9m]]
+                            color: [[10, global.lighter_color], [13, global.mid_color], [15, global.black_color], [16, global.white_color]]
+                            width: [[10, 0.5px], [13, 1px], [15, 1.5px], [16, 0.1px], [17, 7.5px], [18, 9m]]
                             outline:
                                 color: [[10, global.white_color], [14, global.white_color], [15, global.black_color]]
                                 width: [[10, 0px], [15, 0px], [16, 1.5px], [17, 2px]]
@@ -3427,9 +3432,9 @@ layers:
         railway:
             filter: { kind: rail, not: { railway: [subway,light_rail,tram] } }
             draw:
-                lines:
-                    color: [[14, global.light_color], [16, global.mid_color]]
-                    width: [[12, 0px], [13,0.25px], [14,0.4px], [15,0.75px], [16,0.75px], [18,1px]]
+                railway_dash:
+                    color: [[12, global.lightest_color], [16, global.light_color]]
+                    width: [[12, 0px], [15, 0.5px], [18, 4px]]
                     # let roads sort themselves past zoom 14
                     order: global.feature_order
                     # but give them all the same outline
@@ -3470,13 +3475,6 @@ layers:
         footprints:
             filter:
                 any:
-                    # show footprints for buildings at least one zoom level before they will be extruded
-                    # - { $zoom: [13], area: { min: 50000 } }
-                    # - { $zoom: [13], height: { min: 250 } }
-                    # - { $zoom: [13], volume: { min: 200000 } }
-                    # - { $zoom: [14], area: { min: 5000 } }
-                    # - { $zoom: [14], height: { min: 190 } }
-                    # - { $zoom: [14], volume: { min: 150000 } }
                     - { $zoom: [13], scale_rank: [1,2] }
                     - { $zoom: [14], scale_rank: [1,2,3] }
                     - { $zoom: [15], height: { min: 100 } }
