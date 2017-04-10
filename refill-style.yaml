@@ -3352,24 +3352,24 @@ layers:
                 filter: { piste_difficulty: easy }
                 draw:
                     lines:
-                        color: global.offwhite_color
+                        color: global.white_color
             intermediate:
                 filter: { piste_difficulty: intermediate }
                 draw:
                     lines:
-                        color: global.offwhite_color
+                        color: global.white_color
             advanced:
                 filter: { piste_difficulty: advanced }
                 draw:
                     lines:
-                        color: global.offwhite_color
+                        color: global.white_color
                     text-blend-order:
                         text_source: global.ux_language_text_source_piste_advanced
             expert:
                 filter: { piste_difficulty: expert }
                 draw:
                     lines:
-                        color: global.offwhite_color
+                        color: global.white_color
                     text-blend-order:
                         text_source: global.ux_language_text_source_piste_expert
         pier:
@@ -5551,20 +5551,6 @@ layers:
             #             visible: global.green4_v
 
         tier3:
-            # airport:
-            #     filter:
-            #         kind: aerodrome
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: global.purple_v
-            # military:
-            #     filter:
-            #         kind: military
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: true
             university:
                 filter:
                     kind: [university, college]
@@ -5580,13 +5566,6 @@ layers:
                     tiny-dots:
                         color: global.lighter_color
                         visible: true
-            # commercial:
-            #     filter:
-            #         kind: commercial
-            #     draw:
-            #         dots:
-            #             color: [0.855,0.748,0.667]
-            #             visible: global.grey1_v
             golf_course:
                 filter:
                     kind: golf_course
@@ -5601,26 +5580,6 @@ layers:
                     medium-dots:
                         color: global.lightest_color
                         visible: true
-            # industrial:
-            #     filter:
-            #         kind: industrial
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: true
-            # power:
-            #     filter: { kind: [plant, generator, substation] }
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: true
-            # railway:
-            #     filter:
-            #         kind: railway
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: true
             sports_centre:
                 filter:
                     kind: sports_centre
@@ -5634,13 +5593,6 @@ layers:
                     dots-rev-grid:
                         color: global.offwhite_color
                         visible: true
-            # retail:
-            #     filter:
-            #         kind: retail
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: global.grey1_v
             stadium:
                 filter:
                     kind: stadium
@@ -5655,13 +5607,13 @@ layers:
                     tiny-dots:
                         color: global.offwhite_color
                         visible: true
-            # winter_sports:
-            #     filter:
-            #         kind: winter_sports
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: global.grey8_v
+            winter_sports:
+                filter:
+                    kind: winter_sports
+                draw:
+                    polygons:
+                        color: [[9, global.white_color], [20, global.offwhite_color]]
+                        visible: true
             man-made:
                 filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
                 draw:
@@ -5753,13 +5705,6 @@ layers:
                         color: global.ultralight_color
                         order: global.feature_order
                         width: [[14, 0px], [15, 1px], [18, 2px]]
-            # place_of_worship:
-            #     filter:
-            #         kind: place_of_worship
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: global.grey1_v
             playground:
                 filter:
                     kind: playground
