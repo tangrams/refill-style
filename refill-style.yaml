@@ -26,19 +26,32 @@ global:
             // if a ux_langauge has been defined use that, else if there is feature name in the fallback_ux_language then use that, else use the feature's default name in the local language
             return (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature.name;
         }
+    ux_language_text_source_left: |
+        function() {
+            // if a ux_langauge has been defined use that, else if there is feature name in the fallback_ux_language then use that, else use the feature's default name in the local language
+            return (global.ux_language && feature['name:left:'+global.ux_language]) || (global.ux_language_fallback && feature['name:left:'+global.ux_language_fallback]) || feature['name:left'];
+        }
+    ux_language_text_source_right: |
+        function() {
+            // if a ux_langauge has been defined use that, else if there is feature name in the fallback_ux_language then use that, else use the feature's default name in the local language
+            return (global.ux_language && feature['name:right:'+global.ux_language]) || (global.ux_language_fallback && feature['name:right:'+global.ux_language_fallback]) || feature['name:right'];
+        }
+    ux_language_text_source_boundary_lines_left_right:
+        left: global.ux_language_text_source_left
+        right: global.ux_language_text_source_right
     ux_language_text_source_boundary_lines: |
         function() {
-            var right = (global.ux_language && feature['name:right:'+global.ux_language]) || (global.ux_language_fallback && feature['name:right:'+global.ux_language_fallback]) || feature['name:right'];
-            var left = (global.ux_language && feature['name:left:'+global.ux_language]) || (global.ux_language_fallback && feature['name:left:'+global.ux_language_fallback]) || feature['name:left'];
-            if( right && left ) {
-                //if( right.includes(' ') || left.includes(' ') ) {
-                    return left + " - " + right;
-                //} else {
-                //    return right + '\n' + left;
-                //}
-            } else {
-                return (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature.name;
-            }
+           var right = (global.ux_language && feature['name:right:'+global.ux_language]) || (global.ux_language_fallback && feature['name:right:'+global.ux_language_fallback]) || feature['name:right'];
+           var left = (global.ux_language && feature['name:left:'+global.ux_language]) || (global.ux_language_fallback && feature['name:left:'+global.ux_language_fallback]) || feature['name:left'];
+           if( right && left ) {
+               //if( right.includes(' ') || left.includes(' ') ) {
+                   return left + " - " + right;
+               //} else {
+               //    return right + '\n' + left;
+               //}
+           } else {
+               return (global.ux_language && feature['name:'+global.ux_language]) || (global.ux_language_fallback && feature['name:'+global.ux_language_fallback]) || feature.name;
+           }
         }
     ux_language_text_source_short: |
         function() {
@@ -287,30 +300,30 @@ global:
     # transparent:                [0.929,0.929,0.929,0.250]
 
     # SEPIA
-    black_color:                  [0.624,0.373,0.306]
-    dark_color:                   [0.710,0.465,0.398]
-    mid_color:                    [0.780,0.572,0.515]
-    midlight_color:               [0.820,0.653,0.607]
-    light_color:                  [0.880,0.738,0.695]
-    lighter_color:                [0.910,0.819,0.792]
-    lightest_color:               [0.940,0.868,0.855]
-    ultralight_color:             [0.960,0.918,0.912]
-    offwhite_color:               [0.980,0.943,0.931]
-    white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.940,0.868,0.855,0.250]
+    # black_color:                  [0.624,0.373,0.306]
+    # dark_color:                   [0.710,0.465,0.398]
+    # mid_color:                    [0.780,0.572,0.515]
+    # midlight_color:               [0.820,0.653,0.607]
+    # light_color:                  [0.880,0.738,0.695]
+    # lighter_color:                [0.910,0.819,0.792]
+    # lightest_color:               [0.940,0.868,0.855]
+    # ultralight_color:             [0.960,0.918,0.912]
+    # offwhite_color:               [0.980,0.943,0.931]
+    # white_color:                  [1.00,1.00,1.00]
+    # transparent:                  [0.940,0.868,0.855,0.250]
 
     # BLUE
-    # black_color:                [0.000,0.337,0.878]
-    # dark_color:                 [0.141,0.424,0.880]
-    # mid_color:                  [0.282,0.523,0.910]
-    # midlight_color:             [0.382,0.585,0.910]
-    # light_color:                [0.489,0.662,0.940]
-    # lighter_color:              [0.686,0.783,0.940]
-    # lightest_color:             [0.805,0.871,0.970]
-    # ultralight_color:           [0.872,0.915,0.980]
-    # offwhite_color:             [0.921,0.947,0.990]
-    # white_color:                [1.00,1.00,1.00]
-    # transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
+    black_color:                [0.000,0.337,0.878]
+    dark_color:                 [0.141,0.424,0.880]
+    mid_color:                  [0.282,0.523,0.910]
+    midlight_color:             [0.382,0.585,0.910]
+    light_color:                [0.489,0.662,0.940]
+    lighter_color:              [0.686,0.783,0.940]
+    lightest_color:             [0.805,0.871,0.970]
+    ultralight_color:           [0.872,0.915,0.980]
+    offwhite_color:             [0.921,0.947,0.990]
+    white_color:                [1.00,1.00,1.00]
+    transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
 
     # PINK
     # black_color:               [1.000,0.130,0.797]
@@ -3684,8 +3697,8 @@ layers:
                 country-outerline:
                     style: lines
                     order: function() { return (feature.sort_rank -1); }
-                    color: [[0, global.light_color], [6, global.lighter_color]]
-                    width: [[0, 0px], [6, 3px], [14, 7px], [17, 14m]]
+                    color: [[0, global.light_color], [8, global.lighter_color]]
+                    width: [[0, 0px], [6, 4px], [14, 7px], [17, 14m]]
                 lines:
                     color: global.white_color
                     width: [[0, 0px], [5, 0px], [6, 1px]]
@@ -3697,12 +3710,13 @@ layers:
                     lines:
                         visible: false
             labels-z9-up:
-                filter: { name: true, $zoom: { min: 9 }, not: { maritime_boundary: true } }
+                filter: { name: true, $zoom: { min: 8 }, not: { maritime_boundary: true } }
                 draw:
                     text-blend-order:
                         priority: 2
                         visible: global.text_visible_admin
-                        text_source: global.ux_language_text_source_boundary_lines
+                        text_source: global.ux_language_text_source_boundary_lines_left_right
+                        offset: [[8,[0, 7px]],[11,[0, 8px]],[12,[0, 9px]]]
                         text_wrap: 100
                         font:
                             family: global.text_font_family
@@ -3734,8 +3748,8 @@ layers:
                     - kind_detail: [3,4]
             draw:
                 lines:
-                    color: global.lightest_color
-                    width: [[0,0.5px], [5, 1.5px], [9, 3px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+                    color: global.ultralight_color
+                    width: [[0, 0.5px], [5, 2px], [9, 4px], [14, 5.5px], [16, 6.5px], [17, 16m]]
             water:
                 filter: { maritime_boundary: true }
                 draw:
@@ -3752,10 +3766,11 @@ layers:
                     text-blend-order:
                         priority: 3
                         visible: global.text_visible_admin
-                        text_source: global.ux_language_text_source_boundary_lines
+                        text_source: global.ux_language_text_source_boundary_lines_left_right
+                        offset: [[8,[0, 5px]], [11, [0, 6px]], [12,[0, 7px]]]
                         text_wrap: 100
                         # offset: [0px, 10px]
-                        anchor: top
+                        # anchor: top
                         font:
                             family: global.text_font_family
                             size: 9px
@@ -5803,14 +5818,14 @@ layers:
                     polygons:
                         visible: true
                         color: global.lighter_color
-            # apron:
-            #     filter:
-            #         kind: apron
-            #         $zoom: { min: 15 }
-            #     draw:
-            #         polygons:
-            #             color: global.white_color
-            #             visible: global.grey1_v
+            apron:
+                filter:
+                    kind: apron
+                    $zoom: { min: 15 }
+                draw:
+                    dots:
+                        color: global.offwhite_color
+                        visible: global.grey1_v
             minor-amusement-park-landuse:
                 filter:
                     kind:
