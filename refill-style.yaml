@@ -1128,11 +1128,11 @@ styles:
         base: polygons
         shaders:
             uniforms:
-                u_tint: global.ultralight_color
+                u_tint: global.lightest_color
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    color.rgb = vec3(random(abs(floor(pos)))+0.875); // GRAYSCALE
+                    color.rgb = vec3(random(abs(floor(pos)))+0.925); // GRAYSCALE
                     color.rgb *= u_tint;
 
     pixel-pattern-bright:
@@ -1140,11 +1140,11 @@ styles:
         base: polygons
         shaders:
             uniforms:
-                u_tint: global.ultralight_color
+                u_tint: global.lightest_color
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*180.0,1.0);
-                    color.rgb = vec3(random(abs(floor(pos)))+0.925);
+                    color.rgb = vec3(random(abs(floor(pos)))+0.9560);
                     color.rgb *= u_tint;
 
     waves:
@@ -3313,26 +3313,19 @@ layers:
                     cap: round
                     join: round
                     color: global.offwhite_color
-                    width: [[13,0px],[14,1px],[15, 5px], [16, 6px], [18, 3m]]
+                    width: [[13,0px], [14, 3px], [15, 5px], [16, 6px], [18, 3m]]
                 text-blend-order:
                     priority: 18
                     visible: global.text_visible_piste
                     font:
-                        fill: global.light_color
-                        size: 12px
+                        fill: global.midlight_color
+                        size: [[15, 11px], [17, 12px]]
                         # stroke: { color: global.grey8, width: 4 }
             early:
                 filter: { $zoom: { max: 15 } }
                 draw:
                     text-blend-order:
                         visible: false
-            early-z15:
-                filter: { $zoom: [15] }
-                draw:
-                    text-blend-order:
-                        font:
-                            fill: global.light_color
-                            size: 11px
             easy:
                 filter: { piste_difficulty: easy }
                 draw:
