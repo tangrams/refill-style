@@ -9,9 +9,6 @@
 # Authors: Geraldine Sarmiento, Nathaniel V. Kelso
 # Read more: https://github.com/tangrams/refill-style
 #
-import:
-    - https://tangrams.github.io/blocks/patterns/dots.yaml
-    - https://tangrams.github.io/blocks/elevation/normal.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -1130,21 +1127,25 @@ styles:
         mix: [space-tile, generative-random]
         base: polygons
         shaders:
+            uniforms:
+                u_tint: global.ultralight_color
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    color.rgb = vec3(random(abs(floor(pos)))+0.785); // GRAYSCALE
-                    // color.rgb = vec3(1.00, random(abs(floor(pos)))+0.785, random(abs(floor(pos)))+0.885); // PINK
-                    // color.rgb = vec3(random(abs(floor(pos)))+0.685, random(abs(floor(pos)))+0.785, 1.00); // BLUE
+                    color.rgb = vec3(random(abs(floor(pos)))+0.875); // GRAYSCALE
+                    color.rgb *= u_tint;
 
     pixel-pattern-bright:
         mix: [space-tile, generative-random]
         base: polygons
         shaders:
+            uniforms:
+                u_tint: global.ultralight_color
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*180.0,1.0);
-                    color.rgb = vec3(random(abs(floor(pos)))+0.855);
+                    color.rgb = vec3(random(abs(floor(pos)))+0.925);
+                    color.rgb *= u_tint;
 
     waves:
         base: polygons
@@ -1309,22 +1310,6 @@ styles:
                     color.rgb = mix(mix(color.rgb, u_grid_color.rgb, texture2D(u_tex_grid, v_texcoord).a),
                                     color.rgb,
                                     step(.5,dot(vec3(0., 0., 1.), worldNormal())));
-
-    landuse-tier4-hospital:
-        mix: [polygons-dots]
-        raster: custom
-        shaders:
-            defines:
-                NORMAL_TEXTURE_INDEX: 0
-                DOTS_DIR: vec3(-0.600,-0.420,0.600)
-
-                DOTS_COLOR: vec3(0.345,0.224,0.392)
-                DOTS_SCALE: 30.
-                DOTS_SIZE: shade*2.
-            blocks:
-                normal: |
-                    float shade = dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2., DOTS_DIR);
-                    shade = shade*shade*shade;
 
 
     building-lines:
@@ -2409,14 +2394,14 @@ layers:
                         draw:
                             text-blend-order:
                                 priority: 51
-                                visible: global.text_visible_trunk_primary_e2
+                                visible: global.text_visible_trunk_primary
                                 text_source: global.ux_language_text_source_road_ref_and_name
                                 font:
                                     fill: global.dark_color
                                     size: 11px
                                     stroke: { color: global.white_color, width: 3 }
                     labels-trunk_primary-route-z15-up:
-                        filter: { $zoom: [15,16] }
+                        filter: { $zoom: { min: 15 } }
                         draw:
                             text-blend-order:
                                 priority: 51
@@ -2427,7 +2412,7 @@ layers:
                                     weight: 600
                                     size: [[15, 12px], [16, 13px], [19, 16px]]
                                     stroke: { color: global.white_color, width: [[15, 3], [17, 6]] }
-                labels-trunk_primary-z14-z15:
+                labels-trunk_primary-z11-z15:
                     filter:
                         $zoom: [11,12,13,14,15]
                     draw:
@@ -2437,7 +2422,7 @@ layers:
                             text_source: global.ux_language_text_source_road_ref_and_name_short
                             font:
                                 fill: global.dark_color
-                                size: [[11, 9px], [15, 12px]]
+                                size: [[11, 10px], [15, 12px]]
                                 stroke: { color: global.white_color, width: [[11, 3], [13, 3], [14, 4]] }
                 labels-trunk_primary-z16-up:
                     filter: { $zoom: { min: 16 } }
@@ -2506,12 +2491,12 @@ layers:
                                 color: [[13, global.light_color], [15, global.light_color], [16, global.offwhite_color]]
                                 outline:
                                     color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
-                    labels-secondary-routes:
-                        filter: { $zoom: [13] }
+                    labels-secondary-routes-z13-z14:
+                        filter: { $zoom: [13,14] }
                         draw:
                             text-blend-order:
                                 priority: 56
-                                visible: global.text_visible_secondary_e
+                                visible: global.text_visible_secondary
                                 text_source: global.ux_language_text_source_road_ref_and_name_short
                                 font:
                                     fill: global.black_color
@@ -2538,7 +2523,7 @@ layers:
                             text_source: global.ux_language_text_source_road_ref_and_name_short
                             font:
                                 fill: [[13, global.dark_color], [17, global.black_color]]
-                                size: [[13, 9px], [17, 13px]]
+                                size: [[13, 10px], [17, 13px]]
                                 stroke: { color: global.white_color, width: 4 }
             tertiary:
                 filter: { kind_detail: [tertiary, tertiary_link] }
@@ -2597,7 +2582,7 @@ layers:
                             text_source: global.ux_language_text_source_road_ref_and_name_short
                             font:
                                 fill: [[13, global.dark_color], [18, global.black_color]]
-                                size: [[13, 9px], [17, 13px]]
+                                size: [[13, 10px], [17, 13px]]
                                 stroke: { color: global.white_color, width: 4 }
         minor_road:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
@@ -3564,26 +3549,26 @@ layers:
         #         polygons:
         #             color: [1.0,1.0,1.0]
 
-        #     # golf_course:
-        #     #     filter: { landuse_kind: golf_course }
-        #     #     draw:
-        #     #         polygons:
-        #     #             color: global.building2
-        #     # nature_reserve:
-        #     #     filter: { landuse_kind: nature_reserve }
-        #     #     draw:
-        #     #         polygons:
-        #     #             color: global.building2
-        #     # conservation:
-        #     #     filter: { landuse_kind: conservation }
-        #     #     draw:
-        #     #         polygons:
-        #     #             color: global.building2
-        #     # zoo:
-        #     #     filter: { landuse_kind: zoo }
-        #     #     draw:
-        #     #         polygons:
-        #     #             color: global.building2
+            # golf_course:
+            #     filter: { landuse_kind: golf_course }
+            #     draw:
+            #         polygons:
+            #             color: global.building2
+            # nature_reserve:
+            #     filter: { landuse_kind: nature_reserve }
+            #     draw:
+            #         polygons:
+            #             color: global.building2
+            # conservation:
+            #     filter: { landuse_kind: conservation }
+            #     draw:
+            #         polygons:
+            #             color: global.building2
+            # zoo:
+            #     filter: { landuse_kind: zoo }
+            #     draw:
+            #         polygons:
+            #             color: global.building2
         # in_university:
         #     filter: { landuse_kind: [university,school] }
         #     draw:
@@ -5446,6 +5431,7 @@ layers:
                 visible: false
             polygons:
                 order: global.feature_order
+                visible: false
 
 
         landuse-labels:
@@ -5499,9 +5485,7 @@ layers:
                     kind: [protected_area, nature_reserve, national_park]
                     not: { protect_class: ['2','3','5']}
                 draw:
-                    # polygons:
                     pixel-pattern-light:
-                        # style: landuse-tier4-hospital
                         color: global.white_color
                         visible: true
 
