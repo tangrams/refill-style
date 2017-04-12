@@ -282,6 +282,7 @@ global:
     # offwhite_color:             [0.970,0.970,0.970]
     # white_color:                [1.00,1.00,1.00]
     # transparent:                [0.900,0.900,0.900,0.250]
+    # route_line:                 [0.000,0.500,1.000]
 
     # GRAY
     # black_color:                [0.650,0.650,0.650]
@@ -295,6 +296,7 @@ global:
     # offwhite_color:             [0.976,0.976,0.976]
     # white_color:                [1.00,1.00,1.00]
     # transparent:                [0.929,0.929,0.929,0.250]
+    # route_line:                 [0.313,0.482,0.580]
 
     # SEPIA
     # black_color:                  [0.624,0.373,0.306]
@@ -308,32 +310,35 @@ global:
     # offwhite_color:               [0.980,0.943,0.931]
     # white_color:                  [1.00,1.00,1.00]
     # transparent:                  [0.940,0.868,0.855,0.250]
+    # route_line:                   [0.700,0.196,0.507]
 
     # BLUE
-    black_color:                [0.000,0.337,0.878]
-    dark_color:                 [0.141,0.424,0.880]
-    mid_color:                  [0.282,0.523,0.910]
-    midlight_color:             [0.382,0.585,0.910]
-    light_color:                [0.489,0.662,0.940]
-    lighter_color:              [0.686,0.783,0.940]
-    lightest_color:             [0.805,0.871,0.970]
-    ultralight_color:           [0.872,0.915,0.980]
-    offwhite_color:             [0.921,0.947,0.990]
-    white_color:                [1.00,1.00,1.00]
-    transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
+    # black_color:                [0.000,0.337,0.878]
+    # dark_color:                 [0.141,0.424,0.880]
+    # mid_color:                  [0.282,0.523,0.910]
+    # midlight_color:             [0.382,0.585,0.910]
+    # light_color:                [0.489,0.662,0.940]
+    # lighter_color:              [0.686,0.783,0.940]
+    # lightest_color:             [0.805,0.871,0.970]
+    # ultralight_color:           [0.872,0.915,0.980]
+    # offwhite_color:             [0.921,0.947,0.990]
+    # white_color:                [1.00,1.00,1.00]
+    # transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
+    # route_line:                 [0.502,0.200,0.671]
 
     # PINK
-    # black_color:               [1.000,0.130,0.797]
-    # dark_color:                [1.000,0.440,0.869]
-    # mid_color:                 [1.000,0.520,0.888]
-    # midlight_color:            [1.000,0.620,0.911]
-    # light_color:               [1.000,0.730,0.937]
-    # lighter_color:             [1.000,0.810,0.956]
-    # lightest_color:            [1.000,0.880,0.972]
-    # ultralight_color:          [1.000,0.920,0.983]
-    # offwhite_color:            [1.000,0.970,0.994]
-    # white_color:               [1.000,1.000,1.000]
-    # transparent:               [1.000,0.880,0.972,0.250]
+    black_color:               [1.000,0.130,0.797]
+    dark_color:                [1.000,0.440,0.869]
+    mid_color:                 [1.000,0.520,0.888]
+    midlight_color:            [1.000,0.620,0.911]
+    light_color:               [1.000,0.730,0.937]
+    lighter_color:             [1.000,0.810,0.956]
+    lightest_color:            [1.000,0.880,0.972]
+    ultralight_color:          [1.000,0.920,0.983]
+    offwhite_color:            [1.000,0.970,0.994]
+    white_color:               [1.000,1.000,1.000]
+    transparent:               [1.000,0.880,0.972,0.250]
+    route_line:                [0.369,0.349,0.729]
 
     # Refill Global Colors - PINK
     pink:
@@ -1401,7 +1406,7 @@ layers:
         data: { source: mz_route_line }
         draw:
             ux-lines-overlay:
-                color: '#06a6d4'
+                color: global.route_line
                 order: 500
                 width: [[0,3.5px],[5,5px],[9,7px],[10,6px],[11,6px],[13,8px],[14,9px],[15,10px],[16,11px],[17,12px],[18,10px]]
     mz_route_line_transit:
