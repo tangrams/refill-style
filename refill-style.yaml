@@ -9,6 +9,9 @@
 # Authors: Geraldine Sarmiento, Nathaniel V. Kelso
 # Read more: https://github.com/tangrams/refill-style
 #
+# import:
+#     - theme/black.yaml
+
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -299,18 +302,18 @@ global:
     # route_line:                 [0.313,0.482,0.580]
 
     # SEPIA
-    # black_color:                  [0.624,0.373,0.306]
-    # dark_color:                   [0.710,0.465,0.398]
-    # mid_color:                    [0.780,0.572,0.515]
-    # midlight_color:               [0.820,0.653,0.607]
-    # light_color:                  [0.880,0.738,0.695]
-    # lighter_color:                [0.910,0.819,0.792]
-    # lightest_color:               [0.940,0.868,0.855]
-    # ultralight_color:             [0.960,0.918,0.912]
-    # offwhite_color:               [0.980,0.943,0.931]
-    # white_color:                  [1.00,1.00,1.00]
-    # transparent:                  [0.940,0.868,0.855,0.250]
-    # route_line:                   [0.700,0.196,0.507]
+    black_color:                  [0.624,0.373,0.306]
+    dark_color:                   [0.710,0.465,0.398]
+    mid_color:                    [0.780,0.572,0.515]
+    midlight_color:               [0.820,0.653,0.607]
+    light_color:                  [0.880,0.738,0.695]
+    lighter_color:                [0.910,0.819,0.792]
+    lightest_color:               [0.940,0.868,0.855]
+    ultralight_color:             [0.960,0.918,0.912]
+    offwhite_color:               [0.980,0.943,0.931]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.940,0.868,0.855,0.250]
+    route_line:                   [0.700,0.196,0.507]
 
     # BLUE
     # black_color:                [0.000,0.337,0.878]
@@ -327,18 +330,18 @@ global:
     # route_line:                 [0.502,0.200,0.671]
 
     # PINK
-    black_color:               [1.000,0.130,0.797]
-    dark_color:                [1.000,0.440,0.869]
-    mid_color:                 [1.000,0.520,0.888]
-    midlight_color:            [1.000,0.620,0.911]
-    light_color:               [1.000,0.730,0.937]
-    lighter_color:             [1.000,0.810,0.956]
-    lightest_color:            [1.000,0.880,0.972]
-    ultralight_color:          [1.000,0.920,0.983]
-    offwhite_color:            [1.000,0.970,0.994]
-    white_color:               [1.000,1.000,1.000]
-    transparent:               [1.000,0.880,0.972,0.250]
-    route_line:                [0.369,0.349,0.729]
+    # black_color:               [1.000,0.130,0.797]
+    # dark_color:                [1.000,0.440,0.869]
+    # mid_color:                 [1.000,0.520,0.888]
+    # midlight_color:            [1.000,0.620,0.911]
+    # light_color:               [1.000,0.730,0.937]
+    # lighter_color:             [1.000,0.810,0.956]
+    # lightest_color:            [1.000,0.880,0.972]
+    # ultralight_color:          [1.000,0.920,0.983]
+    # offwhite_color:            [1.000,0.970,0.994]
+    # white_color:               [1.000,1.000,1.000]
+    # transparent:               [1.000,0.880,0.972,0.250]
+    # route_line:                [0.369,0.349,0.729]
 
     # Refill Global Colors - PINK
     pink:
@@ -573,11 +576,11 @@ textures:
             cafe: [502, 168, 38, 38]
             camp_site: [782, 84, 38, 38]
             summer_camp: [782, 84, 38, 38]
-            capital-l: [590, 212, 32, 32]
-            capital-m: [558, 212, 24, 24]
-            capital-s: [528, 212, 20, 20]
-            capital-xl: [678, 212, 42, 36]
-            capital-xs: [506, 212, 16, 16]
+            capital-l: [590, 210, 32, 32]
+            capital-m: [558, 210, 24, 24]
+            capital-s: [528, 210, 20, 20]
+            capital-xl: [678, 210, 42, 36]
+            capital-xs: [506, 210, 16, 16]
             car: [780, 126, 38, 38]
             category-namespace-mobility: [780, 126, 38, 38]
             category-predicate-mobility: [780, 126, 38, 38]
@@ -755,15 +758,15 @@ textures:
             amusement_ride: [966, 84, 38, 38]
             toilets: [828, 84, 38, 38]
             townspot-l: [978, 210, 32, 32]
-            townspot-l-rev: [806, 212, 32, 32]
+            townspot-l-rev: [806, 210, 32, 32]
             townspot-m: [946, 210, 24, 24]
-            townspot-m-rev: [774, 212, 24, 24]
+            townspot-m-rev: [774, 210, 24, 24]
             townspot-s: [918, 210, 20, 20]
-            townspot-s-rev: [746, 212, 20, 20]
+            townspot-s-rev: [746, 210, 20, 20]
             townspot-xl: [0, 254, 40, 40]
-            townspot-xl-rev: [846, 212, 38, 38]
+            townspot-xl-rev: [846, 210, 38, 38]
             townspot-xs: [894, 210, 16, 16]
-            townspot-xs-rev: [726, 212, 12, 12]
+            townspot-xs-rev: [726, 210, 12, 12]
             toys: [916, 0, 38, 38]
             traffic_signals: [916, 168, 38, 38]
             train_station: [410, 0, 38, 38]
@@ -2199,7 +2202,8 @@ layers:
             # oneway arrows and shields are distinct groups!
             filter: { oneway: yes, shield_text: false, $zoom: { min: 17 } }
             draw:
-                icons:
+                arrows:
+                    style: icons
                     flat: true
                     visible: true
                     sprite: arrow
@@ -2270,7 +2274,7 @@ layers:
             draw:
                 lines:
                     color: [[8, global.black_color], [13, global.black_color], [14, global.white_color]]
-                    width: [[8, 1px], [13, 1.25px], [14, 0.1px], [15, 1.5px], [17, 6px], [18, 10m]]
+                    width: [[8, 1px], [13, 1.25px], [14, 0.1px], [15, 1.5px], [17, 8px], [18, 10m]]
                     outline:
                         color: [[8, global.white_color], [12, global.white_color], [13, global.black_color]]
                         width: [[8, 0px], [13, 0px], [14, 1px], [15, 2px], [19, 6px]]
@@ -2279,7 +2283,7 @@ layers:
                 draw:
                     lines:
                         color: [[9, global.mid_color], [13, global.mid_color], [14, global.white_color]]
-                        width: [[9, 0px], [13, 0.75px], [14, 0.1px], [17, 3px], [18, 5m]]
+                        width: [[9, 0px], [13, 0.75px], [14, 0.1px], [17, 4px], [18, 5m]]
                         outline:
                             color: [[9, global.white_color], [12, global.white_color], [13, global.mid_color], [15, global.black_color]]
                             width: [[9, 0px], [13, 0px], [14, 0.4px], [17, 1.5px], [18, 2px]]
@@ -2348,7 +2352,7 @@ layers:
                 draw:
                     lines:
                         color: [[8, global.midlight_color], [12, global.mid_color], [13, global.black_color], [14, global.white_color]]
-                        width: [[8, 0.5px], [11, 0.5px], [13, 1px], [14, 0.1px], [16, 2px], [17, 8.25px], [18, 10m]]
+                        width: [[8, 0.5px], [11, 0.5px], [13, 1px], [14, 0.1px], [16, 2px], [17, 8px], [18, 10m]]
                         outline:
                             color: [[8, global.white_color], [12, global.white_color], [13, global.black_color]]
                             width: [[8, 0px], [13, 0px], [14, 0.75px], [16, 1.5px], [18, 4px]]
@@ -2370,7 +2374,7 @@ layers:
                     draw:
                         lines:
                             color: [[8, global.midlight_color], [12, global.mid_color], [13, global.black_color], [14, global.white_color]]
-                            width: [[9, 0.5px], [13, 1px], [14, 0.1px], [15, 1.25px], [16, 2px], [17, 9px], [18, 10m]]
+                            width: [[9, 0.5px], [13, 1px], [14, 0.1px], [15, 1.25px], [16, 2px], [17, 8px], [18, 10m]]
                             outline:
                                 color: [[8, global.white_color], [12, global.white_color], [13, global.black_color]]
                                 width: [[8, 0px], [13, 0px], [14, 0.75px], [15, 1.5px], [17, 3px], [18, 4px]]
@@ -2440,7 +2444,7 @@ layers:
                 draw:
                     lines:
                         color: [[10, global.mid_color], [15, global.light_color], [16, global.white_color]]
-                        width: [[10, 0.5px], [12, 0.5px], [15, 1px], [16, 1.75px], [18, 5m]]
+                        width: [[10, 0.5px], [12, 0.5px], [15, 1px], [16, 1.75px], [17, 3px], [18, 5m]]
                         outline:
                             color: [[10, global.white_color], [15, global.mid_color], [16, global.black_color]]
                             width: [[10, 0px], [15, 0px], [16, 1px], [18, 2px]]
@@ -2588,7 +2592,7 @@ layers:
             draw:
                 lines:
                     color: [[11, global.offwhite_color], [15, global.midlight_color], [16, global.white_color]]
-                    width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 0.1px], [17, 2px], [18, 9m]]
+                    width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 0.1px], [17, 3.5px], [18, 9m]]
                     outline:
                         color: [[11, global.white_color], [14, global.white_color], [15, global.midlight_color], [17, global.black_color]]
                         width: [[11, 0px], [15, 0px], [16, 0.75px], [17, 1.5px], [18, 1.5px]]
@@ -2801,7 +2805,7 @@ layers:
                     sprite_default: generic_shield_5char
                     priority: 58
                     repeat_group: shields
-                    repeat_distance: [[8,90px],[10,40px],[13,30px]]
+                    repeat_distance: [[8, 90px],[10, 40px],[13, 30px]]
                     placement: midpoint
                     placement_min_length_ratio:
                         - [8, 0.1]
