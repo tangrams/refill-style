@@ -1331,6 +1331,12 @@ styles:
         base: points
         texture: pois
         blend_order: 1
+        shaders:
+            uniforms:
+                u_tint: global.black_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint, vec3(1.), color.rgb);
     text-blend-order:
         base: text
         blend_order: 1
