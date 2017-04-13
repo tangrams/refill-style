@@ -1,0 +1,14 @@
+global:
+    # SEPIA
+    black_color:                  [0.624,0.373,0.306]
+    dark_color:                   [0.710,0.465,0.398]
+    mid_color:                    [0.780,0.572,0.515]
+    midlight_color:               [0.820,0.653,0.607]
+    light_color:                  [0.880,0.738,0.695]
+    lighter_color:                [0.910,0.819,0.792]
+    lightest_color:               [0.940,0.868,0.855]
+    ultralight_color:             [0.960,0.918,0.912]
+    offwhite_color:               [0.980,0.943,0.931]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.940,0.868,0.855,0.250]
+    route_line:                   [0.700,0.196,0.507]
