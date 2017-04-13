@@ -302,32 +302,32 @@ global:
     # route_line:                 [0.313,0.482,0.580]
 
     # SEPIA
-    black_color:                  [0.624,0.373,0.306]
-    dark_color:                   [0.710,0.465,0.398]
-    mid_color:                    [0.780,0.572,0.515]
-    midlight_color:               [0.820,0.653,0.607]
-    light_color:                  [0.880,0.738,0.695]
-    lighter_color:                [0.910,0.819,0.792]
-    lightest_color:               [0.940,0.868,0.855]
-    ultralight_color:             [0.960,0.918,0.912]
-    offwhite_color:               [0.980,0.943,0.931]
-    white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.940,0.868,0.855,0.250]
-    route_line:                   [0.700,0.196,0.507]
+    # black_color:                  [0.624,0.373,0.306]
+    # dark_color:                   [0.710,0.465,0.398]
+    # mid_color:                    [0.780,0.572,0.515]
+    # midlight_color:               [0.820,0.653,0.607]
+    # light_color:                  [0.880,0.738,0.695]
+    # lighter_color:                [0.910,0.819,0.792]
+    # lightest_color:               [0.940,0.868,0.855]
+    # ultralight_color:             [0.960,0.918,0.912]
+    # offwhite_color:               [0.980,0.943,0.931]
+    # white_color:                  [1.00,1.00,1.00]
+    # transparent:                  [0.940,0.868,0.855,0.250]
+    # route_line:                   [0.700,0.196,0.507]
 
     # BLUE
-    # black_color:                [0.000,0.337,0.878]
-    # dark_color:                 [0.141,0.424,0.880]
-    # mid_color:                  [0.282,0.523,0.910]
-    # midlight_color:             [0.382,0.585,0.910]
-    # light_color:                [0.489,0.662,0.940]
-    # lighter_color:              [0.686,0.783,0.940]
-    # lightest_color:             [0.805,0.871,0.970]
-    # ultralight_color:           [0.872,0.915,0.980]
-    # offwhite_color:             [0.921,0.947,0.990]
-    # white_color:                [1.00,1.00,1.00]
-    # transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
-    # route_line:                 [0.502,0.200,0.671]
+    black_color:                [0.000,0.337,0.878]
+    dark_color:                 [0.141,0.424,0.880]
+    mid_color:                  [0.282,0.523,0.910]
+    midlight_color:             [0.382,0.585,0.910]
+    light_color:                [0.489,0.662,0.940]
+    lighter_color:              [0.686,0.783,0.940]
+    lightest_color:             [0.805,0.871,0.970]
+    ultralight_color:           [0.872,0.915,0.980]
+    offwhite_color:             [0.921,0.947,0.990]
+    white_color:                [1.00,1.00,1.00]
+    transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
+    route_line:                 [0.502,0.200,0.671]
 
     # PINK
     # black_color:               [1.000,0.130,0.797]
@@ -490,7 +490,7 @@ global:
         function() { return feature.height || 20; }
 
     # labels:
-    text_fill:             '#000'                 # WHITE
+    text_fill:             global.black_color                # WHITE
     text_fill2:            '#000'                 # WHITE
     text_fill_road_e:      '#555'                 # WHITE
     text_fill_exits:       [0.40,0.40,0.40]       # motorway junctions, highway_casing1
