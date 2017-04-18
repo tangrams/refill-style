@@ -522,7 +522,7 @@
             // use transit ux, else default to false
             gui.transit_overlay = query.transit_overlay || false;
             gui.transit_button = gui.add(gui, 'transit_overlay', transit_overlay).onChange(function(value) {
-                tg_global['sdk_transit_overlay'] = (value === 'true' || value === true)
+                tg_global['sdk_transit_overlay'] = (value === 'true' || value === true);
 
                 scene.config.global.sdk_transit_overlay = tg_global['sdk_transit_overlay']; // dat.gui passes a string
                 if (value === 'true' || value === true) {
@@ -545,7 +545,7 @@
             // use transit ux, else default to false
             gui.building_3d = query.building_3d || true;
             gui.building_button = gui.add(gui, 'building_3d', building_3d).onChange(function(value) {
-                tg_global['sdk_building_extrude'] = (value === 'true' || value === true)
+                tg_global['sdk_building_extrude'] = (value === 'true' || value === true);
 
                 scene.config.global.sdk_building_extrude = tg_global['sdk_building_extrude']; // dat.gui passes a string
                 scene.updateConfig();
