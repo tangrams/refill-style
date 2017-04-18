@@ -400,7 +400,7 @@ global:
         function() { return feature.height || 20; }
 
     # labels:
-    text_fill:             '#000'                 # WHITE
+    text_fill:             global.black_color                # WHITE
     text_fill2:            '#000'                 # WHITE
     text_fill_road_e:      '#555'                 # WHITE
     text_fill_exits:       [0.40,0.40,0.40]       # motorway junctions, highway_casing1
