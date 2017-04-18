@@ -221,11 +221,15 @@
         );
         map.setView(map_start_location.slice(0, 2), map_start_location[2]);
 
+        var tg_baseScene = 'refill-style.yaml';
+        var mapzen_api_key = 'vector-tiles-W2tPU-Y';
+        var tg_global = { sdk_mapzen_api_key: mapzen_api_key };
+
         var layer = Tangram.leafletLayer({
             // more: 'vector-tiles-TTucZYU'
             // default (some): 'vector-tiles-W2tPU-Y'
             // no: 'vector-tiles-haXTO7g'
-            scene: { import: 'refill-style.yaml', global: { sdk_mapzen_api_key: 'vector-tiles-W2tPU-Y' } },
+            scene: { import: [tg_baseScene], global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
 
@@ -387,13 +391,15 @@
             // use query language, else default to English
             gui.language = query.language || false;
             gui.add(gui, 'language', langs).onChange(function(value) {
-                scene.config.global.ux_language = value;
+                tg_global['ux_language'] = value;
+                scene.config.global.ux_language = tg_global['ux_language'];
                 scene.updateConfig();
                 //window.location.search = 'language=' + value;
             });
             gui.fallback_lang = query.language || false;
             gui.fallback_button = gui.add(gui, 'fallback_lang', langs).onChange(function(value) {
-                scene.config.global.ux_language_fallback = value;
+                tg_global['ux_language_fallback'] = value;
+                scene.config.global.ux_language_fallback = tg_global['ux_language_fallback'];
                 scene.updateConfig();
                 //window.location.search = 'language=' + value;
             });
@@ -486,6 +492,27 @@
                 //window.location.search = 'language=' + value;
             });
 
+            // Color theme selector
+            var color = {
+                '(default)': 'black',
+                'black': 'black',
+                'gray': 'gray',
+                'pink': 'pink',
+                'blue': 'blue',
+                'sepia': 'sepia'
+            };
+            // use query language, else default to English
+            gui.color = query.color || 'black';
+            gui.add(gui, 'color', color).onChange(function(value) {
+                var import_theme = 'theme/'+ value + '.yaml'
+                console.log( import_theme );
+                scene.load({ import: [ tg_baseScene, import_theme ], global: tg_global });
+                console.log( scene.config );
+                scene.updateConfig();
+                //scene.rebuild();
+                //window.location.color = 'color=' + value;
+            });
+
             // Transit selector
             var transit_overlay = {
                 '(default)': false,
@@ -495,7 +522,9 @@
             // use transit ux, else default to false
             gui.transit_overlay = query.transit_overlay || false;
             gui.transit_button = gui.add(gui, 'transit_overlay', transit_overlay).onChange(function(value) {
-                scene.config.global.sdk_transit_overlay = (value === 'true' || value === true); // dat.gui passes a string
+                tg_global['sdk_transit_overlay'] = (value === 'true' || value === true);
+
+                scene.config.global.sdk_transit_overlay = tg_global['sdk_transit_overlay']; // dat.gui passes a string
                 if (value === 'true' || value === true) {
                     scene.config.global.sdk_road_shields = false;
                 } else {
@@ -516,7 +545,9 @@
             // use transit ux, else default to false
             gui.building_3d = query.building_3d || true;
             gui.building_button = gui.add(gui, 'building_3d', building_3d).onChange(function(value) {
-                scene.config.global.sdk_building_extrude = (value === 'true' || value === true); // dat.gui passes a string
+                tg_global['sdk_building_extrude'] = (value === 'true' || value === true);
+
+                scene.config.global.sdk_building_extrude = tg_global['sdk_building_extrude']; // dat.gui passes a string
                 scene.updateConfig();
             });
             gui.building_button.name( '3D buildings' );
