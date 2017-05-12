@@ -6,8 +6,8 @@ global:
     midlight_color:               [0.000,0.000,0.000]
     light_color:                  [0.250,0.250,0.250]
     lighter_color:                [0.500,0.500,0.500]
-    lightest_color:               [0.500,0.500,0.500]
-    ultralight_color:             [0.750,0.750,0.750]
+    lightest_color:               [0.700,0.700,0.700]
+    ultralight_color:             [0.775,0.775,0.775]
     offwhite_color:               [0.850,0.850,0.850]
     white_color:                  [1.00,1.00,1.00]
     transparent:                  [0.900,0.900,0.900,0.250]
@@ -44,6 +44,24 @@ layers:
                 coast:
                     color: [0.950,0.950,0.950]
 
+        water-area-labels:
+            ocean-sea-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.lightest_color
+                sea-labels:
+                    draw:
+                        text-blend-order:
+                            font:
+                                fill: global.lightest_color
+            mostly-lakes:
+                default-label-text:
+                    draw:
+                        text-blend-order:
+                            font:
+                                fill: global.lightest_color
+
     buildings:
         draw:
             polygons:
@@ -63,7 +81,7 @@ styles:
         shaders:
             uniforms:
                 # we shouldn't need to set a new texture, but relative paths...
-                u_tex_grid: building-grid-themes
+                u_tex_grid: building-grid
                 u_grid_color: global.black_color
 
     waves:
@@ -88,7 +106,5 @@ styles:
 
 textures:
     # we shouldn't need to set a new texture, but relative paths...
-    building-grid-themes:
+    building-grid:
         url: ../images/building-grid.gif
-        # url: images/building-grid-blue.gif
-        filtering: mipmap

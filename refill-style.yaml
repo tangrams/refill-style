@@ -5417,6 +5417,12 @@ layers:
                         color: global.lighter_color
                         visible: true
 
+            forest-landcover:
+                filter: { kind: [forest, natural_forest, wood, natural_wood, natural_park], $zoom: { min: 10 }, not: { operator: "United States Forest Service" } }
+                draw:
+                    pixel-pattern-light:
+                            visible: true
+
             parks-and-national-forests-not-national-park:
                 filter:
                     all:
