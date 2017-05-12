@@ -13,3 +13,4 @@ global:
     transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
     route_line:                 [0.502,0.200,0.671]
 
+

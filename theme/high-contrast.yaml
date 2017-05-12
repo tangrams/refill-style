@@ -1,0 +1,94 @@
+global:
+    # HIGH CONTRAST
+    black_color:                  [0.000,0.000,0.000]
+    dark_color:                   [0.000,0.000,0.000]
+    mid_color:                    [0.000,0.000,0.000]
+    midlight_color:               [0.000,0.000,0.000]
+    light_color:                  [0.250,0.250,0.250]
+    lighter_color:                [0.500,0.500,0.500]
+    lightest_color:               [0.500,0.500,0.500]
+    ultralight_color:             [0.750,0.750,0.750]
+    offwhite_color:               [0.850,0.850,0.850]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.900,0.900,0.900,0.250]
+    route_line:                   [0.700,0.196,0.507]
+
+
+layers:
+    water:
+        draw:
+            waves:
+                color: [0.200,0.200,0.200] # colors the wave lines
+        later:
+            draw:
+                waves:
+                    color: [0.200,0.200,0.200] # colors the wave lines
+
+        # lakes:
+        #     draw:
+        #         waves:
+        #             color: [0.500,0.500,0.500]
+
+        # other-water-areas:
+        #     draw:
+        #         waves:
+        #             color: [0.800,0.800,0.800]
+
+        swimming_pool:
+            draw:
+                waves:
+                    color: [1.0,1.0,1.0]
+
+        water-boundary-ocean:
+            draw:
+                coast:
+                    color: [0.950,0.950,0.950]
+
+    buildings:
+        draw:
+            polygons:
+                color: global.white_color
+            lines:
+                color: [[14, global.light_color], [16, global.midlight_color], [19, global.dark_color]]
+
+        # building footprints, pre-extrusion
+        footprints:
+            extrude:
+                draw:
+                    polygons:
+                        color: global.white_color
+
+styles:
+    building-grid:
+        shaders:
+            uniforms:
+                # we shouldn't need to set a new texture, but relative paths...
+                u_tex_grid: building-grid-themes
+                u_grid_color: global.black_color
+
+    waves:
+        shaders:
+            uniforms:
+                u_lighter: [0.000,0.000,0.000] #global.lighter_color
+                u_lightest: [0.180,0.180,0.180] #global.lightest_color
+
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: [0.90,0.90,0.90] #global.lightest_color
+
+
+    pixel-pattern-bright:
+        shaders:
+            uniforms:
+                u_tint: [0.90,0.90,0.90] #global.lightest_color
+
+
+
+textures:
+    # we shouldn't need to set a new texture, but relative paths...
+    building-grid-themes:
+        url: ../images/building-grid.gif
+        # url: images/building-grid-blue.gif
+        filtering: mipmap

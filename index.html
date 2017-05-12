@@ -222,7 +222,15 @@
         map.setView(map_start_location.slice(0, 2), map_start_location[2]);
 
         var tg_baseScene = 'refill-style.yaml';
+
+        var dev_or_prod = 'prod';
+        // prod
         var mapzen_api_key = 'vector-tiles-W2tPU-Y';
+
+        if( dev_or_prod == 'dev' ) {
+            mapzen_api_key = 'mapzen-xkUbe6g';
+        }
+
         var tg_global = { sdk_mapzen_api_key: mapzen_api_key };
 
         var layer = Tangram.leafletLayer({
@@ -354,7 +362,11 @@
             var zoom = max_zoom < map.getZoom() ? max_zoom : Math.floor(map.getZoom());
             var tileCoords = { x : long2tile(latlng.lng,zoom), y: lat2tile(latlng.lat,zoom), z: zoom };
 
-            var url = 'http://tile.mapzen.com/mapzen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson';
+            var url = 'http://tile.';
+            if( dev_or_prod == 'dev' ) {
+                url += 'dev.';
+            }
+            url += 'mapzen.com/mapzen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson' + '?api_key=' + mapzen_api_key;
             return url;
         }
 
@@ -499,7 +511,8 @@
                 'gray': 'gray',
                 'pink': 'pink',
                 'blue': 'blue',
-                'sepia': 'sepia'
+                'sepia': 'sepia',
+                'high-contrast': 'high-contrast'
             };
             // use query language, else default to English
             gui.color = query.color || 'black';
@@ -551,7 +564,45 @@
                 scene.updateConfig();
             });
             gui.building_button.name( '3D buildings' );
-//
+
+            // Routing selector
+            var sdk_directions = {
+                '(default)': false,
+                'Hide': false,
+                'Car': 'car',
+                'Transit': 'transit',
+                'Bike': 'bike'
+            };
+            // use transit ux, else default to false
+            gui.sdk_directions = query.sdk_directions || false;
+            gui.directions_button = gui.add(gui, 'sdk_directions', sdk_directions).onChange(function(value) {
+                if( value === 'bike' ) {
+                    scene.config.sources.mz_route_line = {};
+                    scene.config.sources.mz_route_line_transit = {};
+                    scene.config.sources.mz_dash_line = {};
+                    scene.config.sources.mz_route_line_bicycle = { type: 'GeoJSON', url: 'https://gist.githubusercontent.com/nvkelso/8a066359dbe7e773926fe01c44c793d4/raw/d32bbf3221a8d8ef47cf22de706768a92ed645d9/map.geojson' }
+                    scene.config.global.sdk_bike_network_overlay = false;
+                } else if( value === 'transit') {
+                    scene.config.sources.mz_route_line = {};
+                    scene.config.sources.mz_route_line_transit = { type: 'GeoJSON', url: 'https://gist.githubusercontent.com/anonymous/71ae88cbc6d62c4d141ecd6a61060050/raw/2254bbc18243f5dc609e663a580c9412a7447936/map.geojson' }
+                    scene.config.sources.mz_dash_line = { type: 'GeoJSON', url: 'https://gist.githubusercontent.com/anonymous/d73b851c64c3e5fbfc2754aa32f44c10/raw/938ae435776e176919c4797bed1465a92e403ef3/map.geojson' }
+                    scene.config.sources.mz_route_line_bicycle = {};
+                } else if( value === 'car') {
+                    scene.config.sources.mz_route_line = { type: 'GeoJSON', url: 'https://gist.githubusercontent.com/anonymous/9a610ebda6fe4be7bccc/raw/8d217e43f2412d48d01534ba115f1e42dac72e68/map.geojson' }
+                    scene.config.sources.mz_route_line_transit = {}
+                    scene.config.sources.mz_dash_line = {}
+                    scene.config.sources.mz_route_line_bicycle = {};
+                } else {
+                    scene.config.sources.mz_route_line = {};
+                    scene.config.sources.mz_route_line_transit = {};
+                    scene.config.sources.mz_dash_line = {};
+                    scene.config.sources.mz_route_line_bicycle = {}
+                    scene.config.global.sdk_bike_network_overlay = true;
+                }
+                scene.updateConfig();
+            });
+            gui.directions_button.name('directions');
+
 //             // Animation selector
 //             var animated = {
 //                 '(default)': true,
@@ -677,6 +728,12 @@
                                     label += "<span class='labelLine' key="+x+" value="+val+"'>"+x+" : "+val+"</span><br>"
                                 }
 
+                                var layers = selection.feature.layers;
+                                label += "<span class='labelLine'>Layers:</span><br>"
+                                layers.forEach(function(val) {
+                                    label += "<span class='labelLine' value="+val+"'>  "+val+"</span><br>"
+                                });
+
                                 if (label != '') {
                                     popup.style.left = (selection.pixel.x) + 'px';
                                     popup.style.top = (selection.pixel.y) + 'px';
@@ -739,7 +796,7 @@
         <script src='https://mapzen.com/common/ui/mapzen-ui.min.js'></script>
         <script>
           MPZN.bug({
-          name: 'Tangram',
+          name: 'Tangram Refill cartography',
           link: 'https://mapzen.com/projects/tangram',
           tweet: 'Tangram Refill style from @mapzen',
           repo: 'https://github.com/tangrams/refill-style/'

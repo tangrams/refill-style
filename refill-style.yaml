@@ -327,7 +327,7 @@ global:
 
     # areas:
     scene1:      white                    # map background
-    water1:      [0.870, 0.870, 0.870]    # water wave
+    water1:      global.lighter_color    # water wave
     water2:      [0.760, 0.760, 0.760]    # water wave
     water3:      [0.5, 0.5, 0.5]          # playa texture
     water1_o:    '#fff'                   # water stroke (ocean coastline)
@@ -3739,6 +3739,7 @@ layers:
                     font:
                         fill: global.black_color
                         weight: 600
+                        stroke: { color: global.white_color, width: 4 }
             country-z2-3:
                 filter:
                     $zoom: [2,3]
@@ -3848,6 +3849,7 @@ layers:
                         size: 11px
                         weight: normal
                         fill: [[4, global.light_color], [9, global.midlight_color]]
+                        stroke: { color: global.white_color, width: 4 }
             region-z4:
                 filter:
                     $zoom: [4]
