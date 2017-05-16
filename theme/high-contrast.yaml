@@ -18,21 +18,21 @@ layers:
     water:
         draw:
             waves:
-                color: [0.300,0.300,0.300] # colors the wave lines
+                color: [0.400,0.400,0.400] # colors the wave lines
         later:
             draw:
                 waves:
-                    color: [0.300,0.300,0.300] # colors the wave lines
+                    color: [0.400,0.400,0.400] # colors the wave lines
 
         lakes:
             draw:
                 waves:
-                    color: [0.300,0.300,0.300]
+                    color: [0.400,0.400,0.400]
 
         other-water-areas:
             draw:
                 waves:
-                    color: [0.300,0.300,0.300]
+                    color: [0.400,0.400,0.400]
 
         swimming_pool:
             draw:
@@ -94,7 +94,7 @@ styles:
         shaders:
             uniforms:
                 # we shouldn't need to set a new texture, but relative paths...
-                u_tex_grid: building-grid2
+                u_tex_grid: building-grid3
                 u_grid_color: global.black_color
 
     waves:
@@ -125,5 +125,5 @@ styles:
 
 textures:
     # we shouldn't need to set a new texture, but relative paths...
-    building-grid2:
+    building-grid3:
         url: ../images/building-grid3.gif

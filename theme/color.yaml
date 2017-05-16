@@ -1,0 +1,117 @@
+global:
+    # BLACK (default)
+    black_color:                [0.00,0.00,0.00]
+    dark_color:                 [0.250,0.250,0.250]
+    mid_color:                  [0.500,0.500,0.500]
+    midlight_color:             [0.625,0.625,0.625]
+    light_color:                [0.750,0.750,0.750]
+    lighter_color:              [0.850,0.850,0.850]
+    lightest_color:             [0.900,0.900,0.900]
+    ultralight_color:           [0.950,0.950,0.950]
+    offwhite_color:             [0.970,0.970,0.970]
+    white_color:                [1.00,1.00,1.00]
+    transparent:                [0.900,0.900,0.900,0.250]
+    route_line:                 [0.000,0.500,1.000]
+
+layers:
+    buildings:
+        draw:
+            polygons:
+                color: [0.850,0.850,0.850]
+            lines:
+                color: [1.00,1.00,1.00]
+
+        in_park:
+            filter:
+                landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden]
+            draw:
+                polygons:
+                    color: [0.157,0.890,0.412]
+                lines:
+                    color: [1.00,1.00,1.00]
+        in_university:
+            filter: { landuse_kind: [university,school] }
+            draw:
+                polygons:
+                    color: [0.435,0.545,0.988]
+                lines:
+                    color: [1.00,1.00,1.00]
+        in_hospital:
+            filter: { landuse_kind: hospital }
+            draw:
+                polygons:
+                    color: [1.000,0.404,0.839]
+                lines:
+                    color: [1.00,1.00,1.00]
+        in_retail:
+           filter: { landuse_kind: retail }
+           draw:
+                polygons:
+                    color: [1.000,0.600,0.122]
+                lines:
+                    color: [1.00,1.00,1.00]
+        in_airport:
+            filter: { landuse_kind: [aerodrome, runway, taxiway] }
+            draw:
+                polygons:
+                    color: [0.498,0.302,1.000]
+                lines:
+                    color: [1.00,1.00,1.00]
+
+        footprints:
+            extrude:
+                draw:
+                    polygons:
+                        color: [0.850,0.850,0.850]
+                    lines:
+                        color: [1.00,1.00,1.00]
+
+            in_park:
+                filter:
+                    landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden]
+                draw:
+                    polygons:
+                        color: [0.157,0.890,0.412]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            in_university:
+                filter: { landuse_kind: [university,school] }
+                draw:
+                    polygons:
+                        color: [0.435,0.545,0.988]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            in_hospital:
+                filter: { landuse_kind: hospital }
+                draw:
+                    polygons:
+                        color: [1.000,0.404,0.839]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            in_retail:
+                filter: { landuse_kind: retail }
+                draw:
+                    polygons:
+                        color: [1.000,0.600,0.122]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            in_airport:
+                filter: { landuse_kind: [aerodrome, runway, taxiway] }
+                draw:
+                    polygons:
+                        color: [0.498,0.302,1.000]
+                    lines:
+                        color: [1.00,1.00,1.00]
+
+styles:
+    building-grid:
+        shaders:
+            uniforms:
+                # we shouldn't need to set a new texture, but relative paths...
+                u_tex_grid: building-grid
+                u_grid_color: global.white_color
+
+textures:
+    # we shouldn't need to set a new texture, but relative paths...
+    building-grid:
+        url: ../images/building-grid.gif
