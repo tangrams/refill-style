@@ -18,21 +18,21 @@ layers:
     water:
         draw:
             waves:
-                color: [0.200,0.200,0.200] # colors the wave lines
+                color: [0.300,0.300,0.300] # colors the wave lines
         later:
             draw:
                 waves:
-                    color: [0.200,0.200,0.200] # colors the wave lines
+                    color: [0.300,0.300,0.300] # colors the wave lines
 
-        # lakes:
-        #     draw:
-        #         waves:
-        #             color: [0.500,0.500,0.500]
+        lakes:
+            draw:
+                waves:
+                    color: [0.300,0.300,0.300]
 
-        # other-water-areas:
-        #     draw:
-        #         waves:
-        #             color: [0.800,0.800,0.800]
+        other-water-areas:
+            draw:
+                waves:
+                    color: [0.300,0.300,0.300]
 
         swimming_pool:
             draw:
@@ -61,6 +61,19 @@ layers:
                         text-blend-order:
                             font:
                                 fill: global.lightest_color
+                                stroke: { color: global.light_color, width: 3 }
+            water-line-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.lightest_color
+
+    roads:
+        railway:
+            draw:
+                railway_dash:
+                    color: global.white_color
+                    width: [[12, 0px], [12, 0.5px], [15, 0.5px], [18, 2px], [20, 1m]]
 
     buildings:
         draw:
@@ -81,14 +94,14 @@ styles:
         shaders:
             uniforms:
                 # we shouldn't need to set a new texture, but relative paths...
-                u_tex_grid: building-grid
+                u_tex_grid: building-grid2
                 u_grid_color: global.black_color
 
     waves:
         shaders:
             uniforms:
                 u_lighter: [0.000,0.000,0.000] #global.lighter_color
-                u_lightest: [0.180,0.180,0.180] #global.lightest_color
+                u_lightest: [0.200,0.200,0.200] #global.lightest_color
 
 
     pixel-pattern-light:
@@ -102,9 +115,15 @@ styles:
             uniforms:
                 u_tint: [0.90,0.90,0.90] #global.lightest_color
 
+    railway_dash:
+        base: lines
+        dash: [0.5, 2.0]
+        dash_background_color: [0.250,0.250,0.250]
+
+
 
 
 textures:
     # we shouldn't need to set a new texture, but relative paths...
-    building-grid:
-        url: ../images/building-grid.gif
+    building-grid2:
+        url: ../images/building-grid3.gif
