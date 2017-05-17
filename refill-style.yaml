@@ -3676,34 +3676,6 @@ layers:
                             fill: global.mid_color
                             transform: uppercase
 
-        # city_walls:
-        #     filter: { kind: city_wall }
-        #     draw:
-        #         lines:
-        #             order: 8
-        #             color: global.city_wall
-        #             width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
-        retaining_wall:
-            filter: { kind: retaining_wall }
-            draw:
-                lines:
-                    color: global.lightest_color
-                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-        # snow_fence:
-        #     filter: { kind: snow_fence }
-        #     draw:
-        #         lines:
-        #             order: 8
-        #             color: [1.0,0.0,0.0] # global.snow_fence
-        #             width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-
-        fence:
-            filter: { kind: fence }
-            draw:
-                lines:
-                    color: global.white_color
-                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 1m]]
-
     places:
         data: { source: mapzen, layer: places }
         filter:
@@ -5702,6 +5674,33 @@ layers:
                         color: global.lighter_color
                         visible: true
 
+        # city_walls:
+        #     filter: { kind: city_wall }
+        #     draw:
+        #         lines:
+        #             order: 8
+        #             color: global.city_wall
+        #             width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
+        retaining_wall:
+            filter: { kind: retaining_wall }
+            draw:
+                lines:
+                    color: global.lightest_color
+                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
+        # snow_fence:
+        #     filter: { kind: snow_fence }
+        #     draw:
+        #         lines:
+        #             order: 8
+        #             color: [1.0,0.0,0.0] # global.snow_fence
+        #             width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
+
+        fence:
+            filter: { kind: fence }
+            draw:
+                lines:
+                    color: global.white_color
+                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 1m]]
 
 #    transit-bus-roads:
 #        data: { source: mapzen, layer: roads }
