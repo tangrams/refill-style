@@ -101,8 +101,11 @@ layers:
                     color: [0.157,0.890,0.412]
                 lines:
                     color: [1.00,1.00,1.00]
-        in_university:
-            filter: { landuse_kind: [university,school] }
+        university:
+            filter:
+                any:
+                    - kind_detail: school
+                    - landuse_kind: [university,school]
             draw:
                 polygons:
                     color: [0.161,0.773,0.965]
