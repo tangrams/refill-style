@@ -5320,6 +5320,8 @@ layers:
             polygons:
                 order: global.feature_order
                 visible: false
+            lines:
+                order: global.feature_order
 
 
         landuse-labels:
@@ -5341,169 +5343,168 @@ layers:
                         size: 11px
                         stroke: { color: global.white_color, width: 1 }
 
-        tier1:
-            national_park:
+        #tier1:
+        national_park:
+            filter:
+                all:
+                    - kind: [national_park, battlefield, protected_area]
+                any:
+                    - not: { operator: [ "United States Forest Service" ] }
+                    - protect_class: ['2','3','5']
+            draw:
+                dots:
+                    color: global.lighter_color
+                    order: 18
+                    visible: true
+            us_national_park:
+                # yosemite national park, death valley national park, grand canyon national park
                 filter:
-                    all:
-                        - kind: [national_park, battlefield, protected_area]
                     any:
-                        - not: { operator: [ "United States Forest Service" ] }
+                        - operator: [ "United States National Park Service" ]
                         - protect_class: ['2','3','5']
                 draw:
-                    dots:
-                        color: global.lighter_color
-                        order: 18
+                    pixel-pattern-light:
                         visible: true
-                us_national_park:
-                    # yosemite national park, death valley national park, grand canyon national park
-                    filter:
-                        any:
-                            - operator: [ "United States National Park Service" ]
-                            - protect_class: ['2','3','5']
-                    draw:
-                        pixel-pattern-light:
-                            visible: true
 
-        tier2:
-
+        #tier2:
             # effectively wilderness
-            conservation:
-                filter:
-                    $zoom: { min: 4 }
-                    kind: [protected_area, nature_reserve, national_park]
-                    not: { protect_class: ['2','3','5']}
-                draw:
-                    pixel-pattern-light:
-                        color: global.white_color
+        conservation:
+            filter:
+                $zoom: { min: 4 }
+                kind: [protected_area, nature_reserve, national_park]
+                not: { protect_class: ['2','3','5']}
+            draw:
+                pixel-pattern-light:
+                    color: global.white_color
+                    visible: true
+
+        national_forest_level_6:
+            filter:
+                all:
+                    - kind: forest
+                any:
+                    - protect_class: ['6']
+                    - operator: ['United States Forest Service']
+            draw:
+                pixel-pattern-bright:
+                    color: global.lighter_color
+                    visible: true
+
+        forest-landcover:
+            filter: { kind: [forest, natural_forest, wood, natural_wood, natural_park], $zoom: { min: 10 }, not: { operator: "United States Forest Service" } }
+            draw:
+                pixel-pattern-light:
                         visible: true
 
-            national_forest_level_6:
+        parks-and-national-forests-not-national-park:
+            filter:
+                all:
+                    - $zoom: { min: 4 }
+                    - kind: [park, national_park]
+                any:
+                    - not: { operator: [ "United States National Park Service", "United States Forest Service" ] }
+                    - not: { protect_class: ['2','3','5','6'] }
+            # default for national forests and more?
+            draw:
+                dots:
+                    color: global.lighter_color
+                    visible: true
+            national_park:
+                #filter: function() { return feature.name && (feature.name.indexOf('National Park') > -1); }
                 filter:
                     all:
-                        - kind: forest
-                    any:
-                        - protect_class: ['6']
-                        - operator: ['United States Forest Service']
-                draw:
-                    pixel-pattern-bright:
-                        color: global.lighter_color
-                        visible: true
-
-            forest-landcover:
-                filter: { kind: [forest, natural_forest, wood, natural_wood, natural_park], $zoom: { min: 10 }, not: { operator: "United States Forest Service" } }
+                        - kind: national_park
+                        - not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
                 draw:
                     pixel-pattern-light:
-                            visible: true
-
-            parks-and-national-forests-not-national-park:
-                filter:
-                    all:
-                        - $zoom: { min: 4 }
-                        - kind: [park, national_park]
-                    any:
-                        - not: { operator: [ "United States National Park Service", "United States Forest Service" ] }
-                        - not: { protect_class: ['2','3','5','6'] }
-                # default for national forests and more?
-                draw:
-                    dots:
-                        color: global.lighter_color
-                        visible: true
-                national_park:
-                    #filter: function() { return feature.name && (feature.name.indexOf('National Park') > -1); }
-                    filter:
-                        all:
-                            - kind: national_park
-                            - not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
-                    draw:
-                        pixel-pattern-light:
-                            visible: true
-
-            # gotta be a protected area to draw green, not just a landcover type
-            farm:
-                filter:
-                    kind: [farm, farmland]
-                    $zoom: { min: 10}
-                draw:
-                    tiny-dots:
-                        color: global.offwhite_color
                         visible: true
 
-        tier3:
-            university:
-                filter:
-                    kind: [university, college]
-                draw:
-                    dots-rev:
-                        color: global.lightest_color
-                        visible: true
-        tier4:
-            cemetery:
-                filter:
-                    kind: cemetery
-                draw:
-                    tiny-dots:
-                        color: global.lighter_color
-                        visible: true
-            golf_course:
-                filter:
-                    kind: golf_course
-                draw:
-                    medium-dots:
-                        color: global.lighter_color
-                        visible: true
-            hospital:
-                filter:
-                    kind: hospital
-                draw:
-                    medium-dots:
-                        color: global.lightest_color
-                        visible: true
-            sports_centre:
-                filter:
-                    kind: sports_centre
-                draw:
-                    dots-rev-grid:
-                        color: global.offwhite_color
-            recreation_ground:
-                filter:
-                    kind: recreation_ground
-                draw:
-                    dots-rev-grid:
-                        color: global.offwhite_color
-                        visible: true
-            stadium:
-                filter:
-                    kind: stadium
-                draw:
-                    dots-rev-grid:
-                        color: global.offwhite_color
-                        visible: true
-            zoo:
-                filter:
-                    kind: [zoo, wildlife_park]
-                draw:
-                    tiny-dots:
-                        color: global.offwhite_color
-                        visible: true
-            winter_sports:
-                filter:
-                    kind: winter_sports
+        # gotta be a protected area to draw green, not just a landcover type
+        farm:
+            filter:
+                kind: [farm, farmland]
+                $zoom: { min: 10}
+            draw:
+                tiny-dots:
+                    color: global.offwhite_color
+                    visible: true
+
+        #tier3:
+        university:
+            filter:
+                kind: [university, college]
+            draw:
+                dots-rev:
+                    color: global.lightest_color
+                    visible: true
+        #tier4:
+        cemetery:
+            filter:
+                kind: cemetery
+            draw:
+                tiny-dots:
+                    color: global.lighter_color
+                    visible: true
+        golf_course:
+            filter:
+                kind: golf_course
+            draw:
+                medium-dots:
+                    color: global.lighter_color
+                    visible: true
+        hospital:
+            filter:
+                kind: hospital
+            draw:
+                medium-dots:
+                    color: global.lightest_color
+                    visible: true
+        sports_centre:
+            filter:
+                kind: sports_centre
+            draw:
+                dots-rev-grid:
+                    color: global.offwhite_color
+        recreation_ground:
+            filter:
+                kind: recreation_ground
+            draw:
+                dots-rev-grid:
+                    color: global.offwhite_color
+                    visible: true
+        stadium:
+            filter:
+                kind: stadium
+            draw:
+                dots-rev-grid:
+                    color: global.offwhite_color
+                    visible: true
+        zoo:
+            filter:
+                kind: [zoo, wildlife_park]
+            draw:
+                tiny-dots:
+                    color: global.offwhite_color
+                    visible: true
+        winter_sports:
+            filter:
+                kind: winter_sports
+            draw:
+                polygons:
+                    color: [[9, global.white_color], [20, global.offwhite_color]]
+                    visible: true
+        man-made:
+            filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
+            draw:
+                horizontal-bars:
+                    color: global.lightest_color
+                    visible: true
+            pier:
+                filter: { kind: [pier,bridge,breakwater,groyne,dike,cutline] }
                 draw:
                     polygons:
-                        color: [[9, global.white_color], [20, global.offwhite_color]]
+                        color: global.offwhite_color
                         visible: true
-            man-made:
-                filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
-                draw:
-                    horizontal-bars:
-                        color: global.lightest_color
-                        visible: true
-                pier:
-                    filter: { kind: [pier,bridge,breakwater,groyne,dike,cutline] }
-                    draw:
-                        polygons:
-                            color: global.offwhite_color
-                            visible: true
         tier5:
             filter:
                 all:
@@ -5533,81 +5534,80 @@ layers:
                     dots:
                         color: global.lightest_color
                         visible: true
-        tier6:
-            garden:
-                filter:
-                    kind: garden
-                draw:
-                    tiny-dots:
-                        color: global.light_color
-                        visible: true
-            parking:
-                filter:
-                    all:
-                        - kind: parking
-                        - $zoom: { min: 14 }
-                    any:
-                        - { $zoom: { min: 14 }, area: { min: 10000 } }
-                        - { $zoom: { min: 15 }, area: { min: 5000 } }
+        #tier6:
+        garden:
+            filter:
+                kind: garden
+            draw:
+                tiny-dots:
+                    color: global.light_color
+                    visible: true
+        parking:
+            filter:
+                all:
+                    - kind: parking
+                    - $zoom: { min: 14 }
+                any:
+                    - { $zoom: { min: 14 }, area: { min: 10000 } }
+                    - { $zoom: { min: 15 }, area: { min: 5000 } }
+            draw:
+                horizontal-bars-rev:
+                    color: global.ultralight_color
+                    visible: true
+            early:
+                filter: { $zoom: { max: 15 } }
                 draw:
                     horizontal-bars-rev:
-                        color: global.ultralight_color
-                        visible: true
-                early:
-                    filter: { $zoom: { max: 15 } }
-                    draw:
-                        horizontal-bars-rev:
-                            color: global.offwhite_color
-                            visible: true
-            pedestrian:
-                filter:
-                    kind: [pedestrian,common]
-                draw:
-                    dots:
                         color: global.offwhite_color
                         visible: true
-                green-stuff:
-                    filter:
-                        surface: [grass]
-                    draw:
-                        dots:
-                            color: global.lighter_color
-            pitch:
-                filter: { kind: pitch }
-                draw:
-                    tiny-dots:
-                        color: global.lightest_color
-                        visible: true
-                    outline:
-                        style: lines
-                        color: global.ultralight_color
-                        order: global.feature_order
-                        width: [[14, 0px], [15, 1px], [18, 2px]]
-            playground:
+        pedestrian:
+            filter:
+                kind: [pedestrian,common]
+            draw:
+                dots:
+                    color: global.offwhite_color
+                    visible: true
+            green-stuff:
                 filter:
-                    kind: playground
-                draw:
-                    dots-rev:
-                        color: global.ultralight_color
-                        visible: true
-            school:
-                filter:
-                    kind: school
-                draw:
-                    dots-rev:
-                        color: global.offwhite_color
-                        visible: true
-            minor-landuse:
-                filter:
-                    kind:
-                        - attraction
-                        - artwork
-                        - wilderness_hut
-                        - hanami
+                    surface: [grass]
                 draw:
                     dots:
-                        color: global.light_color
-                        visible: true
+                        color: global.lighter_color
+        pitch:
+            filter: { kind: pitch }
+            draw:
+                tiny-dots:
+                    color: global.lightest_color
+                    visible: true
+                outline:
+                    style: lines
+                    color: global.ultralight_color
+                    width: [[14, 0px], [15, 1px], [18, 2px]]
+        playground:
+            filter:
+                kind: playground
+            draw:
+                dots-rev:
+                    color: global.ultralight_color
+                    visible: true
+        school:
+            filter:
+                kind: school
+            draw:
+                dots-rev:
+                    color: global.offwhite_color
+                    visible: true
+        minor-landuse:
+            filter:
+                kind:
+                    - attraction
+                    - artwork
+                    - wilderness_hut
+                    - hanami
+            draw:
+                dots:
+                    color: global.light_color
+                    visible: true
 
         landuse-not-filtered:
             # runways and taxiways are also in the roads layer as lines
@@ -5699,8 +5699,8 @@ layers:
             filter: { kind: fence }
             draw:
                 lines:
-                    color: global.white_color
-                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 1m]]
+                    color: global.lightest_color
+                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [19, 0.5m]]
 
 #    transit-bus-roads:
 #        data: { source: mapzen, layer: roads }
