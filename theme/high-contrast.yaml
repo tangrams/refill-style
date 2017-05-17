@@ -93,8 +93,6 @@ styles:
     building-grid:
         shaders:
             uniforms:
-                # we shouldn't need to set a new texture, but relative paths...
-                u_tex_grid: building-grid3
                 u_grid_color: global.black_color
 
     waves:
@@ -119,11 +117,3 @@ styles:
         base: lines
         dash: [0.5, 2.0]
         dash_background_color: [0.250,0.250,0.250]
-
-
-
-
-textures:
-    # we shouldn't need to set a new texture, but relative paths...
-    building-grid3:
-        url: ../images/building-grid3.gif
