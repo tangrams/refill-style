@@ -38,10 +38,32 @@ layers:
                 waves:
                     color: [0.247,0.812,0.847]
 
+        water-boundary-ocean:
+            draw:
+                coast:
+                    color: [0.000,0.416,1.000]
+
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    color: [0.000,0.416,1.000]
+            riverbank:
+                draw:
+                    coast:
+                        color: [0.000,0.416,1.000]
+                        width: [[9, 0.5px], [11, 1px], [14, 2px], [15, 4px]]
+
+    roads:
+        pier:
+            draw:
+                lines:
+                    outline:
+                        color: [0.000,0.416,1.000]
+
     buildings:
         draw:
             polygons:
-                color: [0.920,0.920,0.920]
+                color: [0.820,0.820,0.820]
             lines:
                 color: [1.00,1.00,1.00]
 
@@ -51,6 +73,22 @@ layers:
             draw:
                 polygons:
                     color: red
+
+        church:
+            filter: { kind_detail: church }
+            draw:
+                polygons:
+                    color: [0.00,0.00,0.00]
+                lines:
+                    color: [1.00,1.00,1.00]
+
+        commercial:
+            filter: { kind_detail: commercial }
+            draw:
+                polygons:
+                    color: [1.000,0.600,0.122]
+                lines:
+                    color: [1.00,1.00,1.00]
 
         in_park:
             filter:
@@ -93,7 +131,7 @@ layers:
             extrude:
                 draw:
                     polygons:
-                        color: [0.920,0.920,0.920]
+                        color: [0.820,0.820,0.820]
                     lines:
                         color: [1.00,1.00,1.00]
 
@@ -103,6 +141,22 @@ layers:
                 draw:
                     polygons:
                         color: red
+
+                church:
+                    filter: { kind_detail: church, landuse_kind: place_of_worship }
+                    draw:
+                        polygons:
+                            color: [0.00,0.00,0.00]
+                        lines:
+                            color: [1.00,1.00,1.00]
+
+                commercial:
+                    filter: { kind_detail: commercial }
+                    draw:
+                        polygons:
+                            color: [1.000,0.600,0.122]
+                        lines:
+                            color: [1.00,1.00,1.00]
 
             in_park:
                 filter:
@@ -152,3 +206,24 @@ styles:
             uniforms:
                 u_lighter: [0.850,0.850,0.850] #global.lighter_color
                 u_lightest: [0.950,0.950,0.950] #global.lightest_color
+
+    coast:
+        base: lines
+        mix: [space-constant]
+        blend: overlay
+        shaders:
+            blocks:
+                global: |
+                    mat2 rotate2d(float angle){
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+
+                    float stripes(vec2 st){
+                        st = rotate2d(3.14159265358*-0.25 )*st;
+                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
+                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
+                    }
+                color: |
+                    vec2 st = getConstantCoords();
+                    color = mix(vec4(color.rgb, 0.4), vec4(0.0), stripes(st*130.))*.9; // transparent stripes
