@@ -3449,7 +3449,7 @@ layers:
                         order: 438
                         style: building-grid
                         extrude: global.building_extrude_height
-                        color: global.white_color
+                        # color: global.white_color
                     lines:
                         visible: true
                         order: 439

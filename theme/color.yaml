@@ -67,15 +67,18 @@ layers:
             lines:
                 color: [1.00,1.00,1.00]
 
-        kind_detail:
-            filter:
-                kind_detail: true
-            draw:
-                polygons:
-                    color: red
+        # kind_detail:
+        #     filter:
+        #         kind_detail: true
+        #     draw:
+        #         polygons:
+        #             color: red
 
         church:
-            filter: { kind_detail: church }
+            filter:
+                any:
+                    - kind_detail: church
+                    - landuse_kind: place_of_worship
             draw:
                 polygons:
                     color: [0.00,0.00,0.00]
@@ -86,7 +89,7 @@ layers:
             filter: { kind_detail: commercial }
             draw:
                 polygons:
-                    color: [1.000,0.600,0.122]
+                    color: [1.000,0.502,0.290]
                 lines:
                     color: [1.00,1.00,1.00]
 
@@ -127,73 +130,76 @@ layers:
                 lines:
                     color: [1.00,1.00,1.00]
 
-        footprints:
-            extrude:
-                draw:
-                    polygons:
-                        color: [0.820,0.820,0.820]
-                    lines:
-                        color: [1.00,1.00,1.00]
+        # footprints:
+            #extrude:
+                # draw:
+                #     polygons:
+                #         color: [0.820,0.820,0.820]
+                #     lines:
+                #         color: [1.00,1.00,1.00]
 
-            kind_detail:
-                filter:
-                    kind_detail: true
-                draw:
-                    polygons:
-                        color: red
+            # kind_detail:
+            #     filter:
+            #         kind_detail: true
+            #     draw:
+            #         polygons:
+            #             color: red
 
-                church:
-                    filter: { kind_detail: church, landuse_kind: place_of_worship }
-                    draw:
-                        polygons:
-                            color: [0.00,0.00,0.00]
-                        lines:
-                            color: [1.00,1.00,1.00]
+            # church:
+            #     filter:
+            #         any:
+            #             - kind_detail: church
+            #             - landuse_kind: place_of_worship
+            #     draw:
+            #         polygons:
+            #             color: [0.00,0.00,0.00]
+            #         lines:
+            #             color: [1.00,1.00,1.00]
 
-                commercial:
-                    filter: { kind_detail: commercial }
-                    draw:
-                        polygons:
-                            color: [1.000,0.600,0.122]
-                        lines:
-                            color: [1.00,1.00,1.00]
+            # commercial:
+            #     filter: { kind_detail: commercial }
+            #     draw:
+            #         polygons:
+            #             color: [1.000,0.502,0.290]
+            #         lines:
+            #             color: [1.00,1.00,1.00]
 
-            in_park:
-                filter:
-                    landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden]
-                draw:
-                    polygons:
-                        color: [0.157,0.890,0.412]
-                    lines:
-                        color: [1.00,1.00,1.00]
-            in_university:
-                filter: { landuse_kind: [university,school] }
-                draw:
-                    polygons:
-                        color: [0.161,0.773,0.965]
-                    lines:
-                        color: [1.00,1.00,1.00]
-            in_hospital:
-                filter: { landuse_kind: hospital }
-                draw:
-                    polygons:
-                        color: [1.000,0.404,0.839]
-                    lines:
-                        color: [1.00,1.00,1.00]
-            in_retail:
-                filter: { landuse_kind: retail }
-                draw:
-                    polygons:
-                        color: [1.000,0.600,0.122]
-                    lines:
-                        color: [1.00,1.00,1.00]
-            in_airport:
-                filter: { landuse_kind: [aerodrome, runway, taxiway] }
-                draw:
-                    polygons:
-                        color: [0.498,0.302,1.000]
-                    lines:
-                        color: [1.00,1.00,1.00]
+            # in_park:
+            #     filter:
+            #         landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden]
+            #     draw:
+            #         polygons:
+            #             color: [0.157,0.890,0.412]
+            #         lines:
+            #             color: [1.00,1.00,1.00]
+            # in_university:
+            #     filter: { landuse_kind: [university,school] }
+            #     draw:
+            #         polygons:
+            #             color: [0.161,0.773,0.965]
+            #         lines:
+            #             color: [1.00,1.00,1.00]
+            # in_hospital:
+            #     filter: { landuse_kind: hospital }
+            #     draw:
+            #         polygons:
+            #             color: [1.000,0.404,0.839]
+            #         lines:
+            #             color: [1.00,1.00,1.00]
+            # in_retail:
+            #     filter: { landuse_kind: retail }
+            #     draw:
+            #         polygons:
+            #             color: [1.000,0.600,0.122]
+            #         lines:
+            #             color: [1.00,1.00,1.00]
+            # in_airport:
+            #     filter: { landuse_kind: [aerodrome, runway, taxiway] }
+            #     draw:
+            #         polygons:
+            #             color: [0.498,0.302,1.000]
+            #         lines:
+            #             color: [1.00,1.00,1.00]
 
 styles:
     building-grid:
@@ -227,3 +233,7 @@ styles:
                 color: |
                     vec2 st = getConstantCoords();
                     color = mix(vec4(color.rgb, 0.4), vec4(0.0), stripes(st*130.))*.9; // transparent stripes
+
+textures:
+    building-grid:
+        url: ../images/building-grid-bold.gif
