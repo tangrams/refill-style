@@ -14,12 +14,43 @@ global:
     route_line:                 [0.000,0.500,1.000]
 
 layers:
+    water:
+        draw:
+            waves:
+                color: [0.850,0.850,0.850] # colors the wave lines
+        later:
+            draw:
+                waves:
+                    color: [0.850,0.850,0.850] # colors the wave lines
+
+        lakes:
+            draw:
+                waves:
+                    color: [0.850,0.850,0.850]
+
+        other-water-areas:
+            draw:
+                waves:
+                    color: [0.850,0.850,0.850]
+
+        swimming_pool:
+            draw:
+                waves:
+                    color: [0.247,0.812,0.847]
+
     buildings:
         draw:
             polygons:
-                color: [0.850,0.850,0.850]
+                color: [0.920,0.920,0.920]
             lines:
                 color: [1.00,1.00,1.00]
+
+        kind_detail:
+            filter:
+                kind_detail: true
+            draw:
+                polygons:
+                    color: red
 
         in_park:
             filter:
@@ -33,7 +64,7 @@ layers:
             filter: { landuse_kind: [university,school] }
             draw:
                 polygons:
-                    color: [0.435,0.545,0.988]
+                    color: [0.161,0.773,0.965]
                 lines:
                     color: [1.00,1.00,1.00]
         in_hospital:
@@ -62,9 +93,16 @@ layers:
             extrude:
                 draw:
                     polygons:
-                        color: [0.850,0.850,0.850]
+                        color: [0.920,0.920,0.920]
                     lines:
                         color: [1.00,1.00,1.00]
+
+            kind_detail:
+                filter:
+                    kind_detail: true
+                draw:
+                    polygons:
+                        color: red
 
             in_park:
                 filter:
@@ -78,7 +116,7 @@ layers:
                 filter: { landuse_kind: [university,school] }
                 draw:
                     polygons:
-                        color: [0.435,0.545,0.988]
+                        color: [0.161,0.773,0.965]
                     lines:
                         color: [1.00,1.00,1.00]
             in_hospital:
@@ -110,6 +148,12 @@ styles:
                 # we shouldn't need to set a new texture, but relative paths...
                 u_tex_grid: building-grid
                 u_grid_color: global.white_color
+
+    waves:
+        shaders:
+            uniforms:
+                u_lighter: [0.850,0.850,0.850] #global.lighter_color
+                u_lightest: [0.950,0.950,0.950] #global.lightest_color
 
 textures:
     # we shouldn't need to set a new texture, but relative paths...
