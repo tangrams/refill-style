@@ -117,3 +117,7 @@ styles:
         base: lines
         dash: [0.5, 2.0]
         dash_background_color: [0.250,0.250,0.250]
+
+textures:
+    building-grid:
+        url: ../images/building-grid3.gif

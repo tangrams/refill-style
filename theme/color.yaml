@@ -145,8 +145,6 @@ styles:
     building-grid:
         shaders:
             uniforms:
-                # we shouldn't need to set a new texture, but relative paths...
-                u_tex_grid: building-grid
                 u_grid_color: global.white_color
 
     waves:
@@ -154,8 +152,3 @@ styles:
             uniforms:
                 u_lighter: [0.850,0.850,0.850] #global.lighter_color
                 u_lightest: [0.950,0.950,0.950] #global.lightest_color
-
-textures:
-    # we shouldn't need to set a new texture, but relative paths...
-    building-grid:
-        url: ../images/building-grid.gif
