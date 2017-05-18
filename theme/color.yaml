@@ -299,6 +299,7 @@ styles:
     building-grid:
         shaders:
             uniforms:
+                u_tex_grid: building-grid
                 u_grid_color: [0.50,0.50,0.50]
 
     building-grid-white:
@@ -308,7 +309,7 @@ styles:
         texcoords: true
         shaders:
             uniforms:
-                u_tex_grid: building-grid
+                u_tex_grid: building-grid-bold
                 u_grid_color: global.white_color
             defines:
                 WALL_TINT: vec3(1., 3., .993)
@@ -353,4 +354,7 @@ styles:
 
 textures:
     building-grid:
+        url: ../images/building-grid.gif
+
+    building-grid-bold:
         url: ../images/building-grid-bold.gif
