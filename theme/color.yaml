@@ -17,21 +17,21 @@ layers:
     water:
         draw:
             waves:
-                color: [0.850,0.850,0.850]
+                color: [0.782,0.834,0.850]
         later:
             draw:
                 waves:
-                    color: [0.850,0.850,0.850]
+                    color: [0.782,0.834,0.850]
 
         lakes:
             draw:
                 waves:
-                    color: [0.850,0.850,0.850]
+                    color: [0.782,0.834,0.850]
 
         other-water-areas:
             draw:
                 waves:
-                    color: [0.850,0.850,0.850]
+                    color: [0.782,0.834,0.850]
 
         swimming_pool:
             draw:
@@ -68,9 +68,9 @@ layers:
     buildings:
         draw:
             polygons:
-                color: [0.800,0.800,0.800]
-            lines:
                 color: [1.00,1.00,1.00]
+            lines:
+                color: [0.50,0.50,0.50]
 
         # kind_detail:
         #     filter:
@@ -78,112 +78,118 @@ layers:
         #     draw:
         #         polygons:
         #             color: red
+        colored-buildings:
+            draw:
+                polygons:
+                    style: building-grid-white
+                lines:
+                    style: lines
 
-        church:
-            filter:
-                any:
-                    - kind_detail: [church,temple,cathedral]
-                    - landuse_kind: place_of_worship
-            draw:
-                polygons:
-                    color: [0.00,0.00,0.00]
-                lines:
-                    color: [1.00,1.00,1.00]
+            church:
+                filter:
+                    any:
+                        - kind_detail: [church,temple,cathedral]
+                        - landuse_kind: place_of_worship
+                draw:
+                    polygons:
+                        color: [0.00,0.00,0.00]
+                    lines:
+                        color: [1.00,1.00,1.00]
 
-        public:
-            filter:
-                kind_detail: public
-            draw:
-                polygons:
-                    color: [0.263,0.188,0.439]
-                lines:
-                    color: [0.631,0.988,0.631]
+            public:
+                filter:
+                    kind_detail: public
+                draw:
+                    polygons:
+                        color: [0.263,0.188,0.439]
+                    lines:
+                        color: [1.00,1.00,1.00]
 
-        in_park:
-            filter:
-                landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden,zoo]
-            draw:
-                polygons:
-                    color: [0.157,0.890,0.412]
-                lines:
-                    color: [1.00,1.00,1.00]
-        university:
-            filter:
-                any:
-                    - kind_detail: [school,college,university,kindergarten]
-                    - landuse_kind: [university,school]
-            draw:
-                polygons:
-                    color: [0.161,0.773,0.965]
-                lines:
-                    color: [1.00,1.00,1.00]
-        library:
-            filter:
-                any:
-                    - kind_detail: library
-                    - landuse_kind: library
-            draw:
-                polygons:
-                    color: [0.965,0.914,0.341]
-                lines:
-                    color: [1.00,1.00,1.00]
-        hospital:
-            filter:
-                any:
-                    - kind_detail: hospital
-                    - landuse_kind: hospital
-            draw:
-                polygons:
-                    color: [1.000,0.000,0.000]
-                lines:
-                    color: [1.00,1.00,1.00]
-        retail:
-            filter:
-                any:
-                    - kind_detail: [commercial,retail,shop,supermarket]
-                    - landuse_kind: retail
-            draw:
-                polygons:
-                    color: [1.000,0.404,0.839]
-                lines:
-                    color: [1.00,1.00,1.00]
-        airport:
-            filter: { landuse_kind: [aerodrome, runway, taxiway] }
-            draw:
-                polygons:
-                    color: [0.498,0.302,1.000]
-                lines:
-                    color: [1.00,1.00,1.00]
+            in_park:
+                filter:
+                    landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden,zoo]
+                draw:
+                    polygons:
+                        color: [0.157,0.890,0.412]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            university:
+                filter:
+                    any:
+                        - kind_detail: [school,college,university,kindergarten]
+                        - landuse_kind: [university,school]
+                draw:
+                    polygons:
+                        color: [0.161,0.773,0.965]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            library:
+                filter:
+                    any:
+                        - kind_detail: library
+                        - landuse_kind: library
+                draw:
+                    polygons:
+                        color: [0.965,0.914,0.341]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            hospital:
+                filter:
+                    any:
+                        - kind_detail: hospital
+                        - landuse_kind: hospital
+                draw:
+                    polygons:
+                        color: [1.000,0.000,0.000]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            retail:
+                filter:
+                    any:
+                        - kind_detail: [commercial,retail,shop,supermarket]
+                        - landuse_kind: retail
+                draw:
+                    polygons:
+                        color: [1.000,0.404,0.839]
+                    lines:
+                        color: [1.00,1.00,1.00]
+            airport:
+                filter: { landuse_kind: [aerodrome, runway, taxiway] }
+                draw:
+                    polygons:
+                        color: [0.498,0.302,1.000]
+                    lines:
+                        color: [1.00,1.00,1.00]
 
-        train-station:
-            filter:
-                any:
-                    - kind_detail: [train_station,transportation,station,shrine,monastery]
-            draw:
-                polygons:
-                    color: [0.498,0.302,1.000]
-                lines:
-                    color: [1.00,1.00,1.00]
+            train-station:
+                filter:
+                    any:
+                        - kind_detail: [train_station,transportation,station,shrine,monastery]
+                draw:
+                    polygons:
+                        color: [0.498,0.302,1.000]
+                    lines:
+                        color: [1.00,1.00,1.00]
 
-        industrial:
-            filter:
-                any:
-                    - kind_detail: [industrial,factory]
-                    - landuse_kind: industrial
-            draw:
-                polygons:
-                    color: [0.600,0.600,0.600]
-                lines:
-                    color: [1.00,1.00,1.00]
+            industrial:
+                filter:
+                    any:
+                        - kind_detail: [industrial,factory]
+                        - landuse_kind: industrial
+                draw:
+                    polygons:
+                        color: [0.600,0.600,0.600]
+                    lines:
+                        color: [1.00,1.00,1.00]
 
-        castle:
-            filter:
-                kind_detail: [castle,museum]
-            draw:
-                polygons:
-                    color: [0.976,0.890,0.212]
-                lines:
-                    color: [1.00,1.00,1.00]
+            castle:
+                filter:
+                    kind_detail: [castle,museum]
+                draw:
+                    polygons:
+                        color: [0.976,0.890,0.212]
+                    lines:
+                        color: [1.00,1.00,1.00]
 
         # footprints:
             #extrude:
@@ -293,12 +299,30 @@ styles:
     building-grid:
         shaders:
             uniforms:
-                u_grid_color: [1.00,1.00,1.00]
+                u_grid_color: [0.50,0.50,0.50]
+
+    building-grid-white:
+        base: polygons
+        lighting: false
+        mix: [scale-buildings]
+        texcoords: true
+        shaders:
+            uniforms:
+                u_tex_grid: building-grid
+                u_grid_color: global.white_color
+            defines:
+                WALL_TINT: vec3(1., 3., .993)
+            blocks:
+                color: |
+                    // If it's a wall
+                    color.rgb = mix(mix(color.rgb, u_grid_color.rgb, texture2D(u_tex_grid, v_texcoord).a),
+                                    color.rgb,
+                                    step(.5,dot(vec3(0., 0., 1.), worldNormal())));
 
     waves:
         shaders:
             uniforms:
-                u_lighter: [0.850,0.850,0.850] #global.lighter_color
+                u_lighter: [0.782,0.834,0.850] #global.lighter_color
                 u_lightest: [0.950,0.950,0.950] #global.lightest_color
 
     coast:
