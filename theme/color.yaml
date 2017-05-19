@@ -72,6 +72,23 @@ layers:
 
 
     roads:
+        minor_road:
+            filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
+            draw:
+                lines:
+                    color: [[11, global.offwhite_color], [15, [0.757,0.685,0.588]], [16, global.white_color]]
+                    width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 0.1px], [17, 3.5px], [18, 9m]]
+                    outline:
+                        color: [[11, global.white_color], [14, global.white_color], [15, [0.757,0.685,0.588]], [17, [0.682,0.617,0.530]]]
+                        width: [[11, 0px], [15, 0px], [16, 0.75px], [17, 1.5px], [18, 1.5px]]
+        service_road:
+            draw:
+                lines:
+                    color: [[13, global.offwhite_color], [15, [0.757,0.685,0.588]], [16, global.white_color]]
+                    width: [[13, 0px], [15, 0.75px], [16, 0.1px], [17, 2.5px], [18, 5m]]
+                    outline:
+                        color: [[13, global.white_color], [14, global.white_color], [15, [0.757,0.685,0.588]], [18, [0.682,0.617,0.530]]]
+                        width: [[13, 0px], [15, 0px], [16, 1px], [19, 1.5px]]
         path:
             in_park:
                 # should `forest` and `wood` be included?
@@ -112,7 +129,7 @@ layers:
             polygons:
                 color: [1.00,1.00,1.00]
             lines:
-                color: [0.50,0.50,0.50]
+                color: [0.757,0.685,0.588]
 
         # kind_detail:
         #     filter:
@@ -347,7 +364,7 @@ styles:
         shaders:
             uniforms:
                 u_tex_grid: building-grid
-                u_grid_color: [0.50,0.50,0.50]
+                u_grid_color: [0.757,0.685,0.588]
 
     building-grid-white:
         base: polygons
