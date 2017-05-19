@@ -237,7 +237,7 @@ layers:
                         - landuse_kind: industrial
                 draw:
                     polygons:
-                        color: [0.600,0.600,0.600]
+                        color: [0.756,0.813,0.850]
                     lines:
                         color: [1.00,1.00,1.00]
 
