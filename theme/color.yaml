@@ -72,13 +72,6 @@ layers:
 
 
     roads:
-        highway:
-            tunnel:
-                draw:
-                    lines:
-                        color: [[13, [0.750,0.708,0.652]], [14, global.offwhite_color]]
-                        outline:
-                            color: [[12, global.white_color], [13, [0.750,0.708,0.652]]]
         path:
             in_park:
                 # should `forest` and `wood` be included?
@@ -199,7 +192,7 @@ layers:
                         - landuse_kind: retail
                 draw:
                     polygons:
-                        color: [1.000,0.404,0.839]
+                        color: [1.000,0.280,1.000]
                     lines:
                         color: [1.00,1.00,1.00]
             airport:
@@ -361,7 +354,27 @@ layers:
                 tiny-dots:
                     color: [0.000,0.847,0.408]
                 lines:
-                    color: [0.000,0.847,0.408]
+                    color: [0.000,0.951,0.460]
+                    width: 1px
+
+        pedestrian:
+            draw:
+                dots:
+                    color: [0.854,0.810,1.000]
+                lines:
+                    color: [0.854,0.810,1.000]
+                    width: 1px
+            green-stuff:
+                draw:
+                    dots:
+                        color: [0.695,1.000,0.610]
+
+        minor-landuse:
+            draw:
+                dots:
+                    color: [0.854,0.810,1.000]
+                lines:
+                    color: [0.854,0.810,1.000]
                     width: 1px
 
         landuse-not-filtered:
