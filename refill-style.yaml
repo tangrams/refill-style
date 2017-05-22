@@ -4413,34 +4413,6 @@ layers:
                             fill: [0.4,0.4,0.4]
                             transform: uppercase
 
-        # city_walls:
-        #     filter: { kind: city_wall }
-        #     draw:
-        #         lines:
-        #             order: 8
-        #             color: global.city_wall
-        #             width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
-        retaining_wall:
-            filter: { kind: retaining_wall }
-            draw:
-                lines:
-                    color: [0.90,0.90,0.90] # global.retaining_wall
-                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-        # snow_fence:
-        #     filter: { kind: snow_fence }
-        #     draw:
-        #         lines:
-        #             order: 8
-        #             color: [1.0,0.0,0.0] # global.snow_fence
-        #             width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
-
-        fence:
-            filter: { kind: fence }
-            draw:
-                lines:
-                    color: [1.0,1.0,1.0]
-                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 1m]]
-
     places:
         data: { source: mapzen, layer: places }
         filter:
@@ -6056,9 +6028,13 @@ layers:
             park-dots1:
                 order: global.feature_order
                 visible: false
+            tiny-dots:
+                order: global.feature_order
             medium-dots:
                 order: global.feature_order
                 visible: false
+            dots:
+                order: global.feature_order
             horizontal-bars:
                 order: global.feature_order
                 visible: false
@@ -6078,6 +6054,8 @@ layers:
                 order: global.feature_order
                 visible: false
             polygons:
+                order: global.feature_order
+            lines:
                 order: global.feature_order
 
         landuse-labels:
@@ -6475,7 +6453,8 @@ layers:
                         visible: true
                     outline:
                         style: lines
-                        color: global.green6
+                        order: global.feature_order
+                        color: [0.90,0.90,0.90] #global.green6
                         width: [[14,0px],[15,1px],[16,1m]]
             place_of_worship:
                 filter:
@@ -6586,6 +6565,36 @@ layers:
         #         dots:
         #             order: 1
         #             color: [[4, [1.000,0.510,0.894]], [6, [1.000,0.510,0.894]], [7, [0.882,0.639,0.827]], [8, [0.757,0.729,0.753]]]
+
+        # city_walls:
+        #     filter: { kind: city_wall }
+        #     draw:
+        #         lines:
+        #             order: 8
+        #             color: global.city_wall
+        #             width: [[12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.0px], [16, 2.5px], [19, 6m]]
+        retaining_wall:
+            filter: { kind: retaining_wall }
+            draw:
+                lines:
+                    color: [0.9, 0.9, 0.9] # global.retaining_wall
+                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 2m]]
+        # snow_fence:
+        #     filter: { kind: snow_fence }
+        #     draw:
+        #         lines:
+        #             order: 8
+        #             color: [1.0,0.0,0.0] # global.snow_fence
+        #             width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 4m]]
+
+        fence:
+            filter: { kind: fence }
+            draw:
+                lines:
+                    visible: true
+                    color: [0.8, 0.8, 0.8]
+                    width: [[14, 0.5px], [15, 1.0px], [16, 1.5px], [17, 2.0px], [19, 1m]]
+
 
 #    transit-bus-roads:
 #        data: { source: mapzen, layer: roads }
