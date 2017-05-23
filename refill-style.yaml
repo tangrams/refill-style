@@ -1317,25 +1317,21 @@ styles:
     ux-location-gem-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 2
     ux-icons-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-point-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-shield-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-line-overlay:
