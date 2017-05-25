@@ -1152,15 +1152,19 @@ styles:
         base: polygons
         mix: dots-honeycomb
         shaders:
+            defines:
+                COLOR1: vec3(1.00,1.00,1.00)
             blocks:
                 color: |
-                    color.rgb = mix(vec3(1.000), color.rgb, TileDots(35.0, 0.31));
+                    color.rgb = mix(COLOR1, color.rgb, TileDots(35.0, 0.31));
 
     horizontal-bars:
         base: polygons
         mix: [space-constant, shapes-rect]
         texcoords: false
         shaders:
+            defines:
+                COLOR1: vec3(1.0,1.0,1.0)
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
@@ -1169,7 +1173,7 @@ styles:
                 filter: |
                     vec2 pos = getConstantCoords()*50.0;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
-                    color.rgb = mix(vec3(1.0,1.0,1.0),color.rgb,pct);
+                    color.rgb = mix(COLOR1,color.rgb,pct);
 
     horizontal-bars-rev:
         base: polygons
@@ -1246,9 +1250,10 @@ styles:
         shaders:
             uniforms:
                 u_tint: global.black_color
+                u_fill: global.white_color
             blocks:
                 filter: |
-                    color.rgb = mix(u_tint, vec3(1.), color.rgb);
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
     text-blend-order:
         base: text
         blend_order: 1

@@ -409,6 +409,34 @@ styles:
                                     color.rgb,
                                     step(.5,dot(vec3(0., 0., 1.), worldNormal())));
 
+    tools:
+        base: polygons
+        shaders:
+            blocks:
+                global: |
+
+                    // Stripes
+                    //=============================
+                    float stripes(vec2 st,float width){
+                        return step(width,1.0-abs(sin(st.y*3.14159265358)));
+                    }
+
+    building-gradient:
+        base: polygons
+        mix: tools
+        texcoords: true
+        shaders:
+            blocks:
+                color: |
+                    vec2 st = v_texcoord.xy;
+                    color.rgb += vec3(min((v_world_position.z*.001 + 1.0),3.));
+                    color.rgb = mix(color.rgb,vec3(0.00,0.00,0.00),stripes(st*16.,st.y*0.7) );
+
+                    if ( dot(vec3(0.,0.,1.),normal) == 1.0 ) {
+                        // If it's a roof
+                        color.rgb = vec3(0.990);
+                    }
+
     waves:
         shaders:
             uniforms:

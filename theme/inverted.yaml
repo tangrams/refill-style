@@ -1,0 +1,74 @@
+global:
+    # BLACK (default)
+    black_color:                [1.00,1.00,1.00]
+    dark_color:                 [0.970,0.970,0.970]
+    mid_color:                  [0.950,0.950,0.950]
+    midlight_color:             [0.900,0.900,0.900]
+    light_color:                [0.850,0.850,0.850]
+    lighter_color:              [0.750,0.750,0.750]
+    lightest_color:             [0.625,0.625,0.625]
+    ultralight_color:           [0.500,0.500,0.500]
+    offwhite_color:             [0.250,0.250,0.250]
+    white_color:                [0.00,0.00,0.00]
+    transparent:                [0.900,0.900,0.900,0.250]
+    route_line:                 [0.000,0.500,1.000]
+
+layers:
+    landuse:
+        national_park:
+            draw:
+                dots:
+                    color: [0.170,0.170,0.170]
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                dots:
+                    color: [0.160,0.160,0.160]
+
+        golf_course:
+            draw:
+                medium-dots:
+                    color: [0.170,0.170,0.170]
+
+        garden:
+            draw:
+                tiny-dots:
+                    color: [0.370,0.370,0.370]
+
+styles:
+    dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+                COLOR2: color.rgb
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: [0.100,0.100,0.100]
+
+    medium-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    tiny-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    dots-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    horizontal-bars:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    # colorized-icons:
+    #     shaders:
+    #         uniforms:
+    #             u_tint: [1, 1, 1]
+    #             u_fill: [0, 0, 0]
