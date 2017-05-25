@@ -1263,25 +1263,21 @@ styles:
     ux-location-gem-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 2
     ux-icons-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-point-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-shield-overlay:
         base: points
         texture: pois
-        interactive: global.sdk_interactive
         blend: overlay
         blend_order: 3
     sdk-line-overlay:
@@ -1327,6 +1323,7 @@ layers:
         data: { source: mz_route_line }
         draw:
             ux-lines-overlay:
+                interactive: global.sdk_interactive
                 color: global.route_line
                 order: 500
                 width: [[0,3.5px],[5,5px],[9,7px],[10,6px],[11,6px],[13,8px],[14,9px],[15,10px],[16,11px],[17,12px],[18,10px]]
@@ -1337,11 +1334,10 @@ layers:
                 # each transit route segment could be a different "line" each with it's own color
                 # but some transit lines don't define a color, in those cases default to blue
                 # and since the color is coming from Transit.land they call it "color" instead of "colour"
+                interactive: global.sdk_interactive
                 color: function() { return feature.color || '#06a6d4'; }
                 order: 500
                 width: [[0,3.5px],[5,5px],[9,7px],[10,6px],[11,6px],[13,8px],[14,9px],[15,10px],[16,11px],[17,12px],[18,10px]]
-
-
     mz_current_location_gem:
         data: { source: mz_current_location }
         draw:
@@ -1539,6 +1535,7 @@ layers:
         data: { source: mz_default_line }
         draw:
             sdk-line-overlay:
+                interactive: global.sdk_interactive
                 color: '#06a6d4'
                 order: 503
                 width: 3px
@@ -1546,6 +1543,7 @@ layers:
         data: { source: mz_default_polygon }
         draw:
             sdk-polygon-overlay:
+                interactive: global.sdk_interactive
                 color: [0.02,0.65,0.82,0.5]  #'#06b1e2'
                 order: 501
             sdk-line-overlay:
