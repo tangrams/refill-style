@@ -1,41 +1,88 @@
 global:
     # BLACK (default)
     black_color:                [1.00,1.00,1.00]
-    dark_color:                 [0.970,0.970,0.970]
-    mid_color:                  [0.950,0.950,0.950]
-    midlight_color:             [0.900,0.900,0.900]
-    light_color:                [0.850,0.850,0.850]
-    lighter_color:              [0.750,0.750,0.750]
-    lightest_color:             [0.625,0.625,0.625]
-    ultralight_color:           [0.500,0.500,0.500]
-    offwhite_color:             [0.250,0.250,0.250]
+    dark_color:                 [0.750,0.750,0.750]
+    mid_color:                  [0.500,0.500,0.500]
+    midlight_color:             [0.375,0.375,0.375]
+    light_color:                [0.250,0.250,0.250]
+    lighter_color:              [0.150,0.150,0.150]
+    lightest_color:             [0.100,0.100,0.100]
+    ultralight_color:           [0.050,0.050,0.050]
+    offwhite_color:             [0.030,0.030,0.030]
     white_color:                [0.00,0.00,0.00]
     transparent:                [0.900,0.900,0.900,0.250]
     route_line:                 [0.000,0.500,1.000]
 
 layers:
-    landuse:
-        national_park:
+    water:
+        draw:
+            waves:
+                color: global.midlight_color # colors the wave lines
+        later:
             draw:
-                dots:
-                    color: [0.170,0.170,0.170]
+                waves:
+                    color: global.midlight_color # colors the wave lines
 
+        lakes:
+            draw:
+                waves:
+                    color: global.midlight_color
+
+        other-water-areas:
+            draw:
+                waves:
+                    color: global.midlight_color
+
+        swimming_pool:
+            draw:
+                waves:
+                    color: global.mid_color
+
+        water-boundary-ocean:
+            draw:
+                coast:
+                    color: global.mid_color
+
+    landuse:
         parks-and-national-forests-not-national-park:
             draw:
                 dots:
-                    color: [0.160,0.160,0.160]
+                    color: [0.300,0.300,0.300]
 
-        golf_course:
+        university:
+            draw:
+                dots-rev:
+                    color: global.lighter_color
+
+        hospital:
             draw:
                 medium-dots:
-                    color: [0.170,0.170,0.170]
+                    color: [0.200,0.200,0.200]
 
-        garden:
+        playground:
+            draw:
+                dots-rev:
+                    color: global.light_color
+
+        parking:
+            draw:
+                horizontal-bars-rev:
+                    color: global.lighter_color
+
+        pitch:
             draw:
                 tiny-dots:
-                    color: [0.370,0.370,0.370]
+                    color: global.light_color
+                outline:
+                    color: global.light_color
+
 
 styles:
+    waves:
+        shaders:
+            uniforms:
+                u_lighter: global.midlight_color
+                u_lightest: global.light_color
     dots:
         shaders:
             defines:
@@ -45,7 +92,12 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: [0.100,0.100,0.100]
+                u_tint: [0.080,0.080,0.080]
+
+    pixel-pattern-bright:
+        shaders:
+            uniforms:
+                u_tint: [0.090,0.090,0.090]
 
     medium-dots:
         shaders:
@@ -62,7 +114,17 @@ styles:
             defines:
                 COLOR1: vec3(0.00,0.00,0.00)
 
+    dots-rev-grid:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
     horizontal-bars:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    horizontal-bars-rev:
         shaders:
             defines:
                 COLOR1: vec3(0.00,0.00,0.00)

@@ -411,7 +411,7 @@ global:
     text_fill_beach:       [0.35,0.35,0.35]       # black
     text_fill_piste:       [0.675,0.675,0.675]    # dark gray
     text_fill_piste_e:     [0.675,0.675,0.675]    # dark gray early
-    text_stroke:           '#fff'                 # land color
+    text_stroke:           global.white_color                 # land color
     text_stroke_park:      '#fff'                 # land color
     text_stroke_water:     '#fff'
     text_stroke_address:   [1.0,1.0,1.0]          # address stroke color
@@ -1180,6 +1180,8 @@ styles:
         mix: [space-constant, shapes-rect]
         texcoords: false
         shaders:
+            defines:
+                COLOR1: vec3(1.0,1.0,1.0)
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
@@ -1188,7 +1190,7 @@ styles:
                 filter: |
                     vec2 pos = getConstantCoords()*50.0;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
-                    color.rgb = mix(color.rgb,vec3(1.0,1.0,1.0),pct);
+                    color.rgb = mix(color.rgb,COLOR1,pct);
 
     scale-buildings:
         shaders:
