@@ -5,10 +5,10 @@ global:
     mid_color:                  [0.500,0.500,0.500]
     midlight_color:             [0.375,0.375,0.375]
     light_color:                [0.250,0.250,0.250]
-    lighter_color:              [0.150,0.150,0.150]
-    lightest_color:             [0.120,0.120,0.120]
-    ultralight_color:           [0.090,0.090,0.090]
-    offwhite_color:             [0.070,0.070,0.070]
+    lighter_color:              [0.180,0.180,0.180]
+    lightest_color:             [0.140,0.140,0.140]
+    ultralight_color:           [0.120,0.120,0.120]
+    offwhite_color:             [0.100,0.100,0.100]
     white_color:                [0.00,0.00,0.00]
     transparent:                [0.270,0.270,0.270,0.250]
     route_line:                 [0.000,0.500,1.000]
@@ -139,3 +139,7 @@ styles:
     #         uniforms:
     #             u_tint: [1, 1, 1]
     #             u_fill: [0, 0, 0]
+
+textures:
+    building-grid:
+        url: ../images/building-grid-hi-contrast3.gif
