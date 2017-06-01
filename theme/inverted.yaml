@@ -6,11 +6,11 @@ global:
     midlight_color:             [0.375,0.375,0.375]
     light_color:                [0.250,0.250,0.250]
     lighter_color:              [0.150,0.150,0.150]
-    lightest_color:             [0.100,0.100,0.100]
-    ultralight_color:           [0.050,0.050,0.050]
-    offwhite_color:             [0.030,0.030,0.030]
+    lightest_color:             [0.120,0.120,0.120]
+    ultralight_color:           [0.090,0.090,0.090]
+    offwhite_color:             [0.070,0.070,0.070]
     white_color:                [0.00,0.00,0.00]
-    transparent:                [0.900,0.900,0.900,0.250]
+    transparent:                [0.270,0.270,0.270,0.250]
     route_line:                 [0.000,0.500,1.000]
 
 layers:
@@ -48,6 +48,11 @@ layers:
             draw:
                 dots:
                     color: [0.300,0.300,0.300]
+
+        farm:
+            draw:
+                tiny-dots:
+                    color: global.lighter_color
 
         university:
             draw:
