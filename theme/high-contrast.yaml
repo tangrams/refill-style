@@ -4,35 +4,39 @@ global:
     dark_color:                   [0.000,0.000,0.000]
     mid_color:                    [0.000,0.000,0.000]
     midlight_color:               [0.000,0.000,0.000]
-    light_color:                  [0.250,0.250,0.250]
-    lighter_color:                [0.500,0.500,0.500]
-    lightest_color:               [0.700,0.700,0.700]
-    ultralight_color:             [0.775,0.775,0.775]
-    offwhite_color:               [0.850,0.850,0.850]
+    light_color:                  [0.200,0.200,0.200]
+    lighter_color:                [0.600,0.600,0.600]
+    lightest_color:               [0.800,0.800,0.800]
+    ultralight_color:             [0.850,0.850,0.850]
+    offwhite_color:               [0.900,0.900,0.900]
     white_color:                  [1.00,1.00,1.00]
     transparent:                  [0.900,0.900,0.900,0.250]
     route_line:                   [0.700,0.196,0.507]
 
+    # FILTER
+    landuse-casing:
+        any:
+            - landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest, attraction, natural_wood, recreation_ground]
 
 layers:
     water:
         draw:
             waves:
-                color: [0.400,0.400,0.400] # colors the wave lines
+                color: [0.000,0.000,0.000] # colors the wave lines
         later:
             draw:
                 waves:
-                    color: [0.400,0.400,0.400] # colors the wave lines
+                    color: [0.000,0.000,0.000] # colors the wave lines
 
         lakes:
             draw:
                 waves:
-                    color: [0.400,0.400,0.400]
+                    color: [0.000,0.000,0.000]
 
         other-water-areas:
             draw:
                 waves:
-                    color: [0.400,0.400,0.400]
+                    color: [0.000,0.000,0.000]
 
         swimming_pool:
             draw:
@@ -42,7 +46,7 @@ layers:
         water-boundary-ocean:
             draw:
                 coast:
-                    color: [0.950,0.950,0.950]
+                    color: global.black_color
 
         water-area-labels:
             ocean-sea-labels:
@@ -72,7 +76,7 @@ layers:
         major_road:
             tertiary:
                 in_park:
-                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                    filter: global.landuse-casing
                     draw:
                         lines:
                             color: [[11, global.lighter_color], [15, global.dark_color], [16, global.white_color]]
@@ -84,7 +88,7 @@ layers:
 
         minor_road:
             in_park:
-                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                filter: global.landuse-casing
                 draw:
                     lines:
                         color: [[11, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
@@ -95,7 +99,7 @@ layers:
 
             tunnel:
                 in_park:
-                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                    filter: global.landuse-casing
                     draw:
                         lines:
                             outline:
@@ -104,7 +108,7 @@ layers:
 
         service_road:
             in_park:
-                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                filter: global.landuse-casing
                 draw:
                     lines:
                         color: [[13, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
@@ -114,7 +118,7 @@ layers:
                             width: [[13, 0px], [14, 0.5px], [15, 2px], [16, 3px], [17, 1.25px]]
         path:
             in_park:
-                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                filter: global.landuse-casing
                 draw:
                     lines:
                         outline:
@@ -123,7 +127,7 @@ layers:
 
             pedestrian:
                 in_park:
-                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                    filter: global.landuse-casing
                     draw:
                         lines:
                             outline:
@@ -132,7 +136,7 @@ layers:
 
             footway:
                 in_park:
-                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                    filter: global.landuse-casing
                     draw:
                         lines:
                             outline:
@@ -141,7 +145,7 @@ layers:
 
         track:
             in_park:
-                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                filter: global.landuse-casing
                 draw:
                     lines:
                         outline:
@@ -177,14 +181,30 @@ styles:
     waves:
         shaders:
             uniforms:
-                u_lighter: [0.000,0.000,0.000] #global.lighter_color
-                u_lightest: [0.200,0.200,0.200] #global.lightest_color
+                u_lighter: [0.320,0.320,0.320]
+                u_lightest: [0.000,0.000,0.000] #global.lightest_color
 
+    coast:
+        shaders:
+            defines:
+                OPACITY: 1.0
     dots:
         shaders:
             defines:
                 PATTERN_SCALE: 75.0
                 DOT_SIZE: 0.05
+
+    medium-dots:
+        shaders:
+            defines:
+                PATTERN_SCALE: 70.0
+                DOT_SIZE: 0.11
+
+    tiny-dots:
+        shaders:
+            defines:
+                PATTERN_SCALE: 80.0
+                DOT_SIZE: 0.03
 
     dots-rev:
         shaders:

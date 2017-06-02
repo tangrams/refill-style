@@ -120,13 +120,9 @@ layers:
         #     draw:
         #         polygons:
         #             color: red
-        colored-buildings:
-            draw:
-                polygons:
-                    style: building-grid-white
-                lines:
-                    style: lines
 
+        # change building colors
+        colored-buildings:
             church:
                 filter:
                     any:
@@ -192,7 +188,7 @@ layers:
                         - landuse_kind: retail
                 draw:
                     polygons:
-                        color: [1.000,0.280,1.000]
+                        color: [1.000,0.404,0.839]
                     lines:
                         color: [1.00,1.00,1.00]
             airport:
@@ -220,7 +216,7 @@ layers:
                         - landuse_kind: industrial
                 draw:
                     polygons:
-                        color: [0.756,0.813,0.850]
+                        color: [0.600,0.600,0.600]
                     lines:
                         color: [1.00,1.00,1.00]
 
@@ -233,76 +229,91 @@ layers:
                     lines:
                         color: [1.00,1.00,1.00]
 
-        # footprints:
-            #extrude:
-                # draw:
-                #     polygons:
-                #         color: [0.820,0.820,0.820]
-                #     lines:
-                #         color: [1.00,1.00,1.00]
+        # repeat the colored building rules, nested under the extrude layer, to change the building grid
+        footprints:
+            extrude:
+                church:
+                    filter:
+                        any:
+                            - kind_detail: [church,temple,cathedral]
+                            - landuse_kind: place_of_worship
+                    draw:
+                        polygons:
+                            style: building-grid-white
 
-            # kind_detail:
-            #     filter:
-            #         kind_detail: true
-            #     draw:
-            #         polygons:
-            #             color: red
+                public:
+                    filter:
+                        kind_detail: public
+                    draw:
+                        polygons:
+                            style: building-grid-white
+                in_park:
+                    filter:
+                        landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden,zoo]
+                    draw:
+                        polygons:
+                            style: building-grid-white
+                university:
+                    filter:
+                        any:
+                            - kind_detail: [school,college,university,kindergarten]
+                            - landuse_kind: [university,school]
+                    draw:
+                        polygons:
+                            style: building-grid-white
+                library:
+                    filter:
+                        any:
+                            - kind_detail: library
+                            - landuse_kind: library
+                    draw:
+                        polygons:
+                            style: building-grid-white
+                hospital:
+                    filter:
+                        any:
+                            - kind_detail: hospital
+                            - landuse_kind: hospital
+                    draw:
+                        polygons:
+                            style: building-grid-white
+                retail:
+                    filter:
+                        any:
+                            - kind_detail: [commercial,retail,shop,supermarket]
+                            - landuse_kind: retail
+                    draw:
+                        polygons:
+                            style: building-grid-white
+                airport:
+                    filter: { landuse_kind: [aerodrome, runway, taxiway] }
+                    draw:
+                        polygons:
+                            style: building-grid-white
 
-            # church:
-            #     filter:
-            #         any:
-            #             - kind_detail: church
-            #             - landuse_kind: place_of_worship
-            #     draw:
-            #         polygons:
-            #             color: [0.00,0.00,0.00]
-            #         lines:
-            #             color: [1.00,1.00,1.00]
+                train-station:
+                    filter:
+                        any:
+                            - kind_detail: [train_station,transportation,station,shrine,monastery]
+                    draw:
+                        polygons:
+                            style: building-grid-white
 
-            # commercial:
-            #     filter: { kind_detail: commercial }
-            #     draw:
-            #         polygons:
-            #             color: [1.000,0.502,0.290]
-            #         lines:
-            #             color: [1.00,1.00,1.00]
+                industrial:
+                    filter:
+                        any:
+                            - kind_detail: [industrial,factory]
+                            - landuse_kind: industrial
+                    draw:
+                        polygons:
+                            style: building-grid-white
 
-            # in_park:
-            #     filter:
-            #         landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden]
-            #     draw:
-            #         polygons:
-            #             color: [0.157,0.890,0.412]
-            #         lines:
-            #             color: [1.00,1.00,1.00]
-            # in_university:
-            #     filter: { landuse_kind: [university,school] }
-            #     draw:
-            #         polygons:
-            #             color: [0.161,0.773,0.965]
-            #         lines:
-            #             color: [1.00,1.00,1.00]
-            # in_hospital:
-            #     filter: { landuse_kind: hospital }
-            #     draw:
-            #         polygons:
-            #             color: [1.000,0.404,0.839]
-            #         lines:
-            #             color: [1.00,1.00,1.00]
-            # in_retail:
-            #     filter: { landuse_kind: retail }
-            #     draw:
-            #         polygons:
-            #             color: [1.000,0.600,0.122]
-            #         lines:
-            #             color: [1.00,1.00,1.00]
-            # in_airport:
-            #     filter: { landuse_kind: [aerodrome, runway, taxiway] }
-            #     draw:
-            #         polygons:
-            #             color: [0.498,0.302,1.000]
-            #         lines:
-            #             color: [1.00,1.00,1.00]
+                castle:
+                    filter:
+                        kind_detail: [castle,museum]
+                    draw:
+                        polygons:
+                            style: building-grid-white
 
     landuse:
         national_park:

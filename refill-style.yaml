@@ -1086,6 +1086,8 @@ styles:
         mix: [space-constant]
         blend: overlay
         shaders:
+            defines:
+                OPACITY: 0.8
             blocks:
                 global: |
                     mat2 rotate2d(float angle){
@@ -1100,7 +1102,7 @@ styles:
                     }
                 color: |
                     vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.4), vec4(0.0), stripes(st*130.))*.8; // transparent stripes
+                    color = mix(vec4(color.rgb, 0.4), vec4(0.0), stripes(st*130.))*OPACITY; // transparent stripes
 
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]
