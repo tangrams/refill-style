@@ -191,6 +191,11 @@ styles:
             defines:
                 PATTERN_SCALE: 60.0
 
+    horizontal-bars-rev:
+        shaders:
+            defines:
+                PATTERN_SCALE: 75.0
+
 
     pixel-pattern-light:
         shaders:

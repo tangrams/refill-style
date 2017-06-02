@@ -1182,13 +1182,14 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(1.0,1.0,1.0)
+                PATTERN_SCALE: 50.0
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
                         return rect(st, vec2(size*1.05,size*0.5));
                     }
                 filter: |
-                    vec2 pos = getConstantCoords()*50.0;
+                    vec2 pos = getConstantCoords()*PATTERN_SCALE;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
                     color.rgb = mix(color.rgb,COLOR1,pct);
 
