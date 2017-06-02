@@ -180,6 +180,17 @@ styles:
                 u_lighter: [0.000,0.000,0.000] #global.lighter_color
                 u_lightest: [0.200,0.200,0.200] #global.lightest_color
 
+    dots:
+        shaders:
+            defines:
+                PATTERN_SCALE: 75.0
+                DOT_SIZE: 0.05
+
+    dots-rev:
+        shaders:
+            defines:
+                PATTERN_SCALE: 60.0
+
 
     pixel-pattern-light:
         shaders:

@@ -1153,9 +1153,10 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(1.00,1.00,1.00)
+                PATTERN_SCALE: 35.0
             blocks:
                 color: |
-                    color.rgb = mix(COLOR1, color.rgb, TileDots(35.0, 0.31));
+                    color.rgb = mix(COLOR1, color.rgb, TileDots(PATTERN_SCALE, 0.31));
 
     horizontal-bars:
         base: polygons
