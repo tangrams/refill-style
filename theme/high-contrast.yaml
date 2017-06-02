@@ -71,89 +71,82 @@ layers:
     roads:
         major_road:
             tertiary:
-                draw:
-                    lines:
-                        color: [[11, global.lighter_color], [16, global.dark_color], [17, global.white_color]]
-                        width: [[11, 0.5px], [15, 1px], [16, 2px], [17, 6px], [18, 9m]]
-                        outline:
-                                color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
-                                width: [[11, 1px], [15, 2px], [17, 2px], [18, 2px]]
+                in_park:
+                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                    draw:
+                        lines:
+                            color: [[11, global.lighter_color], [15, global.dark_color], [16, global.white_color]]
+                            width: [[11, 0.5px], [15, 1px], [16, 1.8px], [17, 6px], [18, 9m]]
+                            outline:
+                                color: [[11, global.white_color], [15, global.white_color], [16, global.black_color]]
+                                width: [[11, 2px], [15, 3px], [16, 1px], [17, 2px], [18, 2px]]
+
 
         minor_road:
-            draw:
-                lines:
-                    color: [[11, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
-                    width: [[11, 0.35px], [13, 0.5px], [14, 0.75px], [15, 1px], [16, 1.5px], [17, 3.5px], [18, 9m]]
-                    outline:
-                        color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
-                        width: [[11, 0px], [15, 2px], [16, 3px], [17, 1.5px], [18, 1.5px]]
+            in_park:
+                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                draw:
+                    lines:
+                        color: [[11, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
+                        width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 1.5px], [17, 3.5px], [18, 9m]]
+                        outline:
+                            color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
+                            width: [[11, 2px], [14, 2px], [15, 2px], [17, 1.5px], [18, 1.5px]]
+
+            tunnel:
+                in_park:
+                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                    draw:
+                        lines:
+                            outline:
+                                color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
+                                width: [[11, 0px], [14, 2px], [15, 2px], [17, 1.5px], [18, 1.5px]]
 
         service_road:
-            draw:
-                lines:
-                    color: [[13, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
-                    width: [[13, 0px], [15, 0.75px], [16, 1px], [17, 2.5px], [18, 5m]]
-                    outline:
-                        color: [[13, global.white_color], [16, global.white_color], [17, global.black_color]]
-                        width: [[13, 0px], [15, 2px], [16, 1px], [17, 1.5px], [19, 1.5px]]
-        path:
-            # draw:
-            #     lines:
-            #         color: [[13, global.light_color], [16, global.light_color], [17, global.white_color]]
-            #         width: [[13, 0px], [14, 0.25px], [16, 0.5px], [18, 2px], [20, 1m]]
-            #         outline:
-            #             color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-            #             width: [[13, 0px], [14, 0.25px], [15, 1px], [16, 2px], [17, 1px]]
-            # pedestrian:
-            #     draw:
-            #         lines:
-            #             color: [[13, global.light_color], [16, global.light_color], [17, global.white_color]]
-            #             width: [[13, 0px], [14, 0.25px], [16, 0.5px], [18, 2px], [20, 1m]]
-            #             outline:
-            #                 color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-            #                 width: [[13, 0px], [14, 0.25px], [15, 1px], [16, 2px], [17, 1px]]
-            # footway:
-            #     draw:
-            #         lines:
-            #             color: [[13, global.light_color], [16, global.light_color], [17, global.white_color]]
-            #             width: [[13, 0px], [14, 0.25px], [16, 0.5px], [18, 2px], [20, 1m]]
-            #             outline:
-            #                 color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-            #                 width: [[13, 0px], [14, 0.25px], [15, 1px], [16, 2px], [17, 1px]]
-
             in_park:
-                filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden,national_park] }
+                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                draw:
+                    lines:
+                        color: [[13, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
+                        width: [[13, 0px], [15, 0.75px], [16, 1.25px], [17, 2.5px], [18, 5m]]
+                        outline:
+                            color: [[13, global.white_color], [16, global.white_color], [17, global.black_color]]
+                            width: [[13, 0px], [14, 0.5px], [15, 2px], [16, 3px], [17, 1.25px]]
+        path:
+            in_park:
+                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
                 draw:
                     lines:
                         outline:
                             color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 2px], [15, 2px], [16, 3px], [17, 1px]]
+                            width: [[13, 0px], [14, 1px], [15, 2px], [16, 3px], [17, 1px]]
 
             pedestrian:
                 in_park:
-                    filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden,national_park] }
+                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
                     draw:
                         lines:
                             outline:
                                 color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-                                width: [[13, 0px], [14, 2px], [15, 2px], [16, 3px], [17, 1px]]
+                                width: [[13, 0px], [14, 1px], [15, 2px], [16, 3px], [17, 1px]]
+
+            footway:
+                in_park:
+                    filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
+                    draw:
+                        lines:
+                            outline:
+                                color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
+                                width: [[13, 0px], [14, 0px], [15, 2px], [16, 3px], [17, 1px]]
 
         track:
-            # draw:
-            #     lines:
-            #         color: [[13, global.light_color], [16, global.light_color], [17, global.white_color]]
-            #         width: [[13, 0px], [14, 0.15px], [16, 0.5px], [18, 1.5px], [20, 1m]]
-            #         outline:
-            #             color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-            #             width: [[13, 0px], [14, 0.5px], [15, 1px], [16, 2px], [17, 1px]]
-
             in_park:
-                filter: { landuse_kind: [park,nature_reserve,conservation,golf_course,garden,national_park] }
+                filter: { landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest] }
                 draw:
                     lines:
                         outline:
                             color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 2px], [15, 2px], [16, 3px], [17, 1px]]
+                            width: [[13, 0px], [14, 1px], [15, 2px], [16, 3px], [17, 1px]]
 
         railway:
             draw:

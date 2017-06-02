@@ -704,7 +704,6 @@ textures:
 
     building-grid:
         url: images/building-grid.gif
-        # url: images/building-grid-blue.gif
         filtering: mipmap
 
 sources:
@@ -2567,7 +2566,7 @@ layers:
                     width: [[13, 0px], [15, 0.75px], [16, 0.1px], [17, 2.5px], [18, 5m]]
                     outline:
                         color: [[13, global.white_color], [14, global.white_color], [15, global.mid_color], [18, global.black_color]]
-                        width: [[13, 0px], [15, 0px], [16, 1px], [19, 1.5px]]
+                        width: [[13, 0px], [15, 0px], [16, 0.6px], [19, 1.5px]]
             labels-service_road:
                 filter: { $zoom: { min: 17 } }
                 draw:
@@ -3461,53 +3460,6 @@ layers:
                         style: building-lines
                         extrude: global.building_extrude_height
 
-        # landuse-specific rules
-        # in_park:
-        #     filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
-        #     draw:
-        #         polygons:
-        #             color: [1.0,1.0,1.0]
-
-            # golf_course:
-            #     filter: { landuse_kind: golf_course }
-            #     draw:
-            #         polygons:
-            #             color: global.building2
-            # nature_reserve:
-            #     filter: { landuse_kind: nature_reserve }
-            #     draw:
-            #         polygons:
-            #             color: global.building2
-            # conservation:
-            #     filter: { landuse_kind: conservation }
-            #     draw:
-            #         polygons:
-            #             color: global.building2
-            # zoo:
-            #     filter: { landuse_kind: zoo }
-            #     draw:
-            #         polygons:
-            #             color: global.building2
-        # in_university:
-        #     filter: { landuse_kind: [university,school] }
-        #     draw:
-        #         polygons:
-        #             color: [1.0,1.0,1.0]
-        # in_hospital:
-        #     filter: { landuse_kind: hospital }
-        #     draw:
-        #         polygons:
-        #             color: [1.0,1.0,1.0]
-        # in_airport:
-        #     filter: { landuse_kind: [aerodrome, runway, taxiway] }
-        #     draw:
-        #         polygons:
-        #             color: [1.0,1.0,1.0]
-        # in_retail:
-        #    filter: { landuse_kind: retail }
-        #    draw:
-        #         polygons:
-        #             color: [1.0,1.0,1.0]
 
         building-labels:
             filter:

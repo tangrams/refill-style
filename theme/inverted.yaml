@@ -64,6 +64,11 @@ layers:
                 medium-dots:
                     color: [0.200,0.200,0.200]
 
+        zoo:
+            draw:
+                tiny-dots:
+                    color: global.lighter_color
+
         playground:
             draw:
                 dots-rev:
