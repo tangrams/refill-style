@@ -51,9 +51,12 @@ layers:
 
         forest-landcover:
             draw:
+                pixel-pattern-light:
+                    visible: false
                 polygons:
                     style: splatter
                     color: [0.300,0.300,0.300]
+                    visible: true
 
         parks-and-national-forests-not-national-park:
             draw:
@@ -64,18 +67,6 @@ layers:
             draw:
                 tiny-dots:
                     color: global.lighter_color
-
-        university:
-            draw:
-                dots:
-                    color: red
-            # university-inverted:
-            #     filter:
-            #         kind: [university, college]
-            #     draw:
-            #         polygons:
-            #             style: rock
-            #             visible: true
 
         hospital:
             draw:
@@ -160,8 +151,8 @@ styles:
     rock:
         base: polygons
         material:
-            normal:
-                texture: ../images/building-grid.gif
+            diffuse:
+                texture: ../images/rock.png
                 mapping: planar
                 scale: .001
 
