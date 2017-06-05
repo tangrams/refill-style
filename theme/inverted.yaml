@@ -285,9 +285,9 @@ styles:
                     float t = 1.;
 
                     color.rgb = vec3(0.05,0.05,0.05);
-                    color.rgb = mix(color.rgb, vec3(0.098), step(.4, snoise( vec3(st*1.,t*1.+3232.0) ) ));
-                    color.rgb = mix(color.rgb, vec3(0.12), step(.3, snoise( vec3(st*4.,t*2.+123.0) ) ));
-                    color.rgb = mix(color.rgb, vec3(0.01), step(.2, snoise( vec3(st*4.,t+0.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.200), step(.4, snoise( vec3(st*1.,t*1.+3232.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.150), step(.3, snoise( vec3(st*4.,t*2.+123.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.015), step(.2, snoise( vec3(st*4.,t+0.0) ) ));
                     color.rgb = mix(color.rgb, vec3(0.122), step(.3, snoise( vec3(st*4.,t+0.0) ) ));
                     color.rgb = mix(color.rgb, vec3(0.097), step(.2, snoise( vec3(st*7.,t+0.0) ) ));
                     color.rgb = mix(color.rgb, vec3(0.087), step(.4, snoise( vec3(st*7.,t+0.0) ) ));

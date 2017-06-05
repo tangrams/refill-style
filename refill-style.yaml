@@ -2939,7 +2939,7 @@ layers:
                             text:
                                 offset: [0px, 0.5px]
                                 font:
-                                    fill: global.black_color
+                                    # fill: global.black_color
                                     size: [[7,8px],[13,9px],[15,11px]]
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
@@ -2982,7 +2982,7 @@ layers:
                             text:
                                 offset: [0px, -0.7px]
                                 font:
-                                    fill: global.black_color
+                                    # fill: global.black_color
                                     size: [[7,8px],[13,9px],[15,11px]]
                     # early:
                     #     filter: { $zoom: [7] }
@@ -3042,7 +3042,7 @@ layers:
                             text:
                                 offset: [0px, 1px]
                                 font:
-                                    fill: global.black_color
+                                    # fill: global.black_color
                                     size: [[7,7px],[13,9px],[15,10px]]
                     motorway:
                         filter: { kind_detail: [motorway], $zoom: [7,8] }
@@ -3099,7 +3099,7 @@ layers:
                             text:
                                 # offset: [0px, 1px]
                                 font:
-                                    fill: global.black_color
+                                    # fill: global.black_color
                                     size: [[7,7px],[13,9px],[15,10px]]
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
@@ -3140,7 +3140,7 @@ layers:
                             text:
                                 offset: [0px, 1px]
                                 font:
-                                    fill: global.black_color
+                                    # fill: global.black_color
                                     size: [[7,7px],[13,9px],[15,10px]]
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
