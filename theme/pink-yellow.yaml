@@ -33,6 +33,7 @@ global:
     two_color_mid: [0.976,0.898,0.400]
     two_color_light: [1.000,0.969,0.770]
     two_color_ultralight: [1.000,0.980,0.850]
+    two_color_offwhite: [1.000,0.992,0.940]
 
 
 layers:
@@ -226,7 +227,7 @@ styles:
     railway_dash:
         base: lines
         dash: [0.25, 1.0]
-        dash_background_color: [1.000,0.992,0.940]
+        dash_background_color: global.two_color_offwhite
 
     waves:
         shaders:
