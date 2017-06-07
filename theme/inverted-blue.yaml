@@ -1,0 +1,153 @@
+global:
+    # BLACK (default)
+    black_color:                [1.00,1.00,1.00]
+    dark_color:                 [0.753,0.761,0.961]
+    mid_color:                  [0.510,0.525,0.933]
+    midlight_color:             [0.396,0.420,0.925]
+    light_color:                [0.337,0.365,0.922]
+    lighter_color:              [0.295,0.338,0.950]
+    lightest_color:             [0.242,0.291,0.970]
+    ultralight_color:           [0.200,0.251,0.918]
+    offwhite_color:             [0.192,0.243,0.922]
+    white_color:                [0.157,0.216,0.918]
+    transparent:                [0.270,0.270,0.270,0.250]
+    route_line:                 [0.000,0.500,1.000]
+
+layers:
+    water:
+        draw:
+            waves:
+                color: global.black_color # colors the wave lines
+        later:
+            draw:
+                waves:
+                    color: global.black_color # colors the wave lines
+
+        lakes:
+            draw:
+                waves:
+                    color: global.black_color
+
+        other-water-areas:
+            draw:
+                waves:
+                    color: global.black_color
+
+        swimming_pool:
+            draw:
+                waves:
+                    color: global.mid_color
+
+        water-boundary-ocean:
+            draw:
+                coast:
+                    color: global.mid_color
+
+    landuse:
+        draw:
+            rock:
+                order: global.feature_order
+                visible: false
+
+        # parks-and-national-forests-not-national-park:
+        #     draw:
+        #         dots:
+        #             color: [0.300,0.300,0.300]
+
+        # farm:
+        #     draw:
+        #         tiny-dots:
+        #             color: global.lighter_color
+
+        # hospital:
+        #     draw:
+        #         medium-dots:
+        #             color: [0.200,0.200,0.200]
+
+        # zoo:
+        #     draw:
+        #         tiny-dots:
+        #             color: global.lighter_color
+
+        # playground:
+        #     draw:
+        #         dots-rev:
+        #             color: global.light_color
+
+        # parking:
+        #     draw:
+        #         horizontal-bars-rev:
+        #             color: global.lighter_color
+
+        # pitch:
+        #     draw:
+        #         tiny-dots:
+        #             color: global.light_color
+        #         outline:
+        #             color: global.light_color
+
+
+styles:
+    waves:
+        shaders:
+            uniforms:
+                u_lighter: global.black_color
+                u_lightest: global.dark_color
+    dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+                COLOR2: color.rgb
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: [0.142,0.196,0.833]
+
+    pixel-pattern-bright:
+        shaders:
+            uniforms:
+                u_tint: [0.142,0.196,0.833]
+
+    medium-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    tiny-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    dots-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    dots-rev-grid:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    horizontal-bars:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    horizontal-bars-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    rock:
+        base: polygons
+        material:
+            diffuse:
+                texture: ../images/rock.png
+                mapping: planar
+                scale: .001
+
+
+textures:
+    building-grid:
+        url: ../images/building-grid-hi-contrast3.gif
