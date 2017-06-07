@@ -52,31 +52,40 @@ layers:
     water:
         draw:
             waves:
-                color: global.two_color_lighter #global.midlight_color
+                color: global.two_color_black
         later:
             draw:
                 waves:
-                    color: global.two_color_lighter #global.midlight_color
+                    color: global.two_color_black
 
         lakes:
             draw:
                 waves:
-                    color: global.two_color_lighter #global.midlight_color
+                    color: global.two_color_black
 
         other-water-areas:
             draw:
                 waves:
-                    color: global.two_color_lighter #global.midlight_color
+                    color: global.two_color_black
 
         swimming_pool:
             draw:
                 waves:
-                    color: global.two_color_lighter #global.midlight_color
+                    color: global.two_color_black
 
         water-boundary-ocean:
             draw:
                 coast:
-                    color: global.two_color_lighter #global.midlight_color
+                    color: global.two_color_offwhite
+
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    color: global.two_color_offwhite
+            riverbank:
+                draw:
+                    coast:
+                        color: global.two_color_offwhite
 
     roads:
         arrows:
@@ -236,8 +245,14 @@ styles:
     waves:
         shaders:
             uniforms:
-                u_lighter: global.two_color_lighter
+                u_lighter: global.two_color_black
                 u_lightest: global.two_color_lightest
+
+    coast:
+        shaders:
+            defines:
+                OPACITY: 1.0
+
     dots:
         shaders:
             defines:

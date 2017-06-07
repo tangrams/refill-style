@@ -68,11 +68,6 @@ global:
 
 
 layers:
-    roads:
-        railway:
-            draw:
-                railway_dash:
-                    color: global.two_color_mid
     water:
         draw:
             waves:
@@ -100,17 +95,27 @@ layers:
         water-boundary-ocean:
             draw:
                 coast:
-                    color: global.two_color_lighter
+                    color: global.two_color_mid_dark
 
         water_boundaries-not-ocean:
             draw:
                 coast:
-                    color: global.two_color_lighter
+                    color: global.two_color_mid_dark
             riverbank:
                 draw:
                     coast:
-                        color: global.two_color_lighter
-                        width: [[9, 0.5px], [11, 1px], [14, 2px], [15, 4px]]
+                        color: global.two_color_mid_dark
+
+    roads:
+        railway:
+            draw:
+                railway_dash:
+                    color: global.two_color_mid
+
+        ferry:
+            draw:
+                lines:
+                    color: global.two_color_mid
 
 
     landuse:
@@ -257,6 +262,11 @@ styles:
             uniforms:
                 u_lighter: global.two_color_ultralight
                 u_lightest: global.two_color_light
+
+    coast:
+        shaders:
+            defines:
+                OPACITY: 1.0
 
     building-grid:
         shaders:

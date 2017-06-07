@@ -1666,7 +1666,7 @@ layers:
             draw:
                 coast:
                     order: global.feature_order
-                    color: [[1, global.light_color], [6, global.dark_color]]
+                    color: [[1, global.light_color], [6, global.mid_color]]
                     width: [[1, 1px], [20, 10px]]
                     join: round
         water_boundaries-not-ocean:

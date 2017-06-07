@@ -22,31 +22,40 @@ layers:
     water:
         draw:
             waves:
-                color: [0.000,0.000,0.000] # colors the wave lines
+                color: global.light_color
         later:
             draw:
                 waves:
-                    color: [0.000,0.000,0.000] # colors the wave lines
+                    color: global.light_color
 
         lakes:
             draw:
                 waves:
-                    color: [0.000,0.000,0.000]
+                    color: global.light_color
 
         other-water-areas:
             draw:
                 waves:
-                    color: [0.000,0.000,0.000]
+                    color: global.light_color
 
         swimming_pool:
             draw:
                 waves:
-                    color: [1.0,1.0,1.0]
+                    color: global.light_color
 
         water-boundary-ocean:
             draw:
                 coast:
-                    color: global.black_color
+                    color: [0.500,0.500,0.500]
+
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    color: [0.500,0.500,0.500]
+            riverbank:
+                draw:
+                    coast:
+                        color: [0.500,0.500,0.500]
 
         water-area-labels:
             ocean-sea-labels:
@@ -181,8 +190,8 @@ styles:
     waves:
         shaders:
             uniforms:
-                u_lighter: [0.320,0.320,0.320]
-                u_lightest: [0.000,0.000,0.000] #global.lightest_color
+                u_lighter: global.light_color
+                u_lightest: global.black_color
 
     coast:
         shaders:

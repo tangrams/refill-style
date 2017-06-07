@@ -17,21 +17,21 @@ layers:
     water:
         draw:
             waves:
-                color: global.midlight_color # colors the wave lines
+                color: global.light_color # colors the wave lines
         later:
             draw:
                 waves:
-                    color: global.midlight_color # colors the wave lines
+                    color: global.light_color # colors the wave lines
 
         lakes:
             draw:
                 waves:
-                    color: global.midlight_color
+                    color: global.light_color
 
         other-water-areas:
             draw:
                 waves:
-                    color: global.midlight_color
+                    color: global.light_color
 
         swimming_pool:
             draw:
@@ -42,6 +42,12 @@ layers:
             draw:
                 coast:
                     color: global.mid_color
+
+    roads:
+        ferry:
+            draw:
+                lines:
+                    color: global.ultralight_color
 
     landuse:
         draw:
@@ -100,8 +106,8 @@ styles:
     waves:
         shaders:
             uniforms:
-                u_lighter: global.midlight_color
-                u_lightest: global.light_color
+                u_lighter: global.light_color
+                u_lightest: global.lightest_color
     dots:
         shaders:
             defines:
@@ -111,12 +117,12 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: [0.080,0.080,0.080]
+                u_tint: [0.055,0.055,0.055]
 
     pixel-pattern-bright:
         shaders:
             uniforms:
-                u_tint: [0.090,0.090,0.090]
+                u_tint: [0.055,0.055,0.055]
 
     medium-dots:
         shaders:
