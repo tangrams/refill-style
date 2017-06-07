@@ -79,19 +79,29 @@ layers:
                     color: global.two_color_lighter #global.midlight_color
 
     roads:
+        arrows:
+            draw:
+                arrows:
+                    color: global.two_color_lightest
+
         railway:
             draw:
                 railway_dash:
-                    color: global.two_color_lighter
+                    color: global.two_color_light
 
         airport-lines:
             draw:
                 lines:
-                    color: global.two_color_ultralight
+                    color: global.two_color_offwhite
             taxiway:
                 draw:
                     lines:
                         color: global.two_color_light
+
+        ferry:
+            draw:
+                lines:
+                    color: global.two_color_ultralight
 
     buildings:
         draw:
@@ -142,7 +152,7 @@ layers:
         golf_course:
             draw:
                 medium-dots:
-                    color: global.two_color_dark
+                    color: global.two_color_light
 
         hospital:
             draw:
@@ -158,12 +168,6 @@ layers:
             draw:
                 tiny-dots:
                     color: global.lighter_color
-
-        playground:
-            draw:
-                dots-rev:
-                    color: global.two_color_light
-
         garden:
             draw:
                 tiny-dots:
@@ -180,6 +184,22 @@ layers:
                     color: global.two_color_lighter
                 outline:
                     color: global.two_color_lighter
+
+        playground:
+            draw:
+                dots-rev:
+                    color: global.two_color_light
+
+        school:
+            draw:
+                dots-rev:
+                    color: global.two_color_midlight
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.two_color_offwhite
 
     boundaries:
         country:
@@ -203,6 +223,11 @@ layers:
 
 
 styles:
+    railway_dash:
+        base: lines
+        dash: [0.25, 1.0]
+        dash_background_color: global.two_color_dark
+
     building-grid:
         shaders:
             uniforms:
