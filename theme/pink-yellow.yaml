@@ -221,7 +221,7 @@ layers:
             polygons:
                 color: global.white_color
             lines:
-                color: [[14, global.two_color_light], [17, global.two_color_mid_dark]]
+                color: [[14, global.two_color_mid], [17, global.two_color_dark]]
 
         footprints:
             extrude:
@@ -229,7 +229,7 @@ layers:
                     polygons:
                         color: global.white_color
                     lines:
-                        color: [[14, global.two_color_light], [17, global.two_color_mid_dark]]
+                        color: [[14, global.two_color_mid], [17, global.two_color_dark]]
 
     boundaries:
         country:
