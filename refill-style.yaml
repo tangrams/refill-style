@@ -5262,13 +5262,9 @@ layers:
             dots:
                 order: global.feature_order
                 visible: false
-            tiny-dots:
-                order: global.feature_order
             medium-dots:
                 order: global.feature_order
                 visible: false
-            dots:
-                order: global.feature_order
             horizontal-bars:
                 order: global.feature_order
                 visible: false
