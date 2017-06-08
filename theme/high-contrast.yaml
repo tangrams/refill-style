@@ -181,6 +181,14 @@ layers:
                     polygons:
                         color: global.white_color
 
+    earth-labels:
+        continent:
+            draw:
+                text-blend-order:
+                    font:
+                        stroke: { color: global.white_color, width: 3 }
+
+
 styles:
     building-grid:
         shaders:

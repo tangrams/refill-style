@@ -237,7 +237,7 @@
             // more: 'vector-tiles-TTucZYU'
             // default (some): 'vector-tiles-W2tPU-Y'
             // no: 'vector-tiles-haXTO7g'
-            scene: { import: [tg_baseScene, 'theme/black.yaml'], global: tg_global },
+            scene: { import: [tg_baseScene, 'theme/sepia-orange.yaml'], global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
 
@@ -508,15 +508,15 @@
             var color = {
                 '(default)': 'black',
                 'black': 'black',
-                'gray': 'gray',
-                'pink': 'pink',
-                'blue': 'blue',
-                'sepia': 'sepia',
                 'high-contrast': 'high-contrast',
-                'inverted': 'inverted',
-                'pink-yellow': 'pink-yellow',
-                'purple-green': 'purple-green',
-                'inverted-blue': 'inverted-blue'
+                'gray': 'gray',
+                'COLOR - pink': 'pink',
+                'COLOR - blue': 'blue',
+                'COLOR - sepia': 'sepia',
+                'COLOR - pink-yellow': 'pink-yellow',
+                'COLOR - sepia-orange': 'sepia-orange',
+                'DARK - inverted': 'inverted',
+                'DARK - purple-green': 'purple-green',
             };
             // use query language, else default to English
             gui.color = query.color || 'black';

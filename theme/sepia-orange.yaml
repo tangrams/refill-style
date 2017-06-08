@@ -1,28 +1,50 @@
 global:
-    # PINK ORANGE
-    black_color:               [1.000,0.227,0.580]
-    dark_color:                [1.000,0.502,0.733]
-    mid_color:                 [1.000,0.576,0.769]
-    midlight_color:            [1.000,0.663,0.816]
-    light_color:               [0.996,0.757,0.867]
-    lighter_color:             [1.000,0.831,0.910]
-    lightest_color:            [1.000,0.894,0.941]
-    ultralight_color:          [1.000,0.929,0.965]
-    offwhite_color:            [1.000,0.973,0.984]
-    white_color:               [1.000,1.000,1.000]
-    transparent:               [1.000,0.880,0.972,0.250]
-    route_line:                [0.369,0.349,0.729]
+    # SEPIA
+    black_color:                  [0.588,0.341,0.353]
+    dark_color:                   [0.675,0.431,0.443]
+    mid_color:                    [0.745,0.537,0.545]
+    midlight_color:               [0.796,0.631,0.639]
+    light_color:                  [0.835,0.729,0.733]
+    lighter_color:                [0.847,0.769,0.773]
+    lightest_color:               [0.871,0.816,0.820]
+    ultralight_color:             [0.953,0.918,0.925]
+    offwhite_color:               [0.973,0.933,0.933]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.940,0.868,0.855,0.250]
+    route_line:                   [0.700,0.196,0.507]
 
-    # YELLOW
-    two_color_black: [0.730,0.633,0.000]
-    two_color_dark: [0.910,0.789,0.000]
-    two_color_mid_dark: [0.980,0.885,0.265]
-    two_color_mid: [0.976,0.898,0.400]
-    two_color_midlight: [0.980,0.919,0.519]
-    two_color_light: [0.980,0.938,0.666]
-    two_color_lighter: [1.000,0.969,0.770]
-    two_color_ultralight: [1.000,0.980,0.850]
-    two_color_offwhite: [1.000,0.992,0.940]
+    # GREEN
+    # two_color_black: [0.617,0.768,0.000]
+    # two_color_dark: [0.674,0.830,0.000]
+    # two_color_mid_dark: [0.790,0.935,0.185]
+    # two_color_mid: [0.859,0.980,0.341]
+    # two_color_midlight: [0.878,0.976,0.463]
+    # two_color_light: [0.898,0.965,0.616]
+    # two_color_lighter: [0.929,0.976,0.718]
+    # two_color_ultralight: [0.941,0.973,0.804]
+    # two_color_offwhite: [0.955,0.972,0.875]
+
+    # ORANGE
+    # two_color_black: [0.847,0.369,0.000]
+    # two_color_dark: [0.910,0.455,0.000]
+    # two_color_mid_dark: [1.000,0.624,0.243]
+    # two_color_mid: [1.000,0.686,0.376]
+    # two_color_midlight: [1.000,0.745,0.498]
+    # two_color_light: [1.000,0.824,0.647]
+    # two_color_lighter: [1.000,0.882,0.769]
+    # two_color_ultralight: [1.000,0.925,0.851]
+    # two_color_offwhite: [1.000,0.969,0.941]
+
+    # ORANGE II
+    two_color_black: [1.000,0.350,0.000]
+    two_color_dark: [0.996,0.424,0.114]
+    two_color_mid_dark: [1.000,0.600,0.384]
+    two_color_mid: [0.996,0.667,0.494]
+    two_color_midlight: [1.000,0.733,0.592]
+    two_color_light: [0.996,0.808,0.710]
+    two_color_lighter: [0.996,0.875,0.808]
+    two_color_ultralight: [1.000,0.922,0.878]
+    two_color_offwhite: [1.000,0.965,0.949]
 
 
 layers:
@@ -68,12 +90,12 @@ layers:
         railway:
             draw:
                 railway_dash:
-                    color: global.two_color_mid
+                    color: global.two_color_mid_dark
 
         ferry:
             draw:
                 lines:
-                    color: global.two_color_mid
+                    color: global.two_color_midlight
 
 
     landuse:
@@ -179,7 +201,7 @@ layers:
             polygons:
                 color: global.white_color
             lines:
-                color: [[14, global.two_color_mid], [17, global.two_color_dark]]
+                color: [[14, global.two_color_mid], [17, global.two_color_mid_dark]]
 
         footprints:
             extrude:
@@ -187,7 +209,7 @@ layers:
                     polygons:
                         color: global.white_color
                     lines:
-                        color: [[14, global.two_color_mid], [17, global.two_color_dark]]
+                        color: [[14, global.two_color_mid], [17, global.two_color_mid_dark]]
 
     boundaries:
         country:

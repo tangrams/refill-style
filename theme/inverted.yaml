@@ -79,10 +79,10 @@ layers:
                 medium-dots:
                     color: [0.200,0.200,0.200]
 
-        zoo:
-            draw:
-                tiny-dots:
-                    color: global.lighter_color
+        # zoo:
+        #     draw:
+        #         tiny-dots:
+        #             color: global.lighter_color
 
         playground:
             draw:
@@ -107,7 +107,7 @@ styles:
         shaders:
             uniforms:
                 u_lighter: global.light_color
-                u_lightest: global.lightest_color
+                u_lightest: global.black_color
     dots:
         shaders:
             defines:
