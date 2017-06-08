@@ -5553,6 +5553,7 @@ layers:
                     visible: true
                 outline:
                     style: lines
+                    order: global.feature_order
                     color: global.ultralight_color
                     width: [[14, 0px], [15, 1px], [18, 2px]]
         playground:
