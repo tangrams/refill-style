@@ -1,5 +1,5 @@
 global:
-    # SEPIA
+    # BROWN
     black_color:                  [0.588,0.341,0.353]
     dark_color:                   [0.675,0.431,0.443]
     mid_color:                    [0.745,0.537,0.545]
@@ -12,28 +12,6 @@ global:
     white_color:                  [1.00,1.00,1.00]
     transparent:                  [0.940,0.868,0.855,0.250]
     route_line:                   [0.700,0.196,0.507]
-
-    # GREEN
-    # two_color_black: [0.617,0.768,0.000]
-    # two_color_dark: [0.674,0.830,0.000]
-    # two_color_mid_dark: [0.790,0.935,0.185]
-    # two_color_mid: [0.859,0.980,0.341]
-    # two_color_midlight: [0.878,0.976,0.463]
-    # two_color_light: [0.898,0.965,0.616]
-    # two_color_lighter: [0.929,0.976,0.718]
-    # two_color_ultralight: [0.941,0.973,0.804]
-    # two_color_offwhite: [0.955,0.972,0.875]
-
-    # ORANGE
-    # two_color_black: [0.847,0.369,0.000]
-    # two_color_dark: [0.910,0.455,0.000]
-    # two_color_mid_dark: [1.000,0.624,0.243]
-    # two_color_mid: [1.000,0.686,0.376]
-    # two_color_midlight: [1.000,0.745,0.498]
-    # two_color_light: [1.000,0.824,0.647]
-    # two_color_lighter: [1.000,0.882,0.769]
-    # two_color_ultralight: [1.000,0.925,0.851]
-    # two_color_offwhite: [1.000,0.969,0.941]
 
     # ORANGE II
     two_color_black: [1.000,0.350,0.000]
