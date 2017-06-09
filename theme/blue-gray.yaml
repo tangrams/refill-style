@@ -134,7 +134,7 @@ layers:
         ferry:
             draw:
                 lines:
-                    color: global.two_color_mid
+                    color: global.two_color_light
 
 
     landuse:
