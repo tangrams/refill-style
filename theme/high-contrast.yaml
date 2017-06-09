@@ -15,6 +15,7 @@ global:
 
     hi_contrast_mid:              [0.400,0.400,0.400]
     hi_contrast_midlight:         [0.500,0.500,0.500]
+    hi_contrast_offwhite:         [0.980,0.980,0.980]
 
 
     # FILTER
@@ -232,7 +233,7 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: [0.980,0.980,0.980]
+                u_tint: global.hi_contrast_offwhite
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*110.0,1.0);
@@ -247,7 +248,7 @@ styles:
     railway_dash:
         base: lines
         dash: [0.5, 2.0]
-        dash_background_color: [0.250,0.250,0.250]
+        dash_background_color: global.hi_contrast_midlight
 
 textures:
     building-grid:
