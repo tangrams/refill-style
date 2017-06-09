@@ -10,7 +10,7 @@ global:
     ultralight_color:          [1.000,0.929,0.965]
     offwhite_color:            [1.000,0.973,0.984]
     white_color:               [1.000,1.000,1.000]
-    transparent:               [1.000,0.880,0.972,0.250]
+    transparent:               [1.000,0.831,0.910,0.250]
     route_line:                [0.369,0.349,0.729]
 
     # YELLOW

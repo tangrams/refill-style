@@ -10,7 +10,7 @@ global:
     ultralight_color:             [0.953,0.918,0.925]
     offwhite_color:               [0.973,0.933,0.933]
     white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.940,0.868,0.855,0.250]
+    transparent:                  [0.847,0.769,0.773,0.250]
     route_line:                   [0.700,0.196,0.507]
 
     # ORANGE II

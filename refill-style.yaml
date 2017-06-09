@@ -2599,11 +2599,11 @@ layers:
                     - kind_detail: [steps, track, pier]
             draw:
                 lines:
-                    color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
-                    width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 2px], [20, 1m]]
+                    color: [[14, global.light_color], [17, global.white_color]]
+                    width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                     outline:
-                        color: [[14, global.lighter_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
-                        width: [[13, 0px], [14, 0px], [15, 0.5px], [16, 0px], [17, 1px]]
+                        color: global.light_color
+                        width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
             early:
                 filter:
                     $zoom: { max: 15 }
@@ -2617,27 +2617,27 @@ layers:
                 filter: { kind_detail: pedestrian }
                 draw:
                     lines:
-                        color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
-                        width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 2px], [20, 1m]]
+                        color: [[14, global.light_color], [17, global.white_color]]
+                        width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                         outline:
-                            color: [[14, global.lighter_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 0px], [15, 0.5px], [16, 0px], [17, 1px]]
+                            color: global.light_color
+                            width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
             footway:
                 filter: { kind_detail: footway }
                 draw:
                     lines:
-                        color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
-                        width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 2px], [20, 1m]]
+                        color: [[14, global.light_color], [17, global.white_color]]
+                        width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                         outline:
-                            color: [[14, global.lighter_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 0px], [15, 0.5px], [16, 0px], [17, 1px]]
+                            color: global.light_color
+                            width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
                 bridge:
                     filter: { is_bridge: true }
                     draw:
                         lines:
                             cap: round
                             outline:
-                                color: [[14, global.mid_color], [15, global.white_color], [16, global.white_color], [17, global.mid_color]]
+                                color: global.mid_color
                                 cap: butt
             bridge:
                 filter: { is_bridge: true }
@@ -2645,7 +2645,7 @@ layers:
                     lines:
                         cap: round
                         outline:
-                            color: [[14, global.mid_color], [15, global.white_color], [16, global.white_color], [17, global.mid_color]]
+                            color: global.mid_color
                             cap: butt
             labels-path:
                 filter: { $zoom: { min: 17 } }
