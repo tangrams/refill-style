@@ -3459,6 +3459,8 @@ layers:
                             - { $zoom: [17], area: { min: 500 } }
                             - { $zoom: [17], volume: { min: 15000 } }
                             - { $zoom: { min: 18 } }
+                        - not:
+                            - layer: [-1, -2, -3, -4, -5]
                 draw:
                     polygons:
                         visible: true
@@ -3471,6 +3473,13 @@ layers:
                         order: 439
                         style: building-lines
                         extrude: global.building_extrude_height
+            basement:
+                filter:
+                    all:
+                        - layer: [-1, -2, -3, -4, -5]
+                draw:
+                    lines:
+                        color: global.lightest_color
 
 
         building-labels:
