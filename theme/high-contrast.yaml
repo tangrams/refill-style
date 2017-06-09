@@ -4,13 +4,13 @@ global:
     dark_color:                   [0.000,0.000,0.000]
     mid_color:                    [0.000,0.000,0.000]
     midlight_color:               [0.000,0.000,0.000]
-    light_color:                  [0.200,0.200,0.200]
+    light_color:                  [0.300,0.300,0.300]
     lighter_color:                [0.600,0.600,0.600]
     lightest_color:               [0.800,0.800,0.800]
     ultralight_color:             [0.850,0.850,0.850]
     offwhite_color:               [0.900,0.900,0.900]
     white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.900,0.900,0.900,0.250]
+    transparent:                  [0.850,0.850,0.850,0.250]
     route_line:                   [0.700,0.196,0.507]
 
     # FILTER
@@ -63,11 +63,13 @@ layers:
                     text-blend-order:
                         font:
                             fill: global.lightest_color
+                            stroke: { color: global.black_color, width: 3 }
                 sea-labels:
                     draw:
                         text-blend-order:
                             font:
                                 fill: global.lightest_color
+                                stroke: { color: global.black_color, width: 3 }
             mostly-lakes:
                 default-label-text:
                     draw:
@@ -80,86 +82,32 @@ layers:
                     text-blend-order:
                         font:
                             fill: global.lightest_color
+                            stroke: { color: global.black_color, width: 3 }
 
     roads:
-        major_road:
-            tertiary:
-                in_park:
-                    filter: global.landuse-casing
-                    draw:
-                        lines:
-                            color: [[11, global.lighter_color], [15, global.dark_color], [16, global.white_color]]
-                            width: [[11, 0.5px], [15, 1px], [16, 1.8px], [17, 6px], [18, 9m]]
-                            outline:
-                                color: [[11, global.white_color], [15, global.white_color], [16, global.black_color]]
-                                width: [[11, 2px], [15, 3px], [16, 1px], [17, 2px], [18, 2px]]
-
-
-        minor_road:
-            in_park:
-                filter: global.landuse-casing
-                draw:
-                    lines:
-                        color: [[11, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
-                        width: [[11, 0.35px], [13, 0.5px], [14, 1px], [15, 1px], [16, 1.5px], [17, 3.5px], [18, 9m]]
-                        outline:
-                            color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
-                            width: [[11, 2px], [14, 2px], [15, 2px], [17, 1.5px], [18, 1.5px]]
-
-            tunnel:
-                in_park:
-                    filter: global.landuse-casing
-                    draw:
-                        lines:
-                            outline:
-                                color: [[11, global.white_color], [16, global.white_color], [17, global.black_color]]
-                                width: [[11, 0px], [14, 2px], [15, 2px], [17, 1.5px], [18, 1.5px]]
-
-        service_road:
-            in_park:
-                filter: global.landuse-casing
-                draw:
-                    lines:
-                        color: [[13, global.offwhite_color], [16, global.midlight_color], [17, global.white_color]]
-                        width: [[13, 0px], [15, 0.75px], [16, 1.25px], [17, 2.5px], [18, 5m]]
-                        outline:
-                            color: [[13, global.white_color], [16, global.white_color], [17, global.black_color]]
-                            width: [[13, 0px], [14, 0.5px], [15, 2px], [16, 3px], [17, 1.25px]]
         path:
-            in_park:
-                filter: global.landuse-casing
-                draw:
-                    lines:
-                        outline:
-                            color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 1px], [15, 2px], [16, 3px], [17, 1px]]
+            draw:
+                lines:
+                    outline:
+                        color: global.lighter_color
 
-            pedestrian:
-                in_park:
-                    filter: global.landuse-casing
-                    draw:
-                        lines:
-                            outline:
-                                color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-                                width: [[13, 0px], [14, 1px], [15, 2px], [16, 3px], [17, 1px]]
+        pedestrian:
+            draw:
+                lines:
+                    outline:
+                        color: global.lighter_color
 
-            footway:
-                in_park:
-                    filter: global.landuse-casing
-                    draw:
-                        lines:
-                            outline:
-                                color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-                                width: [[13, 0px], [14, 0px], [15, 2px], [16, 3px], [17, 1px]]
+        footway:
+            draw:
+                lines:
+                    outline:
+                        color: global.lighter_color
 
         track:
-            in_park:
-                filter: global.landuse-casing
-                draw:
-                    lines:
-                        outline:
-                            color: [[14, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 1px], [15, 2px], [16, 3px], [17, 1px]]
+            draw:
+                lines:
+                    outline:
+                        color: global.lighter_color
 
         railway:
             draw:
@@ -173,13 +121,6 @@ layers:
                 color: global.white_color
             lines:
                 color: global.lighter_color
-
-        # building footprints, pre-extrusion
-        footprints:
-            extrude:
-                draw:
-                    polygons:
-                        color: global.white_color
 
     earth-labels:
         continent:
@@ -237,7 +178,7 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: [0.980,0.980,0.980] #global.lightest_color
+                u_tint: [0.980,0.980,0.980]
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*110.0,1.0);
@@ -247,7 +188,7 @@ styles:
     pixel-pattern-bright:
         shaders:
             uniforms:
-                u_tint: [0.90,0.90,0.90] #global.lightest_color
+                u_tint: global.offwhite_color
 
     railway_dash:
         base: lines
