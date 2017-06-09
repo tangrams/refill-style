@@ -2134,7 +2134,7 @@ layers:
 
         arrows:
             # oneway arrows and shields are distinct groups!
-            filter: { oneway: yes, shield_text: false, $zoom: { min: 17 } }
+            filter: { oneway: yes, shield_text: false, not: { kind: rail }, $zoom: { min: 17 } }
             draw:
                 arrows:
                     style: icons
