@@ -3565,7 +3565,7 @@ layers:
                 country-outerline:
                     style: lines
                     order: function() { return (feature.sort_rank -1); }
-                    color: [[0, global.light_color], [8, global.lighter_color]]
+                    color: [[0, global.lightest_color], [8, global.lighter_color]]
                     width: [[0, 0px], [6, 4px], [14, 7px], [17, 14m]]
                 lines:
                     color: global.white_color
@@ -3597,7 +3597,7 @@ layers:
             draw:
                 dashed:
                     order: global.feature_order
-                    color: global.light_color
+                    color: global.lighter_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
             disputed:
                 filter: { kind: [disputed, line_of_control] }
@@ -3606,7 +3606,7 @@ layers:
                         visible: false
                     dashed_big:
                         order: global.feature_order
-                        color: global.light_color
+                        color: global.lighter_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
 
         region:

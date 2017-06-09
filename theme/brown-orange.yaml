@@ -208,21 +208,21 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
 
         other_country_boundary_disputed_etc:
             draw:
                 dashed:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
             disputed:
                 draw:
                     dashed_big:
-                        color: global.two_color_lighter
+                        color: global.two_color_lightest
 
         region:
             draw:
                 lines:
-                    color: global.two_color_lightest
+                    color: global.two_color_ultralight
 
 styles:
     railway_dash:
