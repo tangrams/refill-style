@@ -77,11 +77,11 @@ layers:
         airport-lines:
             draw:
                 lines:
-                    color: global.two_color_light
+                    color: global.two_color_mid
             taxiway:
                 draw:
                     lines:
-                        color: global.two_color_ultralight
+                        color: global.two_color_lighter
 
 
     landuse:
@@ -93,7 +93,7 @@ layers:
         parks-and-national-forests-not-national-park:
             draw:
                 dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_ultralight
 
         farm:
             draw:
@@ -186,7 +186,7 @@ layers:
             runway:
                 draw:
                     polygons:
-                        color: global.two_color_light
+                        color: global.two_color_mid
 
     buildings:
         draw:
