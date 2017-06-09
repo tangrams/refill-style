@@ -16,11 +16,11 @@ global:
     # YELLOW
     two_color_black: [0.730,0.633,0.000]
     two_color_dark: [0.910,0.789,0.000]
-    two_color_mid_dark: [0.980,0.885,0.265]
-    two_color_mid: [0.976,0.898,0.400]
-    two_color_midlight: [0.980,0.919,0.519]
-    two_color_light: [0.980,0.938,0.666]
-    two_color_lighter: [1.000,0.969,0.770]
+    two_color_mid: [0.980,0.885,0.265]
+    two_color_midlight: [0.976,0.898,0.400]
+    two_color_light: [0.980,0.919,0.519]
+    two_color_lighter: [0.980,0.938,0.666]
+    two_color_lightest: [1.000,0.969,0.770]
     two_color_ultralight: [1.000,0.980,0.850]
     two_color_offwhite: [1.000,0.992,0.940]
 
@@ -29,77 +29,77 @@ layers:
     water:
         draw:
             waves:
-                color: [[1, global.two_color_lighter], [13, global.two_color_light]]
+                color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
         later:
             draw:
                 waves:
-                    color: [[1, global.two_color_lighter], [13, global.two_color_light]]
+                    color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         lakes:
             draw:
                 waves:
-                    color: [[1, global.two_color_lighter], [13, global.two_color_light]]
+                    color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         other-water-areas:
             draw:
                 waves:
-                    color: [[1, global.two_color_lighter], [13, global.two_color_light]]
+                    color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         swimming_pool:
             draw:
                 waves:
-                    color: [[1, global.two_color_lighter], [13, global.two_color_light]]
+                    color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         water-boundary-ocean:
             draw:
                 coast:
-                    color: global.two_color_mid_dark
+                    color: global.two_color_mid
 
         water_boundaries-not-ocean:
             draw:
                 coast:
-                    color: global.two_color_mid_dark
+                    color: global.two_color_mid
             riverbank:
                 draw:
                     coast:
-                        color: global.two_color_mid_dark
+                        color: global.two_color_mid
 
     roads:
         railway:
             draw:
                 railway_dash:
-                    color: global.two_color_mid
+                    color: global.two_color_midlight
 
         ferry:
             draw:
                 lines:
-                    color: global.two_color_mid
+                    color: global.two_color_midlight
 
         airport-lines:
             draw:
                 lines:
-                    color: global.two_color_mid
+                    color: global.two_color_midlight
             taxiway:
                 draw:
                     lines:
-                        color: global.two_color_lighter
+                        color: global.two_color_lightest
 
 
     landuse:
         national_park:
             draw:
                 dots:
-                    color: global.two_color_light
+                    color: global.two_color_lighter
 
         parks-and-national-forests-not-national-park:
             draw:
                 dots:
-                    color: global.two_color_light
+                    color: global.two_color_lighter
 
         farm:
             draw:
                 tiny-dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
 
         university:
             draw:
@@ -109,17 +109,17 @@ layers:
         cemetery:
             draw:
                 tiny-dots:
-                    color: global.two_color_midlight
+                    color: global.two_color_light
 
         golf_course:
             draw:
                 medium-dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
 
         hospital:
             draw:
                 medium-dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
 
         recreation_ground:
             draw:
@@ -129,27 +129,27 @@ layers:
         stadium:
             draw:
                 dots-rev-grid:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
 
         man-made:
             draw:
                 horizontal-bars:
-                    color: global.two_color_light
+                    color: global.two_color_lighter
 
         tier5:
             tourism-related:
                 draw:
                     dots:
-                        color: global.two_color_light
+                        color: global.two_color_lighter
             beach:
                 draw:
                     dots:
-                        color: global.two_color_midlight
+                        color: global.two_color_light
 
         garden:
             draw:
                 tiny-dots:
-                    color: global.two_color_light
+                    color: global.two_color_lighter
 
         parking:
             draw:
@@ -164,14 +164,14 @@ layers:
         pitch:
             draw:
                 tiny-dots:
-                    color: global.two_color_midlight
+                    color: global.two_color_light
                 outline:
-                    color: global.two_color_midlight
+                    color: global.two_color_light
 
         playground:
             draw:
                 dots-rev:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
 
         school:
             draw:
@@ -181,20 +181,20 @@ layers:
         minor-landuse:
             draw:
                 dots:
-                    color: global.two_color_light
+                    color: global.two_color_lighter
 
         landuse-not-filtered:
             runway:
                 draw:
                     polygons:
-                        color: global.two_color_mid
+                        color: global.two_color_lighter
 
     buildings:
         draw:
             polygons:
                 color: global.white_color
             lines:
-                color: [[14, global.two_color_mid], [17, global.two_color_dark]]
+                color: [[14, global.two_color_midlight], [17, global.two_color_dark]]
 
         footprints:
             extrude:
@@ -202,27 +202,27 @@ layers:
                     polygons:
                         color: global.white_color
                     lines:
-                        color: [[14, global.two_color_mid], [17, global.two_color_dark]]
+                        color: [[14, global.two_color_midlight], [17, global.two_color_dark]]
 
     boundaries:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_light
+                    color: global.two_color_lighter
 
         other_country_boundary_disputed_etc:
             draw:
                 dashed:
-                    color: global.two_color_light
+                    color: global.two_color_lighter
             disputed:
                 draw:
                     dashed_big:
-                        color: global.two_color_light
+                        color: global.two_color_lighter
 
         region:
             draw:
                 lines:
-                    color: global.two_color_lighter
+                    color: global.two_color_lightest
 
 styles:
     railway_dash:
@@ -233,7 +233,7 @@ styles:
     waves:
         shaders:
             uniforms:
-                u_lighter: global.two_color_light
+                u_lighter: global.two_color_lighter
                 u_lightest: global.two_color_ultralight
 
     coast:
@@ -249,12 +249,12 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: global.two_color_lighter
+                u_tint: global.two_color_lightest
 
     pixel-pattern-bright:
         shaders:
             uniforms:
-                u_tint: global.two_color_lighter
+                u_tint: global.two_color_lightest
 
 textures:
     building-grid:
