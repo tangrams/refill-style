@@ -1,17 +1,4 @@
 global:
-    # GREEN (default)
-    # black_color:                [0.000,1.000,0.483]
-    # dark_color:                 [0.000,0.765,0.370]
-    # mid_color:                  [0.000,0.489,0.236]
-    # midlight_color:             [0.000,0.383,0.185]
-    # light_color:                [0.000,0.236,0.114]
-    # lighter_color:              [0.000,0.169,0.082]
-    # lightest_color:             [0.000,0.156,0.075]
-    # ultralight_color:           [0.000,0.130,0.063]
-    # offwhite_color:             [0.000,0.094,0.045]
-    # white_color:                [0.000,0.000,0.000]
-    # transparent:                [0.270,0.270,0.270,0.250]
-    # route_line:                 [0.000,0.500,1.000]
 
     # GREEN II
     black_color:                [0.012,0.984,0.643]
@@ -26,15 +13,6 @@ global:
     white_color:                [0.000,0.000,0.000]
     transparent:                [0.004,0.482,0.314,0.250]
     route_line:                 [0.000,0.500,1.000]
-
-    # VIOLET I
-    # two_color_black:            [0.114,0.061,0.174]
-    # two_color_dark:             [0.147,0.079,0.225]
-    # two_color_mid:              [0.165,0.088,0.252]
-    # two_color_midlight:         [0.186,0.100,0.285]
-    # two_color_lighter:          [0.273,0.146,0.417]
-    # two_color_lightest:         [0.416,0.223,0.637]
-    # two_color_offwhite:         [0.608,0.326,0.931]
 
     # VIOLET II
     two_color_black:            [0.106,0.082,0.153]

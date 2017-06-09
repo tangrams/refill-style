@@ -2134,7 +2134,7 @@ layers:
 
         arrows:
             # oneway arrows and shields are distinct groups!
-            filter: { oneway: yes, shield_text: false, $zoom: { min: 17 } }
+            filter: { oneway: yes, shield_text: false, not: { kind: rail }, $zoom: { min: 17 } }
             draw:
                 arrows:
                     style: icons
@@ -2599,11 +2599,11 @@ layers:
                     - kind_detail: [steps, track, pier]
             draw:
                 lines:
-                    color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
-                    width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 2px], [20, 1m]]
+                    color: [[14, global.light_color], [16, global.white_color]]
+                    width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                     outline:
-                        color: [[14, global.lighter_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
-                        width: [[13, 0px], [14, 0px], [15, 0.5px], [16, 0px], [17, 1px]]
+                        color: global.light_color
+                        width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
             early:
                 filter:
                     $zoom: { max: 15 }
@@ -2617,27 +2617,27 @@ layers:
                 filter: { kind_detail: pedestrian }
                 draw:
                     lines:
-                        color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
-                        width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 2px], [20, 1m]]
+                        color: [[14, global.light_color], [16, global.white_color]]
+                        width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                         outline:
-                            color: [[14, global.lighter_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 0px], [15, 0.5px], [16, 0px], [17, 1px]]
+                            color: global.light_color
+                            width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
             footway:
                 filter: { kind_detail: footway }
                 draw:
                     lines:
-                        color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
-                        width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 2px], [20, 1m]]
+                        color: [[14, global.light_color], [16, global.white_color]]
+                        width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                         outline:
-                            color: [[14, global.lighter_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
-                            width: [[13, 0px], [14, 0px], [15, 0.5px], [16, 0px], [17, 1px]]
+                            color: global.light_color
+                            width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
                 bridge:
                     filter: { is_bridge: true }
                     draw:
                         lines:
                             cap: round
                             outline:
-                                color: [[14, global.mid_color], [15, global.white_color], [16, global.white_color], [17, global.mid_color]]
+                                color: global.mid_color
                                 cap: butt
             bridge:
                 filter: { is_bridge: true }
@@ -2645,7 +2645,7 @@ layers:
                     lines:
                         cap: round
                         outline:
-                            color: [[14, global.mid_color], [15, global.white_color], [16, global.white_color], [17, global.mid_color]]
+                            color: global.mid_color
                             cap: butt
             labels-path:
                 filter: { $zoom: { min: 17 } }
@@ -3574,7 +3574,7 @@ layers:
                 country-outerline:
                     style: lines
                     order: function() { return (feature.sort_rank -1); }
-                    color: [[0, global.light_color], [8, global.lighter_color]]
+                    color: [[0, global.lightest_color], [8, global.lighter_color]]
                     width: [[0, 0px], [6, 4px], [14, 7px], [17, 14m]]
                 lines:
                     color: global.white_color
@@ -3586,7 +3586,7 @@ layers:
                         visible: false
                     lines:
                         visible: false
-            labels-z9-up:
+            country-labels:
                 filter: { name: true, $zoom: { min: 8 }, not: { maritime_boundary: true } }
                 draw:
                     text-blend-order:
@@ -3606,7 +3606,7 @@ layers:
             draw:
                 dashed:
                     order: global.feature_order
-                    color: global.light_color
+                    color: global.lighter_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
             disputed:
                 filter: { kind: [disputed, line_of_control] }
@@ -3615,7 +3615,7 @@ layers:
                         visible: false
                     dashed_big:
                         order: global.feature_order
-                        color: global.light_color
+                        color: global.lighter_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
 
         region:
@@ -3637,7 +3637,7 @@ layers:
                 draw:
                     lines:
                         visible: false
-            labels-z9-up:
+            region-labels:
                 filter: { name: true, $zoom: { min: 9 }, not: { maritime_boundary: true } }
                 draw:
                     text-blend-order:
