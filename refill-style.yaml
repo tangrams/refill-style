@@ -3577,7 +3577,7 @@ layers:
                         visible: false
                     lines:
                         visible: false
-            labels-z9-up:
+            country-labels:
                 filter: { name: true, $zoom: { min: 8 }, not: { maritime_boundary: true } }
                 draw:
                     text-blend-order:
@@ -3628,7 +3628,7 @@ layers:
                 draw:
                     lines:
                         visible: false
-            labels-z9-up:
+            region-labels:
                 filter: { name: true, $zoom: { min: 9 }, not: { maritime_boundary: true } }
                 draw:
                     text-blend-order:
