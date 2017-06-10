@@ -128,7 +128,7 @@ layers:
         stadium:
             draw:
                 dots-rev-grid:
-                    color: global.two_color_ultralight
+                    color: global.two_color_offwhite
 
         man-made:
             draw:
