@@ -1,0 +1,255 @@
+global:
+    # HIGH CONTRAST CUSTOM GLOBALS
+    black_color:                  [0.000,0.000,0.000]
+    dark_color:                   [0.000,0.000,0.000]
+    mid_color:                    [0.000,0.000,0.000]
+    midlight_color:               [0.000,0.000,0.000]
+    light_color:                  [0.200,0.200,0.200]
+    lighter_color:                [0.600,0.600,0.600]
+    lightest_color:               [0.800,0.800,0.800]
+    ultralight_color:             [0.850,0.850,0.850]
+    offwhite_color:               [0.950,0.950,0.950]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.850,0.850,0.850,0.250]
+    route_line:                   [0.700,0.196,0.507]
+
+    hi_contrast_mid:              [0.300,0.300,0.300]
+    hi_contrast_midlight:         [0.500,0.500,0.500]
+    hi_contrast_offwhite:         [0.980,0.980,0.980]
+
+
+    # FILTER
+    landuse-casing:
+        any:
+            - landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest, attraction, natural_wood, recreation_ground]
+
+layers:
+    water:
+        draw:
+            waves:
+                color: global.hi_contrast_mid
+        later:
+            draw:
+                waves:
+                    color: global.hi_contrast_mid
+
+        lakes:
+            draw:
+                waves:
+                    color: global.hi_contrast_mid
+
+        other-water-areas:
+            draw:
+                waves:
+                    color: global.hi_contrast_mid
+
+        swimming_pool:
+            draw:
+                waves:
+                    color: global.hi_contrast_mid
+
+        water-boundary-ocean:
+            draw:
+                coast:
+                    color: global.hi_contrast_midlight
+
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    color: global.hi_contrast_midlight
+            riverbank:
+                draw:
+                    coast:
+                        color: global.hi_contrast_midlight
+
+        water-area-labels:
+            ocean-sea-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.lightest_color
+                            stroke: { color: global.black_color, width: 3 }
+                sea-labels:
+                    draw:
+                        text-blend-order:
+                            font:
+                                fill: global.lightest_color
+                                stroke: { color: global.black_color, width: 3 }
+            mostly-lakes:
+                default-label-text:
+                    draw:
+                        text-blend-order:
+                            font:
+                                fill: global.lightest_color
+                                stroke: { color: global.light_color, width: 3 }
+            water-line-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.lightest_color
+                            stroke: { color: global.black_color, width: 3 }
+
+    roads:
+        path:
+            draw:
+                lines:
+                    outline:
+                        color: global.lighter_color
+
+            pedestrian:
+                draw:
+                    lines:
+                        outline:
+                            color: global.lighter_color
+
+            footway:
+                draw:
+                    lines:
+                        outline:
+                            color: global.lighter_color
+
+        track:
+            draw:
+                lines:
+                    outline:
+                        color: global.lighter_color
+
+        railway:
+            draw:
+                railway_dash:
+                    color: global.white_color
+                    width: [[12, 0px], [12, 0.5px], [15, 0.5px], [18, 2px], [20, 1m]]
+
+        ferry:
+            draw:
+                lines:
+                    color: global.hi_contrast_midlight
+
+        airport-lines:
+            draw:
+                lines:
+                    color: global.black_color
+            taxiway:
+                draw:
+                    lines:
+                        color: global.black_color
+
+
+    landuse:
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.black_color
+
+    buildings:
+        draw:
+            polygons:
+                color: global.white_color
+            lines:
+                color: global.lighter_color
+
+    boundaries:
+        country:
+            draw:
+                country-outerline:
+                    color: global.lighter_color
+
+            country-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.white_color, width: 3 }
+
+        other_country_boundary_disputed_etc:
+            draw:
+                dashed:
+                    color: global.lighter_color
+            disputed:
+                draw:
+                    dashed_big:
+                        color: global.lighter_color
+
+        region:
+            region-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.white_color, width: 3 }
+
+    earth-labels:
+        continent:
+            draw:
+                text-blend-order:
+                    font:
+                        stroke: { color: global.white_color, width: 3 }
+
+
+styles:
+    building-grid:
+        shaders:
+            uniforms:
+                u_grid_color: global.light_color
+
+    waves:
+        shaders:
+            uniforms:
+                u_lighter: global.hi_contrast_mid
+                u_lightest: global.black_color
+
+    coast:
+        shaders:
+            defines:
+                OPACITY: 1.0
+    dots:
+        shaders:
+            defines:
+                PATTERN_SCALE: 75.0
+                DOT_SIZE: 0.05
+
+    medium-dots:
+        shaders:
+            defines:
+                PATTERN_SCALE: 70.0
+                DOT_SIZE: 0.11
+
+    tiny-dots:
+        shaders:
+            defines:
+                PATTERN_SCALE: 80.0
+                DOT_SIZE: 0.03
+
+    dots-rev:
+        shaders:
+            defines:
+                PATTERN_SCALE: 60.0
+
+    horizontal-bars-rev:
+        shaders:
+            defines:
+                PATTERN_SCALE: 75.0
+
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: global.hi_contrast_offwhite
+            blocks:
+                filter: |
+                    vec3 pos = vec3(getTileCoords()*110.0,1.0);
+                    color.rgb = u_tint * vec3(random(abs(floor(pos)))+0.805);
+
+
+    pixel-pattern-bright:
+        shaders:
+            uniforms:
+                u_tint: global.offwhite_color
+
+    railway_dash:
+        base: lines
+        dash: [0.5, 2.0]
+        dash_background_color: global.hi_contrast_midlight
+
+textures:
+    building-grid:
+        url: ../images/building-grid-hi-contrast3.gif

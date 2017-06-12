@@ -1,0 +1,16 @@
+global:
+    # BLUE
+    black_color:                [0.000,0.337,0.878]
+    dark_color:                 [0.141,0.424,0.880]
+    mid_color:                  [0.282,0.523,0.910]
+    midlight_color:             [0.382,0.585,0.910]
+    light_color:                [0.489,0.662,0.940]
+    lighter_color:              [0.686,0.783,0.940]
+    lightest_color:             [0.805,0.871,0.970]
+    ultralight_color:           [0.872,0.915,0.980]
+    offwhite_color:             [0.921,0.947,0.990]
+    white_color:                [1.00,1.00,1.00]
+    transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
+    route_line:                 [0.502,0.200,0.671]
+
+

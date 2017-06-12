@@ -1,0 +1,297 @@
+global:
+    # BLACK (default)
+    black_color:                [1.00,1.00,1.00]
+    dark_color:                 [0.753,0.761,0.961]
+    mid_color:                  [0.528,0.544,0.966]
+    midlight_color:             [0.451,0.475,0.939]
+    light_color:                [0.380,0.411,1.000]
+    lighter_color:              [0.338,0.380,0.966]
+    lightest_color:             [0.301,0.345,0.970]
+    ultralight_color:           [0.258,0.302,0.920]
+    offwhite_color:             [0.221,0.267,0.920]
+    white_color:                [0.157,0.216,0.918]
+    transparent:                [0.753,0.761,0.961,0.250]
+    route_line:                 [0.000,0.500,1.000]
+
+layers:
+    water:
+        draw:
+            waves:
+                color: global.white_color # colors the wave lines
+        later:
+            draw:
+                waves:
+                    color: global.white_color # colors the wave lines
+
+        lakes:
+            draw:
+                waves:
+                    color: global.white_color
+
+        other-water-areas:
+            draw:
+                waves:
+                    color: global.white_color
+
+        swimming_pool:
+            draw:
+                waves:
+                    color: global.white_color
+
+        water-boundary-ocean:
+            draw:
+                coast:
+                    color: global.black_color
+
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    color: global.black_color
+            riverbank:
+                draw:
+                    coast:
+                        color: global.black_color
+
+    roads:
+        airport-lines:
+            draw:
+                lines:
+                    color: global.black_color
+            taxiway:
+                draw:
+                    lines:
+                        color: global.midlight_color
+
+    landuse:
+        draw:
+            rock:
+                order: global.feature_order
+                visible: false
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.black_color
+
+
+
+styles:
+    waves:
+        base: polygons
+        mix: [space-constant, patterns-stripes]
+        shaders:
+            uniforms:
+                u_lighter: global.ultralight_color
+                u_lightest: global.mid_color
+            blocks:
+                global: |
+                    float stripes2(vec2 st){
+                        return step(.3,1.0-smoothstep(.5,1.,abs(sin(st.y*3.14159265358))));
+                    }
+                filter: |
+                    vec2 st = getConstantCoords();
+
+                    const float wave_width = 30.0;
+                    const float wave_height = .01;
+                    st.y += sin(st.x*wave_width)*wave_height;
+
+                    // gradient
+                    //color.rgb = mix(u_lighter, color.rgb, gl_FragCoord.x / u_resolution.x);
+                    color = mix(color,vec4(u_lightest,1.0),stripes(st*55.,.95))*1.0;
+
+    dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+                COLOR2: color.rgb
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: [0.134,0.187,0.791]
+
+    pixel-pattern-bright:
+        shaders:
+            uniforms:
+                u_tint: [0.134,0.187,0.791]
+
+    medium-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    tiny-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    dots-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    dots-rev-grid:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    horizontal-bars:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    horizontal-bars-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.157,0.216,0.918)
+
+    rock:
+        base: polygons
+        material:
+            diffuse:
+                texture: ../images/rock.png
+                mapping: planar
+                scale: .001
+
+    tools:
+        base: polygons
+        shaders:
+            blocks:
+                global: |
+                    // GridTile
+                    //=============================
+                    varying vec3 v_pos;
+                    // vec2 TileCoords(){return fract(v_pos.xy*0.0002445);}
+                    // vec2 TileCoords(){return fract(v_pos.xy*(1./pow(2.,27.)));}
+                    vec2 TileCoords(){return fract(v_pos.xy/034217728.);}
+                    // vec2 TileCoords(){return fract(v_pos.xy*0.000244140625);}
+                    // vec2 TileCoords(){return v_pos.xy;}
+                    bool grid(vec2 st, float res, float press){
+                        vec2 grid = fract(st*res);
+                        return grid.x < res*press || grid.y < res*press;
+                    }
+                    float TileGrid(float res){
+                        vec2 st = TileCoords()*100.*res;
+                        float pct = 0.0;
+                        float press = 0.4+(1.0-fract(u_map_position.z))*0.2;
+                        if (grid(st,0.01,press)) pct += 0.5;
+                        if (grid(st,0.1,press)) pct += 0.1;
+                        return pct;
+                    }
+                    float TileGrid(){ return mix(TileGrid(1.),TileGrid(2.),fract(u_map_position.z)); }
+                    // Grain
+                    //=============================
+                    float random(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+                    float noise(vec2 x) {
+                        vec2 i = floor(x);
+                        vec2 f = fract(x);
+                        float a = random(i);
+                        float b = random(i + vec2(1.0, 0.0));
+                        float c = random(i + vec2(0.0, 1.0));
+                        float d = random(i + vec2(1.0, 1.0));
+                        vec2 u = f * f * (3.0 - 2.0 * f);
+                        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+                    }
+                    float fbm( in vec2 p ){
+                        float s = 0.0;
+                        float m = 0.0;
+                        float a = 0.5;
+                        for(int i=0; i<2; i++ ){
+                            s += a * noise(p);
+                            m += a;
+                            a *= 0.5;
+                            p *= 2.0;
+                        }
+                        return s/m;
+                    }
+                    float grain(vec2 pos){
+                        vec2 st = pos/v_world_position.xy*0.01;
+                        return dot(st,st)+(fbm(pos*0.6));
+                    }
+                    // Stripes
+                    //=============================
+                    mat2 rotate2d(float angle){
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+                    float stripes(vec2 st){
+                        st = rotate2d(3.14159265358*-0.36 )*st;
+                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
+                        return step(.004,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
+                    }
+                position: |
+                    // GridTile
+                    v_pos = a_position.xyz * 32767.;
+
+    splatter:
+        base: polygons
+        mix: tools
+        animated: false
+        shaders:
+            blocks:
+                global: |
+                    vec3 random3(vec3 c) {
+                        float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
+                        vec3 r;
+                        r.z = fract(512.0*j);
+                        j *= .425;
+                        r.x = fract(512.0*j);
+                        j *= .425;
+                        r.y = fract(512.0*j);
+                        return r-0.5;
+                    }
+
+                    const float F3 =  0.3333333;
+                    const float G3 =  0.1666667;
+                    float snoise(vec3 p) {
+
+                        vec3 s = floor(p + dot(p, vec3(F3)));
+                        vec3 x = p - s + dot(s, vec3(G3));
+
+                        vec3 e = step(vec3(0.0), x - x.yzx);
+                        vec3 i1 = e*(1.0 - e.zxy);
+                        vec3 i2 = 1.0 - e.zxy*(1.0 - e);
+
+                        vec3 x1 = x - i1 + G3;
+                        vec3 x2 = x - i2 + 2.0*G3;
+                        vec3 x3 = x - 1.0 + 3.0*G3;
+
+                        vec4 w, d;
+
+                        w.x = dot(x, x);
+                        w.y = dot(x1, x1);
+                        w.z = dot(x2, x2);
+                        w.w = dot(x3, x3);
+
+                        w = max(0.565 - w, 0.0);
+
+                        d.x = dot(random3(s), x);
+                        d.y = dot(random3(s + i1), x1);
+                        d.z = dot(random3(s + i2), x2);
+                        d.w = dot(random3(s + 1.0), x3);
+
+                        w *= w;
+                        w *= w;
+                        d *= w;
+
+                        return dot(d, vec4(170.0));
+                    }
+                color: |
+                    vec2 st = TileCoords();
+
+                    float t = 1.;
+
+                    color.rgb = vec3(0.221,0.267,0.920);
+                    color.rgb = mix(color.rgb, vec3(0.157,0.216,0.918), step(.4, snoise( vec3(st*1.,t*1.+3232.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.157,0.216,0.918), step(.3, snoise( vec3(st*4.,t*2.+123.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.134,0.187,0.791), step(.2, snoise( vec3(st*4.,t+0.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.221,0.267,0.920), step(.3, snoise( vec3(st*4.,t+0.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.157,0.216,0.918), step(.2, snoise( vec3(st*7.,t+0.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.134,0.187,0.791), step(.4, snoise( vec3(st*7.,t+0.0) ) ));
+                    color.rgb = mix(color.rgb, vec3(0.221,0.267,0.920), step(.5, snoise( vec3(st*2.,t+64.0) ) ));
+
+
+textures:
+    building-grid:
+        url: ../images/building-grid-hi-contrast3.gif

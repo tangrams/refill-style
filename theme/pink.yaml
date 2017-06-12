@@ -1,0 +1,15 @@
+global:
+    # PINK
+    black_color:               [1.000,0.130,0.797]
+    dark_color:                [1.000,0.440,0.869]
+    mid_color:                 [1.000,0.520,0.888]
+    midlight_color:            [1.000,0.620,0.911]
+    light_color:               [1.000,0.730,0.937]
+    lighter_color:             [1.000,0.810,0.956]
+    lightest_color:            [1.000,0.880,0.972]
+    ultralight_color:          [1.000,0.920,0.983]
+    offwhite_color:            [1.000,0.970,0.994]
+    white_color:               [1.000,1.000,1.000]
+    transparent:               [1.000,0.880,0.972,0.250]
+    route_line:                [0.369,0.349,0.729]
+

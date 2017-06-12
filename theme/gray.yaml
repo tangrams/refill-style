@@ -1,0 +1,14 @@
+global:
+    # GRAY
+    black_color:                [0.650,0.650,0.650]
+    dark_color:                 [0.680,0.680,0.680]
+    mid_color:                  [0.722,0.722,0.722]
+    midlight_color:             [0.788,0.788,0.788]
+    light_color:                [0.824,0.824,0.824]
+    lighter_color:              [0.894,0.894,0.894]
+    lightest_color:             [0.929,0.929,0.929]
+    ultralight_color:           [0.965,0.965,0.965]
+    offwhite_color:             [0.976,0.976,0.976]
+    white_color:                [1.00,1.00,1.00]
+    transparent:                [0.929,0.929,0.929,0.250]
+    route_line:                 [0.313,0.482,0.580]
