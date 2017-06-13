@@ -1,0 +1,300 @@
+global:
+    # INVERTED
+    black_color:                [0.604,0.632,0.689]
+    dark_color:                 [0.516,0.538,0.587]
+    mid_color:                  [0.462,0.483,0.521]
+    midlight_color:             [0.380,0.394,0.422]
+    light_color:                [0.298,0.306,0.328]
+    lighter_color:              [0.244,0.248,0.262]
+    lightest_color:             [0.212,0.216,0.225]
+    ultralight_color:           [0.185,0.189,0.197]
+    offwhite_color:             [0.169,0.173,0.176]
+    white_color:                [0.153,0.157,0.161]
+    transparent:                [0.270,0.270,0.270,0.250]
+    route_line:                 [0.000,0.500,1.000]
+
+    # GOLD
+    # two_color_black:            [0.295,0.260,0.200]
+    # two_color_dark:             [0.360,0.318,0.244]
+    # two_color_mid:              [0.395,0.348,0.267]
+    # two_color_midlight:         [0.452,0.398,0.306]
+    # two_color_light:            [0.518,0.457,0.351]
+    # two_color_lighter:          [0.589,0.520,0.399]
+    # two_color_lightest:         [0.677,0.597,0.459]
+    # two_color_ultralight:       [0.771,0.680,0.522]
+    # two_color_offwhite:         [0.850,0.750,0.576]
+
+    # GOLD DARKER
+    two_color_black:            [0.144,0.127,0.097]
+    two_color_dark:             [0.176,0.155,0.119]
+    two_color_mid:              [0.240,0.212,0.163]
+    two_color_midlight:         [0.301,0.265,0.204]
+    two_color_light:            [0.418,0.368,0.283]
+    two_color_lighter:          [0.495,0.436,0.335]
+    two_color_lightest:         [0.609,0.537,0.413]
+    two_color_ultralight:       [0.715,0.631,0.484]
+    two_color_offwhite:         [0.782,0.690,0.530]
+
+
+layers:
+    water:
+        draw:
+            waves:
+                color: global.two_color_light
+        later:
+            draw:
+                waves:
+                    color: global.two_color_light
+
+        lakes:
+            draw:
+                waves:
+                    color: global.two_color_light
+
+        other-water-areas:
+            draw:
+                waves:
+                    color: global.two_color_light
+
+        swimming_pool:
+            draw:
+                waves:
+                    color: global.two_color_light
+
+        water-boundary-ocean:
+            draw:
+                coast:
+                    color: global.two_color_offwhite
+
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    color: global.two_color_offwhite
+            riverbank:
+                draw:
+                    coast:
+                        color: global.two_color_offwhite
+
+    roads:
+        arrows:
+            draw:
+                arrows:
+                    color: global.two_color_lightest
+
+        railway:
+            draw:
+                railway_dash:
+                    color: global.two_color_light
+
+        airport-lines:
+            draw:
+                lines:
+                    color: global.two_color_offwhite
+            taxiway:
+                draw:
+                    lines:
+                        color: global.two_color_light
+
+        ferry:
+            draw:
+                lines:
+                    color: global.two_color_light
+
+    buildings:
+        draw:
+            polygons:
+                color: global.white_color
+            lines:
+                color: global.two_color_light
+
+        footprints:
+            extrude:
+                draw:
+                    polygons:
+                        color: global.white_color
+                    lines:
+                        color: global.two_color_light
+
+    landuse:
+        draw:
+            rock:
+                order: global.feature_order
+                visible: false
+
+        national_park:
+            draw:
+                dots:
+                    color: global.two_color_midlight
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                dots:
+                    color: global.two_color_midlight
+
+        farm:
+            draw:
+                tiny-dots:
+                    color: global.two_color_dark
+
+        university:
+            draw:
+                dots-rev:
+                    color: global.two_color_midlight
+
+        cemetery:
+            draw:
+                tiny-dots:
+                    color: global.two_color_mid
+
+        golf_course:
+            draw:
+                medium-dots:
+                    color: global.two_color_midlight
+
+        hospital:
+            draw:
+                medium-dots:
+                    color: global.two_color_midlight
+
+        recreation_ground:
+            draw:
+                dots-rev-grid:
+                    color: global.two_color_midlight
+
+        zoo:
+            draw:
+                tiny-dots:
+                    color: global.lighter_color
+        garden:
+            draw:
+                tiny-dots:
+                    color: global.two_color_light
+
+        parking:
+            draw:
+                horizontal-bars-rev:
+                    color: global.two_color_black
+
+        pitch:
+            draw:
+                tiny-dots:
+                    color: global.two_color_lighter
+                outline:
+                    color: global.two_color_lighter
+
+        playground:
+            draw:
+                dots-rev:
+                    color: global.two_color_light
+
+        school:
+            draw:
+                dots-rev:
+                    color: global.two_color_midlight
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.two_color_offwhite
+
+    boundaries:
+        country:
+            draw:
+                country-outerline:
+                    color: global.two_color_midlight
+
+        other_country_boundary_disputed_etc:
+            draw:
+                dashed:
+                    color: global.two_color_midlight
+            disputed:
+                draw:
+                    dashed_big:
+                        color: global.two_color_midlight
+
+        region:
+            draw:
+                lines:
+                    color: global.two_color_mid
+
+
+styles:
+    railway_dash:
+        base: lines
+        dash: [0.25, 1.0]
+        dash_background_color: global.two_color_dark
+
+    building-grid:
+        shaders:
+            uniforms:
+                u_grid_color: global.two_color_offwhite
+
+    waves:
+        shaders:
+            uniforms:
+                u_lighter: global.two_color_light
+                u_lightest: global.ultralight_color
+
+    coast:
+        shaders:
+            defines:
+                OPACITY: 1.0
+
+    dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+                COLOR2: color.rgb
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: [0.120,0.123,0.126]
+
+    pixel-pattern-bright:
+        shaders:
+            uniforms:
+                u_tint: [0.120,0.123,0.126]
+
+    medium-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    tiny-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    dots-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    dots-rev-grid:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    horizontal-bars:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    horizontal-bars-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    rock:
+        base: polygons
+        material:
+            diffuse:
+                texture: ../images/rock.png
+                mapping: planar
+                scale: .001
+
+textures:
+    building-grid:
+        url: ../images/building-grid-hi-contrast3.gif
