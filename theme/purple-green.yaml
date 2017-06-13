@@ -25,7 +25,7 @@ global:
     ultralight_color:           [0.107,0.174,0.168]
     offwhite_color:             [0.087,0.136,0.132]
     white_color:                [0.000,0.000,0.000]
-    transparent:                [0.004,0.482,0.314,0.250]
+    transparent:                [0.303,0.862,0.794,0.250]
     route_line:                 [0.000,0.500,1.000]
 
     # VIOLET II
@@ -120,11 +120,6 @@ layers:
                         color: global.two_color_lightest
 
     landuse:
-        draw:
-            rock:
-                order: global.feature_order
-                visible: false
-
         national_park:
             draw:
                 dots:
@@ -177,7 +172,7 @@ layers:
         parking:
             draw:
                 horizontal-bars-rev:
-                    color: global.two_color_black
+                    color: global.two_color_dark
 
         pitch:
             draw:
@@ -290,14 +285,6 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.000,0.000,0.000)
-
-    rock:
-        base: polygons
-        material:
-            diffuse:
-                texture: ../images/rock.png
-                mapping: planar
-                scale: .001
 
 textures:
     building-grid:

@@ -1,7 +1,7 @@
 global:
     # INVERTED
-    black_color:                [0.604,0.632,0.689]
-    dark_color:                 [0.516,0.538,0.587]
+    black_color:                [0.633,0.663,0.722]
+    dark_color:                 [0.532,0.555,0.605]
     mid_color:                  [0.462,0.483,0.521]
     midlight_color:             [0.380,0.394,0.422]
     light_color:                [0.298,0.306,0.328]
@@ -10,7 +10,7 @@ global:
     ultralight_color:           [0.185,0.189,0.197]
     offwhite_color:             [0.169,0.173,0.176]
     white_color:                [0.153,0.157,0.161]
-    transparent:                [0.270,0.270,0.270,0.250]
+    transparent:                [0.380,0.394,0.422,0.250]
     route_line:                 [0.000,0.500,1.000]
 
     # GOLD
@@ -32,8 +32,8 @@ global:
     two_color_light:            [0.418,0.368,0.283]
     two_color_lighter:          [0.495,0.436,0.335]
     two_color_lightest:         [0.609,0.537,0.413]
-    two_color_ultralight:       [0.715,0.631,0.484]
-    two_color_offwhite:         [0.782,0.690,0.530]
+    two_color_ultralight:       [0.734,0.647,0.497]
+    two_color_offwhite:         [0.815,0.718,0.552]
 
 
 layers:
@@ -81,11 +81,6 @@ layers:
                 arrows:
                     color: global.two_color_lightest
 
-        railway:
-            draw:
-                railway_dash:
-                    color: global.two_color_light
-
         airport-lines:
             draw:
                 lines:
@@ -105,15 +100,8 @@ layers:
             polygons:
                 color: global.white_color
             lines:
-                color: global.two_color_light
+                color: [[14, global.two_color_midlight], [17, global.two_color_lightest]]
 
-        footprints:
-            extrude:
-                draw:
-                    polygons:
-                        color: global.white_color
-                    lines:
-                        color: global.two_color_light
 
     landuse:
         draw:
@@ -129,7 +117,7 @@ layers:
         parks-and-national-forests-not-national-park:
             draw:
                 dots:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         farm:
             draw:
@@ -139,7 +127,7 @@ layers:
         university:
             draw:
                 dots-rev:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         cemetery:
             draw:
@@ -159,7 +147,7 @@ layers:
         recreation_ground:
             draw:
                 dots-rev-grid:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         zoo:
             draw:
@@ -178,19 +166,19 @@ layers:
         pitch:
             draw:
                 tiny-dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_light
                 outline:
-                    color: global.two_color_lighter
+                    color: global.two_color_midlight
 
         playground:
             draw:
                 dots-rev:
-                    color: global.two_color_light
+                    color: global.two_color_midlight
 
         school:
             draw:
                 dots-rev:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         landuse-not-filtered:
             runway:
