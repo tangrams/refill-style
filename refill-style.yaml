@@ -2230,14 +2230,14 @@ layers:
                     filter: {is_tunnel: true, $zoom: { min: 13 } }
                     draw:
                         lines:
-                            color: [[13, global.light_color], [14, global.offwhite_color]]
+                            color: [[13, global.light_color], [14, global.ultralight_color]]
                             outline:
                                 color: [[12, global.white_color], [13, global.light_color]]
             tunnel:
                 filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [14, global.offwhite_color]]
+                        color: [[13, global.light_color], [14, global.ultralight_color]]
                         outline:
                             color: [[12, global.white_color], [13, global.light_color]]
             highway_bridge:
@@ -2323,7 +2323,7 @@ layers:
                         filter: { is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [14, global.offwhite_color]]
+                                color: [[13, global.light_color], [14, global.ultralight_color]]
                                 outline:
                                     color: [[12, global.white_color], [13, global.light_color]]
                     labels-trunk_primary-route-z13-z14:
@@ -2386,7 +2386,7 @@ layers:
                 filter: { is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [14, global.offwhite_color]]
+                        color: [[13, global.light_color], [14, global.ultralight_color]]
                         outline:
                             color: [[12, global.white_color], [13, global.light_color]]
             secondary:
@@ -2425,7 +2425,7 @@ layers:
                         filter: {is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [15, global.light_color], [16, global.offwhite_color]]
+                                color: [[13, global.light_color], [15, global.light_color], [16, global.ultralight_color]]
                                 outline:
                                     color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
                     labels-secondary-routes-z13-z14:
@@ -2498,7 +2498,7 @@ layers:
                         filter: { is_tunnel: true, $zoom: { min: 13 } }
                         draw:
                             lines:
-                                color: [[13, global.light_color], [15, global.light_color], [16, global.offwhite_color]]
+                                color: [[13, global.light_color], [15, global.light_color], [16, global.ultralight_color]]
                                 outline:
                                     color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
                 link:
@@ -2549,7 +2549,7 @@ layers:
                 filter: {is_tunnel: true, $zoom: { min: 13 } }
                 draw:
                     lines:
-                        color: [[13, global.light_color], [15, global.light_color], [16, global.offwhite_color]]
+                        color: [[13, global.light_color], [15, global.light_color], [16, global.ultralight_color]]
                         outline:
                             color: [[13, global.white_color], [14, global.white_color], [15, global.light_color]]
             minor_road_bridge:
