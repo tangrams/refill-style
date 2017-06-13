@@ -237,7 +237,7 @@
             // more: 'vector-tiles-TTucZYU'
             // default (some): 'vector-tiles-W2tPU-Y'
             // no: 'vector-tiles-haXTO7g'
-            scene: { import: [tg_baseScene, 'theme/black.yaml'], global: tg_global },
+            scene: { import: [tg_baseScene, 'themes/black.yaml'], global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
 
@@ -522,7 +522,7 @@
             // use query language, else default to English
             gui.color = query.color || 'black';
             gui.add(gui, 'color', color).onChange(function(value) {
-                var import_theme = 'theme/'+ value + '.yaml'
+                var import_theme = 'themes/'+ value + '.yaml'
                 console.log( import_theme );
                 scene.load({ import: [ tg_baseScene, import_theme ], global: tg_global });
                 console.log( scene.config );
