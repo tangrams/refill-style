@@ -11,7 +11,7 @@
 #
 
 import:
-    - theme/black.yaml
+    - themes/black.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
