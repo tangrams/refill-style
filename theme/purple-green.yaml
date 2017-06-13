@@ -201,21 +201,21 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_midlight
+                    color: global.two_color_lightest
 
         other_country_boundary_disputed_etc:
             draw:
                 dashed:
-                    color: global.two_color_midlight
+                    color: global.two_color_lightest
             disputed:
                 draw:
                     dashed_big:
-                        color: global.two_color_midlight
+                        color: global.two_color_lightest
 
         region:
             draw:
                 lines:
-                    color: global.two_color_dark
+                    color: global.two_color_light
 
 
 styles:
@@ -249,12 +249,12 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: [0.056,0.030,0.086]
+                u_tint: [0.086,0.067,0.124]
 
     pixel-pattern-bright:
         shaders:
             uniforms:
-                u_tint: [0.056,0.030,0.086]
+                u_tint: [0.086,0.067,0.124]
 
     medium-dots:
         shaders:

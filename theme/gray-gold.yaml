@@ -1,11 +1,11 @@
 global:
     # INVERTED
-    black_color:                [0.633,0.663,0.722]
-    dark_color:                 [0.532,0.555,0.605]
-    mid_color:                  [0.462,0.483,0.521]
-    midlight_color:             [0.380,0.394,0.422]
-    light_color:                [0.298,0.306,0.328]
-    lighter_color:              [0.244,0.248,0.262]
+    black_color:                [0.650,0.680,0.741]
+    dark_color:                 [0.575,0.599,0.653]
+    mid_color:                  [0.495,0.517,0.558]
+    midlight_color:             [0.418,0.434,0.465]
+    light_color:                [0.333,0.343,0.367]
+    lighter_color:              [0.254,0.258,0.272]
     lightest_color:             [0.212,0.216,0.225]
     ultralight_color:           [0.185,0.189,0.197]
     offwhite_color:             [0.169,0.173,0.176]
@@ -41,25 +41,30 @@ layers:
         draw:
             waves:
                 color: global.two_color_light
+                # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
         later:
             draw:
                 waves:
                     color: global.two_color_light
+                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         lakes:
             draw:
                 waves:
                     color: global.two_color_light
+                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         other-water-areas:
             draw:
                 waves:
                     color: global.two_color_light
+                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         swimming_pool:
             draw:
                 waves:
                     color: global.two_color_light
+                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         water-boundary-ocean:
             draw:
@@ -100,7 +105,15 @@ layers:
             polygons:
                 color: global.white_color
             lines:
-                color: [[14, global.two_color_midlight], [17, global.two_color_lightest]]
+                color: [[14, global.two_color_mid], [18, global.two_color_ultralight]]
+
+        footprints:
+            extrude:
+                draw:
+                    polygons:
+                        color: global.white_color
+                    lines:
+                        color: [[14, global.two_color_mid], [18, global.two_color_ultralight]]
 
 
     landuse:
@@ -137,7 +150,7 @@ layers:
         golf_course:
             draw:
                 medium-dots:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         hospital:
             draw:
@@ -166,9 +179,9 @@ layers:
         pitch:
             draw:
                 tiny-dots:
-                    color: global.two_color_light
+                    color: global.two_color_mid
                 outline:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         playground:
             draw:
@@ -218,11 +231,32 @@ styles:
             uniforms:
                 u_grid_color: global.two_color_offwhite
 
+    # waves:
+    #     shaders:
+    #         uniforms:
+    #             u_lighter: global.two_color_light
+    #             u_lightest: global.ultralight_color
+
     waves:
+        base: polygons
+        mix: [space-constant, patterns-stripes]
         shaders:
             uniforms:
                 u_lighter: global.two_color_light
-                u_lightest: global.ultralight_color
+                u_lightest: global.lightest_color
+            blocks:
+                global: |
+                    float stripes2(vec2 st){
+                        return step(.3,1.0-smoothstep(.5,1.,abs(sin(st.y*3.14159265358))));
+                    }
+                filter: |
+                    vec2 st = getConstantCoords();
+
+                    const float wave_width = 30.0;
+                    const float wave_height = .01;
+                    st.y += sin(st.x*wave_width)*wave_height;
+
+                    color = mix(color,vec4(u_lightest,1.0),stripes(st*92.,.5))*1.0;
 
     coast:
         shaders:
