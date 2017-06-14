@@ -112,6 +112,11 @@ layers:
                 tiny-dots:
                     color: global.lighter_color
 
+        golf_course:
+            draw:
+                medium-dots:
+                    color: global.ultralight_color
+
         hospital:
             draw:
                 medium-dots:
@@ -130,12 +135,12 @@ layers:
         school:
             draw:
                 dots-rev:
-                    color: global.lighter_color
+                    color: global.offwhite_color
 
         playground:
             draw:
                 dots-rev:
-                    color: global.light_color
+                    color: global.lighter_color
 
         parking:
             draw:
@@ -161,7 +166,7 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: global.white_color, width: 3 }
+                            stroke: { color: global.white_color, width: 4 }
 
         other_country_boundary_disputed_etc:
             draw:
@@ -181,7 +186,21 @@ layers:
                     text-blend-order:
                         font:
                             fill: global.white_color
-                            stroke: { color: global.mid_color, width: 4 }
+                            stroke: { color: global.light_color, width: 4 }
+
+    places:
+        region:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: [0.680,0.680,0.680]
+
+    pois:
+        draw:
+            colorized-icons:
+                text:
+                    font:
+                        stroke: { color: global.white_color, width: 6px }
 
 
 styles:
