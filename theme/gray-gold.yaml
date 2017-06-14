@@ -14,17 +14,6 @@ global:
     route_line:                 [0.000,0.500,1.000]
 
     # GOLD
-    # two_color_black:            [0.295,0.260,0.200]
-    # two_color_dark:             [0.360,0.318,0.244]
-    # two_color_mid:              [0.395,0.348,0.267]
-    # two_color_midlight:         [0.452,0.398,0.306]
-    # two_color_light:            [0.518,0.457,0.351]
-    # two_color_lighter:          [0.589,0.520,0.399]
-    # two_color_lightest:         [0.677,0.597,0.459]
-    # two_color_ultralight:       [0.771,0.680,0.522]
-    # two_color_offwhite:         [0.850,0.750,0.576]
-
-    # GOLD DARKER
     two_color_black:            [0.144,0.127,0.097]
     two_color_dark:             [0.176,0.155,0.119]
     two_color_mid:              [0.240,0.212,0.163]
@@ -41,30 +30,25 @@ layers:
         draw:
             waves:
                 color: global.two_color_light
-                # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
         later:
             draw:
                 waves:
                     color: global.two_color_light
-                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         lakes:
             draw:
                 waves:
                     color: global.two_color_light
-                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         other-water-areas:
             draw:
                 waves:
                     color: global.two_color_light
-                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         swimming_pool:
             draw:
                 waves:
                     color: global.two_color_light
-                    # color: [[1, global.two_color_light], [15, global.two_color_midlight]]
 
         water-boundary-ocean:
             draw:
@@ -85,6 +69,11 @@ layers:
             draw:
                 arrows:
                     color: global.two_color_lightest
+
+        railway:
+            draw:
+                railway_dash:
+                    color: global.two_color_midlight
 
         airport-lines:
             draw:
@@ -155,7 +144,7 @@ layers:
         hospital:
             draw:
                 medium-dots:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         recreation_ground:
             draw:
@@ -193,6 +182,11 @@ layers:
                 dots-rev:
                     color: global.two_color_mid
 
+        minor-landuse:
+            draw:
+                dots:
+                    color: global.two_color_mid
+
         landuse-not-filtered:
             runway:
                 draw:
@@ -224,18 +218,12 @@ styles:
     railway_dash:
         base: lines
         dash: [0.25, 1.0]
-        dash_background_color: global.two_color_dark
+        dash_background_color: [0.079,0.070,0.054]
 
     building-grid:
         shaders:
             uniforms:
                 u_grid_color: global.two_color_offwhite
-
-    # waves:
-    #     shaders:
-    #         uniforms:
-    #             u_lighter: global.two_color_light
-    #             u_lightest: global.ultralight_color
 
     waves:
         base: polygons
@@ -309,13 +297,6 @@ styles:
             defines:
                 COLOR1: vec3(0.153,0.157,0.161)
 
-    rock:
-        base: polygons
-        material:
-            diffuse:
-                texture: ../images/rock.png
-                mapping: planar
-                scale: .001
 
 textures:
     building-grid:

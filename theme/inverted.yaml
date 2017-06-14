@@ -145,13 +145,18 @@ layers:
         parking:
             draw:
                 horizontal-bars-rev:
-                    color: global.lightest_color
+                    color: global.ultralight_color
 
         pitch:
             draw:
                 tiny-dots:
                     color: global.light_color
                 outline:
+                    color: global.lighter_color
+
+        minor-landuse:
+            draw:
+                dots:
                     color: global.lighter_color
 
     boundaries:
@@ -259,14 +264,6 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.00,0.00,0.00)
-
-    rock:
-        base: polygons
-        material:
-            diffuse:
-                texture: ../images/rock.png
-                mapping: planar
-                scale: .001
 
 textures:
     building-grid:

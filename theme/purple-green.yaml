@@ -1,33 +1,4 @@
 global:
-
-    # GREEN II
-    # black_color:                [0.012,0.984,0.643]
-    # dark_color:                 [0.008,0.753,0.490]
-    # mid_color:                  [0.004,0.482,0.314]
-    # midlight_color:             [0.004,0.376,0.243]
-    # light_color:                [0.004,0.263,0.174]
-    # lighter_color:              [0.000,0.165,0.110]
-    # lightest_color:             [0.000,0.153,0.098]
-    # ultralight_color:           [0.000,0.125,0.082]
-    # offwhite_color:             [0.000,0.090,0.059]
-    # white_color:                [0.000,0.000,0.000]
-    # transparent:                [0.004,0.482,0.314,0.250]
-    # route_line:                 [0.000,0.500,1.000]
-
-    # GREEN III
-    # black_color:                [0.346,1.000,0.924]
-    # dark_color:                 [0.303,0.862,0.794]
-    # mid_color:                  [0.262,0.726,0.671]
-    # midlight_color:             [0.241,0.641,0.592]
-    # light_color:                [0.219,0.507,0.472]
-    # lighter_color:              [0.180,0.387,0.360]
-    # lightest_color:             [0.162,0.295,0.279]
-    # ultralight_color:           [0.107,0.174,0.168]
-    # offwhite_color:             [0.087,0.136,0.132]
-    # white_color:                [0.000,0.000,0.000]
-    # transparent:                [0.303,0.862,0.794,0.250]
-    # route_line:                 [0.000,0.500,1.000]
-
     # GREEN IV
     black_color:                [0.467,0.855,0.808]
     dark_color:                 [0.404,0.737,0.694]
