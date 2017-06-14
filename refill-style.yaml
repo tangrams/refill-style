@@ -11,7 +11,7 @@
 #
 
 import:
-    - theme/black.yaml
+    - themes/black.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -226,7 +226,7 @@ global:
     feature_order: function() { return feature.sort_rank; }
     #
     #label visibility
-    icon_size:                      [[13, 14px], [16, 18px], [18, 19px]]
+    icon_size:                      [[13, '14px'], [16, '18px'], [18, '19px']]
     text_visible_continent:         true
     text_visible_admin:             true
     text_visible_populated_places:  true
@@ -714,7 +714,6 @@ sources:
             api_key: global.sdk_mapzen_api_key
         #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
         # url:  //localhost:8080/vector/all/{z}/{x}/{y}.topojson
-        rasters: [normals-elevation]
         max_zoom: 16
 
     # # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
@@ -2139,7 +2138,7 @@ layers:
                 arrows:
                     style: icons
                     flat: true
-                    visible: true
+                    visible: global.icon_visible_landuse_green
                     sprite: arrow
                     color: global.midlight_color
                     size: [[17, 6px], [20, 14px]]
