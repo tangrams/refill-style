@@ -159,6 +159,11 @@ layers:
                 dots:
                     color: global.lighter_color
 
+        retaining_wall:
+            draw:
+                lines:
+                    color: global.light_color
+
     boundaries:
         country:
             draw:

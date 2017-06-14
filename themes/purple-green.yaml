@@ -185,6 +185,11 @@ layers:
                     polygons:
                         color: global.two_color_offwhite
 
+        retaining_wall:
+            draw:
+                lines:
+                    color: global.two_color_light
+
     boundaries:
         country:
             draw:
