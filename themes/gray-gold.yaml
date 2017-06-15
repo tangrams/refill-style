@@ -1,55 +1,54 @@
 global:
-    # GREEN IV
-    black_color:                [0.467,0.855,0.808]
-    dark_color:                 [0.404,0.737,0.694]
-    mid_color:                  [0.349,0.627,0.592]
-    midlight_color:             [0.294,0.518,0.489]
-    light_color:                [0.275,0.447,0.424]
-    lighter_color:              [0.220,0.345,0.329]
-    lightest_color:             [0.188,0.267,0.259]
-    ultralight_color:           [0.118,0.157,0.153]
-    offwhite_color:             [0.094,0.125,0.122]
-    white_color:                [0.063,0.083,0.081]
-    transparent:                [0.303,0.862,0.794,0.250]
+    # INVERTED
+    black_color:                [0.650,0.680,0.741]
+    dark_color:                 [0.575,0.599,0.653]
+    mid_color:                  [0.495,0.517,0.558]
+    midlight_color:             [0.418,0.434,0.465]
+    light_color:                [0.333,0.343,0.367]
+    lighter_color:              [0.254,0.258,0.272]
+    lightest_color:             [0.212,0.216,0.225]
+    ultralight_color:           [0.185,0.189,0.197]
+    offwhite_color:             [0.169,0.173,0.176]
+    white_color:                [0.153,0.157,0.161]
+    transparent:                [0.380,0.394,0.422,0.250]
     route_line:                 [0.000,0.500,1.000]
 
-    # VIOLET II
-    two_color_black:            [0.106,0.082,0.153]
-    two_color_dark:             [0.133,0.102,0.196]
-    two_color_mid:              [0.153,0.114,0.220]
-    two_color_midlight:         [0.173,0.129,0.251]
-    two_color_light:            [0.230,0.173,0.332]
-    two_color_lighter:          [0.255,0.192,0.369]
-    two_color_lightest:         [0.388,0.294,0.565]
-    two_color_ultralight:       [0.465,0.352,0.676]
-    two_color_offwhite:         [0.569,0.431,0.824]
-    two_color_white:            [0.690,0.524,1.000]
+    # GOLD
+    two_color_black:            [0.144,0.127,0.097]
+    two_color_dark:             [0.176,0.155,0.119]
+    two_color_mid:              [0.240,0.212,0.163]
+    two_color_midlight:         [0.301,0.265,0.204]
+    two_color_light:            [0.418,0.368,0.283]
+    two_color_lighter:          [0.495,0.436,0.335]
+    two_color_lightest:         [0.609,0.537,0.413]
+    two_color_ultralight:       [0.734,0.647,0.497]
+    two_color_offwhite:         [0.815,0.718,0.552]
 
 
 layers:
     water:
         draw:
             waves:
-                color: global.two_color_black
+                color: global.two_color_light
         later:
             draw:
                 waves:
-                    color: global.two_color_black
+                    color: global.two_color_light
 
         lakes:
             draw:
                 waves:
-                    color: global.two_color_black
+                    color: global.two_color_light
 
         other-water-areas:
             draw:
                 waves:
-                    color: global.two_color_black
+                    color: global.two_color_light
 
         swimming_pool:
             draw:
                 waves:
-                    color: global.two_color_black
+                    color: global.two_color_light
 
         water-boundary-ocean:
             draw:
@@ -74,7 +73,7 @@ layers:
         railway:
             draw:
                 railway_dash:
-                    color: global.two_color_light
+                    color: global.two_color_midlight
 
         airport-lines:
             draw:
@@ -88,15 +87,14 @@ layers:
         ferry:
             draw:
                 lines:
-                    color: global.two_color_ultralight
+                    color: global.two_color_light
 
     buildings:
         draw:
             polygons:
                 color: global.white_color
             lines:
-                # color: global.two_color_lightest
-                color: [[14, global.two_color_lightest], [18, global.two_color_offwhite]]
+                color: [[14, global.two_color_mid], [18, global.two_color_ultralight]]
 
         footprints:
             extrude:
@@ -104,10 +102,15 @@ layers:
                     polygons:
                         color: global.white_color
                     lines:
-                        # color: global.two_color_lightest
-                        color: [[14, global.two_color_lightest], [18, global.two_color_offwhite]]
+                        color: [[14, global.two_color_mid], [18, global.two_color_ultralight]]
+
 
     landuse:
+        draw:
+            rock:
+                order: global.feature_order
+                visible: false
+
         national_park:
             draw:
                 dots:
@@ -116,7 +119,7 @@ layers:
         parks-and-national-forests-not-national-park:
             draw:
                 dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_mid
 
         farm:
             draw:
@@ -126,27 +129,27 @@ layers:
         university:
             draw:
                 dots-rev:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         cemetery:
             draw:
                 tiny-dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_mid
 
         golf_course:
             draw:
                 medium-dots:
-                    color: global.two_color_light
+                    color: global.two_color_mid
 
         hospital:
             draw:
                 medium-dots:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         recreation_ground:
             draw:
                 dots-rev-grid:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
 
         zoo:
             draw:
@@ -160,24 +163,29 @@ layers:
         parking:
             draw:
                 horizontal-bars-rev:
-                    color: global.two_color_dark
+                    color: global.two_color_black
 
         pitch:
             draw:
                 tiny-dots:
-                    color: global.two_color_lighter
+                    color: global.two_color_mid
                 outline:
-                    color: global.two_color_lighter
+                    color: global.two_color_mid
 
         playground:
             draw:
                 dots-rev:
-                    color: global.two_color_light
+                    color: global.two_color_midlight
 
         school:
             draw:
                 dots-rev:
-                    color: global.two_color_midlight
+                    color: global.two_color_mid
+
+        minor-landuse:
+            draw:
+                dots:
+                    color: global.two_color_mid
 
         landuse-not-filtered:
             runway:
@@ -194,39 +202,54 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_lightest
+                    color: global.two_color_midlight
 
         other_country_boundary_disputed_etc:
             draw:
                 dashed:
-                    color: global.two_color_lightest
+                    color: global.two_color_midlight
             disputed:
                 draw:
                     dashed_big:
-                        color: global.two_color_lightest
+                        color: global.two_color_midlight
 
         region:
             draw:
                 lines:
-                    color: global.two_color_light
+                    color: global.two_color_mid
 
 
 styles:
     railway_dash:
         base: lines
         dash: [0.25, 1.0]
-        dash_background_color: global.two_color_dark
+        dash_background_color: [0.079,0.070,0.054]
 
     building-grid:
         shaders:
             uniforms:
-                u_grid_color: global.two_color_white
+                u_grid_color: global.two_color_offwhite
 
     waves:
+        base: polygons
+        mix: [space-constant, patterns-stripes]
         shaders:
             uniforms:
-                u_lighter: global.two_color_black
-                u_lightest: global.two_color_lightest
+                u_lighter: global.two_color_light
+                u_lightest: global.lightest_color
+            blocks:
+                global: |
+                    float stripes2(vec2 st){
+                        return step(.3,1.0-smoothstep(.5,1.,abs(sin(st.y*3.14159265358))));
+                    }
+                filter: |
+                    vec2 st = getConstantCoords();
+
+                    const float wave_width = 30.0;
+                    const float wave_height = .01;
+                    st.y += sin(st.x*wave_width)*wave_height;
+
+                    color = mix(color,vec4(u_lightest,1.0),stripes(st*92.,.5))*1.0;
 
     coast:
         shaders:
@@ -236,48 +259,49 @@ styles:
     dots:
         shaders:
             defines:
-                COLOR1: vec3(0.000,0.000,0.000)
+                COLOR1: vec3(0.153,0.157,0.161)
                 COLOR2: color.rgb
 
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: [0.086,0.067,0.124]
+                u_tint: [0.120,0.123,0.126]
 
     pixel-pattern-bright:
         shaders:
             uniforms:
-                u_tint: [0.086,0.067,0.124]
+                u_tint: [0.120,0.123,0.126]
 
     medium-dots:
         shaders:
             defines:
-                COLOR1: vec3(0.000,0.000,0.000)
+                COLOR1: vec3(0.153,0.157,0.161)
 
     tiny-dots:
         shaders:
             defines:
-                COLOR1: vec3(0.000,0.000,0.000)
+                COLOR1: vec3(0.153,0.157,0.161)
 
     dots-rev:
         shaders:
             defines:
-                COLOR1: vec3(0.000,0.000,0.000)
+                COLOR1: vec3(0.153,0.157,0.161)
 
     dots-rev-grid:
         shaders:
             defines:
-                COLOR1: vec3(0.000,0.000,0.000)
+                COLOR1: vec3(0.153,0.157,0.161)
 
     horizontal-bars:
         shaders:
             defines:
-                COLOR1: vec3(0.000,0.000,0.000)
+                COLOR1: vec3(0.153,0.157,0.161)
 
     horizontal-bars-rev:
         shaders:
             defines:
-                COLOR1: vec3(0.000,0.000,0.000)
+                COLOR1: vec3(0.153,0.157,0.161)
+
 
 textures:
     building-grid:
