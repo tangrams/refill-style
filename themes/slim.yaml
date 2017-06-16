@@ -1,0 +1,56 @@
+layers:
+    water:
+        water-boundary-ocean:
+            draw:
+                coast:
+                    visible: false
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    visible: false
+    roads:
+        minor_road:
+            draw:
+                lines:
+                    width: [[11, 0px], [13, 0px], [14, 1px], [15, 1px], [16, 0.1px], [17, 3.5px], [18, 9m]]
+
+    buildings:
+        draw:
+            lines:
+                width: [[14, 0px], [15, 0px], [16, 0.75px],[18, 0.75px], [19, 1px]]
+        footprints:
+            filter:
+                any:
+                    - { $zoom: [16], area: { min: 100 } }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: { min: 17 }, area: true }
+            draw:
+                polygons:
+                    visible: true
+                lines:
+                    visible: true
+            extrude:
+                filter:
+                    all:
+                        - function() { return global.sdk_building_extrude; }
+                        - any:
+                            - { $zoom: [16], height: { min: 100 } }
+                            - { $zoom: [16], area: { min: 3500 } }
+                            - { $zoom: [16], volume: { min: 50000 } }
+                            - { $zoom: [17], area: { min: 500 } }
+                            - { $zoom: [17], volume: { min: 15000 } }
+                            - { $zoom: { min: 18 } }
+                        - not:
+                            - layer: [-1, -2, -3, -4, -5]
+                draw:
+                    polygons:
+                        visible: true
+                        order: 438
+                        style: building-grid
+                        extrude: global.building_extrude_height
+                        # color: global.white_color
+                    lines:
+                        visible: true
+                        order: 439
+                        style: building-lines
+                        extrude: global.building_extrude_height

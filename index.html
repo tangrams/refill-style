@@ -417,90 +417,47 @@
             });
             gui.fallback_button.name('lang fallback');
 
+            // So many themes
+            var all_theme_imports = { colors: null, lod: null, labels: null };
+
+            function update_scene_with_themes() {
+                console.log( all_theme_imports );
+
+                // construct the import array
+                themes_as_array = [tg_baseScene];
+
+                if( all_theme_imports.colors ) {
+                    themes_as_array.push( all_theme_imports.colors );
+                }
+                if( all_theme_imports.lod ) {
+                    themes_as_array.push( all_theme_imports.lod );
+                }
+                if( all_theme_imports.labels ) {
+                    themes_as_array.push( all_theme_imports.labels );
+                }
+
+                scene.load({ import: themes_as_array, global: tg_global });
+                console.log( scene.config );
+                scene.updateConfig();
+                //scene.rebuild();
+            }
+
+
             // Labels selector
             var labels = {
-                '(default)': 'some',
-                'More': 'more',
-                'Some': 'some',
-                'Some (no shields)': 'some_no_shields',
-                'None': 'none'
+                '(default)': 'default-labels',
+                'More': 'more-labels',
+                'Some': 'default-labels',
+                'Some (no shields)': 'default-labels-no-shields',
+                'None': 'no-labels'
             };
-            gui.labels = query.labels || 'some';
+            gui.labels = query.labels || 'default-labels';
             gui.add(gui, 'labels', labels).onChange(function(value) {
-                var _default = true;
-                var _more = false;
-                var _road_shields = true;
+                var import_theme = 'themes/'+ value + '.yaml'
+                all_theme_imports.labels = import_theme;
 
-                if(value === 'more') {
-                    _more = true;
-                    _default = true;
-                    _road_shields = true;
-                } else if(value === 'some') {
-                    _more = false;
-                    _default = true;
-                    _road_shields = true;
-                } else if(value === 'some_no_shields') {
-                    _more = false;
-                    _default = true;
-                    _road_shields = false;
-                } else {
-                    _more = false;
-                    _default = false;
-                    _road_shields = false;
-                }
+                update_scene_with_themes();
 
-                scene.config.global.text_visible_continent = _default;
-                scene.config.global.text_visible_admin = _default;
-                scene.config.global.text_visible_populated_places = _default;
-                scene.config.global.icon_visible_populated_places = _default;
-                scene.config.global.text_visible_neighbourhoods = _default;
-                scene.config.global.text_visible_neighbourhoods_e = _default;
-                scene.config.global.text_visible_water = _default;
-                scene.config.global.text_visible_water_labels = _default;
-                scene.config.global.text_visible_island = _default;
-
-                scene.config.global.sdk_road_shields = _road_shields;
-
-                scene.config.global.text_visible_roads = _default;
-                scene.config.global.text_visible_highway = _default;
-                scene.config.global.text_visible_trunk_primary_route = _default;
-                scene.config.global.text_visible_trunk_primary = _default;
-                scene.config.global.text_visible_secondary = _default;
-                scene.config.global.text_visible_tertiary = _default;
-                scene.config.global.text_visible_minor_road = _default;
-                scene.config.global.text_visible_service_road = _default;
-                scene.config.global.text_visible_path = _default;
-                scene.config.global.text_visible_piste = _default;
-                scene.config.global.text_visible_steps = _default;
-
-                scene.config.global.text_visible_aerialway = _default;
-                scene.config.global.text_visible_airport_gate = _default;
-                scene.config.global.text_visible_exits = _default;
-
-                scene.config.global.text_visible_building = _more;
-                scene.config.global.text_visible_address = _more;
-
-                scene.config.global.label_visible_poi_landuse = _more;
-                scene.config.global.text_visible_poi_landuse = _more;
-                scene.config.global.icon_visible_poi_landuse = _more;
-                scene.config.global.icon_visible_poi_landuse_e = _more;
-                scene.config.global.icon_visible_station = _more;
-
-                scene.config.global.icon_visible_landuse_green = _default;
-                scene.config.global.text_visible_landuse_green = _default;
-                scene.config.global.text_visible_landuse_generic = _more;
-                if( _more ) {
-                    scene.config.global.icon_size_green = [[13, '14px'], [16, '18px'], [18, '19px']];
-                    scene.config.global.icon_size_green_nationl_park = [[10,'18px'],[12,'28px'],[13,'36px']];
-                    scene.config.global.icon_size_green_airport = [[13,'12px'],[14,'12px'],[17,'18px'],[19,'36px']];
-                    scene.config.global.icon_size_green_l = [[14,'24px'],[16,'32px']];
-                } else {
-                    scene.config.global.icon_size_green = [[0, '0px']];
-                    scene.config.global.icon_size_green_nationl_park = [[0, '0px']];
-                    scene.config.global.icon_size_green_airport = [[0, '0px']];
-                    scene.config.global.icon_size_green_l = [[0, '0px']];
-                }
-                scene.updateConfig();
                 //window.location.search = 'language=' + value;
             });
 
@@ -524,11 +481,26 @@
             gui.color = query.color || 'black';
             gui.add(gui, 'color', color).onChange(function(value) {
                 var import_theme = 'themes/'+ value + '.yaml'
-                console.log( import_theme );
-                scene.load({ import: [ tg_baseScene, import_theme ], global: tg_global });
-                console.log( scene.config );
-                scene.updateConfig();
-                //scene.rebuild();
+
+                all_theme_imports.colors = import_theme;
+                update_scene_with_themes();
+
+                //window.location.color = 'color=' + value;
+            });
+
+            // Color theme selector
+            var lod = {
+                '(default)': '',
+                'LOD - slim': 'slim'
+            };
+            // use query language, else default to English
+            gui.lod = query.lod || '';
+            gui.add(gui, 'lod', lod).onChange(function(value) {
+                var import_theme = 'themes/'+ value + '.yaml'
+
+                all_theme_imports.lod = import_theme;
+                update_scene_with_themes();
+
                 //window.location.color = 'color=' + value;
             });
 
