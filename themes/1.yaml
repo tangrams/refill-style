@@ -1,0 +1,367 @@
+layers:
+    water:
+        water-boundary-ocean:
+            draw:
+                coast:
+                    visible: false
+        water_boundaries-not-ocean:
+            draw:
+                coast:
+                    visible: false
+    roads:
+        arrows:
+            draw:
+                arrows:
+                    visible: false
+        major_road:
+            trunk_primary:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+                routes:
+                    draw:
+                        lines:
+                            visible: true
+                            outline:
+                                visible: true
+                labels-trunk_primary-z11-z15:
+                    draw:
+                        text-blend-order:
+                            visible: false
+                labels-trunk_primary-z16-up:
+                    draw:
+                        text-blend-order:
+                            visible: false
+
+            link:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+
+            secondary:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+                routes:
+                    draw:
+                        lines:
+                            visible: false
+                            outline:
+                                visible: false
+                    labels-secondary-routes-z13-z14:
+                        draw:
+                            text-blend-order:
+                                visible: false
+                    labels-secondary-routes-z15-up:
+                        draw:
+                            text-blend-order:
+                                visible: false
+                labels-secondary:
+                    draw:
+                        text-blend-order:
+                            visible: false
+
+            tertiary:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+                routes:
+                    draw:
+                        lines:
+                            visible: false
+                            outline:
+                                visible: false
+                link:
+                    draw:
+                        lines:
+                            visible: false
+                            outline:
+                                visible: false
+                labels-tertiary:
+                    draw:
+                        text-blend-order:
+                            visible: false
+        minor_road:
+            draw:
+                lines:
+                    visible: false
+                    outline:
+                        visible: false
+            labels-minor_road:
+                draw:
+                    text-blend-order:
+                        visible: false
+
+        service_road:
+            draw:
+                lines:
+                    visible: false
+                    outline:
+                        visible: false
+            labels-service_road:
+                draw:
+                    text-blend-order:
+                        visible: false
+
+        path:
+            draw:
+                lines:
+                    visible: false
+                    outline:
+                        visible: false
+            pedestrian:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+            footway:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+
+            labels-path:
+                draw:
+                    text-blend-order:
+                        visible: false
+
+        track:
+            draw:
+                lines:
+                    visible: false
+                    outline:
+                        visible: false
+            bridge:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+
+        steps:
+            draw:
+                dashed_steps:
+                    visible: false
+
+        ferry:
+            draw:
+                lines:
+                    visible: false
+
+        railway:
+            draw:
+                railway_dash:
+                    visible: false
+            service:
+                draw:
+                    lines:
+                        visible: false
+
+
+
+    buildings:
+        draw:
+            lines:
+                width: [[14, 0px], [15, 0px], [16, 0.75px],[18, 0.75px], [19, 1px]]
+        footprints:
+            filter:
+                any:
+                    - { $zoom: [16], area: { min: 100 } }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: { min: 17 }, area: true }
+            draw:
+                polygons:
+                    visible: true
+                lines:
+                    visible: true
+            extrude:
+                filter:
+                    all:
+                        - function() { return global.sdk_building_extrude; }
+                        - any:
+                            - { $zoom: [16], height: { min: 100 } }
+                            - { $zoom: [16], area: { min: 3500 } }
+                            - { $zoom: [16], volume: { min: 50000 } }
+                            - { $zoom: [17], area: { min: 500 } }
+                            - { $zoom: [17], volume: { min: 15000 } }
+                            - { $zoom: { min: 18 } }
+                        - not:
+                            - layer: [-1, -2, -3, -4, -5]
+                draw:
+                    polygons:
+                        visible: true
+                        order: 438
+                        style: building-grid
+                        extrude: global.building_extrude_height
+                        # color: global.white_color
+                    lines:
+                        visible: true
+                        order: 439
+                        style: building-lines
+                        extrude: global.building_extrude_height
+
+    landuse:
+        national_park:
+            us_national_park:
+                draw:
+                    pixel-pattern-light:
+                        visible: false
+                    dots:
+                        color: global.lighter_color
+
+        conservation:
+            draw:
+                pixel-pattern-light:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        national_forest_level_6:
+            draw:
+                pixel-pattern-bright:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        forest-landcover:
+            draw:
+                pixel-pattern-light:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        parks-and-national-forests-not-national-park:
+            national_park:
+                draw:
+                    pixel-pattern-light:
+                        visible: false
+                    dots:
+                        color: global.lighter_color
+
+        farm:
+            draw:
+                tiny-dots:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        university:
+            draw:
+                dots-rev:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        cemetery:
+            draw:
+                tiny-dots:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        golf_course:
+            draw:
+                medium-dots:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        hospital:
+            draw:
+                medium-dots:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        sports_centre:
+            draw:
+                dots-rev-grid:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        recreation_ground:
+            draw:
+                dots-rev-grid:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        stadium:
+            draw:
+                dots-rev-grid:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        zoo:
+            draw:
+                tiny-dots:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        man-made:
+            draw:
+                horizontal-bars:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        garden:
+            draw:
+                tiny-dots:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        parking:
+            draw:
+                horizontal-bars-rev:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        pitch:
+            draw:
+                tiny-dots:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+                outline:
+                    visible: false
+
+        playground:
+            draw:
+                dots-rev:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        school:
+            draw:
+                dots-rev:
+                    visible: false
+                dots:
+                    color: global.lighter_color
+
+        retaining_wall:
+            draw:
+                lines:
+                    visible: false
+
+        fence:
+            draw:
+                lines:
+                    visible: false
+
