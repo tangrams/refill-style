@@ -331,6 +331,10 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+            early:
+                draw:
+                    horizontal-bars-rev:
+                        visible: false
 
         pitch:
             draw:
