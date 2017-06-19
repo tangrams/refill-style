@@ -218,6 +218,7 @@ layers:
                         visible: false
                     dots:
                         color: global.lighter_color
+                        visible: true
 
         conservation:
             draw:
@@ -225,6 +226,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         national_forest_level_6:
             draw:
@@ -232,6 +234,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         forest-landcover:
             draw:
@@ -239,6 +242,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         parks-and-national-forests-not-national-park:
             national_park:
@@ -247,6 +251,7 @@ layers:
                         visible: false
                     dots:
                         color: global.lighter_color
+                        visible: true
 
         farm:
             draw:
@@ -254,14 +259,15 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
-        # this isnt' drawing
         university:
             draw:
                 dots-rev:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         cemetery:
             draw:
@@ -269,6 +275,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         golf_course:
             draw:
@@ -276,6 +283,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         hospital:
             draw:
@@ -283,6 +291,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         sports_centre:
             draw:
@@ -290,6 +299,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         recreation_ground:
             draw:
@@ -297,6 +307,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         stadium:
             draw:
@@ -304,6 +315,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         zoo:
             draw:
@@ -311,6 +323,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         man-made:
             draw:
@@ -318,6 +331,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         garden:
             draw:
@@ -325,14 +339,15 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
-        # this isnt' drawing
         parking:
             draw:
                 horizontal-bars-rev:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         pitch:
             draw:
@@ -340,6 +355,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
                 outline:
                     visible: false
 
@@ -349,6 +365,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         school:
             draw:
@@ -356,6 +373,7 @@ layers:
                     visible: false
                 dots:
                     color: global.lighter_color
+                    visible: true
 
         retaining_wall:
             draw:
@@ -366,4 +384,3 @@ layers:
             draw:
                 lines:
                     visible: false
-
