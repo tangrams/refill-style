@@ -5493,12 +5493,12 @@ layers:
                 horizontal-bars-rev:
                     color: global.ultralight_color
                     visible: true
-            early:
-                filter: { $zoom: { max: 15 } }
-                draw:
-                    horizontal-bars-rev:
-                        color: global.offwhite_color
-                        visible: true
+            # early:
+            #     filter: { $zoom: { max: 15 } }
+            #     draw:
+            #         horizontal-bars-rev:
+            #             color: global.offwhite_color
+            #             visible: true
         pedestrian:
             filter:
                 kind: [pedestrian,common]
