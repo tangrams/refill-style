@@ -153,6 +153,25 @@ layers:
                 dashed_steps:
                     visible: false
 
+        racetrack:
+            draw:
+                lines:
+                    visible: false
+
+        airport-lines:
+            draw:
+                lines:
+                    visible: false
+                    outline:
+                        visible: false
+
+            taxiway:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+
         ferry:
             draw:
                 lines:
@@ -374,6 +393,12 @@ layers:
                 dots:
                     color: global.lighter_color
                     visible: true
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        visible: false
 
         retaining_wall:
             draw:
