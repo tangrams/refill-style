@@ -258,6 +258,6 @@ styles:
 
 textures:
     building-grid:
-        url: ../images/building-grid-hi-contrast3.gif
+        url: images/building-grid-hi-contrast3.gif
 
 
