@@ -1,3 +1,8 @@
+global:
+    text_visible_minor_road:        false
+    text_visible_service_road:      false
+    text_visible_path:              false
+
 layers:
     water:
         water-boundary-ocean:
@@ -20,20 +25,12 @@ layers:
                     visible: false
                     outline:
                         visible: false
-            labels-minor_road:
-                draw:
-                    text-blend-order:
-                        visible: false
 
         service_road:
             draw:
                 lines:
                     visible: false
                     outline:
-                        visible: false
-            labels-service_road:
-                draw:
-                    text-blend-order:
                         visible: false
 
         path:
@@ -54,11 +51,6 @@ layers:
                         visible: false
                         outline:
                             visible: false
-
-            labels-path:
-                draw:
-                    text-blend-order:
-                        visible: false
 
         track:
             draw:

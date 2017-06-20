@@ -1,3 +1,11 @@
+global:
+    text_visible_trunk_primary:     false
+    text_visible_secondary:         false
+    text_visible_tertiary:          false
+    text_visible_minor_road:        false
+    text_visible_service_road:      false
+    text_visible_path:              false
+
 layers:
     water:
         water-boundary-ocean:
@@ -26,14 +34,6 @@ layers:
                             visible: true
                             outline:
                                 visible: true
-                labels-trunk_primary-z11-z15:
-                    draw:
-                        text-blend-order:
-                            visible: false
-                labels-trunk_primary-z16-up:
-                    draw:
-                        text-blend-order:
-                            visible: false
 
             link:
                 draw:
@@ -54,18 +54,6 @@ layers:
                             visible: false
                             outline:
                                 visible: false
-                    labels-secondary-routes-z13-z14:
-                        draw:
-                            text-blend-order:
-                                visible: false
-                    labels-secondary-routes-z15-up:
-                        draw:
-                            text-blend-order:
-                                visible: false
-                labels-secondary:
-                    draw:
-                        text-blend-order:
-                            visible: false
 
             tertiary:
                 draw:
@@ -85,19 +73,12 @@ layers:
                             visible: false
                             outline:
                                 visible: false
-                labels-tertiary:
-                    draw:
-                        text-blend-order:
-                            visible: false
+
         minor_road:
             draw:
                 lines:
                     visible: false
                     outline:
-                        visible: false
-            labels-minor_road:
-                draw:
-                    text-blend-order:
                         visible: false
 
         service_road:
@@ -105,10 +86,6 @@ layers:
                 lines:
                     visible: false
                     outline:
-                        visible: false
-            labels-service_road:
-                draw:
-                    text-blend-order:
                         visible: false
 
         path:
@@ -130,11 +107,6 @@ layers:
                         outline:
                             visible: false
 
-            labels-path:
-                draw:
-                    text-blend-order:
-                        visible: false
-
         track:
             draw:
                 lines:
@@ -152,12 +124,6 @@ layers:
             draw:
                 dashed_steps:
                     visible: false
-
-        shields:
-            default_priority_trunk_secondary:
-                draw:
-                    colorized-icons:
-                        visible: false
 
         racetrack:
             draw:

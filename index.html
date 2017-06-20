@@ -429,11 +429,11 @@
                 if( all_theme_imports.colors ) {
                     themes_as_array.push( all_theme_imports.colors );
                 }
-                if( all_theme_imports.lod ) {
-                    themes_as_array.push( all_theme_imports.lod );
-                }
                 if( all_theme_imports.labels ) {
                     themes_as_array.push( all_theme_imports.labels );
+                }
+                if( all_theme_imports.lod ) {
+                    themes_as_array.push( all_theme_imports.lod );
                 }
 
                 scene.load({ import: themes_as_array, global: tg_global });

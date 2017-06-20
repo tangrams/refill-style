@@ -9,6 +9,13 @@ layers:
                 coast:
                     visible: false
     roads:
+        service_road:
+            draw:
+                lines:
+                    visible: false
+                    outline:
+                        visible: false
+
         path:
             draw:
                 lines:
