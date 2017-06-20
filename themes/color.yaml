@@ -486,8 +486,8 @@ styles:
         dash_background_color: [0.984,0.980,1.000]
 
 textures:
-    building-grid:
-        url: ../images/building-grid.gif
+#    building-grid:
+#        url: images/building-grid.gif
 
     building-grid-bold:
-        url: ../images/building-grid-bold.gif
+        url: images/building-grid-bold.gif
