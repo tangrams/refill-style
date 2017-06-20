@@ -1231,14 +1231,6 @@ styles:
                                     color.rgb,
                                     step(.5,dot(vec3(0., 0., 1.), worldNormal())));
 
-    rock:
-        base: polygons
-        material:
-            diffuse:
-                texture: images/building-grid.gif
-                mapping: planar
-                scale: .001
-
 
     building-lines:
         base: lines
@@ -2608,8 +2600,7 @@ layers:
                     $zoom: { max: 15 }
                 draw:
                     lines:
-                        order:
-                            order: 351
+                        order: 351
                         outline:
                             order: 350
             pedestrian:
@@ -3997,7 +3988,7 @@ layers:
                     text-blend-order:
                         priority: 6
                         font:
-                            size: [[2,11px],[6,15px],[8,18px],[10,20px],[12,20x],[13,0px]]
+                            size: [[2,11px],[6,15px],[8,18px],[10,20px],[12,20px],[13,0px]]
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
