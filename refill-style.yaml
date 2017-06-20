@@ -1231,14 +1231,6 @@ styles:
                                     color.rgb,
                                     step(.5,dot(vec3(0., 0., 1.), worldNormal())));
 
-    rock:
-        base: polygons
-        material:
-            diffuse:
-                texture: images/building-grid.gif
-                mapping: planar
-                scale: .001
-
 
     building-lines:
         base: lines
