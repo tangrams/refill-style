@@ -1,4 +1,5 @@
 global:
+    text_visible_landuse_green:     false
     text_visible_secondary:         false
     text_visible_tertiary:          false
     text_visible_minor_road:        false
