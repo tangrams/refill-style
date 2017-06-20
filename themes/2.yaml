@@ -363,10 +363,6 @@ layers:
                     visible: false
 
         landuse-not-filtered:
-            runway:
-                draw:
-                    polygons:
-                        visible: false
             apron:
                 draw:
                     dots:
