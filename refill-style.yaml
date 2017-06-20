@@ -5380,7 +5380,7 @@ layers:
                 kind: golf_course
             draw:
                 medium-dots:
-                    color: global.lighter_color
+                    color: global.lightest_color
                     visible: true
         hospital:
             filter:
