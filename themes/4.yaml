@@ -83,15 +83,6 @@ layers:
                 lines:
                     visible: false
 
-        railway:
-            draw:
-                railway_dash:
-                    visible: false
-            service:
-                draw:
-                    lines:
-                        visible: false
-
 
 
     buildings:

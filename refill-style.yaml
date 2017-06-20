@@ -3367,8 +3367,8 @@ layers:
                 filter: { service: true }
                 draw:
                     lines:
-                        color: global.light_color
-                        width: [[14,0px],[15,0.5px],[16,0.75px],[17,1px],[18,1px]]
+                        color: global.white_color
+                        width: [[14,0px],[15,0.5px],[18,2px]]
 
     buildings:
         data: { source: mapzen, layer: buildings }
@@ -5493,12 +5493,6 @@ layers:
                 horizontal-bars-rev:
                     color: global.ultralight_color
                     visible: true
-            # early:
-            #     filter: { $zoom: { max: 15 } }
-            #     draw:
-            #         horizontal-bars-rev:
-            #             color: global.offwhite_color
-            #             visible: true
         pedestrian:
             filter:
                 kind: [pedestrian,common]
