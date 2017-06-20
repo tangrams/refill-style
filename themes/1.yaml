@@ -1,4 +1,5 @@
 global:
+    text_visible_admin:             false
     text_visible_trunk_primary:     false
     text_visible_secondary:         false
     text_visible_tertiary:          false
@@ -208,6 +209,26 @@ layers:
                         order: 439
                         style: building-lines
                         extrude: global.building_extrude_height
+
+    boundaries:
+        country:
+            draw:
+                country-outerline:
+                    visible: false
+                lines:
+                    visible: false
+        other_country_boundary_disputed_etc:
+            draw:
+                dashed:
+                    visible: false
+            disputed:
+                draw:
+                    dashed_big:
+                        visible: false
+        region:
+            draw:
+                lines:
+                    visible: false
 
     landuse:
         # TIER 1 ON
