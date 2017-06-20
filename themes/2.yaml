@@ -15,6 +15,13 @@ layers:
                     visible: false
 
         major_road:
+            link:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+
             secondary:
                 draw:
                     lines:
@@ -125,6 +132,11 @@ layers:
         steps:
             draw:
                 dashed_steps:
+                    visible: false
+
+        racetrack:
+            draw:
+                lines:
                     visible: false
 
         ferry:

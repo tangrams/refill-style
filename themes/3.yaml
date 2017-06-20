@@ -102,6 +102,11 @@ layers:
                 dashed_steps:
                     visible: false
 
+        racetrack:
+            draw:
+                lines:
+                    visible: false
+
         ferry:
             draw:
                 lines:

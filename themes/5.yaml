@@ -51,11 +51,6 @@ layers:
                 dashed_steps:
                     visible: false
 
-        ferry:
-            draw:
-                lines:
-                    visible: false
-
         railway:
             draw:
                 railway_dash:
