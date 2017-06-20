@@ -347,6 +347,10 @@ layers:
             draw:
                 horizontal-bars:
                     visible: false
+            pier:
+                draw:
+                    polygons:
+                        color: global.white_color
 
         # TIER 5 OFF
         tier5:
