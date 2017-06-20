@@ -14,55 +14,6 @@ layers:
                 arrows:
                     visible: false
 
-        major_road:
-            secondary:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
-                routes:
-                    draw:
-                        lines:
-                            visible: false
-                            outline:
-                                visible: false
-                    labels-secondary-routes-z13-z14:
-                        draw:
-                            text-blend-order:
-                                visible: false
-                    labels-secondary-routes-z15-up:
-                        draw:
-                            text-blend-order:
-                                visible: false
-                labels-secondary:
-                    draw:
-                        text-blend-order:
-                            visible: false
-
-            tertiary:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
-                routes:
-                    draw:
-                        lines:
-                            visible: false
-                            outline:
-                                visible: false
-                link:
-                    draw:
-                        lines:
-                            visible: false
-                            outline:
-                                visible: false
-                labels-tertiary:
-                    draw:
-                        text-blend-order:
-                            visible: false
-
         minor_road:
             draw:
                 lines:
@@ -311,36 +262,24 @@ layers:
                     color: global.lighter_color
                     visible: true
 
-        # TIER 5 OFF
-        tier5:
-            tourism-related:
-                draw:
-                    dots:
-                        visible: false
-            beach:
-                draw:
-                    dots:
-                        visible: false
+        # TIER 5 ON
 
-        # TIER 6 OFF
+        # TIER 6 ON
         garden:
             draw:
                 tiny-dots:
                     visible: false
+                dots:
+                    color: global.lighter_color
+                    visible: true
 
         parking:
             draw:
                 horizontal-bars-rev:
                     visible: false
-
-        pedestrian:
-            draw:
                 dots:
-                    visible: false
-                green-stuff:
-                    draw:
-                        dots:
-                            visible: false
+                    color: global.lighter_color
+                    visible: true
 
         pitch:
             draw:
@@ -348,48 +287,22 @@ layers:
                     visible: false
                 outline:
                     visible: false
+                dots:
+                    color: global.lighter_color
+                    visible: true
 
         playground:
             draw:
                 dots-rev:
                     visible: false
+                dots:
+                    color: global.lighter_color
+                    visible: true
 
         school:
             draw:
                 dots-rev:
                     visible: false
-
-        minor-landuse:
-            draw:
                 dots:
-                    visible: false
-
-        landuse-not-filtered:
-            runway:
-                draw:
-                    polygons:
-                        visible: false
-            apron:
-                draw:
-                    dots:
-                        visible: false
-
-            minor-amusement-park-landuse:
-                draw:
-                    dots:
-                        visible: false
-
-            minor-zoo-landuse:
-                draw:
-                    dots:
-                        visible: false
-
-        retaining_wall:
-            draw:
-                lines:
-                    visible: false
-
-        fence:
-            draw:
-                lines:
-                    visible: false
+                    color: global.lighter_color
+                    visible: true

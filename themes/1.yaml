@@ -153,6 +153,12 @@ layers:
                 dashed_steps:
                     visible: false
 
+        shields:
+            default_priority_trunk_secondary:
+                draw:
+                    colorized-icons:
+                        visible: false
+
         racetrack:
             draw:
                 lines:
@@ -186,7 +192,15 @@ layers:
                     lines:
                         visible: false
 
-
+    pois:
+        highway-exit:
+            draw:
+                text-blend-order:
+                    visible: false
+            later:
+                draw:
+                    colorized-icons:
+                        visible: false
 
     buildings:
         draw:
@@ -230,6 +244,7 @@ layers:
                         extrude: global.building_extrude_height
 
     landuse:
+        # TIER 1 ON
         national_park:
             us_national_park:
                 draw:
@@ -239,6 +254,7 @@ layers:
                         color: global.lighter_color
                         visible: true
 
+        # TIER 2 ON
         conservation:
             draw:
                 pixel-pattern-light:
@@ -280,101 +296,93 @@ layers:
                     color: global.lighter_color
                     visible: true
 
+        # TIER 3 OFF
         university:
             draw:
                 dots-rev:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
+        # TIER 4 OFF
         cemetery:
             draw:
                 tiny-dots:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         golf_course:
             draw:
                 medium-dots:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         hospital:
             draw:
                 medium-dots:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         sports_centre:
             draw:
                 dots-rev-grid:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         recreation_ground:
             draw:
                 dots-rev-grid:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         stadium:
             draw:
                 dots-rev-grid:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         zoo:
             draw:
                 tiny-dots:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
+
+        winter_sports:
+            draw:
+                polygons:
+                    visible: false
 
         man-made:
             draw:
                 horizontal-bars:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
+        # TIER 5 OFF
+        tier5:
+            tourism-related:
+                draw:
+                    dots:
+                        visible: false
+            beach:
+                draw:
+                    dots:
+                        visible: false
+
+        # TIER 6 OFF
         garden:
             draw:
                 tiny-dots:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         parking:
             draw:
                 horizontal-bars-rev:
                     visible: false
+
+        pedestrian:
+            draw:
                 dots:
-                    color: global.lighter_color
-                    visible: true
+                    visible: false
+                green-stuff:
+                    draw:
+                        dots:
+                            visible: false
 
         pitch:
             draw:
                 tiny-dots:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
                 outline:
                     visible: false
 
@@ -382,22 +390,35 @@ layers:
             draw:
                 dots-rev:
                     visible: false
-                dots:
-                    color: global.lighter_color
-                    visible: true
 
         school:
             draw:
                 dots-rev:
                     visible: false
+
+        minor-landuse:
+            draw:
                 dots:
-                    color: global.lighter_color
-                    visible: true
+                    visible: false
 
         landuse-not-filtered:
             runway:
                 draw:
                     polygons:
+                        visible: false
+            apron:
+                draw:
+                    dots:
+                        visible: false
+
+            minor-amusement-park-landuse:
+                draw:
+                    dots:
+                        visible: false
+
+            minor-zoo-landuse:
+                draw:
+                    dots:
                         visible: false
 
         retaining_wall:
