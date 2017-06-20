@@ -1,5 +1,7 @@
 global:
     text_visible_admin:             false
+    text_visible_neighbourhoods:    false
+    text_visible_neighbourhoods_e:  false
     text_visible_landuse_green:     false
     text_visible_secondary:         false
     text_visible_tertiary:          false
