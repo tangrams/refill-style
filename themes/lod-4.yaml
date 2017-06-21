@@ -14,66 +14,74 @@ layers:
                 coast:
                     visible: false
     roads:
-        arrows:
-            draw:
-                arrows:
-                    visible: false
+        filter:
+            any:
+                - all:
+                    - $zoom: { max: 11 }
+                - all:
+                    - $zoom: { min: 11 }
+                    - function() { return feature.min_zoom <= ($zoom - 1) }
+    # roads:
+    #     arrows:
+    #         draw:
+    #             arrows:
+    #                 visible: false
 
-        minor_road:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
+    #     minor_road:
+    #         draw:
+    #             lines:
+    #                 visible: false
+    #                 outline:
+    #                     visible: false
 
-        service_road:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
+    #     service_road:
+    #         draw:
+    #             lines:
+    #                 visible: false
+    #                 outline:
+    #                     visible: false
 
-        path:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
-            pedestrian:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
-            footway:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
+    #     path:
+    #         draw:
+    #             lines:
+    #                 visible: false
+    #                 outline:
+    #                     visible: false
+    #         pedestrian:
+    #             draw:
+    #                 lines:
+    #                     visible: false
+    #                     outline:
+    #                         visible: false
+    #         footway:
+    #             draw:
+    #                 lines:
+    #                     visible: false
+    #                     outline:
+    #                         visible: false
 
-        track:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
-            bridge:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
+    #     track:
+    #         draw:
+    #             lines:
+    #                 visible: false
+    #                 outline:
+    #                     visible: false
+    #         bridge:
+    #             draw:
+    #                 lines:
+    #                     visible: false
+    #                     outline:
+    #                         visible: false
 
-        steps:
-            draw:
-                dashed_steps:
-                    visible: false
+    #     steps:
+    #         draw:
+    #             dashed_steps:
+    #                 visible: false
 
-        ferry:
-            draw:
-                lines:
-                    visible: false
+    #     ferry:
+    #         draw:
+    #             lines:
+    #                 visible: false
 
 
 
@@ -85,8 +93,8 @@ layers:
             filter:
                 any:
                     - { $zoom: [15], height: { min: 120 } }
-                    - { $zoom: [15], area: { min: 1700 } }
-                    - { $zoom: [15], volume: { min: 175000 } }
+                    - { $zoom: [15], area: { min: 2200 } }
+                    - { $zoom: [15], volume: { min: 195000 } }
                     - { $zoom: [16], area: { min: 100 } }
                     - { $zoom: [16], volume: { min: 50000 } }
                     - { $zoom: { min: 17 }, area: true }

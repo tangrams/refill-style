@@ -8,55 +8,55 @@ layers:
             draw:
                 coast:
                     visible: false
-    roads:
-        service_road:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
+    # roads:
+    #     service_road:
+    #         draw:
+    #             lines:
+    #                 visible: false
+    #                 outline:
+    #                     visible: false
 
-        path:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
-            pedestrian:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
-            footway:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
+    #     path:
+    #         draw:
+    #             lines:
+    #                 visible: false
+    #                 outline:
+    #                     visible: false
+    #         pedestrian:
+    #             draw:
+    #                 lines:
+    #                     visible: false
+    #                     outline:
+    #                         visible: false
+    #         footway:
+    #             draw:
+    #                 lines:
+    #                     visible: false
+    #                     outline:
+    #                         visible: false
 
-            labels-path:
-                draw:
-                    text-blend-order:
-                        visible: false
+    #         labels-path:
+    #             draw:
+    #                 text-blend-order:
+    #                     visible: false
 
-        track:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
-            bridge:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
+    #     track:
+    #         draw:
+    #             lines:
+    #                 visible: false
+    #                 outline:
+    #                     visible: false
+    #         bridge:
+    #             draw:
+    #                 lines:
+    #                     visible: false
+    #                     outline:
+    #                         visible: false
 
-        steps:
-            draw:
-                dashed_steps:
-                    visible: false
+    #     steps:
+    #         draw:
+    #             dashed_steps:
+    #                 visible: false
 
 
 
