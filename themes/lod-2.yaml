@@ -171,33 +171,6 @@ layers:
     #             dashed_steps:
     #                 visible: false
 
-        # racetrack:
-        #     draw:
-        #         lines:
-        #             visible: false
-
-        # airport-lines:
-        #     taxiway:
-        #         draw:
-        #             lines:
-        #                 visible: false
-        #                 outline:
-        #                     visible: false
-
-        # ferry:
-        #     draw:
-        #         lines:
-        #             visible: false
-
-        # railway:
-        #     draw:
-        #         railway_dash:
-        #             visible: false
-        #     service:
-        #         draw:
-        #             lines:
-        #                 visible: false
-
 
     buildings:
         draw:
@@ -241,20 +214,6 @@ layers:
                         extrude: global.building_extrude_height
 
     boundaries:
-        country:
-            draw:
-                country-outerline:
-                    visible: false
-                lines:
-                    visible: false
-        other_country_boundary_disputed_etc:
-            draw:
-                dashed:
-                    visible: false
-            disputed:
-                draw:
-                    dashed_big:
-                        visible: false
         region:
             draw:
                 lines:

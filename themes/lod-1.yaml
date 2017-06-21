@@ -207,39 +207,6 @@ layers:
     #     #         dashed_steps:
     #     #             visible: false
 
-    #     racetrack:
-    #         draw:
-    #             lines:
-    #                 visible: false
-
-    #     airport-lines:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-
-    #         taxiway:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     ferry:
-    #         draw:
-    #             lines:
-    #                 visible: false
-
-    #     railway:
-    #         draw:
-    #             railway_dash:
-    #                 visible: false
-    #         service:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-
     pois:
         highway-exit:
             draw:

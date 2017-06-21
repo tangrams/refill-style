@@ -18,22 +18,62 @@ layers:
         filter:
             any:
                 - all:
+                    - $zoom: { max: 8 }
+                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
+                - all:
                     - $zoom: [8,9]
-                    - not: { kind: [major_road, minor_road, path] }
+                    - not: { kind: [major_road, minor_road, path], kind_detail: [secondary,tertiary] }
                 - all:
                     - $zoom: [10]
-                    - not: { kind: [major_road], kind_detail: [secondary] }
+                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
                     - not: { kind: [minor_road] }
                     - not: { kind: [major_road], is_link: true }
                 - all:
-                    - $zoom: { min: 11 }
+                    - $zoom: [11,12]
+                    - not: { kind: [major_road], kind_detail: [tertiary] }
                     - function() { return feature.min_zoom <= ($zoom - 1) }
-            minor_road:
-                hide-early:
-                        filter: { $zoom: { max: 13 } }
-                        draw:
-                            lines:
-                                visible: false
+                - all:
+                    - $zoom: { min: 13 }
+                    - function() { return feature.min_zoom <= ($zoom - 1) }
+        minor_road:
+            hide-early:
+                filter: { $zoom: { max: 14 } }
+                draw:
+                    lines:
+                        visible: false
+
+        service_road:
+            enabled: false
+
+        path:
+            enabled: false
+
+        racetrack:
+            draw:
+                lines:
+                    visible: false
+
+        airport-lines:
+            taxiway:
+                draw:
+                    lines:
+                        visible: false
+                        outline:
+                            visible: false
+
+        ferry:
+            draw:
+                lines:
+                    visible: false
+
+        railway:
+            draw:
+                railway_dash:
+                    visible: false
+            service:
+                draw:
+                    lines:
+                        visible: false
     # roads:
     #     arrows:
     #         draw:
@@ -110,35 +150,6 @@ layers:
     #         draw:
     #             dashed_steps:
     #                 visible: false
-
-    #     racetrack:
-    #         draw:
-    #             lines:
-    #                 visible: false
-
-    #     airport-lines:
-    #         taxiway:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     ferry:
-    #         draw:
-    #             lines:
-    #                 visible: false
-
-    #     railway:
-    #         draw:
-    #             railway_dash:
-    #                 visible: false
-    #         service:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-
-
 
     buildings:
         draw:
