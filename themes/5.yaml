@@ -68,7 +68,7 @@ layers:
             filter:
                 any:
                     - { $zoom: [15], height: { min: 100 } }
-                    - { $zoom: [15], area: { min: 500 } }
+                    - { $zoom: [15], area: { min: 1000 } }
                     - { $zoom: [15], volume: { min: 100000 } }
                     - { $zoom: [16], area: { min: 250 } }
                     - { $zoom: [16], volume: { min: 50000 } }
