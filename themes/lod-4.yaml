@@ -5,14 +5,13 @@ global:
 layers:
     water:
         water-boundary-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
         water_boundaries-not-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
     roads:
+        arrows:
+            enabled: false
+
         filter:
             any:
                 - all:
@@ -21,67 +20,27 @@ layers:
                     - $zoom: { min: 11 }
                     - function() { return feature.min_zoom <= ($zoom - 1) }
 
+        minor_road:
+            hide-early:
+                filter: { $zoom: { max: 13 } }
+                draw:
+                    lines:
+                        visible: false
+
+        service_road:
+            enabled: false
+
+        path:
+            enabled: false
+
+        track:
+            enabled: false
+
+        steps:
+            enabled: false
+
         ferry:
-            draw:
-                lines:
-                    visible: false
-    # roads:
-    #     arrows:
-    #         draw:
-    #             arrows:
-    #                 visible: false
-
-    #     minor_road:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-
-    #     service_road:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-
-    #     path:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-    #         pedestrian:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-    #         footway:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     track:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-    #         bridge:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     steps:
-    #         draw:
-    #             dashed_steps:
-    #                 visible: false
-
+            enabled: false
 
 
     buildings:
