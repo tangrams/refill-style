@@ -120,7 +120,7 @@ layers:
                             - population: { min: 40000 }
                         - all:
                             - $zoom: [9,10]
-                            - population: { min: 15000 }
+                            - population: { min: 27000 }
                         - all:
                             - $zoom: [11]
                             - population: { min: 5000 }
