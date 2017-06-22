@@ -89,3 +89,12 @@ layers:
                         order: 439
                         style: building-lines
                         extrude: global.building_extrude_height
+
+    places:
+        region:
+            enabled: false
+
+    landuse:
+        filter:
+            all:
+                - function() { return feature.min_zoom <= ($zoom - 1) }

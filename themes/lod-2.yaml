@@ -111,9 +111,7 @@ layers:
 
     boundaries:
         region:
-            draw:
-                lines:
-                    visible: false
+            enabled: false
 
 
     landuse:

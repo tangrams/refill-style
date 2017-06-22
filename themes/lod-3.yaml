@@ -103,10 +103,18 @@ layers:
                         style: building-lines
                         extrude: global.building_extrude_height
 
+    boundaries:
+        region:
+            enabled: false
+
+    places:
+        region:
+            enabled: false
+
     landuse:
         filter:
             all:
-                - function() { return feature.min_zoom <= ($zoom - 1) }
+                - function() { return feature.min_zoom <= ($zoom - 2) }
 
 
     # landuse:
