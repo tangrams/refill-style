@@ -7,14 +7,13 @@ global:
 layers:
     water:
         water-boundary-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
         water_boundaries-not-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
     roads:
+        arrows:
+            enabled: false
+
         filter:
             any:
                 - all:
@@ -44,108 +43,24 @@ layers:
         path:
             enabled: false
 
+        track:
+            enabled: false
+
+        steps:
+            enabled: false
+
         racetrack:
-            draw:
-                lines:
-                    visible: false
+            enabled: false
 
         airport-lines:
-            taxiway:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
+            enabled: false
 
         ferry:
-            draw:
-                lines:
-                    visible: false
+            enabled: false
 
         railway:
-            draw:
-                railway_dash:
-                    visible: false
-            service:
-                draw:
-                    lines:
-                        visible: false
-    # roads:
-    #     arrows:
-    #         draw:
-    #             arrows:
-    #                 visible: false
+            enabled: false
 
-    #     major_road:
-    #         tertiary:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-    #             routes:
-    #                 draw:
-    #                     lines:
-    #                         visible: false
-    #                         outline:
-    #                             visible: false
-    #             link:
-    #                 draw:
-    #                     lines:
-    #                         visible: false
-    #                         outline:
-    #                             visible: false
-
-    #     minor_road:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-
-    #     service_road:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-
-    #     path:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-    #         pedestrian:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-    #         footway:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     track:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-    #         bridge:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     steps:
-    #         draw:
-    #             dashed_steps:
-    #                 visible: false
 
     buildings:
         draw:

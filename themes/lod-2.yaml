@@ -12,14 +12,14 @@ global:
 layers:
     water:
         water-boundary-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
         water_boundaries-not-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
+
     roads:
+        arrows:
+            enabled: false
+
         filter:
             any:
                 - all:
@@ -55,36 +55,17 @@ layers:
             enabled: false
 
         racetrack:
-            draw:
-                lines:
-                    visible: false
+            enabled: false
 
         airport-lines:
-            taxiway:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
+            enabled: false
 
         ferry:
-            draw:
-                lines:
-                    visible: false
+            enabled: false
 
         railway:
-            draw:
-                railway_dash:
-                    visible: false
-            service:
-                draw:
-                    lines:
-                        visible: false
-    # roads:
-    #     arrows:
-    #         draw:
-    #             arrows:
-    #                 visible: false
+            enabled: false
+
 
 
     buildings:
