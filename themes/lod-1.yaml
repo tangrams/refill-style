@@ -13,24 +13,17 @@ global:
 layers:
     water:
         water-boundary-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
         water_boundaries-not-ocean:
-            draw:
-                coast:
-                    visible: false
+            enabled: false
 
     platforms:
-        draw:
-            lines_transparent:
-                visible: false
-        polygon_geom:
-            draw:
-                polygons_transparent:
-                    visible: false
+        enabled: false
 
     roads:
+        arrows:
+            enabled: false
+
         filter:
             any:
                 - all:
@@ -53,6 +46,7 @@ layers:
                 - all:
                     - $zoom: { min: 14 }
                     - function() { return feature.min_zoom <= ($zoom - 3) }
+
         minor_road:
             enabled: false
 
@@ -62,157 +56,27 @@ layers:
         path:
             enabled: false
 
+        track:
+            enabled: false
+
+        steps:
+            enabled: false
+
         racetrack:
-            draw:
-                lines:
-                    visible: false
+            enabled: false
 
         airport-lines:
-            draw:
-                lines:
-                    visible: false
-                    outline:
-                        visible: false
-
-            taxiway:
-                draw:
-                    lines:
-                        visible: false
-                        outline:
-                            visible: false
+            enabled: false
 
         ferry:
-            draw:
-                lines:
-                    visible: false
+            enabled: false
 
         railway:
-            draw:
-                railway_dash:
-                    visible: false
-            service:
-                draw:
-                    lines:
-                        visible: false
-
-    # roads:
-    #     arrows:
-    #         draw:
-    #             arrows:
-    #                 visible: false
-    #     # major_road:
-    #     #     trunk_primary:
-    #     #         draw:
-    #     #             lines:
-    #     #                 visible: false
-    #     #                 outline:
-    #     #                     visible: false
-    #     #         routes:
-    #     #             draw:
-    #     #                 lines:
-    #     #                     visible: true
-    #     #                     outline:
-    #     #                         visible: true
-
-    #     #     link:
-    #     #         draw:
-    #     #             lines:
-    #     #                 visible: false
-    #     #                 outline:
-    #     #                     visible: false
-
-    #     #     secondary:
-    #     #         draw:
-    #     #             lines:
-    #     #                 visible: false
-    #     #                 outline:
-    #     #                     visible: false
-    #     #         routes:
-    #     #             draw:
-    #     #                 lines:
-    #     #                     visible: false
-    #     #                     outline:
-    #     #                         visible: false
-
-    #     #     tertiary:
-    #     #         draw:
-    #     #             lines:
-    #     #                 visible: false
-    #     #                 outline:
-    #     #                     visible: false
-    #     #         routes:
-    #     #             draw:
-    #     #                 lines:
-    #     #                     visible: false
-    #     #                     outline:
-    #     #                         visible: false
-    #     #         link:
-    #     #             draw:
-    #     #                 lines:
-    #     #                     visible: false
-    #     #                     outline:
-    #     #                         visible: false
-
-    #     # minor_road:
-    #     #     draw:
-    #     #         lines:
-    #     #             visible: false
-    #     #             outline:
-    #     #                 visible: false
-
-    #     # service_road:
-    #     #     draw:
-    #     #         lines:
-    #     #             visible: false
-    #     #             outline:
-    #     #                 visible: false
-
-    #     # path:
-    #     #     draw:
-    #     #         lines:
-    #     #             visible: false
-    #     #             outline:
-    #     #                 visible: false
-    #     #     pedestrian:
-    #     #         draw:
-    #     #             lines:
-    #     #                 visible: false
-    #     #                 outline:
-    #     #                     visible: false
-    #     #     footway:
-    #     #         draw:
-    #     #             lines:
-    #     #                 visible: false
-    #     #                 outline:
-    #     #                     visible: false
-
-    #     # track:
-    #     #     draw:
-    #     #         lines:
-    #     #             visible: false
-    #     #             outline:
-    #     #                 visible: false
-    #     #     bridge:
-    #     #         draw:
-    #     #             lines:
-    #     #                 visible: false
-    #     #                 outline:
-    #     #                     visible: false
-
-    #     # steps:
-    #     #     draw:
-    #     #         dashed_steps:
-    #     #             visible: false
+            enabled: false
 
     pois:
         highway-exit:
-            draw:
-                text-blend-order:
-                    visible: false
-            later:
-                draw:
-                    colorized-icons:
-                        visible: false
+            enabled: false
 
     buildings:
         draw:
@@ -256,24 +120,7 @@ layers:
                         extrude: global.building_extrude_height
 
     boundaries:
-        country:
-            draw:
-                country-outerline:
-                    visible: false
-                lines:
-                    visible: false
-        other_country_boundary_disputed_etc:
-            draw:
-                dashed:
-                    visible: false
-            disputed:
-                draw:
-                    dashed_big:
-                        visible: false
-        region:
-            draw:
-                lines:
-                    visible: false
+        enabled: false
 
     landuse:
         filter:

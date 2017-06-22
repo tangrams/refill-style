@@ -48,6 +48,12 @@ layers:
         path:
             enabled: false
 
+        track:
+            enabled: false
+
+        steps:
+            enabled: false
+
         racetrack:
             draw:
                 lines:
@@ -78,97 +84,6 @@ layers:
     #     arrows:
     #         draw:
     #             arrows:
-    #                 visible: false
-
-    #     major_road:
-    #         link:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #         secondary:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-    #             routes:
-    #                 draw:
-    #                     lines:
-    #                         visible: false
-    #                         outline:
-    #                             visible: false
-
-    #         tertiary:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-    #             routes:
-    #                 draw:
-    #                     lines:
-    #                         visible: false
-    #                         outline:
-    #                             visible: false
-    #             link:
-    #                 draw:
-    #                     lines:
-    #                         visible: false
-    #                         outline:
-    #                             visible: false
-
-    #     minor_road:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-
-    #     service_road:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-
-    #     path:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-    #         pedestrian:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-    #         footway:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     track:
-    #         draw:
-    #             lines:
-    #                 visible: false
-    #                 outline:
-    #                     visible: false
-    #         bridge:
-    #             draw:
-    #                 lines:
-    #                     visible: false
-    #                     outline:
-    #                         visible: false
-
-    #     steps:
-    #         draw:
-    #             dashed_steps:
     #                 visible: false
 
 
