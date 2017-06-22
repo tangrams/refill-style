@@ -40,7 +40,7 @@ layers:
                     - $zoom: [8,9,10]
                     - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
                 - all:
-                    - $zoom: [11]
+                    - $zoom: { min: 11 }
                     - not: { kind: [major_road], kind_detail: [primary] }
                     - function() { return feature.min_zoom <= ($zoom - 3) }
                 - all:
@@ -53,9 +53,6 @@ layers:
                 - all:
                     - $zoom: { min: 14 }
                     - function() { return feature.min_zoom <= ($zoom - 3) }
-                # - all:
-                #     - $zoom: { min: 12 }
-                #     - function() { return feature.min_zoom <= ($zoom - 3) }
         minor_road:
             enabled: false
 

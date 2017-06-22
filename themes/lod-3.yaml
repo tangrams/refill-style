@@ -1,6 +1,6 @@
 global:
-    text_visible_tertiary:          false
-    text_visible_minor_road:        false
+    # text_visible_tertiary:          false
+    # text_visible_minor_road:        false
     text_visible_service_road:      false
     text_visible_path:              false
 
@@ -29,12 +29,8 @@ layers:
                     - not: { kind: [minor_road] }
                     - not: { kind: [major_road], is_link: true }
                 - all:
-                    - $zoom: [11,12]
-                    - not: { kind: [major_road], kind_detail: [tertiary] }
-                    - function() { return feature.min_zoom <= ($zoom - 1) }
-                - all:
-                    - $zoom: { min: 13 }
-                    - function() { return feature.min_zoom <= ($zoom - 1) }
+                    - $zoom: { min: 11 }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
         minor_road:
             hide-early:
                 filter: { $zoom: { max: 14 } }

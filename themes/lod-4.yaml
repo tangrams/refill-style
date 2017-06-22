@@ -1,5 +1,4 @@
 global:
-    text_visible_minor_road:        false
     text_visible_service_road:      false
     text_visible_path:              false
 
@@ -21,6 +20,11 @@ layers:
                 - all:
                     - $zoom: { min: 11 }
                     - function() { return feature.min_zoom <= ($zoom - 1) }
+
+        ferry:
+            draw:
+                lines:
+                    visible: false
     # roads:
     #     arrows:
     #         draw:
@@ -76,11 +80,6 @@ layers:
     #     steps:
     #         draw:
     #             dashed_steps:
-    #                 visible: false
-
-    #     ferry:
-    #         draw:
-    #             lines:
     #                 visible: false
 
 
