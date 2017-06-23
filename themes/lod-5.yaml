@@ -66,3 +66,38 @@ layers:
                         order: 439
                         style: building-lines
                         extrude: global.building_extrude_height
+
+    places:
+        region:
+            enabled: false
+
+        populated-places:
+            filter:
+                all:
+                    - kind: locality
+                    - any:
+                        - all:
+                            - $zoom: { max: 8 }
+                            - function() { return feature.min_zoom <= $zoom }
+                            - population: { min: 50000 }
+                        - all:
+                            - $zoom: [8]
+                            - population: { min: 15000 }
+                        - all:
+                            - $zoom: [9,10]
+                            - any:
+                                - population: { min: 10000 }
+                                - population: false
+                        - all:
+                            - $zoom: [11]
+                            - any:
+                                - population: { min: 1000 }
+                                - population: false
+                        - all:
+                            - $zoom: [12]
+                            - any:
+                                - population: { min: 500 }
+                                - population: false
+                        - all:
+                            - $zoom: { min: 13 }
+                            - function() { return feature.min_zoom <= ($zoom - 1) }
