@@ -122,17 +122,30 @@ layers:
                             - $zoom: [8]
                             - population: { min: 100000 }
                         - all:
-                            - $zoom: [9,10]
-                            - population: { min: 60000 }
+                            - $zoom: [9]
+                            - any:
+                                - population: { min: 60000 }
+                                - population: false
+                        - all:
+                            - $zoom: [10]
+                            - any:
+                                - population: { min: 60000 }
+                                - population: false
                         - all:
                             - $zoom: [11]
-                            - population: { min: 10000 }
+                            - any:
+                                - population: { min: 10000 }
+                                - population: false
                         - all:
                             - $zoom: [12]
-                            - population: { min: 5000 }
+                            - any:
+                                - population: { min: 5000 }
+                                - population: false
                         - all:
                             - $zoom: [13]
-                            - population: { min: 1000 }
+                            - any:
+                                - population: { min: 1000 }
+                                - population: false
                         - all:
                             - $zoom: { min: 14 }
                             - function() { return feature.min_zoom <= ($zoom - 3) }
