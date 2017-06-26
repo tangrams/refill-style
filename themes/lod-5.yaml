@@ -6,6 +6,9 @@ layers:
             enabled: false
 
     roads:
+        arrows:
+            enabled: false
+
         service_road:
             enabled: false
 
