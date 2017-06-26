@@ -82,7 +82,7 @@ layers:
                         - all:
                             - $zoom: { max: 8 }
                             - function() { return feature.min_zoom <= $zoom }
-                            - population: { min: 50000 }
+                            # - population: { min: 50000 }
                         - all:
                             - $zoom: [8]
                             - population: { min: 15000 }
