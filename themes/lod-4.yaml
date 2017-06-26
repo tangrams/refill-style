@@ -132,7 +132,7 @@ layers:
 
         neighbourhoods:
             filter:
-                $zoom: { min: 13 }
+                $zoom: { min: 14 }
 
     pois:
         national-park-protected-areas:
@@ -143,7 +143,7 @@ layers:
         region:
             region-labels:
                 filter:
-                    $zoom: { min: 12 }
+                    $zoom: { min: 13 }
 
     landuse:
         filter:
