@@ -15,6 +15,10 @@ layers:
             enabled: false
         water_boundaries-not-ocean:
             enabled: false
+        water-area-labels:
+            mostly-lakes:
+                filter:
+                    $zoom: { min: 8 }
 
     roads:
         arrows:
