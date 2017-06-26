@@ -148,6 +148,11 @@ layers:
                 $zoom: { min: 15 }
 
     pois:
+        filter:
+            any:
+                - all:
+                    - $zoom: { min: 11 }
+                    - function() { return feature.min_zoom <= ($zoom - 4) }
         national-park-protected-areas:
             filter:
                 $zoom: { min: 9 }
