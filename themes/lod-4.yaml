@@ -133,12 +133,12 @@ layers:
                             - $zoom: [12]
                             - any:
                                 - population: { min: 2500 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [13]
                             - any:
                                 - population: { min: 500 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: { min: 14 }
                             - function() { return feature.min_zoom <= ($zoom - 3) }

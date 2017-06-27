@@ -27,6 +27,10 @@ layers:
             mostly-lakes:
                 filter:
                     $zoom: { min: 9 }
+            playa-labels:
+                enabled: false
+            water-line-labels:
+                enabled: false
 
     platforms:
         enabled: false
@@ -99,6 +103,9 @@ layers:
             enabled: false
 
         beach:
+            enabled: false
+
+        airport:
             enabled: false
 
     buildings:
