@@ -1,13 +1,31 @@
+global:
+    text_visible_service_road:      false
+    text_visible_path:              false
+
 layers:
     water:
         water-boundary-ocean:
             enabled: false
         water_boundaries-not-ocean:
             enabled: false
-
     roads:
         arrows:
             enabled: false
+
+        filter:
+            any:
+                - all:
+                    - $zoom: { max: 11 }
+                - all:
+                    - $zoom: { min: 11 }
+                    - function() { return feature.min_zoom <= ($zoom - 1) }
+
+        minor_road:
+            hide-early:
+                filter: { $zoom: { max: 13 } }
+                draw:
+                    lines:
+                        visible: false
 
         service_road:
             enabled: false
@@ -21,6 +39,8 @@ layers:
         steps:
             enabled: false
 
+        ferry:
+            enabled: false
 
 
     buildings:
@@ -30,9 +50,9 @@ layers:
         footprints:
             filter:
                 any:
-                    - { $zoom: [15], height: { min: 100 } }
-                    - { $zoom: [15], area: { min: 1200 } }
-                    - { $zoom: [15], volume: { min: 150000 } }
+                    - { $zoom: [15], height: { min: 120 } }
+                    - { $zoom: [15], area: { min: 2200 } }
+                    - { $zoom: [15], volume: { min: 195000 } }
                     - { $zoom: [16], area: { min: 100 } }
                     - { $zoom: [16], volume: { min: 50000 } }
                     - { $zoom: { min: 17 }, area: true }
@@ -81,26 +101,51 @@ layers:
                     - any:
                         - all:
                             - $zoom: { max: 8 }
-                            - function() { return feature.min_zoom <= $zoom }
+                            - function() { return feature.min_zoom <= ($zoom - 1) }
                             # - population: { min: 50000 }
                         - all:
                             - $zoom: [8]
-                            - population: { min: 15000 }
+                            - population: { min: 30000 }
                         - all:
                             - $zoom: [9,10]
                             - any:
-                                - population: { min: 10000 }
+                                - population: { min: 20000 }
                                 - population: false
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 1000 }
+                                - population: { min: 2500 }
                                 - population: false
                         - all:
                             - $zoom: [12]
                             - any:
-                                - population: { min: 500 }
+                                - population: { min: 1000 }
                                 - population: false
                         - all:
-                            - $zoom: { min: 13 }
-                            - function() { return feature.min_zoom <= ($zoom - 1) }
+                            - $zoom: [13]
+                            - any:
+                                - population: { min: 100 }
+                                - population: false
+                        - all:
+                            - $zoom: { min: 14 }
+                            - function() { return feature.min_zoom <= ($zoom - 3) }
+
+        neighbourhoods:
+            filter:
+                $zoom: { min: 14 }
+
+    pois:
+        national-park-protected-areas:
+            filter:
+                $zoom: { min: 7 }
+
+    boundaries:
+        region:
+            region-labels:
+                filter:
+                    $zoom: { min: 13 }
+
+    landuse:
+        filter:
+            all:
+                - function() { return feature.min_zoom <= ($zoom - 1) }

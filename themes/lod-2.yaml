@@ -3,9 +3,10 @@ global:
     text_visible_neighbourhoods:    false
     text_visible_neighbourhoods_e:  false
     # text_visible_landuse_green:     false
+    #text_visible_trunk_primary:     false
     #text_visible_secondary:         false
     #text_visible_tertiary:          false
-    # text_visible_minor_road:        false
+    text_visible_minor_road:        false
     text_visible_service_road:      false
     text_visible_path:              false
 
@@ -16,9 +17,15 @@ layers:
         water_boundaries-not-ocean:
             enabled: false
         water-area-labels:
+            ocean-sea-labels:
+                filter:
+                    $zoom: { min: 6 }
             mostly-lakes:
                 filter:
-                    $zoom: { min: 8 }
+                    $zoom: { min: 9 }
+
+    platforms:
+        enabled: false
 
     roads:
         arrows:
@@ -28,24 +35,28 @@ layers:
             any:
                 - all:
                     - $zoom: { max: 8 }
-                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
+                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
                 - all:
-                    - $zoom: [8,9]
-                    - not: { kind: [major_road, minor_road, path], kind_detail: [primary,secondary,tertiary] }
-                - all:
-                    - $zoom: [10]
-                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
-                    - not: { kind: [minor_road] }
-                    - not: { kind: [major_road], is_link: true }
+                    - $zoom: [8,9,10]
+                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
                 - all:
                     - $zoom: { min: 11 }
+                    - not: { kind: [major_road], kind_detail: [primary] }
                     - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: [12]
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: [13]
+                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: { min: 14 }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+
         minor_road:
-            hide-early:
-                filter: { $zoom: { max: 14 } }
-                draw:
-                    lines:
-                        visible: false
+            enabled: false
+
         service_road:
             enabled: false
 
@@ -72,6 +83,15 @@ layers:
 
     pois:
         highway-exit:
+            enabled: false
+
+        national-park-protected-areas:
+            enabled: false
+
+        parks:
+            enabled: false
+
+        forest:
             enabled: false
 
     buildings:
@@ -123,45 +143,44 @@ layers:
                     - any:
                         - all:
                             - $zoom: { max: 8 }
-                            - function() { return feature.min_zoom <= ($zoom - 2) }
+                            - function() { return feature.min_zoom <= ($zoom - 3) }
                         - all:
                             - $zoom: [8]
-                            - population: { min: 100000 }
+                            - population: { min: 250000 }
                         - all:
                             - $zoom: [9]
                             - any:
-                                - population: { min: 60000 }
+                                - population: { min: 90000 }
                                 - population: false
                         - all:
                             - $zoom: [10]
                             - any:
-                                - population: { min: 60000 }
+                                - population: { min: 90000 }
                                 - population: false
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 10000 }
+                                - population: { min: 20000 }
                                 - population: false
                         - all:
                             - $zoom: [12]
                             - any:
-                                - population: { min: 5000 }
+                                - population: { min: 10000 }
                                 - population: false
                         - all:
                             - $zoom: [13]
                             - any:
-                                - population: { min: 1000 }
+                                - population: { min: 5000 }
                                 - population: false
                         - all:
                             - $zoom: { min: 14 }
-                            - function() { return feature.min_zoom <= ($zoom - 3) }
+                            - function() { return feature.min_zoom <= ($zoom - 4) }
 
 
     boundaries:
-        region:
-            enabled: false
+        enabled: false
 
     landuse:
         filter:
             all:
-                - function() { return feature.min_zoom <= ($zoom - 3) }
+                - function() { return feature.min_zoom <= ($zoom - 4) }

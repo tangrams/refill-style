@@ -1,0 +1,5 @@
+layers:
+    roads:
+        natural_earth_highways:
+            filter:
+                $zoom: { min: 5, max: 8 }

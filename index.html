@@ -223,7 +223,7 @@
 
         var tg_baseScene = 'refill-style.yaml';
 
-        var dev_or_prod = 'prod';
+        var dev_or_prod = 'dev';
         // prod
         var mapzen_api_key = 'vector-tiles-W2tPU-Y';
 
@@ -447,6 +447,7 @@
 
             // Labels selector
             var labels = {
+                '11 more': '11',
                 '10 more': '10',
                 '9 more': '9',
                 '8 more': '8',
@@ -495,6 +496,8 @@
 
             // Color theme selector
             var lod = {
+                'LOD - 11': '11',
+                'LOD (default) - 7': '7',
                 'LOD - 6': '6',
                 'LOD - 5': '5',
                 'LOD - 4': '4',
@@ -503,7 +506,7 @@
                 'LOD - 1': '1'
             };
             // use query language, else default to English
-            gui.lod = query.lod || '6';
+            gui.lod = query.lod || '7';
             gui.add(gui, 'lod', lod).onChange(function(value) {
                 var import_theme = 'themes/lod-'+ value + '.yaml'
 
