@@ -70,7 +70,9 @@ layers:
         railway:
             enabled: false
 
-
+    pois:
+        highway-exit:
+            enabled: false
 
     buildings:
         draw:
