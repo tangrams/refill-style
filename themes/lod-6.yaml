@@ -10,16 +10,23 @@ layers:
             enabled: false
 
         service_road:
-            enabled: false
+            filter:
+                $zoom: { min: 15 }
 
         path:
-            enabled: false
-
+            filter:
+                $zoom: { min: 17 }
         track:
-            enabled: false
+            filter:
+                $zoom: { min: 17 }
 
         steps:
-            enabled: false
+            filter:
+                $zoom: { min: 17 }
+
+        ferry:
+            filter:
+                $zoom: { min: 17 }
 
 
 

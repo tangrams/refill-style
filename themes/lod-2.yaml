@@ -11,6 +11,10 @@ global:
     text_visible_path:              false
 
 layers:
+    earth:
+        island:
+            enabled: false
+
     water:
         water-boundary-ocean:
             enabled: false
@@ -94,6 +98,9 @@ layers:
         forest:
             enabled: false
 
+        beach:
+            enabled: false
+
     buildings:
         draw:
             lines:
@@ -151,34 +158,43 @@ layers:
                             - $zoom: [9]
                             - any:
                                 - population: { min: 90000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [10]
                             - any:
                                 - population: { min: 90000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [11]
                             - any:
                                 - population: { min: 20000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [12]
                             - any:
                                 - population: { min: 10000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [13]
                             - any:
                                 - population: { min: 5000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: { min: 14 }
                             - function() { return feature.min_zoom <= ($zoom - 4) }
+            no-population:
+                filter:
+                    population: false
+                draw:
+                    visible: false
 
 
     boundaries:
         enabled: false
+
+    earth-labels:
+        island:
+            enabled: false
 
     landuse:
         filter:

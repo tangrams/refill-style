@@ -28,16 +28,20 @@ layers:
                         visible: false
 
         service_road:
-            enabled: false
+            filter:
+                $zoom: { min: 16 }
 
         path:
-            enabled: false
+            filter:
+                $zoom: { min: 18 }
 
         track:
-            enabled: false
+            filter:
+                $zoom: { min: 18 }
 
         steps:
-            enabled: false
+            filter:
+                $zoom: { min: 18 }
 
         ferry:
             enabled: false
