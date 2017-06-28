@@ -1,5 +1,26 @@
 layers:
+    water:
+        lakes:
+            filter:
+                all:
+                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
+                any:
+                    - area: true
+
+
     roads:
         natural_earth_highways:
             filter:
                 $zoom: { min: 0, max: 8 }
+
+    buildings:
+        footprints:
+            filter:
+                any:
+                    - area: true
+
+        extrude:
+            filter:
+                any:
+                    - area: true
+
