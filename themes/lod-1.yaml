@@ -3,6 +3,28 @@ layers:
         island:
             enabled: false
     water:
+        lakes:
+            filter:
+                all:
+                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 1 },  area: { min: 50000000000 } }
+                    - { $zoom: { min: 2 },  area: { min: 40000000000 } }
+                    # some weird natural earth scale set transition
+                    - { $zoom: { min: 3 },  area: { min: 20000000000 } }
+                    - { $zoom: { min: 4 },  area: { min: 8000000000 } }
+                    - { $zoom: { min: 5 },  area: { min: 5000000000 } }
+                    - { $zoom: { min: 6 },  area: { min: 700000000 } }
+                    - { $zoom: { min: 7 },  area: { min: 500000000 } }
+                    - { $zoom: { min: 8 },  area: { min: 160000000 } }
+                    - { $zoom: { min: 9 },  area: { min: 40000000 } }
+                    - { $zoom: { min: 10 }, area: { min: 10000000 } }
+                    - { $zoom: { min: 11 }, area: { min: 8000000 } }
+                    - { $zoom: { min: 12 }, area: { min: 2000000 } }
+                    - { $zoom: { min: 13 }, area: { min: 200000 } }
+                    - { $zoom: { min: 14 }, area: { min: 100000 } }
+                    - { $zoom: { min: 15 } }
         water-boundary-ocean:
             enabled: false
         water_boundaries-not-ocean:

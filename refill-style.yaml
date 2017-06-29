@@ -671,7 +671,7 @@ textures:
 sources:
     mapzen:
         type: TopoJSON #GeoJSON, MVT, TopoJSON
-        url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
+        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
         url_params:
             api_key: global.sdk_mapzen_api_key
         #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
@@ -1562,14 +1562,15 @@ layers:
         data: { source: mapzen, layer: water }
         draw:
             waves:
+                visible: false
                 order: global.feature_order
-                color: global.lightest_color # colors the wave lines
-        later:
-            filter: { $zoom: { min: 12 } }
-            draw:
-                waves:
-                    color: global.lighter_color # colors the wave lines
-                    order: function() { return feature.sort_rank + 1; }
+                color: [[0, global.lightest_color], [12, global.lighter_color]]
+        # later:
+        #     filter: { $zoom: { min: 12 } }
+        #     draw:
+        #         waves:
+        #             # color: global.lighter_color # colors the wave lines
+        #             order: function() { return feature.sort_rank + 1; }
 
         lakes:
             filter:
@@ -1577,24 +1578,25 @@ layers:
                     - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
                 any:
                     # limit show smaller landuse areas to higher zooms
-                    - { $zoom: { min: 1 },  area: { min: 40000000000 } }
-                    - { $zoom: { min: 2 },  area: { min: 20000000000 } }
+                    - { $zoom: [1],  area: { min: 10000000000 } }
+                    - { $zoom: [2],  area: { min: 7000000000 } }
                     # some weird natural earth scale set transition
-                    - { $zoom: { min: 3 },  area: { min: 80000000000 } }
-                    - { $zoom: { min: 4 },  area: { min: 5000000000 } }
-                    - { $zoom: { min: 5 },  area: { min: 700000000 } }
-                    - { $zoom: { min: 6 },  area: { min: 500000000 } }
-                    - { $zoom: { min: 7 },  area: { min: 160000000 } }
-                    - { $zoom: { min: 8 },  area: { min: 40000000 } }
-                    - { $zoom: { min: 9 },  area: { min: 10000000 } }
-                    - { $zoom: { min: 10 }, area: { min: 8000000 } }
-                    - { $zoom: { min: 11 }, area: { min: 2000000 } }
-                    - { $zoom: { min: 12 }, area: { min: 200000 } }
-                    - { $zoom: { min: 13 }, area: { min: 100000 } }
-                    - { $zoom: { min: 14 }, area: { min: 2000 } }
+                    - { $zoom: [3],  area: { min: 5000000000 } }
+                    - { $zoom: [4],  area: { min: 300000000 } }
+                    - { $zoom: [5],  area: { min: 50000000 } }
+                    - { $zoom: [6],  area: { min: 50000000 } }
+                    - { $zoom: [7],  area: { min: 50000000 } }
+                    - { $zoom: [8],  area: { min: 50000000 } }
+                    - { $zoom: [9],  area: { min: 15000000 } }
+                    - { $zoom: [10], area: { min: 4000000 } }
+                    - { $zoom: [11], area: { min: 1000000 } }
+                    - { $zoom: [12], area: { min: 250000 } }
+                    - { $zoom: [13], area: { min: 150000 } }
+                    - { $zoom: [14], area: { min: 40000 } }
                     - { $zoom: { min: 15 } }
             draw:
                 waves:
+                    visible: true
                     color: global.lighter_color
 
         other-water-areas:
@@ -1608,45 +1610,41 @@ layers:
                 polygons:
                     order: global.feature_order
                     color: global.offwhite_color
-        swimming_pool:
-            filter: { kind: swimming_pool }
-            draw:
-                waves:
-                    color: global.lighter_color
-        water-boundary-ocean:
-            filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
-            draw:
-                coast:
-                    order: global.feature_order
-                    color: [[1, global.light_color], [6, global.mid_color]]
-                    width: [[1, 1px], [20, 10px]]
-                    join: round
-        water_boundaries-not-ocean:
-            filter: { boundary: true, not: { kind: ocean }, $zoom: { min: 8 } }
-            draw:
-                coast:
-                    order: global.feature_order
-                    color: [[6, global.lightest_color], [11, global.mid_color]]
-                    width: [[6, 0.75px], [10, 1px], [14, 2px], [16, 3px]]
-                    join: round
-            # do we still need this?
-            # early:
-            #     filter: { $zoom: { min: 14 } }
-            #     draw:
-            #         lines:
-            #             order: 241
-            swimming-pools-early:
-                filter: { kind: swimming_pool, $zoom: { max: 19 } }
-                draw:
-                    coast:
-                        visible: false
-            riverbank:
-                # river boundaries like the thames in london, la seine in paris
-                filter: { kind: riverbank }
-                draw:
-                    coast:
-                        color: global.dark_color
-                        width: [[9, 0.5px], [11, 1px], [14, 1px], [15, 2px]]
+
+        # water-boundary-ocean:
+        #     filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
+        #     draw:
+        #         coast:
+        #             order: global.feature_order
+        #             color: [[1, global.light_color], [6, global.mid_color]]
+        #             width: [[1, 1px], [20, 10px]]
+        #             join: round
+        # water_boundaries-not-ocean:
+        #     filter: { boundary: true, not: { kind: ocean }, $zoom: { min: 8 } }
+        #     draw:
+        #         coast:
+        #             order: global.feature_order
+        #             color: [[6, global.lightest_color], [11, global.mid_color]]
+        #             width: [[6, 0.75px], [10, 1px], [14, 2px], [16, 3px]]
+        #             join: round
+        #     # do we still need this?
+        #     # early:
+        #     #     filter: { $zoom: { min: 14 } }
+        #     #     draw:
+        #     #         lines:
+        #     #             order: 241
+        #     swimming-pools-early:
+        #         filter: { kind: swimming_pool, $zoom: { max: 19 } }
+        #         draw:
+        #             coast:
+        #                 visible: false
+        #     riverbank:
+        #         # river boundaries like the thames in london, la seine in paris
+        #         filter: { kind: riverbank }
+        #         draw:
+        #             coast:
+        #                 color: global.dark_color
+        #                 width: [[9, 0.5px], [11, 1px], [14, 1px], [15, 2px]]
         river:
             #river center lines, not boundaries for polygons
             filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 14 }, not: { is_tunnel: true } }
@@ -1662,87 +1660,78 @@ layers:
                 all:
                     - name: true
                     - function() { return global.text_visible_water_labels; }
-            ocean-sea-labels:
-                filter: { kind: [sea, ocean] }
+            draw:
+                text-blend-order:
+                    text_source: global.ux_language_text_source
+                    visible: false
+                    font:
+                        fill: global.black_color
+                        family: global.text_font_family
+                        weight: normal
+                        #size: 10px
+            ocean-labels:
+                filter:
+                    all:
+                        - $zoom: { min: 1 }
+                        - kind: [ocean]
                 draw:
                     text-blend-order:
-                        text_source: global.ux_language_text_source
+                        visible: global.text_visible_water_labels
+                        text_source: global.ux_language_text_source_ocean
+                        text_wrap: false
+                        priority: 1
                         font:
-                            fill: global.black_color
-                            family: global.text_font_family
-                            weight: normal
-                            size: 12px
+                            size: [[1, 7px], [2, 9px], [4, 11px]]
                             transform: uppercase
-                ocean-spacer:
-                    filter: { kind: ocean }
-                    ocean-spacer-z1-up:
-                        filter: { $zoom: { min: 1 } }
-                        draw:
-                            text-blend-order:
-                                text_source: global.ux_language_text_source_ocean
-                                text_wrap: false
-                ocean-labels:
-                    draw:
-                        text-blend-order:
-                            font:
-                                size: [[1, 7px], [2, 9px], [4, 15px]]
 
-                sea-early:
-                    filter: { $zoom: [3], kind: sea }
-                    draw: { text-blend-order: { visible: false } }
-
-                sea-spacer:
-                    filter: { not: { kind: [ocean] }, $zoom: { min: 4 } }
-                    draw:
-                        text-blend-order:
-                            text_source: global.ux_language_text_source_sea
-                            text_wrap: false
-
-                sea-labels:
-                    filter: { not: { kind: [ocean] } }
-                    draw:
-                        text-blend-order:
-                            font:
-                                fill: global.dark_color
-                                size: [[4, 9px], [6, 10px], [18, 16px]]
+            sea-labels:
+                filter:
+                    all:
+                        - $zoom: { min: 4 }
+                        - kind: [sea]
+                draw:
+                    text-blend-order:
+                        visible: global.text_visible_water_labels
+                        text_source: global.ux_language_text_source_sea
+                        text_wrap: false
+                        priority: 2
+                        font:
+                            fill: global.dark_color
+                            size: [[4, 8px], [6, 10px], [18, 16px]]
+                            transform: uppercase
             mostly-lakes:
                 filter:
                     all:
+                        - $zoom: { min: 3 }
                         - $geometry: point
                         - not: { kind: [riverbank, dock, playa] }
                         - area: true
                     any:
                         # show labels for smaller landuse areas at higher zooms
-                        - { $zoom: { min: 5 },  area: { min: 10000000000 } }
-                        - { $zoom: { min: 6 },  area: { min: 5000000000 } }
-                        - { $zoom: { min: 7 },  area: { min: 400000000 } }
-                        - { $zoom: { min: 8 },  area: { min: 200000000 } }
-                        - { $zoom: { min: 9 },  area: { min: 100000000 } }
-                        - { $zoom: { min: 10 }, area: { min: 100000000 } }
-                        - { $zoom: { min: 11 }, area: { min: 10000000 } }
-                        - { $zoom: { min: 12 }, area: { min: 2000000 } }
-                        - { $zoom: { min: 13 }, area: { min: 1000000 } }
-                        - { $zoom: { min: 14 }, area: { min: 500000 } }
-                        - { $zoom: { min: 15 }, area: { min: 100000 } }
-                        - { $zoom: { min: 15 }, area: { min: 50000 } }
-                        - { $zoom: { min: 16 }, area: { min: 20000 } }
+                        - { $zoom: [3],  area: { min: 100000000000 } }
+                        - { $zoom: [4],  area: { min: 50000000000 } }
+                        - { $zoom: [5],  area: { min: 10000000000 } }
+                        - { $zoom: [6],  area: { min: 1700000000 } }
+                        - { $zoom: [7],  area: { min: 425000000 } }
+                        - { $zoom: [8],  area: { min: 40000000 } }
+                        - { $zoom: [9],  area: { min: 40000000 } }
+                        - { $zoom: [10], area: { min: 10000000 } }
+                        - { $zoom: [11], area: { min: 1500000 } }
+                        - { $zoom: [12], area: { min: 700000 } }
+                        - { $zoom: [13], area: { min: 100000 } }
+                        - { $zoom: [14], area: { min: 50000 } }
+                        - { $zoom: [15], area: { min: 50000 } }
+                        - { $zoom: [15], area: { min: 25000} }
+                        - { $zoom: [16], area: { min: 1000 } }
                         - { $zoom: { min: 17 } }
-                default-label-text:
-                    draw:
-                        text-blend-order:
-                            text_source: global.ux_language_text_source
-                            font:
-                                fill: global.black_color
-                                family: global.text_font_family
-                                style: italic
-                                weight: normal
-                                size: 12px
-                lakes-z5-up:
-                    filter: { $zoom: { min: 5 } }
-                    draw:
-                        text-blend-order:
-                            font:
-                                size: [[5, 9px], [10, 13px]]
+                draw:
+                    text-blend-order:
+                        visible: global.text_visible_water_labels
+                        text_wrap: 8
+                        font:
+                            style: italic
+                            size: [[5, 9px], [14, 12px]]
+
             playa-labels:
                 filter:
                     all:
@@ -1765,14 +1754,13 @@ layers:
                         - { $zoom: { min: 17 } }
                 draw:
                     text-blend-order:
-                        text_source: global.ux_language_text_source
+                        visible: global.text_visible_water_labels
                         font:
                             fill: global.mid_color
-                            family: global.text_font_family
                             style: italic
-                            weight: normal
                             size: 9px
                             stroke: { color: global.white_color, width: 3 }
+
             water-line-labels:
                 filter:
                     all:
@@ -1781,18 +1769,10 @@ layers:
                         - $zoom: { min: 14 }
                 draw:
                     text-blend-order:
-                        text_source: global.ux_language_text_source
+                        visible: global.text_visible_water_labels
                         font:
-                            fill: global.black_color
-                            family: global.text_font_family
                             style: italic
-                            weight: normal
-                            size: 12px
-                water-line-labels:
-                    draw:
-                        text-blend-order:
-                            font:
-                                size: [[14,10px],[17,14px]]
+                            size: [[14,12px],[17,14px]]
                 not-river-not-stream:
                     filter: { kind: [canal,dam,ditch,drain], $zoom: { max: 16 } }
                     draw:

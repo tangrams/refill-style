@@ -18,7 +18,7 @@ layers:
         water-area-labels:
             mostly-lakes:
                 filter:
-                    $zoom: { min: 8 }
+                    $zoom: { min: 10 }
 
     platforms:
         enabled: false

@@ -2,10 +2,12 @@ layers:
     water:
         lakes:
             filter:
-                all:
-                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
                 any:
                     - area: true
+
+        river:
+            filter:
+                $zoom: { min: 0 }
 
 
     roads:
@@ -23,4 +25,10 @@ layers:
             filter:
                 any:
                     - area: true
+
+    landuse:
+        national_park:
+            filter:
+                any:
+                    - protect_class: true
 
