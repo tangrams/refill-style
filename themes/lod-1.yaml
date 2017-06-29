@@ -19,16 +19,19 @@ layers:
                     - { $zoom: [7],  area: { min: 500000000 } }
                     - { $zoom: [8],  area: { min: 160000000 } }
                     - { $zoom: [9],  area: { min: 40000000 } }
-                    - { $zoom: [10], area: { min: 10000000 } }
-                    - { $zoom: [11], area: { min: 8000000 } }
-                    - { $zoom: [12], area: { min: 2000000 } }
-                    - { $zoom: [13], area: { min: 200000 } }
+                    - { $zoom: [10], area: { min: 15000000 } }
+                    - { $zoom: [11], area: { min: 6000000 } }
+                    - { $zoom: [12], area: { min: 1000000 } }
+                    - { $zoom: [13], area: { min: 500000 } }
                     - { $zoom: [14], area: { min: 100000 } }
                     - { $zoom: { min: 15 } }
         water-boundary-ocean:
             enabled: false
         water_boundaries-not-ocean:
             enabled: false
+        river:
+            intermittent:
+                enabled: false
         water-area-labels:
             enabled: false
 

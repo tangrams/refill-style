@@ -1603,11 +1603,13 @@ layers:
             filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 waves:
+                    visible: true
                     color: global.lighter_color
         playas:
             filter: { kind: playa }
             draw:
                 polygons:
+                    visible: true
                     order: global.feature_order
                     color: global.offwhite_color
 
@@ -1615,14 +1617,38 @@ layers:
             filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
             draw:
                 coast:
+                    visible: true
                     order: global.feature_order
                     color: [[1, global.light_color], [6, global.mid_color]]
                     width: [[1, 1px], [20, 10px]]
                     join: round
         water_boundaries-not-ocean:
-            filter: { boundary: true, not: { kind: ocean }, $zoom: { min: 8 } }
+            filter:
+                all:
+                    - boundary: true
+                    - not: { kind: ocean }
+                    - $zoom: { min: 8 }
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: [1],  area: { min: 10000000000 } }
+                    - { $zoom: [2],  area: { min: 7000000000 } }
+                    # some weird natural earth scale set transition
+                    - { $zoom: [3],  area: { min: 5000000000 } }
+                    - { $zoom: [4],  area: { min: 300000000 } }
+                    - { $zoom: [5],  area: { min: 50000000 } }
+                    - { $zoom: [6],  area: { min: 50000000 } }
+                    - { $zoom: [7],  area: { min: 50000000 } }
+                    - { $zoom: [8],  area: { min: 50000000 } }
+                    - { $zoom: [9],  area: { min: 15000000 } }
+                    - { $zoom: [10], area: { min: 4000000 } }
+                    - { $zoom: [11], area: { min: 1000000 } }
+                    - { $zoom: [12], area: { min: 250000 } }
+                    - { $zoom: [13], area: { min: 150000 } }
+                    - { $zoom: [14], area: { min: 40000 } }
+                    - { $zoom: { min: 15 } }
             draw:
                 coast:
+                    visible: true
                     order: global.feature_order
                     color: [[6, global.lightest_color], [11, global.mid_color]]
                     width: [[6, 0.75px], [10, 1px], [14, 2px], [16, 3px]]
@@ -1643,17 +1669,29 @@ layers:
                 filter: { kind: riverbank }
                 draw:
                     coast:
+                        visible: true
                         color: global.dark_color
                         width: [[9, 0.5px], [11, 1px], [14, 1px], [15, 2px]]
         river:
             #river center lines, not boundaries for polygons
-            filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 14 }, not: { is_tunnel: true } }
+            filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 11 }, not: { is_tunnel: true } }
             draw:
-                waves:
+                coast:
+                    visible: true
                     order: global.feature_order
-                    color: global.lighter_color
-                    width: [[14, 0.5px], [15, 2px], [17, 6px],[ 18, 8px]]
+                    color: global.light_color
+                    width: [[11, 0.5px], [ 18, 8px]]
                     cap: round
+            intermittent:
+                filter:
+                    any:
+                        - intermittent: [true]
+                        - kind: drain
+                draw:
+                    coast:
+                        order: function() { return feature.sort_rank; }
+                        color: global.light_color
+
 
         water-area-labels:
             filter:
