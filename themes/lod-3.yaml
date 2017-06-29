@@ -18,7 +18,23 @@ layers:
         water-area-labels:
             mostly-lakes:
                 filter:
-                    $zoom: { min: 10 }
+                    all:
+                        - $zoom: { min: 8 }
+                        - $geometry: point
+                        - not: { kind: [riverbank, dock, playa] }
+                        - area: true
+                    any:
+                        - { $zoom: [8],  area: { min: 98000000 } }
+                        - { $zoom: [9],  area: { min: 90000000 } }
+                        - { $zoom: [10], area: { min: 25000000 } }
+                        - { $zoom: [11], area: { min: 5000000 } }
+                        - { $zoom: [12], area: { min: 1000000 } }
+                        - { $zoom: [13], area: { min: 500000 } }
+                        - { $zoom: [14], area: { min: 200000 } }
+                        - { $zoom: [15], area: { min: 50000 } }
+                        - { $zoom: [15], area: { min: 25000} }
+                        - { $zoom: [16], area: { min: 1000 } }
+                        - { $zoom: { min: 17 } }
 
     platforms:
         enabled: false

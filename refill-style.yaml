@@ -1622,6 +1622,7 @@ layers:
                     color: [[1, global.light_color], [6, global.mid_color]]
                     width: [[1, 1px], [20, 10px]]
                     join: round
+
         water_boundaries-not-ocean:
             filter:
                 all:
@@ -1671,7 +1672,7 @@ layers:
                     coast:
                         visible: true
                         color: global.dark_color
-                        width: [[9, 0.5px], [11, 1px], [14, 1px], [15, 2px]]
+                        width: [[9, 0.5px], [15, 2px]]
         river:
             #river center lines, not boundaries for polygons
             filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 11 }, not: { is_tunnel: true } }
