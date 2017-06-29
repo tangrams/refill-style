@@ -38,7 +38,7 @@ global:
     text_visible_exits:             true
     text_visible_airport_gate:      true
 
-    sdk_road_shields:               false
+    sdk_road_shields:               true
 
 layers:
     pois:

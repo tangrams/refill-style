@@ -1611,40 +1611,40 @@ layers:
                     order: global.feature_order
                     color: global.offwhite_color
 
-        # water-boundary-ocean:
-        #     filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
-        #     draw:
-        #         coast:
-        #             order: global.feature_order
-        #             color: [[1, global.light_color], [6, global.mid_color]]
-        #             width: [[1, 1px], [20, 10px]]
-        #             join: round
-        # water_boundaries-not-ocean:
-        #     filter: { boundary: true, not: { kind: ocean }, $zoom: { min: 8 } }
-        #     draw:
-        #         coast:
-        #             order: global.feature_order
-        #             color: [[6, global.lightest_color], [11, global.mid_color]]
-        #             width: [[6, 0.75px], [10, 1px], [14, 2px], [16, 3px]]
-        #             join: round
-        #     # do we still need this?
-        #     # early:
-        #     #     filter: { $zoom: { min: 14 } }
-        #     #     draw:
-        #     #         lines:
-        #     #             order: 241
-        #     swimming-pools-early:
-        #         filter: { kind: swimming_pool, $zoom: { max: 19 } }
-        #         draw:
-        #             coast:
-        #                 visible: false
-        #     riverbank:
-        #         # river boundaries like the thames in london, la seine in paris
-        #         filter: { kind: riverbank }
-        #         draw:
-        #             coast:
-        #                 color: global.dark_color
-        #                 width: [[9, 0.5px], [11, 1px], [14, 1px], [15, 2px]]
+        water-boundary-ocean:
+            filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
+            draw:
+                coast:
+                    order: global.feature_order
+                    color: [[1, global.light_color], [6, global.mid_color]]
+                    width: [[1, 1px], [20, 10px]]
+                    join: round
+        water_boundaries-not-ocean:
+            filter: { boundary: true, not: { kind: ocean }, $zoom: { min: 8 } }
+            draw:
+                coast:
+                    order: global.feature_order
+                    color: [[6, global.lightest_color], [11, global.mid_color]]
+                    width: [[6, 0.75px], [10, 1px], [14, 2px], [16, 3px]]
+                    join: round
+            # do we still need this?
+            # early:
+            #     filter: { $zoom: { min: 14 } }
+            #     draw:
+            #         lines:
+            #             order: 241
+            swimming-pools-early:
+                filter: { kind: swimming_pool, $zoom: { max: 19 } }
+                draw:
+                    coast:
+                        visible: false
+            riverbank:
+                # river boundaries like the thames in london, la seine in paris
+                filter: { kind: riverbank }
+                draw:
+                    coast:
+                        color: global.dark_color
+                        width: [[9, 0.5px], [11, 1px], [14, 1px], [15, 2px]]
         river:
             #river center lines, not boundaries for polygons
             filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 14 }, not: { is_tunnel: true } }
