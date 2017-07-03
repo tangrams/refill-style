@@ -42,7 +42,13 @@ layers:
         enabled: false
 
     pois:
-        enabled: false
+        filter:
+            all:
+                - $zoom: { min: 18 }
+                - not: { kind: [tram_stop,pitch,bus_stop,parking,park,traffic_signals,level_crossing,building,address,farm,tree,apron,residential,commercial,industrial] }
+
+        highway-exit:
+            enabled: false
 
     buildings:
         draw:
@@ -85,7 +91,18 @@ layers:
                         style: building-lines
                         extrude: global.building_extrude_height
         building-labels:
-            enabled: false
+            filter:
+                all:
+                    - { $zoom: { min: 18 } }
+                    - $geometry: point
+                    - kind: [false, building, university, college, school, kindergarten]
+                    - function() { return global.text_visible_building; }
+                any:
+                    - { $zoom: [18], area: { min: 1000 }, name: true }
+                    - { $zoom: [18], kind: [university, college, school, kindergarten] }
+                    - { $zoom: [19], area: { min: 200 }, name: true }
+                    - { $zoom: { min: 19 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: { min: 20 }, name: true }
 
     places:
         enabled: false
