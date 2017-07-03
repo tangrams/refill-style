@@ -25,11 +25,15 @@ layers:
                     - { $zoom: [13], area: { min: 500000 } }
                     - { $zoom: [14], area: { min: 100000 } }
                     - { $zoom: { min: 15 } }
+        other-water-areas:
+            enabled: false
         water-boundary-ocean:
             enabled: false
         water_boundaries-not-ocean:
             enabled: false
         river:
+            #river center lines, not boundaries for polygons
+            filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 14 }, not: { is_tunnel: true } }
             intermittent:
                 enabled: false
         water-area-labels:
@@ -45,45 +49,7 @@ layers:
         enabled: false
 
     buildings:
-        draw:
-            lines:
-                width: [[14, 0px], [15, 0px], [16, 0.75px],[18, 0.75px], [19, 1px]]
-        footprints:
-            filter:
-                any:
-                    - { $zoom: [16], area: { min: 100 } }
-                    - { $zoom: [16], volume: { min: 50000 } }
-                    - { $zoom: { min: 17 }, area: true }
-            draw:
-                polygons:
-                    visible: true
-                lines:
-                    visible: true
-            extrude:
-                filter:
-                    all:
-                        - function() { return global.sdk_building_extrude; }
-                        - any:
-                            - { $zoom: [16], height: { min: 100 } }
-                            - { $zoom: [16], area: { min: 3500 } }
-                            - { $zoom: [16], volume: { min: 50000 } }
-                            - { $zoom: [17], area: { min: 500 } }
-                            - { $zoom: [17], volume: { min: 15000 } }
-                            - { $zoom: { min: 18 } }
-                        - not:
-                            - layer: [-1, -2, -3, -4, -5]
-                draw:
-                    polygons:
-                        visible: true
-                        order: 438
-                        style: building-grid
-                        extrude: global.building_extrude_height
-                        # color: global.white_color
-                    lines:
-                        visible: true
-                        order: 439
-                        style: building-lines
-                        extrude: global.building_extrude_height
+        enabled: false
 
     places:
         enabled: false
@@ -96,10 +62,4 @@ layers:
         enabled: false
 
     landuse:
-        filter:
-            all:
-                - function() { return feature.min_zoom <= ($zoom - 4) }
-
-        landuse-not-filtered:
-            runway:
-                enabled: false
+        enabled: false

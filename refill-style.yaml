@@ -225,6 +225,7 @@ global:
     #
     # default order for basemap features
     feature_order: function() { return feature.sort_rank; }
+    feature_order_down_1: function() { return feature.sort_rank - 1; }
     #
     #roads
     highway1:                   [1.00,1.00,1.00]
@@ -1065,6 +1066,29 @@ styles:
                     vec2 st = getConstantCoords();
                     color = mix(vec4(color.rgb, 0.4), vec4(0.0), stripes(st*130.))*OPACITY; // transparent stripes
 
+    riverlines:
+        base: lines
+        mix: [space-constant]
+        blend: opaque
+        shaders:
+            defines:
+                OPACITY: 1.0
+            blocks:
+                global: |
+                    mat2 rotate2d(float angle){
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+
+                    float stripes(vec2 st){
+                        st = rotate2d(3.14159265358*-0.25 )*st;
+                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
+                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
+                    }
+                color: |
+                    vec2 st = getConstantCoords();
+                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*OPACITY; // transparent stripes
+
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]
         base: polygons
@@ -1677,9 +1701,9 @@ layers:
             #river center lines, not boundaries for polygons
             filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 11 }, not: { is_tunnel: true } }
             draw:
-                coast:
+                riverlines:
                     visible: true
-                    order: global.feature_order
+                    order: global.feature_order_down_1
                     color: global.light_color
                     width: [[11, 0.5px], [ 18, 8px]]
                     cap: round
@@ -1690,7 +1714,6 @@ layers:
                         - kind: drain
                 draw:
                     coast:
-                        order: function() { return feature.sort_rank; }
                         color: global.light_color
 
 

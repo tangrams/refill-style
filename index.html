@@ -433,7 +433,7 @@
                     themes_as_array.push( all_theme_imports.labels );
                 }
                 if( all_theme_imports.lod ) {
-                    if( all_theme_imports.lod != 'themes/lod-7.yaml' ) {
+                    if( all_theme_imports.lod != 'themes/lod-8.yaml' ) {
                         themes_as_array.push( all_theme_imports.lod );
                     }
                 }
@@ -497,7 +497,8 @@
             // Color theme selector
             var lod = {
                 'LOD - 11': '11',
-                'LOD (default) - 7': '7',
+                'LOD (default) - 8': '8',
+                'LOD - 7': '7',
                 'LOD - 6': '6',
                 'LOD - 5': '5',
                 'LOD - 4': '4',
@@ -506,7 +507,7 @@
                 'LOD - 1': '1'
             };
             // use query language, else default to English
-            gui.lod = query.lod || '7';
+            gui.lod = query.lod || '8';
             gui.add(gui, 'lod', lod).onChange(function(value) {
                 var import_theme = 'themes/lod-'+ value + '.yaml'
 
