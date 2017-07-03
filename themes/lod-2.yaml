@@ -45,7 +45,7 @@ layers:
         filter:
             all:
                 - $zoom: { min: 18 }
-                - not: { kind: [tram_stop,pitch,bus_stop,parking,park,traffic_signals,level_crossing,building,address,farm,tree,apron,residential,commercial,industrial] }
+                - not: { kind: [animal,information,platform,toilets,drinking_water,bicycle_rental_station,attraction,garden,peak,dog_park,tram_stop,pitch,bus_stop,parking,park,traffic_signals,level_crossing,building,address,farm,tree,apron,residential,commercial,industrial] }
 
         highway-exit:
             enabled: false
