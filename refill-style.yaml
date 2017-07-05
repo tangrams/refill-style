@@ -4782,7 +4782,7 @@ layers:
                         font:
                             fill: global.dark_color
                             style: italic
-            park-like:
+            park-icon:
                 filter:
                     - kind: [national_park, battlefield, protected_area]
                 draw:
