@@ -4546,15 +4546,6 @@ layers:
                             family: global.text_font_family
                             style: italic
                             size: 11px
-        suppress-icon-z17:
-            filter:
-                $zoom: { min: 17 }
-                kind: [common, grass, houseboat, pedestrian, railway, ship, wetland]
-            draw:
-                colorized-icons:
-                    size: 0px
-                    #visible: false
-                    text: { font: { style: italic } }
 
         # the server should be setting better values here
         z-server-friend:
@@ -4779,73 +4770,23 @@ layers:
                 colorized-icons:
                     priority: 41
 
-        national-park-protected-areas:
-            filter:
-                kind: [national_park, battlefield]
-            draw:
-                colorized-icons:
-                    visible: global.icon_visible_landuse_green
-                    size: global.icon_size_green
-                    sprite: park
-                    text:
-                        visible: global.text_visible_landuse_green
-                        font:
-                            fill: global.dark_color
-                            style: italic
-            # large park icon
-            # z14-parks:
-            #     filter: { $zoom: { min: 14 } }
-            #     draw:
-            #         colorized-icons:
-            #             sprite: park-l
-            #             size: [[14,24px],[16,32px]]
         parks:
             filter:
-                - kind: [park, conservation, grass]
-                - { kind: protected_area, not: { protect_class: [6, '6'] } }
+                - kind: [national_park, battlefield, park, protected_area, forest, beach]
             draw:
                 colorized-icons:
                     visible: global.icon_visible_landuse_green
                     size: global.icon_size_green
-                    sprite: park
                     text:
                         visible: global.text_visible_landuse_green
                         font:
                             fill: global.dark_color
-                            style: italic
-            only-text-later:
-                filter: { kind: [grass], $zoom: { min: 16 } }
+            park-like:
+                filter:
+                    - kind: [national_park, battlefield, protected_area]
                 draw:
                     colorized-icons:
-                        size: 0px
-                        text:
-                            font:
-                                style: italic
-        forest:
-            filter:
-                - kind: forest
-                - { kind: protected_area, protect_class: [6, '6'] }
-            draw:
-                colorized-icons:
-                    visible: global.icon_visible_landuse_green
-                    size: global.icon_size_green
-                    sprite: forest
-                    text:
-                        visible: global.text_visible_landuse_green
-                        font:
-                            fill: global.dark_color
-                            style: italic
-        beach:
-            filter:
-                kind: [beach]
-            draw:
-                colorized-icons:
-                    visible: global.icon_visible_landuse_green
-                    size: global.icon_size_green
-                    text:
-                        visible: global.text_visible_landuse_green
-                        font:
-                            fill: global.dark_color
+                        sprite: park
         airport:
             filter:
                 kind: [airport, aerodrome]
@@ -4891,7 +4832,7 @@ layers:
 
         landuse-labels-not-any-above:
             filter:
-                not: { kind: [aerodrome, airport, allotments, aquarium, attraction, battlefield, beach, cemetery, college, conservation, forest, garden, glacier, golf_course, grass, kindergarten, landmark, maze, national_park, nature_reserve, park, playground, protected_area, resort, school, stadium, station, theme_park, university, winery, winter_sports, zoo] }
+                not: { kind: [aerodrome, airport, allotments, aquarium, attraction, battlefield, beach, cemetery, college, conservation, forest, garden, glacier, golf_course, kindergarten, landmark, maze, national_park, nature_reserve, park, playground, protected_area, resort, school, stadium, station, theme_park, university, winery, winter_sports, zoo] }
             draw:
                 colorized-icons:
                     priority: 43
