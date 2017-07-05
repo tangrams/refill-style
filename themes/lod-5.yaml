@@ -173,7 +173,14 @@ layers:
         filter:
             - all:
                 - $zoom: { min: 11 }
-                - function() { return feature.min_zoom <= ($zoom - 2) }
+                # - function() { return feature.min_zoom <= ($zoom - 2) }
+                - any:
+                    - all:
+                        - not: { kind: station }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
+                    - all:
+                        - kind: station
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
 
         station-train-subway:
             station-early:
@@ -181,10 +188,13 @@ layers:
                     $zoom: { max: 13 }      # original is max: 11
             low-priority-early-z13:
                 #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
-                filter: { kind_tile_rank: { min: 4 }, $zoom: [13] }
+                filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
             low-priority-early-z14:
                 #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
-                filter: { kind_tile_rank: { min: 4 }, $zoom: [14] }
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                draw:
+                    colorized-icons:
+                        visible: false
 
     boundaries:
         region:
