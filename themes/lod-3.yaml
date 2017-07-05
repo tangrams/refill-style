@@ -108,23 +108,40 @@ layers:
             enabled: false
 
     pois:
+        filter:
+            - all:
+                - $zoom: { min: 11 }
+                - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 4); } }
         highway-exit:
             enabled: false
 
-        national-park-protected-areas:
-            enabled: false
-
-        parks:
-            enabled: false
-
-        forest:
-            enabled: false
-
-        beach:
-            enabled: false
+        # parks:
+        #     enabled: false
 
         airport:
             enabled: false
+
+        station-train-subway:
+            station-early:
+                filter:
+                    $zoom: { max: 13 }      # original is max: 11
+            low-priority-early:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: { min: 0, max: 13 } }
+            low-priority-early-z13:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: [13] }
+            low-priority-early-z14:
+                #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                filter: { kind_tile_rank: { min: 5 }, $zoom: [14] }
+                draw:
+                    colorized-icons:
+                        visible: false
+            low-priority-early-z15:
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [15] }
+                draw:
+                    colorized-icons:
+                        visible: false
 
     buildings:
         draw:
@@ -211,7 +228,8 @@ layers:
                 filter:
                     population: false
                 draw:
-                    visible: false
+                    colorized-icons:
+                        visible: false
 
 
     boundaries:

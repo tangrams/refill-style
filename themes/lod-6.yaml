@@ -139,9 +139,27 @@ layers:
                 $zoom: { min: 14 }
 
     pois:
+        filter:
+            - all:
+                - function() { return feature.min_zoom <= ($zoom - 1) }
         national-park-protected-areas:
             filter:
                 $zoom: { min: 7 }
+
+        station-train-subway:
+            station-early:
+                filter:
+                    $zoom: { max: 12 }      # original is max: 11
+            low-priority-early:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: { min: 0, max: 13 } }
+            low-priority-early-z13:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: [13] }
+            low-priority-early-z14:
+                #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: [14] }
+
 
     boundaries:
         region:

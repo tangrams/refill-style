@@ -44,8 +44,15 @@ layers:
     pois:
         filter:
             all:
-                - $zoom: { min: 18 }
-                - not: { kind: [animal,information,platform,toilets,drinking_water,bicycle_rental_station,attraction,garden,peak,dog_park,tram_stop,pitch,bus_stop,parking,park,traffic_signals,level_crossing,building,address,farm,tree,apron,residential,commercial,industrial] }
+                #- $zoom: { min: 18 }
+                - function() { if( $zoom >= 19 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 2); } else { return feature.min_zoom <= ($zoom - 5); } }
+                - not: { kind: [animal,information,platform,toilets,drinking_water,bicycle_rental_station,attraction,garden,peak,dog_park,tram_stop,pitch,bus_stop,parking,traffic_signals,level_crossing,building,address,farm,tree,apron,residential,commercial,industrial] }
+
+        station-train-subway:
+            station-early:
+                filter:
+                    $zoom: { max: 16 }      # original is max: 11
+
 
         highway-exit:
             enabled: false

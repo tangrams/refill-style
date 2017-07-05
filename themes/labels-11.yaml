@@ -44,7 +44,7 @@ layers:
     pois:
         filter:
             all:
-                - kind: true
+                - kind: true                # this forces things like trees to display always
 
         no-name:
             filter: { name: false }

@@ -91,10 +91,15 @@ layers:
 
     pois:
         filter:
-            any:
-                - all:
-                    - $zoom: { min: 11 }
-                    - function() { return feature.min_zoom <= ($zoom - 4) }
+            - all:
+                - $zoom: { min: 11 }
+                - any:
+                    - all:
+                        - not: { kind: station }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
+                    - all:
+                        - kind: station
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
 
         highway-exit:
             enabled: false
@@ -105,6 +110,30 @@ layers:
 
         forest:
             enabled: false
+
+        station-train-subway:
+            station-early:
+                filter:
+                    $zoom: { max: 11 }      # original is max: 11
+            low-priority-early:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+            low-priority-early-z13:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+                filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+            low-priority-early-z14:
+                #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                draw:
+                    colorized-icons:
+                        visible: false
+            low-priority-early-z15:
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [15] }
+                draw:
+                    colorized-icons:
+                        size: 14px
+                        text:
+                            visible: false
 
     buildings:
         draw:
