@@ -175,10 +175,6 @@ layers:
                 - $zoom: { min: 11 }
                 - function() { return feature.min_zoom <= ($zoom - 2) }
 
-        national-park-protected-areas:
-            filter:
-                $zoom: { min: 9 }
-
         station-train-subway:
             station-early:
                 filter:

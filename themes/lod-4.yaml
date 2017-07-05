@@ -104,13 +104,6 @@ layers:
         highway-exit:
             enabled: false
 
-        national-park-protected-areas:
-            filter:
-                $zoom: { min: 10 }
-
-        forest:
-            enabled: false
-
         station-train-subway:
             station-early:
                 filter:
