@@ -4781,6 +4781,7 @@ layers:
                         visible: global.text_visible_landuse_green
                         font:
                             fill: global.dark_color
+                            style: italic
             park-like:
                 filter:
                     - kind: [national_park, battlefield, protected_area]
