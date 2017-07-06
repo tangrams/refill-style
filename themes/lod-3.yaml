@@ -57,28 +57,31 @@ layers:
         arrows:
             enabled: false
 
-        filter:
-            any:
-                - all:
-                    - $zoom: { max: 8 }
-                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
-                - all:
-                    - $zoom: [8,9,10]
-                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
-                - all:
-                    - $zoom: { min: 11 }
-                    - not: { kind: [major_road], kind_detail: [primary] }
-                    - function() { return feature.min_zoom <= ($zoom - 3) }
-                - all:
-                    - $zoom: [12]
-                    - function() { return feature.min_zoom <= ($zoom - 3) }
-                - all:
-                    - $zoom: [13]
-                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
-                    - function() { return feature.min_zoom <= ($zoom - 3) }
-                - all:
-                    - $zoom: { min: 14 }
-                    - function() { return feature.min_zoom <= ($zoom - 3) }
+        # filter:
+        #     any:
+        #         - all:
+        #             - $zoom: { max: 8 }
+        #             - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
+        #         - all:
+        #             - $zoom: [8,9,10]
+        #             - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
+        #         - all:
+        #             - $zoom: { min: 11 }
+        #             - not: { kind: [major_road], kind_detail: [primary] }
+        #             - function() { return feature.min_zoom <= ($zoom - 3) }
+        #         - all:
+        #             - $zoom: [12]
+        #             - function() { return feature.min_zoom <= ($zoom - 3) }
+        #         - all:
+        #             - $zoom: [13]
+        #             - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
+        #             - function() { return feature.min_zoom <= ($zoom - 3) }
+        #         - all:
+        #             - $zoom: { min: 14 }
+        #             - function() { return feature.min_zoom <= ($zoom - 3) }
+
+        major_road:
+            enabled: false
 
         minor_road:
             enabled: false

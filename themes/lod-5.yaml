@@ -1,5 +1,10 @@
 global:
-    # text_visible_tertiary:          false
+    text_visible_admin:             false
+    text_visible_neighbourhoods:    false
+    text_visible_neighbourhoods_e:  false
+    # text_visible_landuse_green:     false
+    #text_visible_secondary:         false
+    #text_visible_tertiary:          false
     # text_visible_minor_road:        false
     text_visible_service_road:      false
     text_visible_path:              false
@@ -14,16 +19,14 @@ layers:
             mostly-lakes:
                 filter:
                     all:
-                        - $zoom: { min: 6 }
+                        - $zoom: { min: 8 }
                         - $geometry: point
                         - not: { kind: [riverbank, dock, playa] }
                         - area: true
                     any:
-                        - { $zoom: [6],  area: { min: 1700000000 } }
-                        - { $zoom: [7],  area: { min: 425000000 } }
-                        - { $zoom: [8],  area: { min: 50000000 } }
-                        - { $zoom: [9],  area: { min: 45000000 } }
-                        - { $zoom: [10], area: { min: 15000000 } }
+                        - { $zoom: [8],  area: { min: 98000000 } }
+                        - { $zoom: [9],  area: { min: 90000000 } }
+                        - { $zoom: [10], area: { min: 25000000 } }
                         - { $zoom: [11], area: { min: 5000000 } }
                         - { $zoom: [12], area: { min: 1000000 } }
                         - { $zoom: [13], area: { min: 500000 } }
@@ -32,6 +35,10 @@ layers:
                         - { $zoom: [15], area: { min: 25000} }
                         - { $zoom: [16], area: { min: 1000 } }
                         - { $zoom: { min: 17 } }
+
+    platforms:
+        enabled: false
+
     roads:
         arrows:
             enabled: false
@@ -43,10 +50,10 @@ layers:
                     - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
                 - all:
                     - $zoom: [8,9]
-                    - not: { kind: [major_road, minor_road, path], kind_detail: [secondary,tertiary] }
+                    - not: { kind: [major_road, minor_road, path], kind_detail: [primary,secondary,tertiary] }
                 - all:
                     - $zoom: [10]
-                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
+                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
                     - not: { kind: [minor_road] }
                     - not: { kind: [major_road], is_link: true }
                 - all:
@@ -58,7 +65,6 @@ layers:
                 draw:
                     lines:
                         visible: false
-
         service_road:
             enabled: false
 
@@ -83,6 +89,44 @@ layers:
         railway:
             enabled: false
 
+    pois:
+        filter:
+            - all:
+                - $zoom: { min: 11 }
+                - any:
+                    - all:
+                        - not: { kind: station }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
+                    - all:
+                        - kind: station
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
+
+        highway-exit:
+            enabled: false
+
+        station-train-subway:
+            station-early:
+                filter:
+                    $zoom: { max: 11 }      # original is max: 11
+            low-priority-early:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+            low-priority-early-z13:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+                filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+            low-priority-early-z14:
+                #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                draw:
+                    colorized-icons:
+                        visible: false
+            low-priority-early-z15:
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [15] }
+                draw:
+                    colorized-icons:
+                        size: 14px
+                        text:
+                            visible: false
 
     buildings:
         draw:
@@ -126,9 +170,6 @@ layers:
                         extrude: global.building_extrude_height
 
     places:
-        region:
-            enabled: false
-
         populated-places:
             filter:
                 all:
@@ -136,65 +177,39 @@ layers:
                     - any:
                         - all:
                             - $zoom: { max: 8 }
-                            - function() { return feature.min_zoom <= ($zoom - 1) }
-                            - population: { min: 10000 }
+                            - function() { return feature.min_zoom <= ($zoom - 2) }
                         - all:
                             - $zoom: [8]
-                            - population: { min: 60000 }
+                            - population: { min: 100000 }
                         - all:
-                            - $zoom: [9,10]
+                            - $zoom: [9]
                             - any:
-                                - population: { min: 30000 }
+                                - population: { min: 60000 }
+                                - population: false
+                        - all:
+                            - $zoom: [10]
+                            - any:
+                                - population: { min: 60000 }
                                 - population: false
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 5000 }
+                                - population: { min: 10000 }
                                 - population: false
                         - all:
                             - $zoom: [12]
                             - any:
-                                - population: { min: 2500 }
+                                - population: { min: 5000 }
                                 # - population: false
                         - all:
                             - $zoom: [13]
                             - any:
-                                - population: { min: 500 }
+                                - population: { min: 1000 }
                                 # - population: false
                         - all:
                             - $zoom: { min: 14 }
                             - function() { return feature.min_zoom <= ($zoom - 3) }
 
-        neighbourhoods:
-            filter:
-                $zoom: { min: 15 }
-
-    pois:
-        filter:
-            - all:
-                - $zoom: { min: 11 }
-                # - function() { return feature.min_zoom <= ($zoom - 2) }
-                - any:
-                    - all:
-                        - not: { kind: station }
-                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 2); } }
-                    - all:
-                        - kind: station
-                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 2); } }
-
-        station-train-subway:
-            station-early:
-                filter:
-                    $zoom: { max: 12 }      # original is max: 11
-            low-priority-early-z13:
-                #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
-                filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
-            low-priority-early-z14:
-                #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
-                filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
-                draw:
-                    colorized-icons:
-                        visible: false
 
     boundaries:
         region:
@@ -203,4 +218,4 @@ layers:
     landuse:
         filter:
             all:
-                - function() { return feature.min_zoom <= ($zoom - 2) }
+                - function() { return feature.min_zoom <= ($zoom - 3) }
