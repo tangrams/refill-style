@@ -123,7 +123,7 @@ layers:
                 - any:
                     - all:
                         - not: { kind: station }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 1 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1 ); } else { return feature.min_zoom <= ($zoom - 4); } }
                     - all:
                         - kind: station
                         - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1 ); } else { return feature.min_zoom <= ($zoom - 4); } }
@@ -210,26 +210,26 @@ layers:
                             - function() { return feature.min_zoom <= ($zoom - 3) }
                         - all:
                             - $zoom: [8]
-                            - population: { min: 250000 }
+                            - population: { min: 300000 }
                         - all:
                             - $zoom: [9]
                             - any:
-                                - population: { min: 90000 }
+                                - population: { min: 150000 }
                                 # - population: false
                         - all:
                             - $zoom: [10]
                             - any:
-                                - population: { min: 90000 }
+                                - population: { min: 100000 }
                                 # - population: false
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 50000 }
+                                - population: { min: 75000 }
                                 # - population: false
                         - all:
                             - $zoom: [12]
                             - any:
-                                - population: { min: 10000 }
+                                - population: { min: 47000 }
                                 # - population: false
                         - all:
                             - $zoom: [13]
