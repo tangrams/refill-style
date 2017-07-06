@@ -40,7 +40,7 @@ layers:
             any:
                 - all:
                     - $zoom: { max: 8 }
-                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
+                    - not: { kind: [major_road], kind_detail: [tertiary] }
                 - all:
                     - $zoom: [8,9]
                     - not: { kind: [major_road, minor_road, path], kind_detail: [secondary,tertiary] }
@@ -149,7 +149,7 @@ layers:
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 5000 }
+                                - population: { min: 10000 }
                                 - population: false
                         - all:
                             - $zoom: [12]
@@ -177,7 +177,7 @@ layers:
                 - any:
                     - all:
                         - not: { kind: station }
-                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 2); } }
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 2); } }
                     - all:
                         - kind: station
                         - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 2); } }
@@ -185,7 +185,7 @@ layers:
         station-train-subway:
             station-early:
                 filter:
-                    $zoom: { max: 12 }      # original is max: 11
+                    $zoom: { max: 11 }      # original is max: 11
             low-priority-early-z13:
                 #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
                 filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }

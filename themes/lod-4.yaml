@@ -61,10 +61,10 @@ layers:
             any:
                 - all:
                     - $zoom: { max: 8 }
-                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
+                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
                 - all:
                     - $zoom: [8,9,10]
-                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
+                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
                 - all:
                     - $zoom: { min: 11 }
                     - not: { kind: [major_road], kind_detail: [primary] }
@@ -224,7 +224,7 @@ layers:
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 35000 }
+                                - population: { min: 50000 }
                                 # - population: false
                         - all:
                             - $zoom: [12]

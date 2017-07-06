@@ -47,10 +47,10 @@ layers:
             any:
                 - all:
                     - $zoom: { max: 8 }
-                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
+                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
                 - all:
                     - $zoom: [8,9]
-                    - not: { kind: [major_road, minor_road, path], kind_detail: [primary,secondary,tertiary] }
+                    - not: { kind: [major_road, minor_road, path], kind_detail: [secondary,tertiary] }
                 - all:
                     - $zoom: [10]
                     - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
@@ -96,7 +96,7 @@ layers:
                 - any:
                     - all:
                         - not: { kind: station }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 3); } }
                     - all:
                         - kind: station
                         - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
@@ -194,7 +194,7 @@ layers:
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 10000 }
+                                - population: { min: 25000 }
                                 # - population: false
                         - all:
                             - $zoom: [12]
