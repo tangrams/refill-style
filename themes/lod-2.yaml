@@ -51,14 +51,14 @@ layers:
                         - kind: [forest, park, airport, aerodrome]
                         - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 9 ) { return feature.min_zoom <= ($zoom - 7); } else { return feature.min_zoom <= ($zoom - 5); } }
                     - all:
-                        - not: { kind: [forest, park, airport, aerodrome, museum, nature_reserve, university, nursing_home, mall, protected_area, sports_centre] }
+                        - not: { kind: [forest, park, airport, aerodrome, museum, nature_reserve, university, nursing_home, mall, protected_area, sports_centre, national_park, police] }
                         - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 2); } else { return feature.min_zoom <= ($zoom - 5); } }
                     - all:
-                        - kind: [museum, nature_reserve, university, nursing_home, mall, sports_centre]
+                        - kind: [museum, nature_reserve, university, nursing_home, mall, sports_centre, national_park, police]
                         - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 5); } else { return feature.min_zoom <= ($zoom - 5); } }
                     - all:
                         - kind: [protected_area]
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 8 ) { return feature.min_zoom <= ($zoom - 3); } else { return feature.min_zoom <= ($zoom - 5); } }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 6); } else { return feature.min_zoom <= ($zoom - 5); } }
 
         station-train-subway:
             station-early:

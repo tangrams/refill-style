@@ -111,3 +111,15 @@ layers:
                         - all:
                             - $zoom: { min: 13 }
                             - function() { return feature.min_zoom <= ($zoom - 1) }
+
+    pois:
+        filter:
+            - all:
+                - function() { return feature.min_zoom <= ($zoom) }
+                - any:
+                    - all:
+                        - kind: [museum, cemetery, garden, doityourself, supermarket, motorway_junction, restaurant, tram_stop, nursing_home]
+                        - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 1); } }
+                    - all:
+                        - not: { kind: [museum, cemetery, garden, doityourself, supermarket, motorway_junction, restaurant, tram_stop, nursing_home] }
+                        - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 1); } }

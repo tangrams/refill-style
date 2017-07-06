@@ -185,7 +185,7 @@ layers:
         station-train-subway:
             station-early:
                 filter:
-                    $zoom: { max: 13 }      # original is max: 11
+                    $zoom: { max: 12 }      # original is max: 11
             low-priority-early-z13:
                 #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
                 filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }

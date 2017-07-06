@@ -142,6 +142,13 @@ layers:
         filter:
             - all:
                 - function() { return feature.min_zoom <= ($zoom - 1) }
+                - any:
+                    - all:
+                        - kind: [motorway_junction, nursing_home, tram_stop]
+                        - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom - 3); } else { return feature.min_zoom <= ($zoom - 1); } }
+                    - all:
+                        - not: { kind: [motorway_junction, nursing_home, tram_stop] }
+                        - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 1); } }
 
         station-train-subway:
             station-early:
