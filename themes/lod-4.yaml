@@ -107,6 +107,13 @@ layers:
         railway:
             enabled: false
 
+        shields:
+            default_priority_trunk:
+                filter:
+                    all:
+                        - kind_detail: [trunk]
+                        - $zoom: { min: 12 }
+
     pois:
         filter:
             - all:
@@ -217,7 +224,7 @@ layers:
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 20000 }
+                                - population: { min: 35000 }
                                 # - population: false
                         - all:
                             - $zoom: [12]
