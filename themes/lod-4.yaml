@@ -234,7 +234,9 @@ layers:
                             - function() { return feature.min_zoom <= ($zoom - 4) }
             no-population:
                 filter:
-                    population: false
+                    all:
+                        - kind: locality
+                        - population: false
                 draw:
                     colorized-icons:
                         visible: false

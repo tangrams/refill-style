@@ -185,17 +185,17 @@ layers:
                             - $zoom: [9]
                             - any:
                                 - population: { min: 60000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [10]
                             - any:
                                 - population: { min: 60000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [11]
                             - any:
                                 - population: { min: 10000 }
-                                - population: false
+                                # - population: false
                         - all:
                             - $zoom: [12]
                             - any:
@@ -209,6 +209,15 @@ layers:
                         - all:
                             - $zoom: { min: 14 }
                             - function() { return feature.min_zoom <= ($zoom - 3) }
+
+            no-population:
+                filter:
+                    all:
+                        - kind: locality
+                        - population: false
+                draw:
+                    colorized-icons:
+                        visible: false
 
 
     boundaries:

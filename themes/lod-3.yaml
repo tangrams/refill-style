@@ -110,6 +110,16 @@ layers:
         railway:
             enabled: false
 
+        shields:
+            default_priority_trunk:
+                enabled: false
+            default_priority_primary:
+                enabled: false
+            default_priority_trunk_secondary:
+                enabled: false
+            default_priority_trunk_tertiary:
+                enabled: false
+
     pois:
         filter:
             - all:
@@ -119,10 +129,10 @@ layers:
                 - any:
                     - all:
                         - not: { kind: station }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 1 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 5 ); } else { return feature.min_zoom <= ($zoom - 4); } }
                     - all:
                         - kind: station
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 5 ); } else { return feature.min_zoom <= ($zoom - 4); } }
         highway-exit:
             enabled: false
 
@@ -210,17 +220,17 @@ layers:
                         - all:
                             - $zoom: [9]
                             - any:
-                                - population: { min: 90000 }
+                                - population: { min: 150000 }
                                 # - population: false
                         - all:
                             - $zoom: [10]
                             - any:
-                                - population: { min: 90000 }
+                                - population: { min: 100000 }
                                 # - population: false
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 20000 }
+                                - population: { min: 50000 }
                                 # - population: false
                         - all:
                             - $zoom: [12]
@@ -237,7 +247,9 @@ layers:
                             - function() { return feature.min_zoom <= ($zoom - 4) }
             no-population:
                 filter:
-                    population: false
+                    all:
+                        - kind: locality
+                        - population: false
                 draw:
                     colorized-icons:
                         visible: false
