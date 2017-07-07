@@ -122,11 +122,11 @@ layers:
                 # - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 4); } }
                 - any:
                     - all:
-                        - not: { kind: station }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - not: { kind: [station, museum, university, nature_reserve] }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 2 ); } else { return feature.min_zoom <= ($zoom - 4); } }
                     - all:
-                        - kind: station
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - kind: [station, museum, university, nature_reserve]
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 2 ); } else { return feature.min_zoom <= ($zoom - 4); } }
         highway-exit:
             enabled: false
 

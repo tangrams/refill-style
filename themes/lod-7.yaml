@@ -144,10 +144,10 @@ layers:
                 - function() { return feature.min_zoom <= ($zoom) }
                 - any:
                     - all:
-                        - kind: [motorway_junction, nursing_home, tram_stop]
+                        - kind: [motorway_junction, nursing_home, tram_stop, cemetery, sports_centre, golf_course, school]
                         - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom - 3); } else { return feature.min_zoom <= ($zoom - 1); } }
                     - all:
-                        - not: { kind: [motorway_junction, nursing_home, tram_stop] }
+                        - not: { kind: [motorway_junction, nursing_home, tram_stop, cemetery, sports_centre, golf_course, school] }
                         - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 1); } }
 
         station-train-subway:
