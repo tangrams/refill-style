@@ -454,10 +454,11 @@
                 '7 some': '7',
                 '6 some': '6',
                 '5 some': '5',
-                '4 some (no shields)': '4',
+                '4 some': '4',
+                '3 some (no shields)': '3',
                 '1 none': '1'
             };
-            gui.labels = query.labels || '5';
+            gui.labels = query.labels || '4';
             gui.add(gui, 'labels', labels).onChange(function(value) {
                 var import_theme = 'themes/labels-'+ value + '.yaml'
                 all_theme_imports.labels = import_theme;
