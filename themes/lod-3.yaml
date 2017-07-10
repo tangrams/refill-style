@@ -114,7 +114,10 @@ layers:
                         - kind_detail: motorway
                         - $zoom: { min: 11 }
             default_priority_trunk:
-                enabled: false
+                filter:
+                    all:
+                        - kind_detail: [trunk]
+                        - $zoom: { min: 20 }
             default_priority_primary:
                 enabled: false
             default_priority_trunk_secondary:
@@ -126,7 +129,7 @@ layers:
         filter:
             - all:
                 - $zoom: { min: 11 }
-                - not: { kind: [grass] }
+                - not: { kind: [grass, traffic_signals] }
                 # - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 4); } }
                 - any:
                     - all:
