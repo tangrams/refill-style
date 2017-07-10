@@ -253,7 +253,3 @@ layers:
         filter:
             all:
                 - function() { return feature.min_zoom <= ($zoom - 4) }
-        landuse-labels:
-            filter:
-                all:
-                    - function() { return feature.min_zoom <= ($zoom - 6) }
