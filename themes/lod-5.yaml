@@ -243,7 +243,8 @@ layers:
 
 
     boundaries:
-        enabled: false
+        region:
+            enabled: false
 
     earth-labels:
         island:
