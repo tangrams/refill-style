@@ -139,11 +139,11 @@ layers:
                 - function() { return feature.min_zoom <= ($zoom) }
                 - any:
                     - all:
-                        - not: { kind: station }
-                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 1); } }
+                        - not: { kind: [station, university] }
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 1); } }
                     - all:
-                        - kind: station
-                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 1); } }
+                        - kind: [station, university]
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 1); } }
 
         station-train-subway:
             station-early:

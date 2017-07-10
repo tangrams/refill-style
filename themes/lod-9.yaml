@@ -112,8 +112,8 @@ layers:
                 - function() { return feature.min_zoom <= ($zoom) }
                 - any:
                     - all:
-                        - not: { kind: station }
+                        - not: { kind: [station, university] }
                         - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom); } }
                     - all:
-                        - kind: station
+                        - kind: [station, university]
                         - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom); } }

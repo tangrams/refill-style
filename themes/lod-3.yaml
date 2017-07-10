@@ -108,6 +108,11 @@ layers:
             enabled: false
 
         shields:
+            default_priority_highway:
+                filter:
+                    all:
+                        - kind_detail: motorway
+                        - $zoom: { min: 11 }
             default_priority_trunk:
                 enabled: false
             default_priority_primary:
