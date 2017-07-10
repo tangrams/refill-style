@@ -205,12 +205,7 @@ layers:
                             - $zoom: [8]
                             - population: { min: 300000 }
                         - all:
-                            - $zoom: [9]
-                            - any:
-                                - population: { min: 95000 }
-                                # - population: false
-                        - all:
-                            - $zoom: [10]
+                            - $zoom: [9,10]
                             - any:
                                 - population: { min: 100000 }
                                 # - population: false

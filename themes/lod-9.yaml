@@ -90,7 +90,7 @@ layers:
                         - all:
                             - $zoom: [9,10]
                             - any:
-                                - population: { min: 14000 }
+                                - population: { min: 10000 }
                                 - population: false
                         - all:
                             - $zoom: [11]
