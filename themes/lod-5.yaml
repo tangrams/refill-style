@@ -80,9 +80,6 @@ layers:
         racetrack:
             enabled: false
 
-        airport-lines:
-            enabled: false
-
         ferry:
             enabled: false
 
