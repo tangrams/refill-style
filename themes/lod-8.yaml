@@ -112,8 +112,8 @@ layers:
                 - function() { return feature.min_zoom <= ($zoom) }
                 - any:
                     - all:
-                        - kind: [museum, garden, doityourself, supermarket, motorway_junction, restaurant, tram_stop, nursing_home]
-                        - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 1); } }
+                        - not: { kind: station }
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom); } }
                     - all:
-                        - not: { kind: [museum, garden, doityourself, supermarket, motorway_junction, restaurant, tram_stop, nursing_home] }
-                        - function() { if( feature.min_zoom <= 14 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 1); } }
+                        - kind: station
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom); } }
