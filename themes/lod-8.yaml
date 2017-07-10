@@ -1,10 +1,4 @@
 layers:
-    water:
-        water-boundary-ocean:
-            enabled: false
-        water_boundaries-not-ocean:
-            enabled: false
-
     roads:
         arrows:
             enabled: false

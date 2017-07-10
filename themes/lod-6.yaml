@@ -6,10 +6,6 @@ global:
 
 layers:
     water:
-        water-boundary-ocean:
-            enabled: false
-        water_boundaries-not-ocean:
-            enabled: false
         water-area-labels:
             mostly-lakes:
                 filter:
@@ -73,9 +69,6 @@ layers:
 
         racetrack:
             enabled: false
-
-        # airport-lines:
-        #     enabled: false
 
         ferry:
             enabled: false

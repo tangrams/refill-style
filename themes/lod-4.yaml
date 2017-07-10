@@ -16,10 +16,6 @@ layers:
             enabled: false
 
     water:
-        water-boundary-ocean:
-            enabled: false
-        water_boundaries-not-ocean:
-            enabled: false
         water-area-labels:
             ocean-labels:
                 filter:

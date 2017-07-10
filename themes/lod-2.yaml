@@ -25,8 +25,7 @@ layers:
                     - { $zoom: [13], area: { min: 500000 } }
                     - { $zoom: [14], area: { min: 100000 } }
                     - { $zoom: { min: 15 } }
-        water-boundary-ocean:
-            enabled: false
+
         water_boundaries-not-ocean:
             enabled: false
         river:
