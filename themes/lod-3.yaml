@@ -130,11 +130,11 @@ layers:
                 # - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 4); } }
                 - any:
                     - all:
-                        - not: { kind: station }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 5 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - not: { kind: [station, museum] }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 6 ); } else { return feature.min_zoom <= ($zoom - 5); } }
                     - all:
-                        - kind: station
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 5 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - kind: [station, museum]
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 6 ); } else { return feature.min_zoom <= ($zoom - 5); } }
         highway-exit:
             enabled: false
 
@@ -220,4 +220,4 @@ layers:
     landuse:
         filter:
             all:
-                - function() { return feature.min_zoom <= ($zoom - 4) }
+                - function() { return feature.min_zoom <= ($zoom - 6) }
