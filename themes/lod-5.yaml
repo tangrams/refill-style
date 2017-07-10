@@ -3,25 +3,35 @@ global:
     text_visible_neighbourhoods:    false
     text_visible_neighbourhoods_e:  false
     # text_visible_landuse_green:     false
+    #text_visible_trunk_primary:     false
     #text_visible_secondary:         false
     #text_visible_tertiary:          false
-    # text_visible_minor_road:        false
+    text_visible_minor_road:        false
     text_visible_service_road:      false
     text_visible_path:              false
 
 layers:
+    earth:
+        island:
+            enabled: false
+
     water:
         water-area-labels:
+            ocean-labels:
+                filter:
+                    $zoom: { min: 6 }
+            sea-labels:
+                filter:
+                    $zoom: { min: 6 }
             mostly-lakes:
                 filter:
                     all:
-                        - $zoom: { min: 8 }
+                        - $zoom: { min: 9 }
                         - $geometry: point
                         - not: { kind: [riverbank, dock, playa] }
                         - area: true
                     any:
-                        - { $zoom: [8],  area: { min: 98000000 } }
-                        - { $zoom: [9],  area: { min: 90000000 } }
+                        - { $zoom: [9],  area: { min: 95000000 } }
                         - { $zoom: [10], area: { min: 25000000 } }
                         - { $zoom: [11], area: { min: 5000000 } }
                         - { $zoom: [12], area: { min: 1000000 } }
@@ -31,6 +41,10 @@ layers:
                         - { $zoom: [15], area: { min: 25000} }
                         - { $zoom: [16], area: { min: 1000 } }
                         - { $zoom: { min: 17 } }
+            playa-labels:
+                enabled: false
+            water-line-labels:
+                enabled: false
 
     platforms:
         enabled: false
@@ -43,24 +57,28 @@ layers:
             any:
                 - all:
                     - $zoom: { max: 8 }
-                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
-                - all:
-                    - $zoom: [8,9]
-                    - not: { kind: [major_road, minor_road, path], kind_detail: [secondary,tertiary] }
-                - all:
-                    - $zoom: [10]
                     - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
-                    - not: { kind: [minor_road] }
-                    - not: { kind: [major_road], is_link: true }
+                - all:
+                    - $zoom: [8,9,10]
+                    - not: { kind: [major_road], kind_detail: [primary,secondary,tertiary] }
                 - all:
                     - $zoom: { min: 11 }
+                    - not: { kind: [major_road], kind_detail: [primary] }
                     - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: [12]
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: [13]
+                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: { min: 14 }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+
         minor_road:
-            hide-early:
-                filter: { $zoom: { max: 14 } }
-                draw:
-                    lines:
-                        visible: false
+            enabled: false
+
         service_road:
             enabled: false
 
@@ -82,28 +100,42 @@ layers:
         railway:
             enabled: false
 
+        shields:
+            default_priority_trunk:
+                filter:
+                    all:
+                        - kind_detail: [trunk]
+                        - $zoom: { min: 12 }
+
     pois:
         filter:
             - all:
                 - $zoom: { min: 11 }
+                - not: { kind: [grass] }
+                # - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 4); } }
                 - any:
                     - all:
-                        - not: { kind: station }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 3); } }
+                        - not: { kind: [station, museum, university, nature_reserve] }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 2 ); } else { return feature.min_zoom <= ($zoom - 4); } }
                     - all:
-                        - kind: station
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
-
+                        - kind: [station, museum, university, nature_reserve]
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 2 ); } else { return feature.min_zoom <= ($zoom - 4); } }
         highway-exit:
+            enabled: false
+
+        # parks:
+        #     enabled: false
+
+        airport:
             enabled: false
 
         station-train-subway:
             station-early:
                 filter:
-                    $zoom: { max: 11 }      # original is max: 11
+                    $zoom: { max: 13 }      # original is max: 11
             low-priority-early:
                 #filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
-                filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: { min: 0, max: 13 } }
             low-priority-early-z13:
                 #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
                 filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
@@ -117,9 +149,7 @@ layers:
                 filter: { kind_tile_rank: { min: 7 }, $zoom: [15] }
                 draw:
                     colorized-icons:
-                        size: 14px
-                        text:
-                            visible: false
+                        visible: false
 
     buildings:
         draw:
@@ -170,39 +200,38 @@ layers:
                     - any:
                         - all:
                             - $zoom: { max: 8 }
-                            - function() { return feature.min_zoom <= ($zoom - 2) }
+                            - function() { return feature.min_zoom <= ($zoom - 3) }
                         - all:
                             - $zoom: [8]
-                            - population: { min: 150000 }
+                            - population: { min: 300000 }
                         - all:
                             - $zoom: [9]
                             - any:
-                                - population: { min: 75000 }
+                                - population: { min: 150000 }
                                 # - population: false
                         - all:
                             - $zoom: [10]
                             - any:
-                                - population: { min: 60000 }
+                                - population: { min: 100000 }
                                 # - population: false
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 40000 }
+                                - population: { min: 75000 }
                                 # - population: false
                         - all:
                             - $zoom: [12]
                             - any:
-                                - population: { min: 35000 }
+                                - population: { min: 47000 }
                                 # - population: false
                         - all:
                             - $zoom: [13]
                             - any:
-                                - population: { min: 1000 }
+                                - population: { min: 5000 }
                                 # - population: false
                         - all:
                             - $zoom: { min: 14 }
-                            - function() { return feature.min_zoom <= ($zoom - 3) }
-
+                            - function() { return feature.min_zoom <= ($zoom - 4) }
             no-population:
                 filter:
                     all:
@@ -214,10 +243,13 @@ layers:
 
 
     boundaries:
-        region:
+        enabled: false
+
+    earth-labels:
+        island:
             enabled: false
 
     landuse:
         filter:
             all:
-                - function() { return feature.min_zoom <= ($zoom - 3) }
+                - function() { return feature.min_zoom <= ($zoom - 4) }

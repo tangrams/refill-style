@@ -115,11 +115,11 @@ layers:
                 # - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 4); } }
                 - any:
                     - all:
-                        - not: { kind: [station, museum, university, nature_reserve] }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 2 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - not: { kind: station }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 5 ); } else { return feature.min_zoom <= ($zoom - 4); } }
                     - all:
-                        - kind: [station, museum, university, nature_reserve]
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 2 ); } else { return feature.min_zoom <= ($zoom - 4); } }
+                        - kind: station
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 5 ); } else { return feature.min_zoom <= ($zoom - 4); } }
         highway-exit:
             enabled: false
 
@@ -203,35 +203,37 @@ layers:
                             - function() { return feature.min_zoom <= ($zoom - 3) }
                         - all:
                             - $zoom: [8]
-                            - population: { min: 300000 }
+                            - population: { min: 500000 }
                         - all:
                             - $zoom: [9]
                             - any:
-                                - population: { min: 150000 }
+                                - population: { min: 300000 }
                                 # - population: false
                         - all:
                             - $zoom: [10]
                             - any:
-                                - population: { min: 100000 }
+                                - population: { min: 200000 }
                                 # - population: false
                         - all:
                             - $zoom: [11]
                             - any:
-                                - population: { min: 75000 }
+                                - population: { min: 125000 }
                                 # - population: false
                         - all:
                             - $zoom: [12]
                             - any:
-                                - population: { min: 47000 }
+                                - population: { min: 70000 }
                                 # - population: false
                         - all:
                             - $zoom: [13]
                             - any:
-                                - population: { min: 5000 }
+                                - population: { min: 50000 }
                                 # - population: false
                         - all:
                             - $zoom: { min: 14 }
-                            - function() { return feature.min_zoom <= ($zoom - 4) }
+                            - function() { return feature.min_zoom <= ($zoom - 5) }
+                            - any:
+                                - population: { min: 30000 }
             no-population:
                 filter:
                     all:
