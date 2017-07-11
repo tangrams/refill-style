@@ -47,17 +47,14 @@ layers:
                 - not: { kind: [military, animal, information, platform, toilets, drinking_water, bicycle_rental_station, attraction, garden, peak, dog_park, tram_stop, pitch, bus_stop, parking, traffic_signals, level_crossing, building, address, farm, tree, apron,r esidential, commercial, industrial, prison, bench] }
                 - any:
                     - all:
-                        - kind: [forest, park, airport, aerodrome]
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 9 ) { return feature.min_zoom <= ($zoom - 7); } else { return feature.min_zoom <= ($zoom - 5); } }
+                        - kind: [forest, park, airport, aerodrome, protected_area]
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 8); } else { return feature.min_zoom <= ($zoom - 5); } }
                     - all:
                         - not: { kind: [forest, park, airport, aerodrome, museum, nature_reserve, university, nursing_home, mall, protected_area, sports_centre, national_park, police, marina, beach, zoo] }
                         - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 2); } else { return feature.min_zoom <= ($zoom - 5); } }
                     - all:
                         - kind: [museum, nature_reserve, university, nursing_home, mall, sports_centre, national_park, police, marina, beach, zoo]
                         - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 5); } else { return feature.min_zoom <= ($zoom - 5); } }
-                    - all:
-                        - kind: [protected_area]
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 6); } else { return feature.min_zoom <= ($zoom - 5); } }
 
         station-train-subway:
             station-early:
@@ -133,10 +130,7 @@ layers:
     landuse:
         filter:
             all:
-                - function() { return feature.min_zoom <= ($zoom - 4) }
-
-        landuse-labels:
-            enabled: false
+                - function() { return feature.min_zoom <= ($zoom - 6) }
 
         landuse-not-filtered:
             runway:
