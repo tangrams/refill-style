@@ -108,22 +108,7 @@ layers:
             enabled: false
 
         shields:
-            default_priority_highway:
-                filter:
-                    all:
-                        - kind_detail: motorway
-                        - $zoom: { min: 11 }
-            default_priority_trunk:
-                filter:
-                    all:
-                        - kind_detail: [trunk]
-                        - $zoom: { min: 20 }
-            default_priority_primary:
-                enabled: false
-            default_priority_trunk_secondary:
-                enabled: false
-            default_priority_trunk_tertiary:
-                enabled: false
+            enabled: false
 
     pois:
         filter:
@@ -209,6 +194,22 @@ layers:
                         order: 439
                         style: building-lines
                         extrude: global.building_extrude_height
+
+        building-labels:
+            filter:
+                all:
+                    - { $zoom: { min: 17 } }
+                    - $geometry: point
+                    - kind: [false, building, university, college, school, kindergarten]
+                    - function() { return global.text_visible_building; }
+                any:
+                    - { $zoom: [17], area: { min: 3000 }, name: true }
+                    - { $zoom: [17], area: { min: 2000 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: [18], area: { min: 1000 }, name: true }
+                    - { $zoom: [18], kind: [university, college, school, kindergarten] }
+                    - { $zoom: [19], area: { min: 200 }, name: true }
+                    - { $zoom: { min: 19 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: { min: 20 }, name: true }
 
     places:
         enabled: false
