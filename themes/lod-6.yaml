@@ -86,7 +86,7 @@ layers:
         filter:
             - all:
                 - $zoom: { min: 11 }
-                - not: { kind: [grass, tree] }
+                - not: { kind: [grass, tree, bench] }
                 - any:
                     - all:
                         - not: { kind: station }

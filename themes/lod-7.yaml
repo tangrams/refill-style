@@ -166,6 +166,7 @@ layers:
         filter:
             - all:
                 - $zoom: { min: 11 }
+                - not: { kind: [tree, bench] }
                 # - function() { return feature.min_zoom <= ($zoom - 2) }
                 - any:
                     - all:
