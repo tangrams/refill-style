@@ -86,13 +86,14 @@ layers:
         filter:
             - all:
                 - $zoom: { min: 11 }
+                - not: { kind: [grass, tree] }
                 - any:
                     - all:
                         - not: { kind: station }
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 3); } }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 2); } }
                     - all:
                         - kind: station
-                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 3); } }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom - 2); } }
 
         highway-exit:
             enabled: false
