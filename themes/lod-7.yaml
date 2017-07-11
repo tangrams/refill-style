@@ -178,7 +178,7 @@ layers:
 
         draw:
             colorized-icons:
-                buffer: 8px
+                buffer: 12px
 
         station-train-subway:
             station-early:
