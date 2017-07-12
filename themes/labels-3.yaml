@@ -56,6 +56,10 @@ layers:
                 text-blend-order:
                     buffer: 42px
 
+        neighbourhoods:
+            filter:
+                $zoom: { min: 16, max: 17 }
+
     roads:
         major_road:
             secondary:
