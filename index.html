@@ -237,7 +237,7 @@
             // more: 'vector-tiles-TTucZYU'
             // default (some): 'vector-tiles-W2tPU-Y'
             // no: 'vector-tiles-haXTO7g'
-            scene: { import: [tg_baseScene, 'themes/color-black.yaml', 'themes/lod-10.yaml'], global: tg_global },
+            scene: { import: [tg_baseScene, 'themes/color-black.yaml', 'themes/labels-10.yaml', 'themes/lod-10.yaml'], global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
 
@@ -454,8 +454,7 @@
                 '7 more': '7',
                 '6 more': '6',
                 '5 some**': '5',
-                '5 some (no shields)': '5',
-                '4 some': '4',
+                '4 some (no shields)': '4',
                 '3 some': '3',
                 '2 some': '2',
                 '1 none**': '1'
@@ -497,7 +496,7 @@
                 //window.location.color = 'color=' + value;
             });
 
-            // Color theme selector
+            // Level of Detail selector
             var lod = {
                 'LOD - 11': '11',
                 'LOD (default) - 10': '10',

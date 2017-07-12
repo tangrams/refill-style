@@ -34,7 +34,6 @@ global:
     text_visible_piste:             true
     text_visible_steps:             true
     text_visible_aerialway:         true
-    sdk_road_shields:               true
     text_visible_exits:             true
     text_visible_airport_gate:      true
 
@@ -48,3 +47,16 @@ layers:
                 # White list a few kinds to "always" show per the tile zoom inclusion, else test feature's min_zoom
                 #- function() { return feature.min_zoom <= $zoom }
                 - function() { return feature.min_zoom <= ($zoom - 3) }
+
+    places:
+        populated-places:
+            draw:
+                colorized-icons:
+                    buffer: 42px
+                text-blend-order:
+                    buffer: 42px
+
+    roads:
+        minor_road:
+            labels-minor_road:
+                filter: { $zoom: { min: 17 } }

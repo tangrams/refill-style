@@ -12,7 +12,7 @@
 
 import:
     - themes/color-black.yaml
-    - themes/labels-10.yaml
+    - themes/labels-5.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -3501,7 +3501,7 @@ layers:
                     interactive: global.sdk_interactive
                     text_source: global.ux_language_text_source_building_and_address
                     move_into_tile: true
-                    priority: 51
+                    priority: 72
                     order: 7
                     font:
                         fill: global.dark_color

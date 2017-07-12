@@ -34,6 +34,7 @@ global:
     text_visible_piste:             false
     text_visible_steps:             false
     text_visible_aerialway:         false
-    sdk_road_shields:               false
     text_visible_exits:             false
     text_visible_airport_gate:      false
+    
+    sdk_road_shields:               false
