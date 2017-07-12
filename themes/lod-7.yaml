@@ -176,10 +176,6 @@ layers:
                         - kind: [station, university]
                         - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 2); } }
 
-        draw:
-            colorized-icons:
-                buffer: 8px
-
         station-train-subway:
             station-early:
                 filter:

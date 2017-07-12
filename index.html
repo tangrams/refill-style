@@ -237,7 +237,7 @@
             // more: 'vector-tiles-TTucZYU'
             // default (some): 'vector-tiles-W2tPU-Y'
             // no: 'vector-tiles-haXTO7g'
-            scene: { import: [tg_baseScene, 'themes/color-black.yaml'], global: tg_global },
+            scene: { import: [tg_baseScene, 'themes/color-black.yaml', 'themes/lod-10.yaml'], global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
 
@@ -448,18 +448,19 @@
             // Labels selector
             var labels = {
                 '11 more': '11',
-                '10 more': '10',
+                '10 more**': '10',
                 '9 more': '9',
                 '8 more': '8',
-                '7 some': '7',
-                '6 some': '6',
-                '5 some': '5',
-                '4 some (no shields)': '4',
+                '7 more': '7',
+                '6 more': '6',
+                '5 some**': '5',
+                '5 some (no shields)': '5',
+                '4 some': '4',
                 '3 some': '3',
                 '2 some': '2',
-                '1 none': '1'
+                '1 none**': '1'
             };
-            gui.labels = query.labels || '8';
+            gui.labels = query.labels || '10';
             gui.add(gui, 'labels', labels).onChange(function(value) {
                 var import_theme = 'themes/labels-'+ value + '.yaml'
                 all_theme_imports.labels = import_theme;

@@ -47,4 +47,4 @@ layers:
                 - not: { kind: [building,address,farm,tree,apron,residential,commercial,industrial] }
                 # White list a few kinds to "always" show per the tile zoom inclusion, else test feature's min_zoom
                 #- function() { return feature.min_zoom <= $zoom }
-                - function() { return feature.min_zoom <= ($zoom - 4) }
+                - function() { return feature.min_zoom <= ($zoom - 2) }

@@ -4456,6 +4456,18 @@ layers:
                         font:
                             weight: 600
 
+        low-value-priority:
+            filter: { min_zoom: { min: 17 } }
+            draw:
+                colorized-icons:
+                    priority: 70
+
+            traffic_signals:
+                filter: { kind: traffic_signals }
+                draw:
+                    colorized-icons:
+                        priority: 71
+
         # source icon sprite from something other than kind
         sports-pitch:
             filter: { kind: [grass, pitch] }
@@ -4505,6 +4517,7 @@ layers:
                 draw:
                     colorized-icons:
                         visible: false
+                        priority: 72
             sports-pitch:
                 filter:
                     $zoom: { min: 17 }
