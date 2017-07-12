@@ -12,7 +12,7 @@
 
 import:
     - themes/color-black.yaml
-    - themes/labels-5.yaml
+    - themes/labels-10.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
