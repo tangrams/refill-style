@@ -4307,112 +4307,61 @@ layers:
 
         neighbourhoods:
             filter:
-                kind:
-                    - macrohood
-                    - neighbourhood
-                    - borough
-                $zoom: { min: 10 }
-                is_landuse_aoi: false
+                all:
+                    - kind:
+                        - borough
+                        - macrohood
+                        - neighbourhood
+                        #- microhood       # until Tenderloin microhoods are cleaned up, ban this placetype
+                    - $zoom: { min: 10, max: 17 }
+                    - is_landuse_aoi: false
+                    - function() { return (feature.min_zoom <= ($zoom+0.5) && feature.max_zoom >= ($zoom+1)) }
             draw:
                 text-blend-order:
-                    visible: false
+                    visible: global.text_visible_neighbourhoods_e
                     priority: 29
                     buffer: 8px
                     text_wrap: 10
                     max_lines: 2
                     font:
                         fill: global.mid_color
+                        size: [[11, 9px], [12, 10px], [13, 12px], [14, 16px], [16, 24px]]
+                        weight: normal
                         transform: uppercase
-                        stroke: { color: global.white_color, width: 4 }
-            neighborhood-z11:
+                        stroke: { color: global.white_color, width: [[12, 4px], [13, 6px], [15, 8px]] }
+
+            z13-up:
                 filter:
-                    $zoom: [11]
-                    min_zoom: [11]
-                    max_zoom: { min: 12 }
-                    #- kind_tile_rank: { max: 6 }
+                    $zoom: { min: 13 }
                 draw:
                     text-blend-order:
-                        visible: global.text_visible_neighbourhoods_e
                         font:
-                            size: 9px
-                            weight: normal
-            neighborhood-z12:
-                filter:
-                    $zoom: [12]
-                    min_zoom: [11,12]
-                    max_zoom: { min: 13 }
-                    #- kind_tile_rank: { max: 8 }
-                draw:
-                    text-blend-order:
-                        visible: global.text_visible_neighbourhoods_e
-                        font:
-                            size: 10px
-                            weight: normal
-            neighborhood-z13:
-                filter:
-                    $zoom: [13]
-                    min_zoom: [11,12,13]
-                    max_zoom: { min: 14 }
-                    kind_tile_rank: { max: 8 }
-                draw:
-                    text-blend-order:
-                        visible: global.text_visible_neighbourhoods_e
-                        font:
-                            size: 12px
                             weight: 300
-                            stroke: { color: global.white_color, width: 6 }
-            neighborhood-z14:
-                filter:
-                    $zoom: [14]
-                    min_zoom: [11,12,13,14]
-                    max_zoom: { min: 15 }
-                    kind_tile_rank: { max: 8 }
-                draw:
-                    text-blend-order:
-                        text_wrap: 12
-                        visible: global.text_visible_neighbourhoods
-                        font:
-                            size: 16px
-                            weight: 300
-                            stroke: { color: global.white_color, width: 6 }
-            neighborhood-z15:
-                filter:
-                    $zoom: [15]
-                    min_zoom: [11,12,13,14,15]
-                    max_zoom: { min: 16 }
-                    kind_tile_rank: { max: 8 }
-                draw:
-                    text-blend-order:
-                        text_wrap: 12
-                        visible: global.text_visible_neighbourhoods
-                        font:
-                            size: 21px
-                            weight: 300
-                            fill: global.mid_color
-                            stroke: { color: global.white_color, width: 8 }
-                z15-new:
+
+                low_quality_kind_tile_rank:
                     filter:
-                        all:
-                            - min_zoom: 15
+                        kind_tile_rank: { min: 8 }
                     draw:
                         text-blend-order:
-                            priority: 19
-                            font:
-                                size: 13px
-            neighborhood-z16:
-                filter:
-                    $zoom: [16]
-                    min_zoom: [11,12,13,14,15,16]
-                    max_zoom: { min: 17 }
-                    kind_tile_rank: { max: 8 }
-                draw:
-                    text-blend-order:
-                        visible: global.text_visible_neighbourhoods
-                        font:
-                            size: 24px
-                            weight: 300
-                            fill: global.mid_color
-                            stroke: { color: global.white_color, width: 8 }
+                            visible: false
+
+                z14-up:
+                    filter:
+                        $zoom: { min: 14 }
+                    draw:
+                        text-blend-order:
+                            text_wrap: 9
+                            visible: global.text_visible_neighbourhoods
+
+                    z15-up:
+                        filter:
+                            $zoom: { min: 15 }
+                            min_zoom: { min: 15 }
+                        draw:
+                            text-blend-order:
+                                priority: 19
+                                font:
+                                    size: 13px
 
     pois:
         data: { source: mapzen, layer: pois }

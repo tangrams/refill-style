@@ -57,6 +57,16 @@ layers:
                     buffer: 24px
 
     roads:
+        major_road:
+            trunk_primary:
+                labels-trunk_primary-z11-z15:
+                    filter:
+                        $zoom: { min: 14 }
+
+            secondary:
+                labels-secondary:
+                    filter: { $zoom: { min: 16 } }
+
         minor_road:
             labels-minor_road:
                 filter: { $zoom: { min: 16 } }

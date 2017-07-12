@@ -6,7 +6,7 @@ global:
     text_visible_populated_places:  true
     icon_visible_populated_places:  true
     text_visible_neighbourhoods:    true
-    text_visible_neighbourhoods_e:  true
+    text_visible_neighbourhoods_e:  false
     text_visible_building:          false                       # false for default
     text_visible_address:           false                       # false for default
     text_visible_water_labels:      true
@@ -57,6 +57,15 @@ layers:
                     buffer: 42px
 
     roads:
+        major_road:
+            secondary:
+                labels-secondary:
+                    filter: { $zoom: { min: 18 } }
+            tertiary:
+                labels-tertiary:
+                    filter: { $zoom: { min: 18 } }
+
+
         minor_road:
             labels-minor_road:
                 filter: { $zoom: { min: 17 } }

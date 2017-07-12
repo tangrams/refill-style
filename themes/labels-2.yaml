@@ -5,8 +5,8 @@ global:
     text_visible_admin:             true
     text_visible_populated_places:  true
     icon_visible_populated_places:  true
-    text_visible_neighbourhoods:    true
-    text_visible_neighbourhoods_e:  true
+    text_visible_neighbourhoods:    false
+    text_visible_neighbourhoods_e:  false
     text_visible_building:          false                       # false for default
     text_visible_address:           false                       # false for default
     text_visible_water_labels:      true
@@ -25,9 +25,9 @@ global:
     icon_visible_station:           false                       #false on default, this needs work
     text_visible_station:           true
     text_visible_highway:           true
-    text_visible_trunk_primary:     true
-    text_visible_secondary:         true
-    text_visible_tertiary:          true
+    text_visible_trunk_primary:     false
+    text_visible_secondary:         false
+    text_visible_tertiary:          false
     text_visible_minor_road:        false
     text_visible_service_road:      false
     text_visible_path:              false
@@ -47,7 +47,7 @@ layers:
                 # White list a few kinds to "always" show per the tile zoom inclusion, else test feature's min_zoom
                 #- function() { return feature.min_zoom <= $zoom }
                 - function() { return feature.min_zoom <= ($zoom - 4) }
-                
+
     places:
         populated-places:
             draw:
