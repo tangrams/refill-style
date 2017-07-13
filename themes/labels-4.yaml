@@ -58,18 +58,17 @@ layers:
 
         neighbourhoods:
             filter:
-                $zoom: { min: 15, max: 17 }
+                $zoom: { min: 13, max: 17 }
 
     roads:
         major_road:
-            trunk_primary:
-                labels-trunk_primary-z11-z15:
-                    filter:
-                        $zoom: { min: 14 }
-
             secondary:
                 labels-secondary:
                     filter: { $zoom: { min: 16 } }
+
+            tertiary:
+                labels-tertiary:
+                    filter: { $zoom: { min: 17 } }
 
         minor_road:
             labels-minor_road:
