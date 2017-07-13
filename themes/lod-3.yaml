@@ -83,8 +83,10 @@ layers:
                     - function() { return feature.min_zoom <= ($zoom - 3) }
 
         major_road:
-            enabled: true
-            
+            trunk_primary:
+                labels-trunk_primary-z11-z15:
+                    enabled: false
+
         minor_road:
             enabled: false
 
