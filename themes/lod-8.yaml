@@ -129,10 +129,6 @@ layers:
                             - $zoom: { min: 14 }
                             - function() { return feature.min_zoom <= ($zoom - 3) }
 
-        neighbourhoods:
-            filter:
-                $zoom: { min: 14 }
-
     pois:
         filter:
             - all:
