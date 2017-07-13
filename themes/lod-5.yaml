@@ -101,6 +101,16 @@ layers:
             enabled: false
 
         shields:
+            filter:
+                all:
+                    - $zoom: { min: 7 }
+                    - function() { return global.sdk_road_shields; }
+                    - any:
+                        - shield_text: true    # some roads don't have shield text, deal with that later
+                        - all:
+                            - shield_text: false    # some roads don't have shield text, deal with that later
+                            - ref: true
+                            - kind_detail: [motorway, trunk, primary, secondary, tertiary]
             default_priority_trunk:
                 filter:
                     all:
