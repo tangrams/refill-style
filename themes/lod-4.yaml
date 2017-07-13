@@ -76,6 +76,17 @@ layers:
                     - $zoom: { min: 14 }
                     - function() { return feature.min_zoom <= ($zoom - 3) }
 
+        major_road:
+            trunk_primary:
+                labels-trunk_primary-z11-z15:
+                    filter:
+                        $zoom: [12,13,14,15]
+            secondary:
+                labels-secondary-routes-z13-z14:
+                    draw:
+                        text-blend-order:
+                            visible: false
+
         minor_road:
             enabled: false
 
