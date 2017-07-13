@@ -40,10 +40,55 @@ global:
     sdk_road_shields:               true
 
 layers:
+    places:
+        filter:
+            all:
+                - name: true
+                - population: true
+        draw:
+            colorized-icons:
+                buffer: 0px
+            text-blend-order:
+                buffer: 0px
+
+        populated-places:
+            filter:
+                all:
+                    - kind: locality
+                    - population: true
+                draw:
+                    colorized-icons:
+                        buffer: 0px
+                    text-blend-order:
+                        buffer: 0px
+
+            z8-50k-below:
+                filter:
+                    population: true
+                draw:
+                    colorized-icons:
+                        buffer: 0px
+            z9-10k-below:
+                filter:
+                    population: true
+                draw:
+                    colorized-icons:
+                        buffer: 0px
+            z9-no-population:
+                filter:
+                    population: false
+                draw:
+                    colorized-icons:
+                        buffer: 0px
+
+
     pois:
         filter:
             all:
                 - kind: true                # this forces things like trees to display always
+        draw:
+            colorized-icons:
+                buffer: 0px
 
         no-name:
             filter: { name: false }
