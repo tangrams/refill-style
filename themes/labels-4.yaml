@@ -68,7 +68,7 @@ layers:
 
             tertiary:
                 labels-tertiary:
-                    filter: { $zoom: { min: 17 } }
+                    filter: { $zoom: { min: 15 } }
 
         minor_road:
             labels-minor_road:
