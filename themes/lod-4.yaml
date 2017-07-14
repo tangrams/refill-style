@@ -122,6 +122,11 @@ layers:
                             - shield_text: false    # some roads don't have shield text, deal with that later
                             - ref: true
                             - kind_detail: [motorway, trunk, primary, secondary, tertiary]
+            default_priority_trunk:
+                filter:
+                    all:
+                        - kind_detail: [trunk]
+                        - $zoom: { min: 12 }
 
     pois:
         filter:
