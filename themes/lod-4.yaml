@@ -122,6 +122,11 @@ layers:
                             - shield_text: false    # some roads don't have shield text, deal with that later
                             - ref: true
                             - kind_detail: [motorway, trunk, primary, secondary, tertiary]
+            default_priority_trunk:
+                filter:
+                    all:
+                        - kind_detail: [trunk]
+                        - $zoom: { min: 12 }
 
     pois:
         filter:
@@ -170,10 +175,15 @@ layers:
     buildings:
         draw:
             lines:
-                width: [[14, 0px], [15, 0px], [16, 0.75px],[18, 0.75px], [19, 1px]]
+                width: [[14, 0.3px], [15, 0.5px], [16, 0.75px],[18, 0.75px], [19, 1px]]
         footprints:
             filter:
                 any:
+                    - { $zoom: [13], scale_rank: [1,2] }
+                    - { $zoom: [14], scale_rank: [1,2,3] }
+                    - { $zoom: [15], height: { min: 100 } }
+                    - { $zoom: [15], area: { min: 500 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
                     - { $zoom: [16], area: { min: 100 } }
                     - { $zoom: [16], volume: { min: 50000 } }
                     - { $zoom: { min: 17 }, area: true }
@@ -187,6 +197,9 @@ layers:
                     all:
                         - function() { return global.sdk_building_extrude; }
                         - any:
+                            - { $zoom: [15], height: { min: 190 } }
+                            - { $zoom: [15], area: { min: 5000 } }
+                            - { $zoom: [15], volume: { min: 100000 } }
                             - { $zoom: [16], height: { min: 100 } }
                             - { $zoom: [16], area: { min: 3500 } }
                             - { $zoom: [16], volume: { min: 50000 } }
