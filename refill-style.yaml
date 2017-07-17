@@ -5529,7 +5529,7 @@ layers:
                         visible: true
         pedestrian:
             filter:
-                kind: [pedestrian,common]
+                kind: [pedestrian,common,footway]
             draw:
                 dots:
                     color: global.offwhite_color
