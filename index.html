@@ -419,54 +419,60 @@
 
             // So many themes
             var all_theme_imports = { colors: null, lod: null, labels: null };
+            var old_theme_imports = { colors: null, lod: null, labels: null };
 
             function update_scene_with_themes() {
-                console.log( all_theme_imports );
+                if( old_theme_imports.colors === all_theme_imports.colors &&
+                    old_theme_imports.lod    === all_theme_imports.lod &&
+                    old_theme_imports.labels === all_theme_imports.labels ) {
+                    //console.log( 'no change' );
+                } else {
+                     //console.log( all_theme_imports, old_theme_imports );
 
-                // construct the import array
-                themes_as_array = [tg_baseScene];
+                     // construct the import array
+                     themes_as_array = [tg_baseScene];
 
-                if( all_theme_imports.colors ) {
-                    themes_as_array.push( all_theme_imports.colors );
-                }
-                if( all_theme_imports.labels ) {
-                    themes_as_array.push( all_theme_imports.labels );
-                }
-                if( all_theme_imports.lod ) {
-                    if( all_theme_imports.lod != 'themes/lod-10.yaml' ) {
-                        themes_as_array.push( all_theme_imports.lod );
-                    }
-                }
+                     if( all_theme_imports.colors ) {
+                         themes_as_array.push( all_theme_imports.colors );
+                     }
+                     if( all_theme_imports.labels ) {
+                         themes_as_array.push( all_theme_imports.labels );
+                     }
+                     if( all_theme_imports.lod ) {
+                         themes_as_array.push( all_theme_imports.lod );
+                     }
 
-                scene.load({ import: themes_as_array, global: tg_global });
-                console.log( scene.config );
-                scene.updateConfig();
-                //scene.rebuild();
+                     scene.load({ import: themes_as_array, global: tg_global });
+                     console.log( scene.config );
+                     scene.updateConfig();
+                     //scene.rebuild();
+
+                     old_theme_imports.colors = all_theme_imports.colours;
+                     old_theme_imports.lod    = all_theme_imports.lod;
+                     old_theme_imports.labels = all_theme_imports.labels;
+                }
             }
 
-
             // Labels selector
-            var labels = {
-                '11 more': '11',
-                '10 more**': '10',
-                '9 more': '9',
-                '8 more': '8',
-                '7 more': '7',
-                '6 more': '6',
-                '5 some**': '5',
-                '4 some (no shields)': '4',
-                '3 some': '3',
-                '2 some': '2',
-                '1 none**': '1'
-            };
-            gui.labels = query.labels || '10';
-            gui.add(gui, 'labels', labels).onChange(function(value) {
+            gui.labels = query.labels || 10;
+            gui.add(gui, 'labels', 1, 11).step(1).onChange(function(value) {
                 var import_theme = 'themes/labels-'+ value + '.yaml'
                 all_theme_imports.labels = import_theme;
 
                 update_scene_with_themes();
 
                 //window.location.search = 'language=' + value;
+            });
+
+            // Level of Detail selector
+            gui.lod = query.lod || 10;
+            gui.add(gui, 'lod', 1, 11).step(1).onChange(function(value) {
+                var import_theme = 'themes/lod-'+ value + '.yaml'
+
+                all_theme_imports.lod = import_theme;
+                update_scene_with_themes();
+
+                //window.location.color = 'color=' + value;
             });
 
             // Color theme selector
@@ -491,31 +497,6 @@
                 var import_theme = 'themes/color-'+ value + '.yaml'
 
                 all_theme_imports.colors = import_theme;
-                update_scene_with_themes();
-
-                //window.location.color = 'color=' + value;
-            });
-
-            // Level of Detail selector
-            var lod = {
-                'LOD - 11': '11',
-                'LOD (default) - 10': '10',
-                'LOD - 9': '9',
-                'LOD - 8': '8',
-                'LOD - 7': '7',
-                'LOD - 6': '6',
-                'LOD - 5': '5',
-                'LOD - 4': '4',
-                'LOD - 3': '3',
-                'LOD - 2': '2',
-                'LOD - 1': '1'
-            };
-            // use query language, else default to English
-            gui.lod = query.lod || '10';
-            gui.add(gui, 'lod', lod).onChange(function(value) {
-                var import_theme = 'themes/lod-'+ value + '.yaml'
-
-                all_theme_imports.lod = import_theme;
                 update_scene_with_themes();
 
                 //window.location.color = 'color=' + value;
