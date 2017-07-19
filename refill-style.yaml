@@ -3594,6 +3594,12 @@ layers:
                             size: 10px
                             fill: global.black_color
                             transform: uppercase
+                no-left-right:
+                    filter: { "name:left": false, "name:right": false }
+                    draw:
+                        text-blend-order:
+                            text_source: global.ux_language_text_source_boundary_lines
+                            offset: 0px
 
         other_country_boundary_disputed_etc:
             filter: { kind: [disputed, indefinite, indeterminate, lease_limit, line_of_control, overlay_limit] }
@@ -3647,6 +3653,12 @@ layers:
                             size: 9px
                             fill: global.mid_color
                             transform: uppercase
+                no-left-right:
+                    filter: { "name:left": false, "name:right": false }
+                    draw:
+                        text-blend-order:
+                            text_source: global.ux_language_text_source_boundary_lines
+                            offset: 0px
 
     places:
         data: { source: mapzen, layer: places }
