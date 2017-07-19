@@ -214,6 +214,15 @@
            return obj;
         }
 
+        // So many themes
+        var theme_defaults = { colors: 'black', lod: 10, labels: 5 };
+        var all_theme_imports = { colors: 'themes/color-' + theme_defaults.colors + '.yaml',
+                                  labels: 'themes/labels-' + theme_defaults.labels + '.yaml',
+                                  lod: 'themes/lod-' + theme_defaults.lod + '.yaml' };
+        var old_theme_imports = { colors: 'themes/color-' + theme_defaults.colors + '.yaml',
+                                  labels: 'themes/labels-' + theme_defaults.labels + '.yaml',
+                                  lod: 'themes/lod-' + theme_defaults.lod + '.yaml' };
+
         /*** Map ***/
 
         var map = L.map('map',
@@ -237,7 +246,11 @@
             // more: 'vector-tiles-TTucZYU'
             // default (some): 'vector-tiles-W2tPU-Y'
             // no: 'vector-tiles-haXTO7g'
-            scene: { import: [tg_baseScene, 'themes/color-black.yaml', 'themes/labels-10.yaml', 'themes/lod-10.yaml'], global: tg_global },
+            scene: { import: [  tg_baseScene,
+                                'themes/color-' + theme_defaults.colors + '.yaml',
+                                'themes/labels-' + theme_defaults.labels + '.yaml',
+                                'themes/lod-' + theme_defaults.lod + '.yaml'],
+                     global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
 
@@ -417,10 +430,6 @@
             });
             gui.fallback_button.name('lang fallback');
 
-            // So many themes
-            var all_theme_imports = { colors: null, lod: null, labels: null };
-            var old_theme_imports = { colors: null, lod: null, labels: null };
-
             function update_scene_with_themes() {
                 if( old_theme_imports.colors === all_theme_imports.colors &&
                     old_theme_imports.lod    === all_theme_imports.lod &&
@@ -442,8 +451,10 @@
                          themes_as_array.push( all_theme_imports.lod );
                      }
 
+                     //console.log ( themes_as_array );
+
                      scene.load({ import: themes_as_array, global: tg_global });
-                     console.log( scene.config );
+                     //console.log( scene.config );
                      scene.updateConfig();
                      //scene.rebuild();
 
@@ -454,7 +465,7 @@
             }
 
             // Labels selector
-            gui.labels = query.labels || 10;
+            gui.labels = query.labels || theme_defaults.labels;
             gui.add(gui, 'labels', 1, 11).step(1).onChange(function(value) {
                 var import_theme = 'themes/labels-'+ value + '.yaml'
                 all_theme_imports.labels = import_theme;
@@ -465,7 +476,7 @@
             });
 
             // Level of Detail selector
-            gui.lod = query.lod || 10;
+            gui.lod = query.lod || theme_defaults.lod;
             gui.add(gui, 'lod', 1, 11).step(1).onChange(function(value) {
                 var import_theme = 'themes/lod-'+ value + '.yaml'
 
@@ -492,7 +503,7 @@
                 'DARK - gray-gold': 'gray-gold'
             };
             // use query language, else default to English
-            gui.color = query.color || 'black';
+            gui.color = query.color || theme_defaults.colors;
             gui.add(gui, 'color', color).onChange(function(value) {
                 var import_theme = 'themes/color-'+ value + '.yaml'
 
