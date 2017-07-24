@@ -1,0 +1,34 @@
+layers:
+    water:
+        lakes:
+            filter:
+                any:
+                    - area: true
+
+        river:
+            filter:
+                $zoom: { min: 0 }
+
+
+    roads:
+        natural_earth_highways:
+            filter:
+                $zoom: { min: 0, max: 8 }
+
+    buildings:
+        footprints:
+            filter:
+                any:
+                    - area: true
+
+        extrude:
+            filter:
+                any:
+                    - area: true
+
+    landuse:
+        national_park:
+            filter:
+                any:
+                    - protect_class: true
+

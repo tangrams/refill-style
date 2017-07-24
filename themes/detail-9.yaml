@@ -1,0 +1,121 @@
+layers:
+    roads:
+        arrows:
+            enabled: false
+
+        service_road:
+            filter:
+                $zoom: { min: 15 }
+
+        path:
+            filter:
+                $zoom: { min: 17 }
+        track:
+            filter:
+                $zoom: { min: 17 }
+
+        steps:
+            filter:
+                $zoom: { min: 17 }
+
+        ferry:
+            filter:
+                $zoom: { min: 17 }
+
+
+
+    buildings:
+        draw:
+            lines:
+                width: [[14, 0.3px], [15, 0.5px], [16, 0.75px],[18, 0.75px], [19, 1px]]
+        footprints:
+            filter:
+                any:
+                    - { $zoom: [13], scale_rank: [1,2] }
+                    - { $zoom: [14], scale_rank: [1,2,3] }
+                    - { $zoom: [15], height: { min: 100 } }
+                    - { $zoom: [15], area: { min: 500 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
+                    - { $zoom: [16], area: { min: 100 } }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: { min: 17 }, area: true }
+            draw:
+                polygons:
+                    visible: true
+                lines:
+                    visible: true
+            extrude:
+                filter:
+                    all:
+                        - function() { return global.sdk_building_extrude; }
+                        - any:
+                            - { $zoom: [15], height: { min: 190 } }
+                            - { $zoom: [15], area: { min: 5000 } }
+                            - { $zoom: [15], volume: { min: 100000 } }
+                            - { $zoom: [16], height: { min: 100 } }
+                            - { $zoom: [16], area: { min: 3500 } }
+                            - { $zoom: [16], volume: { min: 50000 } }
+                            - { $zoom: [17], area: { min: 500 } }
+                            - { $zoom: [17], volume: { min: 15000 } }
+                            - { $zoom: { min: 18 } }
+                        - not:
+                            - layer: [-1, -2, -3, -4, -5]
+                draw:
+                    polygons:
+                        visible: true
+                        order: 438
+                        style: building-grid
+                        extrude: global.building_extrude_height
+                        # color: global.white_color
+                    lines:
+                        visible: true
+                        order: 439
+                        style: building-lines
+                        extrude: global.building_extrude_height
+
+    places:
+        region:
+            enabled: false
+
+        populated-places:
+            filter:
+                all:
+                    - kind: locality
+                    - any:
+                        - all:
+                            - $zoom: { max: 8 }
+                            - function() { return feature.min_zoom <= $zoom }
+                            # - population: { min: 50000 }
+                        - all:
+                            - $zoom: [8]
+                            - population: { min: 15000 }
+                        - all:
+                            - $zoom: [9,10]
+                            - any:
+                                - population: { min: 10000 }
+                                - population: false
+                        - all:
+                            - $zoom: [11]
+                            - any:
+                                - population: { min: 1000 }
+                                - population: false
+                        - all:
+                            - $zoom: [12]
+                            - any:
+                                - population: { min: 500 }
+                                # - population: false
+                        - all:
+                            - $zoom: { min: 13 }
+                            - function() { return feature.min_zoom <= ($zoom - 1) }
+
+    pois:
+        filter:
+            - all:
+                - function() { return feature.min_zoom <= ($zoom) }
+                - any:
+                    - all:
+                        - not: { kind: [station, university] }
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom); } }
+                    - all:
+                        - kind: [station, university]
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom); } else { return feature.min_zoom <= ($zoom); } }

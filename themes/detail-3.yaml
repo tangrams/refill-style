@@ -1,0 +1,243 @@
+global:
+    text_visible_admin:             false
+    text_visible_neighbourhoods:    false
+    text_visible_neighbourhoods_e:  false
+    # text_visible_landuse_green:     false
+    #text_visible_trunk_primary:     false
+    #text_visible_secondary:         false
+    #text_visible_tertiary:          false
+    text_visible_minor_road:        false
+    text_visible_service_road:      false
+    text_visible_path:              false
+
+layers:
+    earth:
+        island:
+            enabled: false
+
+    water:
+        water-area-labels:
+            ocean-labels:
+                filter:
+                    $zoom: { min: 6 }
+            sea-labels:
+                filter:
+                    $zoom: { min: 6 }
+            mostly-lakes:
+                filter:
+                    all:
+                        - $zoom: { min: 9 }
+                        - $geometry: point
+                        - not: { kind: [riverbank, dock, playa] }
+                        - area: true
+                    any:
+                        - { $zoom: [9],  area: { min: 95000000 } }
+                        - { $zoom: [10], area: { min: 25000000 } }
+                        - { $zoom: [11], area: { min: 5000000 } }
+                        - { $zoom: [12], area: { min: 1000000 } }
+                        - { $zoom: [13], area: { min: 500000 } }
+                        - { $zoom: [14], area: { min: 200000 } }
+                        - { $zoom: [15], area: { min: 50000 } }
+                        - { $zoom: [15], area: { min: 25000} }
+                        - { $zoom: [16], area: { min: 1000 } }
+                        - { $zoom: { min: 17 } }
+            playa-labels:
+                enabled: false
+            water-line-labels:
+                enabled: false
+
+    platforms:
+        enabled: false
+
+    roads:
+        arrows:
+            enabled: false
+
+        filter:
+            any:
+                - all:
+                    - $zoom: { max: 8 }
+                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
+                - all:
+                    - $zoom: [8,9,10]
+                    - not: { kind: [major_road], kind_detail: [trunk,primary,secondary,tertiary] }
+                #- all:
+#                    - $zoom: { min: 11 }
+#                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
+#                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: [11]
+                    - not: { kind: [major_road], kind_detail: [primary] }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: [12]
+                    - not: { kind: [major_road], kind_detail: [primary] }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: [13]
+                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+                - all:
+                    - $zoom: { min: 14 }
+                    - not: { kind: [major_road], kind_detail: [secondary,tertiary] }
+                    - function() { return feature.min_zoom <= ($zoom - 3) }
+
+        major_road:
+            trunk_primary:
+                labels-trunk_primary-z11-z15:
+                    enabled: false
+
+        minor_road:
+            enabled: false
+
+        service_road:
+            enabled: false
+
+        path:
+            enabled: false
+
+        track:
+            enabled: false
+
+        steps:
+            enabled: false
+
+        racetrack:
+            enabled: false
+
+        airport-lines:
+            filter:
+                $zoom: { min: 14 }
+
+        ferry:
+            enabled: false
+
+        railway:
+            enabled: false
+
+        shields:
+            enabled: false
+
+    pois:
+        filter:
+            - all:
+                - $zoom: { min: 11 }
+                - not: { kind: [grass, traffic_signals, bus_stop, tree, bench] }
+                # - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom < 11 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 4); } }
+                - any:
+                    - all:
+                        - not: { kind: [station, museum] }
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 9 ) { return feature.min_zoom <= ($zoom - 6 ); } else { return feature.min_zoom <= ($zoom - 5); } }
+                    - all:
+                        - kind: [station, museum]
+                        - function() { if( $zoom >= 18 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 6 ); } else { return feature.min_zoom <= ($zoom - 5); } }
+        highway-exit:
+            enabled: false
+
+        # parks:
+        #     enabled: false
+
+        airport:
+            enabled: false
+
+        station-train-subway:
+            station-early:
+                filter:
+                    $zoom: { max: 13 }      # original is max: 11
+            low-priority-early:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: { min: 0, max: 13 } }
+            low-priority-early-z13:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+                filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+            low-priority-early-z14:
+                #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                draw:
+                    colorized-icons:
+                        visible: false
+            low-priority-early-z15:
+                filter: { kind_tile_rank: { min: 7 }, $zoom: [15] }
+                draw:
+                    colorized-icons:
+                        visible: false
+
+    buildings:
+        draw:
+            lines:
+                width: [[14, 0.3px], [15, 0.5px], [16, 0.75px],[18, 0.75px], [19, 1px]]
+        footprints:
+            filter:
+                any:
+                    - { $zoom: [13], scale_rank: [1,2] }
+                    - { $zoom: [14], scale_rank: [1,2,3] }
+                    - { $zoom: [15], height: { min: 100 } }
+                    - { $zoom: [15], area: { min: 500 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
+                    - { $zoom: [16], area: { min: 100 } }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: { min: 17 }, area: true }
+            draw:
+                polygons:
+                    visible: true
+                lines:
+                    visible: true
+            extrude:
+                filter:
+                    all:
+                        - function() { return global.sdk_building_extrude; }
+                        - any:
+                            - { $zoom: [15], height: { min: 190 } }
+                            - { $zoom: [15], area: { min: 5000 } }
+                            - { $zoom: [15], volume: { min: 100000 } }
+                            - { $zoom: [16], height: { min: 100 } }
+                            - { $zoom: [16], area: { min: 3500 } }
+                            - { $zoom: [16], volume: { min: 50000 } }
+                            - { $zoom: [17], area: { min: 500 } }
+                            - { $zoom: [17], volume: { min: 15000 } }
+                            - { $zoom: { min: 18 } }
+                        - not:
+                            - layer: [-1, -2, -3, -4, -5]
+                draw:
+                    polygons:
+                        visible: true
+                        order: 438
+                        style: building-grid
+                        extrude: global.building_extrude_height
+                        # color: global.white_color
+                    lines:
+                        visible: true
+                        order: 439
+                        style: building-lines
+                        extrude: global.building_extrude_height
+
+        building-labels:
+            filter:
+                all:
+                    - { $zoom: { min: 17 } }
+                    - $geometry: point
+                    - kind: [false, building, university, college, school, kindergarten]
+                    - function() { return global.text_visible_building; }
+                any:
+                    - { $zoom: [17], area: { min: 3000 }, name: true }
+                    - { $zoom: [17], area: { min: 2000 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: [18], area: { min: 1000 }, name: true }
+                    - { $zoom: [18], kind: [university, college, school, kindergarten] }
+                    - { $zoom: [19], area: { min: 200 }, name: true }
+                    - { $zoom: { min: 19 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: { min: 20 }, name: true }
+
+    places:
+        enabled: false
+
+    boundaries:
+        enabled: false
+
+    earth-labels:
+        island:
+            enabled: false
+
+    landuse:
+        filter:
+            all:
+                - function() { return feature.min_zoom <= ($zoom - 6) }

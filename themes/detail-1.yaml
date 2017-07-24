@@ -1,0 +1,65 @@
+layers:
+    earth:
+        island:
+            enabled: false
+    water:
+        lakes:
+            filter:
+                all:
+                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: [1],  area: { min: 50000000000 } }
+                    - { $zoom: [2],  area: { min: 40000000000 } }
+                    # some weird natural earth scale set transition
+                    - { $zoom: [3],  area: { min: 20000000000 } }
+                    - { $zoom: [4],  area: { min: 8000000000 } }
+                    - { $zoom: [5],  area: { min: 5000000000 } }
+                    - { $zoom: [6],  area: { min: 700000000 } }
+                    - { $zoom: [7],  area: { min: 500000000 } }
+                    - { $zoom: [8],  area: { min: 160000000 } }
+                    - { $zoom: [9],  area: { min: 40000000 } }
+                    - { $zoom: [10], area: { min: 15000000 } }
+                    - { $zoom: [11], area: { min: 6000000 } }
+                    - { $zoom: [12], area: { min: 1000000 } }
+                    - { $zoom: [13], area: { min: 500000 } }
+                    - { $zoom: [14], area: { min: 100000 } }
+                    - { $zoom: { min: 15 } }
+        other-water-areas:
+            enabled: false
+        water-boundary-ocean:
+            enabled: false
+        water_boundaries-not-ocean:
+            enabled: false
+        river:
+            #river center lines, not boundaries for polygons
+            filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 14 }, not: { is_tunnel: true } }
+            intermittent:
+                enabled: false
+        water-area-labels:
+            enabled: false
+
+    platforms:
+        enabled: false
+
+    roads:
+        enabled: false
+
+    pois:
+        enabled: false
+
+    buildings:
+        enabled: false
+
+    places:
+        enabled: false
+
+
+    boundaries:
+        enabled: false
+
+    earth-labels:
+        enabled: false
+
+    landuse:
+        enabled: false

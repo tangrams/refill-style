@@ -1,0 +1,170 @@
+global:
+    text_visible_service_road:      false
+    text_visible_path:              false
+
+layers:
+    roads:
+        arrows:
+            enabled: false
+
+        filter:
+            any:
+                - all:
+                    - $zoom: { max: 11 }
+                - all:
+                    - $zoom: { min: 11 }
+                    - function() { return feature.min_zoom <= ($zoom - 1) }
+
+        minor_road:
+            hide-early:
+                filter: { $zoom: { max: 13 } }
+                draw:
+                    lines:
+                        visible: false
+
+        service_road:
+            filter:
+                $zoom: { min: 16 }
+
+        path:
+            filter:
+                $zoom: { min: 18 }
+
+        track:
+            filter:
+                $zoom: { min: 18 }
+
+        steps:
+            filter:
+                $zoom: { min: 18 }
+
+        ferry:
+            enabled: false
+
+
+    buildings:
+        draw:
+            lines:
+                width: [[14, 0.3px], [15, 0.5px], [16, 0.75px],[18, 0.75px], [19, 1px]]
+        footprints:
+            filter:
+                any:
+                    - { $zoom: [13], scale_rank: [1,2] }
+                    - { $zoom: [14], scale_rank: [1,2,3] }
+                    - { $zoom: [15], height: { min: 100 } }
+                    - { $zoom: [15], area: { min: 500 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
+                    - { $zoom: [16], area: { min: 100 } }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: { min: 17 }, area: true }
+            draw:
+                polygons:
+                    visible: true
+                lines:
+                    visible: true
+            extrude:
+                filter:
+                    all:
+                        - function() { return global.sdk_building_extrude; }
+                        - any:
+                            - { $zoom: [15], height: { min: 190 } }
+                            - { $zoom: [15], area: { min: 5000 } }
+                            - { $zoom: [15], volume: { min: 100000 } }
+                            - { $zoom: [16], height: { min: 100 } }
+                            - { $zoom: [16], area: { min: 3500 } }
+                            - { $zoom: [16], volume: { min: 50000 } }
+                            - { $zoom: [17], area: { min: 500 } }
+                            - { $zoom: [17], volume: { min: 15000 } }
+                            - { $zoom: { min: 18 } }
+                        - not:
+                            - layer: [-1, -2, -3, -4, -5]
+                draw:
+                    polygons:
+                        visible: true
+                        order: 438
+                        style: building-grid
+                        extrude: global.building_extrude_height
+                        # color: global.white_color
+                    lines:
+                        visible: true
+                        order: 439
+                        style: building-lines
+                        extrude: global.building_extrude_height
+
+    places:
+        region:
+            enabled: false
+
+        populated-places:
+            filter:
+                all:
+                    - kind: locality
+                    - any:
+                        - all:
+                            - $zoom: { max: 8 }
+                            - function() { return feature.min_zoom <= ($zoom - 1) }
+                            # - population: { min: 50000 }
+                        - all:
+                            - $zoom: [8]
+                            - population: { min: 30000 }
+                        - all:
+                            - $zoom: [9,10]
+                            - any:
+                                - population: { min: 25000 }
+                                - population: false
+                        - all:
+                            - $zoom: [11]
+                            - any:
+                                - population: { min: 15000 }
+                                - population: false
+                        - all:
+                            - $zoom: [12]
+                            - any:
+                                - population: { min: 9000 }
+                                # - population: false
+                        - all:
+                            - $zoom: [13]
+                            - any:
+                                - population: { min: 100 }
+                                # - population: false
+                        - all:
+                            - $zoom: { min: 14 }
+                            - function() { return feature.min_zoom <= ($zoom - 3) }
+
+    pois:
+        filter:
+            - all:
+                - function() { return feature.min_zoom <= ($zoom) }
+                - any:
+                    - all:
+                        - not: { kind: [station, university] }
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 1); } }
+                    - all:
+                        - kind: [station, university]
+                        - function() { if( $zoom >= 17 ) { return true; } else if( feature.min_zoom <= 10 ) { return feature.min_zoom <= ($zoom - 1); } else { return feature.min_zoom <= ($zoom - 1); } }
+
+        station-train-subway:
+            station-early:
+                filter:
+                    $zoom: { max: 12 }      # original is max: 11
+            low-priority-early:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: { min: 0, max: 13 } }
+            low-priority-early-z13:
+                #filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: [13] }
+            low-priority-early-z14:
+                #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
+                filter: { kind_tile_rank: { min: 4 }, $zoom: [14] }
+
+
+    boundaries:
+        region:
+            region-labels:
+                filter:
+                    $zoom: { min: 13 }
+
+    landuse:
+        filter:
+            all:
+                - function() { return feature.min_zoom <= ($zoom - 1) }
