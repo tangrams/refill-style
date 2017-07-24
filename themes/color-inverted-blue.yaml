@@ -150,7 +150,7 @@ styles:
         base: polygons
         material:
             diffuse:
-                texture: ../images/rock.png
+                texture: images/rock.png
                 mapping: planar
                 scale: .001
 
@@ -294,4 +294,4 @@ styles:
 
 textures:
     building-grid:
-        url: ../images/building-grid-hi-contrast3.gif
+        url: images/building-grid-hi-contrast3.gif
