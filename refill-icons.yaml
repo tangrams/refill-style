@@ -1,12 +1,7 @@
 styles:
-    icons:
-        base: points
-        texture: mapzen_icon_spritesheet
-        blend_order: 1
-
     mapzen_icon_library:
         base: points
-        texture: mapzen_icon_spritesheet
+        texture: mapzen_icon_library
         blend_order: 1
         mix: colorized-icons
         draw:
@@ -35,7 +30,7 @@ styles:
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
 textures:
-    mapzen_icon_spritesheet:
+    mapzen_icon_library:
         url: images/refill@2x.png
         filtering: mipmap
         sprites:

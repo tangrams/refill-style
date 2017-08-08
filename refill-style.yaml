@@ -1673,7 +1673,7 @@ layers:
                             - $zoom: { min: 13 }
                             - ref: true
                 draw:
-                    icons:
+                    mapzen_icon_library:
                         priority: 20
                         # you need to match any custom shield to the vector tile `network` values
                         sprite: function() { return ('sdk_shield-' + feature.ref.length + 'char'); }
@@ -1703,49 +1703,51 @@ layers:
                                 fill: function() { if(feature.colour == 'yellow') { return '#555'; } else { return 'white'; } }
                                 style: bold
                                 size: [[7,7px],[12,8px],[16,11px]]
+                                # disable the default mapzen_icon_library stroke
+                                stroke: { width: 0px }
 
                 width_1char:
                     filter: function() { return (feature.ref.length === 1); }
                     draw:
-                        icons:
+                        mapzen_icon_library:
                             size: [[6,[16px,16px]],[13,[18px,18px]],[16,[21px,21px]]]
                 width_2char:
                     filter: function() { return (feature.ref.length === 2); }
                     draw:
-                        icons:
+                        mapzen_icon_library:
                             size: [[6,[21px,16px]],[13,[24px,18px]],[16,[28px,21px]]]
                 width_3char:
                     filter: function() { return (feature.ref.length === 3); }
                     draw:
-                        icons:
+                        mapzen_icon_library:
                             size: [[6,[27px,16px]],[13,[31px,18px]],[16,[36px,21px]]]
                 width_4char:
                     filter: function() { return (feature.ref.length === 4); }
                     draw:
-                        icons:
+                        mapzen_icon_library:
                             size: [[6,[32px,16px]],[13,[36px,18px]],[16,[41px,21px]]]
                     # London sucks
                     early:
                         filter: { $zoom: { max: 14 } }
                         draw:
-                            icons:
+                            mapzen_icon_library:
                                 visible: false
                 width_5char:
                     filter: function() { return (feature.ref.length === 5); }
                     draw:
-                        icons:
+                        mapzen_icon_library:
                             size: [[6,[37px,16px]],[13,[41px,18px]],[16,[48px,21px]]]
                     # London sucks
                     early:
                         filter: { $zoom: { max: 14 } }
                         draw:
-                            icons:
+                            mapzen_icon_library:
                                 visible: false
                 # this is kinda a hack
                 width_longggggg:
                     filter: function() { return (feature.ref.length > 5); }
                     draw:
-                        icons:
+                        mapzen_icon_library:
                             visible: false
 
             z19-show-long-route-name:
@@ -1837,7 +1839,7 @@ layers:
             filter: { oneway: yes, shield_text: false, not: { kind: rail }, $zoom: { min: 17 } }
             draw:
                 arrows:
-                    style: icons
+                    style: mapzen_icon_library
                     flat: true
                     visible: global.icon_visible_landuse_green
                     sprite: arrow
@@ -1846,6 +1848,8 @@ layers:
                     placement: spaced
                     placement_spacing: [[17, 70px], [20, 175px]]
                     angle: auto
+                    text:
+                        visible: false
 
         early:
             filter: { $zoom: { max: 15 } }
@@ -3372,6 +3376,7 @@ layers:
             name: true
         draw:
             mapzen_icon_library:
+                visible: false
                 text:
                     text_source: global.ux_language_text_source
                     visible: false
