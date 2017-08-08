@@ -13,6 +13,7 @@
 import:
     - themes/color-black.yaml
     - themes/label-5.yaml
+    - refill-icons.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -383,288 +384,6 @@ global:
 
 
 textures:
-    pois:
-        url: images/refill@2x.png
-        filtering: mipmap
-        sprites:
-            # define sprites: [x origin, y origin, width, height]
-            'US:CA-1char': [488, 642, 82, 92]
-            'US:CA-2char': [388, 642, 94, 94]
-            'US:CA-3char': [268, 642, 112, 92]
-            'US:CA-4char': [136, 642, 124, 92]
-            'US:CA-5char': [0, 642, 128, 92]
-            'US:I-1char': [908, 745, 88, 100]
-            'US:I-2char': [798, 745, 102, 100]
-            'US:I-3char': [658, 745, 134, 100]
-            'US:I-4char': [512, 745, 140, 100]
-            'US:I-5char': [352, 745, 152, 100]
-            'US:NY-1char': [756, 386, 72, 88]
-            'US:NY-2char': [660, 386, 88, 88]
-            'US:NY-3char': [548, 386, 104, 86]
-            'US:NY-4char': [424, 388, 116, 84]
-            'US:NY-5char': [296, 386, 120, 86]
-            'US:PA-1char': [216, 386, 72, 88]
-            'US:PA-2char': [120, 386, 88, 88]
-            'US:PA-3char': [0, 386, 112, 88]
-            'US:PA-4char': [892, 254, 120, 88]
-            'US:PA-5char': [756, 254, 128, 88]
-            'US:US-1char': [256, 746, 88, 94]
-            'US:US-2char': [144, 746, 106, 94]
-            'US:US-3char': [0, 746, 138, 100]
-            'US:US-4char': [748, 642, 156, 100]
-            'US:US-5char': [576, 642, 164, 100]
-            airport: [870, 0, 38, 38]
-            aerodrome: [870, 0, 38, 38]
-            aquarium: [732, 168, 38, 38]
-            arrow: [368, 210, 38, 38]
-            atm: [918, 126, 38, 38]
-            bakery: [548, 168, 38, 38]
-            bank: [964, 126, 38, 38]
-            category-predicate-money: [964, 126, 38, 38]
-            bar: [230, 168, 38, 38]
-            pub: [230, 168, 38, 38]
-            category-predicate-drink: [230, 168, 38, 38]
-            baseball: [460, 84, 38, 38]
-            basketball: [414, 84, 38, 38]
-            beach: [598, 84, 38, 38]
-            bench: [548, 0, 38, 38]
-            bicycle: [872, 126, 38, 38]
-            bicycle_rental: [872, 126, 38, 38]
-            bicycle_rental_station: [872, 126, 38, 38]
-            bicycle_parking: [644, 126, 38, 38]
-            biergarten: [276, 210, 38, 38]
-            brewery: [276, 210, 38, 38]
-            books: [826, 126, 38, 38]
-            bridge: [874, 84, 38, 38]
-            buddhist: [736, 84, 38, 38]
-            building: [414, 168, 38, 38]
-            hangar: [414, 168, 38, 38]
-            nursing_home: [414, 168, 38, 38]
-            manor: [414, 168, 38, 38]
-            apartments: [414, 168, 38, 38]
-            care_home: [414, 168, 38, 38]
-            bus_station: [778, 0, 38, 38]
-            bus_stop: [778, 0, 38, 38]
-            butcher: [920, 42, 38, 38]
-            cafe: [502, 168, 38, 38]
-            camp_site: [782, 84, 38, 38]
-            summer_camp: [782, 84, 38, 38]
-            capital-l: [590, 210, 32, 32]
-            capital-m: [558, 210, 24, 24]
-            capital-s: [528, 210, 20, 20]
-            capital-xl: [678, 210, 42, 36]
-            capital-xs: [506, 210, 16, 16]
-            car: [780, 126, 38, 38]
-            category-namespace-mobility: [780, 126, 38, 38]
-            category-predicate-mobility: [780, 126, 38, 38]
-            car_repair: [0, 168, 38, 38]
-            car_sharing: [594, 0, 38, 38]
-            castle: [414, 42, 38, 38]
-            fort: [414, 42, 38, 38]
-            cemetery: [690, 84, 38, 38]
-            grave_yard: [690, 84, 38, 38]
-            christian: [184, 126, 38, 38]
-            cinema: [778, 168, 38, 38]
-            clothes: [824, 168, 38, 38]
-            fashion: [824, 168, 38, 38]
-            college: [870, 168, 38, 38]
-            university: [870, 168, 38, 38]
-            confectionery: [0, 210, 38, 38]
-            convenience: [46, 84, 38, 38]
-            county_shield-1char: [404, 478, 72, 72]
-            county_shield-2char: [300, 478, 96, 72]
-            county_shield-3char: [160, 478, 132, 72]
-            county_shield-4char: [0, 478, 152, 72]
-            county_shield-5char: [836, 386, 180, 72]
-            courthouse: [364, 0, 38, 38]
-            department_store: [734, 126, 38, 38]
-            drinking_water: [230, 210, 38, 38]
-            dry_cleaning: [0, 84, 38, 38]
-            electronics: [598, 126, 38, 38]
-            computer: [598, 126, 38, 38]
-            estate_agent: [138, 42, 38, 38]
-            factory: [368, 168, 38, 38]
-            industrial: [368, 168, 38, 38]
-            chimney: [368, 168, 38, 38]
-            substation: [368, 168, 38, 38]
-            wastewater_plant: [368, 168, 38, 38]
-            works: [368, 168, 38, 38]
-            water_works: [368, 168, 38, 38]
-            plant: [368, 168, 38, 38]
-            generator: [368, 168, 38, 38]
-            category-predicate-industry: [368, 168, 38, 38]
-            fast_food: [138, 210, 38, 38]
-            ferry: [824, 0, 38, 38]
-            ferry_terminal: [824, 0, 38, 38]
-            fire_station: [318, 0, 38, 38]
-            fitness: [874, 42, 38, 38]
-            fitness_station: [874, 42, 38, 38]
-            florist: [138, 126, 38, 38]
-            forest: [46, 210, 38, 38]
-            natural_forest: [46, 210, 38, 38]
-            nature_reserve: [46, 210, 38, 38]
-            fountain: [276, 126, 38, 38]
-            fuel: [960, 168, 38, 38]
-            gallery: [640, 168, 38, 38]
-            garden: [644, 84, 38, 38]
-            generic: [414, 210, 38, 38]
-            category-namespace-other: [414, 210, 38, 38]
-            category-predicate-addressing: [414, 210, 38, 38]
-            generic_shield-1char: [104, 554, 72, 72]
-            generic_shield-2char: [0, 554, 98, 72]
-            generic_shield-3char: [832, 478, 132, 72]
-            generic_shield-4char: [672, 478, 152, 72]
-            generic_shield-5char: [484, 478, 180, 72]
-            gift: [92, 126, 38, 38]
-            golf_course: [368, 84, 38, 38]
-            government: [138, 168, 38, 38]
-            townhall: [138, 168, 38, 38]
-            public: [138, 168, 38, 38]
-            embassy: [138, 168, 38, 38]
-            category-predicate-civic: [138, 168, 38, 38]
-            hairdresser: [46, 42, 38, 38]
-            hardware: [828, 42, 38, 38]
-            doityourself: [828, 42, 38, 38]
-            painter: [828, 42, 38, 38]
-            historical: [46, 126, 38, 38]
-            hospital: [184, 0, 38, 38]
-            category-namespace-health: [184, 0, 38, 38]
-            category-predicate-health: [184, 0, 38, 38]
-            hotel: [732, 0, 38, 38]
-            motel: [732, 0, 38, 38]
-            hostel: [732, 0, 38, 38]
-            category-predicate-sleep: [732, 0, 38, 38]
-            ice_cream: [322, 210, 38, 38]
-            information: [460, 210, 38, 38]
-            jewelry: [736, 42, 38, 38]
-            jewish: [46, 0, 38, 38]
-            landmark: [272, 0, 38, 38]
-            memorial: [272, 0, 38, 38]
-            monument: [272, 0, 38, 38]
-            tower: [272, 0, 38, 38]
-            beacon: [272, 0, 38, 38]
-            laundry: [690, 42, 38, 38]
-            library: [0, 0, 38, 38]
-            light_rail: [686, 0, 38, 38]
-            tram_stop: [686, 0, 38, 38]
-            lighthouse: [230, 84, 38, 38]
-            liquor: [506, 126, 38, 38]
-            alcohol: [506, 126, 38, 38]
-            mall: [644, 42, 38, 38]
-            marina: [92, 168, 38, 38]
-            dock: [92, 168, 38, 38]
-            mineshaft: [782, 42, 38, 38]
-            quarry: [782, 42, 38, 38]
-            adit: [782, 42, 38, 38]
-            mobile_phone: [506, 42, 38, 38]
-            museum: [0, 126, 38, 38]
-            observatory: [0, 126, 38, 38]
-            music: [368, 42, 38, 38]
-            muslim: [92, 0, 38, 38]
-            newspaper: [322, 42, 38, 38]
-            kiosk: [322, 42, 38, 38]
-            office: [552, 84, 38, 38]
-            insurance: [552, 84, 38, 38]
-            company: [552, 84, 38, 38]
-            category-predicate-service: [552, 84, 38, 38]
-            optician: [276, 42, 38, 38]
-            park: [230, 126, 38, 38]
-            category-predicate-nature: [230, 126, 38, 38]
-            parking: [690, 126, 38, 38]
-            peak: [184, 84, 38, 38]
-            pet: [230, 42, 38, 38]
-            pharmacy: [966, 42, 38, 38]
-            photographic_laboratory: [184, 42, 38, 38]
-            photographer: [184, 42, 38, 38]
-            pier: [640, 0, 38, 38]
-            place_of_worship: [276, 168, 38, 38]
-            chapel: [276, 168, 38, 38]
-            wayside_shrine: [276, 168, 38, 38]
-            category-predicate-religion: [276, 168, 38, 38]
-            playground: [460, 42, 38, 38]
-            police: [226, 0, 38, 38]
-            post_office: [322, 168, 38, 38]
-            recycling: [92, 42, 38, 38]
-            restaurant: [92, 210, 38, 38]
-            category-namespace-eat_and_drink: [92, 210, 38, 38]
-            category-predicate-eat: [92, 210, 38, 38]
-            retail: [598, 42, 38, 38]
-            store: [598, 42, 38, 38]
-            category-namespace-shop_and_service: [598, 42, 38, 38]
-            category-predicate-shop: [598, 42, 38, 38]
-            ruin: [502, 0, 38, 38]
-            ruins: [502, 0, 38, 38]
-            archaeological_site: [502, 0, 38, 38]
-            school: [506, 84, 38, 38]
-            kindergarten: [506, 84, 38, 38]
-            category-namespace-education_and_religion: [506, 84, 38, 38]
-            category-predicate-education: [506, 84, 38, 38]
-            sdk_shield-1char: [832, 554, 84, 84]
-            sdk_shield-2char: [712, 554, 112, 84]
-            sdk_shield-3char: [560, 554, 144, 84]
-            sdk_shield-4char: [384, 554, 168, 84]
-            sdk_shield-5char: [184, 554, 192, 84]
-            shoemaker: [552, 42, 38, 38]
-            ski: [322, 126, 38, 38]
-            ski_rental: [322, 126, 38, 38]
-            ski_school: [322, 126, 38, 38]
-            winter_sports: [322, 126, 38, 38]
-            slipway: [138, 84, 38, 38]
-            soccer: [322, 84, 38, 38]
-            sports: [0, 42, 38, 38]
-            sports_centre: [184, 168, 38, 38]
-            pitch: [184, 168, 38, 38]
-            recreation_ground: [184, 168, 38, 38]
-            spring: [276, 84, 38, 38]
-            hot_spring: [276, 84, 38, 38]
-            stadium: [414, 126, 38, 38]
-            subway_entrance: [456, 0, 38, 38]
-            supermarket: [552, 126, 38, 38]
-            greengrocer: [552, 126, 38, 38]
-            swimming_pool: [460, 126, 38, 38]
-            swimming_area: [460, 126, 38, 38]
-            tailor: [962, 0, 38, 38]
-            tennis: [368, 126, 38, 38]
-            theatre: [594, 168, 38, 38]
-            category-predicate-fun: [594, 168, 38, 38]
-            theme_park: [966, 84, 38, 38]
-            amusement_ride: [966, 84, 38, 38]
-            toilets: [828, 84, 38, 38]
-            townspot-l: [978, 210, 32, 32]
-            townspot-l-rev: [806, 210, 32, 32]
-            townspot-m: [946, 210, 24, 24]
-            townspot-m-rev: [774, 210, 24, 24]
-            townspot-s: [918, 210, 20, 20]
-            townspot-s-rev: [746, 210, 20, 20]
-            townspot-xl: [0, 254, 40, 40]
-            townspot-xl-rev: [846, 210, 38, 38]
-            townspot-xs: [894, 210, 16, 16]
-            townspot-xs-rev: [726, 210, 12, 12]
-            toys: [916, 0, 38, 38]
-            traffic_signals: [916, 168, 38, 38]
-            train_station: [410, 0, 38, 38]
-            station: [410, 0, 38, 38]
-            train: [410, 0, 38, 38]
-            category-predicate-transport: [410, 0, 38, 38]
-            ux-current-location: [342, 254, 88, 88]
-            ux-locate-off: [676, 254, 72, 72]
-            ux-locate-on: [596, 254, 72, 72]
-            ux-route-arrow: [48, 254, 128, 128]
-            ux-route-start: [262, 254, 72, 92]
-            ux-route-stop: [184, 254, 72, 92]
-            ux-search-active: [436, 254, 72, 108]
-            ux-search-inactive: [516, 254, 72, 108]
-            ux-transit-stop: [630, 212, 42, 36]
-            veterinary: [138, 0, 38, 38]
-            viewpoint: [686, 168, 38, 38]
-            category-namespace-do_and_see: [686, 168, 38, 38]
-            category-predicate-attraction: [686, 168, 38, 38]
-            vineyard: [46, 168, 38, 38]
-            volcano: [92, 84, 38, 38]
-            wine: [184, 210, 38, 38]
-            winery: [456, 168, 38, 38]
-            zoo: [920, 84, 38, 38]
-
     building-grid:
         url: images/building-grid.gif
         filtering: mipmap
@@ -1230,19 +949,6 @@ styles:
     polygons_transparent:
         base: polygons
         blend: overlay
-    icons:
-        base: points
-        texture: pois
-        blend_order: 1
-    colorized-icons:
-        mix: icons
-        shaders:
-            uniforms:
-                u_tint: global.black_color
-                u_fill: global.white_color
-            blocks:
-                filter: |
-                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
     text-blend-order:
         base: text
         blend_order: 1
@@ -1256,22 +962,22 @@ styles:
         blend_order: 0
     ux-location-gem-overlay:
         base: points
-        texture: pois
+        texture: mapzen_icon_library
         blend: overlay
         blend_order: 2
     ux-icons-overlay:
         base: points
-        texture: pois
+        texture: mapzen_icon_library
         blend: overlay
         blend_order: 3
     sdk-point-overlay:
         base: points
-        texture: pois
+        texture: mapzen_icon_library
         blend: overlay
         blend_order: 3
     sdk-shield-overlay:
         base: points
-        texture: pois
+        texture: mapzen_icon_library
         blend: overlay
         blend_order: 3
     sdk-line-overlay:
@@ -2147,6 +1853,7 @@ layers:
                 lines:
                     outline:
                         order: global.feature_order
+
         bridges-tunnels:
             filter: { any: [is_bridge: true, is_tunnel: true] }
             draw:
@@ -2455,7 +2162,7 @@ layers:
                             font:
                                 fill: [[13, global.dark_color], [17, global.black_color]]
                                 size: [[13, 10px], [17, 13px]]
-                                stroke: { color: global.white_color, width: 4 }
+                                stroke: { color: global.white_color, width: 4px }
             tertiary:
                 filter: { kind_detail: [tertiary, tertiary_link] }
                 draw:
@@ -2594,7 +2301,7 @@ layers:
             draw:
                 lines:
                     color: [[14, global.light_color], [16, global.white_color]]
-                    width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
+                    width: [[14, 0px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                     outline:
                         color: global.light_color
                         width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
@@ -2611,7 +2318,7 @@ layers:
                 draw:
                     lines:
                         color: [[14, global.light_color], [16, global.white_color]]
-                        width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
+                        width: [[14, 0px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                         outline:
                             color: global.light_color
                             width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
@@ -2620,7 +2327,7 @@ layers:
                 draw:
                     lines:
                         color: [[14, global.light_color], [16, global.white_color]]
-                        width: [[14, 0.35px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
+                        width: [[14, 0px], [15, 0px], [16, 0.25px], [18, 2px], [20, 1m]]
                         outline:
                             color: global.light_color
                             width: [[14, 0px], [15, 0.35px], [16, 0.45px], [17, 1px]]
@@ -2650,7 +2357,7 @@ layers:
                         font:
                             fill: global.dark_color
                             size: 12px
-                            stroke: { color: global.white_color, width: 4 }
+                            stroke: { color: global.white_color, width: 4px }
         track:
             filter: { kind: path, kind_detail: track }
             draw:
@@ -2680,7 +2387,7 @@ layers:
                 dashed_steps:
                     order: global.feature_order
                     color: [[15, global.light_color], [19, global.lighter_color]]
-                    width: [[15, 0.5], [18, 3px], [19, 1.5m]]
+                    width: [[15, 0.5px], [18, 3px], [19, 1.5m]]
                     outline:
                         color: global.offwhite_color
                         width: [[15, 0px], [18, 1px]]
@@ -2694,7 +2401,7 @@ layers:
                         font:
                             fill: global.mid_color
                             size: 11px
-                            stroke: { color: global.white_color, width: 4 }
+                            stroke: { color: global.white_color, width: 4px }
 
         shields:
             filter:
@@ -2719,7 +2426,7 @@ layers:
                             - kind_detail: [motorway, trunk, primary, secondary, tertiary]
             # default
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     # you need to match any custom shield to the vector tile `network` values
                     sprite: |
                         function() {
@@ -2767,7 +2474,7 @@ layers:
                         - kind_detail: motorway
                         - $zoom: { min: 9 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         priority: 47
                         #color: yellow
                         visible: global.sdk_road_shields
@@ -2778,7 +2485,7 @@ layers:
                         - kind_detail: [trunk]
                         - $zoom: { min: 10 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         priority: 48
                         #color: red
                         visible: global.sdk_road_shields
@@ -2788,7 +2495,7 @@ layers:
                         - kind_detail: [primary]
                         - $zoom: { min: 12 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         priority: 49
                         #color: aqua
                         visible: global.sdk_road_shields
@@ -2798,7 +2505,7 @@ layers:
                         - kind_detail: [secondary]
                         - $zoom: { min: 12 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         priority: 53
                         #color: blue
                         visible: global.sdk_road_shields
@@ -2808,7 +2515,7 @@ layers:
                         - kind_detail: tertiary
                         - $zoom: { min: 13 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         priority: 55
                         #color: green
                         visible: global.sdk_road_shields
@@ -2817,7 +2524,7 @@ layers:
             #         not: { network: ['US:I','US:US'] }
             #         $zoom: { max: 9 }
             #     draw:
-            #         colorized-icons:
+            #         mapzen_icon_library:
             #             visible: false
             width_1char:
                 filter: |
@@ -2829,7 +2536,7 @@ layers:
                         }
                     }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[6,[14px,14px]],[13,[16px,16px]],[16,[18px,18px]]]
             width_2char:
                 filter: |
@@ -2841,7 +2548,7 @@ layers:
                         }
                     }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[6,[18px,14px]],[13,[20px,15px]],[16,[24px,18px]]]
             width_3char:
                 filter: |
@@ -2853,7 +2560,7 @@ layers:
                         }
                     }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[6,[25px,14px]],[13,[27px,15px]],[16,[33px,18px]]]
             width_4char:
                 filter: |
@@ -2865,13 +2572,13 @@ layers:
                         }
                     }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[6,[29px,14px]],[13,[31px,15px]],[16,[38px,18px]]]
                 # London sucks
                 early:
                     filter: { $zoom: { max: 14 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             visible: false
             width_5char:
                 filter: |
@@ -2883,13 +2590,13 @@ layers:
                         }
                     }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[6,[34px,14px]],[13,[37px,15px]],[16,[45px,18px]]]
                 # London sucks
                 early:
                     filter: { $zoom: { max: 14 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             visible: false
             # this is kinda a hack
             width_longggggg:
@@ -2902,7 +2609,7 @@ layers:
                         }
                     }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             # missing-route-relations:
             #     filter: { shield_text: false }
@@ -2917,14 +2624,14 @@ layers:
             legit-shields:
                 filter: { shield_text: true }
                 # draw:
-                #     colorized-icons:
+                #     mapzen_icon_library:
                 #         color: red
                 # US Interstate roads
                 US-I:
                     filter:
                         network: 'US:I'
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             # you need to match any custom shield to the vector tile `network` values
                             sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
                             priority: 46
@@ -2937,27 +2644,27 @@ layers:
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[15px,18px]],[13,[17px,20px]],[15,[22px,25px]]]
                     width_2char:
                         filter: function() { return (feature.shield_text.length === 2) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[18px,18px]],[13,[20px,20px]],[15,[25px,25px]]]
                     width_3char:
                         filter: function() { return (feature.shield_text.length === 3) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[23px,18px]],[13,[26px,20px]],[15,[33px,25px]]]
                     width_4char:
                         filter: function() { return (feature.shield_text.length === 4) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[25px,18px]],[13,[27px,20px]],[15,[35px,25px]]]
                     width_5char:
                         filter: function() { return (feature.shield_text.length === 5) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[26px,18px]],[13,[30px,20px]],[15,[38px,25px]]]
                 # US Federal Routes
                 US-US:
@@ -2965,7 +2672,7 @@ layers:
                         network: ['US:US','US:US:Business', 'US:US:Truck', 'US:US:Alternate']
                         $zoom: { min: 7 }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             # you need to match any custom shield to the vector tile `network` values
                             sprite: |
                                 function() { return ('US:US-' + feature.shield_text.length + 'char'); }
@@ -2979,32 +2686,32 @@ layers:
                                     size: [[7,8px],[13,9px],[15,11px]]
                     # early:
                     #     filter: { $zoom: [7] }
-                    #     colorized-icons:
+                    #     mapzen_icon_library:
                     #         visible: false
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[15px,17px]],[13,[17px,19px]],[15,[22px,24px]]]
                     width_2char:
                         filter: function() { return (feature.shield_text.length === 2) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[18px,17px]],[13,[20px,19px]],[15,[26px,24px]]]
                     width_3char:
                         filter: function() { return (feature.shield_text.length === 3) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[22px,17px]],[13,[25px,19px]],[15,[34px,25px]]]
                     width_4char:
                         filter: function() { return (feature.shield_text.length === 4) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[25px,17px]],[13,[29px,19px]],[15,[39px,25px]]]
                     width_5char:
                         filter: function() { return (feature.shield_text.length === 5) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[27px,17px]],[13,[30px,19px]],[15,[41px,25px]]]
                 # US State Routes
                 # US-states:
@@ -3015,12 +2722,12 @@ layers:
                 #                 /^US:(?!US)\w\w$/.test(feature.network)
                 #         }
                 #     draw:
-                #         colorized-icons:
+                #         mapzen_icon_library:
                 #             # you need to match any custom shield to the vector tile `network` values
                 #             priority: 18
                 #     early:
                 #         filter: { $zoom: [7,8,9] }
-                #         colorized-icons:
+                #         mapzen_icon_library:
                 #             visible: false
                 US-CA:
                     # Match California state highways: `US:CA`
@@ -3030,7 +2737,7 @@ layers:
                                 /^US:CA$/.test(feature.network)
                         }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
                             text:
                                 offset: [0px, 1px]
@@ -3040,42 +2747,42 @@ layers:
                     motorway:
                         filter: { kind_detail: [motorway], $zoom: [7,8] }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 visible: global.sdk_road_shields
                     trunk:
                         filter: { kind_detail: [trunk], $zoom: [8,9] }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 visible: global.sdk_road_shields
                     primary:
                         filter: { kind_detail: primary, $zoom: [10,11] }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 visible: global.sdk_road_shields
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[14px,16px]],[13,[15px,18px]],[15,[18px,21px]]]
                     width_2char:
                         filter: function() { return (feature.shield_text.length === 2) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[18px,18px]],[13,[20px,20px]],[15,[23px,23px]]]
                     width_3char:
                         filter: function() { return (feature.shield_text.length === 3) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[21px,18px]],[13,[24px,20px]],[15,[28px,23px]]]
                     width_4char:
                         filter: function() { return (feature.shield_text.length === 4) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[24px,18px]],[13,[26px,20px]],[15,[31px,23px]]]
                     width_5char:
                         filter: function() { return (feature.shield_text.length === 5) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[25px,18px]],[13,[27px,20px]],[15,[32px,23px]]]
                 US-NY:
                     # Match New York state highways: `US:NY`
@@ -3086,7 +2793,7 @@ layers:
                                 /* (/^US:NY$/.test(feature.network) || /^NY:US$/.test(feature.network)) */
                         }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             sprite: |
                                 function() { return ( 'US:NY-' + feature.shield_text.length + 'char'); }
                             text:
@@ -3097,27 +2804,27 @@ layers:
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[13px,17px]],[13,[15px,19px]],[15,[18px,22px]]]
                     width_2char:
                         filter: function() { return (feature.shield_text.length === 2) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[17px,17px]],[13,[19px,19px]],[15,[22px,22px]]]
                     width_3char:
                         filter: function() { return (feature.shield_text.length === 3) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[20px,17px]],[13,[22px,19px]],[15,[27px,22px]]]
                     width_4char:
                         filter: function() { return (feature.shield_text.length === 4) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[21px,17px]],[13,[24px,19px]],[15,[29px,22px]]]
                     width_5char:
                         filter: function() { return (feature.shield_text.length === 5) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[22px,17px]],[13,[25px,19px]],[15,[30px,22px]]]
                 US-PA:
                     # Match Pennsylvania state highways
@@ -3127,7 +2834,7 @@ layers:
                                 /^US:PA$/.test(feature.network)
                         }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             sprite: |
                                 function() { return ( 'US:PA-' + feature.shield_text.length + 'char'); }
                             text:
@@ -3138,27 +2845,27 @@ layers:
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[13px,17px]],[13,[15px,19px]],[15,[18px,22px]]]
                     width_2char:
                         filter: function() { return (feature.shield_text.length === 2) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[17px,17px]],[13,[19px,19px]],[15,[22px,22px]]]
                     width_3char:
                         filter: function() { return (feature.shield_text.length === 3) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[21px,17px]],[13,[24px,19px]],[15,[28px,22px]]]
                     width_4char:
                         filter: function() { return (feature.shield_text.length === 4) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[22px,17px]],[13,[25px,19px]],[15,[30x,22px]]]
                     width_5char:
                         filter: function() { return (feature.shield_text.length === 5) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[24px,17px]],[13,[27px,19px]],[15,[32px,22px]]]
                 # USA County Routes
                 US-counties:
@@ -3194,7 +2901,7 @@ layers:
                                 $zoom > 10
                         }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             # you need to match any custom shield to the vector tile `network` values
                             sprite: function() { return ('county_shield-' + feature.shield_text.length + 'char'); }
                             # priority: 19
@@ -3206,32 +2913,32 @@ layers:
                     # early:
                     #     filter: { $zoom: { max: 11 } }
                     #     draw:
-                    #         colorized-icons:
+                    #         mapzen_icon_library:
                     #             visible: false
                     width_1char:
                         filter: function() { return (feature.shield_text.length === 1) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[14px,14px]],[13,[16px,16px]],[15,[18px,18px]]]
                     width_2char:
                         filter: function() { return (feature.shield_text.length === 2) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[16px,14px]],[13,[18px,16px]],[15,[22px,18px]]]
                     width_3char:
                         filter: function() { return (feature.shield_text.length === 3) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[20px,14px]],[13,[21px,15px]],[15,[26px,18px]]]
                     width_4char:
                         filter: function() { return (feature.shield_text.length === 4) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[25px,14px]],[13,[28px,15px]],[15,[34px,18px]]]
                     width_5char:
                         filter: function() { return (feature.shield_text.length === 5) }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 size: [[6,[30px,14px]],[13,[33px,15px]],[15,[40px,18px]]]
 
 
@@ -3365,7 +3072,7 @@ layers:
                         font:
                             fill: global.black_color
                             size: 10px
-                            stroke: { color: global.white_color, width: 4 }
+                            stroke: { color: global.white_color, width: 4px }
                 minor:
                     filter: { not: { kind_detail: [gondola,cable_car,chair_lift] }, $zoom: { max: 17 } }
                     draw:
@@ -3507,16 +3214,16 @@ layers:
                         family: global.text_font_family
                         style: italic
                         size: 11px
-                        stroke: { color: global.white_color , width: 4 }
+                        stroke: { color: global.white_color , width: 4px }
             building_labels-z15-z16:
                 filter: { $zoom: [15,16] }
-                draw: { text-blend-order: { font: { size: 9px, stroke: { width: 3 } } } }
+                draw: { text-blend-order: { font: { size: 9px, stroke: { width: 3px } } } }
             building_labels-z17-z18:
                 filter: { $zoom: [17,18] }
-                draw: { text-blend-order: { font: { size: 11px, stroke: { width: 3 } } } }
+                draw: { text-blend-order: { font: { size: 11px, stroke: { width: 3px } } } }
             building_labels-z19-up:
                 filter: { $zoom: [19,20] }
-                draw: { text-blend-order: { font: { size: 12px, stroke: { width: 3 }  } } }
+                draw: { text-blend-order: { font: { size: 12px, stroke: { width: 3px }  } } }
             building-labels-z16:
                 filter: function() { if( $zoom == 16 && feature.name.length > 20 ) { return true; } else { return false; } }
                 draw:
@@ -3664,7 +3371,7 @@ layers:
         filter:
             name: true
         draw:
-            colorized-icons:
+            mapzen_icon_library:
                 text:
                     text_source: global.ux_language_text_source
                     visible: false
@@ -3881,7 +3588,7 @@ layers:
             filter:
                 kind: locality
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     visible: global.icon_visible_populated_places
                     size: [[10,4px],[11,0px]]
                     sprite: townspot-xs-rev
@@ -3908,7 +3615,7 @@ layers:
             # no-townspot:
             #     filter: { $zoom: { min: 11 } }
             #     draw:
-            #         colorized-icons:
+            #         mapzen_icon_library:
             #             size: 0px
             #             text:
             #                 anchor: center
@@ -3918,7 +3625,7 @@ layers:
             _icons_later:
                 filter: { $zoom: { min: 11 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
                     text-blend-order:
                         visible: global.text_visible_populated_places
@@ -3933,21 +3640,21 @@ layers:
             z8-50k-below:
                 filter: { $zoom: [8,9], population: { min: 10000, max: 50000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         buffer: 25px
                         #color: red
                         #visible: false
             z9-10k-below:
                 filter: { $zoom: [8,9], population: { max: 10000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         buffer: 18px
                         #color: blue
                         #visible: false
             z9-no-population:
                 filter: { $zoom: [8,9], population: false }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         buffer: 10px
                         #color: yellow
                         #visible: false
@@ -3957,7 +3664,7 @@ layers:
                     $zoom: [3]
                     name: [Denver]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
 
             # HACK
@@ -3993,7 +3700,7 @@ layers:
                 filter:
                     population: { min: 10000000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[4,5px],[8,6px],[9,0px]]
                         sprite: townspot-m-rev
                         priority: 6
@@ -4007,7 +3714,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,8px],[11,0px]]
                             sprite: capital-l
                             priority: 5
@@ -4017,7 +3724,7 @@ layers:
                 filter:
                     population: { min: 5000000, max: 10000000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[4,5px],[8,6px],[9,0px]]
                         sprite: townspot-m-rev
                         priority: 7
@@ -4032,7 +3739,7 @@ layers:
                     # we only want townspots to show as capital dots starting at zoom 5
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,8px],[11,0px]]
                             sprite: capital-l
                             priority: 6
@@ -4042,7 +3749,7 @@ layers:
                 filter:
                     population: { min: 1000000, max: 5000000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[4,5px],[8,6px],[9,0px]]
                         sprite: townspot-m-rev
                         priority: 9
@@ -4057,7 +3764,7 @@ layers:
                     # we only want townspots to show as capital dots starting at zoom 5
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,8px],[11,0px]]
                             sprite: capital-l
                             priority: 8
@@ -4067,7 +3774,7 @@ layers:
                 filter:
                     population: { min: 500000, max: 1000000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,6px],[9,0px]]
                         sprite: townspot-m-rev
                         priority: 11
@@ -4081,7 +3788,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,6px],[11,0px]]
                             sprite: capital-m
                             priority: 10
@@ -4091,7 +3798,7 @@ layers:
                 filter:
                     population: { min: 200000, max: 500000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,6px],[9,6px],[10,6px],[11,0px]]
                         sprite: townspot-m-rev
                         priority: 13
@@ -4106,7 +3813,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,6px],[11,0px]]
                             sprite: capital-m
                             priority: 12
@@ -4116,7 +3823,7 @@ layers:
                 filter:
                     population: { min: 100000, max: 200000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,6px],[9,6px],[10,6px],[11,0px]]
                         sprite: townspot-m-rev
                         priority: 15
@@ -4130,7 +3837,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,6px],[11,0px]]
                             sprite: capital-m
                             priority: 14
@@ -4140,7 +3847,7 @@ layers:
                 filter:
                     population: { min: 50000, max: 100000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,5px],[9,5px],[10,6px],[11,0px]]
                         sprite: townspot-s-rev
                         priority: 17
@@ -4154,7 +3861,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-m
                             priority: 16
@@ -4164,7 +3871,7 @@ layers:
                 filter:
                     population: { min: 20000, max: 50000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,5px],[9,5px],[10,5px],[11,0px]]
                         sprite: townspot-s-rev
                         priority: 19
@@ -4178,7 +3885,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 18
@@ -4188,7 +3895,7 @@ layers:
                 filter:
                     population: { min: 10000, max: 20000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,4px],[9,4px],[10,4px],[11,0px]]
                         sprite: townspot-xs-rev
                         priority: 21
@@ -4204,7 +3911,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 20
@@ -4214,7 +3921,7 @@ layers:
                 filter:
                     population: { min: 5000, max: 10000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,4px],[9,4px],[10,4px],[11,0px]]
                         sprite: townspot-xs-rev
                         priority: 23
@@ -4230,7 +3937,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 22
@@ -4240,7 +3947,7 @@ layers:
                 filter:
                     population: { min: 2000, max: 5000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,4px],[9,4px],[10,4px],[11,0px]]
                         sprite: townspot-xs-rev
                         priority: 25
@@ -4256,7 +3963,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 24
@@ -4266,7 +3973,7 @@ layers:
                 filter:
                     population: { min: 1000, max: 2000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,4px],[9,4px],[10,4px],[11,0px]]
                         sprite: townspot-xs-rev
                         priority: 27
@@ -4282,7 +3989,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 26
@@ -4292,7 +3999,7 @@ layers:
                 filter:
                     population: { min: 200, max: 1000 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[8,4px],[9,4px],[10,4px],[11,0px]]
                         sprite: townspot-xs-rev
                         priority: 28
@@ -4308,7 +4015,7 @@ layers:
                 capital:
                     filter: { country_capital: true, $zoom: { min: 5 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[10,5px],[11,0px]]
                             sprite: capital-s
                             priority: 27
@@ -4384,7 +4091,7 @@ layers:
                 #- function() { return feature.min_zoom <= $zoom }
                 - function() { if( feature.kind == 'restaurant' || feature.kind == 'landmark' || feature.kind == 'cafe' ) { return true } else { return feature.min_zoom <= $zoom } }
         draw:
-            colorized-icons:
+            mapzen_icon_library:
                 visible: global.icon_visible_poi_landuse
                 size: global.icon_size
                 sprite: function() { return feature.kind; }
@@ -4409,7 +4116,7 @@ layers:
         poi_labels-z18:
             filter: { $zoom: { min: 18 } }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     text:
                         # some pois have really long names
                         max_lines: 5
@@ -4419,20 +4126,20 @@ layers:
         low-value-priority:
             filter: { min_zoom: { min: 17 } }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     priority: 70
 
             traffic_signals:
                 filter: { kind: traffic_signals }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         priority: 71
 
         # source icon sprite from something other than kind
         sports-pitch:
             filter: { kind: [grass, pitch] }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     sprite: function() { return feature.kind_detail; }
                     # needs a better recreation icon, so just use generic (default) for now
                     #sprite_default: sports
@@ -4440,7 +4147,7 @@ layers:
             filter:
                 kind: [place_of_worship, wayside_chapel]
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     sprite: function() { return feature.religion; }
                     sprite_default: place_of_worship
         # TODO: some or all of this may be unnecessary for the sprite, but is necessary for the early filter
@@ -4448,7 +4155,7 @@ layers:
             filter:
                 kind: [apartments, auditorium, building, hangar, manor, recreation_center, retirement_home, terminal]
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     sprite: building
             early:
                 filter:
@@ -4459,7 +4166,7 @@ layers:
                         - { $zoom: [16], area: { max: 5000 } }
                         - { $zoom: [17], area: { max: 1000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
         #end different icon sprites
 
@@ -4467,7 +4174,7 @@ layers:
         no-name:
             filter: { name: false }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     visible: false
             # eg park polygons in SF that have area but no name, sigh
             no-name-no-area:
@@ -4475,7 +4182,7 @@ layers:
                     kind: true
                     name: false
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
                         priority: 72
             sports-pitch:
@@ -4484,33 +4191,33 @@ layers:
                     kind: [grass, pitch]
                     kind_detail: [baseball, basketball, football, hockey, soccer, tennis]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: global.icon_visible_poi_landuse_e
                         priority: 69
             z17:
                 filter:
                     $zoom: { min: 17 }
                     kind: [parking]
-                draw: { colorized-icons: { visible: global.icon_visible_poi_landuse_e } }
+                draw: { mapzen_icon_library: { visible: global.icon_visible_poi_landuse_e } }
             z18:
                 # for different styles, different sets
                 # since [picnic_site] doesn't have bubble-wrap icon, it's omitted here
                 filter:
                     $zoom: { min: 18 }
                     kind: [drinking_water, information, playground, toilets, traffic_signals]
-                draw: { colorized-icons: { visible: global.icon_visible_poi_landuse_e } }
+                draw: { mapzen_icon_library: { visible: global.icon_visible_poi_landuse_e } }
             z19:
                 filter:
                     $zoom: { min: 19 }
                     kind: [bicycle_parking]
-                draw: { colorized-icons: { visible: global.icon_visible_poi_landuse_e } }
+                draw: { mapzen_icon_library: { visible: global.icon_visible_poi_landuse_e } }
 
         # NOTE: all natural_* should only be in landuse layer
         suppress-icon-always:
             filter:
                 kind: [natural_forest, natural_park, natural_wood]
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     size: 0px
                     priority: 100
                     text:
@@ -4527,21 +4234,21 @@ layers:
                     kind: [landmark, museum, prison]
                     $zoom: { max: 12 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z14-any:
                 filter:
                     kind: [natural_forest, natural_park, natural_wood, post_office]
                     $zoom: { max: 14 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z15-any:
                 filter:
                     $zoom: { max: 15 }
                     kind: [cafe, restaurant]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z15-no-area:
                 filter:
@@ -4549,7 +4256,7 @@ layers:
                     $zoom: { max: 15 }
                     kind: [park]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z15-with-area:
                 filter:
@@ -4557,14 +4264,14 @@ layers:
                     $zoom: { max: 15 }
                     kind: [nursing_home]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z16-any:
                 filter:
                     kind: [fire_station, grass, peak, police, tram_stop]
                     $zoom: { max: 16 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z16-no-area:
                 filter:
@@ -4572,7 +4279,7 @@ layers:
                     kind: [allotments, college, garden, university]
                     $zoom: { max: 16 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             # no POIs for commercial, residential
             hide-until-z17-any:
@@ -4580,7 +4287,7 @@ layers:
                     $zoom: { max: 17 }
                     kind: [bank, bus_stop, car_sharing, wood]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z17-with-area:
                 filter:
@@ -4588,7 +4295,7 @@ layers:
                     $zoom: { max: 17 }
                     kind: [common, grass, houseboat, pedestrian, pitch, railway, ship, wetland]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z17-no-area:
                 filter:
@@ -4597,14 +4304,14 @@ layers:
                     # note: atm and drinking_water appear hear and in area versions
                     kind: [accountant, administrative, advertising_agency, animal, architect, association, atm, bakery, bed_and_breakfast, bicycle, bicycle_parking, bicycle_rental_station, books, butcher, car, car_repair, chalet, clothes, company, computer, consulting, convenience, doityourself, drinking_water, dry_cleaning, educational_institution, emergency_phone, employment_agency, estate_agent, fashion, financial, florist, foundation, gift, government, greengrocer, guest_house, hairdresser, hostel, hotel, insurance, it, jewelry, lawyer, mast, memorial, mobile_phone, motel, newspaper, ngo, notary, optician, parking, pet, physician, playground, political_party, post_box, religion, research, subway_entrance, tax_advisor, telecommunication, telephone, theatre, therapist, toilets, traffic_signals, travel_agent, water_tower]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z18-any:
                 filter:
                     kind: [atm, bus_stop, drinking_water]
                     $zoom: { max: 18 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z18-no-area:
                 filter:
@@ -4612,14 +4319,14 @@ layers:
                     area: false
                     kind: [bench, parking, waste_basket]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             hide-until-z19-any:
                 filter:
                     $zoom: { max: 19 }
                     kind: [bicycle_parking, burial_vault, car_sharing]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
 
             # hide based on kind and area filters
@@ -4630,7 +4337,7 @@ layers:
                         # show labels for smaller landuse areas at higher zooms
                         - { $zoom: [8], area: { max: 50000000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             university-early:
                 filter:
@@ -4640,7 +4347,7 @@ layers:
                         - { $zoom: [11], area: { max: 2000000 } }
                         - { $zoom: [12], area: { max: 500000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             school-early:
                 filter:
@@ -4653,7 +4360,7 @@ layers:
                         - { $zoom: [16], area: { max: 5000 } }
                         - { $zoom: [17], area: { max: 2000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             garden-area-early:
                 filter:
@@ -4665,7 +4372,7 @@ layers:
                         - { $zoom: [14], area: { max: 10000 } }
                         - { $zoom: [15], area: { max: 5000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             cemetery-early:
                 filter:
@@ -4674,7 +4381,7 @@ layers:
                     any:
                         - { $zoom: [12], area: { max: 3000000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             golf_course-early:
                 filter:
@@ -4682,14 +4389,14 @@ layers:
                     any:
                         - { $zoom: [12], area: { max: 2500000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             office-early:
                 filter:
                     - { kind: [insurance, office, company], $zoom: [15], area: { max: 10000 } }
                     - { kind: [insurance, office, company], $zoom: [16], area: { max: 5000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             landuse-labels-green-areas-not-national-park:
                 filter:
@@ -4709,45 +4416,45 @@ layers:
                     - { $zoom: [15],   area: { max: 10000 } }
                     - { $zoom: [16],   area: { max: 1000 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
                 wilderness-areas-early:
                     filter: function() { return $zoom < 9 && feature.name && (feature.name.indexOf("Wilderness") > -1 || feature.name.indexOf("BLM") > -1 || feature.protect_class == '1' || feature.protect_class == '1a' || feature.protect_class == '1b' ); }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             visible: false
                 not-national-park:
                     filter: function() { return feature.name && !((feature.name.indexOf("National Park") > -1) || feature.name.indexOf("National Monument") > -1); }
                     early:
                         filter: { $zoom: { max: 8 } }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 visible: false
             landuse-labels-not-any-above:
                 filter:
                     $zoom: { max: 6 }
                     not: { kind: [aerodrome, airport, allotments, aquarium, attraction, battlefield, beach, cemetery, college, conservation, forest, garden, glacier, golf_course, grass, kindergarten, landmark, maze, national_park, nature_reserve, park, playground, protected_area, resort, school, stadium, station, theme_park, university, winery, winter_sports, zoo] }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             glacier:
                 filter: { $zoom: { max: 14 }, kind: glacier, area: false }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
 
         # set special priority, sprite, and text styles per kind
         has-area:
             filter: { area: true }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     priority: 41
 
         parks:
             filter:
                 - kind: [national_park, battlefield, park, protected_area, forest, beach]
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     visible: global.icon_visible_landuse_green
                     size: global.icon_size_green
                     text:
@@ -4759,13 +4466,13 @@ layers:
                 filter:
                     - kind: [national_park, battlefield, protected_area]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         sprite: park
         airport:
             filter:
                 kind: [airport, aerodrome]
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     priority: 42
                     visible: global.icon_visible_landuse_green
                     size: global.icon_size_green
@@ -4774,12 +4481,12 @@ layers:
                         text_source: global.ux_language_text_source_iata
             early:
                 filter: { $zoom: [9,10,11] }
-                draw: { colorized-icons: { text: { text_source: iata } } }
+                draw: { mapzen_icon_library: { text: { text_source: iata } } }
         enclosure-related:
             filter:
                 kind: [enclosure, animal]
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     priority: 43
                     size: 0px
                     #: dot-black
@@ -4792,7 +4499,7 @@ layers:
             filter:
                 kind: glacier
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     size: 0px
                     #visible: false
                     text:
@@ -4808,19 +4515,19 @@ layers:
             filter:
                 not: { kind: [aerodrome, airport, allotments, aquarium, attraction, battlefield, beach, cemetery, college, conservation, forest, garden, glacier, golf_course, kindergarten, landmark, maze, national_park, nature_reserve, park, playground, protected_area, resort, school, stadium, station, theme_park, university, winery, winter_sports, zoo] }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     priority: 43
 
         building-like:
             filter: { kind: [commercial,residential,warehouse,public,dormitory], osm_relation: false }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     sprite: building
 
         station-train-subway:
             filter: { kind: [station, train_station] }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     visible: global.icon_visible_station
                     size: [[13, 12px], [14, 12px], [15, 16px], [17, 18px], [18, 20px]]
                     priority: 42
@@ -4830,49 +4537,49 @@ layers:
                 filter:
                     $zoom: { max: 11 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             # for a transit style we'd want to see **all**, so don't move this above (it's special to this style)
             low-priority-early:
                 filter: { kind_tile_rank: { min: 5 }, $zoom: { min: 0, max: 13 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             low-priority-early-z13:
                 filter: { kind_tile_rank: { min: 5 }, $zoom: [13] }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             low-priority-early-z14:
                 filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         text: { visible: false }
 
         garden-no-area-early:
             filter: { kind: [garden, allotments], $zoom: [16], area: false }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     priority: 45
                     size: 14px
                     text:  { font: { size: 10px, style: italic } }
         garden-no-area-later:
             filter: { kind: [garden, allotments], $zoom: { min: 17 }, area: false }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     priority: 45
                     size: 16px
                     text:  { font: { size: 11px, style: italic } }
         gate:
             filter: { kind: gate, name: true  }
-            draw: { colorized-icons: { sprite: generic } }
+            draw: { mapzen_icon_library: { sprite: generic } }
 
         parking-labels:
             filter:
                 kind: [parking]
                 $zoom: { min: 18 }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     text:
                         visible: global.text_visible_poi_landuse
                         font:
@@ -4880,7 +4587,7 @@ layers:
         tower:
             filter: { kind: [tower], label_placement: true }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     size: 0px
                     #visible: false
                     text:
@@ -4891,7 +4598,7 @@ layers:
             filter:
                 kind: [bus_stop]
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     size: [[18,12px],[20,18px]]
                     text:
                         optional: true
@@ -4901,14 +4608,14 @@ layers:
             early:
                 filter: { $zoom: { max: 19 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         text:
                             visible: false
 
         airport-gate:
             filter: { kind: aeroway_gate }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     visible: false
                 text-blend-order:
                     visible: global.text_visible_airport_gate
@@ -4920,7 +4627,7 @@ layers:
             later:
                 filter: { $zoom: { min: 19 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         text:
                             font:
                                 weight: 600
@@ -4928,7 +4635,7 @@ layers:
         highway-exit:
             filter: { kind: motorway_junction, $zoom: { min: 14 } }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     visible: false
                 text-blend-order:
                     visible: global.text_visible_exits
@@ -4942,7 +4649,7 @@ layers:
             later:
                 filter: { $zoom: { min: 16 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         text:
                             font:
                                 weight: 600
@@ -4959,7 +4666,7 @@ layers:
                               - $geometry: point
                               - kind: true
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     size: [[13, 12px], [16, 16px], [19, 20px]]
                     interactive: global.sdk_interactive
                     priority: 15
@@ -4977,20 +4684,20 @@ layers:
                             stroke: { color: global.white_color, width: 3 }
             poi_labels-z14:
                 filter: { $zoom: [14] }
-                draw: { colorized-icons: { text: { font: { size: 11px } } } }
+                draw: { mapzen_icon_library: { text: { font: { size: 11px } } } }
             poi_labels-z15:
                 filter: { $zoom: [15,16,17] }
-                draw: { colorized-icons: { text: { font: { size: 12px, stroke: { width: 2 } } } } }
+                draw: { mapzen_icon_library: { text: { font: { size: 12px, stroke: { width: 2 } } } } }
             poi_labels-z18:
                 filter: { $zoom: [18,19] }
-                draw: { colorized-icons: { text: { font: { size: 12px, weight: 600, stroke: { width: 3 } } } } }
+                draw: { mapzen_icon_library: { text: { font: { size: 12px, weight: 600, stroke: { width: 3 } } } } }
             poi_labels-z20-up:
                 filter: { $zoom: { min: 20 } }
-                draw: { colorized-icons: { text: { font: { size: 14px, weight: 600, stroke: { width: 3 }  } } } }
+                draw: { mapzen_icon_library: { text: { font: { size: 14px, weight: 600, stroke: { width: 3 }  } } } }
             station-train-subway:
                 filter: { kind: [station, train-station, train_station] } #, $zoom: { min: 13 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         sprite: train_station
                         size: [[13, 12px], [14, 14px], [15, 16px], [17, 20px]]
                         priority: 11
@@ -5000,19 +4707,19 @@ layers:
                 low-priority-early:
                     filter: { kind_tile_rank: { min: 3 }, $zoom: { min: 0, max: 12 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[12, 5px], [14, 6px], [15, 16px]]
                             text:
                                 visible: false
                     long-tail:
                         filter: { kind_tile_rank: { min: 10 }, $zoom: [10] }
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 visible: false
                 low-priority-early-z12:
                     filter: { kind_tile_rank: { min: 8 }, $zoom: [12] }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
     #                        visible: false
                             size: [[12, 5px], [14, 6px], [15, 16px]]
                             text:
@@ -5020,7 +4727,7 @@ layers:
                 low-priority-early-z13:
                     filter: { kind_tile_rank: { min: 8 }, $zoom: [13] }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             #visible: false
                             size: [[12, 8px], [14, 6px], [15, 16px]]
                             text:
@@ -5028,7 +4735,7 @@ layers:
                 low-priority-early-z14:
                     filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[12, 10px], [14, 11px], [15, 16px]]
                             #visible: false
                             text:
@@ -5036,7 +4743,7 @@ layers:
                 late:
                     filter: { $zoom: { min: 16 } }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             text:
                                 font:
                                     weight: 600
@@ -5044,14 +4751,14 @@ layers:
             subway-early:
                 filter: { is_subway: true, is_train: false, $zoom: { max: 12 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
                         text:
                             visible: false
             halt-early:
                 filter: { kind: [halt,stop], $zoom: { max: 15 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[15, 8px], [16, 18px]]
                         visible: global.sdk_transit_overlay
                         sprite: light_rail
@@ -5060,7 +4767,7 @@ layers:
             platform-early:
                 filter: { kind: [platform] }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[15, 8px], [16, 18px]]
                         visible: global.sdk_transit_overlay
                         sprite: generic
@@ -5069,7 +4776,7 @@ layers:
             tram-stop-early:
                 filter: { kind: [tram_stop], $zoom: { max: 16 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[13, 0px], [14, 7px], [15, 8px]]
                         visible: global.sdk_transit_overlay
                         sprite: light_rail
@@ -5078,7 +4785,7 @@ layers:
             tram-stop:
                 filter: { kind: tram_stop, $zoom: { min: 16 } }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[16, 12px], [17, 14px], [18, 18px]]
                         sprite: light_rail
                         #text:
@@ -5087,7 +4794,7 @@ layers:
                 filter:
                     kind: [platform, stop_position]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[13, 8px], [16, 10px], [17, 12px], [18, 18px]]
                         sprite: bus_station
                         text:
@@ -5101,7 +4808,7 @@ layers:
                     kind: [bus_station, bus_stop]
                     $zoom: { min: 16 }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         size: [[13, 12px], [16, 18px]]
                         sprite: bus_station
                         priority: 17
@@ -5117,7 +4824,7 @@ layers:
                         kind: [bus_stop]
                         $zoom: { max: 19 }
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             size: [[13, 8px], [19, 18px]]
                             text:
                                 visible: false
@@ -5125,7 +4832,7 @@ layers:
                 filter:
                     kind: [subway_entrance]
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         sprite: subway_entrance
                         size: [[17, 12px], [19, 14px]]
                         priority: 19
@@ -5172,7 +4879,7 @@ layers:
                         style: italic
                         fill: global.black_color
                         weight: normal
-                        stroke: { color: global.white_color, width: 4 }
+                        stroke: { color: global.white_color, width: 4px }
 
     landuse:
         data: { source: mapzen }

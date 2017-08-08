@@ -164,12 +164,12 @@ layers:
                 #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                 filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
             low-priority-early-z15:
                 filter: { kind_tile_rank: { min: 7 }, $zoom: [15] }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
 
     buildings:
@@ -269,7 +269,7 @@ layers:
                         - kind: locality
                         - population: false
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
 
 
