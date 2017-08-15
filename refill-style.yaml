@@ -2379,6 +2379,19 @@ layers:
                             color: [[14, global.light_color], [15, global.white_color], [16, global.white_color], [17, global.dark_color]]
                             width: [[13, 0px], [14, 0.25px], [15, 0.5px], [16, 1px], [17, 1px]]
                             cap: butt
+
+            labels-track:
+                filter: { $zoom: { min: 17 } }
+                draw:
+                    text-blend-order:
+                        priority: 61
+                        visible: global.text_visible_path
+                        text_source: name
+                        font:
+                            fill: global.dark_color
+                            size: 12px
+                            stroke: { color: global.white_color, width: 4px }
+
         steps:
             filter:
                 all:
