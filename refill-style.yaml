@@ -1014,9 +1014,6 @@ fonts:
           #url: https://fonts.gstatic.com/s/montserrat/v7/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff
           url: fonts/Montserrat-Regular.woff
 
-scene:
-    background:
-        color: global.white_color
 layers:
     # Map overlays for styling the server response (using special source layer names) for route line, current location, and search result pins
     mz_route_line:
@@ -1254,28 +1251,25 @@ layers:
     # Basemap styling
     earth:
         data: { source: mapzen, layer: earth }
-
         continent:
-            filter: { name: true, kind: [continent], $zoom: { max: 5 } }
+            filter: { kind: [continent], $zoom: {max: 5} }
             draw:
                 text-blend-order:
                     visible: global.text_visible_continent
-                    text_source: ux_language_text_source
+                    text_source: global.ux_language_text_source_continent_stacked_only
+                    text_wrap: false
                     font:
-                        size: 14px
+                        family: global.text_font_family
+                        size: [[1,11px],[3,14px]]
                         style: italic
                         fill: global.black_color
-                        weight: 600
+                        weight: normal
                         transform: uppercase
-        continent-spacer:
-            filter: { kind: continent }
-            continent-spacer-z1-z5:
-                filter: { $zoom: { min: 1, max: 5 } }
+            continent-spacer:
+                filter: { $zoom: { min: 2 } }
                 draw:
                     text-blend-order:
-                        text_source: ux_language_text_source_continent
-                        text_wrap: false
-
+                        text_source: global.ux_language_text_source_continent
         island:
             filter: { kind: [archipelago, island, islet] }
             draw:
@@ -1283,6 +1277,7 @@ layers:
                     visible: global.text_visible_island
                     text_wrap: 10
                     font:
+                        family: global.text_font_family
                         size: 12px
                         style: italic
                         fill: global.black_color
@@ -4853,40 +4848,6 @@ layers:
                                 size: 12px
                                 stroke: { color: global.white_color, width: 4px }
 
-    earth-labels:
-        data: { source: mapzen, layer: earth }
-        continent:
-            filter: { kind: [continent], $zoom: {max: 5} }
-            draw:
-                text-blend-order:
-                    visible: global.text_visible_continent
-                    text_source: global.ux_language_text_source_continent_stacked_only
-                    text_wrap: false
-                    font:
-                        family: global.text_font_family
-                        size: [[1,11px],[3,14px]]
-                        style: italic
-                        fill: global.black_color
-                        weight: normal
-                        transform: uppercase
-            continent-spacer:
-                filter: { $zoom: { min: 2 } }
-                draw:
-                    text-blend-order:
-                        text_source: global.ux_language_text_source_continent
-        island:
-            filter: { kind: [archipelago, island, islet] }
-            draw:
-                text-blend-order:
-                    visible: global.text_visible_island
-                    text_wrap: 10
-                    font:
-                        family: global.text_font_family
-                        size: 12px
-                        style: italic
-                        fill: global.black_color
-                        weight: normal
-                        stroke: { color: global.white_color, width: 4px }
 
     landuse:
         data: { source: mapzen }
