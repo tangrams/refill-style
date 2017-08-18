@@ -4095,7 +4095,6 @@ layers:
                         size: [[8,6px],[9,6px],[10,6px],[11,0px]]
                         sprite: townspot-m-rev
                         priority: 13
-                        collide: false  #debug
                         text:
                             font:
                                 size: [[6,10px],[8,14px],[10,15px],[12,16px],[13,0px]]
