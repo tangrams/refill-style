@@ -1,0 +1,7 @@
+import:
+    - https://raw.githubusercontent.com/tangrams/refill-style/gh-pages/refill-style.yaml
+    - https://raw.githubusercontent.com/tangrams/refill-style/gh-pages/themes/label-11.yaml
+
+global:
+    sdk_mapzen_api_key: mapzen-iSPPZHx
+    ux_language: hi
