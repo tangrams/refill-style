@@ -1,0 +1,314 @@
+global:
+    # INVERTED
+    black_color:                [0.000,0.000,0.000]
+    dark_color:                 [0.100,0.100,0.100]
+    mid_color:                  [0.495,0.517,0.558]
+    midlight_color:             [0.418,0.434,0.465]
+    light_color:                [0.333,0.343,0.367]
+    lighter_color:              [0.490,0.490,0.490]
+    lightest_color:             [0.520,0.520,0.520]
+    ultralight_color:           [0.600,0.600,0.600]
+    offwhite_color:             [0.750,0.750,0.750]
+    white_color:                [0.800,0.800,0.800]
+    transparent:                [0.380,0.394,0.422,0.250]
+    route_line:                 [0.000,0.500,1.000]
+
+    # GOLD
+    two_color_black:            [0.144,0.127,0.097]
+    two_color_dark:             [0.176,0.155,0.119]
+    two_color_mid:              [0.240,0.212,0.163]
+    two_color_midlight:         [0.301,0.265,0.204]
+    two_color_light:            [0.418,0.368,0.283]
+    two_color_lighter:          [0.495,0.436,0.335]
+    two_color_lightest:         [0.609,0.537,0.413]
+    two_color_ultralight:       [0.734,0.647,0.497]
+    two_color_offwhite:         [0.815,0.718,0.552]
+
+scene:
+    background:
+        color: [0.749,0.749,0.749]
+
+
+layers:
+    water:
+        draw:
+            polygons:
+                style: no_waves
+        # later:
+        #     draw:
+        #         waves:
+        #             color: global.two_color_light
+
+        lakes:
+            draw:
+                polygons:
+                    style: no_waves
+
+        other-water-areas:
+            draw:
+                polygons:
+                    style: no_waves
+
+        swimming_pool:
+            draw:
+                polygons:
+                    style: no_waves
+
+        water-boundary-ocean:
+            draw:
+                lines:
+                    style: no_coast
+
+        water_boundaries-not-ocean:
+            draw:
+                lines:
+                    style: no_coast
+            riverbank:
+                draw:
+                    lines:
+                        style: no_coast
+
+        river:
+            draw:
+                lines:
+                    style: no_riverlines
+            intermittent:
+                draw:
+                    lines:
+                        style: no_coast
+
+    buildings:
+        draw:
+            polygons:
+                color: [0.749,0.749,0.749]
+
+        footprints:
+            extrude:
+                draw:
+                    polygons:
+                        color: [0.749,0.749,0.749]
+
+    landuse:
+        draw:
+            rock:
+                order: global.feature_order
+                visible: false
+
+        national_park:
+            draw:
+                polygons:
+                    style: no_texture
+
+        conservation:
+            draw:
+                polygons:
+                    style: no_texture
+
+        national_forest_level_6:
+            draw:
+                polygons:
+                    style: no_texture
+
+        forest-landcover:
+            draw:
+                polygons:
+                    style: no_texture
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                polygons:
+                    style: no_texture
+            national_park:
+                draw:
+                    polygons:
+                        style: no_texture
+
+        farm:
+            draw:
+                polygons:
+                    style: no_texture
+
+        university:
+            draw:
+                polygons:
+                    style: no_texture
+
+        cemetery:
+            draw:
+                polygons:
+                    style: no_texture
+
+        golf_course:
+            draw:
+                polygons:
+                    style: no_texture
+
+        hospital:
+            draw:
+                polygons:
+                    style: no_texture
+
+        sports_centre:
+            draw:
+                polygons:
+                    style: no_texture
+
+        recreation_ground:
+            draw:
+                polygons:
+                    style: no_texture
+
+        stadium:
+            draw:
+                polygons:
+                    style: no_texture
+
+        zoo:
+            draw:
+                polygons:
+                    style: no_texture
+
+        man-made:
+            draw:
+                polygons:
+                    style: no_texture
+
+        tier5:
+            tourism-related:
+                draw:
+                    polygons:
+                        style: no_texture
+
+            beach:
+                draw:
+                    polygons:
+                        style: no_texture
+
+        garden:
+            draw:
+                polygons:
+                    style: no_texture
+
+        parking:
+            draw:
+                polygons:
+                    style: no_texture
+
+        pedestrian:
+            draw:
+                polygons:
+                    style: no_texture
+            green-stuff:
+                draw:
+                    polygons:
+                        style: no_texture
+
+        pitch:
+            draw:
+                polygons:
+                    style: no_texture
+
+        playground:
+            draw:
+                polygons:
+                    style: no_texture
+
+        school:
+            draw:
+                dots-rev:
+                    color: global.two_color_mid
+
+        minor-landuse:
+            draw:
+                dots:
+                    color: global.two_color_mid
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.two_color_offwhite
+
+        retaining_wall:
+            draw:
+                lines:
+                    color: global.two_color_light
+
+    boundaries:
+        country:
+            draw:
+                country-outerline:
+                    color: global.two_color_midlight
+
+        other_country_boundary_disputed_etc:
+            draw:
+                dashed:
+                    color: global.two_color_midlight
+            disputed:
+                draw:
+                    dashed_big:
+                        color: global.two_color_midlight
+
+        region:
+            draw:
+                lines:
+                    color: global.two_color_mid
+
+
+styles:
+    railway_dash:
+        base: lines
+        dash: [0.25, 1.0]
+        dash_background_color: [0.079,0.070,0.054]
+
+    building-grid:
+        shaders:
+            uniforms:
+                u_grid_color: global.two_color_offwhite
+
+    no_waves:
+        base: polygons
+
+    no_coast:
+        base: lines
+
+    no_riverlines:
+        base: lines
+
+    no_texture:
+        base: polygons
+
+    medium-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    tiny-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    dots-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    dots-rev-grid:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    horizontal-bars:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+    horizontal-bars-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.153,0.157,0.161)
+
+
+textures:
+    building-grid:
+        url: images/building-grid-hi-contrast3.gif
