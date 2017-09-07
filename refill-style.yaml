@@ -5207,9 +5207,11 @@ layers:
             filter:
                 kind: school
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.offwhite_color
                     visible: true
+
         minor-landuse:
             filter:
                 kind:
@@ -5218,7 +5220,8 @@ layers:
                     - wilderness_hut
                     - hanami
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.light_color
                     visible: true
 
@@ -5241,12 +5244,11 @@ layers:
                     - petting_zoo
                     - aviary
             draw:
-                dots:
-                    order: global.feature_order
-                    visible: false
                 polygons:
-                    visible: false
+                    style: dots
                     order: global.feature_order
+                    visible: false
+
             runway:
                 filter:
                     kind: runway
@@ -5259,9 +5261,11 @@ layers:
                     kind: apron
                     $zoom: { min: 15 }
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.offwhite_color
                         visible: global.grey1_v
+
             minor-amusement-park-landuse:
                 filter:
                     kind:
@@ -5272,9 +5276,11 @@ layers:
                         - water_slide
                         - carousel
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.light_color
                         visible: true
+
             minor-zoo-landuse:
                 filter:
                     kind:
@@ -5283,7 +5289,8 @@ layers:
                         - petting_zoo
                         - aviary
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.lighter_color
                         visible: true
 

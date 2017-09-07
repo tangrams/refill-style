@@ -215,24 +215,19 @@ layers:
 
         school:
             draw:
-                dots-rev:
-                    color: global.two_color_mid
+                polygons:
+                    style: no_texture
 
         minor-landuse:
             draw:
-                dots:
-                    color: global.two_color_mid
+                polygons:
+                    style: no_texture
 
         landuse-not-filtered:
-            runway:
+            apron:
                 draw:
                     polygons:
-                        color: global.two_color_offwhite
-
-        retaining_wall:
-            draw:
-                lines:
-                    color: global.two_color_light
+                        style: no_texture
 
     boundaries:
         country:
