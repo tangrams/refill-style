@@ -4,12 +4,12 @@ global:
     dark_color:                 [0.100,0.100,0.100]
     mid_color:                  [0.495,0.517,0.558]
     midlight_color:             [0.418,0.434,0.465]
-    light_color:                [0.333,0.343,0.367]
-    lighter_color:              [0.490,0.490,0.490]
-    lightest_color:             [0.520,0.520,0.520]
-    ultralight_color:           [0.600,0.600,0.600]
-    offwhite_color:             [0.750,0.750,0.750]
-    white_color:                [0.800,0.800,0.800]
+    light_color:                [0.533,0.533,0.533]
+    lighter_color:              [0.590,0.590,0.590]
+    lightest_color:             [0.620,0.620,0.620]
+    ultralight_color:           [0.700,0.700,0.700]
+    offwhite_color:             [0.850,0.850,0.850]
+    white_color:                [0.900,0.900,0.900]
     transparent:                [0.380,0.394,0.422,0.250]
     route_line:                 [0.000,0.500,1.000]
 
@@ -34,6 +34,7 @@ layers:
         draw:
             polygons:
                 style: no_waves
+                color: [0.502,0.502,0.502]
         # later:
         #     draw:
         #         waves:
@@ -43,50 +44,175 @@ layers:
             draw:
                 polygons:
                     style: no_waves
+                    color: [0.502,0.502,0.502]
 
         other-water-areas:
             draw:
                 polygons:
                     style: no_waves
+                    color: [0.502,0.502,0.502]
 
         swimming_pool:
             draw:
                 polygons:
                     style: no_waves
+                    color: [0.502,0.502,0.502]
 
         water-boundary-ocean:
             draw:
                 lines:
                     style: no_coast
+                    color: [0.400,0.400,0.400]
+                    width: [[10, 1px], [12, 2px]]
 
         water_boundaries-not-ocean:
             draw:
                 lines:
                     style: no_coast
+                    color: [0.400,0.400,0.400]
+                    width: [[14, 1.0px], [16, 1.5px], [18, 2m]]
             riverbank:
                 draw:
                     lines:
                         style: no_coast
+                        color: [0.400,0.400,0.400]
 
         river:
             draw:
                 lines:
                     style: no_riverlines
+                    color: [0.400,0.400,0.400]
+                    width: [[13, 0.5px], [16, 1.5px], [18, 4m]]
             intermittent:
                 draw:
                     lines:
-                        style: no_coast
+                        color: [0.400,0.400,0.400]
+
+    roads:
+        highway:
+            labels-highway-z13-z14:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: [0.749,0.749,0.749] }
+
+            labels-highway-z15-up:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
+                            stroke: { color: [0.749,0.749,0.749] }
+
+        major_road:
+            trunk_primary:
+                routes:
+                    labels-trunk_primary-route-z13-z14:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: [0.749,0.749,0.749] }
+                    labels-trunk_primary-route-z15-up:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: [0.749,0.749,0.749] }
+                labels-trunk_primary-z11-z15:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: [0.749,0.749,0.749] }
+                labels-trunk_primary-z16-up:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: [0.749,0.749,0.749] }
+            secondary:
+                routes:
+                    labels-secondary-routes-z13-z14:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: [0.749,0.749,0.749] }
+                    labels-secondary-routes-z15-up:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: [0.749,0.749,0.749] }
+                labels-secondary:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: [0.749,0.749,0.749] }
+
+            tertiary:
+                labels-tertiary:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: [0.749,0.749,0.749] }
+
+
+        minor_road:
+            labels-minor_road:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: [0.333,0.333,0.333]
+                            stroke: { color: [0.749,0.749,0.749] }
+
+        railway:
+            draw:
+                lines:
+                    style: no_dash
+                    color: global.lighter_color
+                    width: [[12, 0px], [14, 0px], [18, 2px], [20, 2m]]
+                    outline:
+                        visible: false
+            service:
+                draw:
+                    lines:
+                        color: global.lighter_color
+
+        ferry:
+            draw:
+                lines:
+                    color: [0.400,0.400,0.400]
+
+
 
     buildings:
         draw:
             polygons:
-                color: [0.749,0.749,0.749]
+                color: [0.698,0.698,0.698]
+            lines:
+                color: [0.259,0.259,0.259]
 
         footprints:
+            filter:
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: [13], scale_rank: [1,2] }
+                    - { $zoom: [14], scale_rank: [1,2,3] }
+                    - { $zoom: [15], area: { min: 5000 }, name: true }
+                    - { $zoom: [15], area: { min: 5000 }, kind: true }
+                    - { $zoom: [15], area: { min: 3000 }, landuse_kind: true }
+                    - { $zoom: [15], height: { min: 100 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
+                    - { $zoom: [16], area: { min: 1000 }, name: true }
+                    - { $zoom: [16], area: { min: 1000 }, kind: true }
+                    - { $zoom: [16], area: { min: 2000 }, landuse_kind: true }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: { min: 17 } }
             extrude:
                 draw:
                     polygons:
-                        color: [0.749,0.749,0.749]
+                        extrude: false
+                        style: polygons
+                        color: [0.698,0.698,0.698]
+                    lines:
+                        extrude: false
+                        style: lines
+                        color: [0.259,0.259,0.259]
 
     landuse:
         draw:
@@ -98,16 +224,22 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+            us_national_park:
+                draw:
+                    polygons:
+                        style: no_texture
 
         conservation:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.627,0.627,0.627]
 
         national_forest_level_6:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.675,0.675,0.675]
 
         forest-landcover:
             draw:
@@ -118,15 +250,18 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.675,0.675,0.675]
             national_park:
                 draw:
                     polygons:
                         style: no_texture
+                        color: [0.675,0.675,0.675]
 
         farm:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.749,0.749,0.749]
 
         university:
             draw:
@@ -157,6 +292,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.667,0.667,0.667]
 
         stadium:
             draw:
@@ -188,6 +324,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.698,0.698,0.698]
 
         parking:
             draw:
@@ -207,6 +344,9 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.722,0.722,0.722]
+                outline:
+                    color: [0.549,0.549,0.549]
 
         playground:
             draw:
@@ -217,6 +357,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.667,0.667,0.667]
 
         minor-landuse:
             draw:
@@ -228,6 +369,17 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
+
+            minor-amusement-park-landuse:
+                draw:
+                    polygons:
+                        style: no_texture
+
+            minor-zoo-landuse:
+                draw:
+                    polygons:
+                        style: no_texture
+                        color: [0.800,0.800,0.800]
 
     boundaries:
         country:
@@ -249,13 +401,41 @@ layers:
                 lines:
                     color: global.two_color_mid
 
+    places:
+        populated-places:
+            draw:
+                mapzen_icon_library:
+                    text:
+                        font:
+                            stroke: { color: [0.749,0.749,0.749] }
+                text-blend-order:
+                    font:
+                        stroke: { color: [0.749,0.749,0.749] }
+
+        neighbourhoods:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: [0.133,0.133,0.133]
+                        stroke: { color: [0.749,0.749,0.749] }
+
+    pois:
+        draw:
+            mapzen_icon_library:
+                text:
+                    font:
+                        stroke: { color: [0.749,0.749,0.749] }
+
+        highway-exit:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: global.black_color
+                        stroke: { color: [0.749,0.749,0.749] }
+
+
 
 styles:
-    railway_dash:
-        base: lines
-        dash: [0.25, 1.0]
-        dash_background_color: [0.079,0.070,0.054]
-
     building-grid:
         shaders:
             uniforms:
@@ -272,6 +452,9 @@ styles:
 
     no_texture:
         base: polygons
+
+    no_dash:
+        base: lines
 
     medium-dots:
         shaders:
