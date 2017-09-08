@@ -173,6 +173,11 @@ layers:
                     lines:
                         color: global.lighter_color
 
+        airport-lines:
+            draw:
+                lines:
+                    color: [0.298,0.298,0.298]
+
         ferry:
             draw:
                 lines:
@@ -262,6 +267,14 @@ layers:
                 polygons:
                     style: no_texture
                     color: [0.749,0.749,0.749]
+
+        airport:
+            filter:
+                kind: aerodrome
+            draw:
+                polygons:
+                    color: [0.647,0.647,0.647]
+                    visible: true
 
         university:
             draw:
