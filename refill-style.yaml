@@ -5265,6 +5265,7 @@ layers:
                     polygons:
                         style: dots
                         color: global.offwhite_color
+                        order: 60
                         visible: global.grey1_v
 
             minor-amusement-park-landuse:

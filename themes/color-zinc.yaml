@@ -55,6 +55,7 @@ layers:
         swimming_pool:
             draw:
                 polygons:
+                    order: global.feature_order
                     style: no_waves
                     color: [0.502,0.502,0.502]
 
@@ -71,6 +72,11 @@ layers:
                     style: no_coast
                     color: [0.400,0.400,0.400]
                     width: [[14, 1.0px], [16, 1.5px], [18, 2m]]
+            swimming-pools-early:
+                draw:
+                    lines:
+                        style: no_coast
+                        color: [0.400,0.400,0.400]
             riverbank:
                 draw:
                     lines:
@@ -177,6 +183,11 @@ layers:
             draw:
                 lines:
                     color: [0.298,0.298,0.298]
+            taxiway:
+                draw:
+                    lines:
+                        outline:
+                            visible: false
 
         ferry:
             draw:
@@ -221,7 +232,7 @@ layers:
 
     landuse:
         draw:
-            rock:
+            no_texture:
                 order: global.feature_order
                 visible: false
 
@@ -276,6 +287,15 @@ layers:
                     color: [0.647,0.647,0.647]
                     visible: true
 
+        military:
+            filter:
+                kind:
+                    military
+            draw:
+                polygons:
+                    color: [0.647,0.647,0.647]
+                    visible: true
+
         university:
             draw:
                 polygons:
@@ -290,6 +310,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.698,0.698,0.698]
 
         hospital:
             draw:
