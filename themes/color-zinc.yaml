@@ -87,7 +87,7 @@ layers:
             draw:
                 lines:
                     style: no_riverlines
-                    width: [[13, 0.25px], [16, 1px], [18, 4m]]
+                    width: [[13, 0.5px], [16, 1.5px], [18, 4m]]
             intermittent:
                 draw:
                     lines:
@@ -204,7 +204,7 @@ layers:
         track:
             draw:
                 lines:
-                    width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                    width: [[13, 0.5px], [14, 1.0px], [15, 1.0px], [16, 6m]]
                     outline:
                         color: [0.600,0.600,0.600]
                         width: [[14, 0px], [15, 0.35px], [16, 1px]]
@@ -214,7 +214,7 @@ layers:
                 lines:
                     style: no_dash
                     color: [0.482,0.482,0.482]
-                    width: [[12, 0px], [14, 1px], [18, 2px], [20, 2m]]
+                    width: [[12, 0.25px], [14, 0.5px], [18, 2px], [20, 2m]]
                     outline:
                         visible: false
             service:
@@ -229,6 +229,7 @@ layers:
             taxiway:
                 draw:
                     lines:
+                        color: [0.812,0.812,0.812]
                         outline:
                             visible: false
 
@@ -273,6 +274,13 @@ layers:
                         extrude: false
                         style: lines
                         color: [0.259,0.259,0.259]
+
+            in_airport:
+                filter: { landuse_kind: [aerodrome, runway, taxiway] }
+                draw:
+                    polygons:
+                        color: [0.549,0.549,0.549]
+
 
     landuse:
         draw:
@@ -363,6 +371,23 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+
+        industrial:
+            filter:
+                kind: industrial
+            draw:
+                polygons:
+                    color: [0.776,0.776,0.776]
+                    visible: true
+
+        railway:
+            filter:
+                kind: railway
+            draw:
+                polygons:
+                    color: [0.647,0.647,0.647]
+                    visible: true
+
 
         sports_centre:
             draw:
@@ -457,6 +482,7 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
+                        color: [0.800,0.800,0.800]
 
             minor-amusement-park-landuse:
                 draw:
