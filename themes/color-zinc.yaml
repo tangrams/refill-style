@@ -2,8 +2,8 @@ global:
     # INVERTED
     black_color:                [0.000,0.000,0.000]
     dark_color:                 [0.100,0.100,0.100]
-    mid_color:                  [0.495,0.517,0.558]
-    midlight_color:             [0.418,0.434,0.465]
+    mid_color:                  [0.482,0.482,0.482]
+    midlight_color:             [0.418,0.418,0.418]
     light_color:                [0.533,0.533,0.533]
     lighter_color:              [0.590,0.590,0.590]
     lightest_color:             [0.620,0.620,0.620]
@@ -13,20 +13,21 @@ global:
     transparent:                [0.380,0.394,0.422,0.250]
     route_line:                 [0.000,0.500,1.000]
 
-    # GOLD
-    two_color_black:            [0.144,0.127,0.097]
-    two_color_dark:             [0.176,0.155,0.119]
-    two_color_mid:              [0.240,0.212,0.163]
-    two_color_midlight:         [0.301,0.265,0.204]
-    two_color_light:            [0.418,0.368,0.283]
-    two_color_lighter:          [0.495,0.436,0.335]
-    two_color_lightest:         [0.609,0.537,0.413]
-    two_color_ultralight:       [0.734,0.647,0.497]
-    two_color_offwhite:         [0.815,0.718,0.552]
+    # GRAYS
+    ultradark_gray_color:       [0.259,0.259,0.259]
+    darkest_gray_color:         [0.298,0.298,0.298]
+    darker_gray_color:          [0.333,0.333,0.333]
+    dark_gray_color:            [0.400,0.400,0.400]
+    mid_gray_color:             [0.502,0.502,0.502]
+    gray_color:                 [0.600,0.600,0.600]
+    light_gray_color:           [0.675,0.675,0.675]
+    lighter_gray_color:         [0.749,0.749,0.749]
+    lightest_gray_color:        [0.800,0.800,0.800]
+    gray_offwhite_color:        [0.898,0.898,0.898]
 
 scene:
     background:
-        color: [0.749,0.749,0.749]
+        color: global.lighter_gray_color
 
 
 layers:
@@ -34,7 +35,7 @@ layers:
         draw:
             polygons:
                 style: no_waves
-                color: [0.502,0.502,0.502]
+                color: global.mid_gray_color
         # later:
         #     draw:
         #         waves:
@@ -44,44 +45,44 @@ layers:
             draw:
                 polygons:
                     style: no_waves
-                    color: [0.502,0.502,0.502]
+                    color: global.mid_gray_color
 
         other-water-areas:
             draw:
                 polygons:
                     style: no_waves
-                    color: [0.502,0.502,0.502]
+                    color: global.mid_gray_color
 
         swimming_pool:
             draw:
                 polygons:
                     order: global.feature_order
                     style: no_waves
-                    color: [0.502,0.502,0.502]
+                    color: global.mid_gray_color
 
         water-boundary-ocean:
             draw:
                 lines:
                     style: no_coast
-                    color: [0.400,0.400,0.400]
+                    color: global.dark_gray_color
                     width: [[10, 1px], [12, 2px]]
 
         water_boundaries-not-ocean:
             draw:
                 lines:
                     style: no_coast
-                    color: [0.400,0.400,0.400]
+                    color: global.dark_gray_color
                     width: [[14, 1.0px], [16, 1.5px], [18, 2m]]
             swimming-pools-early:
                 draw:
                     lines:
                         style: no_coast
-                        color: [0.400,0.400,0.400]
+                        color: global.dark_gray_color
             riverbank:
                 draw:
                     lines:
                         style: no_coast
-                        color: [0.400,0.400,0.400]
+                        color: global.dark_gray_color
 
         river:
             draw:
@@ -91,7 +92,7 @@ layers:
             intermittent:
                 draw:
                     lines:
-                        color: [0.400,0.400,0.400]
+                        color: global.dark_gray_color
 
     roads:
         highway:
@@ -99,14 +100,14 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: [0.749,0.749,0.749] }
+                            stroke: { color: global.lighter_gray_color }
 
             labels-highway-z15-up:
                 draw:
                     text-blend-order:
                         font:
                             fill: global.black_color
-                            stroke: { color: [0.749,0.749,0.749] }
+                            stroke: { color: global.lighter_gray_color }
 
         major_road:
             trunk_primary:
@@ -115,105 +116,106 @@ layers:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: [0.749,0.749,0.749] }
+                                    stroke: { color: global.lighter_gray_color }
                     labels-trunk_primary-route-z15-up:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: [0.749,0.749,0.749] }
+                                    stroke: { color: global.lighter_gray_color }
                 labels-trunk_primary-z11-z15:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: [0.749,0.749,0.749] }
+                                stroke: { color: global.lighter_gray_color }
                 labels-trunk_primary-z16-up:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: [0.749,0.749,0.749] }
+                                stroke: { color: global.lighter_gray_color }
             secondary:
                 routes:
                     labels-secondary-routes-z13-z14:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: [0.749,0.749,0.749] }
+                                    stroke: { color: global.lighter_gray_color }
                     labels-secondary-routes-z15-up:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: [0.749,0.749,0.749] }
+                                    stroke: { color: global.lighter_gray_color }
                 labels-secondary:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: [0.749,0.749,0.749] }
+                                stroke: { color: global.lighter_gray_color }
 
             tertiary:
                 labels-tertiary:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: [0.749,0.749,0.749] }
+                                stroke: { color: global.lighter_gray_color }
 
 
         minor_road:
             draw:
                 lines:
-                    color: [0.898,0.898,0.898]
+                    color: global.gray_offwhite_color
                     outline:
-                        color: [[11, [0.898,0.898,0.898]], [16, [0.898,0.898,0.898]], [17, global.black_color]]
+                        color: [[11, global.gray_offwhite_color], [16, global.gray_offwhite_color], [17, global.black_color]]
             labels-minor_road:
                 draw:
                     text-blend-order:
                         font:
-                            fill: [0.333,0.333,0.333]
-                            stroke: { color: [0.749,0.749,0.749] }
+                            fill: global.darker_gray_color
+                            stroke: { color: global.lighter_gray_color }
 
         service_road:
             draw:
                 lines:
-                    color: [0.898,0.898,0.898]
+                    color: global.gray_offwhite_color
                     outline:
-                        color: [[11, [0.898,0.898,0.898]], [16, [0.898,0.898,0.898]], [17, global.black_color]]
+                        color: [[11, global.gray_offwhite_color], [16, global.gray_offwhite_color], [17, global.black_color]]
 
         path:
             draw:
                 lines:
-                    width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                    width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
                     outline:
-                        color: [0.600,0.600,0.600]
+                        color: global.gray_color
                         width: [[14, 0px], [15, 0.35px], [16, 1px]]
 
             pedestrian:
                 draw:
                     lines:
-                        width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                        width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
                         outline:
-                            color: [0.600,0.600,0.600]
+                            color: global.gray_color
                             width: [[14, 0px], [15, 0.35px], [16, 1px]]
 
             footway:
                 draw:
                     lines:
-                        width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                        width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
                         outline:
-                            color: [0.600,0.600,0.600]
+                            color: global.gray_color
                             width: [[14, 0px], [15, 0.35px], [16, 1px]]
 
         track:
             draw:
                 lines:
-                    width: [[13, 0.5px], [14, 1.0px], [15, 1.0px], [16, 6m]]
+                    color: global.gray_offwhite_color
+                    width: [[13, 0.5px], [14, 1.0px], [15, 1.0px], [18, 6m]]
                     outline:
-                        color: [0.600,0.600,0.600]
-                        width: [[14, 0px], [15, 0.35px], [16, 1px]]
+                        color: global.gray_color
+                        width: [[14, 0px], [15, 0.35px], [17, 1px]]
 
         railway:
             draw:
                 lines:
                     style: no_dash
-                    color: [0.482,0.482,0.482]
+                    color: global.midlight_color
                     width: [[12, 0.25px], [14, 0.5px], [18, 2px], [20, 2m]]
                     outline:
                         visible: false
@@ -225,27 +227,27 @@ layers:
         airport-lines:
             draw:
                 lines:
-                    color: [0.298,0.298,0.298]
+                    color: global.darkest_gray_color
             taxiway:
                 draw:
                     lines:
-                        color: [0.812,0.812,0.812]
+                        color: global.lightest_gray_color
                         outline:
                             visible: false
 
         ferry:
             draw:
                 lines:
-                    color: [0.400,0.400,0.400]
+                    color: global.dark_gray_color
 
 
 
     buildings:
         draw:
             polygons:
-                color: [0.698,0.698,0.698]
+                color: global.ultralight_color
             lines:
-                color: [0.259,0.259,0.259]
+                color: global.ultradark_gray_color
                 width: [[14, 0px], [15, 0.5px], [18, 1px], [19, 0.4m]]
 
         footprints:
@@ -269,17 +271,23 @@ layers:
                     polygons:
                         extrude: false
                         style: polygons
-                        color: [0.698,0.698,0.698]
+                        color: global.ultralight_color
                     lines:
                         extrude: false
                         style: lines
-                        color: [0.259,0.259,0.259]
+                        color: global.ultradark_gray_color
+
+            in_university:
+                filter: { landuse_kind: [university,school] }
+                draw:
+                    polygons:
+                        color: global.lightest_color
 
             in_airport:
                 filter: { landuse_kind: [aerodrome, runway, taxiway] }
                 draw:
                     polygons:
-                        color: [0.549,0.549,0.549]
+                        color: global.lightest_color
 
 
     landuse:
@@ -292,52 +300,54 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.light_gray_color
             us_national_park:
                 draw:
                     polygons:
                         style: no_texture
+                        color: global.light_gray_color
 
         conservation:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.627,0.627,0.627]
+                    color: global.lightest_color
 
         national_forest_level_6:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.675,0.675,0.675]
+                    color: global.light_gray_color
 
         forest-landcover:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.675,0.675,0.675]
+                    color: global.light_gray_color
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.675,0.675,0.675]
+                    color: global.light_gray_color
             national_park:
                 draw:
                     polygons:
                         style: no_texture
-                        color: [0.675,0.675,0.675]
+                        color: global.light_gray_color
 
         farm:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.749,0.749,0.749]
+                    color: global.lighter_gray_color
 
         airport:
             filter:
                 kind: aerodrome
             draw:
                 polygons:
-                    color: [0.647,0.647,0.647]
+                    color: global.light_gray_color
                     visible: true
 
         military:
@@ -346,7 +356,7 @@ layers:
                     military
             draw:
                 polygons:
-                    color: [0.647,0.647,0.647]
+                    color: global.ultralight_color
                     visible: true
 
         university:
@@ -359,13 +369,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.698,0.698,0.698]
+                    color: global.ultralight_color
 
         golf_course:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.698,0.698,0.698]
+                    color: global.ultralight_color
 
         hospital:
             draw:
@@ -404,13 +414,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.698,0.698,0.698]
+                    color: global.ultralight_color
 
         zoo:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.698,0.698,0.698]
+                    color: global.ultralight_color
 
         man-made:
             draw:
@@ -419,7 +429,7 @@ layers:
             pier:
                 draw:
                     polygons:
-                        color: [0.749,0.749,0.749]
+                        color: global.lighter_gray_color
 
         tier5:
             tourism-related:
@@ -437,7 +447,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.698,0.698,0.698]
+                    color: global.ultralight_color
 
         parking:
             draw:
@@ -457,7 +467,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.722,0.722,0.722]
+                    color: global.lighter_gray_color
                 outline:
                     color: [0.549,0.549,0.549]
 
@@ -470,51 +480,62 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.667,0.667,0.667]
+                    color: global.ultralight_color
 
         minor-landuse:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.lighter_gray_color
 
         landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.ultradark_gray_color
+
             apron:
                 draw:
                     polygons:
                         style: no_texture
-                        color: [0.800,0.800,0.800]
+                        color: global.lightest_gray_color
 
             minor-amusement-park-landuse:
                 draw:
                     polygons:
                         style: no_texture
-                        color: [0.847,0.847,0.847]
+                        color: global.offwhite_color
 
             minor-zoo-landuse:
                 draw:
                     polygons:
                         style: no_texture
-                        color: [0.800,0.800,0.800]
+                        color: global.lightest_gray_color
 
     boundaries:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_midlight
+                    color: global.dark_gray_color
 
         other_country_boundary_disputed_etc:
             draw:
                 dashed:
-                    color: global.two_color_midlight
+                    color: global.dark_gray_color
             disputed:
                 draw:
                     dashed_big:
-                        color: global.two_color_midlight
+                        color: global.dark_gray_color
 
         region:
             draw:
                 lines:
-                    color: global.two_color_mid
+                    color: global.dark_gray_color
+            region-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
 
     places:
         populated-places:
@@ -522,40 +543,35 @@ layers:
                 mapzen_icon_library:
                     text:
                         font:
-                            stroke: { color: [0.749,0.749,0.749] }
+                            stroke: { color: global.lighter_gray_color }
                 text-blend-order:
                     font:
-                        stroke: { color: [0.749,0.749,0.749] }
+                        stroke: { color: global.lighter_gray_color }
 
         neighbourhoods:
             draw:
                 text-blend-order:
                     font:
                         fill: [0.133,0.133,0.133]
-                        stroke: { color: [0.749,0.749,0.749] }
+                        stroke: { color: global.lighter_gray_color }
 
     pois:
         draw:
             mapzen_icon_library:
                 text:
                     font:
-                        stroke: { color: [0.749,0.749,0.749] }
+                        stroke: { color: global.lighter_gray_color }
 
         highway-exit:
             draw:
                 text-blend-order:
                     font:
                         fill: global.black_color
-                        stroke: { color: [0.749,0.749,0.749] }
+                        stroke: { color: global.lighter_gray_color }
 
 
 
 styles:
-    building-grid:
-        shaders:
-            uniforms:
-                u_grid_color: global.two_color_offwhite
-
     no_waves:
         base: polygons
 
@@ -570,38 +586,3 @@ styles:
 
     no_dash:
         base: lines
-
-    medium-dots:
-        shaders:
-            defines:
-                COLOR1: vec3(0.153,0.157,0.161)
-
-    tiny-dots:
-        shaders:
-            defines:
-                COLOR1: vec3(0.153,0.157,0.161)
-
-    dots-rev:
-        shaders:
-            defines:
-                COLOR1: vec3(0.153,0.157,0.161)
-
-    dots-rev-grid:
-        shaders:
-            defines:
-                COLOR1: vec3(0.153,0.157,0.161)
-
-    horizontal-bars:
-        shaders:
-            defines:
-                COLOR1: vec3(0.153,0.157,0.161)
-
-    horizontal-bars-rev:
-        shaders:
-            defines:
-                COLOR1: vec3(0.153,0.157,0.161)
-
-
-textures:
-    building-grid:
-        url: images/building-grid-hi-contrast3.gif

@@ -5246,7 +5246,6 @@ layers:
                     - aviary
             draw:
                 polygons:
-                    style: dots
                     order: global.feature_order
                     visible: false
 
