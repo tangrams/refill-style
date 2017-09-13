@@ -87,8 +87,7 @@ layers:
             draw:
                 lines:
                     style: no_riverlines
-                    color: [0.707,0.707,0.707]
-                    width: [[13, 0.5px], [16, 1.5px], [18, 4m]]
+                    width: [[13, 0.25px], [16, 1px], [18, 4m]]
             intermittent:
                 draw:
                     lines:
@@ -159,6 +158,11 @@ layers:
 
 
         minor_road:
+            draw:
+                lines:
+                    color: [0.898,0.898,0.898]
+                    outline:
+                        color: [[11, [0.898,0.898,0.898]], [16, [0.898,0.898,0.898]], [17, global.black_color]]
             labels-minor_road:
                 draw:
                     text-blend-order:
@@ -166,12 +170,51 @@ layers:
                             fill: [0.333,0.333,0.333]
                             stroke: { color: [0.749,0.749,0.749] }
 
+        service_road:
+            draw:
+                lines:
+                    color: [0.898,0.898,0.898]
+                    outline:
+                        color: [[11, [0.898,0.898,0.898]], [16, [0.898,0.898,0.898]], [17, global.black_color]]
+
+        path:
+            draw:
+                lines:
+                    width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                    outline:
+                        color: [0.600,0.600,0.600]
+                        width: [[14, 0px], [15, 0.35px], [16, 1px]]
+
+            pedestrian:
+                draw:
+                    lines:
+                        width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                        outline:
+                            color: [0.600,0.600,0.600]
+                            width: [[14, 0px], [15, 0.35px], [16, 1px]]
+
+            footway:
+                draw:
+                    lines:
+                        width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                        outline:
+                            color: [0.600,0.600,0.600]
+                            width: [[14, 0px], [15, 0.35px], [16, 1px]]
+
+        track:
+            draw:
+                lines:
+                    width: [[14, 0px], [15, 0px], [16, 0.15px], [18, 2px], [20, 1m]]
+                    outline:
+                        color: [0.600,0.600,0.600]
+                        width: [[14, 0px], [15, 0.35px], [16, 1px]]
+
         railway:
             draw:
                 lines:
                     style: no_dash
-                    color: global.lighter_color
-                    width: [[12, 0px], [14, 0px], [18, 2px], [20, 2m]]
+                    color: [0.482,0.482,0.482]
+                    width: [[12, 0px], [14, 1px], [18, 2px], [20, 2m]]
                     outline:
                         visible: false
             service:
@@ -202,6 +245,7 @@ layers:
                 color: [0.698,0.698,0.698]
             lines:
                 color: [0.259,0.259,0.259]
+                width: [[14, 0px], [15, 0.5px], [18, 1px], [19, 0.4m]]
 
         footprints:
             filter:
@@ -261,6 +305,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.675,0.675,0.675]
 
         parks-and-national-forests-not-national-park:
             draw:
@@ -300,11 +345,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.667,0.667,0.667]
 
         cemetery:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.698,0.698,0.698]
 
         golf_course:
             draw:
@@ -332,22 +379,29 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.698,0.698,0.698]
 
         zoo:
             draw:
                 polygons:
                     style: no_texture
+                    color: [0.698,0.698,0.698]
 
         man-made:
             draw:
                 polygons:
                     style: no_texture
+            pier:
+                draw:
+                    polygons:
+                        color: [0.749,0.749,0.749]
 
         tier5:
             tourism-related:
                 draw:
                     polygons:
                         style: no_texture
+                        color: [0.847,0.847,0.847]
 
             beach:
                 draw:
@@ -408,6 +462,7 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
+                        color: [0.847,0.847,0.847]
 
             minor-zoo-landuse:
                 draw:
