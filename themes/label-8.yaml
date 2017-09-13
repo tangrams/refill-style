@@ -42,19 +42,19 @@ global:
 layers:
     pois:
         draw:
-            colorized-icons:
+            mapzen_icon_library:
                 buffer: 42px
 
         # new for this labels variant
         poi_labels-z17:
             filter: { $zoom: [17,18] }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     buffer: 28px
 
         # new for this labels variant
         poi_labels-z19:
             filter: { $zoom: { min: 19 } }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     buffer: 3px

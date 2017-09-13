@@ -42,14 +42,14 @@ global:
 layers:
     places:
         draw:
-            colorized-icons:
+            mapzen_icon_library:
                 buffer: 0px
             text-blend-order:
                 buffer: 0px
 
         populated-places:
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     buffer: 0px
                 text-blend-order:
                     buffer: 0px
@@ -58,19 +58,19 @@ layers:
                 filter:
                     population: true
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         buffer: 0px
             z9-10k-below:
                 filter:
                     population: true
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         buffer: 0px
             z9-no-population:
                 filter:
                     population: false
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         buffer: 0px
 
         region:
@@ -97,13 +97,13 @@ layers:
             all:
                 - kind: true                # this forces things like trees to display always
         draw:
-            colorized-icons:
+            mapzen_icon_library:
                 buffer: 0px
 
         no-name:
             filter: { name: false }
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     visible: true
             # eg park polygons in SF that have area but no name, sigh
             no-name-no-area:
@@ -111,112 +111,112 @@ layers:
                     kind: true
                     name: false
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
 
         # the server should be setting better values here
         z-server-friend:
             hide-until-z12-any:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z14-any:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z15-any:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z15-no-area:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z15-with-area:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z16-any:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z16-no-area:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             # no POIs for commercial, residential
             hide-until-z17-any:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z17-with-area:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z17-no-area:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z18-any:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z18-no-area:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             hide-until-z19-any:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
 
             # hide based on kind and area filters
             military-early:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             university-early:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             school-early:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             garden-area-early:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             cemetery-early:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             golf_course-early:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             office-early:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             landuse-labels-green-areas-not-national-park:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
                 wilderness-areas-early:
                     draw:
-                        colorized-icons:
+                        mapzen_icon_library:
                             visible: true
                 not-national-park:
                     early:
                         draw:
-                            colorized-icons:
+                            mapzen_icon_library:
                                 visible: true
             landuse-labels-not-any-above:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true
             glacier:
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: true

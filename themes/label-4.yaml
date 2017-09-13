@@ -51,7 +51,7 @@ layers:
     places:
         populated-places:
             draw:
-                colorized-icons:
+                mapzen_icon_library:
                     buffer: 24px
                 text-blend-order:
                     buffer: 24px

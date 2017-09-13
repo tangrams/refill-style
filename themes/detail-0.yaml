@@ -59,7 +59,6 @@ layers:
     places:
         enabled: false
 
-
     boundaries:
         enabled: false
 

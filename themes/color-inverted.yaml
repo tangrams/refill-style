@@ -207,7 +207,7 @@ layers:
 
     pois:
         draw:
-            colorized-icons:
+            mapzen_icon_library:
                 text:
                     font:
                         stroke: { color: global.white_color, width: 6px }

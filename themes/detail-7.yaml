@@ -195,7 +195,7 @@ layers:
                 #filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                 filter: { kind_tile_rank: { min: 7 }, $zoom: [14] }
                 draw:
-                    colorized-icons:
+                    mapzen_icon_library:
                         visible: false
 
     boundaries:
