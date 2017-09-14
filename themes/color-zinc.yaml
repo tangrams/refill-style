@@ -331,7 +331,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.lightest_color
+                    color: global.light_gray_color
 
         national_forest_level_6:
             draw:
