@@ -113,7 +113,7 @@ layers:
                     text-blend-order:
                         font:
                             fill: global.black_color
-                            stroke: { color: global.lighter_gray_color }
+                            stroke: { color: global.white_color }
 
         major_road:
             trunk_primary:
@@ -123,21 +123,13 @@ layers:
                             text-blend-order:
                                 font:
                                     stroke: { color: global.lighter_gray_color }
-                    labels-trunk_primary-route-z15-up:
-                        draw:
-                            text-blend-order:
-                                font:
-                                    stroke: { color: global.lighter_gray_color }
+
                 labels-trunk_primary-z11-z15:
                     draw:
                         text-blend-order:
                             font:
                                 stroke: { color: global.lighter_gray_color }
-                labels-trunk_primary-z16-up:
-                    draw:
-                        text-blend-order:
-                            font:
-                                stroke: { color: global.lighter_gray_color }
+
             secondary:
                 routes:
                     labels-secondary-routes-z13-z14:
@@ -145,16 +137,18 @@ layers:
                             text-blend-order:
                                 font:
                                     stroke: { color: global.lighter_gray_color }
-                    labels-secondary-routes-z15-up:
-                        draw:
-                            text-blend-order:
-                                font:
-                                    stroke: { color: global.lighter_gray_color }
+
                 labels-secondary:
                     draw:
                         text-blend-order:
                             font:
                                 stroke: { color: global.lighter_gray_color }
+                    z17-up:
+                        filter: { $zoom: { min: 17 } }
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: global.white_color }
 
             tertiary:
                 labels-tertiary:
@@ -162,6 +156,13 @@ layers:
                         text-blend-order:
                             font:
                                 stroke: { color: global.lighter_gray_color }
+                    z17-up:
+                        filter: { $zoom: { min: 17 } }
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: global.white_color }
+
 
 
         minor_road:
@@ -176,6 +177,12 @@ layers:
                         font:
                             fill: global.darker_gray_color
                             stroke: { color: global.lighter_gray_color }
+                z17-up:
+                    filter: { $zoom: { min: 17 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.white_color }
 
         service_road:
             draw:
