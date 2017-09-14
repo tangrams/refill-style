@@ -237,6 +237,13 @@ layers:
                     lines:
                         color: global.lighter_color
 
+        pier:
+            draw:
+                lines:
+                    color: global.ultralight_color
+                    outline:
+                        color: global.dark_gray_color
+
         airport-lines:
             draw:
                 lines:
