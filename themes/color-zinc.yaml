@@ -31,6 +31,12 @@ scene:
 
 
 layers:
+    earth:
+        island:
+            draw:
+                text-blend-order:
+                    font:
+                        stroke: { color: global.lighter_gray_color }
     water:
         draw:
             polygons:
@@ -88,7 +94,7 @@ layers:
             draw:
                 lines:
                     style: no_riverlines
-                    width: [[13, 0.5px], [16, 1.5px], [18, 4m]]
+                    width: [[10, 0px], [12, 0px], [13, 0.5px], [16, 1.5px], [18, 4m]]
             intermittent:
                 draw:
                     lines:
@@ -363,7 +369,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.667,0.667,0.667]
+                    color: global.light_gray_color
 
         cemetery:
             draw:
@@ -387,7 +393,7 @@ layers:
                 kind: industrial
             draw:
                 polygons:
-                    color: [0.776,0.776,0.776]
+                    color: global.lighter_gray_color
                     visible: true
 
         railway:
@@ -395,7 +401,7 @@ layers:
                 kind: railway
             draw:
                 polygons:
-                    color: [0.647,0.647,0.647]
+                    color: global.lightest_color
                     visible: true
 
 
@@ -408,7 +414,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: [0.667,0.667,0.667]
+                    color: global.light_gray_color
 
         stadium:
             draw:
@@ -436,7 +442,7 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
-                        color: [0.847,0.847,0.847]
+                        color: global.offwhite_color
 
             beach:
                 draw:
@@ -469,7 +475,7 @@ layers:
                     style: no_texture
                     color: global.lighter_gray_color
                 outline:
-                    color: [0.549,0.549,0.549]
+                    color: global.light_color
 
         playground:
             draw:
@@ -538,6 +544,30 @@ layers:
                             fill: global.black_color
 
     places:
+        country:
+            draw:
+                text-blend-order:
+                    font:
+                        transform: uppercase
+                        weight: 600
+                        stroke: { color: global.lighter_gray_color }
+            country-z2-3:
+                draw:
+                    text-blend-order:
+                        font:
+                            weight: 600
+            country-z4:
+                draw:
+                    text-blend-order:
+                        font:
+                            weight: 600
+        region:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: global.black_color
+                        stroke: { color: global.lighter_gray_color }
+
         populated-places:
             draw:
                 mapzen_icon_library:
@@ -552,7 +582,7 @@ layers:
             draw:
                 text-blend-order:
                     font:
-                        fill: [0.133,0.133,0.133]
+                        fill: global.dark_color
                         stroke: { color: global.lighter_gray_color }
 
     pois:
