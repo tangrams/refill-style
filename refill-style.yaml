@@ -12,9 +12,8 @@
 
 import:
     - themes/color-black.yaml
-    - themes/label-10.yaml
+    - themes/label-5.yaml
     - themes/refill-icons.yaml
-    - https://mapzen.com/carto/walkabout-style/6/themes/walkabout-icons.zip
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
