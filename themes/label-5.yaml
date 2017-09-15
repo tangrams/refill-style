@@ -24,6 +24,7 @@ global:
     label_visible_station:          true
     icon_visible_station:           false                       #false on default, this needs work
     text_visible_station:           true
+    icon_visible_arrows:            true
     text_visible_highway:           true
     text_visible_trunk_primary:     true
     text_visible_secondary:         true

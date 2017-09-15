@@ -24,6 +24,7 @@ global:
     label_visible_station:          false
     icon_visible_station:           false                       #false on default, this needs work
     text_visible_station:           false
+    icon_visible_arrows:            false
     text_visible_highway:           false
     text_visible_trunk_primary:     false
     text_visible_secondary:         false
@@ -36,5 +37,5 @@ global:
     text_visible_aerialway:         false
     text_visible_exits:             false
     text_visible_airport_gate:      false
-    
+
     sdk_road_shields:               false
