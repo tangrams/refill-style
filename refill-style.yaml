@@ -1847,7 +1847,7 @@ layers:
                 arrows:
                     style: mapzen_icon_library
                     flat: true
-                    visible: global.icon_visible_landuse_green
+                    visible: global.icon_visible_arrows
                     sprite: arrow
                     color: global.midlight_color
                     size: [[17, 6px], [20, 14px]]
@@ -3211,20 +3211,20 @@ layers:
                 all:
                     - { $zoom: { min: 16 } }
                     - $geometry: point
-                    - kind: [false, building, university, college, school, kindergarten]
+                    - landuse_kind: [university, college, school, kindergarten]
                     - function() { return global.text_visible_building; }
                 any:
                     - { $zoom: [16], area: { min: 5000 }, name: true }
                     - { $zoom: [16], area: { min: 5000 }, kind: true }
                     - { $zoom: [16], area: { min: 10000 }, landuse_kind: true }
-                    - { $zoom: [16], area: { min: 7000 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: [16], area: { min: 7000 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [16], volume: { min: 50000 }, name: true }
                     - { $zoom: [17], area: { min: 3000 }, name: true }
-                    - { $zoom: [17], area: { min: 2000 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: [17], area: { min: 2000 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [18], area: { min: 1000 }, name: true }
-                    - { $zoom: [18], kind: [university, college, school, kindergarten] }
+                    - { $zoom: [18], kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [19], area: { min: 200 }, name: true }
-                    - { $zoom: { min: 19 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: { min: 19 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: { min: 20 }, name: true }
             draw:
                 text-blend-order:
