@@ -1,0 +1,632 @@
+global:
+    # INVERTED
+    black_color:                [0.000,0.000,0.000]
+    dark_color:                 [0.100,0.100,0.100]
+    mid_color:                  [0.482,0.482,0.482]
+    midlight_color:             [0.418,0.418,0.418]
+    light_color:                [0.533,0.533,0.533]
+    lighter_color:              [0.590,0.590,0.590]
+    lightest_color:             [0.620,0.620,0.620]
+    ultralight_color:           [0.700,0.700,0.700]
+    offwhite_color:             [0.850,0.850,0.850]
+    white_color:                [0.900,0.900,0.900]
+    transparent:                [0.380,0.394,0.422,0.250]
+    route_line:                 [0.000,0.500,1.000]
+
+    # GRAYS
+    ultradark_gray_color:       [0.259,0.259,0.259]
+    darkest_gray_color:         [0.298,0.298,0.298]
+    darker_gray_color:          [0.333,0.333,0.333]
+    dark_gray_color:            [0.400,0.400,0.400]
+    mid_gray_color:             [0.502,0.502,0.502]
+    gray_color:                 [0.600,0.600,0.600]
+    light_gray_color:           [0.675,0.675,0.675]
+    lighter_gray_color:         [0.749,0.749,0.749]
+    lightest_gray_color:        [0.800,0.800,0.800]
+    gray_offwhite_color:        [0.898,0.898,0.898]
+
+scene:
+    background:
+        color: global.lighter_gray_color
+
+
+layers:
+    earth:
+        island:
+            draw:
+                text-blend-order:
+                    font:
+                        stroke: { color: global.lighter_gray_color }
+    water:
+        draw:
+            polygons:
+                style: no_waves
+                color: global.mid_gray_color
+        # later:
+        #     draw:
+        #         waves:
+        #             color: global.two_color_light
+
+        lakes:
+            draw:
+                polygons:
+                    style: no_waves
+                    color: global.mid_gray_color
+
+        other-water-areas:
+            draw:
+                polygons:
+                    style: no_waves
+                    color: global.mid_gray_color
+
+        swimming_pool:
+            draw:
+                polygons:
+                    order: global.feature_order
+                    style: no_waves
+                    color: global.mid_gray_color
+
+        water-boundary-ocean:
+            draw:
+                lines:
+                    style: no_coast
+                    color: global.dark_gray_color
+                    width: [[10, 1px], [12, 2px]]
+
+        water_boundaries-not-ocean:
+            draw:
+                lines:
+                    style: no_coast
+                    color: global.dark_gray_color
+                    width: [[14, 1.0px], [16, 1.5px], [18, 2m]]
+            swimming-pools-early:
+                draw:
+                    lines:
+                        style: no_coast
+                        color: global.dark_gray_color
+            riverbank:
+                draw:
+                    lines:
+                        style: no_coast
+                        color: global.dark_gray_color
+
+        river:
+            draw:
+                lines:
+                    style: no_riverlines
+                    width: [[10, 0px], [12, 0px], [13, 0.5px], [16, 1.5px], [18, 4m]]
+            intermittent:
+                draw:
+                    lines:
+                        color: global.dark_gray_color
+
+    roads:
+        highway:
+            labels-highway-z13-z14:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.lighter_gray_color }
+
+            labels-highway-z15-up:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
+                            stroke: { color: global.white_color }
+
+        major_road:
+            trunk_primary:
+                routes:
+                    labels-trunk_primary-route-z13-z14:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: global.lighter_gray_color }
+
+                labels-trunk_primary-z11-z15:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.lighter_gray_color }
+
+            secondary:
+                routes:
+                    labels-secondary-routes-z13-z14:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: global.lighter_gray_color }
+
+                labels-secondary:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.lighter_gray_color }
+                    z17-up:
+                        filter: { $zoom: { min: 17 } }
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: global.white_color }
+
+            tertiary:
+                labels-tertiary:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.lighter_gray_color }
+                    z17-up:
+                        filter: { $zoom: { min: 17 } }
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: global.white_color }
+
+
+
+        minor_road:
+            draw:
+                lines:
+                    color: global.gray_offwhite_color
+                    outline:
+                        color: [[11, global.gray_offwhite_color], [16, global.gray_offwhite_color], [17, global.black_color]]
+            labels-minor_road:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.darker_gray_color
+                            stroke: { color: global.lighter_gray_color }
+                z17-up:
+                    filter: { $zoom: { min: 17 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.white_color }
+
+        service_road:
+            draw:
+                lines:
+                    color: global.gray_offwhite_color
+                    outline:
+                        color: [[11, global.gray_offwhite_color], [16, global.gray_offwhite_color], [17, global.black_color]]
+
+        path:
+            draw:
+                lines:
+                    width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
+                    outline:
+                        color: global.gray_color
+                        width: [[14, 0px], [15, 0.35px], [16, 1px]]
+
+            pedestrian:
+                draw:
+                    lines:
+                        width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
+                        outline:
+                            color: global.gray_color
+                            width: [[14, 0px], [15, 0.35px], [16, 1px]]
+
+            footway:
+                draw:
+                    lines:
+                        width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
+                        outline:
+                            color: global.gray_color
+                            width: [[14, 0px], [15, 0.35px], [16, 1px]]
+
+        track:
+            draw:
+                lines:
+                    color: global.gray_offwhite_color
+                    width: [[13, 0.5px], [14, 1.0px], [15, 1.0px], [18, 6m]]
+                    outline:
+                        color: global.gray_color
+                        width: [[14, 0px], [15, 0.35px], [17, 1px]]
+
+        railway:
+            draw:
+                lines:
+                    style: no_dash
+                    color: global.midlight_color
+                    width: [[12, 0.25px], [14, 0.5px], [18, 2px], [20, 2m]]
+                    outline:
+                        visible: false
+            service:
+                draw:
+                    lines:
+                        color: global.lighter_color
+
+        pier:
+            draw:
+                lines:
+                    color: global.ultralight_color
+                    outline:
+                        color: global.dark_gray_color
+
+        airport-lines:
+            draw:
+                lines:
+                    color: global.darkest_gray_color
+            taxiway:
+                draw:
+                    lines:
+                        color: global.lightest_gray_color
+                        outline:
+                            visible: false
+
+        ferry:
+            draw:
+                lines:
+                    color: global.dark_gray_color
+
+
+
+    buildings:
+        draw:
+            polygons:
+                color: global.ultralight_color
+            lines:
+                color: global.ultradark_gray_color
+                width: [[14, 0px], [15, 0.5px], [18, 1px], [19, 0.4m]]
+
+        footprints:
+            filter:
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: [13], scale_rank: [1,2] }
+                    - { $zoom: [14], scale_rank: [1,2,3] }
+                    - { $zoom: [15], area: { min: 5000 }, name: true }
+                    - { $zoom: [15], area: { min: 5000 }, kind: true }
+                    - { $zoom: [15], area: { min: 3000 }, landuse_kind: true }
+                    - { $zoom: [15], height: { min: 100 } }
+                    - { $zoom: [15], volume: { min: 100000 } }
+                    - { $zoom: [16], area: { min: 1000 }, name: true }
+                    - { $zoom: [16], area: { min: 1000 }, kind: true }
+                    - { $zoom: [16], area: { min: 2000 }, landuse_kind: true }
+                    - { $zoom: [16], volume: { min: 50000 } }
+                    - { $zoom: { min: 17 } }
+            extrude:
+                draw:
+                    polygons:
+                        extrude: false
+                        style: polygons
+                        color: global.ultralight_color
+                    lines:
+                        extrude: false
+                        style: lines
+                        color: global.ultradark_gray_color
+
+            in_university:
+                filter: { landuse_kind: [university,school] }
+                draw:
+                    polygons:
+                        color: global.lightest_color
+
+            in_airport:
+                filter: { landuse_kind: [aerodrome, runway, taxiway] }
+                draw:
+                    polygons:
+                        color: global.lightest_color
+
+
+    landuse:
+        draw:
+            no_texture:
+                order: global.feature_order
+                visible: false
+
+        national_park:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.light_gray_color
+            us_national_park:
+                draw:
+                    polygons:
+                        style: no_texture
+                        color: global.light_gray_color
+
+        conservation:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.light_gray_color
+
+        national_forest_level_6:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.light_gray_color
+
+        forest-landcover:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.light_gray_color
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.light_gray_color
+            national_park:
+                draw:
+                    polygons:
+                        style: no_texture
+                        color: global.light_gray_color
+
+        farm:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.lighter_gray_color
+
+        airport:
+            filter:
+                kind: aerodrome
+            draw:
+                polygons:
+                    color: global.light_gray_color
+                    visible: true
+
+        military:
+            filter:
+                kind:
+                    military
+            draw:
+                polygons:
+                    color: global.ultralight_color
+                    visible: true
+
+        university:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.light_gray_color
+
+        cemetery:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.ultralight_color
+
+        golf_course:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.ultralight_color
+
+        hospital:
+            draw:
+                polygons:
+                    style: no_texture
+
+        industrial:
+            filter:
+                kind: industrial
+            draw:
+                polygons:
+                    color: global.lighter_gray_color
+                    visible: true
+
+        railway:
+            filter:
+                kind: railway
+            draw:
+                polygons:
+                    color: global.lightest_color
+                    visible: true
+
+
+        sports_centre:
+            draw:
+                polygons:
+                    style: no_texture
+
+        recreation_ground:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.light_gray_color
+
+        stadium:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.ultralight_color
+
+        zoo:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.ultralight_color
+
+        man-made:
+            draw:
+                polygons:
+                    style: no_texture
+            pier:
+                draw:
+                    polygons:
+                        color: global.lighter_gray_color
+
+        tier5:
+            tourism-related:
+                draw:
+                    polygons:
+                        style: no_texture
+                        color: global.offwhite_color
+
+            beach:
+                draw:
+                    polygons:
+                        style: no_texture
+
+        garden:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.ultralight_color
+
+        parking:
+            draw:
+                polygons:
+                    style: no_texture
+
+        pedestrian:
+            draw:
+                polygons:
+                    style: no_texture
+            green-stuff:
+                draw:
+                    polygons:
+                        style: no_texture
+
+        pitch:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.lighter_gray_color
+                outline:
+                    color: global.light_color
+
+        playground:
+            draw:
+                polygons:
+                    style: no_texture
+
+        school:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.ultralight_color
+
+        minor-landuse:
+            draw:
+                polygons:
+                    style: no_texture
+                    color: global.lighter_gray_color
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.ultradark_gray_color
+
+            apron:
+                draw:
+                    polygons:
+                        style: no_texture
+                        color: global.lightest_gray_color
+
+            minor-amusement-park-landuse:
+                draw:
+                    polygons:
+                        style: no_texture
+                        color: global.offwhite_color
+
+            minor-zoo-landuse:
+                draw:
+                    polygons:
+                        style: no_texture
+                        color: global.lightest_gray_color
+
+    boundaries:
+        country:
+            draw:
+                country-outerline:
+                    color: global.dark_gray_color
+
+        other_country_boundary_disputed_etc:
+            draw:
+                dashed:
+                    color: global.dark_gray_color
+            disputed:
+                draw:
+                    dashed_big:
+                        color: global.dark_gray_color
+
+        region:
+            draw:
+                lines:
+                    color: global.dark_gray_color
+            region-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
+
+    places:
+        country:
+            draw:
+                text-blend-order:
+                    font:
+                        transform: uppercase
+                        weight: 600
+                        stroke: { color: global.lighter_gray_color }
+            country-z2-3:
+                draw:
+                    text-blend-order:
+                        font:
+                            weight: 600
+            country-z4:
+                draw:
+                    text-blend-order:
+                        font:
+                            weight: 600
+        region:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: global.black_color
+                        stroke: { color: global.lighter_gray_color }
+
+        populated-places:
+            draw:
+                mapzen_icon_library:
+                    text:
+                        font:
+                            stroke: { color: global.lighter_gray_color }
+                text-blend-order:
+                    font:
+                        stroke: { color: global.lighter_gray_color }
+
+        neighbourhoods:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: global.dark_color
+                        stroke: { color: global.lighter_gray_color }
+
+    pois:
+        draw:
+            mapzen_icon_library:
+                text:
+                    font:
+                        stroke: { color: global.lighter_gray_color }
+
+        highway-exit:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: global.black_color
+                        stroke: { color: global.lighter_gray_color }
+
+
+
+styles:
+    no_waves:
+        base: polygons
+
+    no_coast:
+        base: lines
+
+    no_riverlines:
+        base: lines
+
+    no_texture:
+        base: polygons
+
+    no_dash:
+        base: lines

@@ -13,7 +13,7 @@
 import:
     - themes/color-black.yaml
     - themes/label-5.yaml
-    - refill-icons.yaml
+    - themes/refill-icons.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -1014,6 +1014,13 @@ fonts:
         - weight: normal
           #url: https://fonts.gstatic.com/s/montserrat/v7/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff
           url: fonts/Montserrat-Regular.woff
+        - weight: 500
+          #url: https://fonts.gstatic.com/s/montserrat/v10/BYPM-GE291ZjIXBWrtCweqLy3K7m9xj_O5xwN3SdQNs.woff
+          url: fonts/Montserrat-Medium.woff
+        - weight: 700
+          #url: https://fonts.gstatic.com/s/montserrat/v10/IQHow_FEYlDC4Gzy_m8fcnbFhgvWbfSbdVg11QabG8w.woff
+          url: fonts/Montserrat-Bold.woff
+
 
 layers:
     # Map overlays for styling the server response (using special source layer names) for route line, current location, and search result pins
@@ -1289,7 +1296,8 @@ layers:
     water:
         data: { source: mapzen, layer: water }
         draw:
-            waves:
+            polygons:
+                style: waves
                 visible: false
                 order: global.feature_order
                 color: [[0, global.lightest_color], [12, global.lighter_color]]
@@ -1323,14 +1331,16 @@ layers:
                     - { $zoom: [14], area: { min: 40000 } }
                     - { $zoom: { min: 15 } }
             draw:
-                waves:
+                polygons:
+                    style: waves
                     visible: true
                     color: global.lighter_color
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
-                waves:
+                polygons:
+                    style: waves
                     visible: true
                     color: global.lighter_color
         playas:
@@ -1344,7 +1354,8 @@ layers:
         water-boundary-ocean:
             filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
             draw:
-                coast:
+                lines:
+                    style: coast
                     visible: true
                     order: global.feature_order
                     color: [[1, global.light_color], [6, global.mid_color]]
@@ -1376,7 +1387,8 @@ layers:
                     - { $zoom: [14], area: { min: 40000 } }
                     - { $zoom: { min: 15 } }
             draw:
-                coast:
+                lines:
+                    style: coast
                     visible: true
                     order: global.feature_order
                     color: [[6, global.lightest_color], [11, global.mid_color]]
@@ -1391,13 +1403,15 @@ layers:
             swimming-pools-early:
                 filter: { kind: swimming_pool, $zoom: { max: 19 } }
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         visible: false
             riverbank:
                 # river boundaries like the thames in london, la seine in paris
                 filter: { kind: riverbank }
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         visible: true
                         color: global.dark_color
                         width: [[9, 0.5px], [15, 2px]]
@@ -1405,7 +1419,8 @@ layers:
             #river center lines, not boundaries for polygons
             filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 11 }, not: { is_tunnel: true } }
             draw:
-                riverlines:
+                lines:
+                    style: riverlines
                     visible: true
                     order: global.feature_order_down_1
                     color: global.light_color
@@ -1417,7 +1432,8 @@ layers:
                         - intermittent: [true]
                         - kind: drain
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         color: global.light_color
 
 
@@ -1699,7 +1715,8 @@ layers:
                             font:
                                 family: Montserrat
                                 fill: function() { if(feature.colour == 'yellow') { return '#555'; } else { return 'white'; } }
-                                style: bold
+                                #style: bold
+                                weight: 700
                                 size: [[7,7px],[12,8px],[16,11px]]
                                 # disable the default mapzen_icon_library stroke
                                 stroke: { width: 0px }
@@ -1839,7 +1856,7 @@ layers:
                 arrows:
                     style: mapzen_icon_library
                     flat: true
-                    visible: global.icon_visible_landuse_green
+                    visible: global.icon_visible_arrows
                     sprite: arrow
                     color: global.midlight_color
                     size: [[17, 6px], [20, 14px]]
@@ -3102,7 +3119,8 @@ layers:
         railway:
             filter: { kind: rail, not: { kind_detail: [subway,light_rail,tram] } }
             draw:
-                railway_dash:
+                lines:
+                    style: railway_dash
                     color: [[12, global.lightest_color], [17, global.light_color]]
                     width: [[12, 0px], [12, 0.5px], [18, 4px], [20, 2m]]
                     # let roads sort themselves past zoom 14
@@ -3202,20 +3220,20 @@ layers:
                 all:
                     - { $zoom: { min: 16 } }
                     - $geometry: point
-                    - kind: [false, building, university, college, school, kindergarten]
+                    - landuse_kind: [university, college, school, kindergarten]
                     - function() { return global.text_visible_building; }
                 any:
                     - { $zoom: [16], area: { min: 5000 }, name: true }
                     - { $zoom: [16], area: { min: 5000 }, kind: true }
                     - { $zoom: [16], area: { min: 10000 }, landuse_kind: true }
-                    - { $zoom: [16], area: { min: 7000 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: [16], area: { min: 7000 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [16], volume: { min: 50000 }, name: true }
                     - { $zoom: [17], area: { min: 3000 }, name: true }
-                    - { $zoom: [17], area: { min: 2000 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: [17], area: { min: 2000 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [18], area: { min: 1000 }, name: true }
-                    - { $zoom: [18], kind: [university, college, school, kindergarten] }
+                    - { $zoom: [18], kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [19], area: { min: 200 }, name: true }
-                    - { $zoom: { min: 19 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: { min: 19 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: { min: 20 }, name: true }
             draw:
                 text-blend-order:
@@ -4926,7 +4944,8 @@ layers:
                     - not: { operator: [ "United States Forest Service" ] }
                     - protect_class: ['2','3','5']
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.lighter_color
                     order: 18
                     visible: true
@@ -4937,7 +4956,8 @@ layers:
                         - operator: [ "United States National Park Service" ]
                         - protect_class: ['2','3','5']
                 draw:
-                    pixel-pattern-light:
+                    polygons:
+                        style: pixel-pattern-light
                         visible: true
 
         #tier2:
@@ -4948,7 +4968,8 @@ layers:
                 kind: [protected_area, nature_reserve, national_park]
                 not: { protect_class: ['2','3','5']}
             draw:
-                pixel-pattern-light:
+                polygons:
+                    style: pixel-pattern-light
                     color: global.white_color
                     visible: true
 
@@ -4960,15 +4981,17 @@ layers:
                     - protect_class: ['6']
                     - operator: ['United States Forest Service']
             draw:
-                pixel-pattern-bright:
+                polygons:
+                    style: pixel-pattern-bright
                     color: global.lighter_color
                     visible: true
 
         forest-landcover:
             filter: { kind: [forest, natural_forest, wood, natural_wood, natural_park], $zoom: { min: 10 }, not: { operator: "United States Forest Service" } }
             draw:
-                pixel-pattern-light:
-                        visible: true
+                polygons:
+                    style: pixel-pattern-light
+                    visible: true
 
         parks-and-national-forests-not-national-park:
             filter:
@@ -4980,7 +5003,8 @@ layers:
                     - not: { protect_class: ['2','3','5','6'] }
             # default for national forests and more?
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.lighter_color
                     visible: true
             national_park:
@@ -4990,7 +5014,8 @@ layers:
                         - kind: national_park
                         - not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
                 draw:
-                    pixel-pattern-light:
+                    polygons:
+                        style: pixel-pattern-light
                         visible: true
 
         # gotta be a protected area to draw green, not just a landcover type
@@ -4999,7 +5024,8 @@ layers:
                 kind: [farm, farmland]
                 $zoom: { min: 10}
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.offwhite_color
                     visible: true
 
@@ -5008,7 +5034,8 @@ layers:
             filter:
                 kind: [university, college]
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.lightest_color
                     visible: true
         #tier4:
@@ -5016,50 +5043,62 @@ layers:
             filter:
                 kind: cemetery
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.lighter_color
                     visible: true
+
         golf_course:
             filter:
                 kind: golf_course
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.lightest_color
                     visible: true
+
         hospital:
             filter:
                 kind: hospital
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.lightest_color
                     visible: true
+
         sports_centre:
             filter:
                 kind: sports_centre
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.offwhite_color
+
         recreation_ground:
             filter:
                 kind: recreation_ground
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.offwhite_color
                     visible: true
         stadium:
             filter:
                 kind: stadium
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.offwhite_color
                     visible: true
         zoo:
             filter:
                 kind: [zoo, wildlife_park]
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.offwhite_color
                     visible: true
+
         winter_sports:
             filter:
                 kind: winter_sports
@@ -5067,10 +5106,12 @@ layers:
                 polygons:
                     color: [[9, global.white_color], [20, global.offwhite_color]]
                     visible: true
+
         man-made:
             filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
             draw:
-                horizontal-bars:
+                polygons:
+                    style: horizontal-bars
                     color: global.lightest_color
                     visible: true
             pier:
@@ -5098,14 +5139,16 @@ layers:
                         - winery
                         - maze
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.light_color
                         visible: true
             beach:
                 filter:
                     kind: beach
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.lightest_color
                         visible: true
         #tier6:
@@ -5113,9 +5156,11 @@ layers:
             filter:
                 kind: garden
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.light_color
                     visible: true
+
         parking:
             filter:
                 all:
@@ -5125,26 +5170,31 @@ layers:
                     - { $zoom: { min: 14 }, area: { min: 10000 } }
                     - { $zoom: { min: 15 }, area: { min: 5000 } }
             draw:
-                horizontal-bars-rev:
+                polygons:
+                    style: horizontal-bars-rev
                     color: global.ultralight_color
                     visible: true
+
         pedestrian:
             filter:
                 kind: [pedestrian,common,footway]
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.offwhite_color
                     visible: true
             green-stuff:
                 filter:
                     surface: [grass]
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.lighter_color
         pitch:
             filter: { kind: pitch }
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.lightest_color
                     visible: true
                 outline:
@@ -5152,20 +5202,25 @@ layers:
                     order: global.feature_order
                     color: global.ultralight_color
                     width: [[14, 0px], [15, 1px], [18, 2px]]
+
         playground:
             filter:
                 kind: playground
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.ultralight_color
                     visible: true
+
         school:
             filter:
                 kind: school
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.offwhite_color
                     visible: true
+
         minor-landuse:
             filter:
                 kind:
@@ -5174,7 +5229,8 @@ layers:
                     - wilderness_hut
                     - hanami
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.light_color
                     visible: true
 
@@ -5197,12 +5253,10 @@ layers:
                     - petting_zoo
                     - aviary
             draw:
-                dots:
-                    order: global.feature_order
-                    visible: false
                 polygons:
-                    visible: false
                     order: global.feature_order
+                    visible: false
+
             runway:
                 filter:
                     kind: runway
@@ -5215,9 +5269,12 @@ layers:
                     kind: apron
                     $zoom: { min: 15 }
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.offwhite_color
+                        order: 60
                         visible: global.grey1_v
+
             minor-amusement-park-landuse:
                 filter:
                     kind:
@@ -5228,9 +5285,11 @@ layers:
                         - water_slide
                         - carousel
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.light_color
                         visible: true
+
             minor-zoo-landuse:
                 filter:
                     kind:
@@ -5239,7 +5298,8 @@ layers:
                         - petting_zoo
                         - aviary
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.lighter_color
                         visible: true
 

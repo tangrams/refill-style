@@ -24,6 +24,7 @@ global:
     label_visible_station:          true
     icon_visible_station:           true                        #false on default, this needs work
     text_visible_station:           true
+    icon_visible_arrows:            true
     text_visible_highway:           true
     text_visible_trunk_primary:     true
     text_visible_secondary:         true
@@ -72,13 +73,13 @@ layers:
                 all:
                     - { $zoom: { min: 19 } }
                     - $geometry: point
-                    - kind: [false, building, university, college, school, kindergarten]
+                    - landuse_kind: [university, college, school, kindergarten]
                     - function() { return global.text_visible_building; }
                 any:
                     - { $zoom: [17], area: { min: 3000 }, name: true }
-                    - { $zoom: [17], area: { min: 2000 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: [17], area: { min: 2000 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [18], area: { min: 1000 }, name: true }
-                    - { $zoom: [18], kind: [university, college, school, kindergarten] }
+                    - { $zoom: [18], kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: [19], area: { min: 200 }, name: true }
-                    - { $zoom: { min: 19 }, kind: [university, college, school, kindergarten] }
+                    - { $zoom: { min: 19 }, kind_detail: [university, college, school, kindergarten] }
                     - { $zoom: { min: 20 }, name: true }
