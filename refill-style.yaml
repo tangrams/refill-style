@@ -391,11 +391,12 @@ textures:
 sources:
     mapzen:
         type: TopoJSON #GeoJSON, MVT, TopoJSON
-        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
+        url:  https://tile.mapzen.com/mapzen/vector/v1/512/all/{z}/{x}/{y}.topojson
         url_params:
             api_key: global.sdk_mapzen_api_key
         #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
         # url:  //localhost:8080/vector/all/{z}/{x}/{y}.topojson
+        tile_size: 512
         max_zoom: 16
 
     # # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
@@ -3827,7 +3828,6 @@ layers:
                         size: [[8,6px],[9,6px],[10,6px],[11,0px]]
                         sprite: townspot-m-rev
                         priority: 13
-                        collide: false  #debug
                         text:
                             font:
                                 size: [[6,10px],[8,14px],[10,15px],[12,16px],[13,0px]]
