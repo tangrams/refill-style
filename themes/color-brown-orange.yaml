@@ -24,6 +24,47 @@ global:
     two_color_ultralight: [1.000,0.922,0.878]
     two_color_offwhite: [1.000,0.965,0.949]
 
+    # DATA VIZ DOT COLORS
+    # Qualitative Option 1
+    # dot_color1_outline:         [0.320,0.440,0.800,1.0]
+    # dot_color1_fill:            [0.320,0.440,0.800,0.2]
+    # dot_color2_outline:         [0.800,0.320,0.704,1.0]
+    # dot_color2_fill:            [0.800,0.320,0.704,0.2]
+    # dot_color3_outline:         [0.800,0.552,0.320,1.0]
+    # dot_color3_fill:            [0.800,0.552,0.320,0.2]
+
+    # Qualitative Option 2
+    dot_color1_outline:         [0.031,0.394,0.620,1.0]
+    dot_color1_fill:            [0.031,0.394,0.620,0.2]
+    dot_color2_outline:         [0.260,0.034,0.680,1.0]
+    dot_color2_fill:            [0.260,0.034,0.680,0.2]
+    dot_color3_outline:         [0.765,0.243,0.035,1.0]
+    dot_color3_fill:            [0.765,0.243,0.035,0.2]
+
+    # Sequential
+    # dot_color1_outline:         [0.545,0.158,0.036,1.0]
+    # dot_color1_fill:            [0.545,0.158,0.036,0.2]
+    # dot_color2_outline:         [0.851,0.280,0.015,1.0]
+    # dot_color2_fill:            [0.851,0.280,0.015,0.2]
+    # dot_color3_outline:         [0.945,0.416,0.080,1.0]
+    # dot_color3_fill:            [0.945,0.416,0.080,0.2]
+    # dot_color4_outline:         [0.992,0.574,0.221,1.0]
+    # dot_color4_fill:            [0.992,0.574,0.221,0.2]
+    # dot_color5_outline:         [0.992,0.699,0.344,1.0]
+    # dot_color5_fill:            [0.992,0.699,0.344,0.2]
+
+    # Diverging
+    # dot_color1_outline:         [0.660,0.251,0.049,1.0]
+    # dot_color1_fill:            [0.660,0.251,0.049,0.2]
+    # dot_color2_outline:         [0.682,0.344,0.268,1.0]
+    # dot_color2_fill:            [0.682,0.344,0.268,0.2]
+    # dot_color3_outline:         [0.430,0.430,0.430,1.0]
+    # dot_color3_fill:            [0.430,0.430,0.430,0.2]
+    # dot_color4_outline:         [0.928,0.321,0.990,1.0]
+    # dot_color4_fill:            [0.928,0.321,0.990,0.2]
+    # dot_color5_outline:         [0.617,0.068,1.000,1.0]
+    # dot_color5_fill:            [0.617,0.068,1.000,0.2]
+
 
 layers:
     water:
