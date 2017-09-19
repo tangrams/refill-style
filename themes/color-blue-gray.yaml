@@ -24,7 +24,94 @@ global:
     two_color_ultralight: [0.915,0.928,0.932]
     two_color_offwhite: [0.951,0.955,0.960]
 
+    # DATA VIZ DOT COLORS
+    # Qualitative Option 1
+    # dot_color1_outline:         [0.502,0.314,0.729,1.0]
+    # dot_color1_fill:            [0.502,0.314,0.729,0.2]
+    # dot_color2_outline:         [0.398,0.353,0.430,1.0]
+    # dot_color2_fill:            [0.398,0.353,0.430,0.2]
+    # dot_color3_outline:         [0.880,0.422,0.834,1.0]
+    # dot_color3_fill:            [0.880,0.422,0.834,0.2]
+
+    # Qualitative Option 2 - styleguide colors
+    dot_color1_outline:         [0.188,0.510,0.443,1.0]
+    dot_color1_fill:            [0.188,0.510,0.443,0.2]
+    dot_color2_outline:         [0.467,0.478,0.549,1.0]
+    dot_color2_fill:            [0.467,0.478,0.549,0.2]
+    dot_color3_outline:         [0.396,0.369,0.722,1.0]
+    dot_color3_fill:            [0.396,0.369,0.722,0.2]
+
+    # Sequential
+    # dot_color1_outline:         [0.384,0.000,0.702,1.0]
+    # dot_color1_fill:            [0.384,0.000,0.702,0.2]
+    # dot_color2_outline:         [0.667,0.200,0.890,1.0]
+    # dot_color2_fill:            [0.667,0.200,0.890,0.2]
+    # dot_color3_outline:         [0.902,0.349,0.988,1.0]
+    # dot_color3_fill:            [0.902,0.349,0.988,0.2]
+    # dot_color4_outline:         [0.992,0.518,0.988,1.0]
+    # dot_color4_fill:            [0.992,0.518,0.988,0.2]
+    # dot_color5_outline:         [0.992,0.620,0.945,1.0]
+    # dot_color5_fill:            [0.992,0.620,0.945,0.2]
+
+    # Diverging
+    # dot_color1_outline:         [0.492,0.264,0.184,1.0]
+    # dot_color1_fill:            [0.492,0.264,0.184,0.2]
+    # dot_color2_outline:         [0.831,0.556,0.375,1.0]
+    # dot_color2_fill:            [0.831,0.556,0.375,0.2]
+    # dot_color3_outline:         [0.720,0.720,0.720,1.0]
+    # dot_color3_fill:            [0.720,0.720,0.720,0.2]
+    # dot_color4_outline:         [0.502,0.804,0.757,1.0]
+    # dot_color4_fill:            [0.502,0.804,0.757,0.2]
+    # dot_color5_outline:         [0.004,0.522,0.443,1.0]
+    # dot_color5_fill:            [0.004,0.522,0.443,0.2]
+
 layers:
+    # test data viz colors here
+    restaurant:
+        data: { source: mapzen, layer: pois }
+        filter: { kind: restaurant }
+        draw:
+            mapzen_dot_density:
+                color: global.dot_color1_fill
+                outline:
+                    color: global.dot_color1_outline
+
+    cafe:
+        data: { source: mapzen, layer: pois }
+        filter: { kind: cafe }
+        draw:
+            mapzen_dot_density:
+                color: global.dot_color2_fill
+                outline:
+                    color: global.dot_color2_outline
+
+    bakery:
+        data: { source: mapzen, layer: pois }
+        filter: { kind: bakery }
+        draw:
+            mapzen_dot_density:
+                color: global.dot_color3_fill
+                outline:
+                    color: global.dot_color3_outline
+
+    # park:
+    #     data: { source: mapzen, layer: pois }
+    #     filter: { kind: park }
+    #     draw:
+    #         mapzen_dot_density:
+    #             color: global.dot_color4_fill
+    #             outline:
+    #                 color: global.dot_color4_outline
+
+    # school:
+    #     data: { source: mapzen, layer: pois }
+    #     filter: { kind: [school,kindergarten,playground] }
+    #     draw:
+    #         mapzen_dot_density:
+    #             color: global.dot_color5_fill
+    #             outline:
+    #                 color: global.dot_color5_outline
+
     water:
         draw:
             waves:
