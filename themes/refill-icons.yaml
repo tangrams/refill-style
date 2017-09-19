@@ -20,6 +20,16 @@ styles:
                     size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
                     stroke: { color: global.white_color, width: [[12,2px],[16,4px]] }
 
+    mapzen_dot_density:
+        base: points
+        draw:
+            collide: false
+            color: [1.000, 1.000, 1.000]
+            size: [[12, 4px], [16, 8px], [18, 16px], [20, 24px]]
+            outline:
+                color: global.mapzen_color_library.default.0.0
+                width: [[12, 1px], [18, 2px]]
+
     colorized-icons:
         shaders:
             uniforms:

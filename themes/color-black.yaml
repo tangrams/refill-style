@@ -12,3 +12,48 @@ global:
     white_color:                [1.00,1.00,1.00]
     transparent:                [0.900,0.900,0.900,0.250]
     route_line:                 [0.000,0.500,1.000]
+
+    #qualitative option 1
+    # dot_color1_outline:         [0.090,0.639,0.965,1.0]
+    # dot_color1_fill:            [0.090,0.639,0.965,0.2]
+    # dot_color2_outline:         [0.482,0.314,0.914,1.0]
+    # dot_color2_fill:            [0.482,0.314,0.914,0.2]
+    # dot_color3_outline:         [0.000,0.640,0.608,1.0]
+    # dot_color3_fill:            [0.000,0.640,0.608,0.2]
+
+    #qualitative option 2 - styleguide colors
+    dot_color1_outline:         [1.000,0.286,0.278,1.0]
+    dot_color1_fill:            [1.000,0.286,0.278,0.2]
+    dot_color2_outline:         [0.498,0.176,0.890,1.0]
+    dot_color2_fill:            [0.498,0.176,0.890,0.2]
+    dot_color3_outline:         [0.647,0.431,0.780,1.0]
+    dot_color3_fill:            [0.647,0.431,0.780,0.2]
+
+# test data viz colors here
+layers:
+    restaurant:
+        data: { source: mapzen, layer: pois }
+        filter: { kind: restaurant }
+        draw:
+            mapzen_dot_density:
+                color: global.dot_color1_fill
+                outline:
+                    color: global.dot_color1_outline
+
+    cafe:
+        data: { source: mapzen, layer: pois }
+        filter: { kind: cafe }
+        draw:
+            mapzen_dot_density:
+                color: global.dot_color2_fill
+                outline:
+                    color: global.dot_color2_outline
+
+    bakery:
+        data: { source: mapzen, layer: pois }
+        filter: { kind: bakery }
+        draw:
+            mapzen_dot_density:
+                color: global.dot_color3_fill
+                outline:
+                    color: global.dot_color3_outline
