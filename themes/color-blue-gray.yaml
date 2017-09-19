@@ -26,14 +26,14 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
-    # dot_color1_outline:         [0.502,0.314,0.729,1.0]
-    # dot_color1_fill:            [0.502,0.314,0.729,0.2]
-    # dot_color2_outline:         [0.398,0.353,0.430,1.0]
-    # dot_color2_fill:            [0.398,0.353,0.430,0.2]
-    # dot_color3_outline:         [0.880,0.422,0.834,1.0]
-    # dot_color3_fill:            [0.880,0.422,0.834,0.2]
+    dot_color1_outline:         [0.502,0.314,0.729,1.0]
+    dot_color1_fill:            [0.502,0.314,0.729,0.2]
+    dot_color2_outline:         [0.398,0.353,0.430,1.0]
+    dot_color2_fill:            [0.398,0.353,0.430,0.2]
+    dot_color3_outline:         [0.880,0.422,0.834,1.0]
+    dot_color3_fill:            [0.880,0.422,0.834,0.2]
 
-    # Qualitative Option 2 - styleguide colors
+    # Qualitative Option 2
     # dot_color1_outline:         [0.188,0.510,0.443,1.0]
     # dot_color1_fill:            [0.188,0.510,0.443,0.2]
     # dot_color2_outline:         [0.467,0.478,0.549,1.0]
@@ -66,52 +66,6 @@ global:
     # dot_color5_fill:            [0.224,0.500,0.248,0.2]
 
 layers:
-    # test data viz colors here
-    # restaurant:
-    #     data: { source: mapzen, layer: pois }
-    #     filter: { kind: restaurant }
-    #     draw:
-    #         mapzen_dot_density:
-    #             color: global.dot_color1_fill
-    #             outline:
-    #                 color: global.dot_color1_outline
-
-    # cafe:
-    #     data: { source: mapzen, layer: pois }
-    #     filter: { kind: cafe }
-    #     draw:
-    #         mapzen_dot_density:
-    #             color: global.dot_color2_fill
-    #             outline:
-    #                 color: global.dot_color2_outline
-
-    # bakery:
-    #     data: { source: mapzen, layer: pois }
-    #     filter: { kind: bakery }
-    #     draw:
-    #         mapzen_dot_density:
-    #             color: global.dot_color3_fill
-    #             outline:
-    #                 color: global.dot_color3_outline
-
-    # park:
-    #     data: { source: mapzen, layer: pois }
-    #     filter: { kind: park }
-    #     draw:
-    #         mapzen_dot_density:
-    #             color: global.dot_color4_fill
-    #             outline:
-    #                 color: global.dot_color4_outline
-
-    # school:
-    #     data: { source: mapzen, layer: pois }
-    #     filter: { kind: [school,kindergarten,playground] }
-    #     draw:
-    #         mapzen_dot_density:
-    #             color: global.dot_color5_fill
-    #             outline:
-    #                 color: global.dot_color5_outline
-
     water:
         draw:
             waves:
