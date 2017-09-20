@@ -12,3 +12,44 @@ global:
     white_color:                  [1.00,1.00,1.00]
     transparent:                  [0.940,0.868,0.855,0.250]
     route_line:                   [0.700,0.196,0.507]
+
+    # DATA VIZ DOT COLORS
+    # Qualitative Option 1
+    dot_color1_outline:         [0.263,0.466,0.940,1.0]
+    dot_color1_fill:            [0.263,0.466,0.940,0.2]
+    dot_color2_outline:         [0.263,0.760,0.940,1.0]
+    dot_color2_fill:            [0.263,0.760,0.940,0.2]
+    dot_color3_outline:         [0.940,0.534,0.263,1.0]
+    dot_color3_fill:            [0.940,0.534,0.263,0.2]
+
+    # Qualitative Option 2
+    # dot_color1_outline:         [0.700,0.336,0.960,1.0]
+    # dot_color1_fill:            [0.700,0.336,0.960,0.2]
+    # dot_color2_outline:         [0.965,0.337,0.945,1.0]
+    # dot_color2_fill:            [0.965,0.337,0.945,0.2]
+    # dot_color3_outline:         [0.960,0.586,0.336,1.0]
+    # dot_color3_fill:            [0.960,0.586,0.336,0.2]
+
+    # Sequential
+    # dot_color1_outline:         [0.517,0.000,0.555,1.0]
+    # dot_color1_fill:            [0.517,0.000,0.555,0.2]
+    # dot_color2_outline:         [0.741,0.007,0.630,1.0]
+    # dot_color2_fill:            [0.741,0.007,0.630,0.2]
+    # dot_color3_outline:         [0.924,0.217,0.631,1.0]
+    # dot_color3_fill:            [0.924,0.217,0.631,0.2]
+    # dot_color4_outline:         [0.969,0.423,0.594,1.0]
+    # dot_color4_fill:            [0.969,0.423,0.594,0.2]
+    # dot_color5_outline:         [0.980,0.575,0.574,1.0]
+    # dot_color5_fill:            [0.980,0.575,0.574,0.2]
+
+    # Diverging
+    # dot_color1_outline:         [0.660,0.251,0.049,1.0]
+    # dot_color1_fill:            [0.660,0.251,0.049,0.2]
+    # dot_color2_outline:         [0.682,0.344,0.268,1.0]
+    # dot_color2_fill:            [0.682,0.344,0.268,0.2]
+    # dot_color3_outline:         [0.430,0.430,0.430,1.0]
+    # dot_color3_fill:            [0.430,0.430,0.430,0.2]
+    # dot_color4_outline:         [0.928,0.321,0.990,1.0]
+    # dot_color4_fill:            [0.928,0.321,0.990,0.2]
+    # dot_color5_outline:         [0.617,0.068,1.000,1.0]
+    # dot_color5_fill:            [0.617,0.068,1.000,0.2]
