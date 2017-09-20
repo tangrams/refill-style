@@ -27,20 +27,20 @@ layers:
                 outline:
                     color: global.dot_color3_outline
 
-    park:
-        data: { source: mapzen, layer: pois }
-        filter: { kind: park }
-        draw:
-            mapzen_dot_density:
-                color: global.dot_color4_fill
-                outline:
-                    color: global.dot_color4_outline
+    # park:
+    #     data: { source: mapzen, layer: pois }
+    #     filter: { kind: park }
+    #     draw:
+    #         mapzen_dot_density:
+    #             color: global.dot_color4_fill
+    #             outline:
+    #                 color: global.dot_color4_outline
 
-    school:
-        data: { source: mapzen, layer: pois }
-        filter: { kind: [school,kindergarten,playground] }
-        draw:
-            mapzen_dot_density:
-                color: global.dot_color5_fill
-                outline:
-                    color: global.dot_color5_outline
+    # school:
+    #     data: { source: mapzen, layer: pois }
+    #     filter: { kind: [school,kindergarten,playground] }
+    #     draw:
+    #         mapzen_dot_density:
+    #             color: global.dot_color5_fill
+    #             outline:
+    #                 color: global.dot_color5_outline
