@@ -26,12 +26,12 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
-    # dot_color1_outline:         [1.000,0.898,0.549,1.0]
-    # dot_color1_fill:            [1.000,0.898,0.549,0.2]
-    # dot_color2_outline:         [0.965,0.643,0.451,1.0]
-    # dot_color2_fill:            [0.965,0.643,0.451,0.2]
-    # dot_color3_outline:         [0.957,0.722,0.969,1.0]
-    # dot_color3_fill:            [0.957,0.722,0.969,0.2]
+    dot_color1_outline:         [1.000,0.898,0.549,1.0]
+    dot_color1_fill:            [1.000,0.898,0.549,0.2]
+    dot_color2_outline:         [0.965,0.643,0.451,1.0]
+    dot_color2_fill:            [0.965,0.643,0.451,0.2]
+    dot_color3_outline:         [0.957,0.722,0.969,1.0]
+    dot_color3_fill:            [0.957,0.722,0.969,0.2]
 
     # Qualitative Option 2
     # dot_color1_outline:         [0.930,0.571,0.363,1.0]
@@ -54,16 +54,16 @@ global:
     # dot_color5_fill:            [0.992,0.519,0.227,0.2]
 
     # Diverging
-    dot_color1_outline:         [0.996,0.817,0.459,1.0]
-    dot_color1_fill:            [0.996,0.817,0.459,0.2]
-    dot_color2_outline:         [1.000,0.921,0.632,1.0]
-    dot_color2_fill:            [1.000,0.921,0.632,0.2]
-    dot_color3_outline:         [0.850,0.850,0.850,1.0]
-    dot_color3_fill:            [0.850,0.850,0.850,0.2]
-    dot_color4_outline:         [1.000,0.630,0.858,1.0]
-    dot_color4_fill:            [1.000,0.630,0.858,0.2]
-    dot_color5_outline:         [1.000,0.460,0.748,1.0]
-    dot_color5_fill:            [1.000,0.460,0.748,0.2]
+    # dot_color1_outline:         [0.996,0.817,0.459,1.0]
+    # dot_color1_fill:            [0.996,0.817,0.459,0.2]
+    # dot_color2_outline:         [1.000,0.921,0.632,1.0]
+    # dot_color2_fill:            [1.000,0.921,0.632,0.2]
+    # dot_color3_outline:         [0.850,0.850,0.850,1.0]
+    # dot_color3_fill:            [0.850,0.850,0.850,0.2]
+    # dot_color4_outline:         [1.000,0.630,0.858,1.0]
+    # dot_color4_fill:            [1.000,0.630,0.858,0.2]
+    # dot_color5_outline:         [1.000,0.460,0.748,1.0]
+    # dot_color5_fill:            [1.000,0.460,0.748,0.2]
 
 
 layers:
