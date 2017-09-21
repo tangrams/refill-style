@@ -13,3 +13,8 @@ global:
     transparent:               [1.000,0.880,0.972,0.250]
     route_line:                [0.369,0.349,0.729]
 
+styles:
+    mapzen_icon_library:
+        # To make Refill's colorize-able icons play nice with other styles
+        # restate the mix so the order of import matters
+        mix: colorized-icons

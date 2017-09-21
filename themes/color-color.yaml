@@ -396,6 +396,11 @@ layers:
 
 
 styles:
+    mapzen_icon_library:
+        # To make Refill's colorize-able icons play nice with other styles
+        # restate the mix so the order of import matters
+        mix: colorized-icons
+
     building-grid:
         shaders:
             uniforms:

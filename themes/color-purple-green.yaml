@@ -212,6 +212,11 @@ layers:
 
 
 styles:
+    mapzen_icon_library:
+        # To make Refill's colorize-able icons play nice with other styles
+        # restate the mix so the order of import matters
+        mix: colorized-icons
+
     railway_dash:
         base: lines
         dash: [0.25, 1.0]

@@ -302,6 +302,11 @@ styles:
             defines:
                 COLOR1: vec3(0.153,0.157,0.161)
 
+styles:
+    mapzen_icon_library:
+        # To make Refill's colorize-able icons play nice with other styles
+        # restate the mix so the order of import matters
+        mix: colorized-icons
 
 textures:
     building-grid:
