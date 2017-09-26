@@ -25,6 +25,8 @@ global:
     two_color_offwhite:         [0.569,0.431,0.824]
     two_color_white:            [0.690,0.524,1.000]
 
+    # style for mixing color
+    sdk-icon-color-style: colorized-icons
 
 layers:
     water:
@@ -215,7 +217,7 @@ styles:
     mapzen_icon_library:
         # To make Refill's colorize-able icons play nice with other styles
         # restate the mix so the order of import matters
-        mix: colorized-icons
+        mix: global.sdk-icon-color-style
 
     railway_dash:
         base: lines
