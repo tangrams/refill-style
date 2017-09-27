@@ -31,16 +31,16 @@ global:
     # dot_color3_fill:            [1.000,0.431,1.000,0.4]
 
     # Sequential
-    # dot_color1_outline:         [0.053,0.653,0.890,1.0]
-    # dot_color1_fill:            [0.053,0.653,0.890,0.2]
-    # dot_color2_outline:         [0.146,0.730,0.662,1.0]
-    # dot_color2_fill:            [0.146,0.730,0.662,0.2]
-    # dot_color3_outline:         [0.358,0.804,0.513,1.0]
-    # dot_color3_fill:            [0.358,0.804,0.513,0.2]
-    # dot_color4_outline:         [0.613,0.914,0.523,1.0]
-    # dot_color4_fill:            [0.613,0.914,0.523,0.2]
-    # dot_color5_outline:         [0.918,0.970,0.578,1.0]
-    # dot_color5_fill:            [0.918,0.970,0.578,0.2]
+    dot_color1_outline:         [0.053,0.653,0.890,1.0]
+    dot_color1_fill:            [0.053,0.653,0.890,0.2]
+    dot_color2_outline:         [0.146,0.730,0.662,1.0]
+    dot_color2_fill:            [0.146,0.730,0.662,0.2]
+    dot_color3_outline:         [0.358,0.804,0.513,1.0]
+    dot_color3_fill:            [0.358,0.804,0.513,0.2]
+    dot_color4_outline:         [0.613,0.914,0.523,1.0]
+    dot_color4_fill:            [0.613,0.914,0.523,0.2]
+    dot_color5_outline:         [0.918,0.970,0.578,1.0]
+    dot_color5_fill:            [0.918,0.970,0.578,0.2]
 
     # Diverging
     # dot_color1_outline:         [0.219,0.854,0.079,1.0]
