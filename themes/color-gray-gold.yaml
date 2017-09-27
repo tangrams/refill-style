@@ -27,11 +27,11 @@ global:
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
     # dot_color1_outline:         [1.000,0.870,0.400,1.0]
-    # dot_color1_fill:            [1.000,0.870,0.400,0.3]
+    # dot_color1_fill:            [1.000,0.870,0.400,0.4]
     # dot_color2_outline:         [0.960,0.494,0.461,1.0]
-    # dot_color2_fill:            [0.960,0.494,0.461,0.3]
-    # dot_color3_outline:         [0.835,0.537,0.910,1.0]
-    # dot_color3_fill:            [0.835,0.537,0.910,0.3]
+    # dot_color2_fill:            [0.960,0.494,0.461,0.4]
+    # dot_color3_outline:         [0.537,0.612,0.910,1.0]
+    # dot_color3_fill:            [0.537,0.612,0.910,0.4]
 
     # # Qualitative Option 2
     dot_color1_outline:         [0.957,0.529,0.980,1.0]
