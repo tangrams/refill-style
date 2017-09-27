@@ -11,8 +11,8 @@
 #
 
 import:
-    - themes/color-black.yaml
     - themes/label-5.yaml
+    # the icon import also imports theme/color-black.yaml for us
     - themes/refill-icons.yaml
 
 global:

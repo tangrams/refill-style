@@ -1,9 +1,8 @@
-global:
-    # To make Refill's colorize-able icons play nice with other styles.
-    # Other styles default to "" or null (don't color).
-    # Here we default Refill to use colorized icons by default by
-    # setting sdk_icon_color_style property value to "colorized-icons"
-    sdk_icon_color_style: colorized_icons
+import:
+    # Importing the color theme here provides access to
+    # global colors like black_color, white_color, and dark_color; and
+    # to globals like sdk_icon_color_style, icon_size, and text_font_family
+    - themes/color-black.yaml
 
 styles:
     mapzen_icon_library:
