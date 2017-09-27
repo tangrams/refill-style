@@ -24,6 +24,13 @@ global:
     two_color_ultralight: [1.000,0.980,0.850]
     two_color_offwhite: [1.000,0.992,0.940]
 
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
 
 layers:
     water:
@@ -225,11 +232,6 @@ layers:
                     color: global.two_color_lightest
 
 styles:
-    mapzen_icon_library:
-        # To make Refill's colorize-able icons play nice with other styles
-        # restate the mix so the order of import matters
-        mix: colorized-icons
-
     railway_dash:
         base: lines
         dash: [0.25, 1.0]

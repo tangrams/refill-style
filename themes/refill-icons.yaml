@@ -1,9 +1,17 @@
+global:
+    # To make Refill's colorize-able icons play nice with other styles.
+    # Other styles default to "" or null (don't color).
+    # Here we default Refill to use colorized icons by default by
+    # setting sdk_icon_color_style property value to "colorized-icons"
+    sdk_icon_color_style: colorized_icons
+
 styles:
     mapzen_icon_library:
         base: points
         texture: mapzen_icon_library
         blend_order: 1
-        mix: colorized-icons
+        # To make Refill's colorize-able icons play nice with other styles
+        mix: global.sdk_icon_color_style
         draw:
             size: global.icon_size
             sprite: function() { return feature.kind; }
@@ -20,7 +28,7 @@ styles:
                     size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
                     stroke: { color: global.white_color, width: [[12,2px],[16,4px]] }
 
-    colorized-icons:
+    colorized_icons:
         shaders:
             uniforms:
                 u_tint: global.black_color
