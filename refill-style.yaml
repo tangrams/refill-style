@@ -11,9 +11,9 @@
 #
 
 import:
-    - themes/label-5.yaml
-    # the icon import also imports theme/color-black.yaml for us
     - themes/refill-icons.yaml
+    - themes/color-black.yaml
+    - themes/label-5.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits

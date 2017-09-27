@@ -1,8 +1,21 @@
-import:
-    # Importing the color theme here provides access to
-    # global colors like black_color, white_color, and dark_color; and
-    # to globals like sdk_icon_color_style, icon_size, and text_font_family
-    - color-black.yaml
+global:
+    # To allow standalone icon use let's define core terms that
+    # are otherwise defined in the root {style}-style.yaml,
+    # themes/color-{theme}.yaml or themes/label-{step} files.
+    # This also means {style}-icons.yaml should be imported first.
+    icon_size:          [[13, '14px'], [16, '18px'], [18, '19px']]
+    text_font_family:   'Open Sans'
+    black_color:        [0.00,0.00,0.00]
+    dark_color:         [0.250,0.250,0.250]
+    white_color:        [1.00,1.00,1.00]
+
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
 
 styles:
     mapzen_icon_library:
