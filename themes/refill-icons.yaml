@@ -2,7 +2,7 @@ import:
     # Importing the color theme here provides access to
     # global colors like black_color, white_color, and dark_color; and
     # to globals like sdk_icon_color_style, icon_size, and text_font_family
-    - themes/color-black.yaml
+    - color-black.yaml
 
 styles:
     mapzen_icon_library:
