@@ -11,10 +11,10 @@
 #
 
 import:
+    - themes/refill-icons.yaml
     - themes/color-black.yaml
     - themes/label-5.yaml
-    - themes/refill-icons.yaml
-    - themes/data-viz.yaml
+    - themes/data-viz-testing.yaml
 
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
@@ -2500,6 +2500,7 @@ layers:
                             family: Montserrat
                             fill: global.black_color
                             size: [[7,7px],[12,8px],[16,11px]]
+                            stroke: { width: 0px }
 
             default_priority_highway:
                 filter:

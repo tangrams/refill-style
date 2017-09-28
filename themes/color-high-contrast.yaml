@@ -17,6 +17,14 @@ global:
     hi_contrast_midlight:         [0.500,0.500,0.500]
     hi_contrast_offwhite:         [0.980,0.980,0.980]
 
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
+
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
     dot_color1_outline:         [0.090,0.639,0.965,1.0]
@@ -58,49 +66,62 @@ global:
     # dot_color5_outline:         [0.004,0.522,0.443,1.0]
     # dot_color5_fill:            [0.004,0.522,0.443,0.2]
 
-
     # FILTER
     landuse-casing:
         any:
             - landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest, attraction, natural_wood, recreation_ground]
 
 layers:
+    earth:
+        continent:
+            draw:
+                text-blend-order:
+                    font:
+                        stroke: { color: global.white_color, width: 3px }
     water:
         draw:
-            waves:
+            polygons:
+                style: waves
                 color: global.hi_contrast_mid
         later:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.hi_contrast_mid
 
         lakes:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.hi_contrast_mid
 
         other-water-areas:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.hi_contrast_mid
 
         swimming_pool:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.hi_contrast_mid
 
         water-boundary-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.hi_contrast_midlight
 
         water_boundaries-not-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.hi_contrast_midlight
             riverbank:
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         color: global.hi_contrast_midlight
 
         water-area-labels:
@@ -109,26 +130,26 @@ layers:
                     text-blend-order:
                         font:
                             fill: global.lightest_color
-                            stroke: { color: global.black_color, width: 3 }
+                            stroke: { color: global.black_color, width: 3px }
                 sea-labels:
                     draw:
                         text-blend-order:
                             font:
                                 fill: global.lightest_color
-                                stroke: { color: global.black_color, width: 3 }
+                                stroke: { color: global.black_color, width: 3px }
             mostly-lakes:
                 default-label-text:
                     draw:
                         text-blend-order:
                             font:
                                 fill: global.lightest_color
-                                stroke: { color: global.light_color, width: 3 }
+                                stroke: { color: global.light_color, width: 3px }
             water-line-labels:
                 draw:
                     text-blend-order:
                         font:
                             fill: global.lightest_color
-                            stroke: { color: global.black_color, width: 3 }
+                            stroke: { color: global.black_color, width: 3px }
 
     roads:
         path:
@@ -157,7 +178,8 @@ layers:
 
         railway:
             draw:
-                railway_dash:
+                lines:
+                    style: railway_dash
                     color: global.white_color
                     width: [[12, 0px], [12, 0.5px], [15, 0.5px], [18, 2px], [20, 1m]]
 
@@ -200,7 +222,7 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: global.white_color, width: 3 }
+                            stroke: { color: global.white_color, width: 3px }
 
         other_country_boundary_disputed_etc:
             draw:
@@ -216,14 +238,7 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: global.white_color, width: 3 }
-
-    earth-labels:
-        continent:
-            draw:
-                text-blend-order:
-                    font:
-                        stroke: { color: global.white_color, width: 3 }
+                            stroke: { color: global.white_color, width: 3px }
 
 
 styles:

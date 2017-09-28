@@ -1,9 +1,29 @@
+global:
+    # To allow standalone icon use let's define core terms that
+    # are otherwise defined in the root {style}-style.yaml,
+    # themes/color-{theme}.yaml or themes/label-{step} files.
+    # This also means {style}-icons.yaml should be imported first.
+    icon_size:          [[13, '14px'], [16, '18px'], [18, '19px']]
+    text_font_family:   'Open Sans'
+    black_color:        [0.00,0.00,0.00]
+    dark_color:         [0.250,0.250,0.250]
+    white_color:        [1.00,1.00,1.00]
+
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
+
 styles:
     mapzen_icon_library:
         base: points
         texture: mapzen_icon_library
         blend_order: 1
-        mix: colorized-icons
+        # To make Refill's colorize-able icons play nice with other styles
+        mix: global.sdk_icon_color_style
         draw:
             size: global.icon_size
             sprite: function() { return feature.kind; }
@@ -20,6 +40,15 @@ styles:
                     size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
                     stroke: { color: global.white_color, width: [[12,2px],[16,4px]] }
 
+    colorized_icons:
+        shaders:
+            uniforms:
+                u_tint: global.black_color
+                u_fill: global.white_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
     mapzen_dot_density:
         base: points
         draw:
@@ -29,15 +58,6 @@ styles:
             outline:
                 color: global.mapzen_color_library.default.0.0
                 width: [[12, 1px], [18, 2px]]
-
-    colorized-icons:
-        shaders:
-            uniforms:
-                u_tint: global.black_color
-                u_fill: global.white_color
-            blocks:
-                filter: |
-                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
 textures:
     mapzen_icon_library:

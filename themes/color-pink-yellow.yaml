@@ -23,6 +23,14 @@ global:
     two_color_lightest: [1.000,0.969,0.770]
     two_color_ultralight: [1.000,0.980,0.850]
     two_color_offwhite: [1.000,0.992,0.940]
+ 
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
@@ -65,51 +73,58 @@ global:
     # dot_color5_outline:         [0.547,0.126,0.700,1.0]
     # dot_color5_fill:            [0.547,0.126,0.700,0.2]
 
-
-
 layers:
     water:
         draw:
-            waves:
+            polygons:
+                style: waves
                 color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
         later:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         lakes:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         other-water-areas:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         swimming_pool:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         water-boundary-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_mid
 
         water_boundaries-not-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_mid
             riverbank:
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         color: global.two_color_mid
 
     roads:
         railway:
             draw:
-                railway_dash:
+                lines:
+                    style: railway_dash
                     color: global.two_color_midlight
 
         ferry:
@@ -130,99 +145,118 @@ layers:
     landuse:
         national_park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_lighter
 
         parks-and-national-forests-not-national-park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_lighter
 
         farm:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_lightest
 
         university:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_ultralight
 
         cemetery:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_light
 
         golf_course:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_lightest
 
         hospital:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_lightest
 
         recreation_ground:
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.two_color_offwhite
 
         stadium:
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.two_color_lightest
 
         man-made:
             draw:
-                horizontal-bars:
+                polygons:
+                    style: horizontal-bars
                     color: global.two_color_lighter
 
         tier5:
             tourism-related:
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.two_color_lighter
             beach:
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.two_color_light
 
         garden:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_lighter
 
         parking:
             draw:
-                horizontal-bars-rev:
+                polygons:
+                    style: horizontal-bars-rev
                     color: global.two_color_offwhite
 
         pedestrian:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_ultralight
 
         pitch:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_light
                 outline:
                     color: global.two_color_light
 
         playground:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_lightest
 
         school:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_ultralight
 
         minor-landuse:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_lighter
 
         landuse-not-filtered:

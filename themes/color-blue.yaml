@@ -13,6 +13,14 @@ global:
     transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
     route_line:                 [0.502,0.200,0.671]
 
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
+
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
     dot_color1_outline:         [0.000,0.140,0.886,1.0]
@@ -53,5 +61,3 @@ global:
     # dot_color4_fill:            [0.928,0.321,0.990,0.2]
     # dot_color5_outline:         [0.617,0.068,1.000,1.0]
     # dot_color5_fill:            [0.617,0.068,1.000,0.2]
-
-

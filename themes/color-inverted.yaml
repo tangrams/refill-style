@@ -12,6 +12,14 @@ global:
     white_color:                [0.00,0.00,0.00]
     transparent:                [0.800,0.800,0.800,0.250]
     route_line:                 [0.000,0.500,1.000]
+ 
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
@@ -57,40 +65,48 @@ global:
 layers:
     water:
         draw:
-            waves:
+            polygons:
+                style: waves
                 color: global.midlight_color
         later:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.midlight_color
 
         lakes:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.midlight_color
 
         other-water-areas:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.midlight_color
 
         swimming_pool:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.midlight_color
 
         water-boundary-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.black_color
 
         water_boundaries-not-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.black_color
             riverbank:
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         color: global.black_color
 
         water-area-labels:
@@ -130,7 +146,8 @@ layers:
 
         railway:
             draw:
-                railway_dash:
+                lines:
+                    style: railway_dash
                     color: global.light_color
         ferry:
             draw:
@@ -138,66 +155,72 @@ layers:
                     color: global.midlight_color
 
     landuse:
-        draw:
-            rock:
-                order: global.feature_order
-                visible: false
-
         parks-and-national-forests-not-national-park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.lighter_color
 
         farm:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.lighter_color
 
         golf_course:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.ultralight_color
 
         hospital:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.lighter_color
 
         recreation_ground:
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.lighter_color
 
         zoo:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.lighter_color
 
         school:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.offwhite_color
 
         playground:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.lighter_color
 
         parking:
             draw:
-                horizontal-bars-rev:
+                polygons:
+                    style: horizontal-bars-rev
                     color: global.ultralight_color
 
         pitch:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.light_color
                 outline:
                     color: global.lighter_color
 
         minor-landuse:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.lighter_color
 
         retaining_wall:

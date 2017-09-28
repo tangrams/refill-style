@@ -24,6 +24,14 @@ global:
     two_color_ultralight:       [0.734,0.647,0.497]
     two_color_offwhite:         [0.815,0.718,0.552]
 
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
+
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
     # dot_color1_outline:         [1.000,0.870,0.400,1.0]
@@ -65,44 +73,51 @@ global:
     # dot_color5_outline:         [1.000,0.460,0.748,1.0]
     # dot_color5_fill:            [1.000,0.460,0.748,0.2]
 
-
 layers:
     water:
         draw:
-            waves:
+            polygons:
+                style: waves
                 color: global.two_color_light
         later:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         lakes:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         other-water-areas:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         swimming_pool:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         water-boundary-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_offwhite
 
         water_boundaries-not-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_offwhite
             riverbank:
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         color: global.two_color_offwhite
 
     roads:
@@ -113,7 +128,8 @@ layers:
 
         railway:
             draw:
-                railway_dash:
+                lines:
+                    style: railway_dash
                     color: global.two_color_midlight
 
         airport-lines:
@@ -147,85 +163,95 @@ layers:
 
 
     landuse:
-        draw:
-            rock:
-                order: global.feature_order
-                visible: false
-
         national_park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_midlight
 
         parks-and-national-forests-not-national-park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_mid
 
         farm:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_dark
 
         university:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_mid
 
         cemetery:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_mid
 
         golf_course:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_mid
 
         hospital:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_mid
 
         recreation_ground:
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.two_color_mid
 
         zoo:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.lighter_color
         garden:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_light
 
         parking:
             draw:
-                horizontal-bars-rev:
+                polygons:
+                    style: horizontal-bars-rev
                     color: global.two_color_black
 
         pitch:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_mid
                 outline:
                     color: global.two_color_mid
 
         playground:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_midlight
 
         school:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_mid
 
         minor-landuse:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_mid
 
         landuse-not-filtered:
@@ -261,6 +287,11 @@ layers:
 
 
 styles:
+    mapzen_icon_library:
+        # To make Refill's colorize-able icons play nice with other styles
+        # restate the mix so the order of import matters
+        mix: colorized-icons
+
     railway_dash:
         base: lines
         dash: [0.25, 1.0]
@@ -342,7 +373,6 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.153,0.157,0.161)
-
 
 textures:
     building-grid:
