@@ -259,10 +259,6 @@ layers:
         region:
             enabled: false
 
-    earth-labels:
-        island:
-            enabled: false
-
     landuse:
         filter:
             all:
