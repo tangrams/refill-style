@@ -17,6 +17,13 @@ global:
     hi_contrast_midlight:         [0.500,0.500,0.500]
     hi_contrast_offwhite:         [0.980,0.980,0.980]
 
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
 
     # FILTER
     landuse-casing:
@@ -186,11 +193,6 @@ layers:
 
 
 styles:
-    mapzen_icon_library:
-        # To make Refill's colorize-able icons play nice with other styles
-        # restate the mix so the order of import matters
-        mix: colorized-icons
-
     building-grid:
         shaders:
             uniforms:

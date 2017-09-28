@@ -13,8 +13,10 @@ global:
     transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
     route_line:                 [0.502,0.200,0.671]
 
-styles:
-    mapzen_icon_library:
-        # To make Refill's colorize-able icons play nice with other styles
-        # restate the mix so the order of import matters
-        mix: colorized-icons
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
