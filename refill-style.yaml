@@ -2499,6 +2499,7 @@ layers:
                             family: Montserrat
                             fill: global.black_color
                             size: [[7,7px],[12,8px],[16,11px]]
+                            stroke: { width: 0px }
 
             default_priority_highway:
                 filter:
