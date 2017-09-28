@@ -12,7 +12,7 @@ global:
     white_color:                [1.00,1.00,1.00]
     transparent:                [0.929,0.929,0.929,0.250]
     route_line:                 [0.313,0.482,0.580]
-       
+
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
     # This allows the Refill color theme to import *after* say Walkabout icons
@@ -23,12 +23,12 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1 - Mapzen styleguide colors
-    dot_color1_outline:         [1.000,0.286,0.278,1.0]
-    dot_color1_fill:            [1.000,0.286,0.278,0.2]
-    dot_color2_outline:         [0.498,0.176,0.890,1.0]
-    dot_color2_fill:            [0.498,0.176,0.890,0.2]
-    dot_color3_outline:         [0.078,0.545,0.541,1.0]
-    dot_color3_fill:            [0.078,0.545,0.541,0.2]
+    # dot_color1_outline:         [1.000,0.286,0.278,1.0]
+    # dot_color1_fill:            [1.000,0.286,0.278,0.2]
+    # dot_color2_outline:         [0.498,0.176,0.890,1.0]
+    # dot_color2_fill:            [0.498,0.176,0.890,0.2]
+    # dot_color3_outline:         [0.078,0.545,0.541,1.0]
+    # dot_color3_fill:            [0.078,0.545,0.541,0.2]
 
     # Qualitative Option 2
     # dot_color1_outline:         [0.090,0.518,0.957,1.0]
@@ -51,14 +51,14 @@ global:
     # dot_color5_fill:            [0.992,0.620,0.945,0.2]
 
     # Diverging
-    # dot_color1_outline:         [0.492,0.264,0.184,1.0]
-    # dot_color1_fill:            [0.492,0.264,0.184,0.2]
-    # dot_color2_outline:         [0.831,0.556,0.375,1.0]
-    # dot_color2_fill:            [0.831,0.556,0.375,0.2]
-    # dot_color3_outline:         [0.720,0.720,0.720,1.0]
-    # dot_color3_fill:            [0.720,0.720,0.720,0.2]
-    # dot_color4_outline:         [0.502,0.804,0.757,1.0]
-    # dot_color4_fill:            [0.502,0.804,0.757,0.2]
-    # dot_color5_outline:         [0.004,0.522,0.443,1.0]
-    # dot_color5_fill:            [0.004,0.522,0.443,0.2]
+    dot_color1_outline:         [0.000,0.460,0.368,1.0]
+    dot_color1_fill:            [0.000,0.460,0.368,0.4]
+    dot_color2_outline:         [0.000,0.750,0.625,1.0]
+    dot_color2_fill:            [0.000,0.750,0.625,0.4]
+    dot_color3_outline:         [0.620,0.620,0.620,1.0]
+    dot_color3_fill:            [0.620,0.620,0.620,0.4]
+    dot_color4_outline:         [0.990,0.605,0.366,1.0]
+    dot_color4_fill:            [0.990,0.605,0.366,0.4]
+    dot_color5_outline:         [0.550,0.261,0.165,1.0]
+    dot_color5_fill:            [0.550,0.261,0.165,0.4]
 
