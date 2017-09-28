@@ -35,46 +35,55 @@ global:
 layers:
     water:
         draw:
-            waves:
+            polygons:
+                style: waves
                 color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
         later:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         lakes:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         other-water-areas:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         swimming_pool:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         water-boundary-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_mid
 
         water_boundaries-not-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_mid
             riverbank:
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         color: global.two_color_mid
 
     roads:
         railway:
             draw:
-                railway_dash:
+                lines:
+                    style: railway_dash
                     color: global.two_color_mid
 
         ferry:
@@ -95,99 +104,118 @@ layers:
     landuse:
         national_park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_lighter
 
         parks-and-national-forests-not-national-park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_lightest
 
         farm:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_lightest
 
         university:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_ultralight
 
         cemetery:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_lightest
 
         golf_course:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_ultralight
 
         hospital:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_ultralight
 
         recreation_ground:
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.two_color_offwhite
 
         stadium:
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.two_color_offwhite
 
         man-made:
             draw:
-                horizontal-bars:
+                polygons:
+                    style: horizontal-bars
                     color: global.two_color_lighter
 
         tier5:
             tourism-related:
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.two_color_lighter
             beach:
                 draw:
-                    dots:
+                    polygons:
+                        style: dots
                         color: global.two_color_light
 
         garden:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_lighter
 
         parking:
             draw:
-                horizontal-bars-rev:
+                polygons:
+                    style: horizontal-bars-rev
                     color: global.two_color_offwhite
 
         pedestrian:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_ultralight
 
         pitch:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_lighter
                 outline:
                     color: global.two_color_lightest
 
         playground:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_lightest
 
         school:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_ultralight
 
         minor-landuse:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_lighter
 
         landuse-not-filtered:
