@@ -28,40 +28,48 @@ global:
 layers:
     water:
         draw:
-            waves:
+            polygons:
+                style: waves
                 color: global.two_color_light
         later:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         lakes:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         other-water-areas:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         swimming_pool:
             draw:
-                waves:
+                polygons:
+                    style: waves
                     color: global.two_color_light
 
         water-boundary-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_offwhite
 
         water_boundaries-not-ocean:
             draw:
-                coast:
+                lines:
+                    style: coast
                     color: global.two_color_offwhite
             riverbank:
                 draw:
-                    coast:
+                    lines:
+                        style: coast
                         color: global.two_color_offwhite
 
     roads:
@@ -72,7 +80,8 @@ layers:
 
         railway:
             draw:
-                railway_dash:
+                lines:
+                    style: railway_dash
                     color: global.two_color_midlight
 
         airport-lines:
@@ -106,85 +115,95 @@ layers:
 
 
     landuse:
-        draw:
-            rock:
-                order: global.feature_order
-                visible: false
-
         national_park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_midlight
 
         parks-and-national-forests-not-national-park:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_mid
 
         farm:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_dark
 
         university:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_mid
 
         cemetery:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_mid
 
         golf_course:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_mid
 
         hospital:
             draw:
-                medium-dots:
+                polygons:
+                    style: medium-dots
                     color: global.two_color_mid
 
         recreation_ground:
             draw:
-                dots-rev-grid:
+                polygons:
+                    style: dots-rev-grid
                     color: global.two_color_mid
 
         zoo:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.lighter_color
         garden:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_light
 
         parking:
             draw:
-                horizontal-bars-rev:
+                polygons:
+                    style: horizontal-bars-rev
                     color: global.two_color_black
 
         pitch:
             draw:
-                tiny-dots:
+                polygons:
+                    style: tiny-dots
                     color: global.two_color_mid
                 outline:
                     color: global.two_color_mid
 
         playground:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_midlight
 
         school:
             draw:
-                dots-rev:
+                polygons:
+                    style: dots-rev
                     color: global.two_color_mid
 
         minor-landuse:
             draw:
-                dots:
+                polygons:
+                    style: dots
                     color: global.two_color_mid
 
         landuse-not-filtered:
@@ -220,6 +239,11 @@ layers:
 
 
 styles:
+    mapzen_icon_library:
+        # To make Refill's colorize-able icons play nice with other styles
+        # restate the mix so the order of import matters
+        mix: colorized-icons
+
     railway_dash:
         base: lines
         dash: [0.25, 1.0]
@@ -301,12 +325,6 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.153,0.157,0.161)
-
-styles:
-    mapzen_icon_library:
-        # To make Refill's colorize-able icons play nice with other styles
-        # restate the mix so the order of import matters
-        mix: colorized-icons
 
 textures:
     building-grid:
