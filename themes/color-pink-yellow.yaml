@@ -23,7 +23,7 @@ global:
     two_color_lightest: [1.000,0.969,0.770]
     two_color_ultralight: [1.000,0.980,0.850]
     two_color_offwhite: [1.000,0.992,0.940]
- 
+
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
     # This allows the Refill color theme to import *after* say Walkabout icons
@@ -34,12 +34,12 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
-    dot_color1_outline:         [0.022,0.441,0.720,1.0]
-    dot_color1_fill:            [0.022,0.441,0.720,0.2]
-    dot_color2_outline:         [0.715,0.022,0.720,1.0]
-    dot_color2_fill:            [0.715,0.022,0.720,0.2]
-    dot_color3_outline:         [0.310,0.019,0.722,1.0]
-    dot_color3_fill:            [0.310,0.019,0.722,0.2]
+    # dot_color1_outline:         [0.022,0.441,0.720,1.0]
+    # dot_color1_fill:            [0.022,0.441,0.720,0.2]
+    # dot_color2_outline:         [0.715,0.022,0.720,1.0]
+    # dot_color2_fill:            [0.715,0.022,0.720,0.2]
+    # dot_color3_outline:         [0.310,0.019,0.722,1.0]
+    # dot_color3_fill:            [0.310,0.019,0.722,0.2]
 
     # Qualitative Option 2
     # dot_color1_outline:         [0.156,0.532,0.680,1.0]
@@ -62,16 +62,16 @@ global:
     # dot_color5_fill:            [0.996,0.721,0.199,0.2]
 
     # Diverging
-    # dot_color1_outline:         [0.126,0.375,0.700,1.0]
-    # dot_color1_fill:            [0.126,0.375,0.700,0.2]
-    # dot_color2_outline:         [0.259,0.691,0.960,1.0]
-    # dot_color2_fill:            [0.259,0.691,0.960,0.2]
-    # dot_color3_outline:         [0.580,0.580,0.580,1.0]
-    # dot_color3_fill:            [0.580,0.580,0.580,0.2]
-    # dot_color4_outline:         [0.773,0.259,0.960,1.0]
-    # dot_color4_fill:            [0.773,0.259,0.960,0.2]
-    # dot_color5_outline:         [0.547,0.126,0.700,1.0]
-    # dot_color5_fill:            [0.547,0.126,0.700,0.2]
+    dot_color1_outline:         [0.126,0.375,0.700,1.0]
+    dot_color1_fill:            [0.126,0.375,0.700,0.2]
+    dot_color2_outline:         [0.259,0.691,0.960,1.0]
+    dot_color2_fill:            [0.259,0.691,0.960,0.2]
+    dot_color3_outline:         [0.580,0.580,0.580,1.0]
+    dot_color3_fill:            [0.580,0.580,0.580,0.2]
+    dot_color4_outline:         [0.773,0.259,0.960,1.0]
+    dot_color4_fill:            [0.773,0.259,0.960,0.2]
+    dot_color5_outline:         [0.547,0.126,0.700,1.0]
+    dot_color5_fill:            [0.547,0.126,0.700,0.2]
 
 layers:
     water:
