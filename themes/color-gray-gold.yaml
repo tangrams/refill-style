@@ -249,7 +249,13 @@ styles:
     mapzen_icon_library:
         # To make Refill's colorize-able icons play nice with other styles
         # restate the mix so the order of import matters
-        mix: colorized-icons
+        mix: colorized_icons
+
+    colorized_icons:
+        shaders:
+            uniforms:
+                u_tint: global.two_color_offwhite
+                u_fill: [0.00,0.00,0.00]
 
     railway_dash:
         base: lines
