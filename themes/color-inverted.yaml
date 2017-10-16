@@ -23,12 +23,12 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
-    dot_color1_outline:         [0.960,0.928,0.000,1.0]
-    dot_color1_fill:            [0.960,0.928,0.000,0.4]
-    dot_color2_outline:         [0.927,0.461,0.960,1.0]
-    dot_color2_fill:            [0.927,0.461,0.960,0.4]
-    dot_color3_outline:         [0.000,1.000,0.917,1.0]
-    dot_color3_fill:            [0.000,1.000,0.917,0.4]
+    # dot_color1_outline:         [0.960,0.928,0.000,1.0]
+    # dot_color1_fill:            [0.960,0.928,0.000,0.4]
+    # dot_color2_outline:         [0.927,0.461,0.960,1.0]
+    # dot_color2_fill:            [0.927,0.461,0.960,0.4]
+    # dot_color3_outline:         [0.000,1.000,0.917,1.0]
+    # dot_color3_fill:            [0.000,1.000,0.917,0.4]
 
     # Qualitative Option 2
     # dot_color1_outline:         [0.603,0.294,0.980,1.0]
@@ -52,15 +52,15 @@ global:
 
     # Diverging
     dot_color1_outline:         [0.219,0.854,0.079,1.0]
-    dot_color1_fill:            [0.219,0.854,0.079,0.2]
+    dot_color1_fill:            [0.219,0.854,0.079,0.4]
     dot_color2_outline:         [0.802,1.000,0.322,1.0]
-    dot_color2_fill:            [0.802,1.000,0.322,0.2]
+    dot_color2_fill:            [0.802,1.000,0.322,0.4]
     dot_color3_outline:         [0.850,0.850,0.850,1.0]
-    dot_color3_fill:            [0.850,0.850,0.850,0.2]
-    dot_color4_outline:         [1.000,0.320,0.739,1.0]
-    dot_color4_fill:            [1.000,0.320,0.739,0.2]
+    dot_color3_fill:            [0.850,0.850,0.850,0.4]
+    dot_color4_outline:         [1.000,0.460,0.793,1.0]
+    dot_color4_fill:            [1.000,0.460,0.793,0.4]
     dot_color5_outline:         [0.850,0.076,0.553,1.0]
-    dot_color5_fill:            [0.850,0.076,0.553,0.2]
+    dot_color5_fill:            [0.850,0.076,0.553,0.4]
 
 layers:
     water:

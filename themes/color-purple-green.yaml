@@ -81,8 +81,8 @@ global:
     dot_color2_fill:            [0.802,1.000,0.322,0.4]
     dot_color3_outline:         [0.850,0.850,0.850,1.0]
     dot_color3_fill:            [0.850,0.850,0.850,0.4]
-    dot_color4_outline:         [1.000,0.320,0.739,1.0]
-    dot_color4_fill:            [1.000,0.320,0.739,0.4]
+    dot_color4_outline:         [1.000,0.480,0.801,1.0]
+    dot_color4_fill:            [1.000,0.480,0.801,0.4]
     dot_color5_outline:         [0.850,0.076,0.553,1.0]
     dot_color5_fill:            [0.850,0.076,0.553,0.4]
 
