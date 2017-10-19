@@ -35,12 +35,12 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
-    # dot_color1_outline:         [0.945,0.957,0.384,1.0]
-    # dot_color1_fill:            [0.945,0.957,0.384,0.3]
-    # dot_color2_outline:         [0.938,0.634,0.960,1.0]
-    # dot_color2_fill:            [0.938,0.634,0.960,0.3]
-    # dot_color3_outline:         [0.576,0.960,0.934,1.0]
-    # dot_color3_fill:            [0.576,0.960,0.934,0.3]
+    dot_color1_outline:         [0.945,0.957,0.384,1.0]
+    dot_color1_fill:            [0.945,0.957,0.384,0.3]
+    dot_color2_outline:         [0.938,0.634,0.960,1.0]
+    dot_color2_fill:            [0.938,0.634,0.960,0.3]
+    dot_color3_outline:         [0.576,0.960,0.934,1.0]
+    dot_color3_fill:            [0.576,0.960,0.934,0.3]
 
     # Qualitative Option 2
     # dot_color1_outline:         [0.950,0.900,1.000,1.0]
@@ -63,16 +63,16 @@ global:
     # dot_color5_fill:            [1.000,0.350,0.000,0.4]
 
     # Sequential Option 2
-    dot_color1_outline:         [0.996,0.922,0.937,1.0]
-    dot_color1_fill:            [0.996,0.922,0.937,0.4]
-    dot_color2_outline:         [0.984,0.655,0.725,1.0]
-    dot_color2_fill:            [0.984,0.655,0.725,0.4]
-    dot_color3_outline:         [1.000,0.490,0.761,1.0]
-    dot_color3_fill:            [1.000,0.490,0.761,0.4]
-    dot_color4_outline:         [0.910,0.302,0.776,1.0]
-    dot_color4_fill:            [0.910,0.302,0.776,0.4]
-    dot_color5_outline:         [0.740,0.089,0.631,1.0]
-    dot_color5_fill:            [0.740,0.089,0.631,0.4]
+    # dot_color1_outline:         [0.996,0.922,0.937,1.0]
+    # dot_color1_fill:            [0.996,0.922,0.937,0.4]
+    # dot_color2_outline:         [0.984,0.655,0.725,1.0]
+    # dot_color2_fill:            [0.984,0.655,0.725,0.4]
+    # dot_color3_outline:         [1.000,0.490,0.761,1.0]
+    # dot_color3_fill:            [1.000,0.490,0.761,0.4]
+    # dot_color4_outline:         [0.910,0.302,0.776,1.0]
+    # dot_color4_fill:            [0.910,0.302,0.776,0.4]
+    # dot_color5_outline:         [0.740,0.089,0.631,1.0]
+    # dot_color5_fill:            [0.740,0.089,0.631,0.4]
 
     # Diverging
     # dot_color1_outline:         [0.219,0.854,0.079,1.0]
