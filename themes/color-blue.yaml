@@ -23,20 +23,20 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1
-    dot_color1_outline:         [0.000,0.140,0.886,1.0]
-    dot_color1_fill:            [0.000,0.140,0.886,0.2]
-    dot_color2_outline:         [0.925,0.000,0.003,1.0]
-    dot_color2_fill:            [0.925,0.000,0.003,0.2]
-    dot_color3_outline:         [0.000,0.000,0.000,1.0]
-    dot_color3_fill:            [0.000,0.000,0.000,0.2]
+    # dot_color1_outline:         [0.000,0.140,0.886,1.0]
+    # dot_color1_fill:            [0.000,0.140,0.886,0.4]
+    # dot_color2_outline:         [0.925,0.000,0.003,1.0]
+    # dot_color2_fill:            [0.925,0.000,0.003,0.4]
+    # dot_color3_outline:         [0.000,0.000,0.000,1.0]
+    # dot_color3_fill:            [0.000,0.000,0.000,0.4]
 
     # Qualitative Option 2
-    # dot_color1_outline:         [0.925,0.087,0.026,1.0]
-    # dot_color1_fill:            [0.925,0.087,0.026,0.2]
-    # dot_color2_outline:         [0.969,0.547,0.014,1.0]
-    # dot_color2_fill:            [0.969,0.547,0.014,0.2]
-    # dot_color3_outline:         [0.886,0.014,0.841,1.0]
-    # dot_color3_fill:            [0.886,0.014,0.841,0.2]
+    dot_color1_outline:         [0.000,0.628,0.650,1.0]
+    dot_color1_fill:            [0.000,0.628,0.650,0.4]
+    dot_color2_outline:         [0.969,0.547,0.014,1.0]
+    dot_color2_fill:            [0.969,0.547,0.014,0.4]
+    dot_color3_outline:         [0.886,0.014,0.841,1.0]
+    dot_color3_fill:            [0.886,0.014,0.841,0.4]
 
     # Sequential
     # dot_color1_outline:         [1.000,0.762,0.490,1.0]
