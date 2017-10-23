@@ -23,20 +23,20 @@ global:
 
     # DATA VIZ DOT COLORS
     # Qualitative Option 1 - Mapzen styleguide colors
-    # dot_color1_outline:         [1.000,0.286,0.278,1.0]
-    # dot_color1_fill:            [1.000,0.286,0.278,0.4]
-    # dot_color2_outline:         [0.498,0.176,0.890,1.0]
-    # dot_color2_fill:            [0.498,0.176,0.890,0.4]
-    # dot_color3_outline:         [0.078,0.545,0.541,1.0]
-    # dot_color3_fill:            [0.078,0.545,0.541,0.4]
+    dot_color1_outline:         [1.000,0.286,0.278,1.0]
+    dot_color1_fill:            [1.000,0.286,0.278,0.4]
+    dot_color2_outline:         [0.498,0.176,0.890,1.0]
+    dot_color2_fill:            [0.498,0.176,0.890,0.4]
+    dot_color3_outline:         [0.078,0.545,0.541,1.0]
+    dot_color3_fill:            [0.078,0.545,0.541,0.4]
 
     # Qualitative Option 2
-    dot_color1_outline:         [0.090,0.518,0.957,1.0]
-    dot_color1_fill:            [0.090,0.518,0.957,0.4]
-    dot_color2_outline:         [0.360,0.360,0.360,1.0]
-    dot_color2_fill:            [0.360,0.360,0.360,0.4]
-    dot_color3_outline:         [0.969,0.016,0.145,1.0]
-    dot_color3_fill:            [0.969,0.016,0.145,0.4]
+    # dot_color1_outline:         [0.090,0.518,0.957,1.0]
+    # dot_color1_fill:            [0.090,0.518,0.957,0.4]
+    # dot_color2_outline:         [0.360,0.360,0.360,1.0]
+    # dot_color2_fill:            [0.360,0.360,0.360,0.4]
+    # dot_color3_outline:         [0.969,0.016,0.145,1.0]
+    # dot_color3_fill:            [0.969,0.016,0.145,0.4]
 
     # Sequential
     # dot_color1_outline:         [1.000,0.720,0.963,1.0]
