@@ -27,11 +27,6 @@ layers:
             polygons:
                 style: waves
                 color: global.midlight_color
-        # later:
-        #     draw:
-        #         polygons:
-        #             style: waves
-        #             color: global.midlight_color
 
         lakes:
             draw:

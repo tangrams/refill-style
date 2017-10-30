@@ -38,11 +38,6 @@ layers:
             polygons:
                 style: waves
                 color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
-        # later:
-        #     draw:
-        #         polygons:
-        #             style: waves
-        #             color: [[1, global.two_color_lightest], [13, global.two_color_lighter]]
 
         lakes:
             draw:

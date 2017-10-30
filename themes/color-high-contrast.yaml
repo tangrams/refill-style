@@ -42,11 +42,6 @@ layers:
             polygons:
                 style: waves
                 color: global.hi_contrast_mid
-        # later:
-        #     draw:
-        #         polygons:
-        #             style: waves
-        #             color: global.hi_contrast_mid
 
         lakes:
             draw:

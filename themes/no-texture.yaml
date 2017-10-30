@@ -58,10 +58,12 @@ layers:
             draw:
                 lines:
                     style: no_riverlines
+                    color: global.lightest_color
                     width: [[10, 0px], [12, 0px], [13, 0.5px], [16, 1.5px], [18, 4m]]
             intermittent:
                 draw:
                     lines:
+                        style: no_coast
                         color: global.lightest_color
 
     landuse:
@@ -74,7 +76,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.lightest_color
+                    color: global.ultralight_color
             us_national_park:
                 draw:
                     polygons:
@@ -138,7 +140,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.lightest_color
+                    color: global.ultralight_color
 
         sports_centre:
             draw:
@@ -213,7 +215,7 @@ layers:
                     style: no_texture
                     color: global.offwhite_color
                 outline:
-                    color: global.light_color
+                    color: global.lightest_color
 
         playground:
             draw:

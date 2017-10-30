@@ -37,12 +37,6 @@ layers:
         draw:
             polygons:
                 style: waves
-                color: global.two_color_light
-        # later:
-        #     draw:
-        #         polygons:
-        #             style: waves
-        #             color: global.two_color_light
 
         lakes:
             draw:

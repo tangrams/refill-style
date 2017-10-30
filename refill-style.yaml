@@ -1116,7 +1116,7 @@ layers:
     earth:
         data: { source: mapzen, layer: earth }
         continent:
-            filter: { kind: [continent], $zoom: {max: 5} }
+            filter: { kind: [continent], $zoom: { max: 5 } }
             draw:
                 text-blend-order:
                     visible: global.text_visible_continent
@@ -1124,7 +1124,7 @@ layers:
                     text_wrap: false
                     font:
                         family: global.text_font_family
-                        size: [[1,11px],[3,14px]]
+                        size: [[1, 11px], [3, 14px]]
                         style: italic
                         fill: global.black_color
                         weight: normal
@@ -1158,12 +1158,6 @@ layers:
                 visible: false
                 order: global.feature_order
                 color: [[0, global.lightest_color], [12, global.lighter_color]]
-        # later:
-        #     filter: { $zoom: { min: 12 } }
-        #     draw:
-        #         waves:
-        #             # color: global.lighter_color # colors the wave lines
-        #             order: function() { return feature.sort_rank + 1; }
 
         lakes:
             filter:
@@ -1411,7 +1405,7 @@ layers:
                         visible: global.text_visible_water_labels
                         font:
                             style: italic
-                            size: [[14,12px],[17,14px]]
+                            size: [[14, 12px], [17, 14px]]
                 not-river-not-stream:
                     filter: { kind: [canal,dam,ditch,drain], $zoom: { max: 16 } }
                     draw:

@@ -50,10 +50,6 @@ layers:
             polygons:
                 style: no_waves
                 color: global.mid_gray_color
-        # later:
-        #     draw:
-        #         waves:
-        #             color: global.two_color_light
 
         lakes:
             draw:
