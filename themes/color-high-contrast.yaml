@@ -42,11 +42,11 @@ layers:
             polygons:
                 style: waves
                 color: global.hi_contrast_mid
-        later:
-            draw:
-                polygons:
-                    style: waves
-                    color: global.hi_contrast_mid
+        # later:
+        #     draw:
+        #         polygons:
+        #             style: waves
+        #             color: global.hi_contrast_mid
 
         lakes:
             draw:
@@ -60,11 +60,11 @@ layers:
                     style: waves
                     color: global.hi_contrast_mid
 
-        swimming_pool:
-            draw:
-                polygons:
-                    style: waves
-                    color: global.hi_contrast_mid
+        # swimming_pool:
+        #     draw:
+        #         polygons:
+        #             style: waves
+        #             color: global.hi_contrast_mid
 
         water-boundary-ocean:
             draw:

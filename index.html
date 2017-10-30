@@ -218,10 +218,12 @@
         var theme_defaults = { color: 'black', detail: 10, label: 5 };
         var all_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
-                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml' };
+                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
+                                  texture: '' };
         var old_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
-                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml' };
+                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
+                                  texture: '' };
 
         /*** Map ***/
 
@@ -433,7 +435,8 @@
             function update_scene_with_themes() {
                 if( old_theme_imports.color === all_theme_imports.color &&
                     old_theme_imports.detail    === all_theme_imports.detail &&
-                    old_theme_imports.label === all_theme_imports.label ) {
+                    old_theme_imports.label === all_theme_imports.label &&
+                    old_theme_imports.texture === all_theme_imports.texture ) {
                     //console.log( 'no change' );
                 } else {
                      //console.log( all_theme_imports, old_theme_imports );
@@ -450,6 +453,9 @@
                      if( all_theme_imports.detail ) {
                          themes_as_array.push( all_theme_imports.detail );
                      }
+                     if( all_theme_imports.texture ) {
+                         themes_as_array.push( all_theme_imports.texture );
+                     }
 
                      //console.log ( themes_as_array );
 
@@ -461,6 +467,7 @@
                      old_theme_imports.color = all_theme_imports.color;
                      old_theme_imports.detail    = all_theme_imports.detail;
                      old_theme_imports.label = all_theme_imports.label;
+                     old_theme_imports.texture = all_theme_imports.texture;
                 }
             }
 
@@ -552,6 +559,25 @@
                 scene.updateConfig();
             });
             gui.building_button.name( '3D buildings' );
+
+            // Texture toggle
+            var texture = {
+                '(default)': true,
+                'Yes': true,
+                'No': false
+            };
+            gui.texture = query.texture || true;
+            gui.texture_button = gui.add(gui, 'texture', texture).onChange(function(value) {
+                console.log( value );
+                if (value === 'false' || value === false) {
+                    all_theme_imports.texture = 'themes/no-texture.yaml';
+                } else {
+                    all_theme_imports.texture = '';
+                }
+                update_scene_with_themes();
+
+            });
+            gui.texture_button.name( 'texture' );
 
             // Routing selector
             var sdk_directions = {

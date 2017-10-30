@@ -360,6 +360,7 @@ global:
     building_o:  25                       # building stroke order
     building_e:  true                     # building stroke order
     sdk_building_extrude: true            # building extrusion toggle
+    sdk_texture: true                     # texture toggle
     building_extrude_height: |              # building extrude height logic
         function() { return feature.height || 20; }
 
@@ -1295,6 +1296,7 @@ layers:
 
     water:
         data: { source: mapzen, layer: water }
+        filter:
         draw:
             polygons:
                 style: waves

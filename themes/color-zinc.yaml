@@ -67,12 +67,12 @@ layers:
                     style: no_waves
                     color: global.mid_gray_color
 
-        swimming_pool:
-            draw:
-                polygons:
-                    order: global.feature_order
-                    style: no_waves
-                    color: global.mid_gray_color
+        # swimming_pool:
+        #     draw:
+        #         polygons:
+        #             order: global.feature_order
+        #             style: no_waves
+        #             color: global.mid_gray_color
 
         water-boundary-ocean:
             draw:
@@ -380,8 +380,7 @@ layers:
 
         military:
             filter:
-                kind:
-                    military
+                kind: military
             draw:
                 polygons:
                     color: global.ultralight_color

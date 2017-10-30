@@ -38,11 +38,11 @@ layers:
             polygons:
                 style: waves
                 color: global.two_color_light
-        later:
-            draw:
-                polygons:
-                    style: waves
-                    color: global.two_color_light
+        # later:
+        #     draw:
+        #         polygons:
+        #             style: waves
+        #             color: global.two_color_light
 
         lakes:
             draw:
@@ -56,11 +56,11 @@ layers:
                     style: waves
                     color: global.two_color_light
 
-        swimming_pool:
-            draw:
-                polygons:
-                    style: waves
-                    color: global.two_color_light
+        # swimming_pool:
+        #     draw:
+        #         polygons:
+        #             style: waves
+        #             color: global.two_color_light
 
         water-boundary-ocean:
             draw:
