@@ -116,22 +116,6 @@ layers:
                     style: no_texture
                     color: global.ultralight_color
 
-        airport:
-            filter:
-                kind: aerodrome
-            draw:
-                polygons:
-                    color: global.ultralight_color
-                    visible: true
-
-        military:
-            filter:
-                kind: military
-            draw:
-                polygons:
-                    color: global.ultralight_color
-                    visible: true
-
         university:
             draw:
                 polygons:
@@ -154,28 +138,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-
-        industrial:
-            filter:
-                kind: industrial
-            draw:
-                polygons:
-                    color: global.ultralight_color
-                    visible: true
-
-        railway:
-            filter:
-                kind: railway
-            draw:
-                polygons:
                     color: global.lightest_color
-                    visible: true
-
 
         sports_centre:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.offwhite_color
 
         recreation_ground:
             draw:
@@ -215,6 +184,7 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
+                        color: global.offwhite_color
 
         garden:
             draw:
@@ -226,6 +196,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.offwhite_color
 
         pedestrian:
             draw:
@@ -265,7 +236,7 @@ layers:
             runway:
                 draw:
                     polygons:
-                        color: global.ultralight_color
+                        color: global.offwhite_color
 
             apron:
                 draw:
