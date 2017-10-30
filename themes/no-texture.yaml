@@ -85,13 +85,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.lightest_color
+                    color: global.ultralight_color
 
         national_forest_level_6:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.lightest_color
+                    color: global.ultralight_color
 
         forest-landcover:
             draw:
