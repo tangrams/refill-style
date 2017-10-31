@@ -1301,7 +1301,6 @@ layers:
                         fill: global.black_color
                         family: global.text_font_family
                         weight: normal
-                        #size: 10px
             ocean-labels:
                 filter:
                     all:
@@ -1429,13 +1428,13 @@ layers:
                 draw:
                     lines:
                         color: global.lighter_color
-                        width: [[14,0.5px],[16,1px],[18,1px]]
+                        width: [[14, 0.5px], [16, 1px], [18, 1px]]
             subway:
                 filter: { kind: subway }
                 draw:
                     lines:
                         color: global.lighter_color
-                        width: [[14,0.5px],[16,1px],[18,1px]]
+                        width: [[14, 0.5px], [16, 1px], [18, 1px]]
             light_rail:
                 filter: { kind: [light_rail,tram], $zoom: { min: 15 } }
                 draw:
@@ -1451,18 +1450,18 @@ layers:
                     order: 499
                     visible: global.sdk_transit_overlay
                     color: purple
-                    width: [[5,1.5px],[6,2px],[11,3px],[18,4px]]
+                    width: [[5, 1.5px], [6, 2px], [11, 3px], [18, 4px]]
                     outline:
-                        color: [1.,1.,1.,.8]
+                        color: [1.00,1.00,1.00,0.8]
                         width: [[7,0px],[8,0.25px],[9,0.5px],[12,1.0px],[13,1.75px],[14,2px]]
             train-sizing-color:
                 filter: { kind: train }
                 draw:
                     lines:
                         color: purple
-                        width: [[5,1.0px],[6,1.0px],[7,1.25px],[11,2.0px],[13,2.5px],[18,3.5px]]
+                        width: [[5, 1.0px], [6, 1.0px], [7, 1.25px], [11, 2.0px], [13, 2.5px], [18, 3.5px]]
                         outline:
-                            width: [[12,1.0px],[13,1.75px],[14,2px]]
+                            width: [[12, 1.0px], [13, 1.75px], [14, 2px]]
                 stack-below-other-transit-later-zooms:
                     filter: { $zoom: { min: 9 } }
                     draw:
@@ -1472,25 +1471,25 @@ layers:
                 filter: { kind: subway }
                 draw:
                     lines:
-                        width: [[9,1px],[11,2px],[12,3px],[13,4px],[15,5px],[16,7px],[17,9px]]
+                        width: [[9, 1px], [11, 2px], [12, 3px], [13, 4px], [15, 5px], [16, 7px], [17, 9px]]
                         outline:
                             #color: [[10,white],[11,black]]
-                            width: [[9,0px],[10,0.5px],[12,1.25px],[13,1.5px],[15,2px]]
+                            width: [[9, 0px], [10, 0.5px], [12, 1.25px], [13, 1.5px], [15, 2px]]
                             #width: [[12,1.5px],[13,2.0px],[14,2.5px]]
             light-rail-and-tram-sizing:
                 filter: { kind: [light_rail, tram] }
                 draw:
                     lines:
-                        width: [[10,1px],[12,1.5px],[15,2px],[18,3.5px]]
+                        width: [[10, 1px], [12, 1.5px], [15, 2px], [18, 3.5px]]
                         outline:
                             #color: [[11,white],[12,black]]
-                            width: [[12,0.25px],[13,0.5px],[14,1px],[16,2px]]
+                            width: [[12, 0.25px], [13, 0.5px], [14, 1px], [16, 2px]]
             has-data-color:
                 filter: { colour: true }
                 draw:
                     lines:
                         order: 510
-                        width: [[9,2px],[11,3px],[12,4px]]
+                        width: [[9, 2px], [11, 3px], [12, 4px]]
                         color: function() { return feature.colour || 'purple'; }
                         #outline:
                             #color: function() { if(feature.colour == 'silver') { return 'black'; } else { return [0.,0.,0.,.1]; } }
@@ -1546,7 +1545,7 @@ layers:
                         color: function() { if ( feature.kind === 'train') { return 'purple' } else { return feature.colour || 'purple'; } }
                         # Size is specified below, and limited to 5 char in another filter
                         repeat_group: shields
-                        repeat_distance: [[8,90px],[10,40px],[13,30px]]
+                        repeat_distance: [[8, 90px], [10, 40px], [13, 30px]]
                         placement: midpoint
                         placement_min_length_ratio:
                             - [8, 0.1]
@@ -1568,7 +1567,7 @@ layers:
                                 fill: function() { if(feature.colour == 'yellow') { return '#555'; } else { return 'white'; } }
                                 #style: bold
                                 weight: 700
-                                size: [[7,7px],[12,8px],[16,11px]]
+                                size: [[7, 7px], [12, 8px], [16, 11px]]
                                 # disable the default mapzen_icon_library stroke
                                 stroke: { width: 0px }
 
@@ -1686,7 +1685,6 @@ layers:
         data: { source: mapzen, layer: roads }
         draw:
             lines:
-                #color: black
                 width: 1px
                 order: global.feature_order
                 # but give them all the same outline
