@@ -1,0 +1,75 @@
+sources:
+    mapzen:
+        type: TopoJSON
+        # prod
+        rasters: [normals]
+        tile_size: 512
+        max_zoom: 16
+    normals: # normals
+        type: Raster
+        # prod
+        url: https://tile.mapzen.com/mapzen/terrain/v1/512/normal/{z}/{x}/{y}.png
+        url_params:
+            api_key: global.sdk_mapzen_api_key
+        tile_size: 512
+        max_zoom: 14
+
+layers:
+    earth:
+        data: { source: mapzen }
+        draw:
+            terrain:
+                order: function() { return feature.sort_rank || 0; }
+                color: [1.0, 1.0, 1.0]
+            lines:
+                visible: false
+
+    landuse:
+        enabled: false
+
+
+styles:
+    colorized_terrain:
+        shaders:
+            uniforms:
+                u_tint: global.black_color
+                u_fill: global.white_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    terrain:
+        mix: colorized_terrain
+        base: polygons
+        lighting: false
+        raster: normal
+        shaders:
+            uniforms:
+                # u_envmap: https://mapzen-assets.s3.amazonaws.com/resources/viirs-375-napa/dark-terrain.jpeg
+                # u_envmap: images/dark-terrain.jpeg
+                u_envmap: images/draw-test10.jpg
+                u_contrast: 1.
+                u_zoom_scale: 3.5
+                u_brightness_base: 0.5
+                u_brightness_scaler: 0.5
+            blocks:
+                global: |
+                    // Simplified view-independent environment map
+                    vec4 applyEnvmap (in sampler2D _tex, in vec3 _normal, in float scale) {
+                        _normal.z *= scale;
+                        return texture2D(_tex, .5*(normalize(_normal).xy + 1.));
+                    }
+                color: |
+                    // turn terrain exaggeration up/down
+                    // fade out spheremap normals with a function
+                    float scale1 = 20./(u_map_position.z) + 1.5;
+                    float m = u_zoom_scale * (u_map_position.z - 0.8) * exp(u_map_position.z * -.29);
+                    m = clamp(m, 0., 1.5);
+                    color = applyEnvmap(u_envmap, normal, 1./scale1);
+                    // apply contrast and brightness
+                    float contrast = m;
+                    color.rgb = ((color.rgb - 0.5) * max(contrast, 0.)) + 0.5;
+                    float brightness = u_brightness_base - m * u_brightness_scaler;
+                    color.rgb += brightness;
+                    // apply layer color
+                    color *= v_color;

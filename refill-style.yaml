@@ -254,6 +254,14 @@ sources:
         # url:  //localhost:8080/vector/all/{z}/{x}/{y}.topojson
         tile_size: 512
         max_zoom: 16
+    normals: # normals
+        type: Raster
+        # prod
+        url: https://tile.mapzen.com/mapzen/terrain/v1/512/normal/{z}/{x}/{y}.png
+        url_params:
+            api_key: global.sdk_mapzen_api_key
+        tile_size: 512
+        max_zoom: 14
 
     # # Only enable this for local debug, should not be enabled for prod (app inserts these at runtime)
     # # These are all in San Francisco, California
@@ -1849,7 +1857,7 @@ layers:
                     color: [[8, global.black_color], [13, global.black_color], [17, global.white_color]]
                     width: [[13, 1px], [14, 1px], [16, 2.5px], [17, 3px]]
                     outline:
-                        width: [[12, 0px], [13, .5px], [15, 1px], [17, 2px]]
+                        width: [[12, 0px], [13, 0.5px], [15, 1px], [17, 2px]]
             trunk_primary:
                 filter: { kind_detail: [trunk, primary] }
                 draw:
@@ -2048,7 +2056,7 @@ layers:
                             outline:
                                 order: function() { return feature.sort_rank + 3; }
                 routes:
-                    filter: { ref: true, $zoom: { min: 12} }
+                    filter: { ref: true, $zoom: { min: 12 } }
                     draw:
                         lines:
                             color: [[11, global.lighter_color], [15, global.dark_color], [16, global.white_color]]
@@ -2832,14 +2840,13 @@ layers:
                     cap: round
                     join: round
                     color: global.offwhite_color
-                    width: [[13,0px], [14, 3px], [15, 5px], [16, 6px], [18, 3m]]
+                    width: [[13, 0px], [14, 3px], [15, 5px], [16, 6px], [18, 3m]]
                 text-blend-order:
                     priority: 18
                     visible: global.text_visible_piste
                     font:
                         fill: global.midlight_color
                         size: [[15, 11px], [17, 12px]]
-                        # stroke: { color: global.grey8, width: 4px }
             early:
                 filter: { $zoom: { max: 15 } }
                 draw:
@@ -2874,10 +2881,10 @@ layers:
             draw:
                 lines:
                     color: global.offwhite_color
-                    width: [[13, 0px], [14, 0.5px],[15, 1.5px], [16, 2.5px],[17, 3px],[18, 3m]]
+                    width: [[13, 0px], [14, 0.5px],[15, 1.5px], [16, 2.5px], [17, 3px], [18, 3m]]
                     outline:
                         color: global.mid_color
-                        width: [[15, 0px],[16,0.65px], [17, 0.75px], [18, 1px], [19, 1.5px]]
+                        width: [[15, 0px], [16, 0.65px], [17, 0.75px], [18, 1px], [19, 1.5px]]
         racetrack:
             filter: { kind: racetrack }
             draw:
@@ -2885,7 +2892,7 @@ layers:
                     cap: round
                     join: round
                     color: global.black_color
-                    width: [[13,0.5px],[14,1px],[15, 1px], [16, 1.5px], [18, 3px], [19, 5px]]
+                    width: [[13, 0.5px], [14, 1px], [15, 1px], [16, 1.5px], [18, 3px], [19, 5px]]
         airport-lines:
             filter: { kind: aeroway, kind_detail: [runway,taxiway] }
             draw:

@@ -219,11 +219,13 @@
         var all_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
                                   detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
-                                  texture: '' };
+                                  texture: '',
+                                  terrain: '' };
         var old_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
                                   detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
-                                  texture: '' };
+                                  texture: '',
+                                  terrain: '' };
 
         /*** Map ***/
 
@@ -436,7 +438,8 @@
                 if( old_theme_imports.color === all_theme_imports.color &&
                     old_theme_imports.detail    === all_theme_imports.detail &&
                     old_theme_imports.label === all_theme_imports.label &&
-                    old_theme_imports.texture === all_theme_imports.texture ) {
+                    old_theme_imports.texture === all_theme_imports.texture &&
+                    old_theme_imports.terrain === all_theme_imports.terrain ) {
                     //console.log( 'no change' );
                 } else {
                      //console.log( all_theme_imports, old_theme_imports );
@@ -456,6 +459,9 @@
                      if( all_theme_imports.texture ) {
                          themes_as_array.push( all_theme_imports.texture );
                      }
+                     if( all_theme_imports.terrain ) {
+                         themes_as_array.push( all_theme_imports.terrain );
+                     }
 
                      //console.log ( themes_as_array );
 
@@ -468,6 +474,7 @@
                      old_theme_imports.detail    = all_theme_imports.detail;
                      old_theme_imports.label = all_theme_imports.label;
                      old_theme_imports.texture = all_theme_imports.texture;
+                     old_theme_imports.terrain = all_theme_imports.terrain;
                 }
             }
 
@@ -578,6 +585,25 @@
 
             });
             gui.texture_button.name( 'texture' );
+
+            // Terrain toggle
+            var terrain = {
+                '(default)': false,
+                'No': false,
+                'Yes': true
+            };
+            gui.terrain = query.terrain || false;
+            gui.terrain_button = gui.add(gui, 'terrain', texture).onChange(function(value) {
+                console.log( value );
+                if (value === 'true' || value === true) {
+                    all_theme_imports.terrain = 'themes/terrain.yaml';
+                } else {
+                    all_theme_imports.terrain = '';
+                }
+                update_scene_with_themes();
+
+            });
+            gui.terrain_button.name( 'terrain' );
 
             // Routing selector
             var sdk_directions = {
