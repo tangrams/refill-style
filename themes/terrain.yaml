@@ -24,11 +24,60 @@ layers:
             lines:
                 visible: false
 
+    buildings:
+        draw:
+            polygons:
+                color: [[13, global.ultralight_color], [18, global.white_color]]
+
+    places:
+        region:
+            draw:
+                text-blend-order:
+                    font:
+                        stroke: { color: global.text_stroke }
+        populated-places:
+            draw:
+                mapzen_icon_library:
+                    text:
+                        font:
+                            stroke: { color: global.text_stroke }
+                text-blend-order:
+                    font:
+                        stroke: { color: global.text_stroke }
+        neighbourhoods:
+            draw:
+                text-blend-order:
+                    font:
+                        stroke: { color: global.text_stroke }
+
     landuse:
         enabled: false
 
 
 styles:
+    riverlines:
+        base: lines
+        mix: [space-constant]
+        blend: opaque
+        shaders:
+            uniforms:
+                u_fill: global.ultralight_color
+            blocks:
+                global: |
+                    mat2 rotate2d(float angle){
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+
+                    float stripes(vec2 st){
+                        st = rotate2d(3.14159265358*-0.25 )*st;
+                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
+                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
+                    }
+                color: |
+                    vec2 st = getConstantCoords();
+                    color = mix(vec4(color.rgb, 1.0), vec4(u_fill.rgb, 1.0), stripes(st*130.)); // transparent stripes
+
     colorized_terrain:
         shaders:
             uniforms:
@@ -45,9 +94,7 @@ styles:
         raster: normal
         shaders:
             uniforms:
-                # u_envmap: https://mapzen-assets.s3.amazonaws.com/resources/viirs-375-napa/dark-terrain.jpeg
-                # u_envmap: images/dark-terrain.jpeg
-                u_envmap: images/draw-test10.jpg
+                u_envmap: global.sdk_terrain_sphere_map  #images/draw-test10.jpg
                 u_contrast: 1.
                 u_zoom_scale: 3.5
                 u_brightness_base: 0.5

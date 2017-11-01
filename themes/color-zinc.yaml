@@ -25,6 +25,9 @@ global:
     lightest_gray_color:        [0.800,0.800,0.800]
     gray_offwhite_color:        [0.898,0.898,0.898]
 
+    text_fill:                  global.black_color
+    text_stroke:                [0.900,0.900,0.900,0.5]                 # land color
+
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
     # This allows the Refill color theme to import *after* say Walkabout icons
@@ -32,6 +35,8 @@ global:
     # then Walkabout icons would not be colorized as Walkabout icons re-set the
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
+
+    sdk_terrain_sphere_map: images/draw-test10.jpg
 
 scene:
     background:

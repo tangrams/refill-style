@@ -234,8 +234,6 @@ global:
         function() { return feature.height || 20; }
 
     # labels:
-    text_fill:             global.black_color
-    text_stroke:           global.white_color                 # land color
     text_font_family:      'Open Sans'            # branding in asperational Unicode, yo (or Helvetica)
 
 
@@ -655,8 +653,6 @@ styles:
         mix: [space-constant]
         blend: opaque
         shaders:
-            defines:
-                OPACITY: 1.0
             blocks:
                 global: |
                     mat2 rotate2d(float angle){
@@ -671,7 +667,7 @@ styles:
                     }
                 color: |
                     vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.))*OPACITY; // transparent stripes
+                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.)); // transparent stripes
 
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]

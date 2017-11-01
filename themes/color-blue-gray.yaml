@@ -24,6 +24,9 @@ global:
     two_color_ultralight: [0.915,0.928,0.932]
     two_color_offwhite: [0.951,0.955,0.960]
 
+    text_fill:                  global.black_color
+    text_stroke:                [1.00,1.00,1.00,0.5]                 # land color
+
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
     # This allows the Refill color theme to import *after* say Walkabout icons

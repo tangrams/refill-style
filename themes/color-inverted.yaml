@@ -13,6 +13,9 @@ global:
     transparent:                [0.800,0.800,0.800,0.250]
     route_line:                 [0.000,0.500,1.000]
 
+    text_fill:                  global.black_color
+    text_stroke:                [0.00,0.00,0.00,0.5]                 # land color
+
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
     # This allows the Refill color theme to import *after* say Walkabout icons
@@ -20,6 +23,8 @@ global:
     # then Walkabout icons would not be colorized as Walkabout icons re-set the
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
+
+    sdk_terrain_sphere_map: images/draw-test10.jpg
 
 layers:
     water:
@@ -287,6 +292,11 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.00,0.00,0.00)
+
+    # terrain:
+    #     shaders:
+    #         uniforms:
+    #             u_envmap: images/draw-test10.jpg
 
 textures:
     building-grid:
