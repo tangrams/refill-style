@@ -27,6 +27,8 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [0.153,0.157,0.161,0.5]                 # land color
 
+    terrain_color:              global.black_color
+
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
     # This allows the Refill color theme to import *after* say Walkabout icons

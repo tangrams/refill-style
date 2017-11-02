@@ -1150,7 +1150,7 @@ layers:
                         style: italic
                         fill: global.black_color
                         weight: normal
-                        stroke: { color: global.white_color, width: 4px }
+                        stroke: { color: global.text_stroke, width: 4px }
 
 
     water:
@@ -1395,7 +1395,7 @@ layers:
                             fill: global.mid_color
                             style: italic
                             size: 9px
-                            stroke: { color: global.white_color, width: 3px }
+                            stroke: { color: global.text_stroke, width: 3px }
 
             water-line-labels:
                 filter:
@@ -1629,7 +1629,7 @@ layers:
                             font:
                                 fill: global.black_color
                                 style: italic
-                                stroke: { color: global.white_color, width: 3px }
+                                stroke: { color: global.text_stroke, width: 3px }
     platforms:
         data: { source: mapzen, layer: transit }
         filter: { kind: platform }
@@ -1832,7 +1832,7 @@ layers:
                             fill: global.black_color
                             weight: 600
                             size: 11px
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
             labels-highway-z15-up:
                 filter: { $zoom: { min: 15 } }
                 draw:
@@ -1909,7 +1909,7 @@ layers:
                                 font:
                                     fill: global.dark_color
                                     size: 11px
-                                    stroke: { color: global.white_color, width: 3px }
+                                    stroke: { color: global.text_stroke, width: 3px }
                     labels-trunk_primary-route-z15-up:
                         filter: { $zoom: { min: 15 } }
                         draw:
@@ -1921,7 +1921,7 @@ layers:
                                     fill: global.black_color
                                     weight: 600
                                     size: [[15, 12px], [16, 13px], [19, 16px]]
-                                    stroke: { color: global.white_color, width: [[15, 3px], [17, 6px]] }
+                                    stroke: { color: global.text_stroke, width: [[15, 3px], [17, 6px]] }
                 labels-trunk_primary-z11-z15:
                     filter:
                         $zoom: [11,12,13,14,15]
@@ -1933,7 +1933,7 @@ layers:
                             font:
                                 fill: global.dark_color
                                 size: [[11, 10px], [15, 12px]]
-                                stroke: { color: global.white_color, width: [[11, 3px], [13, 3px], [14, 4px]] }
+                                stroke: { color: global.text_stroke, width: [[11, 3px], [13, 3px], [14, 4px]] }
                 labels-trunk_primary-z16-up:
                     filter: { $zoom: { min: 16 } }
                     draw:
@@ -1945,7 +1945,7 @@ layers:
                                 fill: [[16, global.dark_color], [18, global.black_color]]
                                 weight: 600
                                 size: [[16, 13px], [18, 13px], [19, 16px]]
-                                stroke: { color: global.white_color, width: [[16, 4px], [17, 6px]]}
+                                stroke: { color: global.text_stroke, width: [[16, 4px], [17, 6px]]}
             link:
                 filter: { is_link: true } # on- and off-ramps, etc
                 draw:
@@ -2011,7 +2011,7 @@ layers:
                                 font:
                                     fill: global.black_color
                                     size: 11px
-                                    stroke: { color: global.white_color, width: 4px }
+                                    stroke: { color: global.text_stroke, width: 4px }
                     labels-secondary-routes-z15-up:
                         filter: { $zoom: { min: 15 } }
                         draw:
@@ -2023,7 +2023,7 @@ layers:
                                     fill: global.black_color
                                     weight: 600
                                     size: [[15, 11px], [17, 13px]]
-                                    stroke: { color: global.white_color, width: 4px }
+                                    stroke: { color: global.text_stroke, width: 4px }
                 labels-secondary:
                     filter: { $zoom: { min: 13 } }
                     draw:
@@ -2034,7 +2034,7 @@ layers:
                             font:
                                 fill: [[13, global.dark_color], [17, global.black_color]]
                                 size: [[13, 10px], [17, 13px]]
-                                stroke: { color: global.white_color, width: 4px }
+                                stroke: { color: global.text_stroke, width: 4px }
             tertiary:
                 filter: { kind_detail: [tertiary, tertiary_link] }
                 draw:
@@ -2093,7 +2093,7 @@ layers:
                             font:
                                 fill: [[13, global.dark_color], [18, global.black_color]]
                                 size: [[13, 10px], [17, 13px]]
-                                stroke: { color: global.white_color, width: 4px }
+                                stroke: { color: global.text_stroke, width: 4px }
         minor_road:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
             draw:
@@ -2142,7 +2142,7 @@ layers:
                         font:
                             fill: [[15, global.mid_color], [18, global.black_color]]
                             size: [[15, 10px], [18, 13px]]
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
         service_road:
             filter: { kind: minor_road, kind_detail: service, $zoom: { min: 13 } }
             draw:
@@ -2162,7 +2162,7 @@ layers:
                         font:
                             fill: [[17, global.dark_color], [18, global.black_color]]
                             size: [[17, 11px], [18, 12px]]
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
 
         path:
             filter:
@@ -2229,7 +2229,7 @@ layers:
                         font:
                             fill: global.dark_color
                             size: 12px
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
         track:
             filter: { kind: path, kind_detail: track }
             draw:
@@ -2261,7 +2261,7 @@ layers:
                         font:
                             fill: global.dark_color
                             size: 12px
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
 
         steps:
             filter:
@@ -2286,7 +2286,7 @@ layers:
                         font:
                             fill: global.mid_color
                             size: 11px
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
 
         shields:
             filter:
@@ -2957,7 +2957,7 @@ layers:
                         font:
                             fill: global.black_color
                             size: 10px
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
                 minor:
                     filter: { not: { kind_detail: [gondola,cable_car,chair_lift] }, $zoom: { max: 17 } }
                     draw:
@@ -3100,7 +3100,7 @@ layers:
                         family: global.text_font_family
                         style: italic
                         size: 11px
-                        stroke: { color: global.white_color , width: 4px }
+                        stroke: { color: global.text_stroke , width: 4px }
             building_labels-z15-z16:
                 filter: { $zoom: [15,16] }
                 draw: { text-blend-order: { font: { size: 9px, stroke: { width: 3px } } } }
@@ -3143,7 +3143,7 @@ layers:
                         family: global.text_font_family
                         style: italic
                         size: 11px
-                        stroke: { color: global.white_color, width: 4px }
+                        stroke: { color: global.text_stroke, width: 4px }
 
     boundaries:
         data: { source: mapzen, layer: boundaries }
@@ -3288,7 +3288,7 @@ layers:
                     font:
                         fill: global.black_color
                         weight: 600
-                        stroke: { color: global.white_color, width: 4px }
+                        stroke: { color: global.text_stroke, width: 4px }
             country-z2-3:
                 filter:
                     $zoom: [2,3]
@@ -3398,7 +3398,7 @@ layers:
                         size: 11px
                         weight: normal
                         fill: [[4, global.light_color], [9, global.midlight_color]]
-                        stroke: { color: global.white_color, width: 4px }
+                        stroke: { color: global.text_stroke, width: 4px }
             region-z4:
                 filter:
                     $zoom: [4]
@@ -3486,14 +3486,14 @@ layers:
                         buffer: 3px
                         font:
                             size: [[5,9px],[8,10px],[12,11px]]
-                            stroke: { color: global.white_color, width: 4px }
+                            stroke: { color: global.text_stroke, width: 4px }
                             # fill: global.text_fill
                 text-blend-order:
                     visible: global.text_visible_populated_places
                     buffer: 10px
                     font:
                         size: [[5,9px],[8,10px],[12,11px]]
-                        stroke: { color: global.white_color, width: 4px }
+                        stroke: { color: global.text_stroke, width: 4px }
                         # fill: global.text_fill
 
             #
@@ -3932,7 +3932,7 @@ layers:
                         size: [[11, 9px], [12, 10px], [13, 12px], [14, 16px], [16, 24px]]
                         weight: normal
                         transform: uppercase
-                        stroke: { color: global.white_color, width: [[12, 4px], [13, 6px], [15, 8px]] }
+                        stroke: { color: global.text_stroke, width: [[12, 4px], [13, 6px], [15, 8px]] }
 
             z13-up:
                 filter:
@@ -3997,7 +3997,7 @@ layers:
                         weight: normal
                         fill: global.dark_color
                         size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
-                        stroke: { color: global.white_color, width: [[12, 2px], [16, 4px]] }
+                        stroke: { color: global.text_stroke, width: [[12, 2px], [16, 4px]] }
         # improve legibility at high zooms
         poi_labels-z18:
             filter: { $zoom: { min: 18 } }
@@ -4567,7 +4567,7 @@ layers:
                             fill: global.black_color
                             weight: normal
                             size: 11px
-                            stroke: { color: global.white_color, width: 3px }
+                            stroke: { color: global.text_stroke, width: 3px }
             poi_labels-z14:
                 filter: { $zoom: [14] }
                 draw: { mapzen_icon_library: { text: { font: { size: 11px } } } }
@@ -4688,7 +4688,7 @@ layers:
                             font:
                                 fill: global.black_color
                                 size: 12px
-                                stroke: { color: global.white_color, width: 4px }
+                                stroke: { color: global.text_stroke, width: 4px }
             bus-station-labels:
                 filter:
                     kind: [bus_station, bus_stop]
@@ -4704,7 +4704,7 @@ layers:
                             font:
                                 fill: global.black_color
                                 size: 12px
-                                stroke: { color: global.white_color, width: 4px }
+                                stroke: { color: global.text_stroke, width: 4px }
                 bus_stop:
                     filter:
                         kind: [bus_stop]
@@ -4730,7 +4730,7 @@ layers:
                             font:
                                 fill: global.black_color
                                 size: 12px
-                                stroke: { color: global.white_color, width: 4px }
+                                stroke: { color: global.text_stroke, width: 4px }
 
 
     landuse:
@@ -4786,7 +4786,7 @@ layers:
                         family: global.text_font_family
                         style: italic
                         size: 11px
-                        stroke: { color: global.white_color, width: 1px }
+                        stroke: { color: global.text_stroke, width: 1px }
 
         #tier1:
         national_park:

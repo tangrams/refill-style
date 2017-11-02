@@ -27,28 +27,7 @@ layers:
     buildings:
         draw:
             polygons:
-                color: [[13, global.ultralight_color], [18, global.white_color]]
-
-    places:
-        region:
-            draw:
-                text-blend-order:
-                    font:
-                        stroke: { color: global.text_stroke }
-        populated-places:
-            draw:
-                mapzen_icon_library:
-                    text:
-                        font:
-                            stroke: { color: global.text_stroke }
-                text-blend-order:
-                    font:
-                        stroke: { color: global.text_stroke }
-        neighbourhoods:
-            draw:
-                text-blend-order:
-                    font:
-                        stroke: { color: global.text_stroke }
+                color: [[13, global.offwhite_color], [18, global.white_color]]
 
     landuse:
         enabled: false
@@ -81,7 +60,7 @@ styles:
     colorized_terrain:
         shaders:
             uniforms:
-                u_tint: global.black_color
+                u_tint: global.terrain_color
                 u_fill: global.white_color
             blocks:
                 filter: |
@@ -94,7 +73,7 @@ styles:
         raster: normal
         shaders:
             uniforms:
-                u_envmap: global.sdk_terrain_sphere_map  #images/draw-test10.jpg
+                u_envmap: global.sdk_terrain_sphere_map   #images/draw-test10.jpg
                 u_contrast: 1.
                 u_zoom_scale: 3.5
                 u_brightness_base: 0.5

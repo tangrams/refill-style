@@ -14,18 +14,20 @@ global:
     route_line:                   [0.700,0.196,0.507]
 
     # ORANGE II
-    two_color_black: [1.000,0.350,0.000]
-    two_color_dark: [0.996,0.424,0.114]
-    two_color_mid: [1.000,0.600,0.384]
-    two_color_midlight: [0.996,0.667,0.494]
-    two_color_light: [1.000,0.733,0.592]
-    two_color_lighter: [0.996,0.808,0.710]
-    two_color_lightest: [0.996,0.875,0.808]
-    two_color_ultralight: [1.000,0.922,0.878]
-    two_color_offwhite: [1.000,0.965,0.949]
+    two_color_black:              [1.000,0.350,0.000]
+    two_color_dark:               [0.996,0.424,0.114]
+    two_color_mid:                [1.000,0.600,0.384]
+    two_color_midlight:           [0.996,0.667,0.494]
+    two_color_light:              [1.000,0.733,0.592]
+    two_color_lighter:            [0.996,0.808,0.710]
+    two_color_lightest:           [0.996,0.875,0.808]
+    two_color_ultralight:         [1.000,0.922,0.878]
+    two_color_offwhite:           [1.000,0.965,0.949]
 
-    text_fill:                  global.black_color
-    text_stroke:                [1.00,1.00,1.00,0.5]                 # land color
+    text_fill:                    global.black_color
+    text_stroke:                  [1.00,1.00,1.00,0.5]
+
+    terrain_color:                global.dark_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
