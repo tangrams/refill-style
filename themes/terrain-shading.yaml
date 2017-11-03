@@ -14,6 +14,12 @@ sources:
         tile_size: 512
         max_zoom: 14
 
+textures:
+    # This texture is defined here so Tangram knows the scene includes a texture with this name
+    # This prevents it from otherwies interpreting the texture name as a URL
+    # The actual URL for the texture will be set by the included color theme.
+    sdk_terrain_texture: {}
+
 layers:
     earth:
         data: { source: mapzen }
@@ -73,7 +79,7 @@ styles:
         raster: normal
         shaders:
             uniforms:
-                u_envmap: images/draw-test10.jpg #global.sdk_terrain_sphere_map
+                u_envmap: sdk_terrain_texture   #images/draw-test10.jpg
                 u_contrast: 1.
                 u_zoom_scale: 3.5
                 u_brightness_base: 0.5

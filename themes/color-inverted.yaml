@@ -26,7 +26,9 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_sphere_map: images/draw-test10.jpg
+textures:
+    sdk_terrain_texture:
+        url: images/draw-test10.jpg
 
 layers:
     water:

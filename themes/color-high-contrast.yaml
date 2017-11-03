@@ -30,12 +30,14 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_sphere_map: images/draw-test10.jpg
-
     # FILTER
     landuse-casing:
         any:
             - landuse_kind: [park, nature_reserve, conservation, golf_course, garden, national_park, hospital, parking, cemetery, common, university, zoo, forest, attraction, natural_wood, recreation_ground]
+
+textures:
+    sdk_terrain_texture:
+        url: images/draw-test10.jpg
 
 layers:
     earth:
