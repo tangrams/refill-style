@@ -13,18 +13,9 @@ sources:
             api_key: global.sdk_mapzen_api_key
         max_zoom: 15
 
-import:
-    - https://tangrams.github.io/blocks/functions/zoom.yaml
-    - https://tangrams.github.io/blocks/elevation/dash.yaml
-    - https://tangrams.github.io/blocks/source-elevation.yaml
-    - https://tangrams.github.io/blocks/elevation/normal.yaml
-    - https://tangrams.github.io/blocks/polygons/dots.yaml
-    - https://tangrams.github.io/blocks/elevation/ramp.yaml
-
 textures:
     palette:
         url: images/ramp.png
-
 layers:
     earth:
         data: { source: mapzen }
@@ -35,17 +26,162 @@ layers:
                 color: global.lightest_color
             lines:
                 visible: false
-
     buildings:
         draw:
             polygons:
                 color: [[13, global.offwhite_color], [18, global.white_color]]
-
     landuse:
         enabled: false
 
-
 styles:
+    functions-zoom:
+        mix:
+            - functions-easing
+        shaders:
+            defines:
+                ZOOM_START: 14
+                ZOOM_END: 20
+                ZOOM_MAX: 'max(ZOOM_START, ZOOM_END)'
+                ZOOM_FNC: linear
+                ZOOM_IN: 0
+                ZOOM_OUT: 1
+            blocks:
+                global: |
+                    float zoom() {
+                        return mix( ZOOM_IN, 
+                                    ZOOM_OUT, 
+                                    clamp( smoothstep(  ZOOM_START/ZOOM_MAX, 
+                                                        ZOOM_END/ZOOM_MAX, 
+                                                        max(u_map_position.z/ZOOM_MAX, 0.)), 0., 1.) );
+                    }
+
+                    float zoomEase() {
+                        return mix( ZOOM_IN, 
+                                    ZOOM_OUT, 
+                                    (u_map_position.z-ZOOM_START)/(ZOOM_END-ZOOM_START) );
+                    }
+
+    elevation-dash:
+        base: polygons
+        mix:
+            - polygons-diagonal-dash
+        raster: custom
+        shaders:
+            defines:
+                DASH_COLOR: color.rgb*.5
+                DASH_BACKGROUND_COLOR: color.rgb
+                DASH_SCALE: 10
+                DASH_SIZE: 0.9
+                DASH_TYPE: fill
+                DASH_TILE_STYLE: tile
+                DASH_DIR: vec3(-0.600,-0.420,0.560)
+                NORMAL_TEXTURE_INDEX: 0
+                DASH_MIN_SIZE: 0.8
+                DASH_MAX_SIZE: 1
+            blocks:
+                normal: >
+                    float shade = dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
+                    DASH_DIR);
+
+                    shade = mix(DASH_MIN_SIZE, DASH_MAX_SIZE, (shade*shade*shade)*4.);
+    polygons-diagonal-dash:
+        base: polygons
+        mix:
+            - space-tile
+            - tiling-brick
+            - tiling-tile
+            - shapes-type
+        shaders:
+            defines:
+                DASH_COLOR: color.rgb*.5
+                DASH_BACKGROUND_COLOR: color.rgb
+                DASH_SCALE: 10
+                DASH_SIZE: 0.9
+                DASH_TYPE: fill
+                DASH_TILE_STYLE: tile
+                PI: 3.141592653589793
+            blocks:
+                global: |
+                    float dashDF(vec2 st) {
+                        return min(cos((st.x-st.y)*PI),-cos((st.x+st.y+.5)*PI*.6666)*5.);
+                    }
+                color: |
+                    color.rgb = mix(DASH_BACKGROUND_COLOR, 
+                                    DASH_COLOR, 
+                                    DASH_TYPE( DASH_SIZE, dashDF(DASH_TILE_STYLE(getTileCoords()*DASH_SCALE,3.))) );
+    shapes-type:
+        mix:
+            - functions-aastep
+        shaders:
+            defines:
+                STROKE: 0.15
+            blocks:
+                global: |
+                    float fill (in float size, in float x) {
+                        return 1.-aastep(size, x);
+                    }
+
+                    float stroke (in float size, in float x) {
+                        return aastep(size, x+STROKE*.5) - aastep(size, x-STROKE*.5);
+                    }
+    elevation-normal:
+        raster: custom
+        shaders:
+            defines:
+                NORMAL_TEXTURE_INDEX: 0
+            blocks:
+                normal: |
+                    vec4 normal_elv_raster = sampleRaster(int(NORMAL_TEXTURE_INDEX));
+                    normal = (normal_elv_raster.rgb-.5)*2.;
+    polygons-dots:
+        base: polygons
+        mix:
+            - space-tile
+            - tiling-brick
+            - tiling-tile
+            - shapes-circle
+        shaders:
+            defines:
+                DOTS_COLOR: color.rgb*.5
+                DOTS_BACKGROUND_COLOR: color.rgb
+                DOTS_SCALE: 10
+                DOTS_SIZE: 0.41
+                DOTS_TYPE: fill
+                DOTS_TILE_STYLE: brick
+            blocks:
+                color: |
+                    color.rgb = mix(DOTS_BACKGROUND_COLOR, 
+                                    DOTS_COLOR, 
+                                    DOTS_TYPE( DOTS_SIZE, circleDF(vec2(0.5)-DOTS_TILE_STYLE(getTileCoords()*DOTS_SCALE,2.))) );
+    shapes-circle:
+        mix:
+            - shapes-type
+        shaders:
+            blocks:
+                global: |
+                    // get distance field of a Circle
+                    float circleDF (vec2 st) {
+                                    return dot(st,st)*3.03;
+                    }
+
+                    // Draw a circle in the middle of the ST space
+                    float circle (vec2 st, float radius) {
+                                    return fill(radius, circleDF(st-vec2(0.5)));
+                    }
+
+                    // Draw a circle in the middle of the ST space
+                    float circleBorder (vec2 st, float radius) {
+                                    return stroke(radius, circleDF(st-vec2(0.5)));
+                    }
+    elevation-ramp:
+        mix: colorized_terrain
+        shaders:
+            uniforms:
+                u_ramp: palette
+            blocks:
+                color: |
+                    color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
+        raster: custom
     landuse:
         base: polygons
         mix: [functions-zoom, elevation-dash]
@@ -68,7 +204,6 @@ styles:
                 NORMAL_TEXTURE_INDEX: 0
                 DASH_MIN_SIZE: .8
                 DASH_MAX_SIZE: 1.
-                DASH_SIZE: shade
 
     landuse2:
         base: polygons
@@ -90,7 +225,6 @@ styles:
                 NORMAL_TEXTURE_INDEX: 0
                 DASH_MIN_SIZE: 0.4
                 DASH_MAX_SIZE: 0.8
-                DASH_SIZE: shade
 
     # dot terrain from Tron for hospitals
     dots-terrain:
@@ -119,14 +253,6 @@ styles:
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
-
-    elevation-ramp:
-        mix: colorized_terrain
-        raster: custom
-        shaders:
-            uniforms:
-                u_ramp: palette
-
     dots-normal:
         base: polygons
         mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
