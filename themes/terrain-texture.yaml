@@ -4,7 +4,8 @@ sources:
         url: https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt
         url_params:
             api_key: global.sdk_mapzen_api_key
-        rasters: [normals-elevation]
+        rasters:
+            - normals-elevation
         max_zoom: 16
     normals-elevation:
         type: Raster
@@ -35,7 +36,8 @@ layers:
 
 styles:
     functions-zoom:
-        mix: [functions-easing]
+        mix:
+            - functions-easing
         shaders:
             defines:
                 ZOOM_START: 14
@@ -62,7 +64,8 @@ styles:
 
     elevation-dash:
         base: polygons
-        mix: [polygons-diagonal-dash]
+        mix:
+            - polygons-diagonal-dash
         raster: custom
         shaders:
             defines:
@@ -84,7 +87,11 @@ styles:
                     shade = mix(DASH_MIN_SIZE, DASH_MAX_SIZE, (shade*shade*shade)*4.);
     polygons-diagonal-dash:
         base: polygons
-        mix: [space-tile, tiling-brick, tiling-tile, shapes-type]
+        mix:
+            - space-tile
+            - tiling-brick
+            - tiling-tile
+            - shapes-type
         shaders:
             defines:
                 DASH_COLOR: color.rgb*.5
@@ -104,7 +111,8 @@ styles:
                                     DASH_COLOR, 
                                     DASH_TYPE( DASH_SIZE, dashDF(DASH_TILE_STYLE(getTileCoords()*DASH_SCALE,3.))) );
     shapes-type:
-        mix: [functions-aastep]
+        mix:
+            - functions-aastep
         shaders:
             defines:
                 STROKE: 0.15
@@ -128,7 +136,11 @@ styles:
                     normal = (normal_elv_raster.rgb-.5)*2.;
     polygons-dots:
         base: polygons
-        mix: [space-tile, tiling-brick, tiling-tile, shapes-circle]
+        mix:
+            - space-tile
+            - tiling-brick
+            - tiling-tile
+            - shapes-circle
         shaders:
             defines:
                 DOTS_COLOR: color.rgb*.5
@@ -143,7 +155,8 @@ styles:
                                     DOTS_COLOR, 
                                     DOTS_TYPE( DOTS_SIZE, circleDF(vec2(0.5)-DOTS_TILE_STYLE(getTileCoords()*DOTS_SCALE,2.))) );
     shapes-circle:
-        mix: [shapes-type]
+        mix:
+            - shapes-type
         shaders:
             blocks:
                 global: |
@@ -172,7 +185,9 @@ styles:
         raster: custom
     landuse:
         base: polygons
-        mix: [functions-zoom, elevation-dash]
+        mix:
+            - functions-zoom
+            - elevation-dash
         shaders:
             defines:
                 ZOOM_START: 14.
@@ -195,7 +210,9 @@ styles:
 
     landuse2:
         base: polygons
-        mix: [functions-zoom, elevation-dash]
+        mix:
+            - functions-zoom
+            - elevation-dash
         shaders:
             uniforms:
                 u_tint: global.ultralight_color
@@ -216,7 +233,8 @@ styles:
 
     # dot terrain from Tron for hospitals
     dots-terrain:
-        mix: [polygons-dots]
+        mix:
+            - polygons-dots
         raster: custom
         shaders:
             defines:
@@ -243,7 +261,11 @@ styles:
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
     dots-normal:
         base: polygons
-        mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
+        mix:
+            - elevation-ramp
+            - elevation-normal
+            - functions-zoom
+            - polygons-dots
         shaders:
             defines:
                 ZOOM_START: 0.
