@@ -587,14 +587,15 @@
             // Terrain toggle
             var terrain = {
                 '(default)': false,
-                'No': false,
-                'Yes': true
+                'None': false,
+                'Shading': 'shading',
+                'Texture': 'texture'
             };
             gui.terrain = query.terrain || false;
-            gui.terrain_button = gui.add(gui, 'terrain', texture).onChange(function(value) {
+            gui.terrain_button = gui.add(gui, 'terrain', terrain).onChange(function(value) {
                 console.log( value );
-                if (value === 'true' || value === true) {
-                    all_theme_imports.terrain = 'themes/terrain.yaml';
+                if (value === 'shading' || value === 'texture') {
+                    all_theme_imports.terrain = 'themes/terrain-' + value + '.yaml';
                 } else {
                     all_theme_imports.terrain = '';
                 }

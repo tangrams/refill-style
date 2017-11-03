@@ -1,0 +1,147 @@
+sources:
+    mapzen:
+        type: MVT
+        url: https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt
+        url_params:
+            api_key: global.sdk_mapzen_api_key
+        rasters: [normals-elevation]
+        max_zoom: 16
+    normals-elevation:
+        type: Raster
+        url: https://tile.mapzen.com/mapzen/terrain/v1/normal/{z}/{x}/{y}.png
+        url_params:
+            api_key: global.sdk_mapzen_api_key
+        max_zoom: 15
+
+import:
+    - https://tangrams.github.io/blocks/functions/zoom.yaml
+    - https://tangrams.github.io/blocks/elevation/dash.yaml
+    - https://tangrams.github.io/blocks/source-elevation.yaml
+    - https://tangrams.github.io/blocks/elevation/normal.yaml
+    - https://tangrams.github.io/blocks/polygons/dots.yaml
+    - https://tangrams.github.io/blocks/elevation/ramp.yaml
+
+textures:
+    palette:
+        url: images/ramp.png
+
+layers:
+    earth:
+        data: { source: mapzen }
+        draw:
+            polygons:
+                style: dots-normal
+                order: function() { return feature.sort_rank || 0; }
+                color: global.lightest_color
+            lines:
+                visible: false
+
+    buildings:
+        draw:
+            polygons:
+                color: [[13, global.offwhite_color], [18, global.white_color]]
+
+    landuse:
+        enabled: false
+
+
+styles:
+    landuse:
+        base: polygons
+        mix: [functions-zoom, elevation-dash]
+        shaders:
+            defines:
+                ZOOM_START: 14.
+                ZOOM_END: 18.
+                ZOOM_IN: .0
+                ZOOM_OUT: 1.
+
+                # DASH_COLOR: vec3(0.000,0.000,0.000)
+                # DASH_BACKGROUND_COLOR: vec3(1.000,1.000,1.000)
+                DASH_COLOR: vec3(1.000,1.000,1.000)
+                DASH_BACKGROUND_COLOR: vec3(0.000,0.000,0.000)
+                DASH_SCALE: 12.
+                DASH_SIZE: 0.9
+                DASH_TYPE: fill
+                DASH_TILE_STYLE: tile
+                DASH_DIR: vec3(-0.600,-0.420,0.560)
+                NORMAL_TEXTURE_INDEX: 0
+                DASH_MIN_SIZE: .8
+                DASH_MAX_SIZE: 1.
+                DASH_SIZE: shade
+
+    landuse2:
+        base: polygons
+        mix: [functions-zoom, elevation-dash]
+        shaders:
+            uniforms:
+                u_tint: global.ultralight_color
+                u_fill: global.white_color
+            defines:
+                ZOOM_START: 0.
+                ZOOM_END: 13.
+
+                DASH_COLOR: u_fill.rgb
+                DASH_BACKGROUND_COLOR: u_tint.rgb
+                DASH_SCALE: 30.
+                DASH_TYPE: fill
+                DASH_TILE_STYLE: tile
+                DASH_DIR: vec3(-0.600,-0.420,0.560)
+                NORMAL_TEXTURE_INDEX: 0
+                DASH_MIN_SIZE: 0.4
+                DASH_MAX_SIZE: 0.8
+                DASH_SIZE: shade
+
+    # dot terrain from Tron for hospitals
+    dots-terrain:
+        mix: [polygons-dots]
+        raster: custom
+        shaders:
+            defines:
+                NORMAL_TEXTURE_INDEX: 0
+                DOTS_DIR: vec3(-0.600,-0.420,0.600)
+                DOTS_COLOR: vec3(0.345,0.224,0.392)
+                DOTS_SCALE: 30.
+                DOTS_SIZE: shade*2.
+            blocks:
+                normal: |
+                    float shade = dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2., DOTS_DIR);
+                    shade = shade*shade*shade;
+
+    # dot terrain from Patricio's example
+    # https://mapzen.com/tangram/play/?scene=https://tangrams.github.io/tangram-sandbox/styles/callejas.yaml&lines=116#10.9329/38.3394/-122.3068
+
+    colorized_terrain:
+        shaders:
+            uniforms:
+                u_tint: global.ultralight_color
+                u_fill: global.white_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    elevation-ramp:
+        mix: colorized_terrain
+        raster: custom
+        shaders:
+            uniforms:
+                u_ramp: palette
+
+    dots-normal:
+        base: polygons
+        mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
+        shaders:
+            defines:
+                ZOOM_START: 0.
+                ZOOM_END: 13.
+                DOTS_DIR: vec3(-0.600,-0.420,0.600)
+                DOTS_COLOR: color.rgb
+                DOTS_BACKGROUND_COLOR: vec3(1.0)
+                DOTS_SCALE: 30
+                DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
+            blocks:
+                normal: |
+                    float shade = dot(normal, DOTS_DIR);
+                    shade =shade*shade*shade;
+
+

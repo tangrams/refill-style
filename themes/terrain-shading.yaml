@@ -73,7 +73,7 @@ styles:
         raster: normal
         shaders:
             uniforms:
-                u_envmap: global.sdk_terrain_sphere_map   #images/draw-test10.jpg
+                u_envmap: images/draw-test10.jpg #global.sdk_terrain_sphere_map
                 u_contrast: 1.
                 u_zoom_scale: 3.5
                 u_brightness_base: 0.5
