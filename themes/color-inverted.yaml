@@ -16,7 +16,8 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [0.00,0.00,0.00,0.5]                 # land color
 
-    terrain_color:              global.black_color
+    terrain_color:              global.mid_color
+    dot_terrain_color:          global.ultralight_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -28,7 +29,7 @@ global:
 
 textures:
     sdk_terrain_texture:
-        url: images/draw-test10.jpg
+        url: images/flexner-test3.jpg  #images/draw-test10.jpg  #
 
 layers:
     water:

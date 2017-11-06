@@ -23,7 +23,7 @@ import:
 
 textures:
     palette:
-        url: images/ramp.png
+        url: images/ramp2.png
 
 layers:
     earth:
@@ -114,7 +114,7 @@ styles:
     colorized_terrain:
         shaders:
             uniforms:
-                u_tint: global.ultralight_color
+                u_tint: global.dot_terrain_color
                 u_fill: global.white_color
             blocks:
                 filter: |
