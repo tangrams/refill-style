@@ -27,7 +27,9 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [0.153,0.157,0.161,0.75]                 # land color
 
-    terrain_color:              global.black_color
+    terrain_tint_color:         global.dark_color
+    terrain_fill_color:         global.white_color
+
     dot_terrain_color:          global.ultralight_color
 
     # To make Refill's colorize-able icons play nice with other styles
@@ -38,11 +40,25 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
+    sdk_terrain_style: terrain-dark
+
 textures:
     sdk_terrain_texture:
         url: images/refill-spheremap-dark.jpg
 
+    building-grid:
+        url: images/building-grid-hi-contrast3.gif
+
 layers:
+    earth:
+        data: { source: mapzen }
+        draw:
+            terrain-dark:
+                order: function() { return feature.sort_rank || 0; }
+                color: [1.0, 1.0, 1.0]
+            lines:
+                visible: false
+
     water:
         draw:
             polygons:
@@ -342,7 +358,3 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.153,0.157,0.161)
-
-textures:
-    building-grid:
-        url: images/building-grid-hi-contrast3.gif

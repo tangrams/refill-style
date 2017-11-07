@@ -28,7 +28,9 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [0.900,0.900,0.900,0.75]                 # land color
 
-    terrain_color:              global.black_color
+    terrain_tint_color:         global.black_color
+    terrain_fill_color:         global.white_color
+
     dot_terrain_color:          global.ultralight_color
 
     # To make Refill's colorize-able icons play nice with other styles
@@ -39,9 +41,11 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
+    sdk_terrain_style: terrain
+
 textures:
     sdk_terrain_texture:
-        url: images/draw-test10.jpg
+        url: images/refill-spheremap-light.jpg
 
 scene:
     background:

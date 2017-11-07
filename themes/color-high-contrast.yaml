@@ -20,7 +20,9 @@ global:
     text_fill:                    global.black_color
     text_stroke:                  [1.00,1.00,1.00,0.75]                 # land color
 
-    terrain_color:                [0.150,0.150,0.150]
+    terrain_tint_color:           [0.150,0.150,0.150]
+    terrain_fill_color:           global.white_color
+
     dot_terrain_color:            global.ultralight_color
 
     # To make Refill's colorize-able icons play nice with other styles
@@ -31,6 +33,8 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
+    sdk_terrain_style: terrain
+
     # FILTER
     landuse-casing:
         any:
@@ -38,7 +42,10 @@ global:
 
 textures:
     sdk_terrain_texture:
-        url: images/draw-test10.jpg
+        url: images/refill-spheremap-light.jpg
+
+    building-grid:
+        url: images/building-grid-hi-contrast3.gif
 
 layers:
     earth:
@@ -269,7 +276,3 @@ styles:
         base: lines
         dash: [0.5, 2.0]
         dash_background_color: global.hi_contrast_midlight
-
-textures:
-    building-grid:
-        url: images/building-grid-hi-contrast3.gif

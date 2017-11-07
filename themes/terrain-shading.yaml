@@ -25,6 +25,7 @@ layers:
         data: { source: mapzen }
         draw:
             terrain:
+                style: global.sdk_terrain_style
                 order: function() { return feature.sort_rank || 0; }
                 color: [1.0, 1.0, 1.0]
             lines:
@@ -66,8 +67,8 @@ styles:
     colorized_terrain:
         shaders:
             uniforms:
-                u_tint: global.terrain_color
-                u_fill: global.white_color
+                u_tint: global.terrain_tint_color
+                u_fill: global.terrain_fill_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
@@ -79,7 +80,7 @@ styles:
         raster: normal
         shaders:
             uniforms:
-                u_envmap: sdk_terrain_texture   #images/draw-test10.jpg
+                u_envmap: sdk_terrain_texture
                 u_contrast: 1.
                 u_zoom_scale: 3.5
                 u_brightness_base: 0.5
@@ -105,3 +106,14 @@ styles:
                     color.rgb += brightness;
                     // apply layer color
                     color *= v_color;
+
+    terrain-dark:
+        mix: [colorized_terrain, terrain]
+        base: polygons
+        shaders:
+            uniforms:
+                u_envmap: sdk_terrain_texture   #images/draw-test10.jpg
+                u_contrast: 0.5
+                u_zoom_scale: 8.0
+                u_brightness_base: 0.75
+                u_brightness_scaler: 0.0
