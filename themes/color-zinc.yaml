@@ -26,7 +26,7 @@ global:
     gray_offwhite_color:        [0.898,0.898,0.898]
 
     text_fill:                  global.black_color
-    text_stroke:                [0.900,0.900,0.900,0.5]                 # land color
+    text_stroke:                [0.900,0.900,0.900,0.75]                 # land color
 
     terrain_color:              global.black_color
     dot_terrain_color:          global.ultralight_color

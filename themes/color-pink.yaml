@@ -14,7 +14,7 @@ global:
     route_line:                [0.369,0.349,0.729]
 
     text_fill:                  global.black_color
-    text_stroke:                [1.000,1.000,1.000,0.5]                 # land color
+    text_stroke:                [1.000,1.000,1.000,0.75]                 # land color
 
     terrain_color:              global.midlight_color
     dot_terrain_color:          global.lightest_color
