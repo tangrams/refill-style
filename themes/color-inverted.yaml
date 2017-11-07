@@ -30,6 +30,8 @@ global:
 textures:
     sdk_terrain_texture:
         url: images/flexner-test3.jpg  #images/draw-test10.jpg  #
+    building-grid:
+        url: images/building-grid-hi-contrast3.gif
 
 layers:
     water:
@@ -297,12 +299,3 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.00,0.00,0.00)
-
-    # terrain:
-    #     shaders:
-    #         uniforms:
-    #             u_envmap: images/draw-test10.jpg
-
-textures:
-    building-grid:
-        url: images/building-grid-hi-contrast3.gif
