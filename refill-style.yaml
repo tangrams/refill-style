@@ -3217,7 +3217,7 @@ layers:
                     - kind_detail: [3,4]
             draw:
                 lines:
-                    color: global.ultralight_color
+                    color: global.lightest_color
                     width: [[0, 0.5px], [5, 2px], [9, 4px], [14, 5.5px], [16, 6.5px], [17, 16m]]
             water:
                 filter: { maritime_boundary: true }
