@@ -17,7 +17,7 @@ global:
     text_stroke:                [1.00,1.00,1.00,0.5]                 # land color
 
     terrain_color:              global.mid_color
-    dot_terrain_color:          global.ultralight_color
+    dot_terrain_color:          global.light_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -30,4 +30,4 @@ global:
 textures:
     sdk_terrain_texture:
         # oddly, we can't get any other color theme to use flexner unless it's defined here on first import of color-black.yaml by refill-style.yaml?
-        url: images/flexner-test3.jpg  #images/draw-test10.jpg  #
+        url: images/draw-test10.jpg  #

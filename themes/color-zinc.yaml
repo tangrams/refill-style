@@ -29,6 +29,7 @@ global:
     text_stroke:                [0.900,0.900,0.900,0.5]                 # land color
 
     terrain_color:              global.black_color
+    dot_terrain_color:          global.ultralight_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.

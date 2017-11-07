@@ -23,7 +23,7 @@ import:
 
 textures:
     palette:
-        url: images/ramp2.png
+        url: images/ramp.png
 
 layers:
     earth:
@@ -134,7 +134,12 @@ styles:
             defines:
                 ZOOM_START: 0.
                 ZOOM_END: 13.
-                DOTS_DIR: vec3(-0.600,-0.420,0.600)
+                DOTS_DIR: vec3(0.600,-0.950,0.600)
+                # DOTS_DIR: vec3(-0.600,-0.420,0.600)
+                # DOTS_DIR: vec3(1.000, 0.000, 0.506)
+                # DOTS_DIR: vec3(0.090, 0.502, 0.490)
+                # DOTS_DIR: vec3(0.067, 0.686, 0.498)
+                # DOTS_DIR: vec3(0.780, 0.267, 0.357)
                 DOTS_COLOR: color.rgb
                 DOTS_BACKGROUND_COLOR: vec3(1.0)
                 DOTS_SCALE: 30
