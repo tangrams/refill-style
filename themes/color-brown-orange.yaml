@@ -92,6 +92,15 @@ layers:
                         style: coast
                         color: global.two_color_mid
 
+        river:
+            draw:
+                lines:
+                    color: global.two_color_midlight
+            intermittent:
+                draw:
+                    lines:
+                        color: global.two_color_midlight
+
     roads:
         railway:
             draw:

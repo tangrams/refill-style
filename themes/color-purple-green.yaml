@@ -102,6 +102,15 @@ layers:
                         style: coast
                         color: global.two_color_offwhite
 
+        river:
+            draw:
+                lines:
+                    color: global.two_color_lightest
+            intermittent:
+                draw:
+                    lines:
+                        color: global.two_color_lightest
+
     roads:
         arrows:
             draw:
