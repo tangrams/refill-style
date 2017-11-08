@@ -573,7 +573,7 @@
             };
             gui.texture = query.texture || true;
             gui.texture_button = gui.add(gui, 'texture', texture).onChange(function(value) {
-                console.log( value );
+                //console.log( value );
                 if (value === 'false' || value === false) {
                     all_theme_imports.texture = 'themes/no-texture.yaml';
                 } else {

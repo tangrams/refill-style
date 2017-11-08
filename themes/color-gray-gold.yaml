@@ -4,6 +4,7 @@ global:
     dark_color:                 [0.575,0.599,0.653]
     mid_color:                  [0.495,0.517,0.558]
     midlight_color:             [0.418,0.434,0.465]
+    light:                      [0.381,0.395,0.423]
     light_color:                [0.333,0.343,0.367]
     lighter_color:              [0.254,0.258,0.272]
     lightest_color:             [0.212,0.216,0.225]
@@ -25,9 +26,12 @@ global:
     two_color_offwhite:         [0.815,0.718,0.552]
 
     text_fill:                  global.black_color
-    text_stroke:                [0.153,0.157,0.161,0.5]                 # land color
+    text_stroke:                [0.153,0.157,0.161,0.75]                 # land color
 
-    terrain_color:              global.black_color
+    terrain_tint_color:         global.mid_color
+    terrain_fill_color:         [0.000,0.000,0.000]
+
+    dot_terrain_color:          global.ultralight_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -37,11 +41,25 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
+    sdk_terrain_style: terrain-dark
+
 textures:
     sdk_terrain_texture:
-        url: images/draw-test10.jpg
+        url: images/refill-spheremap-dark.jpg
+
+    building-grid:
+        url: images/building-grid-hi-contrast3.gif
 
 layers:
+    earth:
+        data: { source: mapzen }
+        draw:
+            terrain-dark:
+                order: function() { return feature.sort_rank || 0; }
+                color: [1.0, 1.0, 1.0]
+            lines:
+                visible: false
+
     water:
         draw:
             polygons:
@@ -81,6 +99,15 @@ layers:
                     lines:
                         style: coast
                         color: global.two_color_offwhite
+
+        river:
+            draw:
+                lines:
+                    color: global.two_color_light
+            intermittent:
+                draw:
+                    lines:
+                        color: global.two_color_light
 
     roads:
         arrows:
@@ -341,7 +368,3 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.153,0.157,0.161)
-
-textures:
-    building-grid:
-        url: images/building-grid-hi-contrast3.gif

@@ -4,7 +4,8 @@ global:
     dark_color:                 [0.680,0.680,0.680]
     mid_color:                  [0.722,0.722,0.722]
     midlight_color:             [0.788,0.788,0.788]
-    light_color:                [0.824,0.824,0.824]
+    light:                      [0.810,0.810,0.810]
+    light_color:                [0.844,0.844,0.844]
     lighter_color:              [0.894,0.894,0.894]
     lightest_color:             [0.929,0.929,0.929]
     ultralight_color:           [0.965,0.965,0.965]
@@ -14,9 +15,12 @@ global:
     route_line:                 [0.313,0.482,0.580]
 
     text_fill:                  global.black_color
-    text_stroke:                [1.00,1.00,1.00,0.5]                 # land color
+    text_stroke:                [1.00,1.00,1.00,0.75]                 # land color
 
-    terrain_color:              global.dark_color
+    terrain_tint_color:         global.dark_color
+    terrain_fill_color:         global.white_color
+
+    dot_terrain_color:          global.ultralight_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -26,6 +30,8 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
+    sdk_terrain_style: terrain
+
 textures:
     sdk_terrain_texture:
-        url: images/draw-test10.jpg
+        url: images/refill-spheremap-light.jpg

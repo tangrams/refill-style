@@ -254,8 +254,7 @@ styles:
     colorized_terrain:
         shaders:
             uniforms:
-                # u_tint: global.ultralight_color
-                u_tint: global.black_color
+                u_tint: global.dot_terrain_color
                 u_fill: global.white_color
             blocks:
                 filter: |
