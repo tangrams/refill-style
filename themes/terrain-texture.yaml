@@ -254,30 +254,30 @@ styles:
     colorized_terrain:
         shaders:
             uniforms:
-                u_tint: global.ultralight_color
+                # u_tint: global.ultralight_color
+                u_tint: global.black_color
                 u_fill: global.white_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
     dots-normal:
         base: polygons
-        mix:
-            - elevation-ramp
-            - elevation-normal
-            - functions-zoom
-            - polygons-dots
+        mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
         shaders:
             defines:
                 ZOOM_START: 0.
                 ZOOM_END: 13.
-                DOTS_DIR: vec3(-0.600,-0.420,0.600)
-                DOTS_COLOR: color.rgb
+                DOTS_DIR: vec3(0.600,-0.950,0.600)
+                # DOTS_COLOR: color.rgb
+                DOTS_COLOR: vec3(0)
                 DOTS_BACKGROUND_COLOR: vec3(1.0)
                 DOTS_SCALE: 30
                 DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
             blocks:
                 normal: |
                     float shade = dot(normal, DOTS_DIR);
-                    shade =shade*shade*shade;
-
-
+                    // subtract .1 to increase contrast a bit
+                    shade = shade*shade*shade - .1;
+                    // reset normal to prevent standard terrain shading mixing with dots
+                    normal = vec3(0,0,1);
