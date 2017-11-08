@@ -1279,7 +1279,7 @@ layers:
                     style: riverlines
                     visible: true
                     order: global.feature_order_down_1
-                    color: global.light_color
+                    color: global.light
                     width: [[11, 0.5px], [ 18, 8px]]
                     cap: round
             intermittent:
@@ -1290,7 +1290,7 @@ layers:
                 draw:
                     lines:
                         style: coast
-                        color: global.light_color
+                        color: global.light
 
 
         water-area-labels:

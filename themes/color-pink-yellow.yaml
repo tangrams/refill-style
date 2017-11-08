@@ -4,6 +4,7 @@ global:
     dark_color:                [1.000,0.502,0.733]
     mid_color:                 [1.000,0.576,0.769]
     midlight_color:            [1.000,0.663,0.816]
+    light:                     [1.000,0.710,0.840]
     light_color:               [0.996,0.757,0.867]
     lighter_color:             [1.000,0.831,0.910]
     lightest_color:            [1.000,0.894,0.941]
@@ -27,7 +28,7 @@ global:
     text_fill:                 global.black_color
     text_stroke:               [1.000,1.000,1.000,0.75]                 # land color
 
-    terrain_tint_color:        [0.950,0.651,0.551]
+    terrain_tint_color:        [0.930,0.721,0.651]
     terrain_fill_color:        global.white_color
 
     dot_terrain_color:         [1.000,0.906,0.880]
@@ -90,15 +91,6 @@ layers:
                     lines:
                         style: coast
                         color: global.two_color_mid
-
-        river:
-            draw:
-                lines:
-                    color: global.two_color_dark
-            intermittent:
-                draw:
-                    lines:
-                        color: global.two_color_dark
 
     roads:
         railway:
