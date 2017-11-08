@@ -594,15 +594,16 @@
             gui.terrain = query.terrain || false;
             gui.terrain_button = gui.add(gui, 'terrain', terrain).onChange(function(value) {
                 //console.log( value );
+                updateTerrain(value);
+            });
+            (updateTerrain = function(value) {
                 if (value === 'shading' || value === 'texture') {
                     all_theme_imports.terrain = 'themes/terrain-' + value + '.yaml';
                 } else {
                     all_theme_imports.terrain = '';
                 }
                 update_scene_with_themes();
-
-            });
-            gui.terrain_button.name( 'terrain' );
+            })(gui.terrain);
 
             // Routing selector
             var sdk_directions = {
