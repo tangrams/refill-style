@@ -41,7 +41,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-dark
 
 textures:
     sdk_terrain_texture:

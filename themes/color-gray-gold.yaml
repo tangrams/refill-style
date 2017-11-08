@@ -27,8 +27,8 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [0.153,0.157,0.161,0.75]                 # land color
 
-    terrain_tint_color:         global.dark_color
-    terrain_fill_color:         global.white_color
+    terrain_tint_color:         global.mid_color
+    terrain_fill_color:         [0.000,0.000,0.000]
 
     dot_terrain_color:          global.ultralight_color
 
@@ -98,6 +98,15 @@ layers:
                     lines:
                         style: coast
                         color: global.two_color_offwhite
+
+        river:
+            draw:
+                lines:
+                    color: global.two_color_light
+            intermittent:
+                draw:
+                    lines:
+                        color: global.two_color_light
 
     roads:
         arrows:

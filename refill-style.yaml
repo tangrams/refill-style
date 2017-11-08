@@ -653,6 +653,8 @@ styles:
         mix: [space-constant]
         blend: opaque
         shaders:
+            uniforms:
+                u_tint: global.white_color
             blocks:
                 global: |
                     mat2 rotate2d(float angle){
@@ -662,12 +664,11 @@ styles:
 
                     float stripes(vec2 st){
                         st = rotate2d(3.14159265358*-0.25 )*st;
-                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
                         return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
                     }
                 color: |
                     vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.9), vec4(0.0), stripes(st*130.)); // transparent stripes
+                    color = mix(vec4(color.rgb, 0.9), vec4(u_tint.rgb, 1.0), stripes(st*130.));
 
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]

@@ -91,6 +91,15 @@ layers:
                         style: coast
                         color: global.two_color_mid
 
+        river:
+            draw:
+                lines:
+                    color: global.two_color_dark
+            intermittent:
+                draw:
+                    lines:
+                        color: global.two_color_dark
+
     roads:
         railway:
             draw:
@@ -269,7 +278,7 @@ layers:
         region:
             draw:
                 lines:
-                    color: global.two_color_lightest
+                    color: global.lighter_color
 
 styles:
     railway_dash:
