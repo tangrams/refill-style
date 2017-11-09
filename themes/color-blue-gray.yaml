@@ -30,9 +30,9 @@ global:
 
     terrain_tint_color:         global.two_color_mid
     terrain_fill_color:         global.white_color
-    terrain_earth_color:        global.white_color
+    terrain_earth_color:        global.two_color_offwhite
 
-    dot_terrain_color:          global.two_color_ultralight
+    dot_terrain_color:          global.white_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -92,6 +92,15 @@ layers:
                     lines:
                         style: coast
                         color: global.two_color_mid
+
+        river:
+            draw:
+                lines:
+                    color: global.two_color_light
+            intermittent:
+                draw:
+                    lines:
+                        color: global.two_color_light
 
     roads:
         railway:

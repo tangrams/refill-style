@@ -214,6 +214,28 @@ styles:
                 normal: |
                     float shade = dot(normal, DOTS_DIR);
                     // subtract .1 to increase contrast a bit
-                    shade = shade*shade*shade + .05;
+                    shade = shade*shade*shade * -1. + .3;
                     // reset normal to prevent standard terrain shading mixing with dots
                     normal = vec3(0,0,1);
+
+    # terrain:
+    #     base: polygons
+    #     mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
+    #     shaders:
+    #         defines:
+    #             ZOOM_START: 0.
+    #             ZOOM_END: 13.
+    #             DOTS_DIR: vec3(0.600,-0.950,0.520)
+    #             # DOTS_DIR: vec3(0.600,-0.950,0.600)
+    #             # DOTS_COLOR: color.rgb
+    #             DOTS_COLOR: vec3(0)
+    #             DOTS_BACKGROUND_COLOR: vec3(1.0)
+    #             DOTS_SCALE: 30
+    #             DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
+    #         blocks:
+    #             normal: |
+    #                 float shade = dot(normal, DOTS_DIR);
+    #                 // subtract .1 to increase contrast a bit
+    #                 shade = shade*shade*shade + .05;
+    #                 // reset normal to prevent standard terrain shading mixing with dots
+    #                 normal = vec3(0,0,1);
