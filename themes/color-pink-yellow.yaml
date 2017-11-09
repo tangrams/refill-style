@@ -30,6 +30,7 @@ global:
 
     terrain_tint_color:        [0.930,0.721,0.651]
     terrain_fill_color:        global.white_color
+    terrain_earth_color:       global.offwhite_color
 
     dot_terrain_color:         [1.000,0.906,0.880]
 

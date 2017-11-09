@@ -30,8 +30,9 @@ global:
 
     terrain_tint_color:           global.dark_color
     terrain_fill_color:           global.white_color
+    terrain_earth_color:          global.white_color
 
-    dot_terrain_color:            global.ultralight_color
+    dot_terrain_color:            global.offwhite_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.

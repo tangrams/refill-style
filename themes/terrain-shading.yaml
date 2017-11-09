@@ -43,7 +43,8 @@ layers:
 styles:
     riverlines:
         base: lines
-        mix: [space-constant]
+        mix:
+            - space-constant
         blend: opaque
         shaders:
             uniforms:
@@ -74,7 +75,8 @@ styles:
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
     terrain:
-        mix: colorized_terrain
+        mix:
+            - colorized_terrain
         base: polygons
         lighting: false
         raster: normal
@@ -108,7 +110,9 @@ styles:
                     color *= v_color;
 
     terrain-dark:
-        mix: [colorized_terrain, terrain]
+        mix:
+            - colorized_terrain
+            - terrain
         base: polygons
         shaders:
             uniforms:

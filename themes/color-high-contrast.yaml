@@ -23,6 +23,7 @@ global:
 
     terrain_tint_color:           [0.150,0.150,0.150]
     terrain_fill_color:           global.white_color
+    terrain_earth_color:          global.white_color
 
     dot_terrain_color:            global.ultralight_color
 
