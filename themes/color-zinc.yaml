@@ -29,11 +29,12 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [0.900,0.900,0.900,0.75]                 # land color
 
-    terrain_tint_color:         global.black_color
-    terrain_fill_color:         global.white_color
-    terrain_earth_color:        [0.700,0.700,0.700]
+    terrain_tint_color:         [0.170,0.170,0.170]
+    terrain_fill_color:         [0.730,0.730,0.730]
+    terrain_earth_color:        [0.675,0.675,0.675]
+    terrain_bldg_color:         global.light_gray_color
 
-    dot_terrain_color:          global.lighter_gray_color
+    dot_terrain_color:          [0.735,0.735,0.735]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -291,6 +292,9 @@ layers:
                 width: [[14, 0px], [15, 0.5px], [18, 1px], [19, 0.4m]]
 
         footprints:
+            # NOTE (2017-11-09, @nvkelso): this filter block is optionally different.
+            # it was added to match the old Zinc, which had less buildings
+            # but maybe it should be removed to just use Refill's standard selection?
             filter:
                 any:
                     # limit show smaller landuse areas to higher zooms
@@ -310,12 +314,8 @@ layers:
                 draw:
                     polygons:
                         extrude: false
-                        style: polygons
-                        color: global.ultralight_color
                     lines:
                         extrude: false
-                        style: lines
-                        color: global.ultradark_gray_color
 
             in_university:
                 filter: { landuse_kind: [university,school] }

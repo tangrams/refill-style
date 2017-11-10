@@ -1,13 +1,9 @@
 sources:
     mapzen:
-        type: TopoJSON
-        # prod
-        rasters: [normals]
-        tile_size: 512
-        max_zoom: 16
-    normals: # normals
+        rasters:
+            - normals
+    normals:
         type: Raster
-        # prod
         url: https://tile.mapzen.com/mapzen/terrain/v1/512/normal/{z}/{x}/{y}.png
         url_params:
             api_key: global.sdk_mapzen_api_key
@@ -31,10 +27,10 @@ layers:
             lines:
                 visible: false
 
-    buildings:
-        draw:
-            polygons:
-                color: [[13, global.offwhite_color], [18, global.white_color]]
+    # buildings:
+    #     draw:
+    #         polygons:
+    #             color: [[13, global.offwhite_color], [18, global.white_color]]
 
     landuse:
         enabled: false

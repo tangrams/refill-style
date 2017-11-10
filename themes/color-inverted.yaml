@@ -15,11 +15,12 @@ global:
     route_line:                 [0.000,0.500,1.000]
 
     text_fill:                  global.black_color
-    text_stroke:                [0.00,0.00,0.00,0.75]                 # land color
+    text_stroke:                [0.00,0.00,0.00,0.75]
 
     terrain_tint_color:         global.mid_color
     terrain_fill_color:         global.white_color
-    terrain_earth_color:        [0.000,0.000,0.000]              #global.lightest_color
+    terrain_earth_color:        [0.000,0.000,0.000]
+    terrain_bldg_color:         global.white_color
 
     dot_terrain_color:          [0.145,0.145,0.145]
 

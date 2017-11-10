@@ -32,6 +32,7 @@ global:
     terrain_tint_color:         global.two_color_ultralight
     terrain_fill_color:         global.white_color
     terrain_earth_color:        global.two_color_black
+    terrain_bldg_color:         global.white_color
 
     dot_terrain_color:          global.two_color_midlight
 
