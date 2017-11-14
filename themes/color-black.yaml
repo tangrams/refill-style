@@ -26,7 +26,7 @@ global:
     landuse_terrain_fill_color: [0.930,0.930,0.930]
 
     earth_dot_terrain_color:    global.white_color
-    earth_terrain_fill_color:   [0.970,0.970,0.970]
+    earth_terrain_fill_color:   [0.980,0.980,0.980]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.

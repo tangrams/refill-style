@@ -335,11 +335,6 @@ layers:
 
 
     landuse:
-        draw:
-            no_texture:
-                order: global.feature_order
-                visible: false
-
         national_park:
             draw:
                 polygons:
@@ -349,7 +344,6 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.light_gray_color
 
         conservation:
             draw:
@@ -378,29 +372,12 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.light_gray_color
 
         farm:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.lighter_gray_color
-
-        airport:
-            filter:
-                kind: aerodrome
-            draw:
-                polygons:
                     color: global.light_gray_color
-                    visible: true
-
-        military:
-            filter:
-                kind: military
-            draw:
-                polygons:
-                    color: global.ultralight_color
-                    visible: true
 
         university:
             draw:
@@ -424,28 +401,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-
-        industrial:
-            filter:
-                kind: industrial
-            draw:
-                polygons:
-                    color: global.lighter_gray_color
-                    visible: true
-
-        railway:
-            filter:
-                kind: railway
-            draw:
-                polygons:
-                    color: global.lightest_color
-                    visible: true
-
+                    color: global.light_gray_color
 
         sports_centre:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.light_gray_color
 
         recreation_ground:
             draw:
@@ -465,10 +427,16 @@ layers:
                     style: no_texture
                     color: global.ultralight_color
 
+        winter_sports:
+            draw:
+                polygons:
+                    color: global.light_gray_color
+
         man-made:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.lighter_gray_color
             pier:
                 draw:
                     polygons:
@@ -480,11 +448,11 @@ layers:
                     polygons:
                         style: no_texture
                         color: global.offwhite_color
-
             beach:
                 draw:
                     polygons:
                         style: no_texture
+                        color: global.lightest_color
 
         garden:
             draw:
@@ -496,28 +464,30 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.ultralight_color
 
         pedestrian:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.lightest_gray_color
             green-stuff:
                 draw:
                     polygons:
                         style: no_texture
+                        color: global.lighter_color
 
         pitch:
             draw:
                 polygons:
                     style: no_texture
                     color: global.lighter_gray_color
-                outline:
-                    color: global.light_color
 
         playground:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.ultralight_color
 
         school:
             draw:
@@ -532,11 +502,14 @@ layers:
                     color: global.lighter_gray_color
 
         landuse-not-filtered:
+            draw:
+                polygons:
+                    order: global.feature_order
+
             runway:
                 draw:
                     polygons:
                         color: global.ultradark_gray_color
-
             apron:
                 draw:
                     polygons:
@@ -554,6 +527,16 @@ layers:
                     polygons:
                         style: no_texture
                         color: global.lightest_gray_color
+
+        retaining_wall:
+            draw:
+                lines:
+                    color: global.lightest_color
+
+        fence:
+            draw:
+                lines:
+                    color: global.lightest_color
 
     boundaries:
         country:

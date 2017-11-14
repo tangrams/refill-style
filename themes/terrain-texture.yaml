@@ -78,10 +78,8 @@ layers:
                     visible: true
 
         university:
-            draw:
-                polygons:
-                    style: landuse-terrain
-                    visible: true
+            enabled: false
+
         cemetery:
             draw:
                 polygons:
@@ -105,6 +103,7 @@ layers:
                 polygons:
                     style: landuse-terrain
                     visible: true
+
         stadium:
             enabled: false
 
@@ -124,7 +123,11 @@ layers:
             enabled: false
 
         tier5:
-            enabled: false
+            tourism-related:
+                draw:
+                    polygons:
+                        style: landuse-terrain
+                        visible: true
 
             beach:
                 draw:
@@ -149,11 +152,6 @@ layers:
                 polygons:
                     style: landuse-terrain
                     visible: true
-                outline:
-                    style: lines
-                    order: global.feature_order
-                    color: global.ultralight_color
-                    width: [[14, 0px], [15, 1px], [18, 2px]]
 
         playground:
             draw:

@@ -4789,7 +4789,7 @@ layers:
                         size: 11px
                         stroke: { color: global.text_stroke, width: 1px }
 
-        #tier1:
+        # tier1:
         national_park:
             filter:
                 all:
@@ -4814,8 +4814,8 @@ layers:
                         style: pixel-pattern-light
                         visible: true
 
-        #tier2:
-            # effectively wilderness
+        # tier2:
+        # effectively wilderness
         conservation:
             filter:
                 $zoom: { min: 4 }
