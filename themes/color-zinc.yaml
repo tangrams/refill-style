@@ -29,12 +29,16 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [0.900,0.900,0.900,0.75]                 # land color
 
-    terrain_tint_color:         [0.170,0.170,0.170]
-    terrain_fill_color:         [0.730,0.730,0.730]
-    terrain_earth_color:        [0.675,0.675,0.675]
+    terrain_tint_color:         [0.350,0.350,0.350] #global.darker_gray_color #[0.170,0.170,0.170]
+    terrain_fill_color:         [0.749,0.749,0.749]
+
     terrain_bldg_color:         global.light_gray_color
 
-    dot_terrain_color:          [0.735,0.735,0.735]
+    landuse_dot_terrain_color:  [0.749,0.749,0.749]
+    landuse_terrain_fill_color: [0.670,0.670,0.670]
+
+    earth_dot_terrain_color:    [0.707,0.707,0.707]
+    earth_terrain_fill_color:   [0.680,0.680,0.680]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
