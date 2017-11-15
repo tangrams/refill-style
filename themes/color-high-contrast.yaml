@@ -21,13 +21,13 @@ global:
     text_fill:                    global.black_color
     text_stroke:                  [1.00,1.00,1.00,0.75]                 # land color
 
-    terrain_tint_color:           [0.150,0.150,0.150]
+    terrain_tint_color:           global.hi_contrast_midlight #[0.150,0.150,0.150]
     terrain_fill_color:           global.white_color
 
     terrain_bldg_color:           global.white_color
 
     landuse_dot_terrain_color:    global.white_color
-    landuse_terrain_fill_color:   [0.930,0.930,0.930]
+    landuse_terrain_fill_color:   [0.900,0.900,0.900]
 
     earth_dot_terrain_color:      global.white_color
     earth_terrain_fill_color:     [0.970,0.970,0.970]
@@ -194,7 +194,7 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.lighter_color
+                    color: global.hi_contrast_mid
 
             country-labels:
                 draw:
@@ -204,12 +204,12 @@ layers:
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.lighter_color
+                lines:
+                    color: global.hi_contrast_mid
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.lighter_color
+                    lines:
+                        color: global.hi_contrast_mid
 
         region:
             region-labels:

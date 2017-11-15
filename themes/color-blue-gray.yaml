@@ -28,7 +28,7 @@ global:
     text_fill:                  global.black_color
     text_stroke:                [1.00,1.00,1.00,0.75]
 
-    terrain_tint_color:         global.two_color_mid
+    terrain_tint_color:         global.two_color_light
     terrain_fill_color:         global.white_color
 
     terrain_bldg_color:         global.white_color
@@ -271,21 +271,21 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_ultralight
+                    color: global.two_color_light
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.two_color_ultralight
+                lines:
+                    color: global.lighter_color
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.two_color_ultralight
+                    lines:
+                        color: global.lighter_color
 
         region:
             draw:
                 lines:
-                    color: global.two_color_offwhite
+                    color: global.two_color_lighter
 
 styles:
     railway_dash:

@@ -17,7 +17,7 @@ global:
     text_fill:                    global.black_color
     text_stroke:                  [1.000,1.000,1.000,0.75]                 # land color
 
-    terrain_tint_color:           global.mid_color
+    terrain_tint_color:           global.light_color
     terrain_fill_color:           global.white_color
 
     terrain_bldg_color:           global.white_color

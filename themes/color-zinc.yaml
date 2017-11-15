@@ -542,21 +542,23 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.dark_gray_color
+                    color: global.mid_gray_color
+                lines:
+                    color: global.lighter_gray_color
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.dark_gray_color
+                lines:
+                    color: global.mid_gray_color
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.dark_gray_color
+                    lines:
+                        color: global.mid_gray_color
 
         region:
             draw:
                 lines:
-                    color: global.dark_gray_color
+                    color: global.gray_color
             region-labels:
                 draw:
                     text-blend-order:

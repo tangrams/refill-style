@@ -578,6 +578,10 @@ styles:
         dash: [0.25, 1.0]
         dash_background_color: global.offwhite_color
 
+    region_dash:
+        base: lines
+        dash: [7.0, 1.0]
+
     pixel-pattern-light:
         mix: [space-tile, generative-random]
         base: polygons
@@ -3161,11 +3165,11 @@ layers:
                 country-outerline:
                     style: lines
                     order: function() { return (feature.sort_rank -1); }
-                    color: [[0, global.lightest_color], [8, global.lighter_color]]
-                    width: [[0, 0px], [6, 4px], [14, 7px], [17, 14m]]
+                    color: global.light_color
+                    width: [[0, 0px], [4, 2px], [8, 5px], [14, 7px], [17, 14m]]
                 lines:
                     color: global.white_color
-                    width: [[0, 0px], [5, 0px], [6, 1px]]
+                    width: [[0, 0px], [5, 0px], [6, 1px], [14, 2px]]
             water:
                 filter: { maritime_boundary: true }
                 draw:
@@ -3180,7 +3184,7 @@ layers:
                         priority: 2
                         visible: global.text_visible_admin
                         text_source: global.ux_language_text_source_boundary_lines_left_right
-                        offset: [[8,[0, 7px]],[11,[0, 8px]],[12,[0, 9px]]]
+                        offset: [[8, [0, 7px]], [11, [0, 8px]], [12, [0, 9px]]]
                         text_wrap: 100
                         font:
                             family: global.text_font_family
@@ -3197,18 +3201,18 @@ layers:
         other_country_boundary_disputed_etc:
             filter: { kind: [disputed, indefinite, indeterminate, lease_limit, line_of_control, overlay_limit] }
             draw:
-                dashed:
+                lines:
+                    style: dashed
                     order: global.feature_order
-                    color: global.lighter_color
+                    color: global.light_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
             disputed:
                 filter: { kind: [disputed, line_of_control] }
                 draw:
-                    dashed:
-                        visible: false
-                    dashed_big:
+                    lines:
+                        style: dashed_big
                         order: global.feature_order
-                        color: global.lighter_color
+                        color: global.light_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
 
         region:
@@ -3218,18 +3222,28 @@ layers:
                     - kind_detail: [3,4]
             draw:
                 lines:
-                    color: global.lightest_color
-                    width: [[0, 0.5px], [5, 2px], [9, 4px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+                    color: global.lighter_color
+                    width: [[0, 0.5px], [5, 2px], [9, 3px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+
             water:
                 filter: { maritime_boundary: true }
                 draw:
                     lines:
                         visible: false
+
+            dash-borders:
+                filter:
+                    $zoom: { min: 7 }
+                draw:
+                    lines:
+                        style: region_dash
+
             early:
                 filter: { not: { min_zoom: [1,2] }, $zoom: { max: 8 } }
                 draw:
                     lines:
                         visible: false
+
             region-labels:
                 filter: { name: true, $zoom: { min: 9 }, not: { maritime_boundary: true } }
                 draw:

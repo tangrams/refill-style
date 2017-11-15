@@ -210,35 +210,35 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.mid_color
+                    color: global.midlight_color
                 lines:
-                    color: global.black_color
+                    color: global.white_color
 
             country-labels:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: global.white_color, width: 4 }
+                            stroke: { color: global.white_color, width: 4px }
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.mid_color
+                lines:
+                    color: global.midlight_color
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.mid_color
+                    lines:
+                        color: global.midlight_color
         region:
             draw:
                 lines:
-                    color: global.light_color
+                    color: global.light
 
             region-labels:
                 draw:
                     text-blend-order:
                         font:
                             fill: global.white_color
-                            stroke: { color: global.light_color, width: 4 }
+                            stroke: { color: global.light_color, width: 4px }
 
     places:
         region:
