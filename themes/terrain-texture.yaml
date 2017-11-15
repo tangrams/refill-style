@@ -225,6 +225,7 @@ styles:
                     DASH_DIR);
 
                     shade = mix(DASH_MIN_SIZE, DASH_MAX_SIZE, (shade*shade*shade)*4.);
+
     polygons-diagonal-dash:
         base: polygons
         mix:
@@ -250,6 +251,7 @@ styles:
                     color.rgb = mix(DASH_BACKGROUND_COLOR,
                                     DASH_COLOR,
                                     DASH_TYPE( DASH_SIZE, dashDF(DASH_TILE_STYLE(getTileCoords()*DASH_SCALE,3.))) );
+
     shapes-type:
         mix:
             - functions-aastep
@@ -265,6 +267,7 @@ styles:
                     float stroke (in float size, in float x) {
                         return aastep(size, x+STROKE*.5) - aastep(size, x-STROKE*.5);
                     }
+
     elevation-normal:
         raster: custom
         shaders:
@@ -274,6 +277,7 @@ styles:
                 normal: |
                     vec4 normal_elv_raster = sampleRaster(int(NORMAL_TEXTURE_INDEX));
                     normal = (normal_elv_raster.rgb-.5)*2.;
+
     polygons-dots:
         base: polygons
         mix:
@@ -400,7 +404,7 @@ styles:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
-
+    # terrain dot shader - paints the shadows instead of the light, opposite of above
     # terrain:
     #     base: polygons
     #     mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]

@@ -33,6 +33,8 @@ global:
 
     terrain_bldg_color:         global.white_color
 
+    terrain_river_color:        global.two_color_dark
+
     landuse_dot_terrain_color:  global.white_color
     landuse_terrain_fill_color: [0.993,0.958,0.935] #[1.000,0.963,0.940] #[1.000,0.953,0.940]  #[1.000,0.906,0.880]
 
@@ -294,6 +296,11 @@ styles:
         shaders:
             defines:
                 OPACITY: 1.0
+
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.two_color_dark
 
     building-grid:
         shaders:

@@ -587,11 +587,11 @@ styles:
         base: polygons
         shaders:
             uniforms:
-                u_tint: global.lightest_color
+                u_tint: global.ultralight_color
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    color.rgb = u_tint * vec3(random(abs(floor(pos)))+0.905);
+                    color.rgb = u_tint * vec3(random(abs(floor(pos)))+0.925);
 
 
     pixel-pattern-bright:
@@ -658,7 +658,8 @@ styles:
         blend: opaque
         shaders:
             uniforms:
-                u_tint: global.white_color
+                u_tint: global.light_color
+                u_fill: global.white_color
             blocks:
                 global: |
                     mat2 rotate2d(float angle){
@@ -672,7 +673,7 @@ styles:
                     }
                 color: |
                     vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.9), vec4(u_tint.rgb, 1.0), stripes(st*130.));
+                    color = mix(vec4(u_tint.rgb, 0.9), vec4(u_fill.rgb, 1.0), stripes(st*130.));
 
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]

@@ -22,6 +22,8 @@ global:
 
     terrain_bldg_color:         global.white_color
 
+    terrain_river_color:        global.light
+
     landuse_dot_terrain_color:  global.white_color
     landuse_terrain_fill_color: [0.930,0.930,0.930]
 

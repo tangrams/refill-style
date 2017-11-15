@@ -38,28 +38,9 @@ layers:
 
 styles:
     riverlines:
-        base: lines
-        mix:
-            - space-constant
-        blend: opaque
         shaders:
             uniforms:
-                u_fill: global.ultralight_color
-            blocks:
-                global: |
-                    mat2 rotate2d(float angle){
-                        return mat2(cos(angle),-sin(angle),
-                                    sin(angle),cos(angle));
-                    }
-
-                    float stripes(vec2 st){
-                        st = rotate2d(3.14159265358*-0.25 )*st;
-                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
-                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
-                    }
-                color: |
-                    vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 1.0), vec4(u_fill.rgb, 1.0), stripes(st*130.)); // transparent stripes
+                u_tint: global.terrain_river_color
 
     colorized_terrain:
         shaders:
