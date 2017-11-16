@@ -17,64 +17,57 @@ layers:
         data: { source: mapzen }
         draw:
             polygons:
-                style: earth-terrain #terrain
+                style: earth-terrain-pattern
                 order: function() { return feature.sort_rank || 0; }
                 color: global.lightest_color
             lines:
                 visible: false
-    # buildings:
-    #     draw:
-    #         polygons:
-    #             color: global.terrain_bldg_color
-
-    # landuse:
-    #     enabled: false
 
     landuse:
         national_park:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
             us_national_park:
                 draw:
                     polygons:
-                        style: landuse-terrain
+                        style: landuse-terrain-pattern
                         visible: true
 
         conservation:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         national_forest_level_6:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         forest-landcover:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
             national_park:
                 draw:
                     polygons:
-                        style: landuse-terrain
+                        style: landuse-terrain-pattern
                         visible: true
 
         farm:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         university:
@@ -83,13 +76,13 @@ layers:
         cemetery:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         golf_course:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         hospital:
@@ -101,7 +94,7 @@ layers:
         recreation_ground:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         stadium:
@@ -110,13 +103,13 @@ layers:
         zoo:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         winter_sports:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         man-made:
@@ -126,19 +119,19 @@ layers:
             tourism-related:
                 draw:
                     polygons:
-                        style: landuse-terrain
+                        style: landuse-terrain-pattern
                         visible: true
 
             beach:
                 draw:
                     polygons:
-                        style: landuse-terrain
+                        style: landuse-terrain-pattern
                         visible: true
 
         garden:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         parking:
@@ -150,13 +143,13 @@ layers:
         pitch:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         playground:
             draw:
                 polygons:
-                    style: landuse-terrain
+                    style: landuse-terrain-pattern
                     visible: true
 
         school:
@@ -175,6 +168,11 @@ layers:
             enabled: false
 
 styles:
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.pattern_river_color
+
     functions-zoom:
         mix:
             - functions-easing
@@ -322,9 +320,9 @@ styles:
     # dot terrain from Patricio's example
     # https://mapzen.com/tangram/play/?scene=https://tangrams.github.io/tangram-sandbox/styles/callejas.yaml&lines=116#10.9329/38.3394/-122.3068
 
-    earth-terrain:
+    earth-terrain-pattern:
         base: polygons
-        mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
+        mix: [elevation-ramp-earth, elevation-normal, functions-zoom, polygons-dots]
         shaders:
             defines:
                 ZOOM_START: 0.
@@ -344,8 +342,8 @@ styles:
                     // reset normal to prevent standard terrain shading mixing with dots
                     normal = vec3(0,0,1);
 
-    elevation-ramp:
-        mix: colorized-earth-terrain
+    elevation-ramp-earth:
+        mix: colorized-earth
         shaders:
             uniforms:
                 u_ramp: palette
@@ -354,18 +352,18 @@ styles:
                     color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
         raster: custom
 
-    colorized-earth-terrain:
+    colorized-earth:
         shaders:
             uniforms:
-                u_tint: global.earth_dot_terrain_color
-                u_fill: global.earth_terrain_fill_color
+                u_tint: global.earth_dot_color
+                u_fill: global.earth_fill_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
-    landuse-terrain:
+    landuse-terrain-pattern:
         base: polygons
-        mix: [elevation-ramp2, elevation-normal, functions-zoom, polygons-dots]
+        mix: [elevation-ramp-landuse, elevation-normal, functions-zoom, polygons-dots]
         shaders:
             defines:
                 ZOOM_START: 0.
@@ -385,8 +383,8 @@ styles:
                     // reset normal to prevent standard terrain shading mixing with dots
                     normal = vec3(0,0,1);
 
-    elevation-ramp2:
-        mix: colorized-landuse-terrain
+    elevation-ramp-landuse:
+        mix: colorized-landuse
         shaders:
             uniforms:
                 u_ramp: palette
@@ -395,34 +393,11 @@ styles:
                     color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
         raster: custom
 
-    colorized-landuse-terrain:
+    colorized-landuse:
         shaders:
             uniforms:
-                u_tint: global.landuse_dot_terrain_color
-                u_fill: global.landuse_terrain_fill_color
+                u_tint: global.landuse_dot_color
+                u_fill: global.landuse_fill_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
-
-    # terrain dot shader - paints the shadows instead of the light, opposite of above
-    # terrain:
-    #     base: polygons
-    #     mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
-    #     shaders:
-    #         defines:
-    #             ZOOM_START: 0.
-    #             ZOOM_END: 13.
-    #             DOTS_DIR: vec3(0.600,-0.950,0.520)
-    #             # DOTS_DIR: vec3(0.600,-0.950,0.600)
-    #             # DOTS_COLOR: color.rgb
-    #             DOTS_COLOR: vec3(0)
-    #             DOTS_BACKGROUND_COLOR: vec3(1.0)
-    #             DOTS_SCALE: 30
-    #             DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
-    #         blocks:
-    #             normal: |
-    #                 float shade = dot(normal, DOTS_DIR);
-    #                 // subtract .1 to increase contrast a bit
-    #                 shade = shade*shade*shade + .05;
-    #                 // reset normal to prevent standard terrain shading mixing with dots
-    #                 normal = vec3(0,0,1);

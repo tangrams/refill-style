@@ -11,7 +11,7 @@ global:
     ultralight_color:           [0.700,0.700,0.700]
     offwhite_color:             [0.850,0.850,0.850]
     white_color:                [0.900,0.900,0.900]
-    transparent:                [0.380,0.394,0.422,0.250]
+    transparent:                [0.380,0.394,0.422,0.25]
     route_line:                 [0.000,0.500,1.000]
 
     # GRAYS
@@ -27,18 +27,17 @@ global:
     gray_offwhite_color:        [0.898,0.898,0.898]
 
     text_fill:                  global.black_color
-    text_stroke:                [0.900,0.900,0.900,0.75]                 # land color
+    text_stroke:                [0.900,0.900,0.900,0.75]
 
-    terrain_tint_color:         [0.350,0.350,0.350] #global.darker_gray_color #[0.170,0.170,0.170]
-    terrain_fill_color:         [0.749,0.749,0.749]
+    # TERRAIN SHADING COLORS
+    shading_tint_color:         [0.350,0.350,0.350]
+    shading_fill_color:         [0.749,0.749,0.749]
 
-    terrain_bldg_color:         global.light_gray_color
-
-    landuse_dot_terrain_color:  [0.749,0.749,0.749]
-    landuse_terrain_fill_color: [0.670,0.670,0.670]
-
-    earth_dot_terrain_color:    [0.707,0.707,0.707]
-    earth_terrain_fill_color:   [0.680,0.680,0.680]
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:          [0.749,0.749,0.749]
+    landuse_fill_color:         [0.670,0.670,0.670]
+    earth_dot_color:            [0.707,0.707,0.707]
+    earth_fill_color:           [0.680,0.680,0.680]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -48,7 +47,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-shading
 
 textures:
     sdk_terrain_texture:
@@ -123,6 +122,7 @@ layers:
             intermittent:
                 draw:
                     lines:
+                        style: no_coast
                         color: global.dark_gray_color
 
     roads:

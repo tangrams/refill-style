@@ -1,34 +1,33 @@
 global:
     # BLUE
-    black_color:                [0.000,0.337,0.878]
-    dark_color:                 [0.141,0.424,0.880]
-    mid_color:                  [0.282,0.523,0.910]
-    midlight_color:             [0.382,0.585,0.910]
-    light:                      [0.451,0.639,0.940]
-    light_color:                [0.489,0.662,0.940]
-    lighter_color:              [0.686,0.783,0.940]
-    lightest_color:             [0.805,0.871,0.970]
-    ultralight_color:           [0.872,0.915,0.980]
-    offwhite_color:             [0.921,0.947,0.990]
-    white_color:                [1.00,1.00,1.00]
-    transparent:                [0.805,0.871,0.970,0.250] # lighter color at 50%
-    route_line:                 [0.502,0.200,0.671]
+    black_color:                  [0.000,0.337,0.878]
+    dark_color:                   [0.141,0.424,0.880]
+    mid_color:                    [0.282,0.523,0.910]
+    midlight_color:               [0.382,0.585,0.910]
+    light:                        [0.451,0.639,0.940]
+    light_color:                  [0.489,0.662,0.940]
+    lighter_color:                [0.686,0.783,0.940]
+    lightest_color:               [0.805,0.871,0.970]
+    ultralight_color:             [0.872,0.915,0.980]
+    offwhite_color:               [0.921,0.947,0.990]
+    white_color:                  [1.00,1.00,1.00]
+    transparent:                  [0.805,0.871,0.970,0.25]
+    route_line:                   [0.502,0.200,0.671]
 
-    text_fill:                  global.black_color
-    text_stroke:                [1.00,1.00,1.00,0.75]                 # land color
+    text_fill:                    global.black_color
+    text_stroke:                  [1.00,1.00,1.00,0.75]
 
-    terrain_tint_color:         global.lighter_color
-    terrain_fill_color:         global.white_color
+    # TERRAIN SHADING COLORS
+    shading_tint_color:           global.lighter_color
+    shading_fill_color:           global.white_color
+    shading_river_color:          global.lighter_color
 
-    terrain_bldg_color:         global.white_color
-
-    terrain_river_color:        global.lighter_color
-
-    landuse_dot_terrain_color:  global.white_color
-    landuse_terrain_fill_color: global.ultralight_color
-
-    earth_dot_terrain_color:    global.white_color
-    earth_terrain_fill_color:   [0.950,0.968,1.000] #global.offwhite_color
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:            global.white_color
+    landuse_fill_color:           global.ultralight_color
+    earth_dot_color:              global.white_color
+    earth_fill_color:             [0.950,0.968,1.000]
+    pattern_river_color:          [0.470,0.650,0.940]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -38,8 +37,14 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-shading
 
 textures:
     sdk_terrain_texture:
         url: images/refill-spheremap-light.jpg
+
+styles:
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: [0.626,0.738,0.920]

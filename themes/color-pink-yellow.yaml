@@ -1,45 +1,44 @@
 global:
     # PINK ORANGE
-    black_color:                [1.000,0.227,0.580]
-    dark_color:                 [1.000,0.502,0.733]
-    mid_color:                  [1.000,0.576,0.769]
-    midlight_color:             [1.000,0.663,0.816]
-    light:                      [1.000,0.710,0.840]
-    light_color:                [0.996,0.757,0.867]
-    lighter_color:              [1.000,0.831,0.910]
-    lightest_color:             [1.000,0.894,0.941]
-    ultralight_color:           [1.000,0.929,0.965]
-    offwhite_color:             [1.000,0.973,0.984]
-    white_color:                [1.000,1.000,1.000]
-    transparent:                [1.000,0.831,0.910,0.250]
-    route_line:                 [0.369,0.349,0.729]
+    black_color:                  [1.000,0.227,0.580]
+    dark_color:                   [1.000,0.502,0.733]
+    mid_color:                    [1.000,0.576,0.769]
+    midlight_color:               [1.000,0.663,0.816]
+    light:                        [1.000,0.710,0.840]
+    light_color:                  [0.996,0.757,0.867]
+    lighter_color:                [1.000,0.831,0.910]
+    lightest_color:               [1.000,0.894,0.941]
+    ultralight_color:             [1.000,0.929,0.965]
+    offwhite_color:               [1.000,0.973,0.984]
+    white_color:                  [1.000,1.000,1.000]
+    transparent:                  [1.000,0.831,0.910,0.250]
+    route_line:                   [0.369,0.349,0.729]
 
     # YELLOW
-    two_color_black:            [0.730,0.633,0.000]
-    two_color_dark:             [0.910,0.789,0.000]
-    two_color_mid:              [0.980,0.885,0.265]
-    two_color_midlight:         [0.976,0.898,0.400]
-    two_color_light:            [0.980,0.919,0.519]
-    two_color_lighter:          [0.980,0.938,0.666]
-    two_color_lightest:         [1.000,0.969,0.770]
-    two_color_ultralight:       [1.000,0.980,0.850]
-    two_color_offwhite:         [1.000,0.992,0.940]
+    two_color_black:              [0.730,0.633,0.000]
+    two_color_dark:               [0.910,0.789,0.000]
+    two_color_mid:                [0.980,0.885,0.265]
+    two_color_midlight:           [0.976,0.898,0.400]
+    two_color_light:              [0.980,0.919,0.519]
+    two_color_lighter:            [0.980,0.938,0.666]
+    two_color_lightest:           [1.000,0.969,0.770]
+    two_color_ultralight:         [1.000,0.980,0.850]
+    two_color_offwhite:           [1.000,0.992,0.940]
 
-    text_fill:                  global.black_color
-    text_stroke:                [1.000,1.000,1.000,0.75]
+    text_fill:                    global.black_color
+    text_stroke:                  [1.000,1.000,1.000,0.75]
 
-    terrain_tint_color:         [0.930,0.721,0.651]
-    terrain_fill_color:         global.white_color
+    # TERRAIN SHADING COLORS
+    shading_tint_color:           [0.930,0.721,0.651]
+    shading_fill_color:           global.white_color
+    shading_river_color:          [0.959,0.831,0.000]
 
-    terrain_bldg_color:         global.white_color
-
-    terrain_river_color:        global.two_color_dark
-
-    landuse_dot_terrain_color:  global.white_color
-    landuse_terrain_fill_color: [0.993,0.958,0.935] #[1.000,0.963,0.940] #[1.000,0.953,0.940]  #[1.000,0.906,0.880]
-
-    earth_dot_terrain_color:    global.white_color
-    earth_terrain_fill_color:   [1.000,0.982,0.970]
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:            global.white_color
+    landuse_fill_color:           [0.993,0.958,0.935]
+    earth_dot_color:              global.white_color
+    earth_fill_color:             [1.000,0.982,0.970]
+    pattern_river_color:          [0.924,0.800,0.000] #global.two_color_dark
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -49,7 +48,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-shading
 
 textures:
     sdk_terrain_texture:
@@ -300,7 +299,7 @@ styles:
     riverlines:
         shaders:
             uniforms:
-                u_tint: global.two_color_dark
+                u_tint: [0.959,0.831,0.000]
 
     building-grid:
         shaders:

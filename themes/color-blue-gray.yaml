@@ -1,45 +1,44 @@
 global:
     # BLUE
-    black_color:               [0.000,0.627,0.878]
-    dark_color:                [0.067,0.698,0.949]
-    mid_color:                 [0.220,0.753,0.973]
-    midlight_color:            [0.325,0.780,0.961]
-    light:                     [0.336,0.805,0.992]
-    light_color:               [0.349,0.794,0.970]
-    lighter_color:             [0.659,0.878,0.965]
-    lightest_color:            [0.788,0.933,0.984]
-    ultralight_color:          [0.859,0.957,0.992]
-    offwhite_color:            [0.914,0.973,0.992]
-    white_color:               [1.000,1.000,1.000]
-    transparent:               [0.659,0.878,0.965,0.25]
-    route_line:                [0.369,0.349,0.729]
+    black_color:                 [0.000,0.627,0.878]
+    dark_color:                  [0.067,0.698,0.949]
+    mid_color:                   [0.220,0.753,0.973]
+    midlight_color:              [0.325,0.780,0.961]
+    light:                       [0.336,0.805,0.992]
+    light_color:                 [0.349,0.794,0.970]
+    lighter_color:               [0.659,0.878,0.965]
+    lightest_color:              [0.788,0.933,0.984]
+    ultralight_color:            [0.859,0.957,0.992]
+    offwhite_color:              [0.914,0.973,0.992]
+    white_color:                 [1.000,1.000,1.000]
+    transparent:                 [0.659,0.878,0.965,0.25]
+    route_line:                  [0.369,0.349,0.729]
 
     # GRAY
-    two_color_black:           [0.434,0.492,0.511]
-    two_color_dark:            [0.477,0.540,0.560]
-    two_color_mid:             [0.549,0.598,0.615]
-    two_color_midlight:        [0.641,0.681,0.693]
-    two_color_light:           [0.730,0.763,0.775]
-    two_color_lighter:         [0.791,0.811,0.820]
-    two_color_lightest:        [0.846,0.858,0.862]
-    two_color_ultralight:      [0.915,0.928,0.932]
-    two_color_offwhite:        [0.951,0.955,0.960]
+    two_color_black:             [0.434,0.492,0.511]
+    two_color_dark:              [0.477,0.540,0.560]
+    two_color_mid:               [0.549,0.598,0.615]
+    two_color_midlight:          [0.641,0.681,0.693]
+    two_color_light:             [0.730,0.763,0.775]
+    two_color_lighter:           [0.791,0.811,0.820]
+    two_color_lightest:          [0.846,0.858,0.862]
+    two_color_ultralight:        [0.915,0.928,0.932]
+    two_color_offwhite:          [0.951,0.955,0.960]
 
-    text_fill:                  global.black_color
-    text_stroke:                [1.00,1.00,1.00,0.75]
+    text_fill:                    global.black_color
+    text_stroke:                  [1.00,1.00,1.00,0.75]
 
-    terrain_tint_color:         global.two_color_light
-    terrain_fill_color:         global.white_color
+    # TERRAIN SHADING COLORS
+    shading_tint_color:           global.two_color_light
+    shading_fill_color:           global.white_color
+    shading_river_color:          global.two_color_light
 
-    terrain_bldg_color:         global.white_color
-
-    terrain_river_color:        global.two_color_light
-
-    landuse_dot_terrain_color:  global.white_color
-    landuse_terrain_fill_color: global.two_color_ultralight
-
-    earth_dot_terrain_color:    global.white_color
-    earth_terrain_fill_color:   [0.975,0.979,0.983]
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:            global.white_color
+    landuse_fill_color:           global.two_color_ultralight
+    earth_dot_color:              global.white_color
+    earth_fill_color:             [0.975,0.979,0.983]
+    pattern_river_color:          global.two_color_midlight
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -49,7 +48,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-shading
 
 textures:
     sdk_terrain_texture:
@@ -99,15 +98,6 @@ layers:
                     lines:
                         style: coast
                         color: global.two_color_mid
-
-        river:
-            draw:
-                lines:
-                    color: global.two_color_light
-            intermittent:
-                draw:
-                    lines:
-                        color: global.two_color_light
 
     roads:
         railway:

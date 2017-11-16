@@ -589,7 +589,7 @@
                 '(default)': false,
                 'None': false,
                 'Shading': 'shading',
-                'Texture': 'texture'
+                'Texture': 'pattern'
             };
             gui.terrain = query.terrain || false;
             gui.terrain_button = gui.add(gui, 'terrain', terrain).onChange(function(value) {
@@ -597,7 +597,7 @@
                 updateTerrain(value);
             });
             (updateTerrain = function(value) {
-                if (value === 'shading' || value === 'texture') {
+                if (value === 'shading' || value === 'pattern') {
                     all_theme_imports.terrain = 'themes/terrain-' + value + '.yaml';
                 } else {
                     all_theme_imports.terrain = '';

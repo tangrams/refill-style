@@ -40,20 +40,20 @@ styles:
     riverlines:
         shaders:
             uniforms:
-                u_tint: global.terrain_river_color
+                u_tint: global.shading_river_color
 
-    colorized_terrain:
+    colorized_shading:
         shaders:
             uniforms:
-                u_tint: global.terrain_tint_color
-                u_fill: global.terrain_fill_color
+                u_tint: global.shading_tint_color
+                u_fill: global.shading_fill_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
-    terrain:
+    terrain-shading:
         mix:
-            - colorized_terrain
+            - colorized_shading
         base: polygons
         lighting: false
         raster: normal
@@ -86,10 +86,10 @@ styles:
                     // apply layer color
                     color *= v_color;
 
-    terrain-dark:
+    terrain-shading-dark:
         mix:
             - colorized_terrain
-            - terrain
+            - terrain-shading
         base: polygons
         shaders:
             uniforms:
