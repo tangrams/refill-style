@@ -1,13 +1,14 @@
+import:
+    - https://raw.githubusercontent.com/tangrams/refill/sensescape/texture-relief/refill-style.yaml
+    - https://raw.githubusercontent.com/tangrams/refill/sensescape/texture-relief/themes/color-black.yaml
+global:
+    sdk_mapzen_api_key: vector-tiles-_vxMzew
+
 sources:
     mapzen:
-        type: MVT
-        url: https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt
-        url_params:
-            api_key: global.sdk_mapzen_api_key
         rasters:
-            - normals-elevation
-        max_zoom: 16
-    normals-elevation:
+            - normals
+    normals:
         type: Raster
         url: https://tile.mapzen.com/mapzen/terrain/v1/normal/{z}/{x}/{y}.png
         url_params:
@@ -16,23 +17,168 @@ sources:
 
 textures:
     palette:
-        url: images/ramp.png
+        url: https://raw.githubusercontent.com/tangrams/refill/sensescape/texture-relief/themes/images/ramp.png
 layers:
     earth:
         data: { source: mapzen }
         draw:
             polygons:
-                style: dots-normal
+                style: earth-terrain #terrain
                 order: function() { return feature.sort_rank || 0; }
                 color: global.lightest_color
             lines:
                 visible: false
-    buildings:
-        draw:
-            polygons:
-                color: [[13, global.offwhite_color], [18, global.white_color]]
+    # buildings:
+    #     draw:
+    #         polygons:
+    #             color: global.terrain_bldg_color
+
+    # landuse:
+    #     enabled: false
+
     landuse:
-        enabled: false
+        national_park:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+            us_national_park:
+                draw:
+                    polygons:
+                        style: landuse-terrain
+                        visible: true
+
+        conservation:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        national_forest_level_6:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        forest-landcover:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+            national_park:
+                draw:
+                    polygons:
+                        style: landuse-terrain
+                        visible: true
+
+        farm:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        university:
+            enabled: false
+
+        cemetery:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        golf_course:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        hospital:
+            enabled: false
+
+        sports_centre:
+            enabled: false
+
+        recreation_ground:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        stadium:
+            enabled: false
+
+        zoo:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        winter_sports:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        man-made:
+            enabled: false
+
+        tier5:
+            tourism-related:
+                draw:
+                    polygons:
+                        style: landuse-terrain
+                        visible: true
+
+            beach:
+                draw:
+                    polygons:
+                        style: landuse-terrain
+                        visible: true
+
+        garden:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        parking:
+            enabled: false
+
+        pedestrian:
+            enabled: false
+
+        pitch:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        playground:
+            draw:
+                polygons:
+                    style: landuse-terrain
+                    visible: true
+
+        school:
+            enabled: false
+
+        minor-landuse:
+            enabled: false
+
+        landuse-not-filtered:
+            enabled: false
+
+        retaining_wall:
+            enabled: false
+
+        fence:
+            enabled: false
 
 styles:
     functions-zoom:
@@ -49,67 +195,20 @@ styles:
             blocks:
                 global: |
                     float zoom() {
-                        return mix( ZOOM_IN, 
-                                    ZOOM_OUT, 
-                                    clamp( smoothstep(  ZOOM_START/ZOOM_MAX, 
-                                                        ZOOM_END/ZOOM_MAX, 
-                                                        max(u_map_position.z/ZOOM_MAX, 0.)), 0., 1.) );
+                        return mix( ZOOM_IN,
+                                    ZOOM_OUT,
+                                    clamp( smoothstep(  ZOOM_START/ZOOM_MAX,
+                                                        ZOOM_END/ZOOM_MAX,
+                                                max(u_map_position.z/ZOOM_MAX, 0.)), 0., 1.) );
                     }
 
                     float zoomEase() {
-                        return mix( ZOOM_IN, 
-                                    ZOOM_OUT, 
+                        return mix( ZOOM_IN,
+                                    ZOOM_OUT,
                                     (u_map_position.z-ZOOM_START)/(ZOOM_END-ZOOM_START) );
                     }
 
-    elevation-dash:
-        base: polygons
-        mix:
-            - polygons-diagonal-dash
-        raster: custom
-        shaders:
-            defines:
-                DASH_COLOR: color.rgb*.5
-                DASH_BACKGROUND_COLOR: color.rgb
-                DASH_SCALE: 10
-                DASH_SIZE: 0.9
-                DASH_TYPE: fill
-                DASH_TILE_STYLE: tile
-                DASH_DIR: vec3(-0.600,-0.420,0.560)
-                NORMAL_TEXTURE_INDEX: 0
-                DASH_MIN_SIZE: 0.8
-                DASH_MAX_SIZE: 1
-            blocks:
-                normal: >
-                    float shade = dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
-                    DASH_DIR);
-
-                    shade = mix(DASH_MIN_SIZE, DASH_MAX_SIZE, (shade*shade*shade)*4.);
-    polygons-diagonal-dash:
-        base: polygons
-        mix:
-            - space-tile
-            - tiling-brick
-            - tiling-tile
-            - shapes-type
-        shaders:
-            defines:
-                DASH_COLOR: color.rgb*.5
-                DASH_BACKGROUND_COLOR: color.rgb
-                DASH_SCALE: 10
-                DASH_SIZE: 0.9
-                DASH_TYPE: fill
-                DASH_TILE_STYLE: tile
-                PI: 3.141592653589793
-            blocks:
-                global: |
-                    float dashDF(vec2 st) {
-                        return min(cos((st.x-st.y)*PI),-cos((st.x+st.y+.5)*PI*.6666)*5.);
-                    }
-                color: |
-                    color.rgb = mix(DASH_BACKGROUND_COLOR, 
-                                    DASH_COLOR, 
-                                    DASH_TYPE( DASH_SIZE, dashDF(DASH_TILE_STYLE(getTileCoords()*DASH_SCALE,3.))) );
+ 
     shapes-type:
         mix:
             - functions-aastep
@@ -125,6 +224,19 @@ styles:
                     float stroke (in float size, in float x) {
                         return aastep(size, x+STROKE*.5) - aastep(size, x-STROKE*.5);
                     }
+
+
+    shapes-circle:
+        mix:
+            - shapes-type
+        shaders:
+            blocks:
+                global: |
+                    // get distance field of a Circle
+                    float circleDF (vec2 st) {
+                                    return dot(st,st)*3.03;
+                    }
+
     elevation-normal:
         raster: custom
         shaders:
@@ -145,129 +257,47 @@ styles:
             defines:
                 DOTS_COLOR: color.rgb*.5
                 DOTS_BACKGROUND_COLOR: color.rgb
-                DOTS_SCALE: 10
+                DOTS_SCALE: 25.
                 DOTS_SIZE: 0.41
-                DOTS_TYPE: fill
-                DOTS_TILE_STYLE: brick
-            blocks:
-                color: |
-                    color.rgb = mix(DOTS_BACKGROUND_COLOR, 
-                                    DOTS_COLOR, 
-                                    DOTS_TYPE( DOTS_SIZE, circleDF(vec2(0.5)-DOTS_TILE_STYLE(getTileCoords()*DOTS_SCALE,2.))) );
-    shapes-circle:
-        mix:
-            - shapes-type
-        shaders:
             blocks:
                 global: |
-                    // get distance field of a Circle
-                    float circleDF (vec2 st) {
-                                    return dot(st,st)*3.03;
+                    float TileDots(float scale, float size) {
+
+                        // controls
+                        float DOT_SIZE = size * .1; // bigger value = smaller dots
+                        float SPEED = 2.; // bigger value = faster transition
+
+                        // enlarge dots just a bit at transition to maintain density
+                        // DOT_SIZE *= 1. - fract(u_map_position.z) * .2;
+
+                        vec2 tc = getTileCoords() * size * pow(2., floor(u_map_position.z) - abs(u_tile_origin.z));
+                        vec2 IN = brick(tc, 2.);
+                        float A = circleDF(vec2(.5) - IN) * DOT_SIZE;
+                        vec2 OUT = brick(tc, 4.);
+                        float B = circleDF(vec2(.5) - OUT) * DOT_SIZE;
+                        // keep B dots big as they fade in, to maintain density
+                        // A *= pow(1. - fract(u_map_position.z), SPEED);
+                        // keep B dots big as they fade in, to maintain density
+                        B *= pow(fract(u_map_position.z), SPEED);
+                        // scale /= pow(fract(u_map_position.z), SPEED) * 20.;
+                        float d = mix(A, B, pow(fract(u_map_position.z), SPEED));
+                        return aastep(scale, d);
                     }
 
-                    // Draw a circle in the middle of the ST space
-                    float circle (vec2 st, float radius) {
-                                    return fill(radius, circleDF(st-vec2(0.5)));
-                    }
-
-                    // Draw a circle in the middle of the ST space
-                    float circleBorder (vec2 st, float radius) {
-                                    return stroke(radius, circleDF(st-vec2(0.5)));
-                    }
-    elevation-ramp:
-        mix: colorized_terrain
-        shaders:
-            uniforms:
-                u_ramp: palette
-            blocks:
                 color: |
-                    color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
-        raster: custom
-    landuse:
+                    color.rgb = mix(DOTS_COLOR, DOTS_BACKGROUND_COLOR, TileDots(DOTS_SIZE, DOTS_SCALE));
+
+
+
+    terrain-shade:
         base: polygons
-        mix:
-            - functions-zoom
-            - elevation-dash
-        shaders:
-            defines:
-                ZOOM_START: 14.
-                ZOOM_END: 18.
-                ZOOM_IN: .0
-                ZOOM_OUT: 1.
-
-                # DASH_COLOR: vec3(0.000,0.000,0.000)
-                # DASH_BACKGROUND_COLOR: vec3(1.000,1.000,1.000)
-                DASH_COLOR: vec3(1.000,1.000,1.000)
-                DASH_BACKGROUND_COLOR: vec3(0.000,0.000,0.000)
-                DASH_SCALE: 12.
-                DASH_SIZE: 0.9
-                DASH_TYPE: fill
-                DASH_TILE_STYLE: tile
-                DASH_DIR: vec3(-0.600,-0.420,0.560)
-                NORMAL_TEXTURE_INDEX: 0
-                DASH_MIN_SIZE: .8
-                DASH_MAX_SIZE: 1.
-
-    landuse2:
-        base: polygons
-        mix:
-            - functions-zoom
-            - elevation-dash
-        shaders:
-            uniforms:
-                u_tint: global.ultralight_color
-                u_fill: global.white_color
-            defines:
-                ZOOM_START: 0.
-                ZOOM_END: 13.
-
-                DASH_COLOR: u_fill.rgb
-                DASH_BACKGROUND_COLOR: u_tint.rgb
-                DASH_SCALE: 30.
-                DASH_TYPE: fill
-                DASH_TILE_STYLE: tile
-                DASH_DIR: vec3(-0.600,-0.420,0.560)
-                NORMAL_TEXTURE_INDEX: 0
-                DASH_MIN_SIZE: 0.4
-                DASH_MAX_SIZE: 0.8
-
-    # dot terrain from Tron for hospitals
-    dots-terrain:
-        mix:
-            - polygons-dots
-        raster: custom
-        shaders:
-            defines:
-                NORMAL_TEXTURE_INDEX: 0
-                DOTS_DIR: vec3(-0.600,-0.420,0.600)
-                DOTS_COLOR: vec3(0.345,0.224,0.392)
-                DOTS_SCALE: 30.
-                DOTS_SIZE: shade*2.
-            blocks:
-                normal: |
-                    float shade = dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2., DOTS_DIR);
-                    shade = shade*shade*shade;
-
-    # dot terrain from Patricio's example
-    # https://mapzen.com/tangram/play/?scene=https://tangrams.github.io/tangram-sandbox/styles/callejas.yaml&lines=116#10.9329/38.3394/-122.3068
-
-    colorized_terrain:
-        shaders:
-            uniforms:
-                u_tint: global.dot_terrain_color
-                u_fill: global.white_color
-            blocks:
-                filter: |
-                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
-
-    dots-normal:
-        base: polygons
-        mix: [elevation-ramp, elevation-normal, functions-zoom, polygons-dots]
+        mix: [elevation-normal, functions-zoom, polygons-dots]
         shaders:
             defines:
                 ZOOM_START: 0.
                 ZOOM_END: 13.
-                DOTS_DIR: vec3(0.600,-0.950,0.600)
+                DOTS_DIR: vec3(0.600,-0.950,0.520)
+                # DOTS_DIR: vec3(0.600,-0.950,0.600)
                 # DOTS_COLOR: color.rgb
                 DOTS_COLOR: vec3(0)
                 DOTS_BACKGROUND_COLOR: vec3(1.0)
@@ -277,6 +307,54 @@ styles:
                 normal: |
                     float shade = dot(normal, DOTS_DIR);
                     // subtract .1 to increase contrast a bit
-                    shade = shade*shade*shade - .1;
+                    shade = shade*shade*shade * 5. - .3;
                     // reset normal to prevent standard terrain shading mixing with dots
                     normal = vec3(0,0,1);
+                # color: color.rgb = vec3(shade * 5. - 4.1);
+        
+    earth-terrain:
+        base: polygons
+        mix: [elevation-ramp, terrain-shade]
+
+    landuse-terrain:
+        base: polygons
+        mix: [elevation-ramp2, terrain-shade]
+
+    elevation-ramp:
+        mix: colorized-earth-terrain
+        shaders:
+            uniforms:
+                u_ramp: palette
+            blocks:
+                color: |
+                    color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
+        raster: custom
+
+    colorized-earth-terrain:
+        shaders:
+            uniforms:
+                u_tint: global.earth_dot_color
+                u_fill: global.earth_dot_color
+            blocks:
+                filter: |
+                    // color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+
+    elevation-ramp2:
+        mix: colorized-landuse-terrain
+        shaders:
+            uniforms:
+                u_ramp: palette
+            blocks:
+                color: |
+                    color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
+        raster: custom
+
+    colorized-landuse-terrain:
+        shaders:
+            uniforms:
+                u_tint: global.landuse_dot_color
+                u_fill: global.landuse_fill_color
+            blocks:
+                filter: |
+                    // color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
