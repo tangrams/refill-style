@@ -15,7 +15,7 @@ global:
     route_line:                 [0.000,0.500,1.000]
 
     text_fill:                  global.black_color
-    text_stroke:                [1.00,1.00,1.00,0.75]
+    text_stroke:                [1.00,1.00,1.00,0.85]
 
     # TERRAIN SHADING COLORS
     shading_tint_color:         [0.655,0.655,0.655]

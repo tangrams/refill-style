@@ -27,7 +27,8 @@ global:
     gray_offwhite_color:        [0.898,0.898,0.898]
 
     text_fill:                  global.black_color
-    text_stroke:                [0.900,0.900,0.900,0.75]
+    text_stroke:                [0.900,0.900,0.900,0.85]
+    zinc_text_stroke:           [0.749,0.749,0.749,0.85]
 
     # TERRAIN SHADING COLORS
     shading_tint_color:         [0.350,0.350,0.350]
@@ -131,14 +132,14 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: global.lighter_gray_color }
+                            stroke: { color: global.zinc_text_stroke }
 
             labels-highway-z15-up:
                 draw:
                     text-blend-order:
                         font:
                             fill: global.black_color
-                            stroke: { color: global.white_color }
+                            stroke: { color: global.text_stroke }
 
         major_road:
             trunk_primary:
@@ -147,13 +148,19 @@ layers:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.lighter_gray_color }
+                                    stroke: { color: global.zinc_text_stroke }
 
                 labels-trunk_primary-z11-z15:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.lighter_gray_color }
+                                stroke: { color: global.zinc_text_stroke }
+
+                labels-trunk_primary-z16-up:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: [[16, global.zinc_text_stroke], [17, global.text_stroke]] }
 
             secondary:
                 routes:
@@ -161,32 +168,38 @@ layers:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.lighter_gray_color }
+                                    stroke: { color: global.zinc_text_stroke }
+
+                    labels-secondary-routes-z15-up:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: [[15, global.zinc_text_stroke], [16, global.zinc_text_stroke], [17, global.text_stroke]] }
 
                 labels-secondary:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.lighter_gray_color }
+                                stroke: { color: global.zinc_text_stroke }
                     z17-up:
                         filter: { $zoom: { min: 17 } }
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.white_color }
+                                    stroke: { color: global.text_stroke }
 
             tertiary:
                 labels-tertiary:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.lighter_gray_color }
+                                stroke: { color: global.zinc_text_stroke }
                     z17-up:
                         filter: { $zoom: { min: 17 } }
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.white_color }
+                                    stroke: { color: global.text_stroke }
 
 
 
@@ -200,14 +213,14 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            fill: global.darker_gray_color
-                            stroke: { color: global.lighter_gray_color }
-                z17-up:
-                    filter: { $zoom: { min: 17 } }
+                            fill: global.black_color
+                            stroke: { color: global.zinc_text_stroke }
+                z18-up:
+                    filter: { $zoom: { min: 18 } }
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.white_color }
+                                stroke: { color: global.text_stroke }
 
         service_road:
             draw:
@@ -215,6 +228,17 @@ layers:
                     color: global.gray_offwhite_color
                     outline:
                         color: [[11, global.gray_offwhite_color], [16, global.gray_offwhite_color], [17, global.black_color]]
+            labels-service_road:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.zinc_text_stroke }
+                z18-up:
+                    filter: { $zoom: { min: 18 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.text_stroke }
 
         path:
             draw:
@@ -240,6 +264,19 @@ layers:
                             color: global.gray_color
                             width: [[14, 0px], [15, 0.35px], [16, 1px]]
 
+            labels-path:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.zinc_text_stroke }
+
+                z20:
+                    filter: { $zoom: { min: 20 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.text_stroke }
+
         track:
             draw:
                 lines:
@@ -248,6 +285,19 @@ layers:
                     outline:
                         color: global.gray_color
                         width: [[14, 0px], [15, 0.35px], [17, 1px]]
+
+            labels-track:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.zinc_text_stroke }
+
+                z17-up:
+                    filter: { $zoom: { min: 17 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.text_stroke }
 
         railway:
             draw:

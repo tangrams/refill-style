@@ -1927,7 +1927,7 @@ layers:
                                     fill: global.black_color
                                     weight: 600
                                     size: [[15, 12px], [16, 13px], [19, 16px]]
-                                    stroke: { color: global.text_stroke, width: [[15, 3px], [17, 6px]] }
+                                    stroke: { color: global.text_stroke, width: [[15, 4px], [17, 6px]] }
                 labels-trunk_primary-z11-z15:
                     filter:
                         $zoom: [11,12,13,14,15]
@@ -2099,7 +2099,7 @@ layers:
                             font:
                                 fill: [[13, global.dark_color], [18, global.black_color]]
                                 size: [[13, 10px], [17, 13px]]
-                                stroke: { color: global.text_stroke, width: 4px }
+                                stroke: { color: global.text_stroke, width: 5px }
         minor_road:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
             draw:
