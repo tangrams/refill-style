@@ -65,7 +65,7 @@ layers:
             draw:
                 text-blend-order:
                     font:
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
     water:
         draw:
             polygons:
@@ -90,6 +90,11 @@ layers:
         #             order: global.feature_order
         #             style: no_waves
         #             color: global.mid_gray_color
+
+        playas:
+            draw:
+                polygons:
+                    color: global.lightest_color
 
         water-boundary-ocean:
             draw:
@@ -125,6 +130,26 @@ layers:
                     lines:
                         style: no_coast
                         color: global.dark_gray_color
+
+        water-area-labels:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: global.black_color
+                        stroke: { color: global.zinc_text_stroke, width: 4px }
+
+            sea-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.mid_gray_color }
+            playa-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
+                            stroke: { color: global.zinc_text_stroke }
+
 
     roads:
         highway:
@@ -220,7 +245,7 @@ layers:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.text_stroke }
+                                stroke: { color: global.text_stroke, width: 6px }
 
         service_road:
             draw:
@@ -298,6 +323,14 @@ layers:
                         text-blend-order:
                             font:
                                 stroke: { color: global.text_stroke }
+
+        steps:
+            labels-steps:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
+                            stroke: { color: global.zinc_text_stroke }
 
         railway:
             draw:
@@ -411,13 +444,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.light_gray_color
+                    color: global.ultralight_color
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.light_gray_color
+                    color: [0.715,0.715,0.715]
             national_park:
                 draw:
                     polygons:
@@ -427,7 +460,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.light_gray_color
+                    color: [0.730,0.730,0.730]
 
         university:
             draw:
@@ -497,7 +530,7 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.offwhite_color
+                        color: global.lighter_gray_color
             beach:
                 draw:
                     polygons:
@@ -622,7 +655,7 @@ layers:
                     font:
                         transform: uppercase
                         weight: 600
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
             country-z2-3:
                 draw:
                     text-blend-order:
@@ -638,38 +671,38 @@ layers:
                 text-blend-order:
                     font:
                         fill: global.black_color
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
         populated-places:
             draw:
                 mapzen_icon_library:
                     text:
                         font:
-                            stroke: { color: global.lighter_gray_color }
+                            stroke: { color: global.zinc_text_stroke }
                 text-blend-order:
                     font:
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
         neighbourhoods:
             draw:
                 text-blend-order:
                     font:
                         fill: global.dark_color
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
     pois:
         draw:
             mapzen_icon_library:
                 text:
                     font:
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke, width: 4px }
 
         highway-exit:
             draw:
                 text-blend-order:
                     font:
                         fill: global.black_color
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
 
 
