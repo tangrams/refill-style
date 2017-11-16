@@ -11,7 +11,7 @@ global:
     ultralight_color:             [0.850,0.850,0.850]
     offwhite_color:               [0.950,0.950,0.950]
     white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.850,0.850,0.850,0.250]
+    transparent:                  [0.850,0.850,0.850,0.25]
     route_line:                   [0.700,0.196,0.507]
 
     hi_contrast_mid:              [0.300,0.300,0.300]
@@ -19,12 +19,19 @@ global:
     hi_contrast_offwhite:         [0.980,0.980,0.980]
 
     text_fill:                    global.black_color
-    text_stroke:                  [1.00,1.00,1.00,0.75]                 # land color
+    text_stroke:                  [1.00,1.00,1.00,0.75]
 
-    terrain_tint_color:           [0.150,0.150,0.150]
-    terrain_fill_color:           global.white_color
+    # TERRAIN SHADING COLORS
+    shading_tint_color:           global.hi_contrast_midlight
+    shading_fill_color:           global.white_color
+    shading_river_color:          global.hi_contrast_midlight
 
-    dot_terrain_color:            global.ultralight_color
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:            global.white_color
+    landuse_fill_color:           [0.900,0.900,0.900]
+    earth_dot_color:              global.white_color
+    earth_fill_color:             [0.970,0.970,0.970]
+    pattern_river_color:          global.hi_contrast_midlight
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -34,7 +41,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-shading
 
     # FILTER
     landuse-casing:
@@ -188,7 +195,7 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.lighter_color
+                    color: global.hi_contrast_mid
 
             country-labels:
                 draw:
@@ -198,12 +205,12 @@ layers:
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.lighter_color
+                lines:
+                    color: global.hi_contrast_mid
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.lighter_color
+                    lines:
+                        color: global.hi_contrast_mid
 
         region:
             region-labels:

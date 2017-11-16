@@ -11,7 +11,7 @@ global:
     ultralight_color:           [0.700,0.700,0.700]
     offwhite_color:             [0.850,0.850,0.850]
     white_color:                [0.900,0.900,0.900]
-    transparent:                [0.380,0.394,0.422,0.250]
+    transparent:                [0.380,0.394,0.422,0.25]
     route_line:                 [0.000,0.500,1.000]
 
     # GRAYS
@@ -27,12 +27,18 @@ global:
     gray_offwhite_color:        [0.898,0.898,0.898]
 
     text_fill:                  global.black_color
-    text_stroke:                [0.900,0.900,0.900,0.75]                 # land color
+    text_stroke:                [0.900,0.900,0.900,0.85]
+    zinc_text_stroke:           [0.749,0.749,0.749,0.85]
 
-    terrain_tint_color:         global.black_color
-    terrain_fill_color:         global.white_color
+    # TERRAIN SHADING COLORS
+    shading_tint_color:         [0.350,0.350,0.350]
+    shading_fill_color:         [0.749,0.749,0.749]
 
-    dot_terrain_color:          global.ultralight_color
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:          [0.749,0.749,0.749]
+    landuse_fill_color:         [0.670,0.670,0.670]
+    earth_dot_color:            [0.707,0.707,0.707]
+    earth_fill_color:           [0.680,0.680,0.680]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -42,7 +48,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-shading
 
 textures:
     sdk_terrain_texture:
@@ -59,7 +65,7 @@ layers:
             draw:
                 text-blend-order:
                     font:
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
     water:
         draw:
             polygons:
@@ -84,6 +90,11 @@ layers:
         #             order: global.feature_order
         #             style: no_waves
         #             color: global.mid_gray_color
+
+        playas:
+            draw:
+                polygons:
+                    color: global.lightest_color
 
         water-boundary-ocean:
             draw:
@@ -117,7 +128,28 @@ layers:
             intermittent:
                 draw:
                     lines:
+                        style: no_coast
                         color: global.dark_gray_color
+
+        water-area-labels:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: global.black_color
+                        stroke: { color: global.zinc_text_stroke, width: 4px }
+
+            sea-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.mid_gray_color }
+            playa-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
+                            stroke: { color: global.zinc_text_stroke }
+
 
     roads:
         highway:
@@ -125,14 +157,14 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: global.lighter_gray_color }
+                            stroke: { color: global.zinc_text_stroke }
 
             labels-highway-z15-up:
                 draw:
                     text-blend-order:
                         font:
                             fill: global.black_color
-                            stroke: { color: global.white_color }
+                            stroke: { color: global.text_stroke }
 
         major_road:
             trunk_primary:
@@ -141,13 +173,19 @@ layers:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.lighter_gray_color }
+                                    stroke: { color: global.zinc_text_stroke }
 
                 labels-trunk_primary-z11-z15:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.lighter_gray_color }
+                                stroke: { color: global.zinc_text_stroke }
+
+                labels-trunk_primary-z16-up:
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: [[16, global.zinc_text_stroke], [17, global.text_stroke]] }
 
             secondary:
                 routes:
@@ -155,32 +193,38 @@ layers:
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.lighter_gray_color }
+                                    stroke: { color: global.zinc_text_stroke }
+
+                    labels-secondary-routes-z15-up:
+                        draw:
+                            text-blend-order:
+                                font:
+                                    stroke: { color: [[15, global.zinc_text_stroke], [16, global.zinc_text_stroke], [17, global.text_stroke]] }
 
                 labels-secondary:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.lighter_gray_color }
+                                stroke: { color: global.zinc_text_stroke }
                     z17-up:
                         filter: { $zoom: { min: 17 } }
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.white_color }
+                                    stroke: { color: global.text_stroke }
 
             tertiary:
                 labels-tertiary:
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.lighter_gray_color }
+                                stroke: { color: global.zinc_text_stroke }
                     z17-up:
                         filter: { $zoom: { min: 17 } }
                         draw:
                             text-blend-order:
                                 font:
-                                    stroke: { color: global.white_color }
+                                    stroke: { color: global.text_stroke }
 
 
 
@@ -194,14 +238,14 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            fill: global.darker_gray_color
-                            stroke: { color: global.lighter_gray_color }
-                z17-up:
-                    filter: { $zoom: { min: 17 } }
+                            fill: global.black_color
+                            stroke: { color: global.zinc_text_stroke }
+                z18-up:
+                    filter: { $zoom: { min: 18 } }
                     draw:
                         text-blend-order:
                             font:
-                                stroke: { color: global.white_color }
+                                stroke: { color: global.text_stroke, width: 6px }
 
         service_road:
             draw:
@@ -209,6 +253,17 @@ layers:
                     color: global.gray_offwhite_color
                     outline:
                         color: [[11, global.gray_offwhite_color], [16, global.gray_offwhite_color], [17, global.black_color]]
+            labels-service_road:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.zinc_text_stroke }
+                z18-up:
+                    filter: { $zoom: { min: 18 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.text_stroke }
 
         path:
             draw:
@@ -234,6 +289,19 @@ layers:
                             color: global.gray_color
                             width: [[14, 0px], [15, 0.35px], [16, 1px]]
 
+            labels-path:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.zinc_text_stroke }
+
+                z20:
+                    filter: { $zoom: { min: 20 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.text_stroke }
+
         track:
             draw:
                 lines:
@@ -242,6 +310,27 @@ layers:
                     outline:
                         color: global.gray_color
                         width: [[14, 0px], [15, 0.35px], [17, 1px]]
+
+            labels-track:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.zinc_text_stroke }
+
+                z17-up:
+                    filter: { $zoom: { min: 17 } }
+                    draw:
+                        text-blend-order:
+                            font:
+                                stroke: { color: global.text_stroke }
+
+        steps:
+            labels-steps:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.black_color
+                            stroke: { color: global.zinc_text_stroke }
 
         railway:
             draw:
@@ -290,6 +379,9 @@ layers:
                 width: [[14, 0px], [15, 0.5px], [18, 1px], [19, 0.4m]]
 
         footprints:
+            # NOTE (2017-11-09, @nvkelso): this filter block is optionally different.
+            # it was added to match the old Zinc, which had less buildings
+            # but maybe it should be removed to just use Refill's standard selection?
             filter:
                 any:
                     # limit show smaller landuse areas to higher zooms
@@ -309,12 +401,8 @@ layers:
                 draw:
                     polygons:
                         extrude: false
-                        style: polygons
-                        color: global.ultralight_color
                     lines:
                         extrude: false
-                        style: lines
-                        color: global.ultradark_gray_color
 
             in_university:
                 filter: { landuse_kind: [university,school] }
@@ -330,11 +418,6 @@ layers:
 
 
     landuse:
-        draw:
-            no_texture:
-                order: global.feature_order
-                visible: false
-
         national_park:
             draw:
                 polygons:
@@ -344,7 +427,6 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.light_gray_color
 
         conservation:
             draw:
@@ -362,40 +444,23 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.light_gray_color
+                    color: global.ultralight_color
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.light_gray_color
+                    color: [0.715,0.715,0.715]
             national_park:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.light_gray_color
 
         farm:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.lighter_gray_color
-
-        airport:
-            filter:
-                kind: aerodrome
-            draw:
-                polygons:
-                    color: global.light_gray_color
-                    visible: true
-
-        military:
-            filter:
-                kind: military
-            draw:
-                polygons:
-                    color: global.ultralight_color
-                    visible: true
+                    color: [0.730,0.730,0.730]
 
         university:
             draw:
@@ -419,28 +484,13 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-
-        industrial:
-            filter:
-                kind: industrial
-            draw:
-                polygons:
-                    color: global.lighter_gray_color
-                    visible: true
-
-        railway:
-            filter:
-                kind: railway
-            draw:
-                polygons:
-                    color: global.lightest_color
-                    visible: true
-
+                    color: global.light_gray_color
 
         sports_centre:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.light_gray_color
 
         recreation_ground:
             draw:
@@ -460,10 +510,16 @@ layers:
                     style: no_texture
                     color: global.ultralight_color
 
+        winter_sports:
+            draw:
+                polygons:
+                    color: global.light_gray_color
+
         man-made:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.lighter_gray_color
             pier:
                 draw:
                     polygons:
@@ -474,12 +530,12 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.offwhite_color
-
+                        color: global.lighter_gray_color
             beach:
                 draw:
                     polygons:
                         style: no_texture
+                        color: global.lightest_color
 
         garden:
             draw:
@@ -491,28 +547,30 @@ layers:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.ultralight_color
 
         pedestrian:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.lightest_gray_color
             green-stuff:
                 draw:
                     polygons:
                         style: no_texture
+                        color: global.lighter_color
 
         pitch:
             draw:
                 polygons:
                     style: no_texture
                     color: global.lighter_gray_color
-                outline:
-                    color: global.light_color
 
         playground:
             draw:
                 polygons:
                     style: no_texture
+                    color: global.ultralight_color
 
         school:
             draw:
@@ -527,11 +585,14 @@ layers:
                     color: global.lighter_gray_color
 
         landuse-not-filtered:
+            draw:
+                polygons:
+                    order: global.feature_order
+
             runway:
                 draw:
                     polygons:
                         color: global.ultradark_gray_color
-
             apron:
                 draw:
                     polygons:
@@ -550,25 +611,37 @@ layers:
                         style: no_texture
                         color: global.lightest_gray_color
 
+        retaining_wall:
+            draw:
+                lines:
+                    color: global.lightest_color
+
+        fence:
+            draw:
+                lines:
+                    color: global.lightest_color
+
     boundaries:
         country:
             draw:
                 country-outerline:
-                    color: global.dark_gray_color
+                    color: global.mid_gray_color
+                lines:
+                    color: global.lighter_gray_color
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.dark_gray_color
+                lines:
+                    color: global.mid_gray_color
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.dark_gray_color
+                    lines:
+                        color: global.mid_gray_color
 
         region:
             draw:
                 lines:
-                    color: global.dark_gray_color
+                    color: global.gray_color
             region-labels:
                 draw:
                     text-blend-order:
@@ -582,7 +655,7 @@ layers:
                     font:
                         transform: uppercase
                         weight: 600
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
             country-z2-3:
                 draw:
                     text-blend-order:
@@ -598,38 +671,38 @@ layers:
                 text-blend-order:
                     font:
                         fill: global.black_color
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
         populated-places:
             draw:
                 mapzen_icon_library:
                     text:
                         font:
-                            stroke: { color: global.lighter_gray_color }
+                            stroke: { color: global.zinc_text_stroke }
                 text-blend-order:
                     font:
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
         neighbourhoods:
             draw:
                 text-blend-order:
                     font:
                         fill: global.dark_color
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
     pois:
         draw:
             mapzen_icon_library:
                 text:
                     font:
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke, width: 4px }
 
         highway-exit:
             draw:
                 text-blend-order:
                     font:
                         fill: global.black_color
-                        stroke: { color: global.lighter_gray_color }
+                        stroke: { color: global.zinc_text_stroke }
 
 
 

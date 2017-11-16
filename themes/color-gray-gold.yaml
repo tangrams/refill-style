@@ -1,37 +1,44 @@
 global:
     # INVERTED
-    black_color:                [0.650,0.680,0.741]
-    dark_color:                 [0.575,0.599,0.653]
-    mid_color:                  [0.495,0.517,0.558]
-    midlight_color:             [0.418,0.434,0.465]
-    light:                      [0.381,0.395,0.423]
-    light_color:                [0.333,0.343,0.367]
-    lighter_color:              [0.254,0.258,0.272]
-    lightest_color:             [0.212,0.216,0.225]
-    ultralight_color:           [0.185,0.189,0.197]
-    offwhite_color:             [0.169,0.173,0.176]
-    white_color:                [0.153,0.157,0.161]
-    transparent:                [0.380,0.394,0.422,0.250]
-    route_line:                 [0.000,0.500,1.000]
+    black_color:                  [0.650,0.680,0.741]
+    dark_color:                   [0.575,0.599,0.653]
+    mid_color:                    [0.495,0.517,0.558]
+    midlight_color:               [0.418,0.434,0.465]
+    light:                        [0.381,0.395,0.423]
+    light_color:                  [0.333,0.343,0.367]
+    lighter_color:                [0.254,0.258,0.272]
+    lightest_color:               [0.212,0.216,0.225]
+    ultralight_color:             [0.185,0.189,0.197]
+    offwhite_color:               [0.169,0.173,0.176]
+    white_color:                  [0.153,0.157,0.161]
+    transparent:                  [0.380,0.394,0.422,0.25]
+    route_line:                   [0.000,0.500,1.000]
 
     # GOLD
-    two_color_black:            [0.144,0.127,0.097]
-    two_color_dark:             [0.176,0.155,0.119]
-    two_color_mid:              [0.240,0.212,0.163]
-    two_color_midlight:         [0.301,0.265,0.204]
-    two_color_light:            [0.418,0.368,0.283]
-    two_color_lighter:          [0.495,0.436,0.335]
-    two_color_lightest:         [0.609,0.537,0.413]
-    two_color_ultralight:       [0.734,0.647,0.497]
-    two_color_offwhite:         [0.815,0.718,0.552]
+    two_color_black:              [0.144,0.127,0.097]
+    two_color_dark:               [0.176,0.155,0.119]
+    two_color_mid:                [0.240,0.212,0.163]
+    two_color_midlight:           [0.301,0.265,0.204]
+    two_color_light:              [0.418,0.368,0.283]
+    two_color_lighter:            [0.495,0.436,0.335]
+    two_color_lightest:           [0.609,0.537,0.413]
+    two_color_ultralight:         [0.734,0.647,0.497]
+    two_color_offwhite:           [0.815,0.718,0.552]
 
-    text_fill:                  global.black_color
-    text_stroke:                [0.153,0.157,0.161,0.75]                 # land color
+    text_fill:                    global.black_color
+    text_stroke:                  [0.153,0.157,0.161,0.75]
 
-    terrain_tint_color:         global.mid_color
-    terrain_fill_color:         [0.000,0.000,0.000]
+    # TERRAIN SHADING COLORS
+    shading_tint_color:           [0.400,0.394,0.384]
+    shading_fill_color:           [0.027,0.029,0.030]
+    shading_river_color:          global.two_color_midlight
 
-    dot_terrain_color:          global.ultralight_color
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:            global.lightest_color
+    landuse_fill_color:           [0.127,0.129,0.130]
+    earth_dot_color:              [0.143,0.147,0.151]
+    earth_fill_color:             [0.127,0.129,0.130]
+    pattern_river_color:          global.two_color_midlight
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -41,7 +48,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain-dark
+    sdk_terrain_style: terrain-shading-dark
 
 textures:
     sdk_terrain_texture:
@@ -99,15 +106,6 @@ layers:
                     lines:
                         style: coast
                         color: global.two_color_offwhite
-
-        river:
-            draw:
-                lines:
-                    color: global.two_color_light
-            intermittent:
-                draw:
-                    lines:
-                        color: global.two_color_light
 
     roads:
         arrows:
@@ -258,21 +256,21 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_midlight
+                    color: global.two_color_lighter
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.two_color_midlight
+                lines:
+                    color: global.midlight_color
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.two_color_midlight
+                    lines:
+                        color: global.midlight_color
 
         region:
             draw:
                 lines:
-                    color: global.two_color_mid
+                    color: global.two_color_light
 
 
 styles:
@@ -322,6 +320,11 @@ styles:
         shaders:
             defines:
                 OPACITY: 1.0
+
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.two_color_light
 
     dots:
         shaders:

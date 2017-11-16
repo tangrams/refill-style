@@ -1,13 +1,9 @@
 sources:
     mapzen:
-        type: TopoJSON
-        # prod
-        rasters: [normals]
-        tile_size: 512
-        max_zoom: 16
-    normals: # normals
+        rasters:
+            - normals
+    normals:
         type: Raster
-        # prod
         url: https://tile.mapzen.com/mapzen/terrain/v1/512/normal/{z}/{x}/{y}.png
         url_params:
             api_key: global.sdk_mapzen_api_key
@@ -31,10 +27,10 @@ layers:
             lines:
                 visible: false
 
-    buildings:
-        draw:
-            polygons:
-                color: [[13, global.offwhite_color], [18, global.white_color]]
+    # buildings:
+    #     draw:
+    #         polygons:
+    #             color: [[13, global.offwhite_color], [18, global.white_color]]
 
     landuse:
         enabled: false
@@ -42,39 +38,22 @@ layers:
 
 styles:
     riverlines:
-        base: lines
-        mix: [space-constant]
-        blend: opaque
         shaders:
             uniforms:
-                u_fill: global.ultralight_color
-            blocks:
-                global: |
-                    mat2 rotate2d(float angle){
-                        return mat2(cos(angle),-sin(angle),
-                                    sin(angle),cos(angle));
-                    }
+                u_tint: global.shading_river_color
 
-                    float stripes(vec2 st){
-                        st = rotate2d(3.14159265358*-0.25 )*st;
-                        //return step(.9,1.0-smoothstep(.5,1.,abs(sin(st.x*3.14159265358))));
-                        return step(.75,1.0-smoothstep(.75,1.,abs(sin(st.x*3.14159265358)))); // more spaced out stripes?
-                    }
-                color: |
-                    vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 1.0), vec4(u_fill.rgb, 1.0), stripes(st*130.)); // transparent stripes
-
-    colorized_terrain:
+    colorized_shading:
         shaders:
             uniforms:
-                u_tint: global.terrain_tint_color
-                u_fill: global.terrain_fill_color
+                u_tint: global.shading_tint_color
+                u_fill: global.shading_fill_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
-    terrain:
-        mix: colorized_terrain
+    terrain-shading:
+        mix:
+            - colorized_shading
         base: polygons
         lighting: false
         raster: normal
@@ -107,8 +86,10 @@ styles:
                     // apply layer color
                     color *= v_color;
 
-    terrain-dark:
-        mix: [colorized_terrain, terrain]
+    terrain-shading-dark:
+        mix:
+            - colorized_terrain
+            - terrain-shading
         base: polygons
         shaders:
             uniforms:

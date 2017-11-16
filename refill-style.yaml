@@ -578,16 +578,20 @@ styles:
         dash: [0.25, 1.0]
         dash_background_color: global.offwhite_color
 
+    region_dash:
+        base: lines
+        dash: [7.0, 1.0]
+
     pixel-pattern-light:
         mix: [space-tile, generative-random]
         base: polygons
         shaders:
             uniforms:
-                u_tint: global.lightest_color
+                u_tint: global.ultralight_color
             blocks:
                 filter: |
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
-                    color.rgb = u_tint * vec3(random(abs(floor(pos)))+0.905);
+                    color.rgb = u_tint * vec3(random(abs(floor(pos)))+0.925);
 
 
     pixel-pattern-bright:
@@ -654,7 +658,8 @@ styles:
         blend: opaque
         shaders:
             uniforms:
-                u_tint: global.white_color
+                u_tint: global.light_color
+                u_fill: global.white_color
             blocks:
                 global: |
                     mat2 rotate2d(float angle){
@@ -668,7 +673,7 @@ styles:
                     }
                 color: |
                     vec2 st = getConstantCoords();
-                    color = mix(vec4(color.rgb, 0.9), vec4(u_tint.rgb, 1.0), stripes(st*130.));
+                    color = mix(vec4(u_tint.rgb, 0.9), vec4(u_fill.rgb, 1.0), stripes(st*130.));
 
     dots:
         mix: [space-tile, tiling-tile, shapes-circle]
@@ -1280,7 +1285,7 @@ layers:
                     visible: true
                     order: global.feature_order_down_1
                     color: global.light
-                    width: [[11, 0.5px], [ 18, 8px]]
+                    width: [[11, 0.5px], [14, 2px], [ 18, 8px]]
                     cap: round
             intermittent:
                 filter:
@@ -1922,7 +1927,7 @@ layers:
                                     fill: global.black_color
                                     weight: 600
                                     size: [[15, 12px], [16, 13px], [19, 16px]]
-                                    stroke: { color: global.text_stroke, width: [[15, 3px], [17, 6px]] }
+                                    stroke: { color: global.text_stroke, width: [[15, 4px], [17, 6px]] }
                 labels-trunk_primary-z11-z15:
                     filter:
                         $zoom: [11,12,13,14,15]
@@ -2094,7 +2099,7 @@ layers:
                             font:
                                 fill: [[13, global.dark_color], [18, global.black_color]]
                                 size: [[13, 10px], [17, 13px]]
-                                stroke: { color: global.text_stroke, width: 4px }
+                                stroke: { color: global.text_stroke, width: 5px }
         minor_road:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 8 } }
             draw:
@@ -3161,11 +3166,11 @@ layers:
                 country-outerline:
                     style: lines
                     order: function() { return (feature.sort_rank -1); }
-                    color: [[0, global.lightest_color], [8, global.lighter_color]]
-                    width: [[0, 0px], [6, 4px], [14, 7px], [17, 14m]]
+                    color: global.light_color
+                    width: [[0, 0px], [4, 2px], [8, 5px], [14, 7px], [17, 14m]]
                 lines:
                     color: global.white_color
-                    width: [[0, 0px], [5, 0px], [6, 1px]]
+                    width: [[0, 0px], [5, 0px], [6, 1px], [14, 2px]]
             water:
                 filter: { maritime_boundary: true }
                 draw:
@@ -3180,7 +3185,7 @@ layers:
                         priority: 2
                         visible: global.text_visible_admin
                         text_source: global.ux_language_text_source_boundary_lines_left_right
-                        offset: [[8,[0, 7px]],[11,[0, 8px]],[12,[0, 9px]]]
+                        offset: [[8, [0, 7px]], [11, [0, 8px]], [12, [0, 9px]]]
                         text_wrap: 100
                         font:
                             family: global.text_font_family
@@ -3197,18 +3202,18 @@ layers:
         other_country_boundary_disputed_etc:
             filter: { kind: [disputed, indefinite, indeterminate, lease_limit, line_of_control, overlay_limit] }
             draw:
-                dashed:
+                lines:
+                    style: dashed
                     order: global.feature_order
-                    color: global.lighter_color
+                    color: global.light_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
             disputed:
                 filter: { kind: [disputed, line_of_control] }
                 draw:
-                    dashed:
-                        visible: false
-                    dashed_big:
+                    lines:
+                        style: dashed_big
                         order: global.feature_order
-                        color: global.lighter_color
+                        color: global.light_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
 
         region:
@@ -3218,18 +3223,28 @@ layers:
                     - kind_detail: [3,4]
             draw:
                 lines:
-                    color: global.lightest_color
-                    width: [[0, 0.5px], [5, 2px], [9, 4px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+                    color: global.lighter_color
+                    width: [[0, 0.5px], [5, 2px], [9, 3px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+
             water:
                 filter: { maritime_boundary: true }
                 draw:
                     lines:
                         visible: false
+
+            dash-borders:
+                filter:
+                    $zoom: { min: 7 }
+                draw:
+                    lines:
+                        style: region_dash
+
             early:
                 filter: { not: { min_zoom: [1,2] }, $zoom: { max: 8 } }
                 draw:
                     lines:
                         visible: false
+
             region-labels:
                 filter: { name: true, $zoom: { min: 9 }, not: { maritime_boundary: true } }
                 draw:
@@ -4789,7 +4804,7 @@ layers:
                         size: 11px
                         stroke: { color: global.text_stroke, width: 1px }
 
-        #tier1:
+        # tier1:
         national_park:
             filter:
                 all:
@@ -4814,8 +4829,8 @@ layers:
                         style: pixel-pattern-light
                         visible: true
 
-        #tier2:
-            # effectively wilderness
+        # tier2:
+        # effectively wilderness
         conservation:
             filter:
                 $zoom: { min: 4 }

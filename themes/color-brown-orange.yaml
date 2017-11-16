@@ -11,7 +11,7 @@ global:
     ultralight_color:             [0.953,0.918,0.925]
     offwhite_color:               [0.973,0.933,0.933]
     white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.847,0.769,0.773,0.250]
+    transparent:                  [0.847,0.769,0.773,0.25]
     route_line:                   [0.700,0.196,0.507]
 
     # ORANGE II
@@ -28,10 +28,17 @@ global:
     text_fill:                    global.black_color
     text_stroke:                  [1.00,1.00,1.00,0.75]
 
-    terrain_tint_color:           global.dark_color
-    terrain_fill_color:           global.white_color
+    # TERRAIN SHADING COLORS
+    shading_tint_color:           global.light_color
+    shading_fill_color:           global.white_color
+    shading_river_color:          global.two_color_light
 
-    dot_terrain_color:            global.ultralight_color
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:            global.white_color
+    landuse_fill_color:           global.ultralight_color
+    earth_dot_color:              global.white_color
+    earth_fill_color:             [1.000,0.970,0.970]
+    pattern_river_color:          [1.000,0.642,0.450]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -41,7 +48,7 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain
+    sdk_terrain_style: terrain-shading
 
 textures:
     sdk_terrain_texture:
@@ -256,21 +263,21 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_lightest
+                    color: global.two_color_light
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.two_color_lightest
+                lines:
+                    color: global.light
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.two_color_lightest
+                    lines:
+                        color: global.light
 
         region:
             draw:
                 lines:
-                    color: global.two_color_ultralight
+                    color: global.two_color_lighter
 
 styles:
     railway_dash:
@@ -288,6 +295,11 @@ styles:
         shaders:
             defines:
                 OPACITY: 1.0
+
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.two_color_light
 
     building-grid:
         shaders:
