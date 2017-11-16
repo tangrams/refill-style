@@ -1939,7 +1939,7 @@ layers:
                             font:
                                 fill: global.dark_color
                                 size: [[11, 10px], [15, 12px]]
-                                stroke: { color: global.text_stroke, width: [[11, 3px], [13, 3px], [14, 4px]] }
+                                stroke: { color: global.text_stroke, width: 4px }
                 labels-trunk_primary-z16-up:
                     filter: { $zoom: { min: 16 } }
                     draw:
@@ -4013,7 +4013,7 @@ layers:
                         weight: normal
                         fill: global.dark_color
                         size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
-                        stroke: { color: global.text_stroke, width: [[12, 2px], [16, 4px]] }
+                        stroke: { color: global.text_stroke, width: 4px }
         # improve legibility at high zooms
         poi_labels-z18:
             filter: { $zoom: { min: 18 } }
@@ -4547,7 +4547,7 @@ layers:
                         family: Montserrat
                         fill: global.mid_color
                         size: [[12,9px],[15,12px],[17,14px]]
-                        stroke: { color: global.text_stroke, width: [[12, 2px], [14, 3px], [15, 3px]] }
+                        stroke: { color: global.text_stroke, width: 4px }
             later:
                 filter: { $zoom: { min: 16 } }
                 draw:

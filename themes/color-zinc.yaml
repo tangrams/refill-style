@@ -268,26 +268,29 @@ layers:
         path:
             draw:
                 lines:
-                    width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
+                    color: [[15, global.gray_color], [17, global.white_color]]
+                    width: [[14, 0px], [16, 0px], [17, 2px], [20, 1m]]
                     outline:
-                        color: global.gray_color
-                        width: [[14, 0px], [15, 0.35px], [16, 1px]]
+                        color: [[14, global.lighter_gray_color], [17, global.gray_color]]
+                        width: [[14, 1px], [16, 2px]]
 
             pedestrian:
                 draw:
                     lines:
-                        width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
+                        color: [[15, global.gray_color], [17, global.white_color]]
+                        width: [[14, 0px], [16, 0px], [17, 2px], [20, 1m]]
                         outline:
-                            color: global.gray_color
-                            width: [[14, 0px], [15, 0.35px], [16, 1px]]
+                            color: [[14, global.lighter_gray_color], [17, global.gray_color]]
+                            width: [[14, 1px], [16, 2px]]
 
             footway:
                 draw:
                     lines:
-                        width: [[14, 0px], [15, 0px], [16, 0.1px], [18, 2px], [20, 1m]]
+                        color: [[15, global.gray_color], [17, global.white_color]]
+                        width: [[14, 0px], [16, 0px], [17, 2px], [20, 1m]]
                         outline:
-                            color: global.gray_color
-                            width: [[14, 0px], [15, 0.35px], [16, 1px]]
+                            color: [[14, global.lighter_gray_color], [17, global.gray_color]]
+                            width: [[14, 1px], [16, 2px]]
 
             labels-path:
                 draw:
