@@ -281,21 +281,32 @@ styles:
         mix:
             - space-tile
             - tiling-brick
-            - tiling-tile
             - shapes-circle
         shaders:
-            defines:
-                DOTS_COLOR: color.rgb*.5
-                DOTS_BACKGROUND_COLOR: color.rgb
-                DOTS_SCALE: 10
-                DOTS_SIZE: 0.41
-                DOTS_TYPE: fill
-                DOTS_TILE_STYLE: brick
             blocks:
+                global: |
+                    float TileDots(float scale, float size) {
+
+                        // controls
+                        float DOT_SIZE = size * .1; // bigger value = smaller dots
+                        float SPEED = 2.; // bigger value = faster transition
+
+                        vec2 tc = getTileCoords() * size * pow(2., floor(u_map_position.z) - abs(u_tile_origin.z));
+                        vec2 IN = brick(tc, 2.);
+                        float A = circleDF(vec2(.5) - IN) * DOT_SIZE;
+                        vec2 OUT = brick(tc, 4.);
+                        float B = circleDF(vec2(.5) - OUT) * DOT_SIZE;
+
+                        // keep B dots big as they fade in, to maintain density
+                        B *= pow(fract(u_map_position.z)*.95, SPEED);
+
+                        float d = mix(A, B, pow(fract(u_map_position.z), SPEED));
+                        return aastep(scale, d);
+                    }
+
                 color: |
-                    color.rgb = mix(DOTS_BACKGROUND_COLOR,
-                                    DOTS_COLOR,
-                                    DOTS_TYPE( DOTS_SIZE, circleDF(vec2(0.5)-DOTS_TILE_STYLE(getTileCoords()*DOTS_SCALE,2.))) );
+                    color.rgb = mix(DOTS_COLOR, DOTS_BACKGROUND_COLOR, TileDots(DOTS_SIZE, DOTS_SCALE));
+
     shapes-circle:
         mix:
             - shapes-type
@@ -307,43 +318,38 @@ styles:
                                     return dot(st,st)*3.03;
                     }
 
-                    // Draw a circle in the middle of the ST space
-                    float circle (vec2 st, float radius) {
-                                    return fill(radius, circleDF(st-vec2(0.5)));
-                    }
 
-                    // Draw a circle in the middle of the ST space
-                    float circleBorder (vec2 st, float radius) {
-                                    return stroke(radius, circleDF(st-vec2(0.5)));
-                    }
 
-    # dot terrain from Patricio's example
-    # https://mapzen.com/tangram/play/?scene=https://tangrams.github.io/tangram-sandbox/styles/callejas.yaml&lines=116#10.9329/38.3394/-122.3068
 
-    earth-terrain-pattern:
+    terrain-shade:
         base: polygons
-        mix: [elevation-ramp-earth, elevation-normal, functions-zoom, polygons-dots]
+        mix: [elevation-normal, functions-zoom, polygons-dots]
         shaders:
             defines:
                 ZOOM_START: 0.
                 ZOOM_END: 13.
                 DOTS_DIR: vec3(0.600,-0.950,0.520)
-                # DOTS_DIR: vec3(0.600,-0.950,0.600)
-                # DOTS_COLOR: color.rgb
-                DOTS_COLOR: vec3(0)
-                DOTS_BACKGROUND_COLOR: vec3(1.0)
+                DOTS_COLOR: vec3(0.)
+                DOTS_BACKGROUND_COLOR: vec3(1.)
                 DOTS_SCALE: 30
                 DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
             blocks:
                 normal: |
                     float shade = dot(normal, DOTS_DIR);
-                    // subtract .1 to increase contrast a bit
-                    shade = shade*shade*shade * -1. + .3;
+                    // modify brightness and contrast
+                    shade = shade*shade*shade * -2. + .65;
                     // reset normal to prevent standard terrain shading mixing with dots
                     normal = vec3(0,0,1);
 
-    elevation-ramp-earth:
-        mix: colorized-earth
+    earth-terrain-pattern:
+        base: polygons
+        mix: [elevation-ramp, terrain-shade, colorized-earth]
+
+    landuse-terrain-pattern:
+        base: polygons
+        mix: [elevation-ramp2, terrain-shade, colorized-landuse]
+
+    elevation-ramp:
         shaders:
             uniforms:
                 u_ramp: palette
@@ -361,37 +367,6 @@ styles:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
-    landuse-terrain-pattern:
-        base: polygons
-        mix: [elevation-ramp-landuse, elevation-normal, functions-zoom, polygons-dots]
-        shaders:
-            defines:
-                ZOOM_START: 0.
-                ZOOM_END: 13.
-                DOTS_DIR: vec3(0.600,-0.950,0.520)
-                # DOTS_DIR: vec3(0.600,-0.950,0.600)
-                # DOTS_COLOR: color.rgb
-                DOTS_COLOR: vec3(0)
-                DOTS_BACKGROUND_COLOR: vec3(1.0)
-                DOTS_SCALE: 30
-                DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
-            blocks:
-                normal: |
-                    float shade = dot(normal, DOTS_DIR);
-                    // subtract .1 to increase contrast a bit
-                    shade = shade*shade*shade * -1. + .3;
-                    // reset normal to prevent standard terrain shading mixing with dots
-                    normal = vec3(0,0,1);
-
-    elevation-ramp-landuse:
-        mix: colorized-landuse
-        shaders:
-            uniforms:
-                u_ramp: palette
-            blocks:
-                color: |
-                    color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
-        raster: custom
 
     colorized-landuse:
         shaders:
