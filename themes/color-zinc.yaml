@@ -269,7 +269,7 @@ layers:
             draw:
                 lines:
                     color: [[15, global.gray_color], [17, global.white_color]]
-                    width: [[14, 0px], [16, 0px], [17, 2px], [20, 1m]]
+                    width: [[14, 0px], [16, 0px], [17, 2px], [20, 2m]]
                     outline:
                         color: [[14, global.lighter_gray_color], [17, global.gray_color]]
                         width: [[14, 1px], [16, 2px]]
@@ -278,19 +278,19 @@ layers:
                 draw:
                     lines:
                         color: [[15, global.gray_color], [17, global.white_color]]
-                        width: [[14, 0px], [16, 0px], [17, 2px], [20, 1m]]
+                        width: [[14, 0px], [16, 0px], [17, 2px], [20, 2m]]
                         outline:
                             color: [[14, global.lighter_gray_color], [17, global.gray_color]]
-                            width: [[14, 1px], [16, 2px]]
+                            width: [[14, 1px], [16, 1px]]
 
             footway:
                 draw:
                     lines:
                         color: [[15, global.gray_color], [17, global.white_color]]
-                        width: [[14, 0px], [16, 0px], [17, 2px], [20, 1m]]
+                        width: [[14, 0px], [16, 0px], [17, 2px], [20, 2m]]
                         outline:
                             color: [[14, global.lighter_gray_color], [17, global.gray_color]]
-                            width: [[14, 1px], [16, 2px]]
+                            width: [[14, 1px], [16, 1px]]
 
             labels-path:
                 draw:

@@ -122,11 +122,11 @@ layers:
         airport-lines:
             draw:
                 lines:
-                    color: global.two_color_offwhite
+                    color: global.two_color_lightest
             taxiway:
                 draw:
                     lines:
-                        color: global.two_color_light
+                        color: global.two_color_midlight
 
         ferry:
             draw:
