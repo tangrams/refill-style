@@ -118,7 +118,7 @@ layers:
             taxiway:
                 draw:
                     lines:
-                        color: global.two_color_lightest
+                        color: global.two_color_lighter
 
 
     landuse:

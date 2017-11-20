@@ -133,6 +133,15 @@ layers:
                 lines:
                     color: global.midlight_color
 
+        airport-lines:
+            draw:
+                lines:
+                    color: global.dark_color
+            taxiway:
+                draw:
+                    lines:
+                        color: global.mid_color
+
     landuse:
         parks-and-national-forests-not-national-park:
             draw:
@@ -206,6 +215,12 @@ layers:
             draw:
                 lines:
                     color: global.light_color
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.dark_color
 
     boundaries:
         country:

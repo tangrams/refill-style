@@ -114,11 +114,11 @@ layers:
         airport-lines:
             draw:
                 lines:
-                    color: global.two_color_midlight
+                    color: global.mid_color
             taxiway:
                 draw:
                     lines:
-                        color: global.two_color_lightest
+                        color: global.light_color
 
 
     landuse:
@@ -242,7 +242,7 @@ layers:
             runway:
                 draw:
                     polygons:
-                        color: global.two_color_lighter
+                        color: global.mid_color
 
     buildings:
         draw:

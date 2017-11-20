@@ -126,7 +126,7 @@ layers:
             taxiway:
                 draw:
                     lines:
-                        color: global.two_color_midlight
+                        color: global.two_color_light
 
         ferry:
             draw:

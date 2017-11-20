@@ -124,11 +124,11 @@ layers:
         airport-lines:
             draw:
                 lines:
-                    color: global.two_color_offwhite
+                    color: [0.110,0.500,0.363]
             taxiway:
                 draw:
                     lines:
-                        color: global.two_color_light
+                        color: global.midlight_color
 
         ferry:
             draw:
@@ -242,7 +242,7 @@ layers:
             runway:
                 draw:
                     polygons:
-                        color: global.two_color_offwhite
+                        color: [0.110,0.500,0.363]
 
         retaining_wall:
             draw:

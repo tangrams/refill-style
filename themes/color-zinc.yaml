@@ -362,7 +362,7 @@ layers:
             taxiway:
                 draw:
                     lines:
-                        color: global.lightest_gray_color
+                        color: global.light
                         outline:
                             visible: false
 
