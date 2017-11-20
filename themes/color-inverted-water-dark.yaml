@@ -10,7 +10,7 @@ global:
     lightest_color:               [0.220,0.220,0.220]
     ultralight_color:             [0.195,0.195,0.195]
     offwhite_color:               [0.175,0.175,0.175]
-    white_color:                  [0.00,0.00,0.00]
+    white_color:                  [0.000,0.000,0.000]
     transparent:                  [0.800,0.800,0.800,0.25]
     route_line:                   [0.000,0.500,1.000]
 
@@ -75,45 +75,45 @@ layers:
             draw:
                 lines:
                     style: coast
-                    color: global.black_color
+                    color: global.dark_color
 
         water_boundaries-not-ocean:
             draw:
                 lines:
                     style: coast
-                    color: global.black_color
+                    color: global.dark_color
             riverbank:
                 draw:
                     lines:
                         style: coast
-                        color: global.black_color
+                        color: global.dark_color
 
         water-area-labels:
             ocean-sea-labels:
                 draw:
                     text-blend-order:
                         font:
-                            fill: global.lighter_color
-                            stroke: { color: [0.920,0.920,0.920], width: 4 }
+                            fill: global.dark_color
+                            stroke: { color: global.lighter_color, width: 4px }
                 sea-labels:
                     draw:
                         text-blend-order:
                             font:
-                                fill: global.lighter_color
-                                stroke: { color: [0.920,0.920,0.920], width: 4 }
+                                fill: global.dark_color
+                                stroke: { color: global.lighter_color, width: 4px }
             mostly-lakes:
                 default-label-text:
                     draw:
                         text-blend-order:
                             font:
-                                fill: global.lighter_color
-                                stroke: { color: [0.920,0.920,0.920], width: 4 }
+                                fill: global.dark_color
+                                stroke: { color: global.lighter_color, width: 4px }
             water-line-labels:
                 draw:
                     text-blend-order:
                         font:
-                            fill: global.lighter_color
-                            stroke: { color: [0.920,0.920,0.920], width: 4 }
+                            fill: global.dark_color
+                            stroke: { color: global.lighter_color, width: 4px }
 
     roads:
         pier:
@@ -275,8 +275,8 @@ styles:
     waves:
         shaders:
             uniforms:
-                u_lighter: global.midlight_color
-                u_lightest: [0.920,0.920,0.920]
+                u_lighter: global.mid_color
+                u_lightest: global.lighter_color
     coast:
         shaders:
             defines:
@@ -296,7 +296,7 @@ styles:
     pixel-pattern-bright:
         shaders:
             uniforms:
-                u_tint: [0.095,0.095,0.095]
+                u_tint: [0.065,0.065,0.065]
 
     medium-dots:
         shaders:

@@ -1,0 +1,329 @@
+global:
+    # INVERTED
+    black_color:                  [1.000,1.000,1.000]
+    dark_color:                   [0.750,0.750,0.750]
+    mid_color:                    [0.500,0.500,0.500]
+    midlight_color:               [0.460,0.460,0.460]
+    light:                        [0.410,0.410,0.410]
+    light_color:                  [0.365,0.365,0.365]
+    lighter_color:                [0.275,0.275,0.275]
+    lightest_color:               [0.220,0.220,0.220]
+    ultralight_color:             [0.195,0.195,0.195]
+    offwhite_color:               [0.175,0.175,0.175]
+    white_color:                  [0.00,0.00,0.00]
+    transparent:                  [0.800,0.800,0.800,0.25]
+    route_line:                   [0.000,0.500,1.000]
+
+    text_fill:                    global.black_color
+    text_stroke:                  [0.00,0.00,0.00,0.75]
+
+    # TERRAIN SHADING COLORS
+    shading_tint_color:           global.light_color
+    shading_fill_color:           global.white_color
+    shading_river_color:          global.light_color
+
+    # TERRAIN PATTERN COLORS
+    landuse_dot_color:            [0.145,0.145,0.145]
+    landuse_fill_color:           [0.000,0.000,0.000]
+    earth_dot_color:              [0.090,0.090,0.090]
+    earth_fill_color:             [0.000,0.000,0.000]
+    pattern_river_color:          global.lighter_color
+
+    # To make Refill's colorize-able icons play nice with other styles
+    # we re-state the global here in the Refill color theme to use colorized_icons.
+    # This allows the Refill color theme to import *after* say Walkabout icons
+    # and then colorize Walkabout's icons. But when imported before Walkabout icons
+    # then Walkabout icons would not be colorized as Walkabout icons re-set the
+    # global to "" (null).
+    sdk_icon_color_style: colorized_icons
+
+    sdk_terrain_style: terrain-shading-dark
+
+textures:
+    sdk_terrain_texture:
+        url: images/refill-spheremap-dark.jpg
+
+    building-grid:
+        url: images/building-grid-hi-contrast3.gif
+
+layers:
+    water:
+        draw:
+            polygons:
+                style: waves
+                color: global.midlight_color
+
+        lakes:
+            draw:
+                polygons:
+                    style: waves
+                    color: global.midlight_color
+
+        other-water-areas:
+            draw:
+                polygons:
+                    style: waves
+                    color: global.midlight_color
+
+        # swimming_pool:
+        #     draw:
+        #         polygons:
+        #             style: waves
+        #             color: global.midlight_color
+
+        water-boundary-ocean:
+            draw:
+                lines:
+                    style: coast
+                    color: global.black_color
+
+        water_boundaries-not-ocean:
+            draw:
+                lines:
+                    style: coast
+                    color: global.black_color
+            riverbank:
+                draw:
+                    lines:
+                        style: coast
+                        color: global.black_color
+
+        water-area-labels:
+            ocean-sea-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.lighter_color
+                            stroke: { color: [0.920,0.920,0.920], width: 4px }
+                sea-labels:
+                    draw:
+                        text-blend-order:
+                            font:
+                                fill: global.lighter_color
+                                stroke: { color: [0.920,0.920,0.920], width: 4px }
+            mostly-lakes:
+                default-label-text:
+                    draw:
+                        text-blend-order:
+                            font:
+                                fill: global.lighter_color
+                                stroke: { color: [0.920,0.920,0.920], width: 4px }
+            water-line-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.lighter_color
+                            stroke: { color: [0.920,0.920,0.920], width: 4px }
+
+    roads:
+        pier:
+            draw:
+                lines:
+                    color: global.midlight_color
+                    outline:
+                        color: global.black_color
+
+        railway:
+            draw:
+                lines:
+                    style: railway_dash
+                    color: global.light_color
+        ferry:
+            draw:
+                lines:
+                    color: global.midlight_color
+
+        airport-lines:
+            draw:
+                lines:
+                    color: global.dark_color
+            taxiway:
+                draw:
+                    lines:
+                        color: global.mid_color
+
+    landuse:
+        parks-and-national-forests-not-national-park:
+            draw:
+                polygons:
+                    style: dots
+                    color: global.lighter_color
+
+        farm:
+            draw:
+                polygons:
+                    style: tiny-dots
+                    color: global.lighter_color
+
+        golf_course:
+            draw:
+                polygons:
+                    style: medium-dots
+                    color: global.ultralight_color
+
+        hospital:
+            draw:
+                polygons:
+                    style: medium-dots
+                    color: global.lighter_color
+
+        recreation_ground:
+            draw:
+                polygons:
+                    style: dots-rev-grid
+                    color: global.lighter_color
+
+        zoo:
+            draw:
+                polygons:
+                    style: tiny-dots
+                    color: global.lighter_color
+
+        school:
+            draw:
+                polygons:
+                    style: dots-rev
+                    color: global.offwhite_color
+
+        playground:
+            draw:
+                polygons:
+                    style: dots-rev
+                    color: global.lighter_color
+
+        parking:
+            draw:
+                polygons:
+                    style: horizontal-bars-rev
+                    color: global.ultralight_color
+
+        pitch:
+            draw:
+                polygons:
+                    style: tiny-dots
+                    color: global.light_color
+                outline:
+                    color: global.lighter_color
+
+        minor-landuse:
+            draw:
+                polygons:
+                    style: dots
+                    color: global.lighter_color
+
+        retaining_wall:
+            draw:
+                lines:
+                    color: global.light_color
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.dark_color
+
+    boundaries:
+        country:
+            draw:
+                country-outerline:
+                    color: global.midlight_color
+                lines:
+                    color: global.white_color
+
+            country-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            stroke: { color: global.white_color, width: 4px }
+
+        other_country_boundary_disputed_etc:
+            draw:
+                lines:
+                    color: global.midlight_color
+            disputed:
+                draw:
+                    lines:
+                        color: global.midlight_color
+        region:
+            draw:
+                lines:
+                    color: global.light
+
+            region-labels:
+                draw:
+                    text-blend-order:
+                        font:
+                            fill: global.white_color
+                            stroke: { color: global.light_color, width: 4px }
+
+    places:
+        region:
+            draw:
+                text-blend-order:
+                    font:
+                        fill: [0.680,0.680,0.680]
+
+    pois:
+        draw:
+            mapzen_icon_library:
+                text:
+                    font:
+                        stroke: { color: global.white_color, width: 6px }
+
+
+styles:
+    waves:
+        shaders:
+            uniforms:
+                u_lighter: global.midlight_color
+                u_lightest: [0.920,0.920,0.920]
+    coast:
+        shaders:
+            defines:
+                OPACITY: 1.0
+
+    dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+                COLOR2: color.rgb
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: [0.095,0.095,0.095]
+
+    pixel-pattern-bright:
+        shaders:
+            uniforms:
+                u_tint: [0.065,0.065,0.065]
+
+    medium-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    tiny-dots:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    dots-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    dots-rev-grid:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    horizontal-bars:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
+
+    horizontal-bars-rev:
+        shaders:
+            defines:
+                COLOR1: vec3(0.00,0.00,0.00)
