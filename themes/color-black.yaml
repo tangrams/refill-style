@@ -28,7 +28,7 @@ global:
     landuse_fill_color:         [0.930,0.930,0.930]
     earth_dot_color:            global.white_color
     earth_fill_color:           [0.980,0.980,0.980]
-    pattern_river_tint:         [0.655,0.655,0.655]
+    pattern_river_tint:         global.light_color
     pattern_river_fill:         [0.930,0.930,0.930] #global.white_color
 
     # To make Refill's colorize-able icons play nice with other styles
