@@ -40,7 +40,8 @@ styles:
     riverlines:
         shaders:
             uniforms:
-                u_tint: global.shading_river_color
+                u_tint: global.shading_river_tint
+                u_fill: global.shading_river_fill
 
     colorized_shading:
         shaders:

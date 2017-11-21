@@ -20,14 +20,16 @@ global:
     # TERRAIN SHADING COLORS
     shading_tint_color:           global.dark_color
     shading_fill_color:           global.white_color
-    shading_river_color:          [0.748,0.748,0.748]
+    shading_river_tint:           [0.748,0.748,0.748]
+    shading_river_fill:           global.offwhite_color
 
     # TERRAIN PATTERN COLORS
     landuse_dot_color:            global.white_color
     landuse_fill_color:           [0.950,0.950,0.950]
     earth_dot_color:              global.white_color
     earth_fill_color:             [0.975,0.975,0.975]
-    pattern_river_color:          global.mid_color
+    pattern_river_tint:           global.mid_color
+    pattern_river_fill:           [0.950,0.950,0.950] #global.white_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.

@@ -2899,7 +2899,7 @@ layers:
             filter: { kind: aeroway, kind_detail: [runway,taxiway] }
             draw:
                 lines:
-                    color: global.light_color
+                    color: global.mid_color
                     cap: butt
                     width: [[10, 1px], [13, 3px], [15, 16px], [17, 60m]]
                     outline:
@@ -5132,7 +5132,7 @@ layers:
                 draw:
                     polygons:
                         visible: true
-                        color: global.lighter_color
+                        color: global.mid_color
             apron:
                 filter:
                     kind: apron
