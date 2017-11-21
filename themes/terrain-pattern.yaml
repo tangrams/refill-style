@@ -20,6 +20,7 @@ layers:
                 style: earth-terrain-pattern
                 order: function() { return feature.sort_rank || 0; }
                 color: global.lightest_color
+                #visible: false
             lines:
                 visible: false
 
@@ -348,7 +349,7 @@ styles:
 
     landuse-terrain-pattern:
         base: polygons
-        mix: [elevation-ramp2, terrain-shade, colorized-landuse]
+        mix: [elevation-ramp, terrain-shade, colorized-landuse]
 
     elevation-ramp:
         shaders:

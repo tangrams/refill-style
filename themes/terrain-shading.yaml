@@ -27,11 +27,6 @@ layers:
             lines:
                 visible: false
 
-    # buildings:
-    #     draw:
-    #         polygons:
-    #             color: [[13, global.offwhite_color], [18, global.white_color]]
-
     landuse:
         enabled: false
 
