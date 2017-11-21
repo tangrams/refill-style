@@ -277,7 +277,7 @@ styles:
     waves:
         shaders:
             uniforms:
-                u_lighter: global.mid_color
+                u_lighter: [0.300,0.300,0.300] #global.mid_color
                 u_lightest: global.lighter_color
     coast:
         shaders:
