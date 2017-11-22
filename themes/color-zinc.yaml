@@ -31,8 +31,10 @@ global:
     zinc_text_stroke:           [0.749,0.749,0.749,0.85]
 
     # TERRAIN SHADING COLORS
-    shading_tint_color:         [0.350,0.350,0.350]
-    shading_fill_color:         [0.749,0.749,0.749]
+    shading_earth_tint_color:   [0.350,0.350,0.350]
+    shading_earth_fill_color:   [0.749,0.749,0.749]
+    shading_landuse_tint_color: [0.350,0.350,0.350]
+    shading_landuse_fill_color: [0.749,0.749,0.749]
 
     # TERRAIN PATTERN COLORS
     landuse_dot_color:          [0.749,0.749,0.749]
@@ -48,7 +50,8 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain-shading
+    sdk_terrain_shading_earth_style: terrain-shading-earth
+    sdk_terrain_shading_landuse_style: terrain-shading-landuse
 
 textures:
     sdk_terrain_texture:

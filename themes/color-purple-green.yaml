@@ -30,10 +30,12 @@ global:
     text_stroke:                  [0.063,0.083,0.081,0.75]
 
     # TERRAIN SHADING COLORS
-    shading_tint_color:           [0.346,0.262,0.503]
-    shading_fill_color:           [0.000,0.000,0.000]
-    shading_river_tint:           [0.307,0.241,0.430]
-    shading_river_fill:           global.two_color_black
+    shading_earth_tint_color:     [0.346,0.262,0.503]
+    shading_earth_fill_color:     [0.000,0.000,0.000]
+    shading_landuse_tint_color:   global.lighter_color #global.two_color_lightest
+    shading_landuse_fill_color:   [0.023,0.043,0.041] #global.white_color #[0.073,0.057,0.105]
+    shading_river_tint_color:     [0.307,0.241,0.430]
+    shading_river_fill_color:     global.two_color_black
 
     # TERRAIN PATTERN COLORS
     landuse_dot_color:            [0.206,0.156,0.300]
@@ -51,7 +53,8 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain-shading-dark
+    sdk_terrain_shading_earth_style: terrain-shading-earth-dark
+    sdk_terrain_shading_landuse_style: terrain-shading-landuse-dark
 
 textures:
     sdk_terrain_texture:

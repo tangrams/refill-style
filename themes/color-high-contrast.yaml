@@ -22,10 +22,12 @@ global:
     text_stroke:                  [1.00,1.00,1.00,0.75]
 
     # TERRAIN SHADING COLORS
-    shading_tint_color:           global.hi_contrast_midlight
-    shading_fill_color:           global.white_color
-    shading_river_tint:           global.hi_contrast_midlight
-    shading_river_fill:           [0.900,0.900,0.900]
+    shading_earth_tint_color:     global.hi_contrast_midlight
+    shading_earth_fill_color:     global.white_color
+    shading_landuse_tint_color:   global.hi_contrast_midlight
+    shading_landuse_fill_color:   global.white_color
+    shading_river_tint_color:     global.hi_contrast_midlight
+    shading_river_fill_color:     [0.900,0.900,0.900]
 
     # TERRAIN PATTERN COLORS
     landuse_dot_color:            global.white_color
@@ -43,7 +45,8 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
-    sdk_terrain_style: terrain-shading
+    sdk_terrain_shading_earth_style: terrain-shading-earth
+    sdk_terrain_shading_landuse_style: terrain-shading-landuse
 
     # FILTER
     landuse-casing:

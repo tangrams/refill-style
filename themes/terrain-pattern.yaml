@@ -17,7 +17,7 @@ layers:
         data: { source: mapzen }
         draw:
             polygons:
-                style: earth-terrain-pattern
+                style: terrain-pattern-earth
                 order: function() { return feature.sort_rank || 0; }
                 color: global.lightest_color
                 #visible: false
@@ -28,48 +28,40 @@ layers:
         national_park:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
             us_national_park:
                 draw:
                     polygons:
-                        style: landuse-terrain-pattern
-                        visible: true
+                        style: terrain-pattern-landuse
 
         conservation:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         national_forest_level_6:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         forest-landcover:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
             national_park:
                 draw:
                     polygons:
-                        style: landuse-terrain-pattern
-                        visible: true
+                        style: terrain-pattern-landuse
 
         farm:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         university:
             enabled: false
@@ -77,14 +69,12 @@ layers:
         cemetery:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         golf_course:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         hospital:
             enabled: false
@@ -95,8 +85,7 @@ layers:
         recreation_ground:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         stadium:
             enabled: false
@@ -104,14 +93,12 @@ layers:
         zoo:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         winter_sports:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         man-made:
             enabled: false
@@ -120,20 +107,17 @@ layers:
             tourism-related:
                 draw:
                     polygons:
-                        style: landuse-terrain-pattern
-                        visible: true
+                        style: terrain-pattern-landuse
 
             beach:
                 draw:
                     polygons:
-                        style: landuse-terrain-pattern
-                        visible: true
+                        style: terrain-pattern-landuse
 
         garden:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         parking:
             enabled: false
@@ -144,14 +128,12 @@ layers:
         pitch:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         playground:
             draw:
                 polygons:
-                    style: landuse-terrain-pattern
-                    visible: true
+                    style: terrain-pattern-landuse
 
         school:
             enabled: false
@@ -323,7 +305,7 @@ styles:
 
 
 
-    terrain-shade:
+    terrain-pattern:
         base: polygons
         mix: [elevation-normal, functions-zoom, polygons-dots]
         shaders:
@@ -343,13 +325,13 @@ styles:
                     // reset normal to prevent standard terrain shading mixing with dots
                     normal = vec3(0,0,1);
 
-    earth-terrain-pattern:
+    terrain-pattern-earth:
         base: polygons
-        mix: [elevation-ramp, terrain-shade, colorized-earth]
+        mix: [elevation-ramp, terrain-pattern, colorized-earth]
 
-    landuse-terrain-pattern:
+    terrain-pattern-landuse:
         base: polygons
-        mix: [elevation-ramp, terrain-shade, colorized-landuse]
+        mix: [elevation-ramp, terrain-pattern, colorized-landuse]
 
     elevation-ramp:
         shaders:
@@ -368,7 +350,6 @@ styles:
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
-
 
     colorized-landuse:
         shaders:
