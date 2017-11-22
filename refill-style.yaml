@@ -217,6 +217,11 @@ global:
     # or app logic sets other booleans that triggers auto behavior later
     sdk_transit_overlay: false
     #
+    # BATHYMETRY
+    # Show relief shading under water
+    # should default to "false", with SDK overriding it to true or false,
+    sdk_bathymetry: false
+    #
     # SHIELDS
     sdk_shield_color: black
     sdk_shield_text_color: white
@@ -1161,7 +1166,6 @@ layers:
 
     water:
         data: { source: mapzen, layer: water }
-        filter:
         draw:
             polygons:
                 style: waves

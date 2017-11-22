@@ -245,7 +245,7 @@
             mapzen_api_key = 'mapzen-xkUbe6g';
         }
 
-        var tg_global = { sdk_mapzen_api_key: mapzen_api_key };
+        var tg_global = { 'sdk_mapzen_api_key': mapzen_api_key, 'sdk_bathymetry': false };
 
         var layer = Tangram.leafletLayer({
             // more: 'vector-tiles-TTucZYU'
@@ -590,7 +590,9 @@
                 '(default)': false,
                 'None': false,
                 'Shading': 'shading',
-                'Pattern': 'pattern'
+                'Shading - Dark': 'shading-dark',
+                'Pattern': 'pattern',
+                'Pattern - Dark': 'pattern-dark'
             };
             gui.terrain = query.terrain || false;
             gui.terrain_button = gui.add(gui, 'terrain', terrain).onChange(function(value) {
@@ -598,13 +600,29 @@
                 updateTerrain(value);
             });
             (updateTerrain = function(value) {
-                if (value === 'shading' || value === 'pattern') {
+                if (value === 'shading' || value === 'shading-dark' || value === 'pattern' || value === 'pattern-dark') {
                     all_theme_imports.terrain = 'themes/terrain-' + value + '.yaml';
                 } else {
                     all_theme_imports.terrain = '';
                 }
                 update_scene_with_themes();
             })(gui.terrain);
+
+            // Bathymetry selector
+            var bathymetry = {
+                '(default)': false,
+                'Yes': true,
+                'No': false
+            };
+            // use transit ux, else default to false
+            gui.bathymetry = query.bathymetry || false;
+            gui.bathymetry_button = gui.add(gui, 'bathymetry', bathymetry).onChange(function(value) {
+                tg_global['sdk_bathymetry'] = (value === 'true' || value === true);
+
+                scene.config.global.sdk_bathymetry = tg_global['sdk_bathymetry']; // dat.gui passes a string
+                scene.updateConfig();
+            });
+            gui.bathymetry_button.name( 'bathymetry' );
 
             // Routing selector
             var sdk_directions = {
