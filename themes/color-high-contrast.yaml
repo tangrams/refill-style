@@ -10,7 +10,7 @@ global:
     lightest_color:               [0.800,0.800,0.800]
     ultralight_color:             [0.850,0.850,0.850]
     offwhite_color:               [0.950,0.950,0.950]
-    white_color:                  [1.00,1.00,1.00]
+    white_color:                  [1.000,1.000,1.000]
     transparent:                  [0.850,0.850,0.850,0.25]
     route_line:                   [0.700,0.196,0.507]
 
@@ -24,8 +24,8 @@ global:
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     global.hi_contrast_midlight
     shading_earth_fill_color:     global.white_color
-    shading_landuse_tint_color:   global.hi_contrast_midlight
-    shading_landuse_fill_color:   global.white_color
+    shading_landuse_tint_color:   [0.470,0.470,0.470]
+    shading_landuse_fill_color:   [0.970,0.970,0.970]
     shading_river_tint_color:     global.hi_contrast_midlight
     shading_river_fill_color:     [0.900,0.900,0.900]
 

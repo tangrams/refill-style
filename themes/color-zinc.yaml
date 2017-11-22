@@ -33,8 +33,8 @@ global:
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:   [0.350,0.350,0.350]
     shading_earth_fill_color:   [0.749,0.749,0.749]
-    shading_landuse_tint_color: [0.350,0.350,0.350]
-    shading_landuse_fill_color: [0.749,0.749,0.749]
+    shading_landuse_tint_color: global.darkest_gray_color
+    shading_landuse_fill_color: [0.720,0.720,0.720]
 
     # TERRAIN PATTERN COLORS
     landuse_dot_color:          [0.749,0.749,0.749]

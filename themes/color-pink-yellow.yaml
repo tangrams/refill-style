@@ -31,8 +31,8 @@ global:
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     [0.930,0.721,0.651]
     shading_earth_fill_color:     global.white_color
-    shading_landuse_tint_color:   [0.930,0.721,0.651]
-    shading_landuse_fill_color:   global.white_color
+    shading_landuse_tint_color:   [0.900,0.684,0.612]
+    shading_landuse_fill_color:   global.offwhite_color #[1.000,0.993,0.950]
     shading_river_tint_color:     [0.959,0.831,0.000]
     shading_river_fill_color:     global.two_color_offwhite
 

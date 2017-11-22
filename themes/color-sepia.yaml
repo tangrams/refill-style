@@ -20,8 +20,8 @@ global:
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     global.light_color
     shading_earth_fill_color:     global.white_color
-    shading_landuse_tint_color:   global.light_color
-    shading_landuse_fill_color:   global.white_color
+    shading_landuse_tint_color:   global.light
+    shading_landuse_fill_color:   [1.000,0.977,0.970]
     shading_river_tint_color:     global.light_color
     shading_river_fill_color:     global.offwhite_color
 
@@ -29,7 +29,7 @@ global:
     landuse_dot_color:            global.white_color
     landuse_fill_color:           global.ultralight_color
     earth_dot_color:              global.white_color
-    earth_fill_color:             [1.000,0.977,0.970]
+    earth_fill_color:             [1.000,0.989,0.980]
     pattern_river_tint:           global.midlight_color
     pattern_river_fill:           global.ultralight_color #global.white_color
 
