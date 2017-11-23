@@ -66,9 +66,9 @@ layers:
     earth:
         data: { source: mapzen }
         draw:
-            terrain-dark:
+            polygons:
                 order: function() { return feature.sort_rank || 0; }
-                color: [1.0, 1.0, 1.0]
+                color: global.white_color
             lines:
                 visible: false
 

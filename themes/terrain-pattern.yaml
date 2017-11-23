@@ -12,6 +12,11 @@ sources:
 textures:
     palette:
         url: images/ramp.png
+
+scene:
+    background:
+        color: global.sdk_bathymetry_bg_color
+
 layers:
     earth:
         data: { source: mapzen }
@@ -31,8 +36,8 @@ layers:
                 polygons:
                     # reuse the inherited base color, but use modified shader
                     # that adjusts brightness / contrast to match original color
-                    style: water-bathymetry
-                    color: global.mid_color
+                    style: water-bathymetry-waves
+                    color: global.pattern_bathymetry_color
         lakes:
             bathymetry:
                 enabled: global.sdk_bathymetry
@@ -40,8 +45,8 @@ layers:
                     polygons:
                         # reuse the inherited base color, but use modified shader
                         # that adjusts brightness / contrast to match original color
-                        style: water-bathymetry
-                        color: global.mid_color
+                        style: water-bathymetry-waves
+                        color: global.pattern_bathymetry_color
 
         other-water-areas:
             bathymetry:
@@ -50,8 +55,8 @@ layers:
                     polygons:
                         # reuse the inherited base color, but use modified shader
                         # that adjusts brightness / contrast to match original color
-                        style: water-bathymetry
-                        color: global.mid_color
+                        style: water-bathymetry-waves
+                        color: global.pattern_bathymetry_color
 
     landuse:
         national_park:
@@ -405,6 +410,22 @@ styles:
                 STRIPES_WIDTH: dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
                                     STRIPES_DIR)*STRIPES_PCT
 
+    elevation-waves:
+        base: polygons
+        mix: [polygons-diagonal-waves]
+        blend: inlay
+        lighting: false
+        raster: custom
+        shaders:
+            defines:
+                STRIPES_ALPHA: .5
+                STRIPES_SCALE: 20.
+                STRIPES_PCT: 1.8
+                NORMAL_TEXTURE_INDEX: 0
+                STRIPES_DIR: vec3(-0.600,-0.420,0.600)
+                STRIPES_WIDTH: dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
+                                    STRIPES_DIR)*STRIPES_PCT
+
     polygons-diagonal-stripes:
         base: polygons
         mix: [patterns-stripes, space-tile]
@@ -417,6 +438,36 @@ styles:
                 color: |
                     color.a = diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE),
                                                 STRIPES_WIDTH) * STRIPES_ALPHA;
+
+    polygons-diagonal-waves:
+        base: polygons
+        mix: [patterns-waves, space-tile]
+        shaders:
+            defines:
+                STRIPES_ALPHA: 1.
+                STRIPES_SCALE: 2.
+                STRIPES_WIDTH: .5
+            blocks:
+                color: |
+                    color.a = diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE),
+                                                STRIPES_WIDTH) * STRIPES_ALPHA;
+
+    patterns-waves:
+        mix: patterns-stripes
+        shaders:
+            blocks:
+                global: |
+                    // Return a distance function of stripes
+                    float wavesDF (vec2 st, float freq, float amp) {
+                        vec2 pos = fract(st);
+                        pos.y += sin(pos.x*freq)*amp;
+                        return stripesDF(pos);
+                    }
+                    //
+                    // Adjustable width waves
+                    float waves (vec2 st, float freq, float amp, float width) {
+                        return aastep(width, wavesDF(st, freq, amp));
+                    }
 
     patterns-stripes:
         mix: [functions-aastep, geometry-matrices]
@@ -535,9 +586,25 @@ styles:
                         );
                     }
 
-    water-bathymetry:
+    water-bathymetry-stripes:
         base: polygons
         mix: [functions-zoom, elevation-stripes]
+        shaders:
+            defines:
+                ZOOM_START: 0.
+                ZOOM_END: 13.
+                STRIPES_ALPHA: .5
+                STRIPES_SCALE: 70.
+                STRIPES_DIR: vec3(-0.600,-0.420,0.560)
+                STRIPES_PCT: 1.8
+                STRIPES_WIDTH: mix( (1.-zoom()),
+                                    dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
+                                        STRIPES_DIR),
+                                    zoom())*STRIPES_PCT
+
+    water-bathymetry-waves:
+        base: polygons
+        mix: [functions-zoom, elevation-waves]
         shaders:
             defines:
                 ZOOM_START: 0.

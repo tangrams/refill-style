@@ -43,6 +43,8 @@ global:
     earth_fill_color:             [0.975,0.979,0.983]
     pattern_river_tint:           global.two_color_midlight
     pattern_river_fill:           global.two_color_ultralight #global.white_color
+    pattern_bathymetry_color:     global.two_color_black
+    sdk_bathymetry_bg_color:      global.two_color_lightest
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
