@@ -24,6 +24,10 @@ global:
     shading_landuse_fill_color:   [1.000,0.977,0.970]
     shading_river_tint_color:     global.light_color
     shading_river_fill_color:     global.offwhite_color
+    shading_dark_earth_tint_color:     global.light
+    shading_dark_earth_fill_color:     global.white_color
+    shading_dark_landuse_tint_color:   global.mid_color
+    shading_dark_landuse_fill_color:   [0.989,0.966,0.958]
 
     # TERRAIN PATTERN COLORS
     landuse_dot_color:            global.white_color
