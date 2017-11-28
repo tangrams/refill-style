@@ -50,7 +50,7 @@ global:
     pattern_dark_earth_dot_color:              global.white_color
     pattern_dark_earth_fill_color:             global.offwhite_color
     pattern_dark_landuse_dot_color:            global.white_color
-    pattern_dark_landuse_fill_color:           [0.908,0.863,0.872]
+    pattern_dark_landuse_fill_color:           [0.928,0.880,0.888] #[0.908,0.863,0.872]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.

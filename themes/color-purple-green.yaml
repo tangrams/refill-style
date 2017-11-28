@@ -48,7 +48,7 @@ global:
     pattern_landuse_fill_color:           global.two_color_black
     pattern_river_tint:           [0.330,0.250,0.480] #global.two_color_lightest
     pattern_river_fill:           global.two_color_black #global.white_color
-    pattern_dark_earth_dot_color:               global.two_color_mid
+    pattern_dark_earth_dot_color:              [0.189,0.142,0.275] #global.two_color_midlight
     pattern_dark_earth_fill_color:             global.two_color_black
     pattern_dark_landuse_dot_color:            global.two_color_lighter
     pattern_dark_landuse_fill_color:           global.two_color_dark

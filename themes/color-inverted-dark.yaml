@@ -30,15 +30,15 @@ global:
     shading_dark_landuse_fill_color:   [0.070,0.070,0.070]
 
     # TERRAIN PATTERN COLORS
-    pattern_earth_dot_color:              [0.090,0.090,0.090]
+    pattern_earth_dot_color:              [0.100,0.100,0.100]
     pattern_earth_fill_color:             [0.000,0.000,0.000]
-    pattern_landuse_dot_color:            [0.145,0.145,0.145]
-    pattern_landuse_fill_color:           [0.020,0.020,0.020]
+    pattern_landuse_dot_color:            [0.185,0.185,0.185]
+    pattern_landuse_fill_color:           [0.000,0.000,0.000]
     pattern_river_tint:           global.lighter_color
     pattern_river_fill:           global.white_color
-    pattern_dark_earth_dot_color:              [0.130,0.130,0.130]
+    pattern_dark_earth_dot_color:              global.offwhite_color
     pattern_dark_earth_fill_color:             [0.000,0.000,0.000]
-    pattern_dark_landuse_dot_color:            global.lightest_color
+    pattern_dark_landuse_dot_color:            [0.250,0.250,0.250]
     pattern_dark_landuse_fill_color:           [0.000,0.000,0.000]
 
     # To make Refill's colorize-able icons play nice with other styles
