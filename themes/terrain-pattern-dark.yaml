@@ -345,8 +345,8 @@ styles:
     colorized-earth:
         shaders:
             uniforms:
-                u_tint: global.earth_dot_color
-                u_fill: global.earth_fill_color
+                u_tint: global.pattern_dark_earth_dot_color
+                u_fill: global.pattern_dark_earth_fill_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
@@ -354,8 +354,8 @@ styles:
     colorized-landuse:
         shaders:
             uniforms:
-                u_tint: global.landuse_dot_color
-                u_fill: global.landuse_fill_color
+                u_tint: global.pattern_dark_landuse_dot_color
+                u_fill: global.pattern_dark_landuse_fill_color
             blocks:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
