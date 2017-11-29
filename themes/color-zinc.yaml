@@ -47,8 +47,8 @@ global:
     pattern_landuse_fill_color:         [0.640,0.640,0.640]
     pattern_dark_earth_dot_color:            [0.717,0.717,0.717]
     pattern_dark_earth_fill_color:           [0.655,0.655,0.655]
-    pattern_dark_landuse_dot_color:          [0.769,0.769,0.769]
-    pattern_dark_landuse_fill_color:         global.lightest_color
+    pattern_dark_landuse_dot_color:          global.lighter_gray_color
+    pattern_dark_landuse_fill_color:         global.gray_color
 
     # BATHYMETRY PATTERN COLORS
     pattern_bathymetry_color:   global.lightest_color

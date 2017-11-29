@@ -18,16 +18,16 @@ global:
     text_stroke:                  [0.00,0.00,0.00,0.75]
 
     # TERRAIN SHADING COLORS
-    shading_earth_tint_color:     global.light_color
-    shading_earth_fill_color:     global.white_color
-    shading_landuse_tint_color:   [0.385,0.385,0.385] #global.light_color
-    shading_landuse_fill_color:   [0.090,0.090,0.090]
+    shading_earth_tint_color:     [0.335,0.335,0.335]
+    shading_earth_fill_color:     [0.040,0.040,0.040]
+    shading_landuse_tint_color:   global.light_color
+    shading_landuse_fill_color:   global.white_color
     shading_river_tint_color:     global.lighter_color
     shading_river_fill_color:     [0.100,0.100,0.100] #global.offwhite_color
-    shading_dark_earth_tint_color:     [0.395,0.395,0.395]
-    shading_dark_earth_fill_color:     global.white_color
+    shading_dark_earth_tint_color:     [0.375,0.375,0.375]
+    shading_dark_earth_fill_color:     [0.040,0.040,0.040]
     shading_dark_landuse_tint_color:   global.midlight_color
-    shading_dark_landuse_fill_color:   [0.070,0.070,0.070]
+    shading_dark_landuse_fill_color:   global.white_color
 
     # TERRAIN PATTERN COLORS
     pattern_earth_dot_color:              [0.080,0.080,0.080]
@@ -42,10 +42,10 @@ global:
     pattern_dark_landuse_fill_color:           [0.000,0.000,0.000]
 
     # BATHYMETRY PATTERN COLORS
-    pattern_bathymetry_color:   global.lightest_color
-    pattern_bathymetry_bg_color:    global.mid_color
-    pattern_dark_bathymetry_color:   global.ultralight_color
-    pattern_dark_bathymetry_bg_color:    global.midlight_color
+    pattern_bathymetry_color:   global.light_color
+    pattern_bathymetry_bg_color:    global.lightest_color
+    pattern_dark_bathymetry_color:   global.light
+    pattern_dark_bathymetry_bg_color:    global.lightest_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.

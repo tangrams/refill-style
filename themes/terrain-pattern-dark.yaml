@@ -37,6 +37,7 @@ layers:
                     # reuse the inherited base color, but use modified shader
                     # that adjusts brightness / contrast to match original color
                     style: water-bathymetry-stripes
+                    order: global.feature_order
                     color: global.pattern_dark_bathymetry_color
         lakes:
             bathymetry:
@@ -46,6 +47,7 @@ layers:
                         # reuse the inherited base color, but use modified shader
                         # that adjusts brightness / contrast to match original color
                         style: water-bathymetry-stripes
+                        order: global.feature_order
                         color: global.pattern_dark_bathymetry_color
 
         other-water-areas:
@@ -56,6 +58,7 @@ layers:
                         # reuse the inherited base color, but use modified shader
                         # that adjusts brightness / contrast to match original color
                         style: water-bathymetry-stripes
+                        order: global.feature_order
                         color: global.pattern_dark_bathymetry_color
 
     landuse:

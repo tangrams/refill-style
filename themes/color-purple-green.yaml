@@ -54,9 +54,9 @@ global:
     pattern_dark_landuse_fill_color:           [0.067,0.053,0.096] #[0.084,0.066,0.120] #global.two_color_black
 
     # BATHYMETRY PATTERN COLORS
-    pattern_bathymetry_color:   global.two_color_offwhite
+    pattern_bathymetry_color:   global.two_color_ultralight
     pattern_bathymetry_bg_color:    global.two_color_light
-    pattern_dark_bathymetry_color:   global.two_color_white
+    pattern_dark_bathymetry_color:   global.two_color_offwhite
     pattern_dark_bathymetry_bg_color:    global.two_color_light
 
     # To make Refill's colorize-able icons play nice with other styles
