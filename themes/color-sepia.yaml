@@ -41,6 +41,12 @@ global:
     pattern_dark_landuse_dot_color:            global.white_color
     pattern_dark_landuse_fill_color:           [0.954,0.878,0.866] #global.lightest_color
 
+    # BATHYMETRY PATTERN COLORS
+    pattern_bathymetry_color:   global.offwhite_color
+    pattern_bathymetry_bg_color:    global.lighter_color
+    pattern_dark_bathymetry_color:   global.white_color
+    pattern_dark_bathymetry_bg_color:    global.lighter_color
+
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
     # This allows the Refill color theme to import *after* say Walkabout icons

@@ -10,7 +10,7 @@ global:
     lightest_color:               [0.929,0.929,0.929]
     ultralight_color:             [0.965,0.965,0.965]
     offwhite_color:               [0.976,0.976,0.976]
-    white_color:                  [1.00,1.00,1.00]
+    white_color:                  [1.000,1.000,1.000]
     transparent:                  [0.929,0.929,0.929,0.25]
     route_line:                   [0.313,0.482,0.580]
 
@@ -40,6 +40,12 @@ global:
     pattern_dark_earth_fill_color:             global.ultralight_color
     pattern_dark_landuse_dot_color:            global.white_color
     pattern_dark_landuse_fill_color:           global.lightest_color
+
+    # BATHYMETRY PATTERN COLORS
+    pattern_bathymetry_color:   [0.990,0.990,0.990]
+    pattern_bathymetry_bg_color:    [0.880,0.880,0.880]
+    pattern_dark_bathymetry_color:   global.white_color
+    pattern_dark_bathymetry_bg_color:    [0.860,0.860,0.860]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
