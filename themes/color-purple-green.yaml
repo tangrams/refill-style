@@ -44,7 +44,7 @@ global:
     # TERRAIN PATTERN COLORS
     pattern_earth_dot_color:               global.two_color_dark
     pattern_earth_fill_color:             [0.091,0.071,0.132]
-    pattern_landuse_dot_color:            [0.198,0.149,0.288] #[0.206,0.156,0.300]
+    pattern_landuse_dot_color:            [0.190,0.144,0.277] #[0.198,0.149,0.288]
     pattern_landuse_fill_color:           [0.091,0.071,0.132]
     pattern_river_tint:           [0.330,0.250,0.480] #global.two_color_lightest
     pattern_river_fill:           global.two_color_black #global.white_color
