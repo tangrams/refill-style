@@ -26,6 +26,39 @@ layers:
             lines:
                 visible: false
 
+    water:
+        bathymetry:
+            enabled: global.sdk_bathymetry
+            draw:
+                polygons:
+                    # reuse the inherited base color, but use modified shader
+                    # that adjusts brightness / contrast to match original color
+                    style: global.sdk_terrain_shading_bathymetry_style
+                    order: global.feature_order
+                    color:
+
+        lakes:
+            bathymetry:
+                enabled: global.sdk_bathymetry
+                draw:
+                    polygons:
+                        # reuse the inherited base color, but use modified shader
+                        # that adjusts brightness / contrast to match original color
+                        style: global.sdk_terrain_shading_bathymetry_style
+                        order: global.feature_order
+                        color:
+
+        other-water-areas:
+            bathymetry:
+                enabled: global.sdk_bathymetry
+                draw:
+                    polygons:
+                        # reuse the inherited base color, but use modified shader
+                        # that adjusts brightness / contrast to match original color
+                        style: global.sdk_terrain_shading_bathymetry_style
+                        order: global.feature_order
+                        color:
+
     landuse:
         national_park:
             draw:
@@ -195,6 +228,15 @@ styles:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
+    colorized-bathymetry:
+        shaders:
+            uniforms:
+                u_tint: global.shading_bathymetry_tint_color
+                u_fill: global.shading_bathymetry_fill_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
     terrain-shading:
         base: polygons
         lighting: false
@@ -236,6 +278,10 @@ styles:
         base: polygons
         mix: [terrain-shading, colorized-landuse]
 
+    terrain-shading-bathymetry:
+        base: polygons
+        mix: [terrain-shading, colorized-bathymetry]
+
     terrain-shading-earth-dark:
         base: polygons
         mix: [terrain-shading-dark, colorized-earth]
@@ -243,6 +289,10 @@ styles:
     terrain-shading-landuse-dark:
         base: polygons
         mix: [terrain-shading-dark, colorized-landuse]
+
+    terrain-shading-bathymetry-dark:
+        base: polygons
+        mix: [terrain-shading-dark, colorized-bathymetry]
 
     terrain-shading-dark:
         mix:

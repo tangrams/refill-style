@@ -41,6 +41,12 @@ global:
     pattern_dark_landuse_dot_color:            global.white_color
     pattern_dark_landuse_fill_color:           [0.810,0.881,0.980] #global.lightest_color
 
+    # BATHYMETRY SHADING COLORS
+    shading_bathymetry_tint_color:          global.black_color
+    shading_bathymetry_fill_color:          global.ultralight_color
+    shading_dark_bathymetry_tint_color:     global.black_color
+    shading_dark_bathymetry_fill_color:     global.ultralight_color
+
     # BATHYMETRY PATTERN COLORS
     pattern_bathymetry_color:   global.offwhite_color
     pattern_bathymetry_bg_color:    [0.771,0.838,0.940]
@@ -57,6 +63,7 @@ global:
 
     sdk_terrain_shading_earth_style: terrain-shading-earth
     sdk_terrain_shading_landuse_style: terrain-shading-landuse
+    sdk_terrain_shading_bathymetry_style: terrain-shading-bathymetry
 
 textures:
     sdk_terrain_texture:
