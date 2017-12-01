@@ -23,7 +23,7 @@ global:
     shading_landuse_tint_color: global.midlight_color
     shading_landuse_fill_color: [0.990,0.990,0.990]
     shading_river_tint_color:   global.light
-    shading_river_fill_color:   global.offwhite_color
+    shading_river_fill_color:   global.ultralight_color
     shading_dark_earth_tint_color:   global.mid_color
     shading_dark_earth_fill_color:   global.white_color
     shading_dark_landuse_tint_color: [0.400,0.400,0.400]

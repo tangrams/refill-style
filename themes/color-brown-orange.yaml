@@ -33,7 +33,7 @@ global:
     shading_earth_fill_color:     global.white_color
     shading_landuse_tint_color:   global.light
     shading_landuse_fill_color:   [1.000,0.972,0.960]
-    shading_river_tint_color:     global.two_color_light
+    shading_river_tint_color:     [0.970,0.699,0.553] #global.two_color_midlight
     shading_river_fill_color:     global.two_color_offwhite
     shading_dark_earth_tint_color:     global.light
     shading_dark_earth_fill_color:     global.white_color
@@ -45,7 +45,7 @@ global:
     pattern_earth_fill_color:             [1.000,0.970,0.970]
     pattern_landuse_dot_color:            global.white_color
     pattern_landuse_fill_color:           global.ultralight_color
-    pattern_river_tint:           [1.000,0.642,0.450]
+    pattern_river_tint:           [0.970,0.699,0.553] #global.two_color_midlight #[1.000,0.642,0.450]
     pattern_river_fill:           global.ultralight_color #global.white_color
     pattern_dark_earth_dot_color:              global.white_color
     pattern_dark_earth_fill_color:             global.offwhite_color
