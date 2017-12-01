@@ -668,7 +668,7 @@ layers:
         region:
             draw:
                 lines:
-                    color: global.gray_color
+                    color: global.mid_gray_color
             region-labels:
                 draw:
                     text-blend-order:

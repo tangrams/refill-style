@@ -2244,11 +2244,11 @@ layers:
             filter: { kind: path, kind_detail: track }
             draw:
                 lines:
-                    color: [[13, global.white_color], [16, global.light_color], [17, global.white_color]]
-                    width: [[13, 0px], [14, 0.15px], [16, 1px], [18, 1.5px], [20, 1m]]
+                    color: [[13, global.light_color], [16, global.white_color]]
+                    width: [[13, 0.5px], [14, 1px], [16, 1px], [18, 1.5px], [20, 2m]]
                     outline:
-                        color: [[14, global.light_color], [15, global.white_color], [16, global.white_color], [17, global.light_color]]
-                        width: [[13, 0px], [14, 0.25px], [15, 0.5px], [16, 1px], [17, 1px]]
+                        color: global.light_color
+                        width: [[13, 0px], [15, 0px], [16, 1px]]
             bridge:
                 filter: { is_bridge: true }
                 draw:
@@ -3228,7 +3228,7 @@ layers:
             draw:
                 lines:
                     color: global.lighter_color
-                    width: [[0, 0.5px], [5, 2px], [9, 3px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+                    width: [[0, 0.5px], [9, 2px], [14, 4px], [16, 6.5px], [17, 16m]]
 
             water:
                 filter: { maritime_boundary: true }
