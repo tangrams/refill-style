@@ -35,6 +35,7 @@ global:
     shading_earth_fill_color:   [0.749,0.749,0.749]
     shading_landuse_tint_color: global.darkest_gray_color
     shading_landuse_fill_color: [0.720,0.720,0.720]
+
     shading_dark_earth_tint_color:   [0.323,0.323,0.323] #global.darker_gray_color
     shading_dark_earth_fill_color:   [0.749,0.749,0.749]
     shading_dark_landuse_tint_color: global.ultradark_gray_color
@@ -43,11 +44,12 @@ global:
     # TERRAIN PATTERN COLORS
     pattern_earth_dot_color:            [0.707,0.707,0.707]
     pattern_earth_fill_color:           [0.680,0.680,0.680]
-    pattern_landuse_dot_color:          [0.749,0.749,0.749]
+    pattern_landuse_dot_color:          [0.729,0.729,0.729]
     pattern_landuse_fill_color:         [0.640,0.640,0.640]
+
     pattern_dark_earth_dot_color:            [0.717,0.717,0.717]
     pattern_dark_earth_fill_color:           [0.655,0.655,0.655]
-    pattern_dark_landuse_dot_color:          global.lighter_gray_color
+    pattern_dark_landuse_dot_color:          [0.725,0.725,0.725] #global.lighter_gray_color
     pattern_dark_landuse_fill_color:         global.gray_color
 
     # BATHYMETRY SHADING COLORS

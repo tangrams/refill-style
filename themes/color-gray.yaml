@@ -1,9 +1,9 @@
 global:
     # GRAY
-    black_color:                  [0.650,0.650,0.650]
-    dark_color:                   [0.680,0.680,0.680]
-    mid_color:                    [0.722,0.722,0.722]
-    midlight_color:               [0.788,0.788,0.788]
+    black_color:                  [0.580,0.580,0.580]
+    dark_color:                   [0.620,0.620,0.620]
+    mid_color:                    [0.652,0.652,0.652]
+    midlight_color:               [0.700,0.700,0.700]
     light:                        [0.810,0.810,0.810]
     light_color:                  [0.844,0.844,0.844]
     lighter_color:                [0.894,0.894,0.894]
@@ -22,8 +22,10 @@ global:
     shading_earth_fill_color:     global.white_color
     shading_landuse_tint_color:   [0.700,0.700,0.700]
     shading_landuse_fill_color:   [0.990,0.990,0.990]
+
     shading_river_tint_color:     [0.748,0.748,0.748]
     shading_river_fill_color:     global.offwhite_color
+
     shading_dark_earth_tint_color:     [0.690,0.690,0.690]
     shading_dark_earth_fill_color:     global.white_color
     shading_dark_landuse_tint_color:   [0.640,0.640,0.640]
@@ -34,12 +36,16 @@ global:
     pattern_earth_fill_color:             [0.975,0.975,0.975]
     pattern_landuse_dot_color:            global.white_color
     pattern_landuse_fill_color:           [0.950,0.950,0.950]
-    pattern_river_tint:           [0.750,0.750,0.750]
-    pattern_river_fill:           [0.950,0.950,0.950] #global.white_color
+
     pattern_dark_earth_dot_color:              global.white_color
     pattern_dark_earth_fill_color:             global.ultralight_color
     pattern_dark_landuse_dot_color:            global.white_color
     pattern_dark_landuse_fill_color:           global.lightest_color
+
+    pattern_river_tint:           [0.750,0.750,0.750]
+    pattern_river_fill:           [0.950,0.950,0.950]
+    pattern_dark_river_tint:           [0.750,0.750,0.750]
+    pattern_dark_river_fill:           [0.950,0.950,0.950]
 
     # BATHYMETRY SHADING COLORS
     shading_bathymetry_tint_color:          global.black_color
@@ -74,3 +80,8 @@ styles:
         shaders:
             uniforms:
                 u_tint: [0.800,0.800,0.800]
+
+    pixel-pattern-light:
+        shaders:
+            uniforms:
+                u_tint: [0.990,0.990,0.990]

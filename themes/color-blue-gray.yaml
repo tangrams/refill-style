@@ -33,8 +33,10 @@ global:
     shading_earth_fill_color:     global.white_color
     shading_landuse_tint_color:   global.two_color_midlight
     shading_landuse_fill_color:   [0.981,0.985,0.990]
-    shading_river_tint_color:     [0.660,0.705,0.717] #global.two_color_light
-    shading_river_fill_color:     global.two_color_offwhite
+
+    shading_river_tint_color:     global.two_color_midlight #[0.610,0.695,0.707] #global.two_color_light
+    shading_river_fill_color:     global.two_color_ultralight
+
     shading_dark_earth_tint_color:     global.two_color_mid
     shading_dark_earth_fill_color:     global.white_color
     shading_dark_landuse_tint_color:   global.two_color_dark
@@ -45,12 +47,16 @@ global:
     pattern_earth_fill_color:             [0.975,0.979,0.983]
     pattern_landuse_dot_color:            global.white_color
     pattern_landuse_fill_color:           global.two_color_ultralight
-    pattern_river_tint:                   [0.672,0.717,0.730]
-    pattern_river_fill:                   global.two_color_ultralight #global.white_color
+
     pattern_dark_earth_dot_color:         global.white_color
     pattern_dark_earth_fill_color:        [0.941,0.947,0.950] #global.two_color_offwhite
     pattern_dark_landuse_dot_color:       global.white_color
     pattern_dark_landuse_fill_color:      [0.891,0.903,0.907]
+
+    pattern_river_tint:                   [0.672,0.717,0.730]
+    pattern_river_fill:                   global.two_color_ultralight #global.white_color
+    pattern_dark_river_tint:                   global.two_color_midlight
+    pattern_dark_river_fill:                   [0.895,0.908,0.912]
 
     # BATHYMETRY SHADING COLORS
     shading_bathymetry_tint_color:          global.two_color_dark
@@ -335,7 +341,7 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: global.two_color_ultralight
+                u_tint: global.two_color_offwhite
 
     pixel-pattern-bright:
         shaders:

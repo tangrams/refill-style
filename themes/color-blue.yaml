@@ -22,8 +22,10 @@ global:
     shading_earth_fill_color:     global.white_color
     shading_landuse_tint_color:   global.light_color
     shading_landuse_fill_color:   [0.960,0.974,1.000]
+
     shading_river_tint_color:     [0.470,0.650,0.940]
     shading_river_fill_color:     global.offwhite_color
+
     shading_dark_earth_tint_color:     global.light_color
     shading_dark_earth_fill_color:     global.white_color
     shading_dark_landuse_tint_color:   global.mid_color
@@ -34,12 +36,16 @@ global:
     pattern_earth_fill_color:             [0.950,0.968,1.000]
     pattern_landuse_dot_color:            global.white_color
     pattern_landuse_fill_color:           global.ultralight_color
-    pattern_river_tint:           [0.496,0.686,0.993] #[0.470,0.650,0.940]
-    pattern_river_fill:           global.offwhite_color #global.white_color
+
     pattern_dark_earth_dot_color:              global.white_color
     pattern_dark_earth_fill_color:             [0.908,0.931,0.974]
     pattern_dark_landuse_dot_color:            global.white_color
     pattern_dark_landuse_fill_color:           [0.810,0.881,0.980] #global.lightest_color
+
+    pattern_river_tint:           [0.496,0.686,0.993] #[0.470,0.650,0.940]
+    pattern_river_fill:           global.offwhite_color #global.white_color
+    pattern_dark_river_tint:           global.light_color
+    pattern_dark_river_fill:           global.ultralight_color
 
     # BATHYMETRY SHADING COLORS
     shading_bathymetry_tint_color:          global.black_color

@@ -191,8 +191,8 @@ styles:
     riverlines:
         shaders:
             uniforms:
-                u_tint: global.pattern_river_tint
-                u_fill: global.pattern_river_fill
+                u_tint: global.pattern_dark_river_tint
+                u_fill: global.pattern_dark_river_fill
 
     functions-zoom:
         mix:

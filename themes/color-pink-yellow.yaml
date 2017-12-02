@@ -33,8 +33,10 @@ global:
     shading_earth_fill_color:     global.white_color
     shading_landuse_tint_color:   [0.900,0.684,0.612]
     shading_landuse_fill_color:   global.offwhite_color #[1.000,0.993,0.950]
-    shading_river_tint_color:     [0.959,0.831,0.000]
-    shading_river_fill_color:     global.two_color_offwhite
+
+    shading_river_tint_color:     [0.879,0.761,0.000] #global.two_color_dark #[0.959,0.831,0.000]
+    shading_river_fill_color:     global.ultralight_color
+
     shading_dark_earth_tint_color:     [0.900,0.684,0.612]
     shading_dark_earth_fill_color:     global.white_color
     shading_dark_landuse_tint_color:   [0.880,0.629,0.546]
@@ -45,12 +47,16 @@ global:
     pattern_earth_fill_color:             [1.000,0.982,0.970]
     pattern_landuse_dot_color:            global.white_color
     pattern_landuse_fill_color:           [0.992,0.941,0.933] #[0.993,0.958,0.935]
-    pattern_river_tint:           [0.924,0.800,0.000] #global.two_color_dark
-    pattern_river_fill:           [0.993,0.958,0.935] #global.white_color
+
     pattern_dark_earth_dot_color:              global.white_color
     pattern_dark_earth_fill_color:             [0.980,0.949,0.922] #[0.993,0.958,0.935]
     pattern_dark_landuse_dot_color:            global.white_color
-    pattern_dark_landuse_fill_color:           [0.969,0.902,0.914] #[0.974,0.927,0.896]
+    pattern_dark_landuse_fill_color:           [0.984,0.917,0.929] #[0.974,0.927,0.896]
+
+    pattern_river_tint:           [0.924,0.800,0.000] #global.two_color_dark
+    pattern_river_fill:           [0.993,0.958,0.935] #global.white_color
+    pattern_dark_river_tint:           [0.879,0.761,0.000] #global.two_color_dark
+    pattern_dark_river_fill:           global.ultralight_color
 
     # BATHYMETRY SHADING COLORS
     shading_bathymetry_tint_color:          global.two_color_black
@@ -335,7 +341,7 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: global.two_color_lightest
+                u_tint: global.two_color_ultralight
 
     pixel-pattern-bright:
         shaders:
