@@ -339,9 +339,6 @@ styles:
                                     return dot(st,st)*3.03;
                     }
 
-
-
-
     terrain-pattern:
         base: polygons
         mix: [elevation-normal, functions-zoom, polygons-dots]

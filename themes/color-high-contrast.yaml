@@ -253,6 +253,11 @@ layers:
 
 
 styles:
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.hi_contrast_midlight
+
     building-grid:
         shaders:
             uniforms:
@@ -300,12 +305,7 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: global.hi_contrast_offwhite
-            blocks:
-                filter: |
-                    vec3 pos = vec3(getTileCoords()*110.0,1.0);
-                    color.rgb = u_tint * vec3(random(abs(floor(pos)))+0.805);
-
+                u_tint: [0.970,0.970,0.970]
 
     pixel-pattern-bright:
         shaders:

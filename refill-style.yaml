@@ -598,7 +598,6 @@ styles:
                     vec3 pos = vec3(getTileCoords()*130.0,1.0);
                     color.rgb = u_tint * vec3(random(abs(floor(pos)))+0.925);
 
-
     pixel-pattern-bright:
         mix: [space-tile, generative-random]
         base: polygons
