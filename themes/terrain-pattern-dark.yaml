@@ -434,10 +434,14 @@ styles:
                 STRIPES_ALPHA: 1.
                 STRIPES_SCALE: 2.
                 STRIPES_WIDTH: .5
+            uniforms:
+                BATH_FG: global.pattern_bathymetry_color
+                BATH_BG: global.pattern_bathymetry_bg_color
             blocks:
                 color: |
-                    color.a = diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE),
-                                                STRIPES_WIDTH) * STRIPES_ALPHA;
+                    color.rgb = BATH_BG;
+                    color.rgb += BATH_FG * diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE), STRIPES_WIDTH) * STRIPES_ALPHA;
+
 
     patterns-stripes:
         mix: [functions-aastep, geometry-matrices]
