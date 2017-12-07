@@ -435,8 +435,8 @@ styles:
                 STRIPES_SCALE: 2.
                 STRIPES_WIDTH: .5
             uniforms:
-                BATH_FG: global.pattern_bathymetry_color
-                BATH_BG: global.pattern_bathymetry_bg_color
+                BATH_FG: global.pattern_dark_bathymetry_color
+                BATH_BG: global.pattern_dark_bathymetry_bg_color
             blocks:
                 color: |
                     color.rgb = BATH_BG;
