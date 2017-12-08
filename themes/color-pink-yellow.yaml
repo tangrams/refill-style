@@ -61,16 +61,16 @@ global:
     pattern_dark_river_fill:           global.ultralight_color
 
     # BATHYMETRY SHADING COLORS
-    shading_bathymetry_tint_color:          global.two_color_black
-    shading_bathymetry_fill_color:          global.two_color_lightest
+    shading_bathymetry_tint_color:          global.two_color_dark
+    shading_bathymetry_fill_color:          global.two_color_ultralight
     shading_dark_bathymetry_tint_color:     global.two_color_black
     shading_dark_bathymetry_fill_color:     global.two_color_lightest
 
     # BATHYMETRY PATTERN COLORS
-    pattern_bathymetry_color:   global.two_color_ultralight
+    pattern_bathymetry_color:   global.two_color_lightest
     pattern_bathymetry_bg_color:    global.two_color_lighter
-    pattern_dark_bathymetry_color:   global.two_color_offwhite
-    pattern_dark_bathymetry_bg_color:    global.two_color_lighter
+    pattern_dark_bathymetry_color:   global.two_color_ultralight
+    pattern_dark_bathymetry_bg_color:    global.two_color_light
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.

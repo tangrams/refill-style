@@ -50,7 +50,7 @@ global:
     pattern_dark_river_fill:           global.ultralight_color
 
     # BATHYMETRY SHADING COLORS
-    shading_bathymetry_tint_color:          global.dark_color
+    shading_bathymetry_tint_color:          [0.171,0.454,0.910]
     shading_bathymetry_fill_color:          global.lightest_color
     shading_dark_bathymetry_tint_color:     global.black_color
     shading_dark_bathymetry_fill_color:     global.lightest_color
