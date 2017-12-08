@@ -35,7 +35,7 @@ layers:
                     # that adjusts brightness / contrast to match original color
                     style: global.sdk_terrain_shading_bathymetry_style
                     order: global.feature_order
-                    color:
+                    color: white
 
         lakes:
             bathymetry:
@@ -46,7 +46,7 @@ layers:
                         # that adjusts brightness / contrast to match original color
                         style: global.sdk_terrain_shading_bathymetry_style
                         order: global.feature_order
-                        color:
+                        color: white
 
         other-water-areas:
             bathymetry:
@@ -57,54 +57,54 @@ layers:
                         # that adjusts brightness / contrast to match original color
                         style: global.sdk_terrain_shading_bathymetry_style
                         order: global.feature_order
-                        color:
+                        color: white
 
     landuse:
         national_park:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
             us_national_park:
                 draw:
                     polygons:
                         style: global.sdk_terrain_shading_landuse_style
-                        color:
+                        color: white
 
         conservation:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         national_forest_level_6:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         forest-landcover:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
             national_park:
                 draw:
                     polygons:
                         style: global.sdk_terrain_shading_landuse_style
-                        color:
+                        color: white
 
         farm:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         university:
             enabled: false
@@ -113,13 +113,13 @@ layers:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         golf_course:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         hospital:
             enabled: false
@@ -131,7 +131,7 @@ layers:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         stadium:
             enabled: false
@@ -140,13 +140,13 @@ layers:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         winter_sports:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         man-made:
             enabled: false
@@ -156,18 +156,18 @@ layers:
                 draw:
                     polygons:
                         style: global.sdk_terrain_shading_landuse_style
-                        color:
+                        color: white
 
             beach:
                 draw:
                     polygons:
                         style: global.sdk_terrain_shading_landuse_style
-                        color:
+                        color: white
         garden:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         parking:
             enabled: false
@@ -179,13 +179,13 @@ layers:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         playground:
             draw:
                 polygons:
                     style: global.sdk_terrain_shading_landuse_style
-                    color:
+                    color: white
 
         school:
             enabled: false
