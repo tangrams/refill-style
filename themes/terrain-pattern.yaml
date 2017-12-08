@@ -344,15 +344,22 @@ styles:
                 filter: |
                     color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
 
+    colorized-bathymetry:
+        shaders:
+            uniforms:
+                u_tint: global.pattern_bathymetry_color
+                u_fill: global.pattern_bathymetry_bg_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
     water-bathymetry-stripes:
         base: polygons
-        mix: [functions-zoom, elevation-stripes]
+        mix: [functions-zoom, elevation-stripes, colorized-bathymetry]
         shaders:
             defines:
                 ZOOM_START: 0.
                 ZOOM_END: 13.
-                STRIPES_ALPHA: .75
-                STRIPES_SCALE: 65.
                 STRIPES_DIR: vec3(0.600,-0.950,0.520)
                 STRIPES_PCT: 1.8
                 STRIPES_WIDTH: mix( (1.-zoom()),
@@ -363,18 +370,28 @@ styles:
     elevation-stripes:
         base: polygons
         mix: [polygons-diagonal-stripes]
-        blend: inlay
+        blend: opaque
         lighting: false
         raster: custom
         shaders:
             defines:
-                STRIPES_ALPHA: .5
-                STRIPES_SCALE: 20.
-                STRIPES_PCT: 1.8
                 NORMAL_TEXTURE_INDEX: 0
-                STRIPES_DIR: vec3(-0.600,-0.420,0.600)
-                STRIPES_WIDTH: dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
-                                    STRIPES_DIR)*STRIPES_PCT
+
+    # polygons-diagonal-stripes:
+    #     base: polygons
+    #     mix: [patterns-stripes, space-tile]
+    #     shaders:
+    #         defines:
+    #             STRIPES_ALPHA: 1.
+    #             STRIPES_WIDTH: .5
+    #             STRIPES_SCALE: 65.
+    #         uniforms:
+    #             BATH_FG: global.pattern_bathymetry_color
+    #             BATH_BG: global.pattern_bathymetry_bg_color
+    #         blocks:
+    #             color: |
+    #                 color.rgb = BATH_BG;
+    #                 color.rgb += BATH_FG * diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE), STRIPES_WIDTH) * STRIPES_ALPHA;
 
     polygons-diagonal-stripes:
         base: polygons
@@ -382,15 +399,13 @@ styles:
         shaders:
             defines:
                 STRIPES_ALPHA: 1.
-                STRIPES_SCALE: 2.
                 STRIPES_WIDTH: .5
-            uniforms:
-                BATH_FG: global.pattern_bathymetry_color
-                BATH_BG: global.pattern_bathymetry_bg_color
+                STRIPES_SCALE: 65.
             blocks:
                 color: |
-                    color.rgb = BATH_BG;
-                    color.rgb += BATH_FG * diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE), STRIPES_WIDTH) * STRIPES_ALPHA;
+                    color.rgb = vec3(1.000,1.000,1.000);
+                    color.rgb -= vec3(1.000,1.000,1.000) * diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE), STRIPES_WIDTH) * STRIPES_ALPHA;
+
 
     patterns-stripes:
         mix: [functions-aastep, geometry-matrices]

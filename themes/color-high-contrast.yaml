@@ -58,10 +58,10 @@ global:
     shading_dark_bathymetry_fill_color:     [0.285,0.285,0.285]
 
     # BATHYMETRY PATTERN COLORS
-    pattern_bathymetry_color:   global.hi_contrast_midlight
+    pattern_bathymetry_color:   [0.280,0.280,0.280]
     pattern_bathymetry_bg_color:    [0.150,0.150,0.150]
-    pattern_dark_bathymetry_color:   global.lighter_color
-    pattern_dark_bathymetry_bg_color:    [0.120,0.120,0.120]
+    pattern_dark_bathymetry_color:   [0.320,0.320,0.320]
+    pattern_dark_bathymetry_bg_color:    [0.100,0.100,0.100]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
