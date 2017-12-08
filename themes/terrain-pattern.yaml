@@ -203,8 +203,8 @@ styles:
                 ZOOM_END: 20
                 ZOOM_MAX: 'max(ZOOM_START, ZOOM_END)'
                 ZOOM_FNC: linear
-                ZOOM_IN: 0
-                ZOOM_OUT: 1
+                ZOOM_IN: 0.
+                ZOOM_OUT: 1.
             blocks:
                 global: |
                     float zoom() {
@@ -299,7 +299,7 @@ styles:
                 DOTS_DIR: vec3(0.600,-0.950,0.520)
                 DOTS_COLOR: vec3(0.)
                 DOTS_BACKGROUND_COLOR: vec3(1.)
-                DOTS_SCALE: 30
+                DOTS_SCALE: 30.
                 DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
             blocks:
                 normal: |
