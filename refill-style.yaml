@@ -807,6 +807,9 @@ styles:
                                     color.rgb,
                                     step(.5,dot(vec3(0., 0., 1.), worldNormal())));
 
+    no_waves_playa:
+        base: polygons
+
     building-lines:
         base: lines
         mix: scale-buildings
@@ -1201,7 +1204,7 @@ layers:
                     color: global.lighter_color
 
         other-water-areas:
-            filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
+            filter: { not: { kind: [ocean, lake, water, reservoir] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 polygons:
                     style: waves
@@ -1211,9 +1214,10 @@ layers:
             filter: { kind: playa }
             draw:
                 polygons:
+                    style: no_waves_playa
                     visible: true
                     order: global.feature_order
-                    color: global.offwhite_color
+                    color: global.playas_color
 
         water-boundary-ocean:
             filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }

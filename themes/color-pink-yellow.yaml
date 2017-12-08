@@ -28,6 +28,8 @@ global:
     text_fill:                    global.black_color
     text_stroke:                  [1.000,1.000,1.000,0.75]
 
+    playas_color:                 [1.000,0.992,0.940]
+
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     [0.930,0.721,0.651]
     shading_earth_fill_color:     global.white_color

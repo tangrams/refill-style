@@ -28,6 +28,8 @@ global:
     text_fill:                    global.black_color
     text_stroke:                  [1.00,1.00,1.00,0.75]
 
+    playas_color:                [0.971,0.975,0.980]
+
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     global.two_color_light
     shading_earth_fill_color:     global.white_color
@@ -60,14 +62,14 @@ global:
 
     # BATHYMETRY SHADING COLORS
     shading_bathymetry_tint_color:          global.two_color_dark
-    shading_bathymetry_fill_color:          global.two_color_ultralight
+    shading_bathymetry_fill_color:          [0.882,0.896,0.900] #global.two_color_ultralight
     shading_dark_bathymetry_tint_color:     global.two_color_black
     shading_dark_bathymetry_fill_color:     [0.882,0.896,0.900] #global.two_color_ultralight
 
     # BATHYMETRY PATTERN COLORS
     pattern_bathymetry_color:   global.two_color_ultralight
     pattern_bathymetry_bg_color:    global.two_color_lightest
-    pattern_dark_bathymetry_color:   global.two_color_offwhite
+    pattern_dark_bathymetry_color:   global.two_color_ultralight
     pattern_dark_bathymetry_bg_color:    global.two_color_lighter
 
     # To make Refill's colorize-able icons play nice with other styles

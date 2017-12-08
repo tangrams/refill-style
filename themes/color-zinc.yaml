@@ -30,6 +30,8 @@ global:
     text_stroke:                [0.900,0.900,0.900,0.85]
     zinc_text_stroke:           [0.749,0.749,0.749,0.85]
 
+    playas_color:               [0.730,0.730,0.730]
+
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:   [0.350,0.350,0.350]
     shading_earth_fill_color:   [0.749,0.749,0.749]
@@ -59,9 +61,9 @@ global:
     shading_dark_bathymetry_fill_color:     global.light
 
     # BATHYMETRY PATTERN COLORS
-    pattern_bathymetry_color:   global.ultradark_gray_color
+    pattern_bathymetry_color:   global.mid_gray_color
     pattern_bathymetry_bg_color:    global.darker_gray_color
-    pattern_dark_bathymetry_color:   [0.220,0.220,0.220]
+    pattern_dark_bathymetry_color:   [0.520,0.520,0.520]
     pattern_dark_bathymetry_bg_color:    global.darker_gray_color
 
     # To make Refill's colorize-able icons play nice with other styles
@@ -116,11 +118,6 @@ layers:
         #             order: global.feature_order
         #             style: no_waves
         #             color: global.mid_gray_color
-
-        playas:
-            draw:
-                polygons:
-                    color: global.lightest_color
 
         water-boundary-ocean:
             draw:
