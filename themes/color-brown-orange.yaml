@@ -61,8 +61,8 @@ global:
     pattern_dark_river_fill:           global.ultralight_color
 
     # BATHYMETRY SHADING COLORS
-    shading_bathymetry_tint_color:          [1.000,0.454,0.144]
-    shading_bathymetry_fill_color:          global.two_color_offwhite
+    shading_bathymetry_tint_color:          global.two_color_dark
+    shading_bathymetry_fill_color:          [1.000,0.945,0.929]
     shading_dark_bathymetry_tint_color:     global.two_color_black
     shading_dark_bathymetry_fill_color:     global.two_color_ultralight
 
@@ -302,11 +302,11 @@ layers:
         other_country_boundary_disputed_etc:
             draw:
                 lines:
-                    color: global.light
+                    color: global.two_color_light
             disputed:
                 draw:
                     lines:
-                        color: global.light
+                        color: global.two_color_light
 
         region:
             draw:

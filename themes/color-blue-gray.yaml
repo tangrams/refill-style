@@ -302,11 +302,11 @@ layers:
         other_country_boundary_disputed_etc:
             draw:
                 lines:
-                    color: global.lighter_color
+                    color: global.two_color_light
             disputed:
                 draw:
                     lines:
-                        color: global.lighter_color
+                        color: global.two_color_light
 
         region:
             draw:

@@ -585,7 +585,7 @@ styles:
 
     region_dash:
         base: lines
-        dash: [7.0, 1.0]
+        dash: [7.0, 2.0]
 
     pixel-pattern-light:
         mix: [space-tile, generative-random]
@@ -3228,8 +3228,9 @@ layers:
                     - kind_detail: [3,4]
             draw:
                 lines:
-                    color: global.lighter_color
-                    width: [[0, 0.5px], [9, 2px], [14, 4px], [16, 6.5px], [17, 16m]]
+                    color: global.light_color
+                    # width: [[0, 0.5px], [9, 2px], [14, 4px], [16, 6.5px], [17, 16m]]
+                    width: [[0, 0.5px], [14, 3px], [16, 5px], [17, 16m]]
 
             water:
                 filter: { maritime_boundary: true }
