@@ -35,7 +35,7 @@ layers:
                 lines:
                     style: no_coast
                     color: global.ultralight_color
-                    width: [[10, 1px], [12, 2px]]
+                    width: 1px
 
         water_boundaries-not-ocean:
             draw:
@@ -76,47 +76,47 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
             us_national_park:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.ultralight_color
+                        color: global.offwhite_color
 
         conservation:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         national_forest_level_6:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         forest-landcover:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
             national_park:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.lightest_color
+                        color: global.offwhite_color
 
         farm:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         university:
             draw:
@@ -128,19 +128,19 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         golf_course:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         hospital:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         sports_centre:
             draw:
@@ -152,19 +152,19 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         stadium:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         zoo:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         man-made:
             draw:
@@ -215,7 +215,7 @@ layers:
                     style: no_texture
                     color: global.offwhite_color
                 outline:
-                    color: global.lightest_color
+                    color: global.ultralight_color
 
         playground:
             draw:
@@ -226,7 +226,7 @@ layers:
             draw:
                 polygons:
                     style: no_texture
-                    color: global.ultralight_color
+                    color: global.offwhite_color
 
         minor-landuse:
             draw:
@@ -256,7 +256,7 @@ layers:
                 draw:
                     polygons:
                         style: no_texture
-                        color: global.ultralight_color
+                        color: global.offwhite_color
 
 styles:
     no_waves:
