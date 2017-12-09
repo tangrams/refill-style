@@ -16,19 +16,19 @@ layers:
         draw:
             polygons:
                 style: no_waves
-                color: global.light_color
+                color: global.no_texture_water_color
 
         lakes:
             draw:
                 polygons:
                     style: no_waves
-                    color: global.light_color
+                    color: global.no_texture_water_color
 
         other-water-areas:
             draw:
                 polygons:
                     style: no_waves
-                    color: global.light_color
+                    color: global.no_texture_water_color
 
         water-boundary-ocean:
             draw:

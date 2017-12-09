@@ -18,6 +18,7 @@ global:
     text_stroke:                  [1.00,1.00,1.00,0.75]
 
     playas_color:                 [0.986,0.986,0.986]
+    no_texture_water_color:       [0.914,0.914,0.914]
 
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     [0.742,0.742,0.742]

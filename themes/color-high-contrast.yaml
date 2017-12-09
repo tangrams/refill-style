@@ -22,6 +22,7 @@ global:
     text_stroke:                  [1.00,1.00,1.00,0.75]
 
     playas_color:                 [0.950,0.950,0.950]
+    no_texture_water_color:       [0.150,0.150,0.150]
 
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     global.lighter_color
@@ -247,6 +248,10 @@ layers:
                         color: global.hi_contrast_mid
 
         region:
+            draw:
+                lines:
+                    color: [0.375,0.375,0.375]
+
             region-labels:
                 draw:
                     text-blend-order:
