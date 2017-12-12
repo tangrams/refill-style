@@ -812,9 +812,6 @@ styles:
                                     color.rgb,
                                     step(.5,dot(vec3(0., 0., 1.), worldNormal())));
 
-    no_waves_playa:
-        base: polygons
-
     building-lines:
         base: lines
         mix: scale-buildings
@@ -1219,7 +1216,7 @@ layers:
             filter: { kind: playa }
             draw:
                 polygons:
-                    style: no_waves_playa
+                    style: polygons
                     visible: true
                     order: global.feature_order
                     color: global.playas_color

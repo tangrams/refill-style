@@ -630,7 +630,7 @@
             };
             gui.coastline = query.coastline || true;
             gui.coastline_button = gui.add(gui, 'coastline', coastline).onChange(function(value) {
-                tg_global['sdk_coastline'] = (value === 'false' || value === false);
+                tg_global['sdk_coastline'] = (value === 'true' || value === true);
 
                 scene.config.global.sdk_coastline = tg_global['sdk_coastline']; // dat.gui passes a string
                 scene.updateConfig();
