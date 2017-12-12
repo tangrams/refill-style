@@ -153,7 +153,7 @@ layers:
         railway:
             draw:
                 lines:
-                    style: railway_dash
+                    dash_background_color: global.two_color_dark
                     color: global.two_color_light
 
         airport-lines:
@@ -306,11 +306,6 @@ layers:
 
 
 styles:
-    railway_dash:
-        base: lines
-        dash: [0.25, 1.0]
-        dash_background_color: global.two_color_dark
-
     building-grid:
         shaders:
             uniforms:

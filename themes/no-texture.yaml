@@ -15,161 +15,156 @@ layers:
     water:
         draw:
             polygons:
-                style: no_waves
+                style: polygons
                 color: global.no_texture_water_color
 
         lakes:
             draw:
                 polygons:
-                    style: no_waves
+                    style: polygons
                     color: global.no_texture_water_color
 
         other-water-areas:
             draw:
                 polygons:
-                    style: no_waves
+                    style: polygons
                     color: global.no_texture_water_color
 
         water-boundary-ocean:
             draw:
                 lines:
-                    style: no_coast
+                    style: lines
                     color: global.ultralight_color
                     width: 1px
 
         water_boundaries-not-ocean:
             draw:
                 lines:
-                    style: no_coast
+                    style: lines
                     color: global.ultralight_color
                     width: [[14, 1.0px], [16, 1.5px], [18, 2m]]
             swimming-pools-early:
                 draw:
                     lines:
-                        style: no_coast
+                        style: lines
                         color: global.ultralight_color
             riverbank:
                 draw:
                     lines:
-                        style: no_coast
+                        style: lines
                         color: global.ultralight_color
 
         river:
             draw:
                 lines:
-                    style: no_riverlines
+                    style: lines
                     color: global.lightest_color
                     width: [[10, 0px], [12, 0px], [13, 0.5px], [16, 1.5px], [18, 4m]]
             intermittent:
                 draw:
                     lines:
-                        style: no_coast
+                        style: lines
                         color: global.lightest_color
 
     landuse:
-        draw:
-            no_texture:
-                order: global.feature_order
-                visible: false
-
         national_park:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
             us_national_park:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
                         color: global.offwhite_color
 
         conservation:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         national_forest_level_6:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         forest-landcover:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         parks-and-national-forests-not-national-park:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
             national_park:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
                         color: global.offwhite_color
 
         farm:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         university:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         cemetery:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         golf_course:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         hospital:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         sports_centre:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         recreation_ground:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         stadium:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         zoo:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         man-made:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
             pier:
                 draw:
                     polygons:
@@ -179,40 +174,40 @@ layers:
             tourism-related:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
                         color: global.offwhite_color
 
             beach:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
                         color: global.offwhite_color
 
         garden:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.ultralight_color
 
         parking:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         pedestrian:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
             green-stuff:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
 
         pitch:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
                 outline:
                     color: global.ultralight_color
@@ -220,18 +215,18 @@ layers:
         playground:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
 
         school:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         minor-landuse:
             draw:
                 polygons:
-                    style: no_texture
+                    style: polygons
                     color: global.offwhite_color
 
         landuse-not-filtered:
@@ -243,33 +238,17 @@ layers:
             apron:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
                         color: global.offwhite_color
 
             minor-amusement-park-landuse:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
                         color: global.offwhite_color
 
             minor-zoo-landuse:
                 draw:
                     polygons:
-                        style: no_texture
+                        style: polygons
                         color: global.offwhite_color
-
-styles:
-    no_waves:
-        base: polygons
-
-    no_coast:
-        base: lines
-
-    no_riverlines:
-        base: lines
-
-    no_texture:
-        base: polygons
-
-    no_dash:
-        base: lines

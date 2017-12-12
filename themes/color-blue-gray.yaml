@@ -138,7 +138,7 @@ layers:
         railway:
             draw:
                 lines:
-                    style: railway_dash
+                    dash_background_color: global.two_color_offwhite
                     color: global.two_color_midlight
 
         ferry:
@@ -315,11 +315,6 @@ layers:
                     color: global.two_color_lighter
 
 styles:
-    railway_dash:
-        base: lines
-        dash: [0.25, 1.0]
-        dash_background_color: global.two_color_offwhite
-
     waves:
         shaders:
             uniforms:

@@ -151,7 +151,7 @@ layers:
         railway:
             draw:
                 lines:
-                    style: railway_dash
+                    dash_background_color: [0.079,0.070,0.054]
                     color: global.two_color_midlight
 
         airport-lines:
@@ -319,11 +319,6 @@ styles:
             uniforms:
                 u_tint: global.two_color_offwhite
                 u_fill: [0.00,0.00,0.00]
-
-    railway_dash:
-        base: lines
-        dash: [0.25, 1.0]
-        dash_background_color: [0.079,0.070,0.054]
 
     building-grid:
         shaders:

@@ -219,56 +219,6 @@ styles:
                                     (u_map_position.z-ZOOM_START)/(ZOOM_END-ZOOM_START) );
                     }
 
-    elevation-dash:
-        base: polygons
-        mix:
-            - polygons-diagonal-dash
-        raster: custom
-        shaders:
-            defines:
-                DASH_COLOR: color.rgb*.5
-                DASH_BACKGROUND_COLOR: color.rgb
-                DASH_SCALE: 10
-                DASH_SIZE: 0.9
-                DASH_TYPE: fill
-                DASH_TILE_STYLE: tile
-                DASH_DIR: vec3(-0.600,-0.420,0.560)
-                NORMAL_TEXTURE_INDEX: 0
-                DASH_MIN_SIZE: 0.8
-                DASH_MAX_SIZE: 1
-            blocks:
-                normal: >
-                    float shade = dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
-                    DASH_DIR);
-
-                    shade = mix(DASH_MIN_SIZE, DASH_MAX_SIZE, (shade*shade*shade)*4.);
-
-    polygons-diagonal-dash:
-        base: polygons
-        mix:
-            - space-tile
-            - tiling-brick
-            - tiling-tile
-            - shapes-type
-        shaders:
-            defines:
-                DASH_COLOR: color.rgb*.5
-                DASH_BACKGROUND_COLOR: color.rgb
-                DASH_SCALE: 10
-                DASH_SIZE: 0.9
-                DASH_TYPE: fill
-                DASH_TILE_STYLE: tile
-                PI: 3.141592653589793
-            blocks:
-                global: |
-                    float dashDF(vec2 st) {
-                        return min(cos((st.x-st.y)*PI),-cos((st.x+st.y+.5)*PI*.6666)*5.);
-                    }
-                color: |
-                    color.rgb = mix(DASH_BACKGROUND_COLOR,
-                                    DASH_COLOR,
-                                    DASH_TYPE( DASH_SIZE, dashDF(DASH_TILE_STYLE(getTileCoords()*DASH_SCALE,3.))) );
-
     shapes-type:
         mix:
             - functions-aastep

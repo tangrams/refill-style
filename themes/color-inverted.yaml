@@ -161,8 +161,8 @@ layers:
         railway:
             draw:
                 lines:
-                    style: railway_dash
-                    color: global.light_color
+                    dash_background_color: global.ultralight_color
+                    color: [0.650,0.650,0.650]
         ferry:
             draw:
                 lines:
