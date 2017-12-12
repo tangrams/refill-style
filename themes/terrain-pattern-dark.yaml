@@ -195,8 +195,6 @@ styles:
                 u_fill: global.pattern_dark_river_fill
 
     functions-zoom:
-        mix:
-            - functions-easing
         shaders:
             defines:
                 ZOOM_START: 14
