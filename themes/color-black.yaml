@@ -4,7 +4,7 @@ global:
     dark_color:                 [0.250,0.250,0.250]
     mid_color:                  [0.500,0.500,0.500]
     midlight_color:             [0.625,0.625,0.625]
-    light:                      [0.690,0.690,0.690]
+    extralight_color:           [0.690,0.690,0.690]
     light_color:                [0.750,0.750,0.750]
     lighter_color:              [0.850,0.850,0.850]
     lightest_color:             [0.900,0.900,0.900]
@@ -26,7 +26,7 @@ global:
     shading_landuse_tint_color: global.midlight_color
     shading_landuse_fill_color: [0.990,0.990,0.990]
 
-    shading_river_tint_color:   global.light
+    shading_river_tint_color:   global.extralight_color
     shading_river_fill_color:   global.ultralight_color
 
     shading_dark_earth_tint_color:   global.mid_color

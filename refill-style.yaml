@@ -222,6 +222,11 @@ global:
     # should default to "false", with SDK overriding it to true or false,
     sdk_bathymetry: false
     #
+    # COASTLINE
+    # Show coastline shader
+    # should default to "true", with SDK overriding it to true or false,
+    sdk_coastline: true
+    #
     # SHIELDS
     sdk_shield_color: black
     sdk_shield_text_color: white
@@ -1220,6 +1225,7 @@ layers:
                     color: global.playas_color
 
         water-boundary-ocean:
+            enabled: global.sdk_coastline
             filter: { boundary: true, kind: ocean, $zoom: { min: 1 } }
             draw:
                 lines:
@@ -1231,6 +1237,7 @@ layers:
                     join: round
 
         water_boundaries-not-ocean:
+            enabled: global.sdk_coastline
             filter:
                 all:
                     - boundary: true
@@ -1291,7 +1298,7 @@ layers:
                     style: riverlines
                     visible: true
                     order: global.feature_order_down_1
-                    color: global.light
+                    color: global.extralight_color
                     width: [[11, 0.5px], [14, 2px], [ 18, 8px]]
                     cap: round
             intermittent:
@@ -1302,7 +1309,7 @@ layers:
                 draw:
                     lines:
                         style: coast
-                        color: global.light
+                        color: global.extralight_color
 
 
         water-area-labels:
@@ -2188,7 +2195,7 @@ layers:
                     color: global.white_color
                     width: [[13, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
                     outline:
-                        color: [[13, global.light_color], [15, global.light]]
+                        color: [[13, global.light_color], [15, global.extralight_color]]
                         width: [[13, 0.25px], [16, 0.35px], [17, 1px]]
             early:
                 filter:
@@ -2205,7 +2212,7 @@ layers:
                         color: global.white_color
                         width: [[13, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
                         outline:
-                            color: [[13, global.light_color], [15, global.light]]
+                            color: [[13, global.light_color], [15, global.extralight_color]]
                             width: [[13, 0.25px], [16, 0.35px], [17, 1px]]
             footway:
                 filter: { kind_detail: footway }

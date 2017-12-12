@@ -4,7 +4,7 @@ global:
     dark_color:                   [0.620,0.620,0.620]
     mid_color:                    [0.652,0.652,0.652]
     midlight_color:               [0.700,0.700,0.700]
-    light:                        [0.810,0.810,0.810]
+    extralight_color:             [0.810,0.810,0.810]
     light_color:                  [0.844,0.844,0.844]
     lighter_color:                [0.894,0.894,0.894]
     lightest_color:               [0.929,0.929,0.929]

@@ -4,7 +4,7 @@ global:
     dark_color:                   [0.750,0.750,0.750]
     mid_color:                    [0.500,0.500,0.500]
     midlight_color:               [0.460,0.460,0.460]
-    light:                        [0.410,0.410,0.410]
+    extralight_color:             [0.410,0.410,0.410]
     light_color:                  [0.365,0.365,0.365]
     lighter_color:                [0.275,0.275,0.275]
     lightest_color:               [0.220,0.220,0.220]
@@ -282,7 +282,7 @@ layers:
         region:
             draw:
                 lines:
-                    color: global.light
+                    color: global.extralight_color
 
             region-labels:
                 draw:

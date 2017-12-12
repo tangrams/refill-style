@@ -4,7 +4,7 @@ global:
     dark_color:                   [0.675,0.431,0.443]
     mid_color:                    [0.745,0.537,0.545]
     midlight_color:               [0.796,0.631,0.639]
-    light:                        [0.820,0.672,0.680]
+    extralight_color:             [0.820,0.672,0.680]
     light_color:                  [0.835,0.729,0.733]
     lighter_color:                [0.847,0.769,0.773]
     lightest_color:               [0.871,0.816,0.820]
@@ -34,10 +34,10 @@ global:
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     global.light_color
     shading_earth_fill_color:     global.white_color
-    shading_landuse_tint_color:   global.light
+    shading_landuse_tint_color:   global.extralight_color
     shading_landuse_fill_color:   [1.000,0.972,0.960]
 
-    shading_dark_earth_tint_color:     global.light
+    shading_dark_earth_tint_color:     global.extralight_color
     shading_dark_earth_fill_color:     global.white_color
     shading_dark_landuse_tint_color:   global.mid_color
     shading_dark_landuse_fill_color:   [1.000,0.972,0.960]

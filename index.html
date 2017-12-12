@@ -245,7 +245,7 @@
             mapzen_api_key = 'mapzen-xkUbe6g';
         }
 
-        var tg_global = { 'sdk_mapzen_api_key': mapzen_api_key, 'sdk_bathymetry': false };
+        var tg_global = { 'sdk_mapzen_api_key': mapzen_api_key, 'sdk_bathymetry': false, 'sdk_coastline': true };
 
         var layer = Tangram.leafletLayer({
             // more: 'vector-tiles-TTucZYU'
@@ -556,7 +556,6 @@
                 'Yes': true,
                 'No': false
             };
-            // use transit ux, else default to false
             gui.building_3d = query.building_3d || true;
             gui.building_button = gui.add(gui, 'building_3d', building_3d).onChange(function(value) {
                 tg_global['sdk_building_extrude'] = (value === 'true' || value === true);
@@ -614,7 +613,6 @@
                 'Yes': true,
                 'No': false
             };
-            // use transit ux, else default to false
             gui.bathymetry = query.bathymetry || false;
             gui.bathymetry_button = gui.add(gui, 'bathymetry', bathymetry).onChange(function(value) {
                 tg_global['sdk_bathymetry'] = (value === 'true' || value === true);
@@ -624,6 +622,21 @@
             });
             gui.bathymetry_button.name( 'bathymetry' );
 
+            // Coastline selector
+            var coastline = {
+                '(default)': true,
+                'Yes': true,
+                'No': false
+            };
+            gui.coastline = query.coastline || true;
+            gui.coastline_button = gui.add(gui, 'coastline', coastline).onChange(function(value) {
+                tg_global['sdk_coastline'] = (value === 'false' || value === false);
+
+                scene.config.global.sdk_coastline = tg_global['sdk_coastline']; // dat.gui passes a string
+                scene.updateConfig();
+            });
+            gui.coastline_button.name( 'coastline' );
+
             // Routing selector
             var sdk_directions = {
                 '(default)': false,
@@ -632,7 +645,6 @@
                 'Transit': 'transit',
                 'Bike': 'bike'
             };
-            // use transit ux, else default to false
             gui.sdk_directions = query.sdk_directions || false;
             gui.directions_button = gui.add(gui, 'sdk_directions', sdk_directions).onChange(function(value) {
                 if( value === 'bike' ) {

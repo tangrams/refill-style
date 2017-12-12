@@ -4,7 +4,7 @@ global:
     dark_color:                 [0.100,0.100,0.100]
     mid_color:                  [0.400,0.400,0.400]
     midlight_color:             [0.418,0.418,0.418]
-    light:                      [0.482,0.482,0.482]
+    extralight_color:           [0.482,0.482,0.482]
     light_color:                [0.533,0.533,0.533]
     lighter_color:              [0.590,0.590,0.590]
     lightest_color:             [0.620,0.620,0.620]
@@ -59,7 +59,7 @@ global:
     shading_bathymetry_tint_color:          [0.150,0.150,0.150]
     shading_bathymetry_fill_color:          global.light_color
     shading_dark_bathymetry_tint_color:     global.black_color
-    shading_dark_bathymetry_fill_color:     global.light
+    shading_dark_bathymetry_fill_color:     global.extralight_color
 
     # BATHYMETRY PATTERN COLORS
     pattern_bathymetry_color:   [0.482,0.482,0.482]
@@ -386,7 +386,7 @@ layers:
             taxiway:
                 draw:
                     lines:
-                        color: global.light
+                        color: global.extralight_color
                         outline:
                             visible: false
 
