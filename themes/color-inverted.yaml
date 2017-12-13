@@ -269,7 +269,8 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            stroke: { color: global.white_color, width: 4px }
+                            fill: global.dark_color
+                            stroke: { color: global.text_stroke, width: 4px }
 
         other_country_boundary_disputed_etc:
             draw:
@@ -288,8 +289,8 @@ layers:
                 draw:
                     text-blend-order:
                         font:
-                            fill: global.white_color
-                            stroke: { color: global.light_color, width: 4px }
+                            fill: global.dark_color
+                            stroke: { color: global.text_stroke, width: 4px }
 
     places:
         region:
