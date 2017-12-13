@@ -304,7 +304,7 @@ layers:
             mapzen_icon_library:
                 text:
                     font:
-                        stroke: { color: global.white_color, width: 6px }
+                        stroke: { color: global.text_stroke, width: 6px }
 
 
 styles:
