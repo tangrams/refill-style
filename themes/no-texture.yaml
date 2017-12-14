@@ -1,0 +1,254 @@
+global:
+    # GRAYS
+    ultradark_gray_color:       [0.259,0.259,0.259]
+    darkest_gray_color:         [0.298,0.298,0.298]
+    darker_gray_color:          [0.333,0.333,0.333]
+    dark_gray_color:            [0.400,0.400,0.400]
+    mid_gray_color:             [0.502,0.502,0.502]
+    gray_color:                 [0.600,0.600,0.600]
+    light_gray_color:           [0.675,0.675,0.675]
+    lighter_gray_color:         [0.749,0.749,0.749]
+    lightest_gray_color:        [0.800,0.800,0.800]
+    gray_offwhite_color:        [0.898,0.898,0.898]
+
+layers:
+    water:
+        draw:
+            polygons:
+                style: polygons
+                color: global.no_texture_water_color
+
+        lakes:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.no_texture_water_color
+
+        other-water-areas:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.no_texture_water_color
+
+        water-boundary-ocean:
+            draw:
+                lines:
+                    style: lines
+                    color: global.ultralight_color
+                    width: 1px
+
+        water_boundaries-not-ocean:
+            draw:
+                lines:
+                    style: lines
+                    color: global.ultralight_color
+                    width: [[14, 1.0px], [16, 1.5px], [18, 2m]]
+            swimming-pools-early:
+                draw:
+                    lines:
+                        style: lines
+                        color: global.ultralight_color
+            riverbank:
+                draw:
+                    lines:
+                        style: lines
+                        color: global.ultralight_color
+
+        river:
+            draw:
+                lines:
+                    style: lines
+                    color: global.lightest_color
+                    width: [[10, 0px], [12, 0px], [13, 0.5px], [16, 1.5px], [18, 4m]]
+            intermittent:
+                draw:
+                    lines:
+                        style: lines
+                        color: global.lightest_color
+
+    landuse:
+        national_park:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+            us_national_park:
+                draw:
+                    polygons:
+                        style: polygons
+                        color: global.offwhite_color
+
+        conservation:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        national_forest_level_6:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        forest-landcover:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+            national_park:
+                draw:
+                    polygons:
+                        style: polygons
+                        color: global.offwhite_color
+
+        farm:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        university:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        cemetery:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        golf_course:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        hospital:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        sports_centre:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        recreation_ground:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        stadium:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        zoo:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        man-made:
+            draw:
+                polygons:
+                    style: polygons
+            pier:
+                draw:
+                    polygons:
+                        color: global.offwhite_color
+
+        tier5:
+            tourism-related:
+                draw:
+                    polygons:
+                        style: polygons
+                        color: global.offwhite_color
+
+            beach:
+                draw:
+                    polygons:
+                        style: polygons
+                        color: global.offwhite_color
+
+        garden:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.ultralight_color
+
+        parking:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        pedestrian:
+            draw:
+                polygons:
+                    style: polygons
+            green-stuff:
+                draw:
+                    polygons:
+                        style: polygons
+
+        pitch:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+                outline:
+                    color: global.ultralight_color
+
+        playground:
+            draw:
+                polygons:
+                    style: polygons
+
+        school:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        minor-landuse:
+            draw:
+                polygons:
+                    style: polygons
+                    color: global.offwhite_color
+
+        landuse-not-filtered:
+            runway:
+                draw:
+                    polygons:
+                        color: global.offwhite_color
+
+            apron:
+                draw:
+                    polygons:
+                        style: polygons
+                        color: global.offwhite_color
+
+            minor-amusement-park-landuse:
+                draw:
+                    polygons:
+                        style: polygons
+                        color: global.offwhite_color
+
+            minor-zoo-landuse:
+                draw:
+                    polygons:
+                        style: polygons
+                        color: global.offwhite_color

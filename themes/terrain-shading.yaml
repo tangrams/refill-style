@@ -1,0 +1,307 @@
+sources:
+    mapzen:
+        rasters:
+            - normals
+    normals:
+        type: Raster
+        url: https://tile.mapzen.com/mapzen/terrain/v1/512/normal/{z}/{x}/{y}.png
+        url_params:
+            api_key: global.sdk_mapzen_api_key
+        tile_size: 512
+        max_zoom: 14
+
+textures:
+    # This texture is defined here so Tangram knows the scene includes a texture with this name
+    # This prevents it from otherwies interpreting the texture name as a URL
+    # The actual URL for the texture will be set by the included color theme.
+    sdk_terrain_texture: {}
+
+layers:
+    earth:
+        draw:
+            polygons:
+                style: global.sdk_terrain_shading_earth_style
+                order: function() { return feature.sort_rank || 0; }
+                color: [1.0, 1.0, 1.0]
+            lines:
+                visible: false
+
+    water:
+        bathymetry:
+            enabled: global.sdk_bathymetry
+            draw:
+                polygons:
+                    # reuse the inherited base color, but use modified shader
+                    # that adjusts brightness / contrast to match original color
+                    style: global.sdk_terrain_shading_bathymetry_style
+                    order: global.feature_order
+                    color: white
+
+        lakes:
+            bathymetry:
+                enabled: global.sdk_bathymetry
+                draw:
+                    polygons:
+                        # reuse the inherited base color, but use modified shader
+                        # that adjusts brightness / contrast to match original color
+                        style: global.sdk_terrain_shading_bathymetry_style
+                        order: global.feature_order
+                        color: white
+
+        other-water-areas:
+            bathymetry:
+                enabled: global.sdk_bathymetry
+                draw:
+                    polygons:
+                        # reuse the inherited base color, but use modified shader
+                        # that adjusts brightness / contrast to match original color
+                        style: global.sdk_terrain_shading_bathymetry_style
+                        order: global.feature_order
+                        color: white
+
+    landuse:
+        national_park:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+            us_national_park:
+                draw:
+                    polygons:
+                        style: global.sdk_terrain_shading_landuse_style
+                        color: white
+
+        conservation:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        national_forest_level_6:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        forest-landcover:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+            national_park:
+                draw:
+                    polygons:
+                        style: global.sdk_terrain_shading_landuse_style
+                        color: white
+
+        farm:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        university:
+            enabled: false
+
+        cemetery:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        golf_course:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        hospital:
+            enabled: false
+
+        sports_centre:
+            enabled: false
+
+        recreation_ground:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        stadium:
+            enabled: false
+
+        zoo:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        winter_sports:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        man-made:
+            enabled: false
+
+        tier5:
+            tourism-related:
+                draw:
+                    polygons:
+                        style: global.sdk_terrain_shading_landuse_style
+                        color: white
+
+            beach:
+                draw:
+                    polygons:
+                        style: global.sdk_terrain_shading_landuse_style
+                        color: white
+        garden:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        parking:
+            enabled: false
+
+        pedestrian:
+            enabled: false
+
+        pitch:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        playground:
+            draw:
+                polygons:
+                    style: global.sdk_terrain_shading_landuse_style
+                    color: white
+
+        school:
+            enabled: false
+
+        minor-landuse:
+            enabled: false
+
+        landuse-not-filtered:
+            enabled: false
+
+        retaining_wall:
+            enabled: false
+
+        fence:
+            enabled: false
+
+
+styles:
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.shading_river_tint_color
+                u_fill: global.shading_river_fill_color
+
+    colorized-earth:
+        shaders:
+            uniforms:
+                u_tint: global.shading_earth_tint_color
+                u_fill: global.shading_earth_fill_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    colorized-landuse:
+        shaders:
+            uniforms:
+                u_tint: global.shading_landuse_tint_color
+                u_fill: global.shading_landuse_fill_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    colorized-bathymetry:
+        shaders:
+            uniforms:
+                u_tint: global.shading_bathymetry_tint_color
+                u_fill: global.shading_bathymetry_fill_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    terrain-shading:
+        base: polygons
+        lighting: false
+        raster: normal
+        shaders:
+            uniforms:
+                u_envmap: sdk_terrain_texture
+                u_contrast: 1.
+                u_zoom_scale: 3.5
+                u_brightness_base: 0.5
+                u_brightness_scaler: 0.5
+            blocks:
+                global: |
+                    // Simplified view-independent environment map
+                    vec4 applyEnvmap (in sampler2D _tex, in vec3 _normal, in float scale) {
+                        _normal.z *= scale;
+                        return texture2D(_tex, .5*(normalize(_normal).xy + 1.));
+                    }
+                color: |
+                    // turn terrain exaggeration up/down
+                    // fade out spheremap normals with a function
+                    float scale1 = 20./(u_map_position.z) + 1.5;
+                    float m = u_zoom_scale * (u_map_position.z - 0.8) * exp(u_map_position.z * -.29);
+                    m = clamp(m, 0., 1.5);
+                    color = applyEnvmap(u_envmap, normal, 1./scale1);
+                    // apply contrast and brightness
+                    float contrast = m;
+                    color.rgb = ((color.rgb - 0.5) * max(contrast, 0.)) + 0.5;
+                    float brightness = u_brightness_base - m * u_brightness_scaler;
+                    color.rgb += brightness;
+                    // apply layer color
+                    color *= v_color;
+
+    terrain-shading-earth:
+        base: polygons
+        mix: [terrain-shading, colorized-earth]
+
+    terrain-shading-landuse:
+        base: polygons
+        mix: [terrain-shading, colorized-landuse]
+
+    terrain-shading-bathymetry:
+        base: polygons
+        mix: [terrain-shading, colorized-bathymetry]
+
+    terrain-shading-earth-dark:
+        base: polygons
+        mix: [terrain-shading-dark, colorized-earth]
+
+    terrain-shading-landuse-dark:
+        base: polygons
+        mix: [terrain-shading-dark, colorized-landuse]
+
+    terrain-shading-bathymetry-dark:
+        base: polygons
+        mix: [terrain-shading-dark, colorized-bathymetry]
+
+    terrain-shading-dark:
+        mix:
+            - terrain-shading
+        base: polygons
+        shaders:
+            uniforms:
+                u_envmap: sdk_terrain_texture
+                u_contrast: 0.5
+                u_zoom_scale: 8.0
+                u_brightness_base: 0.75
+                u_brightness_scaler: 0.0

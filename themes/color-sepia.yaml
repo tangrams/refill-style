@@ -4,14 +4,63 @@ global:
     dark_color:                   [0.710,0.465,0.398]
     mid_color:                    [0.780,0.572,0.515]
     midlight_color:               [0.820,0.653,0.607]
+    extralight_color:             [0.860,0.687,0.638]
     light_color:                  [0.880,0.738,0.695]
     lighter_color:                [0.910,0.819,0.792]
     lightest_color:               [0.940,0.868,0.855]
     ultralight_color:             [0.960,0.918,0.912]
     offwhite_color:               [0.980,0.943,0.931]
     white_color:                  [1.00,1.00,1.00]
-    transparent:                  [0.940,0.868,0.855,0.250]
+    transparent:                  [0.940,0.868,0.855,0.25]
     route_line:                   [0.700,0.196,0.507]
+
+    text_fill:                    global.black_color
+    text_stroke:                  [1.000,1.000,1.000,0.75]
+
+    playas_color:                 [1.000,0.963,0.951]
+    no_texture_water_color:       [0.940,0.868,0.855]
+
+    # TERRAIN SHADING COLORS
+    shading_earth_tint_color:     global.light_color
+    shading_earth_fill_color:     global.white_color
+    shading_landuse_tint_color:   global.extralight_color
+    shading_landuse_fill_color:   [1.000,0.977,0.970]
+
+    shading_river_tint_color:     global.extralight_color
+    shading_river_fill_color:     global.offwhite_color
+
+    shading_dark_earth_tint_color:     global.extralight_color
+    shading_dark_earth_fill_color:     global.white_color
+    shading_dark_landuse_tint_color:   global.mid_color
+    shading_dark_landuse_fill_color:   [0.989,0.966,0.958]
+
+    # TERRAIN PATTERN COLORS
+    pattern_earth_dot_color:              global.white_color
+    pattern_earth_fill_color:             [1.000,0.989,0.980]
+    pattern_landuse_dot_color:            global.white_color
+    pattern_landuse_fill_color:           global.ultralight_color
+
+    pattern_dark_earth_dot_color:              global.white_color
+    pattern_dark_earth_fill_color:             [0.970,0.933,0.921] #global.offwhite_color
+    pattern_dark_landuse_dot_color:            global.white_color
+    pattern_dark_landuse_fill_color:           [0.954,0.878,0.866] #global.lightest_color
+
+    pattern_river_tint:           global.extralight_color
+    pattern_river_fill:           global.offwhite_color
+    pattern_dark_river_tint:           global.midlight_color
+    pattern_dark_river_fill:           global.ultralight_color
+
+    # BATHYMETRY SHADING COLORS
+    shading_bathymetry_tint_color:          [0.730,0.485,0.418]
+    shading_bathymetry_fill_color:          global.lightest_color
+    shading_dark_bathymetry_tint_color:     [0.594,0.343,0.276]
+    shading_dark_bathymetry_fill_color:     global.lightest_color
+
+    # BATHYMETRY PATTERN COLORS
+    pattern_bathymetry_color:   global.lightest_color
+    pattern_bathymetry_bg_color:    global.lighter_color
+    pattern_dark_bathymetry_color:   global.lightest_color
+    pattern_dark_bathymetry_bg_color:    [0.910,0.768,0.725]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -20,3 +69,11 @@ global:
     # then Walkabout icons would not be colorized as Walkabout icons re-set the
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
+
+    sdk_terrain_shading_earth_style: terrain-shading-earth
+    sdk_terrain_shading_landuse_style: terrain-shading-landuse
+    sdk_terrain_shading_bathymetry_style: terrain-shading-bathymetry
+
+textures:
+    sdk_terrain_texture:
+        url: images/refill-spheremap-light.jpg

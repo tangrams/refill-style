@@ -1,17 +1,66 @@
 global:
     # PINK
-    black_color:               [1.000,0.130,0.797]
-    dark_color:                [1.000,0.440,0.869]
-    mid_color:                 [1.000,0.520,0.888]
-    midlight_color:            [1.000,0.620,0.911]
-    light_color:               [1.000,0.730,0.937]
-    lighter_color:             [1.000,0.810,0.956]
-    lightest_color:            [1.000,0.880,0.972]
-    ultralight_color:          [1.000,0.920,0.983]
-    offwhite_color:            [1.000,0.970,0.994]
-    white_color:               [1.000,1.000,1.000]
-    transparent:               [1.000,0.880,0.972,0.250]
-    route_line:                [0.369,0.349,0.729]
+    black_color:                 [1.000,0.130,0.797]
+    dark_color:                  [1.000,0.440,0.869]
+    mid_color:                   [1.000,0.520,0.888]
+    midlight_color:              [1.000,0.620,0.911]
+    extralight_color:            [1.000,0.670,0.923]
+    light_color:                 [1.000,0.730,0.937]
+    lighter_color:               [1.000,0.810,0.956]
+    lightest_color:              [1.000,0.880,0.972]
+    ultralight_color:            [1.000,0.920,0.983]
+    offwhite_color:              [1.000,0.970,0.994]
+    white_color:                 [1.000,1.000,1.000]
+    transparent:                 [1.000,0.880,0.972,0.25]
+    route_line:                  [0.369,0.349,0.729]
+
+    text_fill:                    global.black_color
+    text_stroke:                  [1.000,1.000,1.000,0.75]
+
+    playas_color:                 [1.000,0.970,0.994]
+    no_texture_water_color:       [1.000,0.880,0.972]
+
+    # TERRAIN SHADING COLORS
+    shading_earth_tint_color:     global.light_color
+    shading_earth_fill_color:     global.white_color
+    shading_landuse_tint_color:   global.extralight_color
+    shading_landuse_fill_color:   [1.000,0.980,1.000] #global.offwhite_color
+
+    shading_river_tint_color:     global.extralight_color
+    shading_river_fill_color:     global.offwhite_color
+
+    shading_dark_earth_tint_color:     global.extralight_color
+    shading_dark_earth_fill_color:     global.white_color
+    shading_dark_landuse_tint_color:   [1.000,0.590,0.904]
+    shading_dark_landuse_fill_color:   [1.000,0.970,0.994]
+
+    # TERRAIN PATTERN COLORS
+    pattern_earth_dot_color:              global.white_color
+    pattern_earth_fill_color:             global.offwhite_color
+    pattern_landuse_dot_color:            global.white_color
+    pattern_landuse_fill_color:           global.ultralight_color
+
+    pattern_dark_earth_dot_color:              global.white_color
+    pattern_dark_earth_fill_color:             [0.980,0.931,0.954]
+    pattern_dark_landuse_dot_color:            global.white_color
+    pattern_dark_landuse_fill_color:           global.lightest_color
+
+    pattern_river_tint:           global.extralight_color
+    pattern_river_fill:           global.offwhite_color
+    pattern_dark_river_tint:           global.midlight_color
+    pattern_dark_river_fill:           global.ultralight_color
+
+    # BATHYMETRY SHADING COLORS
+    shading_bathymetry_tint_color:          global.dark_color
+    shading_bathymetry_fill_color:          global.lightest_color
+    shading_dark_bathymetry_tint_color:     [1.000,0.150,0.817]
+    shading_dark_bathymetry_fill_color:     global.lightest_color
+
+    # BATHYMETRY PATTERN COLORS
+    pattern_bathymetry_color:   global.lightest_color
+    pattern_bathymetry_bg_color:    [0.975,0.792,0.933] #global.light_color
+    pattern_dark_bathymetry_color:   global.lightest_color
+    pattern_dark_bathymetry_bg_color:    [1.000,0.710,0.933]
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -20,3 +69,11 @@ global:
     # then Walkabout icons would not be colorized as Walkabout icons re-set the
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
+
+    sdk_terrain_shading_earth_style: terrain-shading-earth
+    sdk_terrain_shading_landuse_style: terrain-shading-landuse
+    sdk_terrain_shading_bathymetry_style: terrain-shading-bathymetry
+
+textures:
+    sdk_terrain_texture:
+        url: images/refill-spheremap-light.jpg

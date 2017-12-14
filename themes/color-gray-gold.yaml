@@ -1,28 +1,77 @@
 global:
     # INVERTED
-    black_color:                [0.650,0.680,0.741]
-    dark_color:                 [0.575,0.599,0.653]
-    mid_color:                  [0.495,0.517,0.558]
-    midlight_color:             [0.418,0.434,0.465]
-    light_color:                [0.333,0.343,0.367]
-    lighter_color:              [0.254,0.258,0.272]
-    lightest_color:             [0.212,0.216,0.225]
-    ultralight_color:           [0.185,0.189,0.197]
-    offwhite_color:             [0.169,0.173,0.176]
-    white_color:                [0.153,0.157,0.161]
-    transparent:                [0.380,0.394,0.422,0.250]
-    route_line:                 [0.000,0.500,1.000]
+    black_color:                  [0.650,0.680,0.741]
+    dark_color:                   [0.575,0.599,0.653]
+    mid_color:                    [0.495,0.517,0.558]
+    midlight_color:               [0.418,0.434,0.465]
+    extralight_color:             [0.381,0.395,0.423]
+    light_color:                  [0.333,0.343,0.367]
+    lighter_color:                [0.254,0.258,0.272]
+    lightest_color:               [0.212,0.216,0.225]
+    ultralight_color:             [0.185,0.189,0.197]
+    offwhite_color:               [0.169,0.173,0.176]
+    white_color:                  [0.153,0.157,0.161]
+    transparent:                  [0.380,0.394,0.422,0.25]
+    route_line:                   [0.000,0.500,1.000]
 
     # GOLD
-    two_color_black:            [0.144,0.127,0.097]
-    two_color_dark:             [0.176,0.155,0.119]
-    two_color_mid:              [0.240,0.212,0.163]
-    two_color_midlight:         [0.301,0.265,0.204]
-    two_color_light:            [0.418,0.368,0.283]
-    two_color_lighter:          [0.495,0.436,0.335]
-    two_color_lightest:         [0.609,0.537,0.413]
-    two_color_ultralight:       [0.734,0.647,0.497]
-    two_color_offwhite:         [0.815,0.718,0.552]
+    two_color_black:              [0.144,0.127,0.097]
+    two_color_dark:               [0.176,0.155,0.119]
+    two_color_mid:                [0.240,0.212,0.163]
+    two_color_midlight:           [0.301,0.265,0.204]
+    two_color_light:              [0.418,0.368,0.283]
+    two_color_lighter:            [0.495,0.436,0.335]
+    two_color_lightest:           [0.609,0.537,0.413]
+    two_color_ultralight:         [0.734,0.647,0.497]
+    two_color_offwhite:           [0.815,0.718,0.552]
+
+    text_fill:                    global.black_color
+    text_stroke:                  [0.153,0.157,0.161,0.75]
+
+    playas_color:                 [0.175,0.179,0.187]
+    no_texture_water_color:       [0.301,0.265,0.204]
+
+    # TERRAIN SHADING COLORS
+    shading_earth_tint_color:     [0.408,0.424,0.455] #global.midlight_color
+    shading_earth_fill_color:     [0.013,0.017,0.021]
+    shading_landuse_tint_color:   [0.400,0.394,0.384]
+    shading_landuse_fill_color:   [0.027,0.029,0.030]
+
+    shading_river_tint_color:     [0.331,0.295,0.234] #global.two_color_midlight
+    shading_river_fill_color:     global.two_color_black
+
+    shading_dark_earth_tint_color:     global.midlight_color
+    shading_dark_earth_fill_color:     [0.013,0.017,0.021]
+    shading_dark_landuse_tint_color:   [0.433,0.423,0.412]
+    shading_dark_landuse_fill_color:   [0.033,0.033,0.040]
+
+    # TERRAIN PATTERN COLORS
+    pattern_earth_dot_color:              [0.143,0.147,0.151]
+    pattern_earth_fill_color:             [0.116,0.120,0.120]
+    pattern_landuse_dot_color:            [0.192,0.196,0.203] #global.lightest_color
+    pattern_landuse_fill_color:           [0.083,0.086,0.086]
+
+    pattern_dark_earth_dot_color:              global.offwhite_color
+    pattern_dark_earth_fill_color:             [0.096,0.100,0.100]
+    pattern_dark_landuse_dot_color:            [0.221,0.225,0.236] #global.lighter_color
+    pattern_dark_landuse_fill_color:           [0.083,0.086,0.086]
+
+    pattern_river_tint:           global.two_color_midlight
+    pattern_river_fill:           [0.127,0.129,0.130] #global.white_color
+    pattern_dark_river_tint:           [0.331,0.295,0.234] #global.two_color_midlight
+    pattern_dark_river_fill:           global.offwhite_color
+
+    # BATHYMETRY SHADING COLORS
+    shading_bathymetry_tint_color:          global.two_color_light
+    shading_bathymetry_fill_color:          global.offwhite_color
+    shading_dark_bathymetry_tint_color:     global.two_color_lighter
+    shading_dark_bathymetry_fill_color:     global.offwhite_color
+
+    # BATHYMETRY PATTERN COLORS
+    pattern_bathymetry_color:   global.two_color_light
+    pattern_bathymetry_bg_color:    global.lightest_color
+    pattern_dark_bathymetry_color:  global.two_color_light #[0.475,0.416,0.315]
+    pattern_dark_bathymetry_bg_color:    global.offwhite_color
 
     # To make Refill's colorize-able icons play nice with other styles
     # we re-state the global here in the Refill color theme to use colorized_icons.
@@ -32,17 +81,31 @@ global:
     # global to "" (null).
     sdk_icon_color_style: colorized_icons
 
+    sdk_terrain_shading_earth_style: terrain-shading-earth-dark
+    sdk_terrain_shading_landuse_style: terrain-shading-landuse-dark
+    sdk_terrain_shading_bathymetry_style: terrain-shading-bathymetry-dark
+
+textures:
+    sdk_terrain_texture:
+        url: images/refill-spheremap-dark.jpg
+
+    building-grid:
+        url: images/building-grid-hi-contrast3.gif
+
 layers:
+    earth:
+        data: { source: mapzen }
+        draw:
+            polygons:
+                order: function() { return feature.sort_rank || 0; }
+                color: global.white_color
+            lines:
+                visible: false
+
     water:
         draw:
             polygons:
                 style: waves
-                color: global.two_color_light
-        later:
-            draw:
-                polygons:
-                    style: waves
-                    color: global.two_color_light
 
         lakes:
             draw:
@@ -56,11 +119,11 @@ layers:
                     style: waves
                     color: global.two_color_light
 
-        swimming_pool:
-            draw:
-                polygons:
-                    style: waves
-                    color: global.two_color_light
+        # swimming_pool:
+        #     draw:
+        #         polygons:
+        #             style: waves
+        #             color: global.two_color_light
 
         water-boundary-ocean:
             draw:
@@ -88,13 +151,13 @@ layers:
         railway:
             draw:
                 lines:
-                    style: railway_dash
+                    dash_background_color: [0.079,0.070,0.054]
                     color: global.two_color_midlight
 
         airport-lines:
             draw:
                 lines:
-                    color: global.two_color_offwhite
+                    color: global.two_color_lightest
             taxiway:
                 draw:
                     lines:
@@ -228,21 +291,21 @@ layers:
         country:
             draw:
                 country-outerline:
-                    color: global.two_color_midlight
+                    color: global.two_color_lighter
 
         other_country_boundary_disputed_etc:
             draw:
-                dashed:
-                    color: global.two_color_midlight
+                lines:
+                    color: global.two_color_lighter
             disputed:
                 draw:
-                    dashed_big:
-                        color: global.two_color_midlight
+                    lines:
+                        color: global.two_color_lighter
 
         region:
             draw:
                 lines:
-                    color: global.two_color_mid
+                    color: global.two_color_light
 
 
 styles:
@@ -256,11 +319,6 @@ styles:
             uniforms:
                 u_tint: global.two_color_offwhite
                 u_fill: [0.00,0.00,0.00]
-
-    railway_dash:
-        base: lines
-        dash: [0.25, 1.0]
-        dash_background_color: [0.079,0.070,0.054]
 
     building-grid:
         shaders:
@@ -293,6 +351,11 @@ styles:
             defines:
                 OPACITY: 1.0
 
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.two_color_light
+
     dots:
         shaders:
             defines:
@@ -302,7 +365,7 @@ styles:
     pixel-pattern-light:
         shaders:
             uniforms:
-                u_tint: [0.120,0.123,0.126]
+                u_tint: [0.090,0.093,0.096]
 
     pixel-pattern-bright:
         shaders:
@@ -338,7 +401,3 @@ styles:
         shaders:
             defines:
                 COLOR1: vec3(0.153,0.157,0.161)
-
-textures:
-    building-grid:
-        url: images/building-grid-hi-contrast3.gif

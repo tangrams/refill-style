@@ -23,6 +23,7 @@
         <!-- Main tangram library -->
         <!-- production -->
         <script src="https://mapzen.com/tangram/0.14/tangram.min.js"></script>
+        <!-- <script src="https://precog.mapzen.com/tangrams/tangram/master/dist/tangram.min.js"></script> -->
         <!-- production debug -->
         <!-- <script src="https://mapzen.com/tangram/0.14/tangram.debug.js"></script> -->
         <!-- dev -->
@@ -218,10 +219,14 @@
         var theme_defaults = { color: 'black', detail: 10, label: 5 };
         var all_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
-                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml' };
+                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
+                                  texture: '',
+                                  terrain: '' };
         var old_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
-                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml' };
+                                  detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
+                                  texture: '',
+                                  terrain: '' };
 
         /*** Map ***/
 
@@ -240,7 +245,7 @@
             mapzen_api_key = 'mapzen-xkUbe6g';
         }
 
-        var tg_global = { sdk_mapzen_api_key: mapzen_api_key };
+        var tg_global = { 'sdk_mapzen_api_key': mapzen_api_key, 'sdk_bathymetry': false, 'sdk_coastline': true };
 
         var layer = Tangram.leafletLayer({
             // more: 'vector-tiles-TTucZYU'
@@ -433,7 +438,9 @@
             function update_scene_with_themes() {
                 if( old_theme_imports.color === all_theme_imports.color &&
                     old_theme_imports.detail    === all_theme_imports.detail &&
-                    old_theme_imports.label === all_theme_imports.label ) {
+                    old_theme_imports.label === all_theme_imports.label &&
+                    old_theme_imports.texture === all_theme_imports.texture &&
+                    old_theme_imports.terrain === all_theme_imports.terrain ) {
                     //console.log( 'no change' );
                 } else {
                      //console.log( all_theme_imports, old_theme_imports );
@@ -450,17 +457,22 @@
                      if( all_theme_imports.detail ) {
                          themes_as_array.push( all_theme_imports.detail );
                      }
+                     if( all_theme_imports.texture ) {
+                         themes_as_array.push( all_theme_imports.texture );
+                     }
+                     if( all_theme_imports.terrain ) {
+                         themes_as_array.push( all_theme_imports.terrain );
+                     }
 
                      //console.log ( themes_as_array );
 
                      scene.load({ import: themes_as_array, global: tg_global });
-                     //console.log( scene.config );
-                     scene.updateConfig();
-                     //scene.rebuild();
 
                      old_theme_imports.color = all_theme_imports.color;
                      old_theme_imports.detail    = all_theme_imports.detail;
                      old_theme_imports.label = all_theme_imports.label;
+                     old_theme_imports.texture = all_theme_imports.texture;
+                     old_theme_imports.terrain = all_theme_imports.terrain;
                 }
             }
 
@@ -499,6 +511,7 @@
                 'COLOR - brown-orange': 'brown-orange',
                 'COLOR - blue-gray': 'blue-gray',
                 'DARK - inverted': 'inverted',
+                'DARK - inverted-dark': 'inverted-dark',
                 'DARK - purple-green': 'purple-green',
                 'DARK - gray-gold': 'gray-gold',
                 'DARK - zinc': 'zinc'
@@ -543,7 +556,6 @@
                 'Yes': true,
                 'No': false
             };
-            // use transit ux, else default to false
             gui.building_3d = query.building_3d || true;
             gui.building_button = gui.add(gui, 'building_3d', building_3d).onChange(function(value) {
                 tg_global['sdk_building_extrude'] = (value === 'true' || value === true);
@@ -553,6 +565,78 @@
             });
             gui.building_button.name( '3D buildings' );
 
+            // Texture toggle
+            var texture = {
+                '(default)': true,
+                'Yes': true,
+                'No': false
+            };
+            gui.texture = query.texture || true;
+            gui.texture_button = gui.add(gui, 'texture', texture).onChange(function(value) {
+                //console.log( value );
+                if (value === 'false' || value === false) {
+                    all_theme_imports.texture = 'themes/no-texture.yaml';
+                } else {
+                    all_theme_imports.texture = '';
+                }
+                update_scene_with_themes();
+
+            });
+            gui.texture_button.name( 'texture' );
+
+            // Terrain toggle
+            var terrain = {
+                '(default)': false,
+                'None': false,
+                'Shading': 'shading',
+                'Shading - Dark': 'shading-dark',
+                'Pattern': 'pattern',
+                'Pattern - Dark': 'pattern-dark'
+            };
+            gui.terrain = query.terrain || false;
+            gui.terrain_button = gui.add(gui, 'terrain', terrain).onChange(function(value) {
+                //console.log( value );
+                updateTerrain(value);
+            });
+            (updateTerrain = function(value) {
+                if (value === 'shading' || value === 'shading-dark' || value === 'pattern' || value === 'pattern-dark') {
+                    all_theme_imports.terrain = 'themes/terrain-' + value + '.yaml';
+                } else {
+                    all_theme_imports.terrain = '';
+                }
+                update_scene_with_themes();
+            })(gui.terrain);
+
+            // Bathymetry selector
+            var bathymetry = {
+                '(default)': false,
+                'Yes': true,
+                'No': false
+            };
+            gui.bathymetry = query.bathymetry || false;
+            gui.bathymetry_button = gui.add(gui, 'bathymetry', bathymetry).onChange(function(value) {
+                tg_global['sdk_bathymetry'] = (value === 'true' || value === true);
+
+                scene.config.global.sdk_bathymetry = tg_global['sdk_bathymetry']; // dat.gui passes a string
+                scene.updateConfig();
+            });
+            gui.bathymetry_button.name( 'bathymetry' );
+
+            // Coastline selector
+            var coastline = {
+                '(default)': true,
+                'Yes': true,
+                'No': false
+            };
+            gui.coastline = query.coastline || true;
+            gui.coastline_button = gui.add(gui, 'coastline', coastline).onChange(function(value) {
+                tg_global['sdk_coastline'] = (value === 'true' || value === true);
+
+                scene.config.global.sdk_coastline = tg_global['sdk_coastline']; // dat.gui passes a string
+                scene.updateConfig();
+            });
+            gui.coastline_button.name( 'coastline' );
+
             // Routing selector
             var sdk_directions = {
                 '(default)': false,
@@ -561,7 +645,6 @@
                 'Transit': 'transit',
                 'Bike': 'bike'
             };
-            // use transit ux, else default to false
             gui.sdk_directions = query.sdk_directions || false;
             gui.directions_button = gui.add(gui, 'sdk_directions', sdk_directions).onChange(function(value) {
                 if( value === 'bike' ) {

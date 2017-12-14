@@ -38,7 +38,7 @@ styles:
                     weight: normal
                     fill: global.dark_color
                     size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
-                    stroke: { color: global.white_color, width: [[12,2px],[16,4px]] }
+                    stroke: { color: global.text_stroke, width: [[12,2px],[16,4px]] }
 
     colorized_icons:
         shaders:

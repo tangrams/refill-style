@@ -1,0 +1,506 @@
+sources:
+    mapzen:
+        rasters:
+            - normals
+    normals:
+        type: Raster
+        url: https://tile.mapzen.com/mapzen/terrain/v1/normal/{z}/{x}/{y}.png
+        url_params:
+            api_key: global.sdk_mapzen_api_key
+        max_zoom: 15
+
+textures:
+    palette:
+        url: images/ramp.png
+
+scene:
+    background:
+        color: global.pattern_dark_bathymetry_bg_color
+
+layers:
+    earth:
+        data: { source: mapzen }
+        draw:
+            polygons:
+                style: terrain-pattern-earth
+                order: function() { return feature.sort_rank || 0; }
+                color: global.lightest_color
+                #visible: false
+            lines:
+                visible: false
+
+    water:
+        bathymetry:
+            enabled: global.sdk_bathymetry
+            draw:
+                polygons:
+                    # reuse the inherited base color, but use modified shader
+                    # that adjusts brightness / contrast to match original color
+                    style: water-bathymetry-stripes
+                    order: global.feature_order
+                    color: global.pattern_dark_bathymetry_color
+        lakes:
+            bathymetry:
+                enabled: global.sdk_bathymetry
+                draw:
+                    polygons:
+                        # reuse the inherited base color, but use modified shader
+                        # that adjusts brightness / contrast to match original color
+                        style: water-bathymetry-stripes
+                        order: global.feature_order
+                        color: global.pattern_dark_bathymetry_color
+
+        other-water-areas:
+            bathymetry:
+                enabled: global.sdk_bathymetry
+                draw:
+                    polygons:
+                        # reuse the inherited base color, but use modified shader
+                        # that adjusts brightness / contrast to match original color
+                        style: water-bathymetry-stripes
+                        order: global.feature_order
+                        color: global.pattern_dark_bathymetry_color
+
+    landuse:
+        national_park:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+            us_national_park:
+                draw:
+                    polygons:
+                        style: terrain-pattern-landuse
+
+        conservation:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        national_forest_level_6:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        forest-landcover:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        parks-and-national-forests-not-national-park:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+            national_park:
+                draw:
+                    polygons:
+                        style: terrain-pattern-landuse
+
+        farm:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        university:
+            enabled: false
+
+        cemetery:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        golf_course:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        hospital:
+            enabled: false
+
+        sports_centre:
+            enabled: false
+
+        recreation_ground:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        stadium:
+            enabled: false
+
+        zoo:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        winter_sports:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        man-made:
+            enabled: false
+
+        tier5:
+            tourism-related:
+                draw:
+                    polygons:
+                        style: terrain-pattern-landuse
+
+            beach:
+                draw:
+                    polygons:
+                        style: terrain-pattern-landuse
+
+        garden:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        parking:
+            enabled: false
+
+        pedestrian:
+            enabled: false
+
+        pitch:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        playground:
+            draw:
+                polygons:
+                    style: terrain-pattern-landuse
+
+        school:
+            enabled: false
+
+        minor-landuse:
+            enabled: false
+
+        landuse-not-filtered:
+            enabled: false
+
+        retaining_wall:
+            enabled: false
+
+        fence:
+            enabled: false
+
+styles:
+    riverlines:
+        shaders:
+            uniforms:
+                u_tint: global.pattern_dark_river_tint
+                u_fill: global.pattern_dark_river_fill
+
+    functions-zoom:
+        shaders:
+            defines:
+                ZOOM_START: 14
+                ZOOM_END: 20
+                ZOOM_MAX: 'max(ZOOM_START, ZOOM_END)'
+                ZOOM_FNC: linear
+                ZOOM_IN: 0.
+                ZOOM_OUT: 1.
+            blocks:
+                global: |
+                    float zoom() {
+                        return mix( ZOOM_IN,
+                                    ZOOM_OUT,
+                                    clamp( smoothstep(  ZOOM_START/ZOOM_MAX,
+                                                        ZOOM_END/ZOOM_MAX,
+                                                        max(u_map_position.z/ZOOM_MAX, 0.)), 0., 1.) );
+                    }
+
+                    float zoomEase() {
+                        return mix( ZOOM_IN,
+                                    ZOOM_OUT,
+                                    (u_map_position.z-ZOOM_START)/(ZOOM_END-ZOOM_START) );
+                    }
+
+    shapes-type:
+        mix:
+            - functions-aastep
+        shaders:
+            defines:
+                STROKE: 0.15
+            blocks:
+                global: |
+                    float fill (in float size, in float x) {
+                        return 1.-aastep(size, x);
+                    }
+
+                    float stroke (in float size, in float x) {
+                        return aastep(size, x+STROKE*.5) - aastep(size, x-STROKE*.5);
+                    }
+
+    elevation-normal:
+        raster: custom
+        shaders:
+            defines:
+                NORMAL_TEXTURE_INDEX: 0
+            blocks:
+                normal: |
+                    vec4 normal_elv_raster = sampleRaster(int(NORMAL_TEXTURE_INDEX));
+                    normal = (normal_elv_raster.rgb-.5)*2.;
+
+    polygons-dots:
+        base: polygons
+        mix:
+            - space-tile
+            - tiling-brick
+            - shapes-circle
+        shaders:
+            blocks:
+                global: |
+                    float TileDots(float scale, float size) {
+
+                        // controls
+                        float DOT_SIZE = size * .1; // bigger value = smaller dots
+                        float SPEED = 2.; // bigger value = faster transition
+
+                        vec2 tc = getTileCoords() * size * pow(2., floor(u_map_position.z) - abs(u_tile_origin.z));
+                        vec2 IN = brick(tc, 2.);
+                        float A = circleDF(vec2(.5) - IN) * DOT_SIZE;
+                        vec2 OUT = brick(tc, 4.);
+                        float B = circleDF(vec2(.5) - OUT) * DOT_SIZE;
+
+                        // keep B dots big as they fade in, to maintain density
+                        B *= pow(fract(u_map_position.z)*.95, SPEED);
+
+                        float d = mix(A, B, pow(fract(u_map_position.z), SPEED));
+                        return aastep(scale, d);
+                    }
+
+                color: |
+                    color.rgb = mix(DOTS_COLOR, DOTS_BACKGROUND_COLOR, TileDots(DOTS_SIZE, DOTS_SCALE));
+
+    shapes-circle:
+        mix:
+            - shapes-type
+        shaders:
+            blocks:
+                global: |
+                    // get distance field of a Circle
+                    float circleDF (vec2 st) {
+                                    return dot(st,st)*3.03;
+                    }
+
+    terrain-pattern:
+        base: polygons
+        mix: [elevation-normal, functions-zoom, polygons-dots]
+        shaders:
+            defines:
+                ZOOM_START: 0.
+                ZOOM_END: 13.
+                DOTS_DIR: vec3(0.600,-0.950,0.520)
+                DOTS_COLOR: vec3(0.)
+                DOTS_BACKGROUND_COLOR: vec3(1.)
+                DOTS_SCALE: 35.
+                DOTS_SIZE: mix(shade*10.,shade*2.,zoom())
+            blocks:
+                normal: |
+                    float shade = dot(normal, DOTS_DIR);
+                    // modify brightness and contrast
+                    shade = shade*shade*shade * -2. + .65;
+                    // reset normal to prevent standard terrain shading mixing with dots
+                    normal = vec3(0,0,1);
+
+    terrain-pattern-earth:
+        base: polygons
+        mix: [elevation-ramp, terrain-pattern, colorized-earth]
+
+    terrain-pattern-landuse:
+        base: polygons
+        mix: [elevation-ramp, terrain-pattern, colorized-landuse]
+
+    elevation-ramp:
+        shaders:
+            uniforms:
+                u_ramp: palette
+            blocks:
+                color: |
+                    color = texture2D(u_ramp, vec2((1.-normal_elv_raster.a),.5));
+        raster: custom
+
+    colorized-earth:
+        shaders:
+            uniforms:
+                u_tint: global.pattern_dark_earth_dot_color
+                u_fill: global.pattern_dark_earth_fill_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    colorized-landuse:
+        shaders:
+            uniforms:
+                u_tint: global.pattern_dark_landuse_dot_color
+                u_fill: global.pattern_dark_landuse_fill_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    colorized-bathymetry:
+        shaders:
+            uniforms:
+                u_tint: global.pattern_dark_bathymetry_color
+                u_fill: global.pattern_dark_bathymetry_bg_color
+            blocks:
+                filter: |
+                    color.rgb = mix(u_tint.rgb, u_fill.rgb, color.rgb);
+
+    water-bathymetry-stripes:
+        base: polygons
+        mix: [functions-zoom, elevation-stripes, colorized-bathymetry]
+        shaders:
+            defines:
+                ZOOM_START: 0.
+                ZOOM_END: 13.
+                STRIPES_DIR: vec3(0.600,-0.950,0.520)
+                STRIPES_PCT: 1.8
+                STRIPES_WIDTH: mix( (1.-zoom()),
+                                    dot((sampleRaster(int(NORMAL_TEXTURE_INDEX)).rgb-.5)*2.,
+                                        STRIPES_DIR),
+                                    zoom())*STRIPES_PCT
+
+    elevation-stripes:
+        base: polygons
+        mix: [polygons-diagonal-stripes]
+        blend: opaque
+        lighting: false
+        raster: custom
+        shaders:
+            defines:
+                NORMAL_TEXTURE_INDEX: 0
+
+    polygons-diagonal-stripes:
+        base: polygons
+        mix: [patterns-stripes, space-tile]
+        shaders:
+            defines:
+                STRIPES_ALPHA: 1.
+                STRIPES_WIDTH: .5
+                STRIPES_SCALE: 65.
+            blocks:
+                color: |
+                    color.rgb = vec3(1.000,1.000,1.000);
+                    color.rgb -= vec3(1.000,1.000,1.000) * diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE), STRIPES_WIDTH) * STRIPES_ALPHA;
+
+    patterns-stripes:
+        mix: [functions-aastep, geometry-matrices]
+        shaders:
+            defines:
+                PI: 3.14159265358979323846
+            blocks:
+                global: |
+                    // Return a distance function of stripes
+                    float stripesDF (vec2 st) {
+                        return abs(sin(st.y*PI));
+                    }
+
+                    // Adjustable width stripes
+                    float stripes (vec2 st, float width) {
+                        return aastep(width, stripesDF(st));
+                    }
+
+                    // Adjustable Angle
+                    float stripes (vec2 st, float width, float angle) {
+                        st = rotate2D(angle) * st;
+                        return stripes(st, width);
+                    }
+
+                    // Faster optimisation of diagonal stripes
+                    float diagonalStripes (vec2 st) {
+                        vec2 i_st = floor(st);
+                        vec2 f_st = fract(st);
+                        if (mod(i_st.y,2.) - mod(i_st.x,2.) == 0.) {
+                            return 1.0 - aastep(f_st.x,f_st.y);
+                        } else {
+                            return aastep(f_st.x,f_st.y);
+                        }
+                    }
+
+                    // Faster optimisation of diagonal stripes with controlable width
+                    float diagonalStripes (vec2 st, float width) {
+                        st.y -= st.x;
+                        return stripes(st, width);
+                    }
+
+    geometry-matrices:
+        mix: [block]
+        shaders:
+            blocks:
+                global: |
+                    // Rotate in 2, 3 and 4 dimensions
+                    // ================================
+                    mat2 rotate2D (float angle) {
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+                    #ifdef TANGRAM_FRAGMENT_SHADER
+                    vec2 rotate2D (vec2 st, float a) {
+                        return (rotate2D(a)*(st-.5))+.5;
+                    }
+                    #endif
+                    mat3 rotateX3D (float phi) {
+                        return mat3(
+                            vec3(1.,0.,0.),
+                            vec3(0.,cos(phi),-sin(phi)),
+                            vec3(0.,sin(phi),cos(phi)));
+                    }
+                    mat4 rotateX4D (float phi) {
+                        return mat4(
+                            vec4(1.,0.,0.,0),
+                            vec4(0.,cos(phi),-sin(phi),0.),
+                            vec4(0.,sin(phi),cos(phi),0.),
+                            vec4(0.,0.,0.,1.));
+                    }
+                    mat3 rotateY3D (float theta) {
+                        return mat3(
+                            vec3(cos(theta),0.,-sin(theta)),
+                            vec3(0.,1.,0.),
+                            vec3(sin(theta),0.,cos(theta)));
+                    }
+                    mat4 rotateY4D (float theta) {
+                        return mat4(
+                            vec4(cos(theta),0.,-sin(theta),0),
+                            vec4(0.,1.,0.,0.),
+                            vec4(sin(theta),0.,cos(theta),0.),
+                            vec4(0.,0.,0.,1.));
+                    }
+                    mat3 rotateZ3D (float psi) {
+                        return mat3(
+                            vec3(cos(psi),-sin(psi),0.),
+                            vec3(sin(psi),cos(psi),0.),
+                            vec3(0.,0.,1.));
+                    }
+                    mat4 rotateZ4D (float psi) {
+                        return mat4(
+                            vec4(cos(psi),-sin(psi),0.,0),
+                            vec4(sin(psi),cos(psi),0.,0.),
+                            vec4(0.,0.,1.,0.),
+                            vec4(0.,0.,0.,1.));
+                    }
+                    //
+                    // Scale 4 dimensions
+                    // ================================
+                    mat4 scale4D (float x, float y, float z) {
+                        return mat4(
+                            vec4(x,   0.0, 0.0, 0.0),
+                            vec4(0.0, y,   0.0, 0.0),
+                            vec4(0.0, 0.0, z,   0.0),
+                            vec4(0.0, 0.0, 0.0, 1.0)
+                        );
+                    }
+                    //
+                    // Translate in 4 dimensions
+                    mat4 translate4D (float x, float y, float z) {
+                        return mat4(
+                            vec4(1.0, 0.0, 0.0, 0.0),
+                            vec4(0.0, 1.0, 0.0, 0.0),
+                            vec4(0.0, 0.0, 1.0, 0.0),
+                            vec4(x,   y,   z,   1.0)
+                        );
+                    }
