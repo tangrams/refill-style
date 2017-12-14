@@ -2168,10 +2168,10 @@ layers:
             draw:
                 lines:
                     color: global.white_color
-                    width: [[13, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
+                    width: [[14, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
                     outline:
                         color: [[13, global.light_color], [15, global.extralight_color]]
-                        width: [[13, 0.25px], [16, 0.35px], [17, 1px]]
+                        width: [[14, 0.25px], [16, 0.35px], [17, 1px]]
             early:
                 filter:
                     $zoom: { max: 15 }
@@ -2185,19 +2185,19 @@ layers:
                 draw:
                     lines:
                         color: global.white_color
-                        width: [[13, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
+                        width: [[14, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
                         outline:
                             color: [[13, global.light_color], [15, global.extralight_color]]
-                            width: [[13, 0.25px], [16, 0.35px], [17, 1px]]
+                            width: [[14, 0.25px], [16, 0.35px], [17, 1px]]
             footway:
                 filter: { kind_detail: footway }
                 draw:
                     lines:
                         color: global.white_color
-                        width: [[13, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
+                        width: [[14, 0px], [16, 0.15px], [17, 2.5px], [20, 3m]]
                         outline:
                             color: [[13, global.light_color], [15, global.mid_color]]
-                            width: [[13, 0.25px], [16, 0.35px], [17, 1px]]
+                            width: [[14, 0.25px], [16, 0.35px], [17, 1px]]
                 bridge:
                     filter: { is_bridge: true }
                     draw:
