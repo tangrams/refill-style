@@ -2317,6 +2317,7 @@ layers:
                             }
                         }
                     sprite_default: generic_shield_5char
+                    size: [[7,[90%,90%]],[12,[100%,100%]],[15,[110%,110%]]]
                     priority: 58
                     repeat_group: shields
                     repeat_distance: [[8, 90px],[10, 40px],[13, 30px]]
