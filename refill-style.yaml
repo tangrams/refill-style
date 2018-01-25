@@ -254,12 +254,12 @@ textures:
 
 sources:
     mapzen:
-        type: TopoJSON #GeoJSON, MVT, TopoJSON
-        url:  https://tile.mapzen.com/mapzen/vector/v1/512/all/{z}/{x}/{y}.topojson
+        type: MVT #GeoJSON, MVT, TopoJSON
+        url:  https://tile.mapzen.com/mapzen/vector/v1/512/all/{z}/{x}/{y}.mvt
         url_params:
             api_key: global.sdk_mapzen_api_key
-        #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
-        # url:  //localhost:8080/vector/all/{z}/{x}/{y}.topojson
+        #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt
+        # url:  //localhost:8080/vector/all/{z}/{x}/{y}.mvt
         tile_size: 512
         max_zoom: 16
     normals: # normals
