@@ -255,17 +255,15 @@ textures:
 sources:
     mapzen:
         type: MVT #GeoJSON, MVT, TopoJSON
-        url:  https://tile.mapzen.com/mapzen/vector/v1/512/all/{z}/{x}/{y}.mvt
+        url:  https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
         url_params:
             api_key: global.sdk_mapzen_api_key
-        #url:  https://tile.dev.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.mvt
-        # url:  //localhost:8080/vector/all/{z}/{x}/{y}.mvt
         tile_size: 512
-        max_zoom: 16
+        max_zoom: 15
     normals: # normals
         type: Raster
         # prod
-        url: https://tile.mapzen.com/mapzen/terrain/v1/512/normal/{z}/{x}/{y}.png
+        url: https://tile.nextzen.org/tilezen/terrain/v1/512/normal/{z}/{x}/{y}.png
         url_params:
             api_key: global.sdk_mapzen_api_key
         tile_size: 512
