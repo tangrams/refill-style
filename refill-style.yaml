@@ -18,7 +18,7 @@ import:
 global:
     # Sign up for a Mapzen API key to enjoy higher rate limits
     # https://mapzen.com/documentation/overview/#developer-accounts-and-api-keys
-    sdk_mapzen_api_key: ''     # set this value to your Mapzen API key
+    sdk_api_key: ''     # set this value to your Mapzen API key
 
     #ux/ui
     ux_language: false             # l10n language code, trusting OSM in v0.10 tiles, fixed in v1.0 tiles
@@ -257,15 +257,15 @@ sources:
         type: MVT #GeoJSON, MVT, TopoJSON
         url:  https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
         url_params:
-            api_key: global.sdk_mapzen_api_key
+            api_key: global.sdk_api_key
         tile_size: 512
-        max_zoom: 15
+        max_zoom: 16
     normals: # normals
         type: Raster
         # prod
         url: https://tile.nextzen.org/tilezen/terrain/v1/512/normal/{z}/{x}/{y}.png
         url_params:
-            api_key: global.sdk_mapzen_api_key
+            api_key: global.sdk_api_key
         tile_size: 512
         max_zoom: 14
 
