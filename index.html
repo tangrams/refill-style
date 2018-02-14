@@ -239,13 +239,13 @@
 
         var dev_or_prod = 'prod';
         // prod
-        var mapzen_api_key = 'vector-tiles-W2tPU-Y';
+        var sdk_api_key = 'ckD92axlTP6zj4BK6rhhhA';
 
         if( dev_or_prod == 'dev' ) {
-            mapzen_api_key = 'mapzen-xkUbe6g';
+            sdk_api_key = 'ckD92axlTP6zj4BK6rhhhA';
         }
 
-        var tg_global = { 'sdk_mapzen_api_key': mapzen_api_key, 'sdk_bathymetry': false, 'sdk_coastline': true };
+        var tg_global = { 'sdk_api_key': sdk_api_key, 'sdk_bathymetry': false, 'sdk_coastline': true };
 
         var layer = Tangram.leafletLayer({
             // more: 'vector-tiles-TTucZYU'
@@ -384,7 +384,7 @@
             if( dev_or_prod == 'dev' ) {
                 url += 'dev.';
             }
-            url += 'nextzen.org/tilezen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson' + '?api_key=' + mapzen_api_key;
+            url += 'nextzen.org/tilezen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson' + '?api_key=' + sdk_api_key;
             return url;
         }
 
