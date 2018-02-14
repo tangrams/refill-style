@@ -22,7 +22,7 @@
 
         <!-- Main tangram library -->
         <!-- production -->
-        <script src="https://mapzen.com/tangram/0.14/tangram.min.js"></script>
+        <script src="https://www.nextzen.org/tangram/0.14/tangram.min.js"></script>
         <!-- <script src="https://precog.mapzen.com/tangrams/tangram/master/dist/tangram.min.js"></script> -->
         <!-- production debug -->
         <!-- <script src="https://mapzen.com/tangram/0.14/tangram.debug.js"></script> -->
@@ -384,7 +384,7 @@
             if( dev_or_prod == 'dev' ) {
                 url += 'dev.';
             }
-            url += 'mapzen.com/mapzen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson' + '?api_key=' + mapzen_api_key;
+            url += 'nextzen.org/tilezen/vector/v1/all/' + zoom + '/' + tileCoords.x  + '/' + tileCoords.y + '.topojson' + '?api_key=' + mapzen_api_key;
             return url;
         }
 
