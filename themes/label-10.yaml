@@ -1,6 +1,5 @@
 global:
     #label visibility
-    icon_size:                      [[13, '14px'], [16, '18px'], [18, '19px']]
     text_visible_continent:         true
     text_visible_admin:             true
     text_visible_populated_places:  true
@@ -14,8 +13,8 @@ global:
     label_visible_landuse_green:    true                        #this needs work
     icon_visible_landuse_green:     true                        #this needs work
     text_visible_landuse_green:     true
-    icon_size_green:                [[13, '14px'], [16, '18px'], [18, '19px']]      # 0px for no, default, more  [[13, '14px'], [16, '18px'], [18, '19px']]
-    icon_size_green_l:              [[14, '24px'], [16, '32px']]                    # 0px for no, default, more  [[14, '24px'], [16, '32px']]
+    icon_size_green:                [[13, [95%,95%]], [16, [100%,100%]], [18, [105%,105%]]]
+    icon_size_green_l:              [[14, [115%,115%]], [16, [200%,200%]]]
     label_visible_poi_landuse:      true                        #false on default
     icon_visible_poi_landuse:       true                        #false on default
     text_visible_poi_landuse:       true
