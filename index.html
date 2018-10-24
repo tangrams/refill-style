@@ -22,10 +22,9 @@
 
         <!-- Main tangram library -->
         <!-- production -->
-        <script src="https://www.nextzen.org/tangram/0.14/tangram.min.js"></script>
-        <!-- <script src="https://precog.mapzen.com/tangrams/tangram/master/dist/tangram.min.js"></script> -->
+        <script src="https://www.nextzen.org/tangram/0.15/tangram.min.js"></script>
         <!-- production debug -->
-        <!-- <script src="https://mapzen.com/tangram/0.14/tangram.debug.js"></script> -->
+        <!-- <script src="https://mapzen.com/tangram/0.15/tangram.debug.js"></script> -->
         <!-- dev -->
         <!-- <script src="https://precog.mapzen.com/tangrams/tangram/master/dist/tangram.debug.js"></script> -->
         <!-- dev branch -->
@@ -221,12 +220,18 @@
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
                                   detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
                                   texture: '',
-                                  terrain: '' };
+                                  terrain: '',
+								  road_shields_usa: 'themes/refill-road-shields-usa.yaml',
+                    			  road_shields_international: 'themes/refill-road-shields-international.yaml'
+                                  };
         var old_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
                                   detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
                                   texture: '',
-                                  terrain: '' };
+                                  terrain: '',
+								  road_shields_usa: 'themes/refill-road-shields-usa.yaml',
+                    			  road_shields_international: 'themes/refill-road-shields-international.yaml'
+                                  };
 
         /*** Map ***/
 
@@ -254,7 +259,9 @@
             scene: { import: [  tg_baseScene,
                                 'themes/color-' + theme_defaults.color + '.yaml',
                                 'themes/label-' + theme_defaults.label + '.yaml',
-                                'themes/detail-' + theme_defaults.detail + '.yaml'],
+                                'themes/detail-' + theme_defaults.detail + '.yaml',
+                                'themes/refill-road-shields-usa.yaml',
+                                'themes/refill-road-shields-international.yaml'], 
                      global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
@@ -408,7 +415,7 @@
                 'español (Spanish)': 'es',
                 'বাংলা (Bengali)': 'bn',
                 'Deutsch (German)': 'de',
-                'ελληνικά (Greek)': 'gr',
+                'ελληνικά (Greek)': 'el',
                 'हिन्दी (Hindi)': 'hi',
                 'Bahasa Indonesia (Indonesian)': 'id',
                 'italiano (Italian)': 'it',
@@ -435,12 +442,22 @@
             });
             gui.fallback_button.name('lang fallback');
 
+
+            // So many themes
+            var all_theme_imports = { color: null,
+                                      detail: null,
+                                      label: null,
+                                      road_shields_usa: 'themes/refill-road-shields-usa.yaml',
+                                      road_shields_international: 'themes/refill-road-shields-international.yaml' };
+
             function update_scene_with_themes() {
                 if( old_theme_imports.color === all_theme_imports.color &&
                     old_theme_imports.detail    === all_theme_imports.detail &&
                     old_theme_imports.label === all_theme_imports.label &&
                     old_theme_imports.texture === all_theme_imports.texture &&
-                    old_theme_imports.terrain === all_theme_imports.terrain ) {
+                    old_theme_imports.terrain === all_theme_imports.terrain &&
+                    old_theme_imports.road_shields_usa === all_theme_imports.road_shields_usa &&
+                    old_theme_imports.road_shields_international === all_theme_imports.road_shields_international ) {
                     //console.log( 'no change' );
                 } else {
                      //console.log( all_theme_imports, old_theme_imports );
@@ -463,8 +480,14 @@
                      if( all_theme_imports.terrain ) {
                          themes_as_array.push( all_theme_imports.terrain );
                      }
-
-                     //console.log ( themes_as_array );
+					 if( all_theme_imports.road_shields_usa ) {
+					 	themes_as_array.push( all_theme_imports.road_shields_usa );
+					 }
+					 if( all_theme_imports.road_shields_international ) {
+					 	themes_as_array.push( all_theme_imports.road_shields_international );
+					 }
+ 
+                     console.log ( themes_as_array );
 
                      scene.load({ import: themes_as_array, global: tg_global });
 
@@ -473,6 +496,8 @@
                      old_theme_imports.label = all_theme_imports.label;
                      old_theme_imports.texture = all_theme_imports.texture;
                      old_theme_imports.terrain = all_theme_imports.terrain;
+                     old_theme_imports.road_shields_usa = all_theme_imports.road_shields_usa;
+                     old_theme_imports.road_shields_international = all_theme_imports.road_shields_international;
                 }
             }
 
@@ -496,6 +521,32 @@
                 update_scene_with_themes();
 
                 //window.location.color = 'color=' + value;
+            });
+
+            // Enable/disable USA state road shields
+            var shields_usa = 'USA shields';
+            gui[shields_usa] = true;
+            gui.add(gui, shields_usa).onChange(function(value) {
+                var import_theme = 'themes/refill-road-shields-usa.yaml'
+                if( value ) {
+                    all_theme_imports.road_shields_usa = import_theme;
+                } else {
+                    all_theme_imports.road_shields_usa = null;
+                }
+                update_scene_with_themes();
+            });
+            
+            // Enable/disable international road shields
+            var shields_international = 'International shields';
+            gui[shields_international] = true;
+            gui.add(gui, shields_international).onChange(function(value) {
+                var import_theme = 'themes/refill-road-shields-international.yaml'
+                if( value ) {
+                    all_theme_imports.road_shields_international = import_theme;
+                } else {
+                    all_theme_imports.road_shields_international = null;
+                }
+                update_scene_with_themes();
             });
 
             // Color theme selector
