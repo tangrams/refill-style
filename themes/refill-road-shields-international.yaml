@@ -1722,7 +1722,7 @@ layers:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: white
+                                    fill: [0.000,0.000,0.000]
                 
                 GR:national:
                     filter: { network: 'GR:national' }
@@ -1759,7 +1759,7 @@ layers:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: white
+                                    fill: [0.000,0.000,0.000]
                 IT:B-road:
                     filter: { network: 'IT:B-road' }
                     draw:
@@ -1934,7 +1934,7 @@ layers:
                     draw:
                         mapzen_icon_library:
                             text:
-                                offset: [0px, 1px]
+                                offset: [0px, 2px]
 
                 ###
                 ### IRAW
@@ -1972,7 +1972,7 @@ layers:
                             text:
                                 offset: [0px, 2px]
                                 font:
-                                    fill: white
+                                    fill: [1.000,1.000,1.000]
 
                 # Split up the za:regional filters, but really need a za:provincial network for diamond green shields ZA:P
                 ZA:regional:
@@ -1981,7 +1981,7 @@ layers:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: [1.000,0.915,0.610]
+                                    fill: [0.000,0.000,0.000]
 
                 za:regional-capetown:
                     filter: { network: 'ZA:capetown' }
@@ -2016,7 +2016,7 @@ layers:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: white
+                                    fill: [0.000,0.000,0.000]
 
                 CH:national:
                     filter: { network: 'CH:national' }
@@ -2060,12 +2060,22 @@ layers:
                 ### UKRAINE
                 ###
                 ua:international:
-                    filter: { network: ['UA:international','UA:national','UA:regional'] }
+                    filter: { network: ['UA:international','UA:national'] }
                     draw:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: white
+                                    fill: [0.000,0.000,0.000]
+
+                UA:regional:
+                    filter: { network: 'UA:regional' }
+                    draw:
+                        mapzen_icon_library:
+                            text:
+                                font:
+                                    fill: [0.000,0.000,0.000]
+
+
 
                 ###
                 ### UNITED KINGDOM
