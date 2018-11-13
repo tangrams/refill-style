@@ -255,9 +255,7 @@ textures:
 sources:
     mapzen:
         type: MVT #GeoJSON, MVT, TopoJSON
-        #url:  https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
-        # TODO: strip the dev URL
-        url: http://localhost:8050/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
+        url:  https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
         url_params:
             api_key: global.sdk_api_key
         tile_size: 512
@@ -2444,7 +2442,7 @@ layers:
                     draw:
                         mapzen_icon_library:
                             visible: false
-            
+
             width_4char:
                 filter: |
                     function() {
