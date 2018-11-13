@@ -255,7 +255,10 @@ textures:
 sources:
     mapzen:
         type: MVT #GeoJSON, MVT, TopoJSON
+        # prod
         url:  https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
+        # dev
+        #url: https://dev-tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
         url_params:
             api_key: global.sdk_api_key
         tile_size: 512

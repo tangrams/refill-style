@@ -1493,7 +1493,7 @@ layers:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: white
+                                    fill: black
 
                 ###
                 ### BRAZIL
@@ -1639,7 +1639,7 @@ layers:
                             text:
                                 offset: [0px, 2px]
                                 font:
-                                    fill: [0.400,0.400,0.400]
+                                    fill: black
 
                 CN-expressway-regional:
                     filter: { network: 'CN:expressway:regional' }
@@ -1723,7 +1723,7 @@ layers:
                             text:
                                 font:
                                     fill: [0.000,0.000,0.000]
-                
+
                 GR:national:
                     filter: { network: 'GR:national' }
                     draw:
@@ -1830,7 +1830,7 @@ layers:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: '#11248b'
+                                    fill: black
 
                 ###
                 ### NEW ZEALAND
@@ -1993,7 +1993,7 @@ layers:
                                 }
                             text:
                                 font:
-                                    fill: [1.000,0.915,0.610]
+                                    fill: black
 
                 ###
                 ### SPAIN
@@ -2093,7 +2093,7 @@ layers:
                         mapzen_icon_library:
                             text:
                                 font:
-                                    fill: [1.000,0.931,0.680]
+                                    fill: black
 
                 ###
                 ### TURKEY
