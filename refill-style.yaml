@@ -255,7 +255,10 @@ textures:
 sources:
     mapzen:
         type: MVT #GeoJSON, MVT, TopoJSON
+        # prod
         url:  https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
+        # dev
+        #url: https://dev-tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt
         url_params:
             api_key: global.sdk_api_key
         tile_size: 512
@@ -2315,7 +2318,7 @@ layers:
                             }
                         }
                     sprite_default: generic_shield_5char
-                    size: [[7,[90%,90%]],[12,[100%,100%]],[15,[110%,110%]]]
+                    size: [[7,[75%,75%]],[12,[100%,100%]],[15,[110%,110%]]]
                     priority: 58
                     repeat_group: shields
                     repeat_distance: [[8, 90px],[10, 40px],[13, 30px]]
@@ -2358,106 +2361,107 @@ layers:
                         priority: 47
                         #color: yellow
                         visible: global.sdk_road_shields
+                early:
+                    filter:
+                        - $zoom: { max: 7 }
+                    draw:
+                        mapzen_icon_library:
+                            visible: false
 
             default_priority_trunk:
                 filter:
                     all:
-                        - kind_detail: [trunk]
-                        - $zoom: { min: 10 }
+                        - kind_detail: major_road
+                        - kind_detail: trunk
                 draw:
                     mapzen_icon_library:
                         priority: 48
                         #color: red
                         visible: global.sdk_road_shields
+                early:
+                    filter:
+                        - $zoom: { max: 9 }
+                    draw:
+                        mapzen_icon_library:
+                            visible: false
             default_priority_primary:
                 filter:
                     all:
-                        - kind_detail: [primary]
-                        - $zoom: { min: 12 }
+                        - kind: major_road
+                        - kind_detail: primary
                 draw:
                     mapzen_icon_library:
                         priority: 49
                         #color: aqua
                         visible: global.sdk_road_shields
+                early:
+                    filter:
+                        - $zoom: { max: 10 }
+                    draw:
+                        mapzen_icon_library:
+                            visible: false
             default_priority_trunk_secondary:
                 filter:
                     all:
-                        - kind_detail: [secondary]
-                        - $zoom: { min: 12 }
+                        - kind: major_road
+                        - kind_detail: secondary
                 draw:
                     mapzen_icon_library:
                         priority: 53
                         #color: blue
                         visible: global.sdk_road_shields
+                early:
+                    filter:
+                        - $zoom: { max: 12 }
+                    draw:
+                        mapzen_icon_library:
+                            visible: false
             default_priority_trunk_tertiary:
                 filter:
                     all:
+                        - kind: major_road
                         - kind_detail: tertiary
-                        - $zoom: { min: 13 }
                 draw:
                     mapzen_icon_library:
                         priority: 55
                         #color: green
                         visible: global.sdk_road_shields
-            # not-special:
-            #     filter:
-            #         not: { network: ['US:I','US:US'] }
-            #         $zoom: { max: 9 }
-            #     draw:
-            #         mapzen_icon_library:
-            #             visible: false
-            # width_1char:
-            #     filter: |
-            #         function() {
-            #             if( feature.shield_text ) {
-            #                 return (feature.shield_text.length === 1)
-            #             } else {
-            #                 return (feature.ref.length === 1)
-            #             }
-            #         }
-            #     draw:
-            #         mapzen_icon_library:
-            #             size: [[6,[14px,14px]],[13,[16px,16px]],[16,[18px,18px]]]
-            # width_2char:
-            #     filter: |
-            #         function() {
-            #             if( feature.shield_text ) {
-            #                 return (feature.shield_text.length === 2)
-            #             } else {
-            #                 return (feature.ref.length === 2)
-            #             }
-            #         }
-            #     draw:
-            #         mapzen_icon_library:
-            #             size: [[6,[18px,14px]],[13,[20px,15px]],[16,[24px,18px]]]
-            # width_3char:
-            #     filter: |
-            #         function() {
-            #             if( feature.shield_text ) {
-            #                 return (feature.shield_text.length === 3)
-            #             } else {
-            #                 return (feature.ref.length === 3)
-            #             }
-            #         }
-            #     draw:
-            #         mapzen_icon_library:
-            #             size: [[6,[25px,14px]],[13,[27px,15px]],[16,[33px,18px]]]
+                early:
+                    filter:
+                        - $zoom: { max: 13 }
+                    draw:
+                        mapzen_icon_library:
+                            visible: false
+            default_priority_minor_road:
+                filter:
+                    - kind: minor_road
+                draw:
+                    mapzen_icon_library:
+                        priority: 56
+                        visible: global.sdk_road_shields
+                early:
+                    filter:
+                        - $zoom: { max: 14 }
+                    draw:
+                        mapzen_icon_library:
+                            visible: false
+
             width_4char:
                 filter: |
                     function() {
                         if( feature.shield_text ) {
                             return (feature.shield_text.length === 4)
                         } else {
-                            return (feature.ref.length === 4)
+                            return (feature.ref.replace(" ", "").length === 4 )
                         }
                     }
                 draw:
-                    # mapzen_icon_library:
-                    #     size: [[6,[29px,14px]],[13,[31px,15px]],[16,[38px,18px]]]
-                # London sucks
+                    mapzen_icon_library:
+                        # this is sensitive to values > 56
+                        priority: 56
                 early:
-                    filter: { $zoom: { max: 14 } }
-                    draw:
+                   filter: { $zoom: { max: 12 } }
+                   draw:
                         mapzen_icon_library:
                             visible: false
             width_5char:
@@ -2466,18 +2470,18 @@ layers:
                         if( feature.shield_text ) {
                             return (feature.shield_text.length === 5)
                         } else {
-                            return (feature.ref.length === 5)
+                            return (feature.ref.replace(" ", "").length === 5)
                         }
                     }
                 draw:
-                    # mapzen_icon_library:
-                    #     size: [[6,[34px,14px]],[13,[37px,15px]],[16,[45px,18px]]]
-                # London sucks
+                    mapzen_icon_library:
+                        # this is sensitive to values > 56
+                        priority: 56
                 early:
-                    filter: { $zoom: { max: 14 } }
-                    draw:
-                        mapzen_icon_library:
-                            visible: false
+                   filter: { $zoom: { max: 13 } }
+                   draw:
+                       mapzen_icon_library:
+                           visible: false
             # this is kinda a hack
             width_longggggg:
                 filter: |
@@ -2491,451 +2495,45 @@ layers:
                 draw:
                     mapzen_icon_library:
                         visible: false
-            # missing-route-relations:
-            #     filter: { shield_text: false }
-            #     draw:
-            #         lines:
-            #             order: 1000
-            #             color: red
-            #             width: 2px
-            #
-            # Now for the good stuff
-            #
-            z-legit-shields:
-                filter: |
-                    function() {
-                        return  feature.shield_text ||
-                                /^A.*$/.test(feature.ref) ||
-                                /^B.*$/.test(feature.ref) ||
-                                /^D.*$/.test(feature.ref) ||
-                                /^N.*$/.test(feature.ref) ||
-                                /^MEX.*$/.test(feature.ref)
-                    }
-                # draw:
-                #     mapzen_icon_library:
-                #         color: red
+
+            shields-usa:
+                filter:
+                    all:
+                        - network: ['US:I','US:I:Business','US:I:Truck','US:I:Alternate','US:US','US:US:Business','US:US:Truck','US:US:Alternate']
+                        - shield_text: true
+                draw:
+                    mapzen_icon_library:
+                        #texture: mapzen_icon_library_shields_usa
+                        # you need to match any custom shield to the vector tile `network` values
+                        sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
+                        sprite_default: function() { return ('generic_shield-' + feature.shield_text.length + 'char'); }
 
                 # US Interstate roads
                 US-I:
                     filter:
                         network: 'US:I'
+                        shield_text: true
                     draw:
                         mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            # you need to match any custom shield to the vector tile `network` values
-                            sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
                             priority: 46
+                            # always show (or not show), irrespective of zoom
                             visible: global.sdk_road_shields
-                            text:
-                                offset: [0px, 0.5px]
-                                font:
-                                    # fill: global.black_color
-                                    size: [[7,8px],[13,9px],[15,11px]]
-                    width_1char:
-                        filter: function() { return (feature.shield_text.length === 1) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[15px,18px]],[13,[17px,20px]],[15,[22px,25px]]]
-                    width_2char:
-                        filter: function() { return (feature.shield_text.length === 2) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[18px,18px]],[13,[20px,20px]],[15,[25px,25px]]]
-                    width_3char:
-                        filter: function() { return (feature.shield_text.length === 3) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[23px,18px]],[13,[26px,20px]],[15,[33px,25px]]]
-                    width_4char:
-                        filter: function() { return (feature.shield_text.length === 4) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[25px,18px]],[13,[27px,20px]],[15,[35px,25px]]]
-                    width_5char:
-                        filter: function() { return (feature.shield_text.length === 5) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[26px,18px]],[13,[30px,20px]],[15,[38px,25px]]]
                 # US Federal Routes
                 US-US:
                     filter:
-                        network: ['US:US','US:US:Business', 'US:US:Truck', 'US:US:Alternate']
+                        network: ['US:US','US:US:Business','US:US:Truck','US:US:Alternate']
+                        shield_text: true
                         $zoom: { min: 7 }
                     draw:
                         mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            # you need to match any custom shield to the vector tile `network` values
-                            sprite: |
-                                function() { return ('US:US-' + feature.shield_text.length + 'char'); }
                             priority: 47
                             cull_from_tile: true
-                            visible: global.sdk_road_shields
-                            text:
-                                offset: [0px, -0.7px]
-                                font:
-                                    # fill: global.black_color
-                                    size: [[7,8px],[13,9px],[15,11px]]
-                    # early:
-                    #     filter: { $zoom: [7] }
-                    #     mapzen_icon_library:
-                    #         visible: false
-                    width_1char:
-                        filter: function() { return (feature.shield_text.length === 1) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[15px,17px]],[13,[17px,19px]],[15,[22px,24px]]]
-                    width_2char:
-                        filter: function() { return (feature.shield_text.length === 2) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[18px,17px]],[13,[20px,19px]],[15,[26px,24px]]]
-                    width_3char:
-                        filter: function() { return (feature.shield_text.length === 3) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[22px,17px]],[13,[25px,19px]],[15,[34px,25px]]]
-                    width_4char:
-                        filter: function() { return (feature.shield_text.length === 4) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[25px,17px]],[13,[29px,19px]],[15,[39px,25px]]]
-                    width_5char:
-                        filter: function() { return (feature.shield_text.length === 5) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[27px,17px]],[13,[30px,19px]],[15,[41px,25px]]]
-                # US State Routes
-                # US-states:
-                #     # Match state highways: `US:??`
-                #     filter: |
-                #         function() {
-                #             return feature.shield_text &&
-                #                 /^US:(?!US)\w\w$/.test(feature.network)
-                #         }
-                #     draw:
-                #         mapzen_icon_library:
-                #             # you need to match any custom shield to the vector tile `network` values
-                #             priority: 18
-                #     early:
-                #         filter: { $zoom: [7,8,9] }
-                #         mapzen_icon_library:
-                #             visible: false
-                US-CA:
-                    # Match California state highways: `US:CA`
-                    filter: |
-                        function() {
-                            return feature.shield_text &&
-                                /^US:CA$/.test(feature.network)
-                        }
-                    draw:
-                        mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
-                            text:
-                                offset: [0px, 1px]
-                                font:
-                                    # fill: global.black_color
-                                    size: [[7,7px],[13,9px],[15,10px]]
-                    motorway:
-                        filter: { kind_detail: [motorway], $zoom: [7,8] }
-                        draw:
-                            mapzen_icon_library:
-                                visible: global.sdk_road_shields
-                    trunk:
-                        filter: { kind_detail: [trunk], $zoom: [8,9] }
-                        draw:
-                            mapzen_icon_library:
-                                visible: global.sdk_road_shields
-                    primary:
-                        filter: { kind_detail: primary, $zoom: [10,11] }
-                        draw:
-                            mapzen_icon_library:
-                                visible: global.sdk_road_shields
-                    width_1char:
-                        filter: function() { return (feature.shield_text.length === 1) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[14px,16px]],[13,[15px,18px]],[15,[18px,21px]]]
-                    width_2char:
-                        filter: function() { return (feature.shield_text.length === 2) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[18px,18px]],[13,[20px,20px]],[15,[23px,23px]]]
-                    width_3char:
-                        filter: function() { return (feature.shield_text.length === 3) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[21px,18px]],[13,[24px,20px]],[15,[28px,23px]]]
-                    width_4char:
-                        filter: function() { return (feature.shield_text.length === 4) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[24px,18px]],[13,[26px,20px]],[15,[31px,23px]]]
-                    width_5char:
-                        filter: function() { return (feature.shield_text.length === 5) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[25px,18px]],[13,[27px,20px]],[15,[32px,23px]]]
-                US-NY:
-                    # Match New York state highways: `US:NY`
-                    filter: |
-                        function() {
-                            return feature.shield_text &&
-                                /^US:NY$/.test(feature.network)
-                                /* (/^US:NY$/.test(feature.network) || /^NY:US$/.test(feature.network)) */
-                        }
-                    draw:
-                        mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            sprite: |
-                                function() { return ( 'US:NY-' + feature.shield_text.length + 'char'); }
-                            text:
-                                # offset: [0px, 1px]
-                                font:
-                                    # fill: global.black_color
-                                    size: [[7,7px],[13,9px],[15,10px]]
-                    width_1char:
-                        filter: function() { return (feature.shield_text.length === 1) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[13px,17px]],[13,[15px,19px]],[15,[18px,22px]]]
-                    width_2char:
-                        filter: function() { return (feature.shield_text.length === 2) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[17px,17px]],[13,[19px,19px]],[15,[22px,22px]]]
-                    width_3char:
-                        filter: function() { return (feature.shield_text.length === 3) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[20px,17px]],[13,[22px,19px]],[15,[27px,22px]]]
-                    width_4char:
-                        filter: function() { return (feature.shield_text.length === 4) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[21px,17px]],[13,[24px,19px]],[15,[29px,22px]]]
-                    width_5char:
-                        filter: function() { return (feature.shield_text.length === 5) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[22px,17px]],[13,[25px,19px]],[15,[30px,22px]]]
-                US-PA:
-                    # Match Pennsylvania state highways
-                    filter: |
-                        function() {
-                            return feature.shield_text &&
-                                /^US:PA$/.test(feature.network)
-                        }
-                    draw:
-                        mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            sprite: |
-                                function() { return ( 'US:PA-' + feature.shield_text.length + 'char'); }
-                            text:
-                                offset: [0px, 1px]
-                                font:
-                                    # fill: global.black_color
-                                    size: [[7,7px],[13,9px],[15,10px]]
-                    width_1char:
-                        filter: function() { return (feature.shield_text.length === 1) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[13px,17px]],[13,[15px,19px]],[15,[18px,22px]]]
-                    width_2char:
-                        filter: function() { return (feature.shield_text.length === 2) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[17px,17px]],[13,[19px,19px]],[15,[22px,22px]]]
-                    width_3char:
-                        filter: function() { return (feature.shield_text.length === 3) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[21px,17px]],[13,[24px,19px]],[15,[28px,22px]]]
-                    width_4char:
-                        filter: function() { return (feature.shield_text.length === 4) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[22px,17px]],[13,[25px,19px]],[15,[30x,22px]]]
-                    width_5char:
-                        filter: function() { return (feature.shield_text.length === 5) }
-                        draw:
-                            mapzen_icon_library:
-                                size: [[6,[24px,17px]],[13,[27px,19px]],[15,[32px,22px]]]
-                # USA County Routes
-                US-counties:
-                    # Match state highways: `US:??:*`
-                    #
-                    # this is very USA specific
-                    #
-                    # filter: |
-                    #     function() {
-                    #         return feature.shield_text &&
-                    #             /^US:(?!US)\w\w:.*$/.test(feature.network)
-                    #     }
-                    #
-                    # this generic for any country with 3rd level networks (like county routes in USA)
-                    # BEWARE:
-                    # US:US:Business  about 150
-                    # US:US:Truck
-                    # US:US:Alternate
-    #
-                    # STATE ROUTE
-                    # ??:??:Loop  about 200
-                    # ??:??:Spur  about 200
-                    # ??:??:Business   about 100
-    #
-                    # STATE TEXAS SPECIAL ROUTE
-                    # US:TX:FM -- probably just state? there are 3k of these
-                    #
-                    #
-                    filter: |
-                        function() {
-                            return feature.shield_text &&
-                                /^\w+:\w+:(!Alternate).+$/.test(feature.network) &&
-                                $zoom > 10
-                        }
-                    draw:
-                        mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            # you need to match any custom shield to the vector tile `network` values
-                            sprite: function() { return ('county_shield-' + feature.shield_text.length + 'char'); }
-                            # priority: 19
+                            # always show (or not show), irrespective of zoom
                             visible: global.sdk_road_shields
                             text:
                                 font:
-                                    fill: global.black_color
-                                    #size: [[11,7px],[15,10px]]
-                    # early:
-                    #     filter: { $zoom: { max: 11 } }
-                    #     draw:
-                    #         mapzen_icon_library:
-                    #             visible: false
-                    # width_1char:
-                    #     filter: function() { return (feature.shield_text.length === 1) }
-                    #     draw:
-                    #         mapzen_icon_library:
-                    #             size: [[6,[14px,14px]],[13,[16px,16px]],[15,[18px,18px]]]
-                    # width_2char:
-                    #     filter: function() { return (feature.shield_text.length === 2) }
-                    #     draw:
-                    #         mapzen_icon_library:
-                    #             size: [[6,[16px,14px]],[13,[18px,16px]],[15,[22px,18px]]]
-                    # width_3char:
-                    #     filter: function() { return (feature.shield_text.length === 3) }
-                    #     draw:
-                    #         mapzen_icon_library:
-                    #             size: [[6,[20px,14px]],[13,[21px,15px]],[15,[26px,18px]]]
-                    # width_4char:
-                    #     filter: function() { return (feature.shield_text.length === 4) }
-                    #     draw:
-                    #         mapzen_icon_library:
-                    #             size: [[6,[25px,14px]],[13,[28px,15px]],[15,[34px,18px]]]
-                    # width_5char:
-                    #     filter: function() { return (feature.shield_text.length === 5) }
-                    #     draw:
-                    #         mapzen_icon_library:
-                    #             size: [[6,[30px,14px]],[13,[33px,15px]],[15,[40px,18px]]]
-
-                US-OTHER:
-                    filter: |
-                        function() {
-                            return feature.shield_text &&
-                                /^US:AK$/.test(feature.network) ||
-                                /^US:AL$/.test(feature.network) ||
-                                /^US:AR$/.test(feature.network) ||
-                                /^US:AZ$/.test(feature.network) ||
-                                /^US:BIA$/.test(feature.network) ||
-                                /^US:BLM$/.test(feature.network) ||
-                                /^US:CO$/.test(feature.network) ||
-                                /^US:DC$/.test(feature.network) ||
-                                /^US:FL$/.test(feature.network) ||
-                                /^US:FSH$/.test(feature.network) ||
-                                /^US:FSR$/.test(feature.network) ||
-                                /^US:GA$/.test(feature.network) ||
-                                /^US:HI$/.test(feature.network) ||
-                                /^US:ID$/.test(feature.network) ||
-                                /^US:KS$/.test(feature.network) ||
-                                /^US:LA$/.test(feature.network) ||
-                                /^US:MA$/.test(feature.network) ||
-                                /^US:CT$/.test(feature.network) ||
-                                /^US:IL$/.test(feature.network) ||
-                                /^US:TX$/.test(feature.network) ||
-                                /^US:IN$/.test(feature.network) ||
-                                /^US:RI$/.test(feature.network) ||
-                                /^US:ME$/.test(feature.network) ||
-                                /^US:WV$/.test(feature.network) ||
-                                /^US:MT$/.test(feature.network) ||
-                                /^US:MD$/.test(feature.network) ||
-                                /^US:MN$/.test(feature.network) ||
-                                /^US:MO$/.test(feature.network) ||
-                                /^US:NC$/.test(feature.network) ||
-                                /^US:MI$/.test(feature.network) ||
-                                /^US:ND$/.test(feature.network) ||
-                                /^US:NE$/.test(feature.network) ||
-                                /^US:NH$/.test(feature.network) ||
-                                /^US:NJ$/.test(feature.network) ||
-                                /^US:IA$/.test(feature.network) ||
-                                /^US:DE$/.test(feature.network) ||
-                                /^US:KY$/.test(feature.network) ||
-                                /^US:MS$/.test(feature.network) ||
-                                /^US:NM$/.test(feature.network) ||
-                                /^US:NV$/.test(feature.network) ||
-                                /^US:OH$/.test(feature.network) ||
-                                /^US:OK$/.test(feature.network) ||
-                                /^US:OR$/.test(feature.network) ||
-                                /^US:SC$/.test(feature.network) ||
-                                /^US:SD$/.test(feature.network) ||
-                                /^US:TN$/.test(feature.network) ||
-                                /^US:UT$/.test(feature.network) ||
-                                /^US:VA$/.test(feature.network) ||
-                                /*TODO: US:VA:secondary*/
-                                /^US:VT$/.test(feature.network) ||
-                                /^US:WA$/.test(feature.network) ||
-                                /^US:WI$/.test(feature.network) ||
-                                /^US:WY$/.test(feature.network)
-                                /*US:CA*/
-                                /*US:I*/
-                                /*US:NY*/
-                                /*US:PA*/
-                                /*US:US*/
-                                /*county_shield*/
-                        }
-                    draw:
-                        mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            sprite: |
-                                function() { return ( feature.network + '-' + feature.shield_text.length + 'char'); }
-                            text:
-                                # offset: [0px, 1px]
-                                font:
-                                    fill: global.black_color
-                                    #size: [[7,7px],[13,9px],[15,10px]]
-#                    width_1char:
-#                        filter: function() { return (feature.shield_text.length === 1) }
-#                        draw:
-#                            mapzen_icon_library:
-#                                size: [[6,[13px,17px]],[13,[15px,19px]],[15,[18px,22px]]]
-#                    width_2char:
-#                        filter: function() { return (feature.shield_text.length === 2) }
-#                        draw:
-#                            mapzen_icon_library:
-#                                size: [[6,[17px,17px]],[13,[19px,19px]],[15,[22px,22px]]]
-#                    width_3char:
-#                        filter: function() { return (feature.shield_text.length === 3) }
-#                        draw:
-#                            mapzen_icon_library:
-#                                size: [[6,[20px,17px]],[13,[22px,19px]],[15,[27px,22px]]]
-#                    width_4char:
-#                        filter: function() { return (feature.shield_text.length === 4) }
-#                        draw:
-#                            mapzen_icon_library:
-#                                size: [[6,[21px,17px]],[13,[24px,19px]],[15,[29px,22px]]]
-#                    width_5char:
-#                        filter: function() { return (feature.shield_text.length === 5) }
-#                        draw:
-#                            mapzen_icon_library:
-#                                size: [[6,[22px,17px]],[13,[25px,19px]],[15,[30px,22px]]]
-
+                                    fill: [0.380,0.318,0.312]
+                                    size: [[7,8px],[13,10px],[15,11px]]
 
         winter_sport_pistes:
             filter: { kind: piste }
