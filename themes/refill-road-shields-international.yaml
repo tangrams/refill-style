@@ -1425,7 +1425,7 @@ layers:
                         texture: mapzen_icon_library_shields_international
                         # you need to match any custom shield to the vector tile `network` values
                         sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
-                        sprite_default: function() { return ('generic_shield-' + feature.shield_text.length + 'char'); }
+                        # FYI: sprite_default doesn't support functions, default is carried by parent style's sprite function
                         text:
                             font:
                                 fill: [0.308,0.308,0.308]
