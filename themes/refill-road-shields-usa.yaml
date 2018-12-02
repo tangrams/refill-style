@@ -325,7 +325,7 @@ textures:
             county_shield-3char: [774, 632, 52, 36]
             county_shield-4char: [700, 632, 68, 36]
             county_shield-5char: [614, 632, 80, 36]
-            
+
 layers:
     roads:
         shields:
@@ -339,7 +339,7 @@ layers:
                         texture: mapzen_icon_library_shields_usa
                         # you need to match any custom shield to the vector tile `network` values
                         sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
-                        sprite_default: function() { return ('county_shield-' + feature.shield_text.length + 'char'); }
+                        # FYI: sprite_default doesn't support functions, default is carried by parent style's sprite function
 
                 # US Interstate roads
                 US-I:
@@ -538,47 +538,51 @@ layers:
                                 offset: [0px, -2px]
 
                 # USA County Routes
-                US-counties:
-                    # Match state highways: `US:??:*`
-                    #
-                    # this is very USA specific
-                    #
-                    # filter: |
-                    #     function() {
-                    #         return feature.shield_text &&
-                    #             /^US:(?!US)\w\w:.*$/.test(feature.network)
-                    #     }
-                    #
-                    # this generic for any country with 3rd level networks (like county routes in USA)
-                    # BEWARE:
-                    # US:US:Business  about 150
-                    # US:US:Truck
-                    # US:US:Alternate
-    #
-                    # STATE ROUTE
-                    # ??:??:Loop  about 200
-                    # ??:??:Spur  about 200
-                    # ??:??:Business   about 100
-    #
-                    # STATE TEXAS SPECIAL ROUTE
-                    # US:TX:FM -- probably just state? there are 3k of these
-                    #
-                    #
-                    filter: |
-                        function() {
-                            return feature.shield_text &&
-                                /^\w+:\w+:(!Alternate).+$/.test(feature.network) &&
-                                $zoom > 10
-                        }
-                    draw:
-                        mapzen_icon_library:
-                            texture: mapzen_icon_library_shields_usa
-                            # you need to match any custom shield to the vector tile `network` values
-                            sprite: function() { return ('county_shield-' + feature.shield_text.length + 'char'); }
-                            #color: pink
-                            #priority: 19
-                            visible: global.sdk_road_shields
-                            text:
-                                font:
-                                    fill: [0.508,0.508,0.508]
-                                    #size: [[11,7px],[15,10px]]
+                # This logic can't go in this layer as we only select on exact network matches, not regex
+                # Someday this should be moved to it's own layer that's at same level as `shields-usa:`
+                # But since it just replaces now with the default county shield, that's not worth it now
+                # (really it should have the pentagon pattern)
+                #US-counties:
+                #    # Match state highways: `US:??:*`
+                #    #
+                #    # this is very USA specific
+                #    #
+                #    # filter: |
+                #    #     function() {
+                #    #         return feature.shield_text &&
+                #    #             /^US:(?!US)\w\w:.*$/.test(feature.network)
+                #    #     }
+                #    #
+                #    # this generic for any country with 3rd level networks (like county routes in USA)
+                #    # BEWARE:
+                #    # US:US:Business  about 150
+                #    # US:US:Truck
+                #    # US:US:Alternate
+                #    #
+                #    # STATE ROUTE
+                #    # ??:??:Loop  about 200
+                #    # ??:??:Spur  about 200
+                #    # ??:??:Business   about 100
+                #    #
+                #    # STATE TEXAS SPECIAL ROUTE
+                #    # US:TX:FM -- probably just state? there are 3k of these
+                #    #
+                #    #
+                #    filter: |
+                #        function() {
+                #            return feature.shield_text &&
+                #                /^\w+:\w+:(!Alternate).+$/.test(feature.network) &&
+                #                $zoom > 10
+                #        }
+                #    draw:
+                #        mapzen_icon_library:
+                #            texture: mapzen_icon_library_shields_usa
+                #            # you need to match any custom shield to the vector tile `network` values
+                #            sprite: function() { return ('county_shield-' + feature.shield_text.length + 'char'); }
+                #            #color: pink
+                #            #priority: 19
+                #            visible: global.sdk_road_shields
+                #            text:
+                #                font:
+                #                    fill: [0.508,0.508,0.508]
+                #                    #size: [[11,7px],[15,10px]]
