@@ -83,3 +83,24 @@ styles:
         shaders:
             uniforms:
                 u_tint: [0.626,0.738,0.920]
+
+
+layers:
+    roads:
+        shields:
+            shields-usa:
+                z-uber-ales:
+                    filter: { network: true, shield_text: true }
+                    draw:
+                        mapzen_icon_library:
+                            text:
+                                font:
+                                    fill: global.black_color
+            shields-international:
+                z-uber-ales:
+                    filter: { network: true, shield_text: true }
+                    draw:
+                        mapzen_icon_library:
+                            text:
+                                font:
+                                    fill: global.black_color

@@ -168,6 +168,24 @@ layers:
                 lines:
                     color: global.two_color_light
 
+        shields:
+            shields-usa:
+                z-uber-ales:
+                    filter: { network: true, shield_text: true }
+                    draw:
+                        mapzen_icon_library:
+                            text:
+                                font:
+                                    fill: global.black_color
+            shields-international:
+                z-uber-ales:
+                    filter: { network: true, shield_text: true }
+                    draw:
+                        mapzen_icon_library:
+                            text:
+                                font:
+                                    fill: global.black_color
+
     buildings:
         draw:
             polygons:

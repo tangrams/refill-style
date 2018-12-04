@@ -216,21 +216,21 @@
 
         // So many themes
         var theme_defaults = { color: 'black', detail: 10, label: 5 };
-        var all_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
+        var all_theme_imports = { road_shields_usa: 'themes/refill-road-shields-usa.yaml',
+                                  road_shields_international: 'themes/refill-road-shields-international.yaml',
+                                  color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
                                   detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
                                   texture: '',
-                                  terrain: '',
-                                  road_shields_usa: 'themes/refill-road-shields-usa.yaml',
-                                  road_shields_international: 'themes/refill-road-shields-international.yaml'
+                                  terrain: ''
                                   };
-        var old_theme_imports = { color: 'themes/color-' + theme_defaults.color + '.yaml',
+        var old_theme_imports = { road_shields_usa: 'themes/refill-road-shields-usa.yaml',
+                                  road_shields_international: 'themes/refill-road-shields-international.yaml',
+                                  color: 'themes/color-' + theme_defaults.color + '.yaml',
                                   label: 'themes/label-' + theme_defaults.label + '.yaml',
                                   detail: 'themes/detail-' + theme_defaults.detail + '.yaml',
                                   texture: '',
-                                  terrain: '',
-                                  road_shields_usa: 'themes/refill-road-shields-usa.yaml',
-                                  road_shields_international: 'themes/refill-road-shields-international.yaml'
+                                  terrain: ''
                                   };
 
         /*** Map ***/
@@ -257,11 +257,11 @@
             // default (some): 'vector-tiles-W2tPU-Y'
             // no: 'vector-tiles-haXTO7g'
             scene: { import: [  tg_baseScene,
+                                'themes/refill-road-shields-usa.yaml',
+                                'themes/refill-road-shields-international.yaml',
                                 'themes/color-' + theme_defaults.color + '.yaml',
                                 'themes/label-' + theme_defaults.label + '.yaml',
-                                'themes/detail-' + theme_defaults.detail + '.yaml',
-                                'themes/refill-road-shields-usa.yaml',
-                                'themes/refill-road-shields-international.yaml'],
+                                'themes/detail-' + theme_defaults.detail + '.yaml' ],
                      global: tg_global },
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a>, &copy; OSM contributors'
         });
@@ -444,20 +444,20 @@
 
 
             // So many themes
-            var all_theme_imports = { color: null,
+            var all_theme_imports = { road_shields_usa: 'themes/refill-road-shields-usa.yaml',
+                                      road_shields_international: 'themes/refill-road-shields-international.yaml',
                                       detail: null,
                                       label: null,
-                                      road_shields_usa: 'themes/refill-road-shields-usa.yaml',
-                                      road_shields_international: 'themes/refill-road-shields-international.yaml' };
+                                      color: null };
 
             function update_scene_with_themes() {
-                if( old_theme_imports.color === all_theme_imports.color &&
+                if( old_theme_imports.road_shields_usa === all_theme_imports.road_shields_usa &&
+                    old_theme_imports.road_shields_international === all_theme_imports.road_shields_international &&
+                    old_theme_imports.color === all_theme_imports.color &&
                     old_theme_imports.detail    === all_theme_imports.detail &&
                     old_theme_imports.label === all_theme_imports.label &&
                     old_theme_imports.texture === all_theme_imports.texture &&
-                    old_theme_imports.terrain === all_theme_imports.terrain &&
-                    old_theme_imports.road_shields_usa === all_theme_imports.road_shields_usa &&
-                    old_theme_imports.road_shields_international === all_theme_imports.road_shields_international ) {
+                    old_theme_imports.terrain === all_theme_imports.terrain ) {
                     //console.log( 'no change' );
                 } else {
                      //console.log( all_theme_imports, old_theme_imports );
@@ -465,6 +465,12 @@
                      // construct the import array
                      themes_as_array = [tg_baseScene];
 
+                     if( all_theme_imports.road_shields_usa ) {
+                         themes_as_array.push( all_theme_imports.road_shields_usa );
+                     }
+                     if( all_theme_imports.road_shields_international ) {
+                         themes_as_array.push( all_theme_imports.road_shields_international );
+                     }
                      if( all_theme_imports.color ) {
                          themes_as_array.push( all_theme_imports.color );
                      }
@@ -480,24 +486,18 @@
                      if( all_theme_imports.terrain ) {
                          themes_as_array.push( all_theme_imports.terrain );
                      }
-                     if( all_theme_imports.road_shields_usa ) {
-                         themes_as_array.push( all_theme_imports.road_shields_usa );
-                     }
-                     if( all_theme_imports.road_shields_international ) {
-                         themes_as_array.push( all_theme_imports.road_shields_international );
-                     }
 
                      //console.log ( themes_as_array );
 
                      scene.load({ import: themes_as_array, global: tg_global });
 
+                     old_theme_imports.road_shields_usa = all_theme_imports.road_shields_usa;
+                     old_theme_imports.road_shields_international = all_theme_imports.road_shields_international;
                      old_theme_imports.color = all_theme_imports.color;
                      old_theme_imports.detail    = all_theme_imports.detail;
                      old_theme_imports.label = all_theme_imports.label;
                      old_theme_imports.texture = all_theme_imports.texture;
                      old_theme_imports.terrain = all_theme_imports.terrain;
-                     old_theme_imports.road_shields_usa = all_theme_imports.road_shields_usa;
-                     old_theme_imports.road_shields_international = all_theme_imports.road_shields_international;
                 }
             }
 
