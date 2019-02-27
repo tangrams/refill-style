@@ -2906,7 +2906,7 @@ layers:
                     draw:
                         text-blend-order:
                             text_source: global.ux_language_text_source_boundary_lines
-                            offset: 0px
+                            offset: [0px,0px]
 
         other_country_boundary_disputed_etc:
             filter: { kind: [disputed, indefinite, indeterminate, lease_limit, line_of_control, overlay_limit] }
@@ -2976,7 +2976,7 @@ layers:
                     draw:
                         text-blend-order:
                             text_source: global.ux_language_text_source_boundary_lines
-                            offset: 0px
+                            offset: [0px,0px]
 
     places:
         data: { source: mapzen, layer: places }
