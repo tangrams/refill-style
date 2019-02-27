@@ -77,7 +77,7 @@ global:
 textures:
     sdk_terrain_texture:
         url: images/refill-spheremap-light.jpg
-
+        size: [256, 256]
 
 layers:
     roads:

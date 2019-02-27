@@ -13,6 +13,7 @@ sources:
 textures:
     palette:
         url: images/ramp.png
+        size: [6, 1]
 
 scene:
     background:

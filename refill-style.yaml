@@ -251,6 +251,7 @@ textures:
     building-grid:
         url: images/building-grid.gif
         filtering: mipmap
+        size: [128,128]
 
 sources:
     mapzen:

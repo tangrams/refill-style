@@ -88,9 +88,11 @@ global:
 textures:
     sdk_terrain_texture:
         url: images/refill-spheremap-light.jpg
+        size: [256, 256]
 
     building-grid:
         url: images/building-grid-hi-contrast3.gif
+        size: [128, 128]
 
 layers:
     water:
