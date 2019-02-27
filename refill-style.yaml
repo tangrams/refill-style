@@ -2311,9 +2311,8 @@ layers:
 
             default_priority_highway:
                 filter:
-                    all:
-                        - kind_detail: motorway
-                        - $zoom: { min: 9 }
+                    kind_detail: motorway
+                    $zoom: { min: 9 }
                 draw:
                     mapzen_icon_library:
                         priority: 47
@@ -2321,16 +2320,15 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 7 }
+                        $zoom: { max: 7 }
                     draw:
                         mapzen_icon_library:
                             visible: false
 
             default_priority_trunk:
                 filter:
-                    all:
-                        - kind_detail: major_road
-                        - kind_detail: trunk
+                    kind_detail: major_road
+                    kind_detail: trunk
                 draw:
                     mapzen_icon_library:
                         priority: 48
@@ -2338,15 +2336,14 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 9 }
+                        $zoom: { max: 9 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_primary:
                 filter:
-                    all:
-                        - kind: major_road
-                        - kind_detail: primary
+                    kind: major_road
+                    kind_detail: primary
                 draw:
                     mapzen_icon_library:
                         priority: 49
@@ -2354,15 +2351,14 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 10 }
+                        $zoom: { max: 10 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_trunk_secondary:
                 filter:
-                    all:
-                        - kind: major_road
-                        - kind_detail: secondary
+                    kind: major_road
+                    kind_detail: secondary
                 draw:
                     mapzen_icon_library:
                         priority: 53
@@ -2370,15 +2366,14 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 12 }
+                        $zoom: { max: 12 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_trunk_tertiary:
                 filter:
-                    all:
-                        - kind: major_road
-                        - kind_detail: tertiary
+                    kind: major_road
+                    kind_detail: tertiary
                 draw:
                     mapzen_icon_library:
                         priority: 55
@@ -2386,20 +2381,20 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 13 }
+                        $zoom: { max: 13 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_minor_road:
                 filter:
-                    - kind: minor_road
+                    kind: minor_road
                 draw:
                     mapzen_icon_library:
                         priority: 56
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 14 }
+                        $zoom: { max: 14 }
                     draw:
                         mapzen_icon_library:
                             visible: false
