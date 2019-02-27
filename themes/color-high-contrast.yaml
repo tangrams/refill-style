@@ -24,6 +24,8 @@ global:
     playas_color:                 [0.950,0.950,0.950]
     no_texture_water_color:       [0.150,0.150,0.150]
 
+    building_mix_color:          global.black_color
+
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     global.lighter_color
     shading_earth_fill_color:     global.white_color

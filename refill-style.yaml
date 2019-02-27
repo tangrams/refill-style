@@ -459,20 +459,18 @@ styles:
     shapes-circle:
         mix: functions-aastep
         shaders:
-            defines:
-                PI: 3.14159265358979323846
             blocks:
                 global: |
                     // get distance field of a Circle
                     // ================================
                     float circleDF (vec2 st) {
-                        return dot(st,st);
+                        return length(st);
                     }
-                    //
+                    
                     // Draw a circle in the middle of the ST space
                     // ================================
                     float circle (vec2 st, float radius) {
-                        return 1.-aastep(radius, circleDF(st-vec2(0.5))*PI);
+                        return 1. - aastep(radius, circleDF(st - .5));
                     }
     shapes-rect:
         shaders:
@@ -712,13 +710,15 @@ styles:
         base: polygons
         shaders:
             defines:
-                PATTERN_SCALE: 50.0
-                DOT_SIZE: .1
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+                DOT_PATTERN_SCALE: 60.0
+                DOT_SIZE: .25
+                DOT_COLOR: color.rgb
+            uniforms:
+                # This is a uniform instead of a define so that variant styles can reuse the same shader source code.
+                u_dot_bg_color: [1., 1., 1.]
             blocks:
                 color: |
-                    color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
+                    color.rgb = mix(u_dot_bg_color, DOT_COLOR, circle(tile(getTileCoords(), DOT_PATTERN_SCALE), DOT_SIZE));
 
     dots-rev-grid:
         mix: [space-tile, tiling-tile, shapes-circle]
@@ -727,8 +727,9 @@ styles:
             defines:
                 PATTERN_SCALE: 60.0
                 DOT_SIZE: .4
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+            uniforms:
+                u_dot_bg_color: [1., 1., 1.]
+#                COLOR2: color.rgb
             blocks:
                 color: |
                     color.rgb = mix(COLOR2, COLOR1, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
@@ -740,8 +741,9 @@ styles:
             defines:
                 PATTERN_SCALE: 60.0
                 DOT_SIZE: .25
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+            uniforms:
+                u_dot_bg_color: [1.00,1.00,1.00]
+#                COLOR2: color.rgb
 
     tiny-dots:
         mix: dots
@@ -749,16 +751,18 @@ styles:
             defines:
                 PATTERN_SCALE: 70.0
                 DOT_SIZE: .125
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+            uniforms:
+                u_dot_bg_color: [1.00,1.00,1.00]
+#                COLOR2: color.rgb
 
     dots-rev:
         base: polygons
         mix: dots-honeycomb
         shaders:
             defines:
-                COLOR1: vec3(1.00,1.00,1.00)
                 PATTERN_SCALE: 35.0
+            uniforms:
+                u_dot_bg_color: [1.00,1.00,1.00]
             blocks:
                 color: |
                     color.rgb = mix(COLOR1, color.rgb, TileDots(PATTERN_SCALE, 0.31));
@@ -768,8 +772,8 @@ styles:
         mix: [space-constant, shapes-rect]
         texcoords: false
         shaders:
-            defines:
-                COLOR1: vec3(1.0,1.0,1.0)
+            uniforms:
+                u_dot_bg_color: [1.00,1.00,1.00]
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
@@ -820,20 +824,24 @@ styles:
     building-grid:
         base: polygons
         lighting: false
-        mix: [scale-buildings]
+        mix: [hsv, scale-buildings]
         texcoords: true
         shaders:
             uniforms:
                 u_tex_grid: building-grid
-                u_grid_color: global.black_color
-            defines:
-                WALL_TINT: vec3(1., 3., .993)
+                u_wall_hsv_tint: [1., 2., .750]
+                u_wall_grid_color: global.building_mix_color
             blocks:
+                global: |
+                    varying float v_is_wall;
+                    varying vec3 v_wall_color_tinted;
+                position: |
+                    v_is_wall = step(worldNormal().z, .2);
+                    v_wall_color_tinted = hsv2rgb(rgb2hsv(a_color.rgb) * u_wall_hsv_tint);
                 color: |
-                    // If it's a wall
-                    color.rgb = mix(mix(color.rgb, u_grid_color.rgb, texture2D(u_tex_grid, v_texcoord).a),
-                                    color.rgb,
-                                    step(.5,dot(vec3(0., 0., 1.), worldNormal())));
+                    vec3 wall_color = mix(v_wall_color_tinted, u_wall_grid_color, texture2D(u_tex_grid, v_texcoord).a);
+                    color.rgb = mix(color.rgb, wall_color, v_is_wall);
+
 
     building-lines:
         base: lines
