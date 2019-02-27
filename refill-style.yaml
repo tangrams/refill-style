@@ -2890,7 +2890,7 @@ layers:
                     draw:
                         text-blend-order:
                             text_source: global.ux_language_text_source_boundary_lines_left_right
-                            offset: [[8, [0, 7px]], [11, [0, 8px]], [12, [0, 9px]]]
+                            offset: [[8, [0px, 7px]], [11, [0px, 8px]], [12, [0px, 9px]]]
 
         other_country_boundary_disputed_etc:
             filter: { kind: [disputed, indefinite, indeterminate, lease_limit, line_of_control, overlay_limit] }
@@ -2946,7 +2946,7 @@ layers:
                         priority: 3
                         visible: global.text_visible_admin
                         text_source: global.ux_language_text_source_boundary_lines_left_right
-                        offset: [[8,[0, 5px]], [11, [0, 6px]], [12,[0, 7px]]]
+                        offset: [[8,[0px, 5px]], [11, [0px, 6px]], [12,[0px, 7px]]]
                         text_wrap: 100
                         # offset: [0px, 10px]
                         # anchor: top
@@ -4316,7 +4316,7 @@ layers:
                         size: [[13, 12px], [14, 14px], [15, 16px], [17, 20px]]
                         priority: 11
                         text:
-                            #offset: [[13, [0, 6px]], [14, [0, 7px]],[15, [0, 8px]], [17, [0, 10px]]]
+                            #offset: [[13, [0px, 6px]], [14, [0px, 7px]],[15, [0px, 8px]], [17, [0px, 10px]]]
                             priority: 12
                 low-priority-early:
                     filter: { kind_tile_rank: { min: 3 }, $zoom: { min: 0, max: 12 } }
@@ -4451,7 +4451,7 @@ layers:
                         size: [[17, 12px], [19, 14px]]
                         priority: 19
                         text:
-                            #offset: [[17, [0, 6px]], [19, [0, 7px]]] # offset tracks alongside icon size (half icon height)
+                            #offset: [[17, [0px, 6px]], [19, [0px, 7px]]] # offset tracks alongside icon size (half icon height)
                             priority: 20
                             interactive: global.sdk_interactive
                             text_source: function() { if( feature.ref || feature.name ) { if( feature.ref && feature.name ) { return '[' + feature.ref + ']\n' + feature.name; } else { return feature.name; } } else { return "Entrance"; } }
