@@ -360,7 +360,6 @@ layers:
                     draw:
                         mapzen_icon_library:
                             priority: 47
-                            cull_from_tile: true
                             # always show (or not show), irrespective of zoom
                             visible: global.sdk_road_shields
                             text:

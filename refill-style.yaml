@@ -1569,8 +1569,6 @@ layers:
                             - [12, 1]
                             - [13, 1.50]
                             - [14, 2.0]
-                        cull_from_tile: true
-    #                    visible: false
                         text:
                             offset: [0px, -0.5px]
                             repeat_distance: 200px
@@ -2341,7 +2339,6 @@ layers:
                         - [12, 1]
                         - [13, 1.50]
                         - [14, 2.0]
-                    cull_from_tile: true
                     text:
                         offset: [0px, -0.5px]
                         repeat_distance: 200px
@@ -2515,7 +2512,6 @@ layers:
                     draw:
                         mapzen_icon_library:
                             priority: 47
-                            cull_from_tile: true
                             # always show (or not show), irrespective of zoom
                             visible: global.sdk_road_shields
                             text:
