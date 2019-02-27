@@ -1160,24 +1160,6 @@ layers:
         lakes:
             filter:
                 kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
-#                any:
-#                    # limit show smaller landuse areas to higher zooms
-#                    - { $zoom: [1],  area: { min: 10000000000 } }
-#                    - { $zoom: [2],  area: { min: 7000000000 } }
-#                    # some weird natural earth scale set transition
-#                    - { $zoom: [3],  area: { min: 5000000000 } }
-#                    - { $zoom: [4],  area: { min: 300000000 } }
-#                    - { $zoom: [5],  area: { min: 50000000 } }
-#                    - { $zoom: [6],  area: { min: 50000000 } }
-#                    - { $zoom: [7],  area: { min: 50000000 } }
-#                    - { $zoom: [8],  area: { min: 50000000 } }
-#                    - { $zoom: [9],  area: { min: 15000000 } }
-#                    - { $zoom: [10], area: { min: 4000000 } }
-#                    - { $zoom: [11], area: { min: 1000000 } }
-#                    - { $zoom: [12], area: { min: 250000 } }
-#                    - { $zoom: [13], area: { min: 150000 } }
-#                    - { $zoom: [14], area: { min: 40000 } }
-#                    - { $zoom: { min: 15 } }
             draw:
                 polygons:
                     style: waves
@@ -1218,24 +1200,6 @@ layers:
                 boundary: true
                 not: { kind: ocean }
                 $zoom: { min: 8 }
-#                any:
-#                    # limit show smaller landuse areas to higher zooms
-#                    - { $zoom: [1],  area: { min: 10000000000 } }
-#                    - { $zoom: [2],  area: { min: 7000000000 } }
-#                    # some weird natural earth scale set transition
-#                    - { $zoom: [3],  area: { min: 5000000000 } }
-#                    - { $zoom: [4],  area: { min: 300000000 } }
-#                    - { $zoom: [5],  area: { min: 50000000 } }
-#                    - { $zoom: [6],  area: { min: 50000000 } }
-#                    - { $zoom: [7],  area: { min: 50000000 } }
-#                    - { $zoom: [8],  area: { min: 50000000 } }
-#                    - { $zoom: [9],  area: { min: 15000000 } }
-#                    - { $zoom: [10], area: { min: 4000000 } }
-#                    - { $zoom: [11], area: { min: 1000000 } }
-#                    - { $zoom: [12], area: { min: 250000 } }
-#                    - { $zoom: [13], area: { min: 150000 } }
-#                    - { $zoom: [14], area: { min: 40000 } }
-#                    - { $zoom: { min: 15 } }
             draw:
                 lines:
                     style: coast
@@ -3673,13 +3637,6 @@ layers:
 
     pois:
         data: { source: mapzen, layer: pois }
-        #visible: global.label_visible_poi_landuse
-        filter:
-            all:
-                - not: { kind: [building,address,farm,tree,apron,residential,commercial,industrial] }
-                # White list a few kinds to "always" show per the tile zoom inclusion, else test feature's min_zoom
-                #- function() { return feature.min_zoom <= $zoom }
-                - function() { if( feature.kind == 'restaurant' || feature.kind == 'landmark' || feature.kind == 'cafe' ) { return true } else { return feature.min_zoom <= $zoom } }
         draw:
             mapzen_icon_library:
                 visible: global.icon_visible_poi_landuse
@@ -3702,6 +3659,22 @@ layers:
                         fill: global.dark_color
                         size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
                         stroke: { color: global.text_stroke, width: 4px }
+
+        hide-some:
+            filter: { kind: [building,address,farm,apron,residential,commercial,industrial] }
+            draw:
+                mapzen_icon_library:
+                    visible: false
+
+        z16-overpacking:
+            filter: { $zoom: { min: 16 } }
+            now-get-real:
+                filter:
+                    - function() { return feature.min_zoom > $zoom + 0.5; } }
+                draw:
+                    mapzen_icon_library:
+                        visible: false
+
         # improve legibility at high zooms
         poi_labels-z18:
             filter: { $zoom: { min: 18 } }
