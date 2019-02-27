@@ -1159,26 +1159,25 @@ layers:
 
         lakes:
             filter:
-                all:
-                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
-                any:
-                    # limit show smaller landuse areas to higher zooms
-                    - { $zoom: [1],  area: { min: 10000000000 } }
-                    - { $zoom: [2],  area: { min: 7000000000 } }
-                    # some weird natural earth scale set transition
-                    - { $zoom: [3],  area: { min: 5000000000 } }
-                    - { $zoom: [4],  area: { min: 300000000 } }
-                    - { $zoom: [5],  area: { min: 50000000 } }
-                    - { $zoom: [6],  area: { min: 50000000 } }
-                    - { $zoom: [7],  area: { min: 50000000 } }
-                    - { $zoom: [8],  area: { min: 50000000 } }
-                    - { $zoom: [9],  area: { min: 15000000 } }
-                    - { $zoom: [10], area: { min: 4000000 } }
-                    - { $zoom: [11], area: { min: 1000000 } }
-                    - { $zoom: [12], area: { min: 250000 } }
-                    - { $zoom: [13], area: { min: 150000 } }
-                    - { $zoom: [14], area: { min: 40000 } }
-                    - { $zoom: { min: 15 } }
+                kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
+#                any:
+#                    # limit show smaller landuse areas to higher zooms
+#                    - { $zoom: [1],  area: { min: 10000000000 } }
+#                    - { $zoom: [2],  area: { min: 7000000000 } }
+#                    # some weird natural earth scale set transition
+#                    - { $zoom: [3],  area: { min: 5000000000 } }
+#                    - { $zoom: [4],  area: { min: 300000000 } }
+#                    - { $zoom: [5],  area: { min: 50000000 } }
+#                    - { $zoom: [6],  area: { min: 50000000 } }
+#                    - { $zoom: [7],  area: { min: 50000000 } }
+#                    - { $zoom: [8],  area: { min: 50000000 } }
+#                    - { $zoom: [9],  area: { min: 15000000 } }
+#                    - { $zoom: [10], area: { min: 4000000 } }
+#                    - { $zoom: [11], area: { min: 1000000 } }
+#                    - { $zoom: [12], area: { min: 250000 } }
+#                    - { $zoom: [13], area: { min: 150000 } }
+#                    - { $zoom: [14], area: { min: 40000 } }
+#                    - { $zoom: { min: 15 } }
             draw:
                 polygons:
                     style: waves
@@ -1216,28 +1215,27 @@ layers:
         water_boundaries-not-ocean:
             enabled: global.sdk_coastline
             filter:
-                all:
-                    - boundary: true
-                    - not: { kind: ocean }
-                    - $zoom: { min: 8 }
-                any:
-                    # limit show smaller landuse areas to higher zooms
-                    - { $zoom: [1],  area: { min: 10000000000 } }
-                    - { $zoom: [2],  area: { min: 7000000000 } }
-                    # some weird natural earth scale set transition
-                    - { $zoom: [3],  area: { min: 5000000000 } }
-                    - { $zoom: [4],  area: { min: 300000000 } }
-                    - { $zoom: [5],  area: { min: 50000000 } }
-                    - { $zoom: [6],  area: { min: 50000000 } }
-                    - { $zoom: [7],  area: { min: 50000000 } }
-                    - { $zoom: [8],  area: { min: 50000000 } }
-                    - { $zoom: [9],  area: { min: 15000000 } }
-                    - { $zoom: [10], area: { min: 4000000 } }
-                    - { $zoom: [11], area: { min: 1000000 } }
-                    - { $zoom: [12], area: { min: 250000 } }
-                    - { $zoom: [13], area: { min: 150000 } }
-                    - { $zoom: [14], area: { min: 40000 } }
-                    - { $zoom: { min: 15 } }
+                boundary: true
+                not: { kind: ocean }
+                $zoom: { min: 8 }
+#                any:
+#                    # limit show smaller landuse areas to higher zooms
+#                    - { $zoom: [1],  area: { min: 10000000000 } }
+#                    - { $zoom: [2],  area: { min: 7000000000 } }
+#                    # some weird natural earth scale set transition
+#                    - { $zoom: [3],  area: { min: 5000000000 } }
+#                    - { $zoom: [4],  area: { min: 300000000 } }
+#                    - { $zoom: [5],  area: { min: 50000000 } }
+#                    - { $zoom: [6],  area: { min: 50000000 } }
+#                    - { $zoom: [7],  area: { min: 50000000 } }
+#                    - { $zoom: [8],  area: { min: 50000000 } }
+#                    - { $zoom: [9],  area: { min: 15000000 } }
+#                    - { $zoom: [10], area: { min: 4000000 } }
+#                    - { $zoom: [11], area: { min: 1000000 } }
+#                    - { $zoom: [12], area: { min: 250000 } }
+#                    - { $zoom: [13], area: { min: 150000 } }
+#                    - { $zoom: [14], area: { min: 40000 } }
+#                    - { $zoom: { min: 15 } }
             draw:
                 lines:
                     style: coast
@@ -2163,8 +2161,7 @@ layers:
 
         path:
             filter:
-                all:
-                    - kind: [path, portage_way]
+                kind: [path, portage_way]
                 not:
                     - kind_detail: [steps, track, pier]
             draw:
@@ -2260,9 +2257,8 @@ layers:
 
         steps:
             filter:
-                all:
-                    - kind: path
-                    - kind_detail: steps
+                kind: path
+                kind_detail: steps
             draw:
                 lines:
                     dash: [0.75, 0.25]
@@ -2286,41 +2282,39 @@ layers:
                             stroke: { color: global.text_stroke, width: 4px }
 
         shields:
+            enabled: global.sdk_road_shields
             filter:
-                all:
-                    - $zoom: { min: 6 }
-                    #
-                    # United State looks great with shield_text alone, but...
-                    #
-                    #shield_text: true    # some roads don't have shield text, deal with that later
-                    #
-                    # Europe doesn't have many network relations set, so we could look for either
-                    # shield_text or ref (with no shield_text) but...
-                    # that makes United States look a bit funky with `(xxx)` and generic shields
-                    # showing up in fields of custom state shields like US:CA and US:NY
-                    #
-                    - function() { return global.sdk_road_shields; }
-                    - any:
-                        - shield_text: true    # some roads don't have shield text, deal with that later
-                        - all:
-                            - shield_text: false    # some roads don't have shield text, deal with that later
-                            - ref: true
-                            - kind_detail: [motorway, trunk, primary, secondary, tertiary]
+                $zoom: { min: 6 }
+                shield_text: true
+                network: true
+                # don't shield ferries and other non-driving roads
+                kind: [highway, major_road, minor_road]
             # default
             draw:
                 mapzen_icon_library:
                     # you need to match any custom shield to the vector tile `network` values
                     sprite: |
                         function() {
-                            if( feature.shield_text ) {
-                                return ('generic_shield-' + feature.shield_text.length + 'char');
-                            } else {
-                                return ('generic_shield-' + feature.ref.length + 'char');
-                            }
+                          switch (feature.shield_text.length) {
+                            case 1:
+                                return 'generic_shield-1char';
+                            case 2:
+                                return 'generic_shield-2char';
+                            case 3:
+                                return 'generic_shield-3char';
+                            case 4:
+                                // Maybe this works, maybe it doesn't
+                                if ($zoom < 11) break;
+                                return 'generic_shield-4char';
+                            case 5:
+                                // Maybe this works, maybe it doesn't
+                                if ($zoom < 15) break;
+                                return 'generic_shield-5char';
+                          }
                         }
-                    sprite_default: generic_shield_5char
                     size: [[7,[75%,75%]],[12,[100%,100%]],[15,[110%,110%]]]
                     priority: 58
+                    # Size is specified below, and limited to 5 char in another filter
                     repeat_group: shields
                     repeat_distance: [[8, 90px],[10, 40px],[13, 30px]]
                     placement: midpoint
@@ -2333,7 +2327,6 @@ layers:
                         - [13, 1.50]
                         - [14, 2.0]
                     cull_from_tile: true
-                    visible: false
                     text:
                         offset: [0px, -0.5px]
                         repeat_distance: 200px
@@ -2446,59 +2439,23 @@ layers:
                     draw:
                         mapzen_icon_library:
                             visible: false
-
-            width_4char:
-                filter: |
-                    function() {
-                        if( feature.shield_text ) {
-                            return (feature.shield_text.length === 4)
-                        } else {
-                            return (feature.ref.replace(" ", "").length === 4 )
-                        }
-                    }
+            width_4-5char:
+                filter:
+                    all:
+                        - not:
+                            kind: [minor_road]
+                            network: ['US:I','US:US']
+                        - |
+                            function() {
+                              var length = feature.shield_text.length;
+                              return length === 4 || length === 5;
+                            }
                 draw:
                     mapzen_icon_library:
                         # this is sensitive to values > 56
                         priority: 56
-                early:
-                   filter: { $zoom: { max: 12 } }
-                   draw:
-                        mapzen_icon_library:
-                            visible: false
-            width_5char:
-                filter: |
-                    function() {
-                        if( feature.shield_text ) {
-                            return (feature.shield_text.length === 5)
-                        } else {
-                            return (feature.ref.replace(" ", "").length === 5)
-                        }
-                    }
-                draw:
-                    mapzen_icon_library:
-                        # this is sensitive to values > 56
-                        priority: 56
-                early:
-                   filter: { $zoom: { max: 13 } }
-                   draw:
-                       mapzen_icon_library:
-                           visible: false
-            # this is kinda a hack
-            # FYI: This happens to "win" in style resolution because it's a-z sorted
-            # don't rename the layer or it'll fail
-            width_longggggg:
-                filter: |
-                    function() {
-                        if( feature.shield_text ) {
-                            return (feature.shield_text.length > 5)
-                        } else {
-                            return (feature.ref.length > 5)
-                        }
-                    }
-                draw:
-                    mapzen_icon_library:
-                        visible: false
 
+            #
             # Now for the good stuff
             #
             # JK: see the theme files for USA and international shields
@@ -2506,21 +2463,35 @@ layers:
             # FYI: When the USA shields theme is imported it replaces this layer with a richer set of textures
             shields-usa:
                 filter:
-                    all:
-                        - network: ['US:I','US:I:Business','US:I:Truck','US:I:Alternate','US:US','US:US:Business','US:US:Truck','US:US:Alternate']
-                        - shield_text: true
+                    network: ['US:I','US:US']
                 draw:
                     mapzen_icon_library:
                         #texture: mapzen_icon_library_shields_usa
                         # you need to match any custom shield to the vector tile `network` values
-                        sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
-                        # FYI: sprite_default doesn't support functions, default is carried by parent style's sprite function
+                        sprite: |
+                            function() {
+                              switch (feature.shield_text.length) {
+                                case 1:
+                                    return feature.network + '-1char';
+                                case 2:
+                                    return feature.network + '-2char';
+                                case 3:
+                                    return feature.network + '-3char';
+                                case 4:
+                                    // Maybe this works, maybe it doesn't
+                                    if ($zoom < 11) break;
+                                    return feature.network + '-4char';
+                                case 5:
+                                    // Maybe this works, maybe it doesn't
+                                    if ($zoom < 15) break;
+                                    return feature.network + '-5char';
+                              }
+                            }
 
                 # US Interstate roads
                 US-I:
                     filter:
                         network: 'US:I'
-                        shield_text: true
                     draw:
                         mapzen_icon_library:
                             priority: 46
@@ -2529,8 +2500,7 @@ layers:
                 # US Federal Routes
                 US-US:
                     filter:
-                        network: ['US:US','US:US:Business','US:US:Truck','US:US:Alternate']
-                        shield_text: true
+                        network: ['US:US']
                         $zoom: { min: 7 }
                     draw:
                         mapzen_icon_library:
@@ -2542,6 +2512,14 @@ layers:
                                 font:
                                     fill: [0.380,0.318,0.312]
                                     size: [[7,8px],[13,10px],[15,11px]]
+
+            shields-e-road:
+                filter:
+                    network: ['e-road']
+                    $zoom: { max: 8 }
+                draw:
+                    mapzen_icon_library:
+                        visible: false
 
         winter_sport_pistes:
             filter: { kind: piste }
@@ -2750,7 +2728,6 @@ layers:
             extrude:
                 filter:
                     all:
-                        - function() { return global.sdk_building_extrude; }
                         - any:
                             - { $zoom: [15], height: { min: 190 } }
                             - { $zoom: [15], area: { min: 5000 } }
@@ -2763,6 +2740,7 @@ layers:
                             - { $zoom: { min: 18 } }
                         - not:
                             - layer: [-1, -2, -3, -4, -5]
+                        - function() { return global.sdk_building_extrude; }
                 draw:
                     polygons:
                         visible: true
@@ -2777,8 +2755,7 @@ layers:
                         extrude: global.building_extrude_height
             basement:
                 filter:
-                    all:
-                        - layer: [-1, -2, -3, -4, -5]
+                    layer: [-1, -2, -3, -4, -5]
                 draw:
                     lines:
                         color: global.lightest_color
@@ -4065,7 +4042,7 @@ layers:
 
         parks:
             filter:
-                - kind: [national_park, battlefield, park, protected_area, forest, beach]
+                kind: [national_park, battlefield, park, protected_area, forest, beach]
             draw:
                 mapzen_icon_library:
                     visible: global.icon_visible_landuse_green
@@ -4555,8 +4532,7 @@ layers:
 
         national_forest_level_6:
             filter:
-                all:
-                    - kind: forest
+                kind: forest
                 any:
                     - protect_class: ['6']
                     - operator: ['United States Forest Service']
@@ -4575,9 +4551,8 @@ layers:
 
         parks-and-national-forests-not-national-park:
             filter:
-                all:
-                    - $zoom: { min: 4 }
-                    - kind: [park, national_park]
+                $zoom: { min: 4 }
+                kind: [park, national_park]
                 any:
                     - not: { operator: [ "United States National Park Service", "United States Forest Service" ] }
                     - not: { protect_class: ['2','3','5','6'] }
@@ -4590,9 +4565,8 @@ layers:
             national_park:
                 #filter: function() { return feature.name && (feature.name.indexOf('National Park') > -1); }
                 filter:
-                    all:
-                        - kind: national_park
-                        - not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
+                    kind: national_park
+                    not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
                 draw:
                     polygons:
                         style: pixel-pattern-light
@@ -4743,9 +4717,8 @@ layers:
 
         parking:
             filter:
-                all:
-                    - kind: parking
-                    - $zoom: { min: 14 }
+                kind: parking
+                $zoom: { min: 14 }
                 any:
                     - { $zoom: { min: 14 }, area: { min: 10000 } }
                     - { $zoom: { min: 15 }, area: { min: 5000 } }
