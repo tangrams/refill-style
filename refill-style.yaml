@@ -519,28 +519,27 @@ styles:
     patterns-stripes:
         mix: functions-aastep
         shaders:
-            defines:
-                PI: 3.14159265358979323846
             blocks:
                 global: |
-                    // Return a distance function of stripes
-                    float stripesDF (vec2 st) {
-                        return abs(sin(st.y*PI));
+                    // Distance function for stripes at each integer.
+                    float stripesDF(float t) {
+                        float f = fract(t);
+                        return abs(min(f, 1. - f));
                     }
 
                     // Adjustable width stripes
-                    float stripes (vec2 st, float width) {
-                        return aastep(width,stripesDF(st));
+                    float stripes(float t, float width) {
+                        return aastep(width, stripesDF(t));
                     }
 
                     // Faster optimisation of diagonal stripes
                     float diagonalStripes (vec2 st) {
                         vec2 i_st = floor(st);
                         vec2 f_st = fract(st);
-                        if (mod(i_st.y,2.) - mod(i_st.x,2.) == 0.) {
-                            return 1.0 - aastep(f_st.x,f_st.y);
+                        if (mod(i_st.y, 2.) - mod(i_st.x, 2.) == 0.) {
+                            return 1.0 - aastep(f_st.x, f_st.y);
                         } else {
-                            return aastep(f_st.x,f_st.y);
+                            return aastep(f_st.x, f_st.y);
                         }
                     }
     dots-honeycomb:
@@ -571,6 +570,25 @@ styles:
                         // Use the antialias step to make a shape from the DF
                         return aastep(size,d);;
                     }
+
+    wave-stripes:
+        mix: patterns-stripes
+        shaders:
+            defines:
+                WAVE_FREQUENCY: 13. # Horizontal waves per tile; Should be integer to avoid seams.
+                WAVE_AMPLITUDE: .015 # Height of each wave as a fraction of the tile.
+                STRIPE_FREQUENCY: 40. # Vertical rows of stripes per tile.
+                STRIPE_THICKNESS: .15 # Width of stripe from 0 (no stripe) to .5 (all stripe).
+            blocks:
+                global: |
+                    float wave_stripes(vec2 pos) {
+                        float wave_distance = pos.y + sin(pos.x * WAVE_FREQUENCY * 3.1415926) * WAVE_AMPLITUDE;
+                        return stripes(wave_distance * STRIPE_FREQUENCY, STRIPE_THICKNESS);
+                    }
+                    varying vec2 v_waves_position;
+                position: |
+                    v_waves_position = modelPosition().xy;
+
 ##### ACTUAL STYLES
     pixel-pattern-light:
         mix: [space-tile, generative-random]
@@ -597,30 +615,55 @@ styles:
 
     waves:
         base: polygons
-        mix: [space-constant, patterns-stripes]
+        mix: wave-stripes
         shaders:
+            defines:
+                WAVE_FREQUENCY: 13. # Horizontal waves per tile; Should be integer to avoid seams.
+                WAVE_AMPLITUDE: .015 # Height of each wave as a fraction of the tile.
+                STRIPE_FREQUENCY: 40. # Vertical rows of stripes per tile.
+                STRIPE_THICKNESS: .15 # Width of stripe from 0 (no stripe) to .5 (all stripe).
+                CROSSFADE_LENGTH: .2 # Length of zoom crossfade; Comment this line to disable crossfade.
             uniforms:
-                u_lighter: global.lighter_color
-                u_lightest: global.lightest_color
+                u_stripe_color: global.water_stripes_color2
             blocks:
-                global: |
-                    float stripes2(vec2 st){
-                        return step(.3,1.0-smoothstep(.5,1.,abs(sin(st.y*3.14159265358))));
-                    }
-                filter: |
-                    vec2 st = getConstantCoords();
+                color: |
+                    #ifdef CROSSFADE_LENGTH
+                    float waves_1 = wave_stripes(v_waves_position);
+                    float waves_2 = wave_stripes(v_waves_position * 2.);
+                    float crossfade = smoothstep(1. - CROSSFADE_LENGTH, 1., fract(u_map_position.z));
+                    color.rgb = mix(color.rgb, u_stripe_color, mix(waves_1, waves_2, crossfade));
+                    #else
+                    color.rgb = mix(color.rgb, u_stripe_color, wave_stripes(v_waves_position));
+                    #endif
 
-                    const float wave_width = 30.0;
-                    const float wave_height = .01;
-                    st.y += sin(st.x*wave_width)*wave_height;
-
-                    // gradient
-                    color.rgb = mix(u_lighter, color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(u_lightest,1.0),stripes(st*92.,.5))*1.0;
+    # TODO: this shader might not be neccesary
+    waves-sharp:
+        base: polygons
+        mix: wave-stripes
+        shaders:
+            defines:
+                WAVE_FREQUENCY: 1. # Horizontal waves per tile; Should be integer to avoid seams.
+                WAVE_AMPLITUDE: .2 # Height of each wave as a fraction of the tile.
+                WAVE_SCALE: 30.
+                WAVE_COLOR: vec3(0.522,0.949,0.988)
+                STRIPE_FREQUENCY: 1. # Vertical rows of stripes per tile.
+                STRIPE_THICKNESS: .35 # Width of stripe from 0 (no stripe) to .5 (all stripe).
+                CROSSFADE_LENGTH: .2 # Length of zoom crossfade; Comment this line to disable crossfade.
+            blocks:
+                color: |
+                    vec2 waves_position_scaled = v_waves_position * WAVE_SCALE;
+                    #ifdef CROSSFADE_LENGTH
+                    float waves_1 = wave_stripes(fract(waves_position_scaled));
+                    float waves_2 = wave_stripes(fract(waves_position_scaled * 2.));
+                    float crossfade = smoothstep(1. - CROSSFADE_LENGTH, 1., fract(u_map_position.z));
+                    color.rgb = mix(color.rgb, WAVE_COLOR, mix(waves_1, waves_2, crossfade));
+                    #else
+                    color.rgb = mix(color.rgb, WAVE_COLOR, wave_stripes(fract(waves_position_scaled)));
+                    #endif
 
     coast:
         base: lines
-        mix: [space-constant]
+        mix: [space-constant]   # TODO: Refactor to not need `space-constant`
         blend: overlay
         shaders:
             defines:
