@@ -588,6 +588,29 @@ styles:
                     v_waves_position = modelPosition().xy;
 
 ##### ACTUAL STYLES
+    # dash styles (to make dash work for ES)
+    steps-dash:
+        base: lines
+        dash: [0.75, 0.25]
+        dash_background_color: global.white_color
+
+    railway-dash:
+        base: lines
+        dash: [0.25, 1.0]
+        dash_background_color: global.offwhite_color
+
+    disputed-country-default-dash:
+        base: lines
+        dash: [1.25, 1.25]
+
+    disputed-country-dash:
+        base: lines
+        dash: [2.0, 1.0]
+
+    region-border-dash:
+        base: lines
+        dash: [7.0, 2.0]
+
     pixel-pattern-light:
         mix: [space-tile, generative-random]
         base: polygons
@@ -2274,8 +2297,7 @@ layers:
                 kind_detail: steps
             draw:
                 lines:
-                    dash: [0.75, 0.25]
-                    dash_background_color: global.white_color
+                    style: steps-dash
                     order: global.feature_order
                     color: [[15, global.light_color], [19, global.lighter_color]]
                     width: [[15, 0.5px], [18, 3px], [19, 1.5m]]
@@ -2672,8 +2694,7 @@ layers:
             filter: { kind: rail, not: { kind_detail: [subway,light_rail,tram] } }
             draw:
                 lines:
-                    dash: [0.25, 1.0]
-                    dash_background_color: global.offwhite_color
+                    style: railway-dash
                     color: [[12, global.lightest_color], [17, global.light_color]]
                     width: [[12, 0px], [12, 0.5px], [18, 4px], [20, 2m]]
                     # let roads sort themselves past zoom 14
@@ -2896,7 +2917,7 @@ layers:
             filter: { kind: [disputed, indefinite, indeterminate, lease_limit, line_of_control, overlay_limit] }
             draw:
                 lines:
-                    dash: [1.25, 1.25]
+                    style: disputed-country-default-dash
                     order: global.feature_order
                     color: global.light_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
@@ -2904,7 +2925,7 @@ layers:
                 filter: { kind: [disputed, line_of_control] }
                 draw:
                     lines:
-                        dash: [2.0, 1.0]
+                        style: disputed-country-dash
                         order: global.feature_order
                         color: global.light_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
@@ -2931,7 +2952,7 @@ layers:
                     $zoom: { min: 7 }
                 draw:
                     lines:
-                        dash: [7.0, 2.0]
+                        style: region-border-dash
 
             early:
                 filter: { not: { min_zoom: [1,2] }, $zoom: { max: 8 } }

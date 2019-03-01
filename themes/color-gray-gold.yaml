@@ -155,7 +155,6 @@ layers:
         railway:
             draw:
                 lines:
-                    dash_background_color: [0.079,0.070,0.054]
                     color: global.two_color_midlight
 
         airport-lines:
@@ -331,6 +330,9 @@ layers:
 
 
 styles:
+    railway-dash:
+        dash_background_color: [0.079,0.070,0.054]
+
     mapzen_icon_library:
         # To make Refill's colorize-able icons play nice with other styles
         # restate the mix so the order of import matters

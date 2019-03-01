@@ -165,7 +165,6 @@ layers:
         railway:
             draw:
                 lines:
-                    dash_background_color: global.ultralight_color
                     color: [0.650,0.650,0.650]
         ferry:
             draw:
@@ -331,6 +330,9 @@ layers:
 
 
 styles:
+    railway-dash:
+        dash_background_color: global.ultralight_color
+
     waves:
         shaders:
             uniforms:
