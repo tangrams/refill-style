@@ -588,7 +588,7 @@ styles:
                     v_waves_position = modelPosition().xy;
 
 ##### ACTUAL STYLES
-    # dash styles (to make dash work for ES)
+    # dash styles (to make dash work for ES), to be removed when ES supports dash draw rule params
     steps-dash:
         base: lines
         dash: [0.75, 0.25]
@@ -2298,6 +2298,8 @@ layers:
             draw:
                 lines:
                     style: steps-dash
+                    #dash: [0.75, 0.25]
+                    #dash_background_color: global.white_color
                     order: global.feature_order
                     color: [[15, global.light_color], [19, global.lighter_color]]
                     width: [[15, 0.5px], [18, 3px], [19, 1.5m]]
@@ -2695,6 +2697,8 @@ layers:
             draw:
                 lines:
                     style: railway-dash
+                    #dash: [0.25, 1.0]
+                    #dash_background_color: global.offwhite_color
                     color: [[12, global.lightest_color], [17, global.light_color]]
                     width: [[12, 0px], [12, 0.5px], [18, 4px], [20, 2m]]
                     # let roads sort themselves past zoom 14
@@ -2918,6 +2922,7 @@ layers:
             draw:
                 lines:
                     style: disputed-country-default-dash
+                    #dash: [1.25, 1.25]
                     order: global.feature_order
                     color: global.light_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
@@ -2926,6 +2931,7 @@ layers:
                 draw:
                     lines:
                         style: disputed-country-dash
+                        #dash: [2.0, 1.0]
                         order: global.feature_order
                         color: global.light_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
@@ -2953,6 +2959,7 @@ layers:
                 draw:
                     lines:
                         style: region-border-dash
+                        #dash: [7.0, 2.0]
 
             early:
                 filter: { not: { min_zoom: [1,2] }, $zoom: { max: 8 } }

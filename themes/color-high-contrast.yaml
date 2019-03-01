@@ -197,10 +197,12 @@ layers:
         railway:
             draw:
                 lines:
+                    #dash_background_color: global.lightest_color
                     color: global.white_color
             service:
                 draw:
                     lines:
+                        #dash_background_color: global.lightest_color
                         color: global.white_color
 
         ferry:
@@ -265,6 +267,7 @@ layers:
 
 
 styles:
+    # TODO: Remove when TangramES supports dash draw rules
     railway-dash:
         dash_background_color: global.lightest_color
 

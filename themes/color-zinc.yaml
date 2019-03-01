@@ -365,6 +365,8 @@ layers:
         railway:
             draw:
                 lines:
+                    #dash: [0, 0]
+                    #dash_background_color: global.midlight_color
                     color: global.midlight_color
                     width: [[12, 0.25px], [14, 0.5px], [18, 2px], [20, 2m]]
                     outline:
@@ -372,6 +374,7 @@ layers:
             service:
                 draw:
                     lines:
+                        #dash_background_color: global.lighter_color
                         style: railway-service-dash
                         color: global.lighter_color
 
@@ -754,6 +757,7 @@ layers:
 
 
 styles:
+    # TODO: Remove when TangramES supports dash draw rules
     railway-dash:
         dash: [0, 0]
         dash_background_color: global.midlight_color
