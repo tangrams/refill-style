@@ -645,7 +645,7 @@ styles:
                 STRIPE_THICKNESS: .15 # Width of stripe from 0 (no stripe) to .5 (all stripe).
                 CROSSFADE_LENGTH: .2 # Length of zoom crossfade; Comment this line to disable crossfade.
             uniforms:
-                u_stripe_color: global.water_stripes_color2
+                u_stripe_color: global.lightest_color
             blocks:
                 color: |
                     #ifdef CROSSFADE_LENGTH
@@ -1229,24 +1229,21 @@ layers:
                 style: waves
                 visible: false
                 order: global.feature_order
-                color: [[0, global.lightest_color], [12, global.lighter_color]]
+                color: global.lighter_color
 
         lakes:
             filter:
                 kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
             draw:
                 polygons:
-                    style: waves
                     visible: true
-                    color: global.lighter_color
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 polygons:
-                    style: waves
                     visible: true
-                    color: global.lighter_color
+
         playas:
             filter: { kind: playa }
             draw:
