@@ -786,7 +786,7 @@ styles:
                 u_dot_bg_color: [1.00,1.00,1.00]
             blocks:
                 color: |
-                    color.rgb = mix(COLOR1, color.rgb, TileDots(PATTERN_SCALE, 0.31));
+                    color.rgb = mix(u_dot_bg_color, color.rgb, TileDots(PATTERN_SCALE, 0.31));
 
     horizontal-bars:
         base: polygons
@@ -813,7 +813,7 @@ styles:
             defines:
                 PATTERN_SCALE: 50.0
             uniforms:
-                u_bar_bg_color: vec3(1.0,1.0,1.0)
+                u_bar_bg_color: [1.00,1.00,1.00]
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
