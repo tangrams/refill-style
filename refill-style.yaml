@@ -733,8 +733,8 @@ styles:
         base: polygons
         shaders:
             defines:
-                DOT_PATTERN_SCALE: 60.0
-                DOT_SIZE: .25
+                DOT_PATTERN_SCALE: 50.0
+                DOT_SIZE: .1
                 DOT_COLOR: color.rgb
             uniforms:
                 # This is a uniform instead of a define so that variant styles can reuse the same shader source code.
@@ -750,12 +750,12 @@ styles:
             defines:
                 PATTERN_SCALE: 60.0
                 DOT_SIZE: .4
+                DOT_COLOR: color.rgb
             uniforms:
                 u_dot_bg_color: [1., 1., 1.]
-#                COLOR2: color.rgb
             blocks:
                 color: |
-                    color.rgb = mix(COLOR2, COLOR1, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
+                    color.rgb = mix(DOT_COLOR, u_dot_bg_color, circle(tile(getTileCoords(), PATTERN_SCALE), DOT_SIZE));
 
     medium-dots:
         mix: dots
@@ -766,7 +766,6 @@ styles:
                 DOT_SIZE: .25
             uniforms:
                 u_dot_bg_color: [1.00,1.00,1.00]
-#                COLOR2: color.rgb
 
     tiny-dots:
         mix: dots
@@ -776,7 +775,6 @@ styles:
                 DOT_SIZE: .125
             uniforms:
                 u_dot_bg_color: [1.00,1.00,1.00]
-#                COLOR2: color.rgb
 
     dots-rev:
         base: polygons
@@ -796,7 +794,7 @@ styles:
         texcoords: false
         shaders:
             uniforms:
-                u_dot_bg_color: [1.00,1.00,1.00]
+                u_bar_bg_color: [1.00,1.00,1.00]
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
@@ -805,7 +803,7 @@ styles:
                 filter: |
                     vec2 pos = getConstantCoords()*50.0;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
-                    color.rgb = mix(COLOR1,color.rgb,pct);
+                    color.rgb = mix(u_bar_bg_color,color.rgb,pct);
 
     horizontal-bars-rev:
         base: polygons
@@ -813,8 +811,9 @@ styles:
         texcoords: false
         shaders:
             defines:
-                COLOR1: vec3(1.0,1.0,1.0)
                 PATTERN_SCALE: 50.0
+            uniforms:
+                u_bar_bg_color: vec3(1.0,1.0,1.0)
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
@@ -823,7 +822,28 @@ styles:
                 filter: |
                     vec2 pos = getConstantCoords()*PATTERN_SCALE;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
-                    color.rgb = mix(color.rgb,COLOR1,pct);
+                    color.rgb = mix(color.rgb,u_bar_bg_color,pct);
+
+# HSV/RGB functions
+    hsv:
+        shaders:
+            blocks:
+                global: |
+                    vec3 rgb2hsv(vec3 c)
+                    {
+                        vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+                        vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+                        vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+                        float d = q.x - min(q.w, q.y);
+                        float e = 1.0e-10;
+                        return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+                    }
+                    vec3 hsv2rgb(vec3 c)
+                    {
+                        vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+                        vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+                        return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+                    }
 
     scale-buildings:
         shaders:
@@ -853,7 +873,7 @@ styles:
             uniforms:
                 u_tex_grid: building-grid
                 u_wall_hsv_tint: [1., 2., .750]
-                u_wall_grid_color: global.building_mix_color
+                u_grid_color: global.black_color
             blocks:
                 global: |
                     varying float v_is_wall;
@@ -862,7 +882,7 @@ styles:
                     v_is_wall = step(worldNormal().z, .2);
                     v_wall_color_tinted = hsv2rgb(rgb2hsv(a_color.rgb) * u_wall_hsv_tint);
                 color: |
-                    vec3 wall_color = mix(v_wall_color_tinted, u_wall_grid_color, texture2D(u_tex_grid, v_texcoord).a);
+                    vec3 wall_color = mix(v_wall_color_tinted, u_grid_color, texture2D(u_tex_grid, v_texcoord).a);
                     color.rgb = mix(color.rgb, wall_color, v_is_wall);
 
 
