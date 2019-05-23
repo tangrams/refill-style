@@ -262,7 +262,7 @@ sources:
         url_params:
             api_key: global.sdk_api_key
         tile_size: 512
-        max_zoom: 14
+        max_zoom: 15
     normals: # normals
         type: Raster
         # prod
