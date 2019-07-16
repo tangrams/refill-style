@@ -31,6 +31,8 @@ global:
     playas_color:                 [0.175,0.179,0.187]
     no_texture_water_color:       [0.301,0.265,0.204]
 
+    building_mix_color:          global.black_color
+
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     [0.408,0.424,0.455] #global.midlight_color
     shading_earth_fill_color:     [0.013,0.017,0.021]
@@ -88,9 +90,11 @@ global:
 textures:
     sdk_terrain_texture:
         url: images/refill-spheremap-dark.jpg
+        size: [256, 256]
 
     building-grid:
         url: images/building-grid-hi-contrast3.gif
+        size: [128, 128]
 
 layers:
     earth:
@@ -151,7 +155,7 @@ layers:
         railway:
             draw:
                 lines:
-                    dash_background_color: [0.079,0.070,0.054]
+                    #dash_background_color: [0.079,0.070,0.054]
                     color: global.two_color_midlight
 
         airport-lines:
@@ -327,6 +331,10 @@ layers:
 
 
 styles:
+    # TODO: Remove when TangramES supports dash draw rules
+    railway-dash:
+        dash_background_color: [0.079,0.070,0.054]
+
     mapzen_icon_library:
         # To make Refill's colorize-able icons play nice with other styles
         # restate the mix so the order of import matters

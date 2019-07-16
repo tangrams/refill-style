@@ -24,6 +24,8 @@ global:
     playas_color:                 [0.950,0.950,0.950]
     no_texture_water_color:       [0.150,0.150,0.150]
 
+    building_mix_color:          global.black_color
+
     # TERRAIN SHADING COLORS
     shading_earth_tint_color:     global.lighter_color
     shading_earth_fill_color:     global.white_color
@@ -86,9 +88,11 @@ global:
 textures:
     sdk_terrain_texture:
         url: images/refill-spheremap-light.jpg
+        size: [256, 256]
 
     building-grid:
         url: images/building-grid-hi-contrast3.gif
+        size: [128, 128]
 
 layers:
     earth:
@@ -193,12 +197,12 @@ layers:
         railway:
             draw:
                 lines:
-                    dash_background_color: global.lightest_color
+                    #dash_background_color: global.lightest_color
                     color: global.white_color
             service:
                 draw:
                     lines:
-                        dash_background_color: global.lightest_color
+                        #dash_background_color: global.lightest_color
                         color: global.white_color
 
         ferry:
@@ -263,6 +267,10 @@ layers:
 
 
 styles:
+    # TODO: Remove when TangramES supports dash draw rules
+    railway-dash:
+        dash_background_color: global.lightest_color
+
     riverlines:
         shaders:
             uniforms:

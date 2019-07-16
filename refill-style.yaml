@@ -235,8 +235,8 @@ global:
     sdk_interactive: true
     #
     # default order for basemap features
-    feature_order: function() { return feature.sort_rank; }
-    feature_order_down_1: function() { return feature.sort_rank - 1; }
+    feature_order: function() { return feature.sort_rank || 1; }
+    feature_order_down_1: function() { return feature.sort_rank - 1 || 0; }
     #
     # areas:
     sdk_building_extrude: true            # building extrusion toggle
@@ -251,6 +251,7 @@ textures:
     building-grid:
         url: images/building-grid.gif
         filtering: mipmap
+        size: [128,128]
 
 sources:
     mapzen:
@@ -458,20 +459,18 @@ styles:
     shapes-circle:
         mix: functions-aastep
         shaders:
-            defines:
-                PI: 3.14159265358979323846
             blocks:
                 global: |
                     // get distance field of a Circle
                     // ================================
                     float circleDF (vec2 st) {
-                        return dot(st,st);
+                        return length(st);
                     }
-                    //
+                    
                     // Draw a circle in the middle of the ST space
                     // ================================
                     float circle (vec2 st, float radius) {
-                        return 1.-aastep(radius, circleDF(st-vec2(0.5))*PI);
+                        return 1. - aastep(radius, circleDF(st - .5));
                     }
     shapes-rect:
         shaders:
@@ -518,28 +517,27 @@ styles:
     patterns-stripes:
         mix: functions-aastep
         shaders:
-            defines:
-                PI: 3.14159265358979323846
             blocks:
                 global: |
-                    // Return a distance function of stripes
-                    float stripesDF (vec2 st) {
-                        return abs(sin(st.y*PI));
+                    // Distance function for stripes at each integer.
+                    float stripesDF(float t) {
+                        float f = fract(t);
+                        return abs(min(f, 1. - f));
                     }
 
                     // Adjustable width stripes
-                    float stripes (vec2 st, float width) {
-                        return aastep(width,stripesDF(st));
+                    float stripes(float t, float width) {
+                        return aastep(width, stripesDF(t));
                     }
 
                     // Faster optimisation of diagonal stripes
                     float diagonalStripes (vec2 st) {
                         vec2 i_st = floor(st);
                         vec2 f_st = fract(st);
-                        if (mod(i_st.y,2.) - mod(i_st.x,2.) == 0.) {
-                            return 1.0 - aastep(f_st.x,f_st.y);
+                        if (mod(i_st.y, 2.) - mod(i_st.x, 2.) == 0.) {
+                            return 1.0 - aastep(f_st.x, f_st.y);
                         } else {
-                            return aastep(f_st.x,f_st.y);
+                            return aastep(f_st.x, f_st.y);
                         }
                     }
     dots-honeycomb:
@@ -570,7 +568,49 @@ styles:
                         // Use the antialias step to make a shape from the DF
                         return aastep(size,d);;
                     }
+
+    wave-stripes:
+        mix: patterns-stripes
+        shaders:
+            defines:
+                WAVE_FREQUENCY: 13. # Horizontal waves per tile; Should be integer to avoid seams.
+                WAVE_AMPLITUDE: .015 # Height of each wave as a fraction of the tile.
+                STRIPE_FREQUENCY: 40. # Vertical rows of stripes per tile.
+                STRIPE_THICKNESS: .15 # Width of stripe from 0 (no stripe) to .5 (all stripe).
+            blocks:
+                global: |
+                    float wave_stripes(vec2 pos) {
+                        float wave_distance = pos.y + sin(pos.x * WAVE_FREQUENCY * 3.1415926) * WAVE_AMPLITUDE;
+                        return stripes(wave_distance * STRIPE_FREQUENCY, STRIPE_THICKNESS);
+                    }
+                    varying vec2 v_waves_position;
+                position: |
+                    v_waves_position = modelPosition().xy;
+
 ##### ACTUAL STYLES
+    # dash styles (to make dash work for ES), to be removed when ES supports dash draw rule params
+    steps-dash:
+        base: lines
+        dash: [0.75, 0.25]
+        dash_background_color: global.white_color
+
+    railway-dash:
+        base: lines
+        dash: [0.25, 1.0]
+        dash_background_color: global.offwhite_color
+
+    disputed-country-default-dash:
+        base: lines
+        dash: [1.25, 1.25]
+
+    disputed-country-dash:
+        base: lines
+        dash: [2.0, 1.0]
+
+    region-border-dash:
+        base: lines
+        dash: [7.0, 2.0]
+
     pixel-pattern-light:
         mix: [space-tile, generative-random]
         base: polygons
@@ -596,30 +636,55 @@ styles:
 
     waves:
         base: polygons
-        mix: [space-constant, patterns-stripes]
+        mix: wave-stripes
         shaders:
+            defines:
+                WAVE_FREQUENCY: 13. # Horizontal waves per tile; Should be integer to avoid seams.
+                WAVE_AMPLITUDE: .015 # Height of each wave as a fraction of the tile.
+                STRIPE_FREQUENCY: 40. # Vertical rows of stripes per tile.
+                STRIPE_THICKNESS: .15 # Width of stripe from 0 (no stripe) to .5 (all stripe).
+                CROSSFADE_LENGTH: .2 # Length of zoom crossfade; Comment this line to disable crossfade.
             uniforms:
-                u_lighter: global.lighter_color
-                u_lightest: global.lightest_color
+                u_stripe_color: global.lightest_color
             blocks:
-                global: |
-                    float stripes2(vec2 st){
-                        return step(.3,1.0-smoothstep(.5,1.,abs(sin(st.y*3.14159265358))));
-                    }
-                filter: |
-                    vec2 st = getConstantCoords();
+                color: |
+                    #ifdef CROSSFADE_LENGTH
+                    float waves_1 = wave_stripes(v_waves_position);
+                    float waves_2 = wave_stripes(v_waves_position * 2.);
+                    float crossfade = smoothstep(1. - CROSSFADE_LENGTH, 1., fract(u_map_position.z));
+                    color.rgb = mix(color.rgb, u_stripe_color, mix(waves_1, waves_2, crossfade));
+                    #else
+                    color.rgb = mix(color.rgb, u_stripe_color, wave_stripes(v_waves_position));
+                    #endif
 
-                    const float wave_width = 30.0;
-                    const float wave_height = .01;
-                    st.y += sin(st.x*wave_width)*wave_height;
-
-                    // gradient
-                    color.rgb = mix(u_lighter, color.rgb, gl_FragCoord.x / u_resolution.x);
-                    color = mix(color,vec4(u_lightest,1.0),stripes(st*92.,.5))*1.0;
+    # TODO: this shader might not be neccesary
+    waves-sharp:
+        base: polygons
+        mix: wave-stripes
+        shaders:
+            defines:
+                WAVE_FREQUENCY: 1. # Horizontal waves per tile; Should be integer to avoid seams.
+                WAVE_AMPLITUDE: .2 # Height of each wave as a fraction of the tile.
+                WAVE_SCALE: 30.
+                WAVE_COLOR: vec3(0.522,0.949,0.988)
+                STRIPE_FREQUENCY: 1. # Vertical rows of stripes per tile.
+                STRIPE_THICKNESS: .35 # Width of stripe from 0 (no stripe) to .5 (all stripe).
+                CROSSFADE_LENGTH: .2 # Length of zoom crossfade; Comment this line to disable crossfade.
+            blocks:
+                color: |
+                    vec2 waves_position_scaled = v_waves_position * WAVE_SCALE;
+                    #ifdef CROSSFADE_LENGTH
+                    float waves_1 = wave_stripes(fract(waves_position_scaled));
+                    float waves_2 = wave_stripes(fract(waves_position_scaled * 2.));
+                    float crossfade = smoothstep(1. - CROSSFADE_LENGTH, 1., fract(u_map_position.z));
+                    color.rgb = mix(color.rgb, WAVE_COLOR, mix(waves_1, waves_2, crossfade));
+                    #else
+                    color.rgb = mix(color.rgb, WAVE_COLOR, wave_stripes(fract(waves_position_scaled)));
+                    #endif
 
     coast:
         base: lines
-        mix: [space-constant]
+        mix: [space-constant]   # TODO: Refactor to not need `space-constant`
         blend: overlay
         shaders:
             defines:
@@ -668,13 +733,15 @@ styles:
         base: polygons
         shaders:
             defines:
-                PATTERN_SCALE: 50.0
+                DOT_PATTERN_SCALE: 50.0
                 DOT_SIZE: .1
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+                DOT_COLOR: color.rgb
+            uniforms:
+                # This is a uniform instead of a define so that variant styles can reuse the same shader source code.
+                u_dot_bg_color: [1., 1., 1.]
             blocks:
                 color: |
-                    color.rgb = mix(COLOR1, COLOR2, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
+                    color.rgb = mix(u_dot_bg_color, DOT_COLOR, circle(tile(getTileCoords(), DOT_PATTERN_SCALE), DOT_SIZE));
 
     dots-rev-grid:
         mix: [space-tile, tiling-tile, shapes-circle]
@@ -683,11 +750,12 @@ styles:
             defines:
                 PATTERN_SCALE: 60.0
                 DOT_SIZE: .4
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+                DOT_COLOR: color.rgb
+            uniforms:
+                u_dot_bg_color: [1., 1., 1.]
             blocks:
                 color: |
-                    color.rgb = mix(COLOR2, COLOR1, circle(tile(getTileCoords(),PATTERN_SCALE), DOT_SIZE));
+                    color.rgb = mix(DOT_COLOR, u_dot_bg_color, circle(tile(getTileCoords(), PATTERN_SCALE), DOT_SIZE));
 
     medium-dots:
         mix: dots
@@ -696,8 +764,8 @@ styles:
             defines:
                 PATTERN_SCALE: 60.0
                 DOT_SIZE: .25
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+            uniforms:
+                u_dot_bg_color: [1.00,1.00,1.00]
 
     tiny-dots:
         mix: dots
@@ -705,27 +773,28 @@ styles:
             defines:
                 PATTERN_SCALE: 70.0
                 DOT_SIZE: .125
-                COLOR1: vec3(1.00,1.00,1.00)
-                COLOR2: color.rgb
+            uniforms:
+                u_dot_bg_color: [1.00,1.00,1.00]
 
     dots-rev:
         base: polygons
         mix: dots-honeycomb
         shaders:
             defines:
-                COLOR1: vec3(1.00,1.00,1.00)
                 PATTERN_SCALE: 35.0
+            uniforms:
+                u_dot_bg_color: [1.00,1.00,1.00]
             blocks:
                 color: |
-                    color.rgb = mix(COLOR1, color.rgb, TileDots(PATTERN_SCALE, 0.31));
+                    color.rgb = mix(u_dot_bg_color, color.rgb, TileDots(PATTERN_SCALE, 0.31));
 
     horizontal-bars:
         base: polygons
         mix: [space-constant, shapes-rect]
         texcoords: false
         shaders:
-            defines:
-                COLOR1: vec3(1.0,1.0,1.0)
+            uniforms:
+                u_bar_bg_color: [1.00,1.00,1.00]
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
@@ -734,7 +803,7 @@ styles:
                 filter: |
                     vec2 pos = getConstantCoords()*50.0;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
-                    color.rgb = mix(COLOR1,color.rgb,pct);
+                    color.rgb = mix(u_bar_bg_color,color.rgb,pct);
 
     horizontal-bars-rev:
         base: polygons
@@ -742,8 +811,9 @@ styles:
         texcoords: false
         shaders:
             defines:
-                COLOR1: vec3(1.0,1.0,1.0)
                 PATTERN_SCALE: 50.0
+            uniforms:
+                u_bar_bg_color: [1.00,1.00,1.00]
             blocks:
                 global: |
                     float bar(in vec2 st, float size){
@@ -752,7 +822,28 @@ styles:
                 filter: |
                     vec2 pos = getConstantCoords()*PATTERN_SCALE;
                     float pct = clamp(bar(fract(pos),0.5),0.0,1.0);
-                    color.rgb = mix(color.rgb,COLOR1,pct);
+                    color.rgb = mix(color.rgb,u_bar_bg_color,pct);
+
+# HSV/RGB functions
+    hsv:
+        shaders:
+            blocks:
+                global: |
+                    vec3 rgb2hsv(vec3 c)
+                    {
+                        vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+                        vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+                        vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+                        float d = q.x - min(q.w, q.y);
+                        float e = 1.0e-10;
+                        return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+                    }
+                    vec3 hsv2rgb(vec3 c)
+                    {
+                        vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+                        vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+                        return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+                    }
 
     scale-buildings:
         shaders:
@@ -776,20 +867,24 @@ styles:
     building-grid:
         base: polygons
         lighting: false
-        mix: [scale-buildings]
+        mix: [hsv, scale-buildings]
         texcoords: true
         shaders:
             uniforms:
                 u_tex_grid: building-grid
+                u_wall_hsv_tint: [1., 2., .750]
                 u_grid_color: global.black_color
-            defines:
-                WALL_TINT: vec3(1., 3., .993)
             blocks:
+                global: |
+                    varying float v_is_wall;
+                    varying vec3 v_wall_color_tinted;
+                position: |
+                    v_is_wall = step(worldNormal().z, .2);
+                    v_wall_color_tinted = hsv2rgb(rgb2hsv(a_color.rgb) * u_wall_hsv_tint);
                 color: |
-                    // If it's a wall
-                    color.rgb = mix(mix(color.rgb, u_grid_color.rgb, texture2D(u_tex_grid, v_texcoord).a),
-                                    color.rgb,
-                                    step(.5,dot(vec3(0., 0., 1.), worldNormal())));
+                    vec3 wall_color = mix(v_wall_color_tinted, u_grid_color, texture2D(u_tex_grid, v_texcoord).a);
+                    color.rgb = mix(color.rgb, wall_color, v_is_wall);
+
 
     building-lines:
         base: lines
@@ -1154,43 +1249,21 @@ layers:
                 style: waves
                 visible: false
                 order: global.feature_order
-                color: [[0, global.lightest_color], [12, global.lighter_color]]
+                color: global.lighter_color
 
         lakes:
             filter:
-                all:
-                    - kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
-                any:
-                    # limit show smaller landuse areas to higher zooms
-                    - { $zoom: [1],  area: { min: 10000000000 } }
-                    - { $zoom: [2],  area: { min: 7000000000 } }
-                    # some weird natural earth scale set transition
-                    - { $zoom: [3],  area: { min: 5000000000 } }
-                    - { $zoom: [4],  area: { min: 300000000 } }
-                    - { $zoom: [5],  area: { min: 50000000 } }
-                    - { $zoom: [6],  area: { min: 50000000 } }
-                    - { $zoom: [7],  area: { min: 50000000 } }
-                    - { $zoom: [8],  area: { min: 50000000 } }
-                    - { $zoom: [9],  area: { min: 15000000 } }
-                    - { $zoom: [10], area: { min: 4000000 } }
-                    - { $zoom: [11], area: { min: 1000000 } }
-                    - { $zoom: [12], area: { min: 250000 } }
-                    - { $zoom: [13], area: { min: 150000 } }
-                    - { $zoom: [14], area: { min: 40000 } }
-                    - { $zoom: { min: 15 } }
+                kind: [ocean, lake, water, riverbank, reservoir, swimming_pool]
             draw:
                 polygons:
-                    style: waves
                     visible: true
-                    color: global.lighter_color
 
         other-water-areas:
             filter: { not: { kind: [ocean, lake, water, reservoir] }, $zoom: { min: 11 }, area: { min: 100 } }
             draw:
                 polygons:
-                    style: waves
                     visible: true
-                    color: global.lighter_color
+
         playas:
             filter: { kind: playa }
             draw:
@@ -1215,28 +1288,9 @@ layers:
         water_boundaries-not-ocean:
             enabled: global.sdk_coastline
             filter:
-                all:
-                    - boundary: true
-                    - not: { kind: ocean }
-                    - $zoom: { min: 8 }
-                any:
-                    # limit show smaller landuse areas to higher zooms
-                    - { $zoom: [1],  area: { min: 10000000000 } }
-                    - { $zoom: [2],  area: { min: 7000000000 } }
-                    # some weird natural earth scale set transition
-                    - { $zoom: [3],  area: { min: 5000000000 } }
-                    - { $zoom: [4],  area: { min: 300000000 } }
-                    - { $zoom: [5],  area: { min: 50000000 } }
-                    - { $zoom: [6],  area: { min: 50000000 } }
-                    - { $zoom: [7],  area: { min: 50000000 } }
-                    - { $zoom: [8],  area: { min: 50000000 } }
-                    - { $zoom: [9],  area: { min: 15000000 } }
-                    - { $zoom: [10], area: { min: 4000000 } }
-                    - { $zoom: [11], area: { min: 1000000 } }
-                    - { $zoom: [12], area: { min: 250000 } }
-                    - { $zoom: [13], area: { min: 150000 } }
-                    - { $zoom: [14], area: { min: 40000 } }
-                    - { $zoom: { min: 15 } }
+                boundary: true
+                not: { kind: ocean }
+                $zoom: { min: 8 }
             draw:
                 lines:
                     style: coast
@@ -1555,8 +1609,6 @@ layers:
                             - [12, 1]
                             - [13, 1.50]
                             - [14, 2.0]
-                        cull_from_tile: true
-    #                    visible: false
                         text:
                             offset: [0px, -0.5px]
                             repeat_distance: 200px
@@ -2162,8 +2214,7 @@ layers:
 
         path:
             filter:
-                all:
-                    - kind: [path, portage_way]
+                kind: [path, portage_way]
                 not:
                     - kind_detail: [steps, track, pier]
             draw:
@@ -2259,13 +2310,13 @@ layers:
 
         steps:
             filter:
-                all:
-                    - kind: path
-                    - kind_detail: steps
+                kind: path
+                kind_detail: steps
             draw:
                 lines:
-                    dash: [0.75, 0.25]
-                    dash_background_color: global.white_color
+                    style: steps-dash
+                    #dash: [0.75, 0.25]
+                    #dash_background_color: global.white_color
                     order: global.feature_order
                     color: [[15, global.light_color], [19, global.lighter_color]]
                     width: [[15, 0.5px], [18, 3px], [19, 1.5m]]
@@ -2285,41 +2336,39 @@ layers:
                             stroke: { color: global.text_stroke, width: 4px }
 
         shields:
+            enabled: global.sdk_road_shields
             filter:
-                all:
-                    - $zoom: { min: 6 }
-                    #
-                    # United State looks great with shield_text alone, but...
-                    #
-                    #shield_text: true    # some roads don't have shield text, deal with that later
-                    #
-                    # Europe doesn't have many network relations set, so we could look for either
-                    # shield_text or ref (with no shield_text) but...
-                    # that makes United States look a bit funky with `(xxx)` and generic shields
-                    # showing up in fields of custom state shields like US:CA and US:NY
-                    #
-                    - function() { return global.sdk_road_shields; }
-                    - any:
-                        - shield_text: true    # some roads don't have shield text, deal with that later
-                        - all:
-                            - shield_text: false    # some roads don't have shield text, deal with that later
-                            - ref: true
-                            - kind_detail: [motorway, trunk, primary, secondary, tertiary]
+                $zoom: { min: 6 }
+                shield_text: true
+                network: true
+                # don't shield ferries and other non-driving roads
+                kind: [highway, major_road, minor_road]
             # default
             draw:
                 mapzen_icon_library:
                     # you need to match any custom shield to the vector tile `network` values
                     sprite: |
                         function() {
-                            if( feature.shield_text ) {
-                                return ('generic_shield-' + feature.shield_text.length + 'char');
-                            } else {
-                                return ('generic_shield-' + feature.ref.length + 'char');
-                            }
+                          switch (feature.shield_text.length) {
+                            case 1:
+                                return 'generic_shield-1char';
+                            case 2:
+                                return 'generic_shield-2char';
+                            case 3:
+                                return 'generic_shield-3char';
+                            case 4:
+                                // Maybe this works, maybe it doesn't
+                                if ($zoom < 11) break;
+                                return 'generic_shield-4char';
+                            case 5:
+                                // Maybe this works, maybe it doesn't
+                                if ($zoom < 15) break;
+                                return 'generic_shield-5char';
+                          }
                         }
-                    sprite_default: generic_shield_5char
                     size: [[7,[75%,75%]],[12,[100%,100%]],[15,[110%,110%]]]
                     priority: 58
+                    # Size is specified below, and limited to 5 char in another filter
                     repeat_group: shields
                     repeat_distance: [[8, 90px],[10, 40px],[13, 30px]]
                     placement: midpoint
@@ -2331,8 +2380,6 @@ layers:
                         - [12, 1]
                         - [13, 1.50]
                         - [14, 2.0]
-                    cull_from_tile: true
-                    visible: false
                     text:
                         offset: [0px, -0.5px]
                         repeat_distance: 200px
@@ -2353,9 +2400,8 @@ layers:
 
             default_priority_highway:
                 filter:
-                    all:
-                        - kind_detail: motorway
-                        - $zoom: { min: 9 }
+                    kind_detail: motorway
+                    $zoom: { min: 9 }
                 draw:
                     mapzen_icon_library:
                         priority: 47
@@ -2363,16 +2409,15 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 7 }
+                        $zoom: { max: 7 }
                     draw:
                         mapzen_icon_library:
                             visible: false
 
             default_priority_trunk:
                 filter:
-                    all:
-                        - kind_detail: major_road
-                        - kind_detail: trunk
+                    kind_detail: major_road
+                    kind_detail: trunk
                 draw:
                     mapzen_icon_library:
                         priority: 48
@@ -2380,15 +2425,14 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 9 }
+                        $zoom: { max: 9 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_primary:
                 filter:
-                    all:
-                        - kind: major_road
-                        - kind_detail: primary
+                    kind: major_road
+                    kind_detail: primary
                 draw:
                     mapzen_icon_library:
                         priority: 49
@@ -2396,15 +2440,14 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 10 }
+                        $zoom: { max: 10 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_trunk_secondary:
                 filter:
-                    all:
-                        - kind: major_road
-                        - kind_detail: secondary
+                    kind: major_road
+                    kind_detail: secondary
                 draw:
                     mapzen_icon_library:
                         priority: 53
@@ -2412,15 +2455,14 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 12 }
+                        $zoom: { max: 12 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_trunk_tertiary:
                 filter:
-                    all:
-                        - kind: major_road
-                        - kind_detail: tertiary
+                    kind: major_road
+                    kind_detail: tertiary
                 draw:
                     mapzen_icon_library:
                         priority: 55
@@ -2428,76 +2470,40 @@ layers:
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 13 }
+                        $zoom: { max: 13 }
                     draw:
                         mapzen_icon_library:
                             visible: false
             default_priority_minor_road:
                 filter:
-                    - kind: minor_road
+                    kind: minor_road
                 draw:
                     mapzen_icon_library:
                         priority: 56
                         visible: global.sdk_road_shields
                 early:
                     filter:
-                        - $zoom: { max: 14 }
+                        $zoom: { max: 14 }
                     draw:
                         mapzen_icon_library:
                             visible: false
-
-            width_4char:
-                filter: |
-                    function() {
-                        if( feature.shield_text ) {
-                            return (feature.shield_text.length === 4)
-                        } else {
-                            return (feature.ref.replace(" ", "").length === 4 )
-                        }
-                    }
+            width_4-5char:
+                filter:
+                    all:
+                        - not:
+                            kind: [minor_road]
+                            network: ['US:I','US:US']
+                        - |
+                            function() {
+                              var length = feature.shield_text.length;
+                              return length === 4 || length === 5;
+                            }
                 draw:
                     mapzen_icon_library:
                         # this is sensitive to values > 56
                         priority: 56
-                early:
-                   filter: { $zoom: { max: 12 } }
-                   draw:
-                        mapzen_icon_library:
-                            visible: false
-            width_5char:
-                filter: |
-                    function() {
-                        if( feature.shield_text ) {
-                            return (feature.shield_text.length === 5)
-                        } else {
-                            return (feature.ref.replace(" ", "").length === 5)
-                        }
-                    }
-                draw:
-                    mapzen_icon_library:
-                        # this is sensitive to values > 56
-                        priority: 56
-                early:
-                   filter: { $zoom: { max: 13 } }
-                   draw:
-                       mapzen_icon_library:
-                           visible: false
-            # this is kinda a hack
-            # FYI: This happens to "win" in style resolution because it's a-z sorted
-            # don't rename the layer or it'll fail
-            width_longggggg:
-                filter: |
-                    function() {
-                        if( feature.shield_text ) {
-                            return (feature.shield_text.length > 5)
-                        } else {
-                            return (feature.ref.length > 5)
-                        }
-                    }
-                draw:
-                    mapzen_icon_library:
-                        visible: false
 
+            #
             # Now for the good stuff
             #
             # JK: see the theme files for USA and international shields
@@ -2505,21 +2511,35 @@ layers:
             # FYI: When the USA shields theme is imported it replaces this layer with a richer set of textures
             shields-usa:
                 filter:
-                    all:
-                        - network: ['US:I','US:I:Business','US:I:Truck','US:I:Alternate','US:US','US:US:Business','US:US:Truck','US:US:Alternate']
-                        - shield_text: true
+                    network: ['US:I','US:US']
                 draw:
                     mapzen_icon_library:
                         #texture: mapzen_icon_library_shields_usa
                         # you need to match any custom shield to the vector tile `network` values
-                        sprite: function() { return (feature.network + '-' + feature.shield_text.length + 'char'); }
-                        # FYI: sprite_default doesn't support functions, default is carried by parent style's sprite function
+                        sprite: |
+                            function() {
+                              switch (feature.shield_text.length) {
+                                case 1:
+                                    return feature.network + '-1char';
+                                case 2:
+                                    return feature.network + '-2char';
+                                case 3:
+                                    return feature.network + '-3char';
+                                case 4:
+                                    // Maybe this works, maybe it doesn't
+                                    if ($zoom < 11) break;
+                                    return feature.network + '-4char';
+                                case 5:
+                                    // Maybe this works, maybe it doesn't
+                                    if ($zoom < 15) break;
+                                    return feature.network + '-5char';
+                              }
+                            }
 
                 # US Interstate roads
                 US-I:
                     filter:
                         network: 'US:I'
-                        shield_text: true
                     draw:
                         mapzen_icon_library:
                             priority: 46
@@ -2528,19 +2548,25 @@ layers:
                 # US Federal Routes
                 US-US:
                     filter:
-                        network: ['US:US','US:US:Business','US:US:Truck','US:US:Alternate']
-                        shield_text: true
+                        network: ['US:US']
                         $zoom: { min: 7 }
                     draw:
                         mapzen_icon_library:
                             priority: 47
-                            cull_from_tile: true
                             # always show (or not show), irrespective of zoom
                             visible: global.sdk_road_shields
                             text:
                                 font:
                                     fill: [0.380,0.318,0.312]
                                     size: [[7,8px],[13,10px],[15,11px]]
+
+            shields-e-road:
+                filter:
+                    network: ['e-road']
+                    $zoom: { max: 8 }
+                draw:
+                    mapzen_icon_library:
+                        visible: false
 
         winter_sport_pistes:
             filter: { kind: piste }
@@ -2687,8 +2713,9 @@ layers:
             filter: { kind: rail, not: { kind_detail: [subway,light_rail,tram] } }
             draw:
                 lines:
-                    dash: [0.25, 1.0]
-                    dash_background_color: global.offwhite_color
+                    style: railway-dash
+                    #dash: [0.25, 1.0]
+                    #dash_background_color: global.offwhite_color
                     color: [[12, global.lightest_color], [17, global.light_color]]
                     width: [[12, 0px], [12, 0.5px], [18, 4px], [20, 2m]]
                     # let roads sort themselves past zoom 14
@@ -2749,7 +2776,6 @@ layers:
             extrude:
                 filter:
                     all:
-                        - function() { return global.sdk_building_extrude; }
                         - any:
                             - { $zoom: [15], height: { min: 190 } }
                             - { $zoom: [15], area: { min: 5000 } }
@@ -2762,6 +2788,7 @@ layers:
                             - { $zoom: { min: 18 } }
                         - not:
                             - layer: [-1, -2, -3, -4, -5]
+                        - function() { return global.sdk_building_extrude; }
                 draw:
                     polygons:
                         visible: true
@@ -2776,8 +2803,7 @@ layers:
                         extrude: global.building_extrude_height
             basement:
                 filter:
-                    all:
-                        - layer: [-1, -2, -3, -4, -5]
+                    layer: [-1, -2, -3, -4, -5]
                 draw:
                     lines:
                         color: global.lightest_color
@@ -2891,28 +2917,29 @@ layers:
                 filter: { name: true, $zoom: { min: 8 }, not: { maritime_boundary: true } }
                 draw:
                     text-blend-order:
-                        priority: 2
                         visible: global.text_visible_admin
-                        text_source: global.ux_language_text_source_boundary_lines_left_right
-                        offset: [[8, [0, 7px]], [11, [0, 8px]], [12, [0, 9px]]]
+                        priority: 2
+                        text_source: global.ux_language_text_source
+                        offset: [0px,0px]
                         text_wrap: 100
                         font:
                             family: global.text_font_family
                             size: 10px
                             fill: global.black_color
                             transform: uppercase
-                no-left-right:
-                    filter: { "name:left": false, "name:right": false }
+                left-right:
+                    filter: ["name:left": true, "name:right": true]
                     draw:
                         text-blend-order:
-                            text_source: global.ux_language_text_source_boundary_lines
-                            offset: 0px
+                            text_source: global.ux_language_text_source_boundary_lines_left_right
+                            offset: [[8, [0px, 7px]], [11, [0px, 8px]], [12, [0px, 9px]]]
 
         other_country_boundary_disputed_etc:
             filter: { kind: [disputed, indefinite, indeterminate, lease_limit, line_of_control, overlay_limit] }
             draw:
                 lines:
-                    dash: [1.25, 1.25]
+                    style: disputed-country-default-dash
+                    #dash: [1.25, 1.25]
                     order: global.feature_order
                     color: global.light_color
                     width: [[1,0.2px],[9,1.5px],[17,10m]]
@@ -2920,7 +2947,8 @@ layers:
                 filter: { kind: [disputed, line_of_control] }
                 draw:
                     lines:
-                        dash: [2.0, 1.0]
+                        style: disputed-country-dash
+                        #dash: [2.0, 1.0]
                         order: global.feature_order
                         color: global.light_color
                         width: [[1, 0.5px], [9, 2.5px], [17,14m]]
@@ -2947,7 +2975,8 @@ layers:
                     $zoom: { min: 7 }
                 draw:
                     lines:
-                        dash: [7.0, 2.0]
+                        style: region-border-dash
+                        #dash: [7.0, 2.0]
 
             early:
                 filter: { not: { min_zoom: [1,2] }, $zoom: { max: 8 } }
@@ -2962,7 +2991,7 @@ layers:
                         priority: 3
                         visible: global.text_visible_admin
                         text_source: global.ux_language_text_source_boundary_lines_left_right
-                        offset: [[8,[0, 5px]], [11, [0, 6px]], [12,[0, 7px]]]
+                        offset: [[8,[0px, 5px]], [11, [0px, 6px]], [12,[0px, 7px]]]
                         text_wrap: 100
                         # offset: [0px, 10px]
                         # anchor: top
@@ -2976,7 +3005,7 @@ layers:
                     draw:
                         text-blend-order:
                             text_source: global.ux_language_text_source_boundary_lines
-                            offset: 0px
+                            offset: [0px,0px]
 
     places:
         data: { source: mapzen, layer: places }
@@ -3119,83 +3148,92 @@ layers:
                 text-blend-order:
                     priority: 14
                     visible: false
-                    text_source: global.ux_language_text_source_short
                     font:
                         size: 11px
                         weight: normal
-                        fill: [[4, global.light_color], [9, global.midlight_color]]
+                        fill: black
                         stroke: { color: global.text_stroke, width: 4px }
-            region-z4:
+            region-short:
                 filter:
-                    $zoom: [4]
-                    not: { name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen] }
+                    "name:short": true
                 draw:
                     text-blend-order:
-                        visible: global.text_visible_admin
-                        # font:
-                        #     fill: [0.70,0.70,0.70]
-            region-z5:
-                filter:
-                    $zoom: [5]
-                    not: { name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen] }
-                draw:
-                    text-blend-order:
-                        visible: global.text_visible_admin
-                        font:
-                            size: 18px
-                            weight: 300
-            region-z6:
-                filter:
-                    $zoom: [6]
-                    not: { name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen] }
-                draw:
-                    text-blend-order:
-                        visible: global.text_visible_admin
-                        font:
-                            size: 21px
-                            weight: 300
-                            transform: uppercase
+                        text_source: global.ux_language_text_source_short
+                region-z4:
+                    filter:
+                        $zoom: [4]
+                        not: { name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen] }
+                    draw:
+                        text-blend-order:
+                            visible: global.text_visible_admin
+                            # font:
+                            #     fill: [0.70,0.70,0.70]
+                region-z5:
+                    filter:
+                        $zoom: [5]
+                        not: { name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen] }
+                    draw:
+                        text-blend-order:
+                            visible: global.text_visible_admin
+                            font:
+                                size: 18px
+                                weight: 300
+                region-z6:
+                    filter:
+                        $zoom: [6]
+                        not: { name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen] }
+                    draw:
+                        text-blend-order:
+                            visible: global.text_visible_admin
+                            font:
+                                size: 21px
+                                weight: 300
+                                transform: uppercase
 
-            region-z7-z8:
-                filter: { $zoom: [7,8] }
+                region-z7:
+                    filter:
+                        $zoom: [7]
+                    draw:
+                        text-blend-order:
+                            visible: global.text_visible_admin
+                            text_source: global.ux_language_text_source_short_proxy_name
+                            font:
+                                size: 30px
+                                weight: 300
+                                transform: uppercase
+                    pesky:
+                        filter:
+                            name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen]
+                        draw:
+                            text-blend-order:
+                                visible: false
+                    abbrev-small-ones-z7:
+                        filter:
+                            name: [Delaware,New Jersey,Connecticut,Rhode Island,Massachusetts,New Hampshire,Vermont]
+                        draw:
+                            text-blend-order:
+                                text_source: global.ux_language_text_source_short
+
+            region-z8:
+                filter:
+                    $zoom: [8]
                 draw:
                     text-blend-order:
                         visible: global.text_visible_admin
-                        text_source: global.ux_language_text_source_short_proxy_name
+                        text_source: global.ux_language_text_source
                         font:
                             size: 30px
                             weight: 300
                             transform: uppercase
-                pesky:
+                no-pop:
                     filter:
-                        $zoom: [7]
-                        name: [Western Cape,Eastern Cape,Northern Cape,North West,Limpopo,KwaZulu-Natal,Hamburg,Freie und Hansestadt Hamburg,Neuchâtel,Nordrhein-Westfalen,Haute-Normandie,Baden-Württemberg,Bayern,Sachsen-Anhalt,Berlin,Mecklenburg-Vorpommern,Schleswig-Holstein,Brandenburg,Niedersachsen,Saarland,Thüringen,Hessen,Sachsen]
+                        any:
+                            - population: false
+                            - population: { max: 1000000 }
                     draw:
                         text-blend-order:
-                            visible: false
-                abbrev-small-ones-z7:
-                    filter:
-                        $zoom: [7]
-                        name: [Delaware,New Jersey,Connecticut,Rhode Island,Massachusetts,New Hampshire,Vermont]
-                    draw:
-                        text-blend-order:
-                            text_source: global.ux_language_text_source_abbreviation
-                            font: { transform: uppercase }
-                region-z8:
-                    filter:
-                        $zoom: [8]
-                    draw:
-                        text-blend-order:
-                            text_source: global.ux_language_text_source
-                    no-pop:
-                        filter:
-                            any:
-                                - population: false
-                                - population: { max: 1000000 }
-                        draw:
-                            text-blend-order:
-                                font:
-                                    size: 16px
+                            font:
+                                size: 16px
 
         populated-places:
             filter:
@@ -3695,13 +3733,6 @@ layers:
 
     pois:
         data: { source: mapzen, layer: pois }
-        #visible: global.label_visible_poi_landuse
-        filter:
-            all:
-                - not: { kind: [building,address,farm,tree,apron,residential,commercial,industrial] }
-                # White list a few kinds to "always" show per the tile zoom inclusion, else test feature's min_zoom
-                #- function() { return feature.min_zoom <= $zoom }
-                - function() { if( feature.kind == 'restaurant' || feature.kind == 'landmark' || feature.kind == 'cafe' ) { return true } else { return feature.min_zoom <= $zoom } }
         draw:
             mapzen_icon_library:
                 visible: global.icon_visible_poi_landuse
@@ -3724,6 +3755,22 @@ layers:
                         fill: global.dark_color
                         size: [[13, 10px], [14, 11px], [17, 12px], [19, 12px], [20, 14px]]
                         stroke: { color: global.text_stroke, width: 4px }
+
+        hide-some:
+            filter: { kind: [building,address,farm,apron,residential,commercial,industrial] }
+            draw:
+                mapzen_icon_library:
+                    visible: false
+
+        z16-overpacking:
+            filter: { $zoom: { min: 16 } }
+            now-get-real:
+                filter:
+                    - function() { return feature.min_zoom > $zoom + 0.5; } }
+                draw:
+                    mapzen_icon_library:
+                        visible: false
+
         # improve legibility at high zooms
         poi_labels-z18:
             filter: { $zoom: { min: 18 } }
@@ -4064,7 +4111,7 @@ layers:
 
         parks:
             filter:
-                - kind: [national_park, battlefield, park, protected_area, forest, beach]
+                kind: [national_park, battlefield, park, protected_area, forest, beach]
             draw:
                 mapzen_icon_library:
                     visible: global.icon_visible_landuse_green
@@ -4314,7 +4361,7 @@ layers:
                         size: [[13, 12px], [14, 14px], [15, 16px], [17, 20px]]
                         priority: 11
                         text:
-                            #offset: [[13, [0, 6px]], [14, [0, 7px]],[15, [0, 8px]], [17, [0, 10px]]]
+                            #offset: [[13, [0px, 6px]], [14, [0px, 7px]],[15, [0px, 8px]], [17, [0px, 10px]]]
                             priority: 12
                 low-priority-early:
                     filter: { kind_tile_rank: { min: 3 }, $zoom: { min: 0, max: 12 } }
@@ -4449,7 +4496,7 @@ layers:
                         size: [[17, 12px], [19, 14px]]
                         priority: 19
                         text:
-                            #offset: [[17, [0, 6px]], [19, [0, 7px]]] # offset tracks alongside icon size (half icon height)
+                            #offset: [[17, [0px, 6px]], [19, [0px, 7px]]] # offset tracks alongside icon size (half icon height)
                             priority: 20
                             interactive: global.sdk_interactive
                             text_source: function() { if( feature.ref || feature.name ) { if( feature.ref && feature.name ) { return '[' + feature.ref + ']\n' + feature.name; } else { return feature.name; } } else { return "Entrance"; } }
@@ -4554,8 +4601,7 @@ layers:
 
         national_forest_level_6:
             filter:
-                all:
-                    - kind: forest
+                kind: forest
                 any:
                     - protect_class: ['6']
                     - operator: ['United States Forest Service']
@@ -4574,9 +4620,8 @@ layers:
 
         parks-and-national-forests-not-national-park:
             filter:
-                all:
-                    - $zoom: { min: 4 }
-                    - kind: [park, national_park]
+                $zoom: { min: 4 }
+                kind: [park, national_park]
                 any:
                     - not: { operator: [ "United States National Park Service", "United States Forest Service" ] }
                     - not: { protect_class: ['2','3','5','6'] }
@@ -4589,9 +4634,8 @@ layers:
             national_park:
                 #filter: function() { return feature.name && (feature.name.indexOf('National Park') > -1); }
                 filter:
-                    all:
-                        - kind: national_park
-                        - not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
+                    kind: national_park
+                    not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
                 draw:
                     polygons:
                         style: pixel-pattern-light
@@ -4742,9 +4786,8 @@ layers:
 
         parking:
             filter:
-                all:
-                    - kind: parking
-                    - $zoom: { min: 14 }
+                kind: parking
+                $zoom: { min: 14 }
                 any:
                     - { $zoom: { min: 14 }, area: { min: 10000 } }
                     - { $zoom: { min: 15 }, area: { min: 5000 } }

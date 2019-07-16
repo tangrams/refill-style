@@ -13,6 +13,7 @@ sources:
 textures:
     palette:
         url: images/ramp.png
+        size: [6, 1]
 
 scene:
     background:
@@ -405,46 +406,6 @@ styles:
                     color.rgb = vec3(1.000,1.000,1.000);
                     color.rgb -= vec3(1.000,1.000,1.000) * diagonalStripes( (getTileCoords()*0.9999)*floor(STRIPES_SCALE), STRIPES_WIDTH) * STRIPES_ALPHA;
 
-
-    patterns-stripes:
-        mix: [functions-aastep, geometry-matrices]
-        shaders:
-            defines:
-                PI: 3.14159265358979323846
-            blocks:
-                global: |
-                    // Return a distance function of stripes
-                    float stripesDF (vec2 st) {
-                        return abs(sin(st.y*PI));
-                    }
-
-                    // Adjustable width stripes
-                    float stripes (vec2 st, float width) {
-                        return aastep(width, stripesDF(st));
-                    }
-
-                    // Adjustable Angle
-                    float stripes (vec2 st, float width, float angle) {
-                        st = rotate2D(angle) * st;
-                        return stripes(st, width);
-                    }
-
-                    // Faster optimisation of diagonal stripes
-                    float diagonalStripes (vec2 st) {
-                        vec2 i_st = floor(st);
-                        vec2 f_st = fract(st);
-                        if (mod(i_st.y,2.) - mod(i_st.x,2.) == 0.) {
-                            return 1.0 - aastep(f_st.x,f_st.y);
-                        } else {
-                            return aastep(f_st.x,f_st.y);
-                        }
-                    }
-
-                    // Faster optimisation of diagonal stripes with controlable width
-                    float diagonalStripes (vec2 st, float width) {
-                        st.y -= st.x;
-                        return stripes(st, width);
-                    }
 
     geometry-matrices:
         mix: [block]
